@@ -3,6 +3,9 @@
 <h2>
 	<?=$common->name;?>
 </h2>
+<? $buttons[] = array("selection" => "common" , "text" => "Edit", "class" => array("button","edit","common-edit"), "id" => "ec_$common->id", "type" => "span", "title" => "Edit this record");
+print create_button_bar($buttons);
+?>
 <p>
 	<label>Genus:</label>
 	<?=$common->genus;?>

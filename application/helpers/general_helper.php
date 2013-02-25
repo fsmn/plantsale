@@ -20,7 +20,17 @@ function create_input($object, $name, $label, $id=NULL)
 		$id = $name;
 	}
 	return sprintf("<label for='%s'>%s: </label><input type='text' name='%s' id='%s' value='%s'/>",$name,$label,$name,$id,get_value($object,$name));
-	
+
+}
+
+function get_current_year()
+{
+	if(date("m") > 7){ //after July
+		$year = date("Y") + 1;
+	}else{
+		$year = date("Y");
+	}
+	return $year;
 }
 
 /*

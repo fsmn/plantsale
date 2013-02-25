@@ -7,7 +7,7 @@ class Color_Model extends CI_Model
 	var $color;
 	var $height;
 	var $width;
-	var $notes;
+	var $note;
 	var $rec_modifier;
 	var $rec_modified;
 
@@ -18,7 +18,7 @@ class Color_Model extends CI_Model
 
 	function prepare_variables()
 	{
-		$variables = array("name","species","genus","description","latin_name");
+		$variables = array("name","color","height","width","note","common_id");
 
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
@@ -34,7 +34,7 @@ class Color_Model extends CI_Model
 	function insert()
 	{
 		$this->prepare_variables();
-		$this->insert("color",$this);
+		$this->db->insert("color",$this);
 		$id = $this->db->insert_id();
 		return $id;
 	}
@@ -54,13 +54,13 @@ class Color_Model extends CI_Model
 	function get($id)
 	{
 		$this->db->where("color.id", $id);
-		$this->db->where("color.common_id = common.id");
+		$this->db->where("color.common_id = `common`.`id`");
 		$this->db->from("color,common");
-		$this->db->join("flag","flag.color_id = color.id");
-		$this->db->join("order","order.color_id = color.id");
-		$this->db->join("menu","menu.id = flag.menu_id");
-		$this->db->order_by("flag.","asc");
-		$this->db->order_by("menu.value");
+		$this->db->join("flag","flag.color_id = color.id","LEFT");
+		$this->db->join("order","order.color_id = color.id", "LEFT");
+		$this->db->join("menu","menu.id = flag.menu_id","LEFT");
+		$this->db->order_by("flag.menu_id","ASC");
+		$this->db->order_by("menu.value", "ASC");
 		$result = $this->db->get()->row();
 		return $result;
 	}

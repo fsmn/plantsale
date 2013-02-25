@@ -27,3 +27,6 @@ var base_url = '<?=base_url();?>';
 
 <!-- Common Name Scripts -->
 <script type="text/javascript" src="<?=base_url();?>js/common.js"></script>
+
+<!-- Color Scripts -->
+<script type="text/javascript" src="<?=base_url();?>js/color.js"></script>

@@ -15,7 +15,7 @@ class Common extends MY_Controller
 
 	function index()
 	{
-
+		redirect();
 	}
 
 	function show_search()
@@ -47,7 +47,7 @@ class Common extends MY_Controller
 		$data["target"] = "common/edit";
 		$data["common"] = NULL;
 		$data["title"] = "Insert a New Common Name";
-		$this->load->view("page/index",$data);
+		$this->load->view($data["target"],$data);
 
 	}
 
@@ -68,9 +68,16 @@ class Common extends MY_Controller
 		$data["common"] = $this->common->get($id);
 		$data["title"] = "Edit Common Name";
 		if($this->input->get("ajax")){
-				$this->load->view($data["target"], $data);
+			$this->load->view($data["target"], $data);
 		}else{
 			$this->load->view("page/index",$data);
 		}
+	}
+	
+	function update()
+	{
+		$id = $this->input->post("id");
+		$this->common->update($id);
+		redirect("common/view/$id");
 	}
 }

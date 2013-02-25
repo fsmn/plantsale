@@ -54,7 +54,7 @@ print create_button_bar($buttons);
 		<? endforeach; ?>
 
 		<tr id="color-row-new">
-			<td><span class="button new color-add" id="common-id_<?=$common->id;?>">Add a Color</span></td>
+			<td><span class="button new color-create" id="common-id_<?=$common->id;?>">Add a Color</span></td>
 		</tr>
 	</tbody>
 </table>

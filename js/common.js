@@ -17,4 +17,15 @@ $(document).ready(function(){
 		});
 	});
 	
+	$(".common-create").live("click",function(){
+		$.ajax({
+			type: "get",
+			url: base_url + "common/create",
+			success: function(data){
+				show_popup("Create Common Name",data, "auto");
+			}
+		});
+		
+	});
+	
 });

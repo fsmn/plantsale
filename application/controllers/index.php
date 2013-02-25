@@ -10,7 +10,9 @@ class Index extends MY_Controller
 
 	function index()
 	{
-		$this->load->view("control");
+		$data["title"] = "Plant Sale Database";
+		$data["target"] = "welcome";
+		$this->load->view("page/index", $data);
 	}
 
 

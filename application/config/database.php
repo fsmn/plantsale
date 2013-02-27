@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'plantsale';
+$db['default']['username'] = 'plantsaledb';
 $db['default']['password'] = 'Peace4All';
-$db['default']['database'] = 'plantsale';
+$db['default']['database'] = 'plantsaledb';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

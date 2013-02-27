@@ -12,4 +12,11 @@ $buttons[] = array("selection" => "common",
 "href"=> site_url("common"),
 "title" => "View the list of common names");
 
+$buttons[] = array("selection" => "color",
+"text" => "Color Listing",
+"class" => array("button"),
+"href" => site_url("color"),
+"title" => "view the color listings",
+);
+
 print create_button_bar($buttons, array("id" =>"navigation-buttons"));

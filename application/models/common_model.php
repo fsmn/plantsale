@@ -63,7 +63,7 @@ class Common_model extends CI_Model
 	
 	function get_by_name($name)
 	{
-		$this->db->where("`name` LIKE '%$name%' OR `genus` LIKE '%$name%' OR `latin_name` LIKE '%$name%' OR `species` LIKE '%$name%')");
+		$this->db->where("`name` LIKE '%$name%'");
 		$this->db->order_by("name","ASC");
 		$this->db->order_by("genus","ASC");
 		$result = $this->db->get("common")->result();

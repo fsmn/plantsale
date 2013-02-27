@@ -27,6 +27,12 @@ class Common extends MY_Controller
 	{
 
 	}
+	
+	function search_by_name()
+	{
+		$name = $this->input->get("name");
+		echo $name;
+	}
 
 	function view()
 	{

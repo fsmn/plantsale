@@ -33,17 +33,16 @@ $(document).ready(function(){
 	$('#common-search-body').live('keyup', function(event) {
 		var common_search = this.value;
 		if (common_search.length > 2 && common_search != "Find Common Names") {
-			searchWords = commmon_search.split(' ');
-			myName = searchWords.join('%') + "%";
-			var myUrl = base_url + "common/search_by_name";
-			var formData = {
+			search_words = commmon_search.split(' ');
+			my_name = search_words.join('%') + "%";
+			var form_data = {
 				ajax: 1,
-				stuName: stuSearch
+				name: my_name
 			};
 			$.ajax({
-				url: myUrl,
+				url: base_url + "common/search_by_name",
 				type: 'GET',
-				data: formData,
+				data: form_data,
 				success: function(data){
 					//remove the search_list because we don't want to have a ton of them. 
 

@@ -15,7 +15,7 @@ print_r($color);
 <h2>
 	<?="$color->common_name: $color->name";?>
 </h2>
-<fieldset>
+<fieldset class="block color-info">
 	<legend>General Info</legend>
 	<p>
 		<label>Common Name:</label>
@@ -50,7 +50,7 @@ print_r($color);
 		<?=$color->note; ?>
 	</p>
 </fieldset>
-<fieldset>
+<fieldset class="order-info block">
 	<legend>
 		Order Info for
 		<?=get_current_year();?>

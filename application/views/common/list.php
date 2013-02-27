@@ -43,7 +43,7 @@
 				id="cdid_<?=$name->id;?>"><?=$name->description;?> </span>
 			</td>
 		
-			<td><span class="button" id="id_<?=$name->id;?>">View Details</span>
+			<td><a class="button" id="id_<?=$name->id;?>" href="<?=site_url("common/view/$name->id");?>">View Details</a>
 			</td>
 		</tr>
 		<? } ?>

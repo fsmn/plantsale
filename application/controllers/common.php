@@ -31,7 +31,9 @@ class Common extends MY_Controller
 	function search_by_name()
 	{
 		$name = $this->input->get("name");
-		echo $name;
+		$data["names"] = $this->common->get_by_name($name);
+		$target = "common/list";
+		$this->load->view($target, $data);
 	}
 
 	function view()

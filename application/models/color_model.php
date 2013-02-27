@@ -72,5 +72,14 @@ class Color_Model extends CI_Model
 		return $result;
 		
 	}
+	
+	function get_by_name($name)
+	{
+		$this->db->where("(CONCAT(`name`,' ', `species`) LIKE '%$name%' OR CONCAT(`genus`,' ', `latin_name`) LIKE '%$name%')");
+		$this->db->order_by("name","ASC");
+		$this->db->order_by("genus","ASC");
+		$result = $this->db->get("common")->result();
+		return $result;
+	}
 
 }

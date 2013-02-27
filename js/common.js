@@ -33,7 +33,7 @@ $(document).ready(function(){
 	$('#common-search-body').live('keyup', function(event) {
 		var common_search = this.value;
 		if (common_search.length > 2 && common_search != "Find Common Names") {
-			searchWords = stuSearch.split(' ');
+			searchWords = commmon_search.split(' ');
 			myName = searchWords.join('%') + "%";
 			var myUrl = base_url + "common/search_by_name";
 			var formData = {

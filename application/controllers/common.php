@@ -32,6 +32,7 @@ class Common extends MY_Controller
 	{
 		$name = $this->input->get("name");
 		$data["names"] = $this->common->get_by_name($name);
+		$data["full_list"] = FALSE;
 		$target = "common/list";
 		$this->load->view($target, $data);
 	}

@@ -5,7 +5,7 @@
 ?>
 
 <table id="common-name-list">
-	<thead>
+	<?if($full_list):?><thead>
 		<tr>
 			<th>Name</th>
 		</tr>
@@ -25,32 +25,38 @@
 			<th></th>
 		</tr>
 	</thead>
+	<? endif; ?>
 	<tbody>
-	<? foreach($names as $name){ ?>
+		<? foreach($names as $name){ ?>
 		<tr>
-		<td><span class="common-name common-edit-row" id="cnid_<?=$name->id;?>"><?=$name->name;?></span>
-		</td>
+			<td><span class="common-name common-edit-row"
+				id="cnid_<?=$name->id;?>"><?=$name->name;?> </span>
+			</td>
 		</tr>
 		<tr>
-		<td><span class="common-species common-edit-row" id="csid_<?=$name->id;?>"><?=$name->species;?></span>
-		</td>
+			<td><span class="common-species common-edit-row"
+				id="csid_<?=$name->id;?>"><?=$name->species;?> </span>
+			</td>
 		</tr>
 		<tr>
-		<td><span class="common-genus common-edit-row" id="cgid_<?=$name->id;?>"><?=$name->genus;?></span>
-		</td>
+			<td><span class="common-genus common-edit-row"
+				id="cgid_<?=$name->id;?>"><?=$name->genus;?> </span>
+			</td>
 		</tr>
 		<tr>
-		<td><span class="common-category common-edit-row" id="ccid_<?=$name->id;?>"><?=$name->category;?></span>
-		</td>
+			<td><span class="common-category common-edit-row"
+				id="ccid_<?=$name->id;?>"><?=$name->category;?> </span>
+			</td>
 		</tr>
 		<tr>
-		<td><span class="common-description common-edit-row" id="cdid_<?=$name->id;?>"><?=$name->description;?></span>
-		</td>
+			<td><span class="common-description common-edit-row"
+				id="cdid_<?=$name->id;?>"><?=$name->description;?> </span>
+			</td>
 		</tr>
 		<tr>
-		<td><span class="button" id="id_<?=$name->id;?>">View Details</span>
-		</td>
+			<td><span class="button" id="id_<?=$name->id;?>">View Details</span>
+			</td>
 		</tr>
-	<? } ?>
+		<? } ?>
 	</tbody>
 </table>

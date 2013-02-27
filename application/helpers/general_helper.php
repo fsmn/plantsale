@@ -79,5 +79,5 @@ function get_value($object, $item, $default = null){
 
 function get_as_price($int){
 	setlocale(LC_MONETARY,'en_US');
-	return money_format('%(#0n', $int);
+	return "$" . money_format('%(#0n', $int);
 }

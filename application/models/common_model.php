@@ -67,7 +67,6 @@ class Common_model extends CI_Model
 		$this->db->order_by("name","ASC");
 		$this->db->order_by("genus","ASC");
 		$result = $this->db->get("common")->result();
-		echo $this->db->last_query();
 		return $result;
 	}
 

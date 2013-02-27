@@ -48,7 +48,7 @@ print create_button_bar($buttons);
 			<td class="color-color edit"><?=$color->color;?></td>
 			<td class="color-height edit"><?=$color->height;?></td>
 			<td class="color-width edit"><?=$color->width;?></td>
-			<td class="color-view edit"><span class="button">View</span></td>
+			<td class="color-view edit"><a class="button" href="<?=site_url("color/view/$color->id");?>">View</span></td>
 		</tr>
 
 		<? endforeach; ?>

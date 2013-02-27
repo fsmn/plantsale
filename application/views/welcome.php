@@ -9,7 +9,7 @@
 <p>
 <div class="button-bar">
 <p><span class="button new common-create">New Common Name</span></p>
-<p><input type="text" name="common-search" id="common-search-body" class="common-search" value="Common Name Search"/></p>
+<p><input type="text" name="common-search" id="common-search-body" class="common-search" value="Find Common Names"/></p>
 <p><input type="text" name="color-search" id="color-search-body" class="color-search" value="Color Search"/></p>
 
 

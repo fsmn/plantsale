@@ -24,11 +24,11 @@ $('#popup_container').ready(function(){
 	
 	
 	$('#new_password').live('keyup',function(){
-		matchPasswords();
+		match_passwords();
 	});
 	
 	$('#check_password').live('keyup',function(){
-		matchPasswords();
+		match_passwords();
 	});
 	
 	$('.change_password').live('click',function(){

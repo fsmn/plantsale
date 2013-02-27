@@ -16,7 +16,7 @@ endif;
 
 <div id='password_note' class='notice error-text' style="display:none"><?=$output;?></div>
 <input type="hidden" name="reset_hash" id="reset_hash" value="<?=$reset_hash;?>"/>
-<input type="hidden" name="kTeach" id="kTeach" value="<?=$id;?>"/>
+<input type="hidden" name="id" id="id" value="<?=$id;?>"/>
 <div class="reset-fields">
 <p><label for="new_password">New Password: </label><br/>
 <input type="password" id="new_password" name="new_password" value=""/></p>

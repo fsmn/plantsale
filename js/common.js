@@ -31,7 +31,8 @@ $(document).ready(function(){
 	
 	
 	$('#common-search-body').live('keyup', function(event) {
-		var common_search = this.value;
+		common_search = this.value;
+		alert(common_search);
 		if (common_search.length > 2 && common_search != "Find Common Names") {
 			search_words = commmon_search.split(' ');
 			my_name = search_words.join('%') + "%";

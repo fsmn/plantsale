@@ -1,0 +1,1 @@
+../ci_core/index.php

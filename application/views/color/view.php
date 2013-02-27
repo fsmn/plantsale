@@ -84,15 +84,15 @@ print_r($color);
 	</p>
 	<p>
 		<label>Flat Cost: </label>
-		<?=$flat_cost;?>
+		<?=get_as_price($flat_cost);?>
 	</p>
 	<p>
 		<label>Plant Cost: </label>
-		<?=$plant_cost;?>
+		<?=get_as_price($plant_cost);?>
 	</p>
 	<p>
 		<label>Sale Price: </label>
-		<?=$color->price;?>
+		<?=get_as_price($color->price);?>
 	</p>
 
 </fieldset>

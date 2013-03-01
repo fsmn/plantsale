@@ -66,9 +66,9 @@ echo create_button_bar($buttons);
 	}
 	?>
 	<?=create_edit_field("flat_size", $color->flat_size, "Flat Size");?>
-	<?=create_edit_field("flat_cost",get_as_price($flat_cost), "Flat Cost");?>
-	<?=create_edit_field("plant_cost", get_as_price($plant_cost), "Plant Cost");?>
-	<?=create_edit_field("price", get_as_price($color->price), "Sale Price");?>
+	<?=create_edit_field("flat_cost", $flat_cost, "Flat Cost $");?>
+	<?=create_edit_field("plant_cost", $plant_cost, "Plant Cost $");?>
+	<?=create_edit_field("price", $color->price, "Sale Price $");?>
 	<?=create_edit_field("pot_size", $color->pot_size, "Pot Size");?>
 	<?=create_edit_field("count_presale",$color->count_presale, "Presale Count");?>
 	<?=create_edit_field("count_midsale",$color->count_midsale, "Midsale Count");?>

@@ -6,7 +6,7 @@ class Order extends MY_Controller
 {
 	function __construct()
 	{
-		parent::_construct();
+		parent::__construct();
 		$this->load->model("order_model", "order");
 	}
 	
@@ -17,11 +17,11 @@ class Order extends MY_Controller
 
 	function update_value()
 	{
-		echo $this->input->get("value");
-		die();
-		$id = $this->input->get("id");
-		$values = array($this->input->get("field") => $value = $this->input->get("value"));
+
+		$id = $this->input->post("id");
+		$values = array($this->input->post("field") => $value = $this->input->post("value"));
 		$this->order->update($id, $values);
+		echo $this->input->post("value");
 	}
 
 }

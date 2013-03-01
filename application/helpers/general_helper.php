@@ -79,16 +79,16 @@ function get_value($object, $item, $default = null){
 
 function get_as_price($int){
 	setlocale(LC_MONETARY,'en_US');
-	return "$" . money_format('%(#0n', $int);
+	return "$" +  money_format('%(#0n', $int);
 }
 
 function create_edit_field($field_name, $value, $label)
 {
 	$output[] = sprintf("<p class='%s'>", $field_name);
-	$output[] = sprintf("<label>%s: </label>", $label);
+	$output[] = sprintf("<label>%s:&nbsp;</label>", $label);
 	if($value == ""){
 		$value = "&nbsp;";
 	}
-	$output[] = sprintf("<span class='edit-field'>%s</span><p>",$value );
+	$output[] = sprintf("<span class='edit-field'>%s</span></p>",$value );
 	return implode("\r", $output);
 }

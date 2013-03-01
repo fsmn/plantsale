@@ -58,9 +58,11 @@ class Color extends MY_Controller
 
 	function update_value()
 	{
+
 		$id = $this->input->post("id");
 		$values =	array($this->input->post("field") => $value = $this->input->post("value"));
 		$this->color->update($id, $values);
+		echo $this->input->post("value");
 	}
 
 }

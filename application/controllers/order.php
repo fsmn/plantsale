@@ -20,8 +20,11 @@ class Order extends MY_Controller
 
 		$id = $this->input->post("id");
 		$values = array($this->input->post("field") => $value = $this->input->post("value"));
-		$this->order->update($id, $values);
-		echo $this->input->post("value");
+		$output = $this->order->update($id, $values);
+		if($this->input->post("format") == "currency"){
+			$output = get_as_price($output);
+		}
+		echo $output;
 	}
 
 }

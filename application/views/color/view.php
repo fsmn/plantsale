@@ -1,11 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-$buttons[] = array("selection" => "color",
-		"text" => "Edit",
-		"class" => array("button edit color_edit"),
-		"id" => "ce_$color->id",
-		"title" => "Edit this color");
-echo create_button_bar($buttons);
 
 
 ?>
@@ -21,7 +15,7 @@ echo create_button_bar($buttons);
 	<legend>General Info</legend>
 	<p>
 		<label>Common Name:</label>
-		<?=$color->common_name;?>
+		<span class="field"><?=$color->common_name;?></span>
 		<a href="<?=site_url("common/view/$color->common_id");?>"
 			title="View details for <?=$color->common_name;?>" class="button">Details</a>
 	</p>
@@ -29,19 +23,23 @@ echo create_button_bar($buttons);
 
 	<?=create_edit_field("color", $color->color, "Color");?>
 
-	<?=create_edit_field("species", $color->species, "Species");?>
-
-	<?=create_edit_field("latin_name", $color->latin_name, "Latin Name");?>
-
+	<p class="species">
+		<label>Species: </label>
+		<span class="field"><?=$color->species; ?></span>
+	</p>
+		<p class="latin_name">
+		<label>Latin Name: </label>
+		<span class="field"><?=$color->latin_name; ?></span>
+	</p>
 	<p class="category">
 		<label>Category: </label>
-		<?=$color->category; ?>
+		<span class="field"><?=$color->category; ?></span>
 	</p>
 	<p class="description">
 		<label>Description: </label>
-		<?=$color->description; ?>
+		<span class="field"><?=$color->description; ?></span>
 	</p>
-	<?=create_edit_field("note", $color->note, "Note");?>
+	<?=create_edit_field("note", $color->note, "Note", array("class"=>"textarea"));?>
 
 </fieldset>
 <fieldset class="order-info block" id="order">
@@ -49,13 +47,14 @@ echo create_button_bar($buttons);
 		Order Info for
 		<?=get_current_year();?>
 	</legend>
+	<div class="column column-odd">
 	<?=create_edit_field("vendor_id", $color->vendor_id, "Vendor Id");?>
 	<?=create_edit_field("year", $color->year, "Year");?>
 	<?=create_edit_field("flat_size", $color->flat_size, "Flat Size");?>
 
 
 	<? if($color->flat_cost && !$color->plant_cost){
-		$plant_cost = $flat_cost/$flat_size;
+		$plant_cost = $color->flat_cost/$color->flat_size;
 		$flat_cost = $color->flat_cost;
 	}elseif($color->plant_cost && !$color->flat_cost){
 		$plant_cost = $color->plant_cost;
@@ -65,11 +64,12 @@ echo create_button_bar($buttons);
 		$flat_cost = $color->flat_cost;
 	}
 	?>
-	<?=create_edit_field("flat_size", $color->flat_size, "Flat Size");?>
-	<?=create_edit_field("flat_cost", $flat_cost, "Flat Cost $");?>
-	<?=create_edit_field("plant_cost", $plant_cost, "Plant Cost $");?>
-	<?=create_edit_field("price", $color->price, "Sale Price $");?>
+	<?=create_edit_field("flat_cost", get_as_price($flat_cost), "Flat Cost", array("attributes"=>"format='currency'"));?>
+	<?=create_edit_field("plant_cost", get_as_price($plant_cost), "Plant Cost", array("attributes"=>"format='currency'"));?>
+	<?=create_edit_field("price", get_as_price($color->price), "Sale Price", array("attributes"=>"format='currency'"));?>
 	<?=create_edit_field("pot_size", $color->pot_size, "Pot Size");?>
+	</div>
+	<div class="column column-even">
 	<?=create_edit_field("count_presale",$color->count_presale, "Presale Count");?>
 	<?=create_edit_field("count_midsale",$color->count_midsale, "Midsale Count");?>
 	<?=create_edit_field("sellout_friday", $color->sellout_friday, "Friday Sellout");?>
@@ -79,4 +79,5 @@ echo create_button_bar($buttons);
 	<?=create_edit_field("remainder_sunday", $color->remainder_sunday, "Sunday Remainder");?>
 	<?=create_edit_field("count_dead", $color->count_dead, "Dead Count");?>
 	<?=create_edit_field("vendor_code", $color->vendor_code, "Vendor Code");?>
+	</div>
 </fieldset>

@@ -151,3 +151,23 @@ function create_button_bar($buttons, $options = NULL ){
 	return $output;
 }
 
+function create_edit_field($field_name, $value, $label, $options = array())
+{
+	$output[] = sprintf("<p class='%s'>", $field_name);
+	$output[] = sprintf("<label>%s:&nbsp;</label>", $label);
+	if($value == ""){
+		$value = "&nbsp;";
+	}
+	$classes[] = "edit-field field";
+	if(array_key_exists("class",$options)){
+		$classes[] = $options["class"];
+	}
+	$field_class = implode(" ", $classes);
+	
+	$attributes = "";
+	if(array_key_exists("attributes", $options)){
+		$attributes = $options["attributes"];
+	}
+	$output[] = sprintf("<span class='%s' %s>%s</span></p>",$field_class, $attributes, $value );
+	return implode("\r", $output);
+}

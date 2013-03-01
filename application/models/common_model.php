@@ -49,6 +49,8 @@ class Common_model extends CI_Model
 			$this->db->update("common",$this);
 		}else{
 			$this->db->update("common",$values);
+				$keys = array_keys($values);
+				return $this->get_value($id, $keys[0] );
 		}
 	}
 
@@ -60,7 +62,7 @@ class Common_model extends CI_Model
 		$output = $this->db->get()->row();
 		return $output;
 	}
-	
+
 	function get_by_name($name)
 	{
 		$this->db->where("`name` LIKE '%$name%' OR `genus` LIKE '%$name%' OR `latin_name` LIKE '%$name%' OR `species` LIKE '%$name%'");
@@ -70,6 +72,14 @@ class Common_model extends CI_Model
 		return $result;
 	}
 
+	function get_value($id, $field)
+	{
+		$this->db->where("id", $id);
+		$this->db->select($field);
+		$this->db->from("common");
+		$output = $this->db->get()->row();
+		return $output->$field;
+	}
 
 
 

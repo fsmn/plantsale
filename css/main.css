@@ -799,16 +799,26 @@ ul.buttons li {
 }
 
 .color-info,.order-info {
-	float: left;
-	min-width: 35%;
+	
 }
 
 fieldset.block label {
 	float: left;
 }
-.edit-field {
-	border: 1px solid #666;
-	padding: 2px 5px;
-	border-color: #666 #333 #666 #333;
-	min-width: 100px;
+.field {
+	padding: 0px 15px;
+	
+}
+
+textarea.save-field {
+	width: 80%;
+}
+
+.column {
+	width: 45%;
+	float: left;
+}
+
+.column-even {
+	padding-left: 5px;
 }

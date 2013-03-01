@@ -66,9 +66,11 @@ class Order_Model extends CI_Model
 			$this->db->update("order", $this);
 		}else{
 			$this->db->update("order", $values);
+			$keys = array_keys($values);
+			return $this->get_value($id, $keys[0] );
 		}
 	}
-	
+
 	function get($id)
 	{
 		$this->db->where("id", $id);
@@ -76,7 +78,7 @@ class Order_Model extends CI_Model
 		$output = $this->db->get()->row();
 		return $output;
 	}
-	
+
 	function get_for_color($color_id, $year = NULL)
 	{
 		$this->db->where("color_id", $color_id);
@@ -89,6 +91,14 @@ class Order_Model extends CI_Model
 		return $output;
 	}
 
+	function get_value($id, $field)
+	{
+		$this->db->where("id", $id);
+		$this->db->select($field);
+		$this->db->from("order");
+		$output = $this->db->get()->row();
+		return $output->$field;
+	}
 
 
 }

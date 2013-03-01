@@ -47,6 +47,10 @@ class Color_Model extends CI_Model
 			$this->db->update("color",$this);
 		}else{
 			$this->db->update("color",$values);
+			if($values == 1){
+				$keys = array_keys($values);
+				return $this->get_value($id, $keys[0] );
+			}
 		}
 	}
 	
@@ -74,6 +78,14 @@ class Color_Model extends CI_Model
 		
 	}
 	
+	function get_value($id, $field)
+	{
+		$this->db->where("id", $id);
+		$this->db->select($field);
+		$this->db->from("color");
+		$output = $this->db->get()->row();
+		return $output->$field;
+	}
 	
 
 }

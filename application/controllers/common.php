@@ -89,4 +89,11 @@ class Common extends MY_Controller
 		$this->common->update($id);
 		redirect("common/view/$id");
 	}
+	
+	function update_value()
+	{
+		$id = $this->input->post("id");
+		$values = array($this->input->post("field") => $this->input->post("value"));
+		echo $this->common->update($id, $values);
+	}
 }

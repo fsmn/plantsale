@@ -49,6 +49,7 @@ class Color_Model extends CI_Model
 			$this->db->update("color",$values);
 		}
 	}
+	
 
 
 	function get($id)

@@ -56,4 +56,11 @@ class Color extends MY_Controller
 		redirect("color/view/$id");
 	}
 
+	function update_value()
+	{
+		$id = $this->input->post("id");
+		$values =	array($this->input->post("field") => $value = $this->input->post("value"));
+		$this->color->update($id, $values);
+	}
+
 }

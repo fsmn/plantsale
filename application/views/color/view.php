@@ -17,7 +17,7 @@ echo create_button_bar($buttons);
 <h2>
 	<?="$color->common_name: $color->name";?>
 </h2>
-<fieldset class="block color-info">
+<fieldset class="block color-info" id="color">
 	<legend>General Info</legend>
 	<p>
 		<label>Common Name:</label>
@@ -44,7 +44,7 @@ echo create_button_bar($buttons);
 	<?=create_edit_field("note", $color->note, "Note");?>
 
 </fieldset>
-<fieldset class="order-info block">
+<fieldset class="order-info block" id="order">
 	<legend>
 		Order Info for
 		<?=get_current_year();?>

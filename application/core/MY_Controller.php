@@ -11,7 +11,6 @@ class MY_Controller extends CI_Controller
 			if($uri != "/auth"){
 				bake_cookie("uri", $uri);
 			}
-			print $uri;
 			redirect("auth");
 			die();
 		}

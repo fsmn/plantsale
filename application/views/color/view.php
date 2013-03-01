@@ -89,4 +89,4 @@ echo create_button_bar($buttons);
 	<?=create_edit_field("vendor_code", $color->vendor_code, "Vendor Code");?>
 </fieldset>
 
-
+print_r($color);

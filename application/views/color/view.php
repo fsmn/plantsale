@@ -85,8 +85,6 @@ echo create_button_bar($buttons);
 	<?=create_edit_field("sellout_saturday", $color->sellout_saturday, "Saturday Sellout");?>
 	<?=create_edit_field("remainder_saturday", $color->remainder_saturday, "Saturday Remainder");?>
 	<?=create_edit_field("remainder_sunday", $color->remainder_sunday, "Sunday Remainder");?>
-	<?=create_edit_field("dead_count", $color->dead_count, "Dead Count");?>
+	<?=create_edit_field("count_dead", $color->count_dead, "Dead Count");?>
 	<?=create_edit_field("vendor_code", $color->vendor_code, "Vendor Code");?>
 </fieldset>
-
-<?=print_r($color);

@@ -12,7 +12,8 @@ echo create_button_bar($buttons);
 <input
 	type="hidden" id="id" name="id" value="<?=$color->id;?>" />
 <input
-	type="hidden" id="order_id" name="order_id" value="<?=$color->order_id;?>" />
+	type="hidden" id="order_id" name="order_id"
+	value="<?=$color->order_id;?>" />
 <h2>
 	<?="$color->common_name: $color->name";?>
 </h2>
@@ -22,35 +23,26 @@ echo create_button_bar($buttons);
 		<label>Common Name:</label>
 		<?=$color->common_name;?>
 		<a href="<?=site_url("common/view/$color->common_id");?>"
-			title="View details for <?=$color->common_name;?>">Details</a>
+			title="View details for <?=$color->common_name;?>" class="button">Details</a>
 	</p>
-	<p class="name">
-		<label>Color Name: </label> <span class="edit-field"><?=$color->name;?>
-		</span>
-	</p>
-	<p class="color">
-		<label>Color: </label> <span class="edit-field"><?=$color->color; ?> </span>
-	</p>
-	<p class="species">
-		<label>Species: </label> <span class="edit-field"><?=$color->species; ?>
-		</span>
-	</p>
-	<p class="latin_name">
-		<label>Latin Name: </label> <span class="edit-field"><?=$color->latin_name; ?>
-		</span>
-	</p>
+	<?=create_edit_field("name", $color->name, "Name");?>
+
+	<?=create_edit_field("color", $color->color, "Color");?>
+
+	<?=create_edit_field("species", $color->species, "Species");?>
+
+	<?=create_edit_field("latin_name", $color->latin_name, "Latin Name");?>
+
 	<p class="category">
-		<label>Category: </label> <span class="edit-field"><?=$color->category; ?>
-		</span>
+		<label>Category: </label>
+		<?=$color->category; ?>
 	</p>
 	<p class="description">
-		<label>Description: </label> <span class="edit-field"><?=$color->description; ?>
-		</span>
+		<label>Description: </label>
+		<?=$color->description; ?>
 	</p>
-	<p class="note">
-		<label>Color Notes: </label> <span class="edit-field"><?=$color->note; ?>
-		</span>
-	</p>
+	<?=create_edit_field("note", $color->note, "Note");?>
+
 </fieldset>
 <fieldset class="order-info block">
 	<legend>

@@ -12,7 +12,7 @@ echo create_button_bar($buttons);
 <input
 	type="hidden" id="id" name="id" value="<?=$color->id;?>" />
 <input
-	type="hidden" id="order_id" name="order_id" value="<?=$order_id;?>" />
+	type="hidden" id="order_id" name="order_id" value="<?=$color->order_id;?>" />
 <h2>
 	<?="$color->common_name: $color->name";?>
 </h2>

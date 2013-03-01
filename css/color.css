@@ -10,10 +10,6 @@ warning borders (dark) #FF8538
 notices: #e69528
 backgrounds: #C7D7E9
 */
-.narrText {
-	border-color: silver gray gray silver;
-}
-
 .highlight {
 	background-color: yellow;
 }
@@ -72,12 +68,10 @@ div.login-title {
 	border-color: black;
 }
 
-/*student search elements*/
 div.result {
 	background-color: white;
 }
 
-/*student list elements*/
 div.entry,div.list {
 	border-top-color: silver;
 	border-right-color: silver;
@@ -106,7 +100,7 @@ div.list {
 	opacity: .90;
 	color: #000;
 	border: none;
-	filter: Alpha(Opacity =                                               90);
+	filter: Alpha(Opacity =                                                 90);
 	/* 	background: #91b347 url(images/button_20_over.png) 50% 50% repeat-x; */
 	background: #67b021;
 	background: -moz-linear-gradient(top, #489310 0, #67b021 100%);
@@ -178,11 +172,6 @@ a.button {
 	/* 	background-image: url(images/edit_button_hover.png); */
 }
 
-.unread {
-	background-color: white;
-	color: red;
-}
-
 .button.new,a.button.new {
 	border: 1px solid #ddd000;
 	background-color: #eff11;
@@ -213,9 +202,7 @@ a.button {
 
 .button.new.active {
 	box-shadow: -1px -1px 1px #eeff11 inset;
-	
 }
-
 
 /* #DB5F3A */
 /* #C9192D */
@@ -267,14 +254,6 @@ a.button {
 	box-shadow: 2px 2px 4px #aaa;
 }
 
-#navigation input[type="text"] {
-	border-color: #aaa;
-}
-
-#stuSearch {
-	color: #666;
-}
-
 #navigation li {
 	color: black;
 }
@@ -288,44 +267,7 @@ a.button {
 	background-color: transparent;
 }
 
-#sidebar,#search_list {
-	border-color: #087CD5;
-}
-
-#sidebar h3 {
-	*color: white;
-	*background-color: black;
-}
-
-#sidebar ol {
-	background-color: white;
-	border-color: black;
-}
-
-/* end div layout elements */
-#advancedSearch {
-	border:none;
-	background-color: #C7D7E9;
-	box-shadow: 2px 2px 4px #aaa;
-	
-}
-
-#advancedSearch h5 {
-	background-color: #C7D7E9;
-	color: black;
-}
-
-#advancedSearch h6 {
-	background-color: #C7D7E9;
-	color: black;
-}
-
-#addConcept {
-	background-color: #fdfdd8;
-	border-color: black;
-}
-
-h2,h3,.support-view legend,h4,h5,h6,tr.benchmark-grade {
+h2,h3,h4,h5,h6 {
 	background-color: #C7D7E9;
 	border: none;
 }
@@ -338,7 +280,7 @@ h2,h3,.support-view legend,h4,h5,h6,tr.benchmark-grade {
 .warning,.notice,.error {
 	color: black;
 	opacity: .90;
-	filter: Alpha(Opacity =                               90);
+	filter: Alpha(Opacity =                                 90);
 	background: #ff8538 url(images/warning.png) 50% 50% repeat-x;
 }
 
@@ -356,36 +298,6 @@ h2,h3,.support-view legend,h4,h5,h6,tr.benchmark-grade {
 	border-color: black;
 }
 
-/*attendance values*/
-ol.attendance {
-	padding: 0;
-	margin: 0;
-	display: inline;
-}
-
-li.attendance {
-	border-left-color: black;
-	color: black
-}
-
-/*column boxes (see attendance_list.inc.html)*/
-.quartercolumn {
-	border-bottom-color: black;
-}
-
-/* Editor for Student Info page */
-#editor {
-	background-color: silver;
-}
-
-#searchForm fieldset {
-	border-color: #6CAADC;
-}
-
-#search_list {
-	background-color: white;
-}
-
 a.link,input.link {
 	color: blue;
 }
@@ -394,7 +306,7 @@ a.link:visited {
 	*color: purple;
 }
 
-span.link, label.link {
+span.link,label.link {
 	color: blue;
 	text-decoration: underline;
 	cursor: pointer;
@@ -414,35 +326,11 @@ input.link {
 	color: #f00;
 }
 
-tr.benchmark-grade {
-	
-}
-
-tr.benchmark-subject {
-	
-}
-
-tr.benchmark-category {
-	
-}
-
-tr.benchmark-term {
-	
-}
-
-tr.benchmark-row td.benchmark-text:hover {
-	background-color: #fcfcaa;
-}
-
 table.list tr:hover {
 	background-color: #cdcdcd;
 }
 
-table.grade-chart tr:hover {
-	background-color: #efefef;
-}
-
-.grade-points.edit:hover,.assignment-edit:hover,td.student-name:hover {
+.edit-field:hover {
+	background-color: yellow;
 	cursor: pointer;
-	background-color: #dfdfdf;
 }

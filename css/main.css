@@ -2,8 +2,6 @@
 
 @import "ui.datepicker.css";
 
-
-
 .narrText {
 	padding: 3px;
 	border-style: solid;
@@ -245,9 +243,6 @@ div.entry,div.list {
 	border-left-style: solid;
 }
 
-
-
-
 /*form elements*/
 .label {
 	font-size: 1em;
@@ -259,8 +254,6 @@ div.entry,div.list {
 	position: absolute;
 	width: 70%;
 }
-
-
 
 .button,#navigation,#advancedSearch,#browser_warning,.notice,.warning,#searchForm fieldset,h2,h3,h4,h5,.support-view legend,input[type="submit"],#navigation input[type="text"]
 	{
@@ -370,7 +363,7 @@ legend {
 }
 
 #navigation {
-	padding:1px;
+	padding: 1px;
 }
 
 #navigation {
@@ -435,7 +428,6 @@ legend {
 	
 }
 
-
 /* end div layout elements */
 .search ol {
 	padding: 0;
@@ -447,7 +439,6 @@ legend {
 	padding-left: 1em;
 	margin-left: 0em;
 }
-
 
 h1 {
 	font-size: 18px;
@@ -624,7 +615,6 @@ label {
 	text-align: center;
 }
 
-
 a.button {
 	text-decoration: none;
 }
@@ -781,7 +771,6 @@ fieldset.advanced div.advanced {
 	margin-right: auto;
 }
 
-
 #search_list .studentName {
 	padding-top: 0;
 }
@@ -805,19 +794,17 @@ ul.buttons li {
 }
 
 /* COLOR Layout */
-
 .block {
 	display: block;
 }
 
-.color-info, .order-info {
+.color-info,.order-info {
 	float: left;
 	width: 45%;
 }
 
 .edit-field {
 	border: 1px solid #666;
-padding: 2px 5px;
-border-color: #666 #333 #666 #333;
-}
+	padding: 2px 5px;
+	border-color: #666 #333 #666 #333;
 }

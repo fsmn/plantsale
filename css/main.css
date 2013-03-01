@@ -814,3 +814,10 @@ ul.buttons li {
 	float: left;
 	width: 45%;
 }
+
+.edit-field {
+	border: 1px solid #666;
+padding: 2px 5px;
+border-color: #666 #333 #666 #333;
+}
+}

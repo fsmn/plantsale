@@ -56,7 +56,7 @@ class Color_Model extends CI_Model
 		$this->db->where("color.id", $id);
 		$this->db->where("color.common_id = `common`.`id`");
 		$this->db->from("color,common");
-		$this->db->select("color.*, common.name as common_name, common.species, common.genus, common.latin_name, common.category, common.description,order.*");
+		$this->db->select("color.*, common.name as common_name, common.species, common.genus, common.latin_name, common.category, common.description,order.id as order_id, order.*");
 		$this->db->join("order","order.color_id = color.id AND `order`.`year` = ". get_current_year(), "LEFT");
 		$result = $this->db->get()->row();
 		return $result;

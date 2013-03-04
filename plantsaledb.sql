@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# Host: 127.0.0.1 (MySQL 5.5.25)
+# Host: 127.0.0.1 (MySQL 5.1.67-0ubuntu0.11.10.1)
 # Database: plantsaledb
-# Generation Time: 2013-03-01 21:20:58 +0000
+# Generation Time: 2013-03-04 12:25:15 -0600
 # ************************************************************
 
 
@@ -62,6 +62,8 @@ CREATE TABLE `common` (
   `category` varchar(255) DEFAULT NULL,
   `subcategory` varchar(255) DEFAULT '',
   `description` text,
+  `comments` text,
+  `light_requirements` varchar(255) DEFAULT NULL,
   `latin_name` varchar(255) DEFAULT NULL,
   `rec_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `rec_modifier` int(11) NOT NULL,
@@ -71,10 +73,10 @@ CREATE TABLE `common` (
 LOCK TABLES `common` WRITE;
 /*!40000 ALTER TABLE `common` DISABLE KEYS */;
 
-INSERT INTO `common` (`id`, `name`, `species`, `genus`, `category`, `subcategory`, `description`, `latin_name`, `rec_modified`, `rec_modifier`)
+INSERT INTO `common` (`id`, `name`, `species`, `genus`, `category`, `subcategory`, `description`, `comments`, `light_requirements`, `latin_name`, `rec_modified`, `rec_modifier`)
 VALUES
-	(1,'Test','Testus',NULL,NULL,'','The poodle is near midnight. ','T. Examen','2013-02-19 11:04:25',1),
-	(2,'Blazing Star','spicata','liatris','Perennials',NULL,'Long flowers spikes. Seeds eaten by birds. Best in groups. Drought tolerant, but loves water, too. ',NULL,'2013-03-01 14:39:16',1);
+	(1,'Test','Testus',NULL,NULL,'','The poodle is near midnight. ',NULL,NULL,'T. Examen','2013-02-19 11:04:25',1),
+	(2,'Blazing Star','spicata','liatris','Perennials',NULL,'Long flowers spikes. Seeds eaten by birds. Best in groups. Drought tolerant, but loves water, too. ',NULL,NULL,NULL,'2013-03-01 14:39:16',1);
 
 /*!40000 ALTER TABLE `common` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -169,7 +171,7 @@ LOCK TABLES `order` WRITE;
 
 INSERT INTO `order` (`id`, `color_id`, `common_id`, `catalog_number`, `catalog_id`, `year`, `flat_size`, `flat_cost`, `plant_cost`, `pot_size`, `price`, `count_presale`, `count_midsale`, `count_dead`, `sellout_friday`, `sellout_saturday`, `remainder_friday`, `remainder_saturday`, `remainder_sunday`, `vendor_id`, `vendor_code`, `rec_modified`, `rec_modifier`)
 VALUES
-	(1,1,2,NULL,NULL,2013,1,'0.92 ','0.92','Bulbs & Bareroots 7 for ',3,85,NULL,NULL,NULL,0,0,0,NULL,'gw',NULL,'2013-03-01 14:39:34',0);
+	(1,1,2,NULL,NULL,2013,1,'0.92 ','0.92','Bulbs & Bareroots 7 for ',3,85,0,NULL,NULL,0,0,0,NULL,'gw',NULL,'2013-03-04 12:06:53',0);
 
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -203,7 +205,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `first`, `last`, `email`, `is_
 VALUES
 	(1,'admin','05e10fb316046c0c7771c0de4f26eb2e','Chris','Dart','chrisdart@cerebratorium.com',1,'04564c9b5f86e74697934335d4e61066','Active','admin',NULL,NULL),
 	(2,'pat','','Pat','Thompson','pat@marksimonson.com',NULL,'','Active','admin',NULL,NULL),
-	(3,'test','','Test','User','chris@cerebratorium.com',NULL,'','Active','user',NULL,NULL),
+	(3,'test','13292e01b77ae7a4dc73c8b77cf9587c','Test','Nostril','chris@cerebratorium.com',NULL,'','Active','user',NULL,NULL),
 	(4,'testy','','Test','User','technology@cerebratorium.com',NULL,'','Active','user','2013-03-01 15:20:03',1);
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
@@ -239,7 +241,8 @@ VALUES
 	(1,'admin','2013-02-28 21:13:14','login'),
 	(1,'admin','2013-03-01 13:39:28','login'),
 	(1,'admin','2013-03-01 14:46:58','logout'),
-	(1,'admin','2013-03-01 14:47:03','login');
+	(1,'admin','2013-03-01 14:47:03','login'),
+	(3,'test','2013-03-04 12:04:49','login');
 
 /*!40000 ALTER TABLE `user_log` ENABLE KEYS */;
 UNLOCK TABLES;

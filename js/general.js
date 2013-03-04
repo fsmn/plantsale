@@ -24,7 +24,21 @@ $(document).ready(function(){
 		}else if(me.hasClass("textarea")){
 			me.html("<br/><textarea name='" + my_field + "'class='save-field'>" + my_value + "</textarea>").removeClass("edit-field");
 			
-		 
+		}else if(me.hasClass("checkbox")){
+			my_category = me.attr("menu");
+			form_data = {
+					field: my_field,
+					category: my_category,
+					value: my_value
+			};
+			$.ajax({
+				type: "get",
+				url: base_url + "menu/get_checkbox",
+				data: form_data,
+				success: function(output){
+					me.html(output).removeClass("edit-field");
+				}
+			});
 			
 		}else{
 			if(me.attr("format")){
@@ -47,6 +61,10 @@ $(document).ready(function(){
 	
 	$(".dropdown .save-field").live("change", function(){
 		save_field($(this));
+	});
+	
+	$(".checkbox .save-checkbox").live("click",function(){
+		//save_field($(this));
 	});
 	
 });

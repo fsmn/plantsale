@@ -14,7 +14,8 @@ print create_button_bar($buttons);
 	<?=create_edit_field("subcategory", $common->subcategory, "Subcategory");?>
 	<?=create_edit_field("latin_name", $common->latin_name, "Latin Name");?>
 	<?=create_edit_field("description", $common->description, "Description", array("class"=>"textarea"));?>
-
+	<?=create_edit_field("comment",$common->comment, "Comment", array("class"=>"textarea"));?>
+	<?=create_edit_field("sunlight",$common->sunlight, "Sunlight Requirements", array("class"=>"checkbox","attributes"=>"menu='sunlight'"));?>
 
 </fieldset>
 <table id="color-list" class="list">

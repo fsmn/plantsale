@@ -7,9 +7,11 @@ class Common_model extends CI_Model
 	var $species;
 	var $genus;
 	var $description;
+	var $comment;
 	var $latin_name;
 	var $category;
 	var $subcategory;
+	var $sunlight;
 	var $rec_modified;
 	var $rec_modifier;
 
@@ -20,7 +22,7 @@ class Common_model extends CI_Model
 
 	function prepare_variables()
 	{
-		$variables = array("name","species","genus","description","latin_name","category","subcategory");
+		$variables = array("name","species","genus","description","comment","latin_name","category","subcategory","sunlight");
 
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];

@@ -338,3 +338,6 @@ table.list tr:hover {
 	background-position: center left;
 }
 
+.search-field {
+	color: #666;
+}

@@ -4,6 +4,11 @@ $buttons[] = array("selection" => "index",
 		"text" => sprintf("Current Year: %s", get_current_year()),
 		"class" => array("button edit set-current-year"),
 		"title" => "Set the current working year of the plant sale");
+$buttons[] = array("selection"=>"user", 
+		"text"=>"Account Info",
+		"href"=>site_url("user/view/" . $this->session->userdata("user_id")
+				)
+		);
 
 $buttons[] = array("selection" => "index",
 		"text" => "Log Out",

@@ -7,7 +7,7 @@ class User_model extends CI_Model
 	var $last;
 	var $username;
 	var $email;
-	var $status;
+	var $is_active;
 	var $db_role;
 	var $rec_modified;
 	var $rec_modifier;
@@ -24,7 +24,7 @@ class User_model extends CI_Model
 	function prepare_variables()
 	{
 
-		$variables = array("first","last","username","email","db_role");
+		$variables = array("first","last","username","email","db_role","is_active");
 		for($i = 0; $i < count($variables); $i++){
 			$myVariable = $variables[$i];
 			if($this->input->post($myVariable)){
@@ -151,21 +151,33 @@ class User_model extends CI_Model
 
 	function set_db_role($id){
 		$data["db_role"] = $this->input->post("db_role");
-		if($this->session->userdata("db_role") == 1 && $this->session->userdata("user_id") == 1000){
+		if($this->session->userdata("db_role") == "admin" && $this->session->userdata("user_id") == 1){
 			$this->db->where("id", $id);
 			$this->db->update("user",$data);
 		}
 	}
 
 
-	function update($id)
+	function update($id, $values = array())
+{
+		$this->db->where("id", $id);
+		if(empty($values)){
+			$this->prepare_variables();
+			$this->db->update("user", $this);
+		}else{
+			$this->db->update("user", $values);
+			$keys = array_keys($values);
+			return $this->get_value($id, $keys[0] );
+		}
+	}
+	
+	function get_value($id, $field)
 	{
-
-		$this->prepare_variables();
-		$this->db->where('id', $id);
-		$this->db->update('user', $this);
-		$this->set_db_role($id);
-
+		$this->db->where("id", $id);
+		$this->db->select($field);
+		$this->db->from("user");
+		$output = $this->db->get()->row();
+		return $output->$field;
 	}
 
 

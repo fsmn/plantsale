@@ -2,4 +2,4 @@
 .settings
 .settings/*
 .buildpath
-config.php
+application/config.php

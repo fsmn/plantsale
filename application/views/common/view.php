@@ -7,7 +7,7 @@
 print create_button_bar($buttons);
 ?>
 <fieldset id="common">
-<input type="hidden" name="id" id="id" value="<?=$common->id;?>"/>
+	<input type="hidden" name="id" id="id" value="<?=$common->id;?>" />
 	<?=create_edit_field("genus", $common->genus, "Genus");?>
 	<?=create_edit_field("species", $common->species, "Species");?>
 	<?=create_edit_field("category", $common->category, "Category", array("class"=>"dropdown", "attributes"=>"menu='common_category'"));?>
@@ -17,7 +17,7 @@ print create_button_bar($buttons);
 
 
 </fieldset>
-<table id="color-list">
+<table id="color-list" class="list">
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -39,10 +39,17 @@ print create_button_bar($buttons);
 		</tr>
 
 		<? endforeach; ?>
-
-		<tr id="color-row-new">
-			<td><span class="button new color-create"
-				id="common-id_<?=$common->id;?>">Add a Color</span></td>
-		</tr>
 	</tbody>
 </table>
+<? print create_button_bar(array(
+		array(
+		"selection"=>"color",
+		"text"=>"Add a Color",
+		"class"=>array("button","new","color-create"),
+		"id"=>sprintf("common-id_%s",$common->id),
+		"type"=>"span",
+		"title"=>"add a new color",
+)
+)
+);
+

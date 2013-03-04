@@ -1,8 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-
-
-
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <input
 	type="hidden" id="id" name="id" value="<?=$color->id;?>" />
 <input
@@ -81,3 +77,4 @@
 	<?=create_edit_field("vendor_code", $color->vendor_code, "Vendor Code");?>
 	</div>
 </fieldset>
+

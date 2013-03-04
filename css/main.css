@@ -694,50 +694,7 @@ a.link:hover,input.link:hover {
 	cursor: pointer;
 }
 
-table.attendance {
-	border-spacing: 0px;
-	border: 1px #ccc solid;
-}
 
-table.attendance td,table.attendance th {
-	padding: 5px;
-	border-right: 1px #ccc solid;
-	border-bottom: 1px #ccc solid;
-}
-
-table.attendance td:last-child,table.attendance th:last-child {
-	border-right: 0;
-}
-
-table.attendance tr:last-child td {
-	border-bottom: 0;
-}
-
-.attendance th {
-	text-align: left;
-	width: 150px;
-}
-
-.attendance th.a-date {
-	width: 80px;
-}
-
-.attendance th.a-button {
-	width: 30px;
-}
-
-.attendance th.a-note {
-	width: 300px;
-}
-
-.support-view {
-	margin-bottom: 5px;
-	margin-top: 5px;
-}
-
-.support-view legend {
-	font-size: 1.25em;
-}
 
 .icon {
 	vertical-align: middle;

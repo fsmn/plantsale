@@ -12,7 +12,7 @@ class Order extends MY_Controller
 	
 	function index()
 	{
-		echo "Hello World";
+		
 	}
 
 	function update_value()
@@ -25,6 +25,21 @@ class Order extends MY_Controller
 			$output = get_as_price($output);
 		}
 		echo $output;
+	}
+	
+	function create()
+	{
+		$data["color_id"] = $this->input->get("color_id");
+		$data["action"] = "insert";
+		$this->load->view("order/row", $data);
+		
+	}
+	
+	function insert()
+	{
+		$order_id = $this->order->insert();
+		$color_id = $this->input->post("color_id");
+		redirect("color/view/$color_id");
 	}
 
 }

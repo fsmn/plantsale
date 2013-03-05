@@ -27,11 +27,6 @@
 			<td><span class="common-name common-edit-row"
 				id="cnid_<?=$name->id;?>"><?=$name->name;?> </span>
 			</td>
-	
-			<td><span class="common-species common-edit-row"
-				id="csid_<?=$name->id;?>"><?=$name->species;?> </span>
-			</td>
-		
 			<td><span class="common-genus common-edit-row"
 				id="cgid_<?=$name->id;?>"><?=$name->genus;?> </span>
 			</td>

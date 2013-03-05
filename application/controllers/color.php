@@ -36,6 +36,9 @@ class Color extends MY_Controller
 	{
 		$id = $this->uri->segment(3);
 		$color = $this->color->get($id);
+		$current_order = $this->order->get_for_color($id, get_current_year());
+		$data["current_order"] = $current_order;
+		$data["orders"] = $this->order->get_for_color($id);
 		$data["color"] = $color;
 		$data["target"] = "color/view";
 		$data["title"] = sprintf("Viewing Info for %s (Color)", $color->color);

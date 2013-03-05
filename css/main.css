@@ -688,6 +688,10 @@ table.files td.file-description {
 	width: 275px;
 }
 
+td.field input {
+	width: 60px;
+}
+
 a.link,input.link {
 	text-decoration: underline;
 }
@@ -786,4 +790,7 @@ textarea.save-field {
 	border: 1px solid #ddd;
 	border-right: 1px solid #ccc;
 	padding: 5px;
+}
+.block {
+	clear:both;
 }

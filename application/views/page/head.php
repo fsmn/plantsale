@@ -33,5 +33,8 @@ var base_url = '<?=base_url("index.php") . "/";?>';
 <!-- Color Scripts -->
 <script type="text/javascript" src="<?=base_url();?>js/color.js"></script>
 
+<!-- Order Scripts -->
+<script type="text/javascript" src="<?=base_url();?>js/order.js"></script>
+
 <!-- admin scripts -->
 <script type="text/javascript" src="<?=base_url();?>js/password.js"></script>

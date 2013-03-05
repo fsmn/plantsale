@@ -110,7 +110,7 @@ function create_dropdown(my_field, my_category, my_value)
 
 function save_field(me)
 {
-	table = $(me).parents("fieldset").attr("id");
+	table = $(me).parents(".grouping").attr("id");
 	my_parent = $(me).parents("span");
 	my_id = $("#id").val();
 	if(table == "order"){

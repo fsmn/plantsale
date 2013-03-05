@@ -6,7 +6,7 @@
 <? $buttons[] = array("selection" => "common" , "text" => "Edit", "class" => array("button","edit","common-edit"), "id" => "ec_$common->id", "type" => "span", "title" => "Edit this record");
 print create_button_bar($buttons);
 ?>
-<fieldset id="common">
+<div class="grouping" id="common">
 	<input type="hidden" name="id" id="id" value="<?=$common->id;?>" />
 	<?=create_edit_field("genus", $common->genus, "Genus");?>
 	<?=create_edit_field("category", $common->category, "Category", array("class"=>"dropdown", "attributes"=>"menu='common_category'"));?>
@@ -15,7 +15,7 @@ print create_button_bar($buttons);
 	<?=create_edit_field("comment",$common->comment, "Comment", array("class"=>"textarea"));?>
 	<?=create_edit_field("sunlight",$common->sunlight, "Sunlight Requirements", array("class"=>"checkbox","attributes"=>"menu='sunlight'"));?>
 
-</fieldset>
+</div>
 <table id="color-list" class="list">
 	<thead>
 		<tr>

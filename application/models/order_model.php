@@ -3,7 +3,6 @@
 class Order_Model extends CI_Model
 {
 	var $color_id;
-	var $common_id;
 	var $vendor_id;
 	var $catalog_number;
 	var $catalog_id;
@@ -32,7 +31,7 @@ class Order_Model extends CI_Model
 
 	function prepare_variables()
 	{
-		$variables = array("color_id","common_id","vendor_id","catalog_number",
+		$variables = array("color_id","vendor_id","catalog_number",
 				"catalog_id","year", "flat_size","flat_cost","pot_size",
 				"plant_cost","price","count_presale","count_midsale","count_dead",
 				"sellout_friday","sellout_saturday","remainder_friday",
@@ -54,7 +53,7 @@ class Order_Model extends CI_Model
 	{
 		$this->prepare_variables();
 		$this->db->insert("order", $this);
-		$id = $this->db->last_insert_id();
+		$id = $this->db->insert_id();
 		return $id;
 	}
 
@@ -87,7 +86,11 @@ class Order_Model extends CI_Model
 		}
 		$this->db->from("order");
 		$this->db->order_by("year","desc");
-		$output = $this->db->get()->result();
+		if($year){
+			$output = $this->db->get()->row();
+		}else{
+			$output = $this->db->get()->result();
+		}
 		return $output;
 	}
 

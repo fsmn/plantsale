@@ -72,8 +72,9 @@ class Order_Model extends CI_Model
 
 	function get($id)
 	{
-		$this->db->where("id", $id);
-		$this->db->from("order");
+		$this->db->where("order.id", $id);
+		$this->db->from("order,color");
+		$this->db->where("`order`.`color_id` = `color`.`id`");
 		$output = $this->db->get()->row();
 		return $output;
 	}

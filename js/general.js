@@ -1,58 +1,8 @@
 $(document).ready(function(){
+
 	
 	$(".edit-field").live("click",function() {
-		me = $(this);
-		my_field = me.parents("p").attr("class");
-		my_value = me.html();
-		if(me.hasClass("dropdown")){
-			my_category = me.attr("menu");
-			form_data = {
-					field: my_field,
-					category: my_category,
-					value: my_value
-			};
-			$.ajax({
-				type: "get",
-				url: base_url + "menu/get_dropdown",
-				data: form_data,
-				success: function(output){
-					me.html(output).removeClass("edit-field");
-				}
-			
-			});
-			
-		}else if(me.hasClass("textarea")){
-			me.html("<br/><textarea name='" + my_field + "'class='save-field'>" + my_value + "</textarea>").removeClass("edit-field");
-			
-		}else if(me.hasClass("checkbox")){
-			my_category = me.attr("menu");
-			form_data = {
-					field: my_field,
-					category: my_category,
-					value: my_value
-			};
-			$.ajax({
-				type: "get",
-				url: base_url + "menu/get_checkbox",
-				data: form_data,
-				success: function(output){
-					me.html(output).removeClass("edit-field");
-				}
-			});
-			
-		}else{
-			if(me.attr("format")){
-				my_format = me.attr("format");
-				if(my_format == "currency"){
-					my_value = my_value.split("$")[1];
-				}
-			}
-		me.html(
-				"<input type='text' name='" + my_field
-						+ "' class='save-field' value='"
-						+ my_value + "'/>").removeClass("edit-field");
-		$(".save-field").focus();
-		}
+		edit_field($(this));
 	});
 
 	$(".save-field").live("blur", function() {
@@ -107,6 +57,62 @@ function create_dropdown(my_field, my_category, my_value)
 	
 	});
 }
+
+function edit_field(me)
+{
+	my_field = me.parents("p").attr("class");
+	my_value = me.html();
+	if(me.hasClass("dropdown")){
+		my_category = me.attr("menu");
+		form_data = {
+				field: my_field,
+				category: my_category,
+				value: my_value
+		};
+		$.ajax({
+			type: "get",
+			url: base_url + "menu/get_dropdown",
+			data: form_data,
+			success: function(output){
+				me.html(output).removeClass("edit-field");
+			}
+		
+		});
+		
+	}else if(me.hasClass("textarea")){
+		me.html("<br/><textarea name='" + my_field + "'class='save-field'>" + my_value + "</textarea>").removeClass("edit-field");
+		
+	}else if(me.hasClass("checkbox")){
+		my_category = me.attr("menu");
+		form_data = {
+				field: my_field,
+				category: my_category,
+				value: my_value
+		};
+		$.ajax({
+			type: "get",
+			url: base_url + "menu/get_checkbox",
+			data: form_data,
+			success: function(output){
+				me.html(output).removeClass("edit-field");
+			}
+		});
+		
+	}else{
+		if(me.attr("format")){
+			my_format = me.attr("format");
+			if(my_format == "currency"){
+				my_value = my_value.split("$")[1];
+			}
+		}
+	me.html(
+			"<input type='text' name='" + my_field
+					+ "' class='save-field' value='"
+					+ my_value + "'/>").removeClass("edit-field");
+	$(".save-field").focus();
+	}
+}
+
 
 function save_field(me)
 {

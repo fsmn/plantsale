@@ -27,7 +27,7 @@ class Common extends MY_Controller
 	{
 
 	}
-	
+
 	function search_by_name()
 	{
 		$name = $this->input->get("name");
@@ -82,14 +82,14 @@ class Common extends MY_Controller
 			$this->load->view("page/index",$data);
 		}
 	}
-	
+
 	function update()
 	{
 		$id = $this->input->post("id");
 		$this->common->update($id);
 		redirect("common/view/$id");
 	}
-	
+
 	function update_value()
 	{
 		$id = $this->input->post("id");

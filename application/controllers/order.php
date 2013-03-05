@@ -14,6 +14,16 @@ class Order extends MY_Controller
 	{
 		
 	}
+	
+	function view()
+	{
+		$id = $this->uri->segment(3);
+		$order = $this->order->get($id);
+		$data["order"] = $order;
+		$data["target"] = "order/view";
+		$data["title"] = "Viewing Order Details";
+		$this->load->view("page/index", $data);
+	}
 
 	function update_value()
 	{

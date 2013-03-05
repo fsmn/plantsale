@@ -25,6 +25,9 @@ class Common_model extends CI_Model
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
 			if($this->input->post($my_variable)){
+				if($my_variable == "sunlight"){
+					$this->$my_variable = join(",", $this->input->post($my_variable));
+				}
 				$this->$my_variable = $this->input->post($my_variable);
 			}
 		}
@@ -32,6 +35,7 @@ class Common_model extends CI_Model
 		$this->rec_modified = mysql_timestamp();
 		$this->rec_modifier = $this->session->userdata('user_id');
 	}
+	
 
 	function insert()
 	{

@@ -46,6 +46,7 @@ if($orders):
 			</td>
 			<td class="order-vendor_code field"><?=$order->vendor_code;?>
 			</td>
+			<td><a href="<?=site_url("order/view/$order->id");?>" class="button edit">Edit</a></td>
 		</tr>
 		<? endforeach;?>
 	</tbody>

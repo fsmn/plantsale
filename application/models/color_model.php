@@ -74,6 +74,8 @@ class Color_Model extends CI_Model
 	{
 		$this->db->where("color.common_id", $common_id);
 		$this->db->from("color");
+		$this->db->join("order","color.id = order.color_id", "LEFT");
+		$this->db->order_by("order.year","DESC");
 		$result = $this->db->get()->result();
 		return $result;
 		

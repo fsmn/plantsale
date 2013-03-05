@@ -7,6 +7,10 @@
 <p><?=create_input($common, "genus","Genus");?></p>
 <p><label for="category">Category: </label><?=form_dropdown("category",$categories,get_value($common,"category"),"id='category'");?></p>
 <p><?=create_input($common,"subcategory","Subcategory");?></p>
+<p><label>Full Sun: </label><input type="checkbox" name="sunlight[]" value="Full Sun"/>
+<label>Part Sun: </label><input type="checkbox" name="sunlight[]" value="Part Sun"/>
+<label>Shade: </label><input type="checkbox" name="sunlight[]" value="Shade"/>
+</p>
 <p><label for="description">Description:</label><br/>
 <textarea name="description" id="description"><?=get_value($common,"description");?></textarea></p>
 <p><input type="submit" value="<?=ucfirst($action);?>" class="button new"/></p>

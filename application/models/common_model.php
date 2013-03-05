@@ -4,11 +4,9 @@ class Common_model extends CI_Model
 {
 
 	var $name;
-	var $species;
 	var $genus;
 	var $description;
 	var $comment;
-	var $latin_name;
 	var $category;
 	var $subcategory;
 	var $sunlight;
@@ -22,7 +20,7 @@ class Common_model extends CI_Model
 
 	function prepare_variables()
 	{
-		$variables = array("name","species","genus","description","comment","latin_name","category","subcategory","sunlight");
+		$variables = array("name","genus","description","comment","category","subcategory","sunlight");
 
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
@@ -67,7 +65,7 @@ class Common_model extends CI_Model
 
 	function get_by_name($name)
 	{
-		$this->db->where("`name` LIKE '%$name%' OR `genus` LIKE '%$name%' OR `latin_name` LIKE '%$name%' OR `species` LIKE '%$name%'");
+		$this->db->where("`name` LIKE '%$name%' OR `genus` LIKE '%$name%'");
 		$this->db->order_by("name","ASC");
 		$this->db->order_by("genus","ASC");
 		$result = $this->db->get("common")->result();

@@ -38,7 +38,7 @@ class Color extends MY_Controller
 		$color = $this->color->get($id);
 		$data["color"] = $color;
 		$data["target"] = "color/view";
-		$data["title"] = sprintf("Viewing Info for %s (Color)", $color->name);
+		$data["title"] = sprintf("Viewing Info for %s (Color)", $color->color);
 		$this->load->view("page/index", $data);
 
 

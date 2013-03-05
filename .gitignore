@@ -3,3 +3,4 @@
 .settings/*
 .buildpath
 application/config.php
+*.sql

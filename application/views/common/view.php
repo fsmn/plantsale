@@ -9,10 +9,8 @@ print create_button_bar($buttons);
 <fieldset id="common">
 	<input type="hidden" name="id" id="id" value="<?=$common->id;?>" />
 	<?=create_edit_field("genus", $common->genus, "Genus");?>
-	<?=create_edit_field("species", $common->species, "Species");?>
 	<?=create_edit_field("category", $common->category, "Category", array("class"=>"dropdown", "attributes"=>"menu='common_category'"));?>
 	<?=create_edit_field("subcategory", $common->subcategory, "Subcategory");?>
-	<?=create_edit_field("latin_name", $common->latin_name, "Latin Name");?>
 	<?=create_edit_field("description", $common->description, "Description", array("class"=>"textarea"));?>
 	<?=create_edit_field("comment",$common->comment, "Comment", array("class"=>"textarea"));?>
 	<?=create_edit_field("sunlight",$common->sunlight, "Sunlight Requirements", array("class"=>"checkbox","attributes"=>"menu='sunlight'"));?>
@@ -21,7 +19,7 @@ print create_button_bar($buttons);
 <table id="color-list" class="list">
 	<thead>
 		<tr>
-			<th>Name</th>
+			<th>Species</th>
 			<th>Color</th>
 			<th>Height</th>
 			<th>Width</th>
@@ -31,7 +29,7 @@ print create_button_bar($buttons);
 	<tbody>
 		<? foreach($colors as $color): ?>
 		<tr id="color-row_<?=$color->id;?>" class="color-row">
-			<td><?=$color->name;?></td>
+			<td><?=$color->species;?></td>
 			<td class="color-color edit"><?=$color->color;?></td>
 			<td class="color-height edit"><?=$color->height;?></td>
 			<td class="color-width edit"><?=$color->width;?></td>

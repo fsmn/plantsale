@@ -16,30 +16,7 @@ print create_button_bar($buttons);
 	<?=create_edit_field("sunlight",$common->sunlight, "Sunlight Requirements", array("class"=>"checkbox","attributes"=>"menu='sunlight'"));?>
 
 </div>
-<table id="color-list" class="list">
-	<thead>
-		<tr>
-			<th>Species</th>
-			<th>Color</th>
-			<th>Height</th>
-			<th>Width</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<? foreach($colors as $color): ?>
-		<tr id="color-row_<?=$color->id;?>" class="color-row">
-			<td><?=$color->species;?></td>
-			<td class="color-color edit"><?=$color->color;?></td>
-			<td class="color-height edit"><?=$color->height;?></td>
-			<td class="color-width edit"><?=$color->width;?></td>
-			<td class="color-view edit"><a class="button"
-				href="<?=site_url("color/view/$color->id");?>">View</a></td>
-		</tr>
-
-		<? endforeach; ?>
-	</tbody>
-</table>
+<? $this->load->view("color/list");?>
 <? print create_button_bar(array(
 		array(
 		"selection"=>"color",

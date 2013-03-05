@@ -5,8 +5,12 @@ class Color_Model extends CI_Model
 	var $common_id;
 	var $species;
 	var $color;
-	var $height;
-	var $width;
+	var $min_height;
+	var $max_height;
+	var $min_width;
+	var $max_width;
+	var $height_unit;
+	var $width_unit;
 	var $note;
 	var $rec_modifier;
 	var $rec_modified;
@@ -18,7 +22,7 @@ class Color_Model extends CI_Model
 
 	function prepare_variables()
 	{
-		$variables = array("species","color","height","width","note","common_id");
+		$variables = array("species","color","min_height","max_height","min_width","max_width","height_unit","width_unit","note","common_id");
 
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
@@ -70,8 +74,6 @@ class Color_Model extends CI_Model
 	{
 		$this->db->where("color.common_id", $common_id);
 		$this->db->from("color");
-		$this->db->join("order","color.id = order.color_id");
-		$this->db->order_by("order.year","DESC");
 		$result = $this->db->get()->result();
 		return $result;
 		

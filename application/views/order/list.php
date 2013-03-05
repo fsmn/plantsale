@@ -4,7 +4,7 @@
 if($orders):
 ?>
 
-<table>
+<table class="list">
 	<thead>
 		<tr>
 			<th>Year</th>

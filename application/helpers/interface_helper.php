@@ -153,7 +153,11 @@ function create_button_bar($buttons, $options = NULL ){
 
 function create_edit_field($field_name, $value, $label, $options = array())
 {
-	$output[] = sprintf("<p class='%s'>", $field_name);
+	$envelope = "p";
+	if(array_key_exists("envelope",$options)){
+		$envelope = $options["envelope"];
+	}
+	$output[] = sprintf("<%s class='%s'>", $envelope, $field_name);
 	$output[] = sprintf("<label>%s:&nbsp;</label>", $label);
 	if($value == ""){
 		$value = "&nbsp;";
@@ -168,6 +172,27 @@ function create_edit_field($field_name, $value, $label, $options = array())
 	if(array_key_exists("attributes", $options)){
 		$attributes = $options["attributes"];
 	}
-	$output[] = sprintf("<span class='%s' %s>%s</span></p>",$field_class, $attributes, $value );
+	$output[] = sprintf("<span class='%s' %s>%s</span></%s>",$field_class, $attributes, $value, $envelope );
+	return implode("\r", $output);
+}
+
+
+/**
+ * create a checkbox with labels
+ * @param string $name
+ * @param array $values
+ * @param array $selections
+ * @TODO add id option
+ */
+function create_checkbox($name, $values, $selections = array()){
+
+	$output = array();
+	foreach($values as $value){
+		$checked = "";
+		if(in_array($value->value,$selections)){
+			$checked = "checked";
+		}
+		$output[] = sprintf("<label>%s</label><input type='checkbox' name='%s' value='%s' %s/>",$value->value, $name, $value->value, $checked );
+	}
 	return implode("\r", $output);
 }

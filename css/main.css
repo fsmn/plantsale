@@ -653,7 +653,7 @@ table.list td {
 }
 
 table.list {
-	border-spacing: 0px;
+	border-spacing: 5px 0;
 	padding-bottom: 5px;
 	padding-top: 5px;
 }
@@ -793,4 +793,32 @@ textarea.save-field {
 }
 .block {
 	clear:both;
+}
+
+.field-set {
+	padding: 5px 0;
+}
+
+.field-group {
+	height: 5.2em;
+
+}
+.field-group .field-set {
+	float: left;
+	padding: 0;
+}
+.field-group .field-set label {
+	display: block;
+}
+
+.field-group .field-set input {
+	width: 3em;
+}
+
+#color-editor textarea {
+	width: 100%;
+}
+
+#flags {
+	width: 150px;
 }

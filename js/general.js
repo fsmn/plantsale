@@ -60,7 +60,7 @@ function create_dropdown(my_field, my_category, my_value)
 
 function edit_field(me)
 {
-	my_field = me.parents("p").attr("class");
+	my_field = me.parents("div|p").attr("class");
 	my_value = me.html();
 	if(me.hasClass("dropdown")){
 		my_category = me.attr("menu");

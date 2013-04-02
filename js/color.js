@@ -1,5 +1,4 @@
-$(document).ready(
-		function() {
+$(document).ready(function() {
 			$(".color-create").live("click", function() {
 				my_id = this.id.split("_")[1];
 				form_data = {
@@ -16,6 +15,56 @@ $(document).ready(
 				});
 			});
 
-			
-
+		$(".flag-add").live("click", function() {
+			my_id = $("#id").val();
+			form_data = {
+					id: my_id,
+					ajax: 1
+			};
+			$.ajax({
+				type: "get",
+				url: base_url + "color/add_flag",
+				data: form_data,
+				success: function(data){
+					$("#flag-list").append(data);
+				}
+			});
 		});
+		
+		$(".flag-insert").live("change",function(){
+			my_id = $("#id").val();
+			my_flag = $(this).val();
+			form_data = {
+					color_id: my_id,
+					name: my_flag,
+					ajax: 1
+			};
+			$.ajax({
+				type: "post",
+				url: base_url + "color/insert_flag",
+				data: form_data,
+				success: function(data){
+					$("#flag-list").html(data);
+				}
+			});
+		});
+		
+		$(".flag-delete").live("click",function(){
+			my_id = $(this).parent().attr("id").split("_")[1];
+			my_color = $("#id").val();
+			form_data = {
+					id: my_id,
+					color_id: my_color,
+					ajax: 1
+			};
+			$.ajax({
+				type: "post",
+				url: base_url + "color/delete_flag",
+				data: form_data,
+				success: function(data){
+					$("#flag-list").html(data);
+				}
+			});
+			
+		});
+});

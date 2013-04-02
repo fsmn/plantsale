@@ -3,18 +3,18 @@
 class Flag_Model extends CI_Model
 {
 	var $color_id;
-	var $symbol_id;
+	var $name;
 	var $rec_modified;
 	var $rec_modifier;
 
 	function __construct()
 	{
-		parent::_construct();
+		parent::__construct();
 	}
 
 	function prepare_variables()
 	{
-		$variables = array("color_id","symbol_id");
+		$variables = array("color_id","name");
 
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
@@ -26,12 +26,13 @@ class Flag_Model extends CI_Model
 		$this->rec_modified = mysql_timestamp();
 		$this->rec_modifier = $this->session->userdata('user_id');
 	}
+	
 
 	function insert()
 	{
 		$this->prepare_variables();
 		$this->db->insert("flag",$this);
-		$id = $this->db->last_insert_id();
+		$id = $this->db->insert_id();
 		return $id;
 	}
 
@@ -51,4 +52,31 @@ class Flag_Model extends CI_Model
 		$this->db->where("id", $id);
 		$this->db->delete("flag");
 	}
+
+	function get_for_color($color_id){
+		$this->db->where("color_id",$color_id);
+		$this->db->from("flag");
+
+		$output = $this->db->get()->result();
+		return $output;
+	}
+
+	/**
+	 * finds all the flags for a color and returns a key-value pair multi-array
+	 * @param unknown $color_id
+	 * @return array
+	 */
+	function get_missing($color_id){
+		$current_flags = $this->get_for_color($color_id);
+		$flag_list = array();
+		foreach($current_flags as $current_flag){
+			$flag_list[] = $current_flag->name;
+		}
+		$query = sprintf("SELECT `key`, `value` FROM `menu` WHERE `category` = 'flag' AND `value` not in ('%s')",implode("','", $flag_list));
+		
+		$output = $this->db->query($query)->result();
+
+		return $output;
+	}
+
 }

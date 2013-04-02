@@ -2,34 +2,61 @@
 <input
 	type="hidden" id="id" name="id" value="<?=$color->id;?>" />
 
-<input
-	type="hidden" id="order_id" name="order_id"
+<input type="hidden"
+	id="order_id" name="order_id"
 	value="<?=get_value($current_order,"id");?>" />
 <h2>
 	<?="$color->common_name: $color->color";?>
 </h2>
 <div class="grouping block color-info" id="color">
 	<div class='column column-odd'>
+		<div class='field-set'>
+			<?=create_edit_field("color", $color->color, "Color",array("envelope"=>"div"));?>
+		</div>
+		<div class='field-set'>
 
-		<?=create_edit_field("color", $color->color, "Color");?>
+			<?=create_edit_field("species", $color->species, "Species",array("envelope"=>"div"));?>
+		</div>
+		<div class="field-group">
+			<div class="label">
+				<strong>Height</strong>
+			</div>
 
-		<?=create_edit_field("species", $color->species, "Species");?>
-		<?=create_edit_field("min_height", $color->min_height,"Min Height");?>
-		<?=create_edit_field("max_height", $color->max_height, "Max Height");?>
-		<?=create_edit_field("height_unit", $color->height_unit, "Unit of Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'"));?>
+			<div class="field-set">
+				<?=create_edit_field("min_height", $color->min_height,"Min",array("envelope"=>"div"));?>
+			</div>
+			<div class="field-set">
+				<?=create_edit_field("max_height", $color->max_height, "Max", array("envelope"=>"div"));?>
+			</div>
+			<div class="field-set">
+				<?=create_edit_field("height_unit", $color->height_unit, "Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
+			</div>
+		</div>
+		<div class="field-group">
+			<div class="label">
+				<strong>Width</strong>
+			</div>
 
-		<?=create_edit_field("min_width", $color->min_width, "Min Width");?>
-		<?=create_edit_field("max_width", $color->max_width, "Max Width");?>
-		<?=create_edit_field("width_unit", $color->width_unit, "Unit of Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'"));?>
+			<div class="field-set">
+				<?=create_edit_field("min_width", $color->min_width, "Min",array("envelope"=>"div"));?>
+			</div>
+			<div class="field-set">
+				<?=create_edit_field("max_width", $color->max_width, "Max",array("envelope"=>"div"));?>
+			</div>
+			<div class="field-set">
+				<?=create_edit_field("width_unit", $color->width_unit, "Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
+			</div>
 
-
-		<?=create_edit_field("note", $color->note, "Note", array("class"=>"textarea"));?>
+		</div>
+		<?=create_edit_field("note", $color->note, "Note", array("class"=>"textarea","envelope"=>"div"));?>
 		<? if($color->species && $color->genus): ?>
-		<p class="latin-name">
-			<label>Latin Name: </label><span class="field"><em> <?=ucfirst(substr($color->genus, 0, 1));?>.
-					<?=strtolower($color->species);?>
-			</em> </span>
-		</p>
+		<div class='field-set'>
+			<div class="latin-name">
+				<label>Latin Name: </label><span class="field"><em> <?=ucfirst(substr($color->genus, 0, 1));?>.
+						<?=strtolower($color->species);?>
+				</em> </span>
+			</div>
+		</div>
 		<? endif;?>
 	</div>
 	<div class='common-info column column-even'>
@@ -46,9 +73,18 @@
 			<label>Description: </label> <span class="field"><?=$color->description; ?>
 			</span>
 		</p>
+
+		<div class="block" id="flags">
+			<h4>Flags</h4>
+			<div id="flag-list">
+			<? $this->load->view("flag/list");?>
+</div>
+			<? $flag_buttons[] = array("selection"=>"flag","text"=>"New Flag","type"=>"span","class"=>"button new flag-add","id"=>"fa_$color->id");
+			echo create_button_bar($flag_buttons);
+			?>
+		</div>
 	</div>
 </div>
-
 
 <div class="all-orders block">
 	<h3>Orders</h3>
@@ -56,5 +92,5 @@
 
 </div>
 <?
-$buttons[] = array("selection"=>"order","text"=>"New Order","type"=>"span","class"=>"button new order-create", "id" => "oc_$color->id");
-echo create_button_bar($buttons);
+$order_buttons[] = array("selection"=>"order","text"=>"New Order","type"=>"span","class"=>"button new order-create", "id" => "oc_$color->id");
+echo create_button_bar($order_buttons);

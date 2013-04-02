@@ -1,4 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+$sunlight = create_checkbox("sunlight[]", $light_types, explode(",", get_value($common,"sunlight",array())));
+
 ?>
 
 <form name="edit-common" id="edit-common" action="<?=site_url("common/$action"); ?>" method="POST">
@@ -7,9 +10,8 @@
 <p><?=create_input($common, "genus","Genus");?></p>
 <p><label for="category">Category: </label><?=form_dropdown("category",$categories,get_value($common,"category"),"id='category'");?></p>
 <p><?=create_input($common,"subcategory","Subcategory");?></p>
-<p><label>Full Sun: </label><input type="checkbox" name="sunlight[]" value="Full Sun"/>
-<label>Part Sun: </label><input type="checkbox" name="sunlight[]" value="Part Sun"/>
-<label>Shade: </label><input type="checkbox" name="sunlight[]" value="Shade"/>
+<p>
+<?=$sunlight;?>
 </p>
 <p><label for="description">Description:</label><br/>
 <textarea name="description" id="description"><?=get_value($common,"description");?></textarea></p>

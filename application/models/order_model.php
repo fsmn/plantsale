@@ -59,14 +59,17 @@ class Order_Model extends CI_Model
 
 	function update($id, $values = array())
 	{
+		
 		$this->db->where("id", $id);
 		if(empty($values)){
 			$this->prepare_variables();
-			$this->db->update("order", $this);
+			$this->db->update("order",$this);
 		}else{
-			$this->db->update("order", $values);
-			$keys = array_keys($values);
-			return $this->get_value($id, $keys[0] );
+			$this->db->update("order",$values);
+			if(count($values) == 1){
+				$keys = array_keys($values);
+				return $this->get_value($id, $keys[0] );
+			}
 		}
 	}
 
@@ -75,6 +78,7 @@ class Order_Model extends CI_Model
 		$this->db->where("order.id", $id);
 		$this->db->from("order,color");
 		$this->db->where("`order`.`color_id` = `color`.`id`");
+		$this->db->select("order.*, color.color");
 		$output = $this->db->get()->row();
 		return $output;
 	}

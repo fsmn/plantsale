@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
 // view.php Chris Dart Mar 4, 2013 9:14:14 PM chrisdart@cerebratorium.com
 ?>
 <div class="block">
@@ -12,12 +11,12 @@
 <a href="<?=site_url("color/view/$order->color_id");?>" class="button">View</a>
 </p>
 </div>
-<input type="hidden" id="order_id" value="<?=$order->color_id;?>" name="order_id"/>
+<input type="hidden" id="order_id" value="<?=$order->id;?>" name="order_id"/>
 <div class="grouping order-info block" id="order">
 
 	<div class="column column-odd">
 		<?=create_edit_field("vendor_id", $order->vendor_id, "Vendor Id");?>
-		<?=create_edit_field("year", $order->year, "Year");?>
+		<?=create_edit_field("year", $order->year, "Year", array("envelope"=>"div"));?>
 		<?=create_edit_field("flat_size", $order->flat_size, "Flat Size");?>
 
 

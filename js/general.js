@@ -58,9 +58,15 @@ function create_dropdown(my_field, my_category, my_value)
 	});
 }
 
+
+/**
+ * takes a dom element and gets the parent with the .field-envelope class. The id of this envelope item
+ * is field_[name] where [name] is the db field name (without brackets) .
+ * @param me
+ */
 function edit_field(me)
 {
-	my_field = me.parents("div|p").attr("class");
+	my_field = me.parents(".field-envelope").attr("id").split("_")[1];
 	my_value = me.html();
 	if(me.hasClass("dropdown")){
 		my_category = me.attr("menu");

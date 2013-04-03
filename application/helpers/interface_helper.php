@@ -151,23 +151,35 @@ function create_button_bar($buttons, $options = NULL ){
 	return $output;
 }
 
+/**
+ * create a field set that can be edited with AJAX on the fly. 
+ * @param string $field_name
+ * @param string $value
+ * @param string $label
+ * @param array $options (envelope, class, attributes)
+ */
 function create_edit_field($field_name, $value, $label, $options = array())
 {
 	$envelope = "p";
 	if(array_key_exists("envelope",$options)){
 		$envelope = $options["envelope"];
 	}
+	/* The id is split with the "-" delimiter in javascript when the field is clicked */
 	$output[] = sprintf("<%s class='field-envelope' id='field-%s'>", $envelope, $field_name);
 	$output[] = sprintf("<label>%s:&nbsp;</label>", $label);
 	if($value == ""){
 		$value = "&nbsp;";
 	}
+	
+	/* add additional classes to the actual field */
 	$classes[] = "edit-field field";
 	if(array_key_exists("class",$options)){
 		$classes[] = $options["class"];
 	}
 	$field_class = implode(" ", $classes);
 	
+	/* Attributes are non-standard html attributes that are used by javascript
+	 * these can include the type of input to be generated */
 	$attributes = "";
 	if(array_key_exists("attributes", $options)){
 		$attributes = $options["attributes"];

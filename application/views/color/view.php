@@ -17,10 +17,10 @@
 
 			<?=create_edit_field("species", $color->species, "Species",array("envelope"=>"div"));?>
 		</div>
-		<div class="field-group">
-			<div class="label">
+		<fieldset class="field-group">
+			<legend class="label">
 				<strong>Height</strong>
-			</div>
+			</legend>
 
 			<div class="field-set">
 				<?=create_edit_field("min_height", $color->min_height,"Min",array("envelope"=>"div"));?>
@@ -31,11 +31,11 @@
 			<div class="field-set">
 				<?=create_edit_field("height_unit", $color->height_unit, "Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
 			</div>
-		</div>
-		<div class="field-group">
-			<div class="label">
+		</fieldset>
+		<fieldset class="field-group">
+			<legend class="label">
 				<strong>Width</strong>
-			</div>
+			</legend>
 
 			<div class="field-set">
 				<?=create_edit_field("min_width", $color->min_width, "Min",array("envelope"=>"div"));?>
@@ -47,7 +47,7 @@
 				<?=create_edit_field("width_unit", $color->width_unit, "Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
 			</div>
 
-		</div>
+		</fieldset>
 		<?=create_edit_field("note", $color->note, "Note", array("class"=>"textarea","envelope"=>"div"));?>
 		<? if($color->species && $color->genus): ?>
 		<div class='field-set'>

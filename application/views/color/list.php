@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
 // list.php Chris Dart Mar 5, 2013 10:57:17 AM chrisdart@cerebratorium.com
 ?>
 <table id="color-list" class="list">

@@ -20,15 +20,16 @@
 		<?=create_edit_field("flat_size", $order->flat_size, "Flat Size");?>
 
 
-		<? if($order->flat_cost && !$order->plant_cost){
-				$plant_cost = $order->flat_cost/$order->flat_size;
+		<?
+		$plant_cost = $order->plant_cost;
+		$flat_cost = $order->flat_cost;
+		 if($order->flat_cost && !$order->plant_cost){
+ 				$plant_cost = $order->flat_size/$order->flat_cost;
 				$flat_cost = $order->flat_cost;
 			}elseif($order->plant_cost && !$order->flat_cost){
 				$plant_cost = $order->plant_cost;
 				$flat_cost = $order->plant_cost * $order->flat_size;
-			}else{
-				$plant_cost = $order->plant_cost;
-				$flat_cost = $order->flat_cost;
+			
 			}
 	?>
 		<?=create_edit_field("flat_cost", get_as_price($flat_cost), "Flat Cost", array("attributes"=>"format='currency'"));?>

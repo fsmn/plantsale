@@ -22,7 +22,18 @@ if($orders):
 		</tr>
 	</thead>
 	<tbody>
-		<? foreach($orders as $order): ?>
+		<? 
+		foreach($orders as $order): 
+			$flat_cost = $order->flat_cost;
+			$plant_cost = $order->plant_cost;
+			if($order->flat_cost && !$order->plant_cost){
+				$flat_cost = $order->flat_cost;
+				$plant_cost = $order->flat_size/$order->flat_cost;
+			}elseif($order->plant_cost && !$order->flat_cost){
+				$plant_cost = $order->plant_cost;
+				$flat_cost = $order->flat_size* $order->plant_cost;
+			}
+			?>
 		<tr class="grouping" id="order_<?=$order->id;?>">
 			<td class="order-year field"><?=$order->year;?>
 			</td>
@@ -30,9 +41,9 @@ if($orders):
 			</td>
 			<td class="order-flat_size field"><?=$order->flat_size;?>
 			</td>
-			<td class="order-flat_cost field"><?=get_as_price($order->flat_cost);?>
+			<td class="order-flat_cost field"><?=get_as_price($flat_cost);?>
 			</td>
-			<td class="order-plant_cost field"><?=get_as_price($order->plant_cost);?>
+			<td class="order-plant_cost field"><?=get_as_price($plant_cost);?>
 			</td>
 			<td class="order-count_presale field"><?=$order->count_presale;?>
 			
@@ -42,11 +53,12 @@ if($orders):
 			</td>
 			<td class="order-pot_size field"><?=$order->pot_size;?>
 			</td>
-				<td class="order-price field"><?=get_as_price($order->price);?>
+			<td class="order-price field"><?=get_as_price($order->price);?>
 			</td>
 			<td class="order-vendor_code field"><?=$order->vendor_code;?>
 			</td>
-			<td><a href="<?=site_url("order/view/$order->id");?>" class="button edit">Edit</a></td>
+			<td><a href="<?=site_url("order/view/$order->id");?>"
+				class="button edit">Edit</a></td>
 		</tr>
 		<? endforeach;?>
 	</tbody>

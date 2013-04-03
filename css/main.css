@@ -780,6 +780,11 @@ textarea.save-field {
 .column {
 	width: 45%;
 	float: left;
+	padding-bottom: 10px;
+}
+
+.column-odd {
+	padding-right: 5px;
 }
 
 .column-even {
@@ -802,6 +807,11 @@ textarea.save-field {
 .field-group {
 
 }
+fieldset.field-group {
+	margin: 5px 0;
+	border: 1px solid #ddd;
+}
+
 .field-group .field-set {
 	float: left;
 	padding: 0;

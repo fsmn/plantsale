@@ -17,6 +17,15 @@
 
 			<?=create_edit_field("species", $color->species, "Species",array("envelope"=>"div"));?>
 		</div>
+		<? if($color->species && $color->genus): ?>
+		<div class='field-set'>
+			<div class="latin-name">
+				<label>Latin Name: </label><span class="field"><em> <?=ucfirst(substr($color->genus, 0, 1));?>.
+						<?=strtolower($color->species);?>
+				</em> </span>
+			</div>
+		</div>
+		<? endif;?>
 		<fieldset class="field-group">
 			<legend class="label">
 				<strong>Height</strong>
@@ -49,15 +58,7 @@
 
 		</fieldset>
 		<?=create_edit_field("note", $color->note, "Note", array("class"=>"textarea","envelope"=>"div"));?>
-		<? if($color->species && $color->genus): ?>
-		<div class='field-set'>
-			<div class="latin-name">
-				<label>Latin Name: </label><span class="field"><em> <?=ucfirst(substr($color->genus, 0, 1));?>.
-						<?=strtolower($color->species);?>
-				</em> </span>
-			</div>
-		</div>
-		<? endif;?>
+		
 	</div>
 	<div class='common-info column column-even'>
 		<p>

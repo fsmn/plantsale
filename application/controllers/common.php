@@ -102,7 +102,12 @@ class Common extends MY_Controller
 	function update_value()
 	{
 		$id = $this->input->post("id");
-		$values = array($this->input->post("field") => $this->input->post("value"));
+		$value = $this->input->post("value");
+		$field = $this->input->post("field");
+		if($this->input->post("format") == "checkbox"){
+			$value = implode(",", $this->input->post("value"));
+		}
+		$values = array($this->input->post("field") => $value);
 		echo $this->common->update($id, $values);
 	}
 }

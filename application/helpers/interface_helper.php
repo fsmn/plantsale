@@ -177,14 +177,17 @@ function create_edit_field($field_name, $value, $label, $options = array())
 		$classes[] = $options["class"];
 	}
 	$field_class = implode(" ", $classes);
-	
+	$format = "";
+	if(array_key_exists("format",$options)){
+		$format = sprintf("format='%s'", $options["format"]);
+	}
 	/* Attributes are non-standard html attributes that are used by javascript
 	 * these can include the type of input to be generated */
 	$attributes = "";
 	if(array_key_exists("attributes", $options)){
 		$attributes = $options["attributes"];
 	}
-	$output[] = sprintf("<span class='%s' %s>%s</span></%s>",$field_class, $attributes, $value, $envelope );
+	$output[] = sprintf("<span class='%s' %s %s>%s</span></%s>",$field_class, $attributes,$format, $value, $envelope);
 	return implode("\r", $output);
 }
 

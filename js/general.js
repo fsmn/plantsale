@@ -14,7 +14,7 @@ $(document).ready(function(){
 	});
 	
 	$(".checkbox .save-checkbox").live("click",function(){
-		//save_field($(this));
+		save_field($(this));
 	});
 	
 });
@@ -128,9 +128,18 @@ function save_field(me)
 	if(table == "order"){
 		my_id = $("#order_id").val();
 	}
-	my_value = $(me).val();
 	my_field = $(me).attr("name");
 	my_format = $(me).parents("span").attr("format");
+	my_value = $(me).val();
+	if(my_format == "checkbox"){
+		my_field = $(me).attr("target").split("[")[0];
+		var vals = [];
+		$(me + ":checked").each(function(i){
+			vals[i] = $(me + ":checked").val();
+		});
+		my_value = vals;
+		
+	}
 	form_data = {
 		field: my_field,
 		value: my_value,

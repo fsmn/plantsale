@@ -56,7 +56,9 @@ class Flag_Model extends CI_Model
 	function get_for_color($color_id){
 		$this->db->where("color_id",$color_id);
 		$this->db->from("flag");
-
+		$this->db->select("flag.*,icon.source");
+		$this->db->join("menu","flag.name=menu.key");
+		$this->db->join("icon","menu.id=icon.menu_id");
 		$output = $this->db->get()->result();
 		return $output;
 	}

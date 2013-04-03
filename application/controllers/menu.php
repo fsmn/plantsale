@@ -24,12 +24,13 @@ class Menu extends MY_Controller
 		$field = $this->input->get("field");
 		$categories = $this->menu->get_pairs($category, array("field"=>"value","direction"=>"ASC"));
 		$pairs = get_keyed_pairs($categories, array("key","value"));
+		$output = array();
 		for($i = 0; $i < count($categories); $i++){
 			$checked = "";
 			if($categories[$i]->value == $value){
 				$checked = "checked";
 			}
-			$output[] = sprintf("<label for='%s'>%s</label><input type='checkbox' name='%s[]' value='%s' %s/>", $categories[$i]->value,$categories[$i]->key,$field, $value, $checked);
+			$output[] = sprintf("<label for='%s'>%s</label><input type='checkbox' name='%s[]' value='%s' %s/>", $categories[$i]->value,$categories[$i]->key,$field,  $categories[$i]->value, $checked);
 		}
 		$buttons =  implode(" ", $output);
 		echo $buttons . sprintf("<span class='button save-checkbox' target='%s[]'>Save</span>", $field);

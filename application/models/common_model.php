@@ -86,7 +86,13 @@ class Common_model extends CI_Model
 		return $output->$field;
 	}
 
-
+	function find()
+	{
+		$this->prepare_variables();
+		$this->db->where("`name` LIKE '%$this->name%' OR `genus` LIKE '%$this->name%'");
+		$this->db->where("category",$this->category);
+		$this->db->where_in("sunlight",$this->sunlight);
+	}
 
 
 }

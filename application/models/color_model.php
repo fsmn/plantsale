@@ -75,10 +75,13 @@ class Color_Model extends CI_Model
 		$this->db->where("color.common_id", $common_id);
 		$this->db->from("color");
 		$this->db->select("color.*, order.year");
-		$this->db->where("order.year", get_current_year());
+		//@TODO how do we solve the question of orders only showing for current year?
+		//$this->db->where("order.year", get_current_year());
 		$this->db->join("order","color.id = order.color_id", "LEFT");
 		$this->db->order_by("order.year","DESC");
+		$this->db->group_by("color.id");
 		$result = $this->db->get()->result();
+		
 		return $result;
 		
 	}

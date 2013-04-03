@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-$sunlight = create_checkbox("sunlight[]", $light_types, explode(",", get_value($common,"sunlight",array())));
+$sunlight = create_checkbox("sunlight[]", $sunlight, explode(",", get_value($common,"sunlight",array())));
 
 ?>
 

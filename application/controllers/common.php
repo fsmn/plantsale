@@ -18,14 +18,19 @@ class Common extends MY_Controller
 		redirect();
 	}
 
-	function show_search()
-	{
-
-	}
-
 	function search()
 	{
+		$categories = $this->menu->get_pairs("common_category",array("field"=>"value","direction"=>"ASC"));
+		$data["categories"] = get_keyed_pairs($categories, array("key","value"));
+		$sunlight = $this->menu->get_pairs("sunlight",array("field"=>"value"));
+		$data["sunlight"] = $sunlight;
+		$data["common"] = NULL;
+		$this->load->view("common/search",$data);
+	}
 
+	function find()
+	{
+		$output = $this->common->find();
 	}
 
 	function search_by_name()
@@ -52,8 +57,8 @@ class Common extends MY_Controller
 	{
 		$categories = $this->menu->get_pairs("common_category",array("field"=>"value","direction"=>"ASC"));
 		$data["categories"] = get_keyed_pairs($categories, array("key","value"));
-		$light_types = $this->menu->get_pairs("light_types",array("field"=>"value"));
-		$data["light_types"] = $light_types;
+		$sunlight = $this->menu->get_pairs("sunlight",array("field"=>"value"));
+		$data["sunlight"] = $sunlight;
 		$data["action"] = "insert";
 		$data["target"] = "common/edit";
 		$data["common"] = NULL;
@@ -74,8 +79,8 @@ class Common extends MY_Controller
 		$id = $this->uri->segment(3);
 		$categories = $this->menu->get_pairs("common_category",array("field"=>"value","direction"=>"ASC"));
 		$data["categories"] = get_keyed_pairs($categories, array("key","value"));
-		$light_types = $this->menu->get_pairs("light_types",array("field"=>"value"));
-		$data["light_types"] = $light_types;
+		$sunlight = $this->menu->get_pairs("sunlight",array("field"=>"value"));
+		$data["sunlight"] = $sunlight;
 		$data["action"] = "update";
 		$data["target"] = "common/edit";
 		$data["common"] = $this->common->get($id);

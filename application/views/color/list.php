@@ -8,6 +8,7 @@
 			<th>Color</th>
 			<th>Height</th>
 			<th>Width</th>
+			<th>Year</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -41,6 +42,7 @@
 			<td class="color-height edit"><?=$height;?>
 			</td>
 			<td class="color-width edit"><?=$width;?></td>
+			<td class="color-year edit"><?=$color->year;?></td>
 			<td class="color-view edit"><a class="button"
 				href="<?=site_url("color/view/$color->id");?>">View</a></td>
 		</tr>

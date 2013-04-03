@@ -157,7 +157,7 @@ function create_edit_field($field_name, $value, $label, $options = array())
 	if(array_key_exists("envelope",$options)){
 		$envelope = $options["envelope"];
 	}
-	$output[] = sprintf("<%s class='field-envelope' id='field_%s'>", $envelope, $field_name);
+	$output[] = sprintf("<%s class='field-envelope' id='field-%s'>", $envelope, $field_name);
 	$output[] = sprintf("<label>%s:&nbsp;</label>", $label);
 	if($value == ""){
 		$value = "&nbsp;";

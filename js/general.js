@@ -17,6 +17,10 @@ $(document).ready(function(){
 		save_field($(this));
 	});
 	
+	$(".multiselect .save-multiselect").live("click",function(){
+		save_field($(this));
+	});
+	
 });
 
 function show_popup(my_title,data,popup_width,x,y){
@@ -84,6 +88,22 @@ function edit_field(me)
 			}
 		
 		});
+	}else if(me.hasClass("multiselect")){
+			my_category = me.attr("menu");
+			form_data = {
+					field: my_field,
+					category: my_category,
+					value: my_value
+			};
+			$.ajax({
+				type: "get",
+				url: base_url + "menu/get_multiselect",
+				data: form_data,
+				success: function(output){
+					me.html(output).removeClass("edit-field");
+				}
+			
+			});
 		
 	}else if(me.hasClass("textarea")){
 		me.html("<br/><textarea name='" + my_field + "'class='save-field'>" + my_value + "</textarea>").removeClass("edit-field");
@@ -128,17 +148,14 @@ function save_field(me)
 	if(table == "order"){
 		my_id = $("#order_id").val();
 	}
-	my_field = $(me).attr("name");
 	my_format = $(me).parents("span").attr("format");
-	my_value = $(me).val();
-	if(my_format == "checkbox"){
-		my_field = $(me).attr("target").split("[")[0];
-		var vals = [];
-		$(me + ":checked").each(function(i){
-			vals[i] = $(me + ":checked").val();
-		});
-		my_value = vals;
-		
+	if(my_format == "multiselect"){
+		my_field = $(me).parent().children("select").attr("name");
+		my_value =  $("#sunlight").val() || [];
+		my_value = my_value.join(",",my_value);
+	}else{
+		my_field = $(me).attr("name");
+		my_value = $(me).val();
 	}
 	form_data = {
 		field: my_field,
@@ -156,5 +173,5 @@ function save_field(me)
 			
 		}
 	});
-	
 }
+	

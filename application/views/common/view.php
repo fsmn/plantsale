@@ -13,7 +13,7 @@ print create_button_bar($buttons);
 	<?=create_edit_field("subcategory", $common->subcategory, "Subcategory");?>
 	<?=create_edit_field("description", $common->description, "Description", array("class"=>"textarea"));?>
 	<?=create_edit_field("comment",$common->comment, "Comment", array("class"=>"textarea"));?>
-	<?=create_edit_field("sunlight",$common->sunlight, "Sunlight Requirements", array("class"=>"checkbox","attributes"=>"menu='sunlight'","format"=>"checkbox"));?>
+	<?=create_edit_field("sunlight",$common->sunlight, "Sunlight Requirements",array("class"=>"multiselect","attributes"=>"menu='sunlight'","format"=>"multiselect"));?>
 
 </div>
 <? $this->load->view("color/list");?>

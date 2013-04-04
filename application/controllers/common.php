@@ -103,11 +103,8 @@ class Common extends MY_Controller
 	{
 		$id = $this->input->post("id");
 		$value = $this->input->post("value");
-		$field = $this->input->post("field");
-		if($this->input->post("format") == "checkbox"){
-			$value = implode(",", $this->input->post("value"));
-		}
-		$values = array($this->input->post("field") => $value);
+		$field = $this->input->post("field"); 
+		$values = array($field => $value);
 		echo $this->common->update($id, $values);
 	}
 }

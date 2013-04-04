@@ -12,6 +12,12 @@ $buttons[] = array("selection" => "common",
 "href"=> site_url("common"),
 "title" => "View the list of common names");
 
+$buttons[] = array("selection" => "all",
+		"text" => "Search Common Names",
+		"class" => array("button","search-common-names"),
+		"type" => "span",
+		"title" => "Search among the common names");
+
 $buttons[] = array("selection" => "color",
 "text" => "Color Listing",
 "class" => array("button"),

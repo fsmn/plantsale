@@ -28,6 +28,15 @@ $(document).ready(function(){
 		
 	});
 	
+	$(".search-common-names").live("click",function(event){
+		$.ajax({
+			type: "get",
+			url: base_url + "common/search",
+			success: function(data){
+				show_popup("Search Common Names",data,"auto");
+			}
+		});
+	});
 	
 	
 	$('#common-search-body').live('keyup', function(event) {
@@ -35,7 +44,7 @@ $(document).ready(function(){
 		if (common_search.length > 2 && common_search != "Find Common Names") {
 			search_words = common_search.split(' ');
 			my_name = search_words.join('%') + "%";
-			var form_data = {
+			form_data = {
 				ajax: 1,
 				name: my_name
 			};

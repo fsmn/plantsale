@@ -89,9 +89,40 @@ class Common_model extends CI_Model
 	function find()
 	{
 		$this->prepare_variables();
-		$this->db->where("`name` LIKE '%$this->name%' OR `genus` LIKE '%$this->name%'");
-		$this->db->where("category",$this->category);
-		$this->db->where_in("sunlight",$this->sunlight);
+		$this->db->from("common");
+		if($this->name && !$this->genus){
+			$this->db->where("`name` LIKE '%$this->name%' OR `genus` LIKE '%$this->name%'");
+		}elseif($this->name && $this->genus){
+			$this->db->like("name","$this->name");
+			$this->db->like("genus","$this->genus");
+
+		}elseif(!$this->name && $this->genus){
+			$this->db->where("`name` LIKE '%$this->genus%' OR `genus` LIKE '%$this->genus%'");
+		}
+		if($this->category){
+			$this->db->where("category",$this->category);
+		}
+		if($this->sunlight){
+			if($this->input->post("sunlight-boolean") == "or"){
+				$my_list = explode(",", $this->sunlight);
+				foreach($my_list as $my_item){
+					$this->db->or_like("sunlight","$my_item");
+				}
+			}else{
+				$this->db->like("sunlight",$this->sunlight);
+			}
+		}
+		$this->db->select("common.*");
+		
+		if($this->input->post("year")){
+			$year = $this->input->post("year");
+			$this->db->join("color","common.id=color.common_id");
+			$this->db->join("order","color.id=order.color_id");
+			$this->db->select("order.year");
+			$this->db->group_by("common.id");
+		}
+		$result = $this->db->get()->result();
+		return $result;
 	}
 
 

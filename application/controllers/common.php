@@ -21,7 +21,7 @@ class Common extends MY_Controller
 	function search()
 	{
 		$categories = $this->menu->get_pairs("common_category",array("field"=>"value","direction"=>"ASC"));
-		$data["categories"] = get_keyed_pairs($categories, array("key","value"));
+		$data["categories"] = get_keyed_pairs($categories, array("key","value"), TRUE);
 		$sunlight = $this->menu->get_pairs("sunlight",array("field"=>"value"));
 		$data["sunlight"] = $sunlight;
 		$data["common"] = NULL;
@@ -30,7 +30,24 @@ class Common extends MY_Controller
 
 	function find()
 	{
-		$output = $this->common->find();
+		$data["names"] = $this->common->find();
+		$data["title"] = "List of Common Names";
+		$data["target"] = "common/list";
+		$data["full_list"] = TRUE;
+
+		//create the legend for the paramter display
+		$variables = array("name","genus","category","sunlight","description","year");
+		$params = array();
+		for($i = 0; $i < count($variables); $i++){
+			$my_variable = $variables[$i];
+			if($this->input->post($my_variable)){
+				$params[$my_variable] = $this->input->post($my_variable);
+			}
+		}
+		$data["params"] = $params;
+
+		$this->load->view("page/index",$data);
+
 	}
 
 	function search_by_name()
@@ -103,7 +120,7 @@ class Common extends MY_Controller
 	{
 		$id = $this->input->post("id");
 		$value = $this->input->post("value");
-		$field = $this->input->post("field"); 
+		$field = $this->input->post("field");
 		$values = array($field => $value);
 		echo $this->common->update($id, $values);
 	}

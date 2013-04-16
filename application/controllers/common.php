@@ -10,12 +10,19 @@ class Common extends MY_Controller
 		$this->load->model("common_model","common");
 		$this->load->model("color_model","color");
 		$this->load->model("menu_model","menu");
+	
 
 	}
 
 	function index()
 	{
 		redirect();
+		die();
+		$this->load->library("image_moo");
+
+		$source = IMAGE_PATH . "/Admin.jpg";
+		$this->image_moo->load($source)->resize(650,650)->save(IMAGE_PATH . "/thumbs/admin.jpg");
+	
 	}
 
 	function search()

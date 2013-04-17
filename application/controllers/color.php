@@ -72,6 +72,19 @@ class Color extends MY_Controller
 		redirect("color/view/$id");
 	}
 
+	function delete()
+	{
+		$id = $this->input->post("id");
+		$common_id = $this->color->get_value($id,"common_id");
+		$this->color->delete($id);
+		if($this->input->post("ajax")){
+			echo $common_id;
+		}else{
+			redirect("common/view/$common_id");
+		}
+
+	}
+
 	function update_value()
 	{
 
@@ -80,7 +93,7 @@ class Color extends MY_Controller
 		$this->color->update($id, $values);
 		echo $this->input->post("value");
 	}
-	
+
 	function add_flag()
 	{
 		$id = $this->input->get("id");
@@ -88,19 +101,19 @@ class Color extends MY_Controller
 		$data["flags"] = get_keyed_pairs($flags, array("key","value"),TRUE);
 		$this->load->view("flag/edit",$data);
 	}
-	
+
 	function insert_flag()
 	{
 		$id = $this->flag->insert();
 		$this->get_flags($this->input->post("color_id"));
 	}
-	
+
 	function get_flags($id)
 	{
 		$data["flags"] = $this->flag->get_for_color($id);
 		$this->load->view("flag/list",$data);
 	}
-	
+
 	function delete_flag()
 	{
 		$id = $this->input->post("id");

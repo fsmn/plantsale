@@ -806,6 +806,7 @@ textarea.save-field {
 }
 
 .field-group {
+	clear: both;
 
 }
 fieldset.field-group {

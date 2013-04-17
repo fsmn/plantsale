@@ -14,6 +14,22 @@ $(document).ready(function() {
 					}
 				});
 			});
+			
+			$(".color-insert").live("click",function(){
+				if($("#add_order").attr("checked")){
+					$.ajax({
+						type: "post",
+						url: base_url + "color/insert",
+						data: $("#color-editor").serializeArray(),
+						success: function(data) {
+							$("#ui-dialog-title-popup").html("New Order");
+							$("#popup").html(data);
+						}
+					});
+					return false;
+				}
+			
+			});
 
 		$(".flag-add").live("click", function() {
 			my_id = $("#id").val();

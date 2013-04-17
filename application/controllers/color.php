@@ -33,7 +33,15 @@ class Color extends MY_Controller
 	function insert()
 	{
 		$id = $this->color->insert();
-		redirect("color/view/$id");
+		if( $this->input->post("add_order")){
+			$data["color_id"] = $id;
+			$data["action"] = "insert";
+			$this->load->view("order/edit", $data);
+		}else{
+			redirect("color/view/$id");
+		}
+
+
 	}
 
 	function view()

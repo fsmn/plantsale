@@ -41,7 +41,9 @@ class Order extends MY_Controller
 	{
 		$data["color_id"] = $this->input->get("color_id");
 		$data["action"] = "insert";
-		$this->load->view("order/row", $data);
+		$data["target"] = "order/edit";
+		$data['title'] = "Insert New Order";
+		$this->load->view($data["target"], $data);
 		
 	}
 	

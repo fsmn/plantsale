@@ -20,8 +20,10 @@
 <div class="dimension field-set"><label for="width_unit">Measure:</label><?=form_dropdown("width_unit",$measure_units, get_value($color,"width_unit"),"id='width_unit'");?></div>
 </div>
 
-<p><label for="note">Note:</label><br/><textarea id="note" name="note"><?=get_value($color,"note");?></textarea></p>
-<p>
-<input type="submit" name="submit" value="<?=ucfirst($action);?>"/>
-</p>
+<div class="field-group"><label for="note">Note:</label><br/><textarea id="note" name="note"><?=get_value($color,"note");?></textarea></div>
+<div class="field-group"><label for="add_order">Add a New Order for this Color:</label><input type="checkbox" id="add_order" name="add_order" value="true"/>
+</div>
+<div class="button-box">
+<input type="submit" name="submit" class="color-<?=$action;?>" value="<?=ucfirst($action);?>"/>
+</div>
 </form>

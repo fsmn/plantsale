@@ -8,9 +8,10 @@ $(document).ready(function(){
 			type: "get",
 			data: form_data,
 			url: base_url + "order/create",
-			success: function(output){
-				$(".all-orders").append(output);
-				$(".order-create").fadeOut();
+			success: function(data){
+				show_popup("New Order",data, "auto");
+				//$(".all-orders").append(data);
+				//$(".order-create").fadeOut();
 			}
 		});
 		

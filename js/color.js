@@ -83,4 +83,25 @@ $(document).ready(function() {
 			});
 			
 		});
+		
+		$(".color-delete").live("click",function(){
+			form_data = {
+					id: $("#id").val(),
+					ajax: 1
+			};
+			question = confirm("Are you sure you want to delete this color? This is permanent and will delete all related orders and flags!");
+			if(question){
+				query = confirm("Are you absolutely sure? This is quite permanent and undoable!");
+				if(query){
+					$.ajax({
+						type: "post",
+						url: base_url + "color/delete",
+						data: form_data,
+						success: function(data){
+							document.location.href = base_url + "common/view/" + data;
+						}
+					});
+				}
+			}
+		});
 });

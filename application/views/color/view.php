@@ -8,8 +8,11 @@
 <h2>
 	<?="$color->common_name: $color->color";?>
 </h2>
+				<div class="button delete color-delete">Delete Color</div>
+
 <div class="grouping block color-info" id="color">
 	<div class='column column-odd'>
+	
 		<div class='field-set'>
 			<?=create_edit_field("color", $color->color, "Color",array("envelope"=>"div"));?>
 		</div>

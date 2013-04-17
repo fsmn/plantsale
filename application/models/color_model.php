@@ -95,5 +95,12 @@ class Color_Model extends CI_Model
 		return $output->$field;
 	}
 	
+	function delete($id)
+	{
+		$this->db->delete("color", array('id' => $id));
+		$this->db->delete("order", array('color_id' => $id));
+		$this->db->delete("flag", array('color_id' => $id));
+	}
+	
 
 }

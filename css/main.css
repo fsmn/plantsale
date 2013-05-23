@@ -669,6 +669,12 @@ table.list tbody tr {
 	
 }
 
+table.list.compressed {
+	font-size: .9em;
+	padding:0;
+	border-spacing:0;
+}
+
 table.files {
 	border-spacing: 5px;
 }

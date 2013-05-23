@@ -46,7 +46,8 @@ $(document).ready(function(){
 			my_name = search_words.join('%') + "%";
 			form_data = {
 				ajax: 1,
-				name: my_name
+				name: my_name,
+				type: 'inline'
 			};
 			$.ajax({
 				url: base_url + "common/search_by_name",

@@ -10,7 +10,7 @@ class Common extends MY_Controller
 		$this->load->model("common_model","common");
 		$this->load->model("color_model","color");
 		$this->load->model("menu_model","menu");
-	
+
 
 	}
 
@@ -22,7 +22,7 @@ class Common extends MY_Controller
 
 		$source = IMAGE_PATH . "/Admin.jpg";
 		$this->image_moo->load($source)->resize(650,650)->save(IMAGE_PATH . "/thumbs/admin.jpg");
-	
+
 	}
 
 	function search()
@@ -62,7 +62,11 @@ class Common extends MY_Controller
 		$name = $this->input->get("name");
 		$data["names"] = $this->common->get_by_name($name);
 		$data["full_list"] = FALSE;
-		$target = "common/list";
+		if($this->input->get("type") == "inline"){
+				$target = "common/inline_list";
+		}else{
+			$target = "common/list";
+		}
 		$this->load->view($target, $data);
 	}
 

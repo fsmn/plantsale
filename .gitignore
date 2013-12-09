@@ -3,4 +3,6 @@
 .settings/*
 .buildpath
 application/config.php
+user_guide/*
+system/*
 *.sql

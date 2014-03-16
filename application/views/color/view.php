@@ -12,12 +12,11 @@
 
 <div class="grouping block color-info" id="color">
 	<div class='column column-odd'>
-	
+
 		<div class='field-set'>
 			<?=create_edit_field("color", $color->color, "Color",array("envelope"=>"div"));?>
 		</div>
 		<div class='field-set'>
-
 			<?=create_edit_field("species", $color->species, "Species",array("envelope"=>"div"));?>
 		</div>
 		<? if($color->species && $color->genus): ?>
@@ -61,7 +60,7 @@
 
 		</fieldset>
 		<?=create_edit_field("note", $color->note, "Note", array("class"=>"textarea","envelope"=>"div"));?>
-		
+
 	</div>
 	<div class='common-info column column-even'>
 		<p>

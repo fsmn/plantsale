@@ -2,7 +2,6 @@
 .settings
 .settings/*
 .buildpath
-application/config.php
+application/config/database.php
 user_guide/*
-system/*
 *.sql

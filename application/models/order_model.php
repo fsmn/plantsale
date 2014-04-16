@@ -98,6 +98,28 @@ class Order_Model extends CI_Model
 		}
 		return $output;
 	}
+	
+	function get_current_year()
+	{
+		$this->db->from("order");
+		$this->db->order_by("year","DESC");
+		$this->db->group_by("year");
+		$this->db->limit(1);
+		$result = $this->db->get()->row();
+		return $result->year;
+		
+	}
+	
+	function get_previous_year($color_id, $current_year){
+		$this->db->from("order");
+		$this->db->where("color_id", $color_id);
+		$this->db->where("year <",$current_year);
+		$this->db->order_by("year","DESC");
+		$this->db->group_by("year");
+		$this->db->limit(1);
+		$result = $this->db->get()->row();
+		return $result;
+	}
 
 	function get_value($id, $field)
 	{
@@ -107,6 +129,24 @@ class Order_Model extends CI_Model
 		$output = $this->db->get()->row();
 		return $output->$field;
 	}
+	
+	function get_plant_total($year){
+		//sum(flat_size * (count_presale + count_midsale))
+		$query = sprintf("SELECT sum(`flat_size` * (`count_presale` + `count_midsale`)) as `total` FROM `order` where `year` = '%s' ",$year);
+		$result = $this->db->query($query)->row();
+		return $result->total;
+		
+	}
+	
+	function get_price_range($year = NULL){
+		$this->db->from("order");
+		$this->db->select("min(`price`) as `min_price`, max(`price`) as `max_price` , avg(`price`) as `average_price`");
+		$this->db->where("year", $year);
+		$result = $this->db->get()->row();
+		return $result;
+	}
+	
+
 
 
 }

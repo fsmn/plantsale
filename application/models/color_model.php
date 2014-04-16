@@ -86,6 +86,18 @@ class Color_Model extends CI_Model
 		
 	}
 	
+	function get_by_name($name)
+	{
+		$this->db->where("`color` LIKE '%$name%' OR `common`.`name` LIKE '%$name%' OR `color`.`species` LIKE '%$name%' OR `common`.`genus` LIKE '%$name%'");
+		$this->db->join("common","color.common_id=common.id");
+		$this->db->order_by("color","ASC");
+		$this->db->order_by("common.name","ASC");
+		$this->db->select("color.*, color.id as id, color.common_id as common_id, common.name as common_name, common.genus,  common.category, common.description");
+		
+		$result = $this->db->get("color")->result();
+		return $result;
+	}
+	
 	function get_value($id, $field)
 	{
 		$this->db->where("id", $id);
@@ -93,6 +105,34 @@ class Color_Model extends CI_Model
 		$this->db->from("color");
 		$output = $this->db->get()->row();
 		return $output->$field;
+	}
+	
+	function get_new_colors($year)
+	{
+		$query = sprintf("SELECT color.id FROM `color` join `order` on `color`.`id` = `order`.`color_id`
+  WHERE `color`.`id` NOT IN (SELECT `color_id` from `order` WHERE `year` < %s ) and `order`.`year` = %s", $year,$year);
+		$result = $this->db->query($query)->result();
+		return $result;
+	}
+	
+	function get_colors_for_year($year){
+		$this->db->from("color");
+		$this->db->join("order","color.id=order.color_id");
+		$this->db->where("order.year", $year);
+		$result = $this->db->get()->result();
+		return $result;
+	}
+	
+	function get_category_totals($year){
+		$this->db->from("color");
+		$this->db->join("order","color.id=order.color_id");
+		$this->db->join("common","common.id=color.common_id");
+		$this->db->where("order.year",$year);
+		$this->db->group_by("common.category");
+		$this->db->select("count(`color`.`id`) as count,common.category");
+		$result = $this->db->get()->result();
+		return $result;
+		
 	}
 	
 	function delete($id)

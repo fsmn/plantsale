@@ -40,6 +40,7 @@ class Order extends MY_Controller
 	function create()
 	{
 		$data["color_id"] = $this->input->get("color_id");
+		$data["order"] = $this->order->get_previous_year($data["color_id"],get_current_year());
 		$data["action"] = "insert";
 		$data["target"] = "order/edit";
 		$data['title'] = "Insert New Order";

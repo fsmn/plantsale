@@ -9,9 +9,118 @@
 <p>
 <div class="button-bar">
 <p><span class="button new common-create">New Common Name</span></p>
-<p><input type="text" name="common-search" id="common-search-body" class="search-field common-search" value="Find Common Names"/></p>
-<p><input type="text" name="color-search" id="color-search-body" class="search-field color-search" value="Color Search"/></p>
-
-
-
 </div>
+<h3>Totals</h3>
+<table class="list">
+<thead>
+<tr>
+<td>
+</td>
+<td>
+<?=$sale_year;?>
+</td>
+<td>
+<?=$sale_year -1;?>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Total Plants
+</td>
+<td>
+<?=$totals->total["current"];?>
+</td>
+<td>
+<?=$totals->total["previous"];?>
+</td>
+</tr>
+<tr>
+<td>
+New Colors
+</td>
+<td>
+<a href="#" title="would show a list of all new colors"><?=count($totals->new_colors["current"]);?></a>
+</td>
+<td>
+<?=count($totals->new_colors["previous"]);?>
+</td>
+</tr>
+<tr>
+<td>
+Total Colors
+</td>
+<td>
+<?=count($totals->colors["current"]);?>
+</td>
+<td>
+<?=count($totals->colors["previous"]);?>
+</td>
+</tr>
+<tr>
+<td>
+Lowest Price
+</td>
+<td>
+<?=get_as_price($totals->price_range["current"]->min_price);?>
+</td>
+<td>
+<?=get_as_price($totals->price_range["previous"]->min_price);?>
+</td>
+</tr>
+<tr>
+<td>
+Highest Price
+</td>
+<td>
+<a href="#" title="would show the highest priced plant"><?=get_as_price($totals->price_range["current"]->max_price);?></a>
+</td>
+<td>
+<a href="#"  title="would show the highest priced plant"><?=get_as_price($totals->price_range["previous"]->max_price);?></a>
+</td>
+</tr>
+<tr>
+<td>
+Average Price
+</td>
+<td>
+<?=get_as_price($totals->price_range["current"]->average_price);?>
+</td>
+<td>
+<?=get_as_price($totals->price_range["previous"]->average_price);?>
+</td>
+</tr>
+<?foreach($totals->categories["current"] as $category) : ?>
+	<tr>
+	<td>
+	<?=$category->category;?>
+	</td>
+	<td>
+	<?=$category->count;?>
+	
+	</td>
+	<td>
+	<? //it's clumsy, but it works ?>
+	<?foreach($totals->categories["previous"] as $old_category): ?>
+		<? if($old_category->category = $category->category):?>
+			<?=$old_category->count;?>
+		<? endif;?>
+	<? endforeach;?>
+	</td>
+	</tr>
+<?endforeach; ?>
+</tbody>
+</table>
+
+
+
+<!--  how many items (ie. pots) for sale 250,000-size number
+how many new colors... 400 or so
+how many total colors... 2500 or so
+price range (lowest price and highest price, average price(?))
+how many in each category
+current to past year comparisons by category (number of flats pre-sale current year/previous year)
+category space use
+
+-->

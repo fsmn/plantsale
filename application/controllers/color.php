@@ -35,6 +35,7 @@ class Color extends MY_Controller
 		$id = $this->color->insert();
 		if( $this->input->post("add_order")){
 			$data["color_id"] = $id;
+			$data["order"] = NULL;
 			$data["action"] = "insert";
 			$this->load->view("order/edit", $data);
 		}else{
@@ -58,6 +59,19 @@ class Color extends MY_Controller
 		$this->load->view("page/index", $data);
 
 
+	}
+	
+	function search_by_name()
+	{
+		$name = $this->input->get("name");
+		$data["names"] = $this->color->get_by_name($name);
+		$data["full_list"] = FALSE;
+		if($this->input->get("type") == "inline"){
+			$target = "color/inline_list";
+		}else{
+			$target = "color/list";
+		}
+		$this->load->view($target, $data);
 	}
 
 	function edit()

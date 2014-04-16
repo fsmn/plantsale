@@ -84,6 +84,56 @@ $(document).ready(function() {
 			
 		});
 		
+		$('#color-search-body').live('keyup', function(event) {
+			common_search = this.value;
+			if (common_search.length > 2 && common_search != "Find Common Names") {
+				search_words = common_search.split(' ');
+				my_name = search_words.join('%') + "%";
+				form_data = {
+					ajax: 1,
+					name: my_name,
+					type: 'inline'
+				};
+				$.ajax({
+					url: base_url + "color/search_by_name",
+					type: 'GET',
+					data: form_data,
+					success: function(data){
+						//remove the search_list because we don't want to have a ton of them. 
+
+						$("#search_list").css({"z-index": 1000}).html(data).position({
+							my: "left top",
+							at: "left bottom",
+							of: $("#color-search-body"), 
+							collision: "fit"
+						}).show();
+				}
+				});
+			}else{
+				$("#search_list").hide();
+	        	$("#search_list").css({"left": 0, "top": 0});
+
+
+			}
+		});// end stuSearch.keyup
+		
+
+		$('#color-search-body').live('focus', function(event) {
+			$('#color-search-body').val('').css( {
+				color : 'black'
+			});
+		});
+		
+		
+		$('#color-search-body').live('blur', function(event) {
+			
+			$("#search_list").fadeOut();
+			$('#color-search-body').css({color:'#666'}).val('Find Colors');
+			//$("#search_list").remove();
+			
+			
+		});
+		
 		$(".color-delete").live("click",function(){
 			form_data = {
 					id: $("#id").val(),

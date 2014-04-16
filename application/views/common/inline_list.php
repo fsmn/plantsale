@@ -5,21 +5,21 @@
 
 <table id="common-name-list" class="list compressed">
 	<?if($full_list):?>
-	<thead>
-		<tr>
-			<th>Name</th>
-
-			<th>Genus</th>
-
-			<th>Category</th>
-
-			<th>Sunlight</th>
-
-			<th>Description</th>
-
-			<th></th>
-		</tr>
-	</thead>
+		<thead>
+			<tr>
+				<th>Name</th>
+	
+				<th>Genus</th>
+	
+				<th>Category</th>
+	
+				<th>Sunlight</th>
+	
+				<th>Description</th>
+	
+				<th></th>
+			</tr>
+		</thead>
 	<? endif; ?>
 	<tbody>
 		<? foreach($names as $name){ ?>

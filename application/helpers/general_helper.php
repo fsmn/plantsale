@@ -80,7 +80,7 @@ function get_value($object, $item, $default = null){
 function get_as_price($int){
 	$parts = explode(".",$int);
 	if(count($parts) == 2){
-		$output = sprintf("$%s", $int);
+		$output = sprintf("$%s", round($int,2));
 	}else{
 		$output = sprintf("$%s.00", $int);
 	}

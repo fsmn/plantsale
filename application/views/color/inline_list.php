@@ -2,6 +2,7 @@
 
 // inline_list.php Chris Dart April 25, 2013 11:07:53 AM chrisdart@cerebratorium.com
 ?>
+<div style="overflow: scroll;max-height: 25em">
 
 <table id="color-name-list" class="list compressed">
 	<?if($full_list):?>
@@ -35,7 +36,7 @@
 				id="color-species_<?=$name->id;?>"><?=$name->species;?> </span>
 			</td>
 			<td><span class="color-common-name color-edit-row"
-				id="color-common-name_<?=$name->id;?>"><?=$name->common_name;?> </span>
+				id="color-common-name_<?=$name->id;?>"><a href="<?=base_url("common/view/$name->common_id");?>"><?=$name->common_name;?></a></span>
 			</td>
 			<td><span class="color-species color-edit-row"
 				id="color-genus_<?=$name->id;?>"><?=$name->genus;?> </span>
@@ -76,3 +77,4 @@
 		<? } ?>
 	</tbody>
 </table>
+</div>

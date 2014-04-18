@@ -140,7 +140,7 @@ class Order_Model extends CI_Model
 	
 	function get_price_range($year = NULL){
 		$this->db->from("order");
-		$this->db->select("min(`price`) as `min_price`, max(`price`) as `max_price` , avg(`price`) as `average_price`");
+		$this->db->select("min(`plant_cost`) as `min_price`, max(`plant_cost`) as `max_price` , avg(`plant_cost`) as `average_price`");
 		$this->db->where("year", $year);
 		$result = $this->db->get()->row();
 		return $result;

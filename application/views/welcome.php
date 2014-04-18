@@ -10,6 +10,7 @@
 <div class="button-bar">
 <p><span class="button new common-create">New Common Name</span></p>
 </div>
+
 <h3>Totals</h3>
 <table class="list">
 <thead>
@@ -103,7 +104,7 @@ Average Price
 	<td>
 	<? //it's clumsy, but it works ?>
 	<?foreach($totals->categories["previous"] as $old_category): ?>
-		<? if($old_category->category = $category->category):?>
+		<? if($old_category->category == $category->category):?>
 			<?=$old_category->count;?>
 		<? endif;?>
 	<? endforeach;?>
@@ -112,7 +113,6 @@ Average Price
 <?endforeach; ?>
 </tbody>
 </table>
-
 
 
 <!--  how many items (ie. pots) for sale 250,000-size number

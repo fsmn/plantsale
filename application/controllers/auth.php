@@ -43,6 +43,7 @@ class Auth extends CI_Controller
 				$data["db_role"] = $result->db_role;
 				$data["user_id"] = $result->id;
 				$this->session->set_userdata($data);
+				bake_cookie("sale_year",get_current_year());
 				$redirect = true;
 			}
 		}

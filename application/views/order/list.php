@@ -12,6 +12,12 @@ if($orders):
 			<th>Flat Size</th>
 			<th>Flat Cost</th>
 			<th>Plant Cost</th>
+			<? if($show_names):?>
+			<th>Genus</th>
+			<th>Species</th>
+			<th>Common Name</th>
+			<th>Color</th>
+			<? endif;?>
 			<th>Presale Count</th>
 			<th>Midsale Count</th>
 			<th>Total Plants</th>
@@ -45,6 +51,13 @@ if($orders):
 			</td>
 			<td class="order-plant_cost field"><?=get_as_price($plant_cost);?>
 			</td>
+			<? if($show_names):?>
+			<td><?=$order->genus;?></td>
+			<td><?=$order->species;?></td>
+			<td><?=$order->name;?></td>
+			<td><?=$order->color;?></td>
+			<? endif;?>
+			
 			<td class="order-count_presale field"><?=$order->count_presale;?>
 			
 			<td class="order-count_midsale field"><?=$order->count_midsale;?>

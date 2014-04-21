@@ -699,6 +699,18 @@ td.field input {
 	width: 60px;
 }
 
+table.chart td {
+	border: 1px solid #ddd;
+	padding: 5px;
+	
+}
+
+table.chart thead td {
+	border: none;
+	text-align: center
+	
+}
+
 a.link,input.link {
 	text-decoration: underline;
 }

@@ -10,9 +10,9 @@
 <div class="button-bar">
 <p><span class="button new common-create">New Common Name</span></p>
 </div>
-
+<div style="width:350px;margin:0 auto;">
 <h3>Totals</h3>
-<table class="list">
+<table class="chart">
 <thead>
 <tr>
 <td>
@@ -31,10 +31,10 @@
 Total Plants
 </td>
 <td>
-<?=$totals->total["current"];?>
+<?=number_format($totals->total["current"]);?>
 </td>
 <td>
-<?=$totals->total["previous"];?>
+<?=number_format($totals->total["previous"]);?>
 </td>
 </tr>
 <tr>
@@ -45,7 +45,7 @@ New Colors
 <a href="#" title="would show a list of all new colors"><?=count($totals->new_colors["current"]);?></a>
 </td>
 <td>
-<?=count($totals->new_colors["previous"]);?>
+<?=number_format(count($totals->new_colors["previous"]));?>
 </td>
 </tr>
 <tr>
@@ -53,10 +53,10 @@ New Colors
 Total Colors
 </td>
 <td>
-<?=count($totals->colors["current"]);?>
+<?=number_format(count($totals->colors["current"]));?>
 </td>
 <td>
-<?=count($totals->colors["previous"]);?>
+<?=number_format(count($totals->colors["previous"]));?>
 </td>
 </tr>
 <tr>
@@ -95,7 +95,7 @@ Average Price
 <?foreach($totals->categories["current"] as $category) : ?>
 	<tr>
 	<td>
-	<?=$category->category;?>
+	<a href="<?=site_url("order/category_totals?category=$category->category");?>"><?=$category->category;?></a>
 	</td>
 	<td>
 	<?=$category->count;?>
@@ -113,7 +113,7 @@ Average Price
 <?endforeach; ?>
 </tbody>
 </table>
-
+</div>
 
 <!--  how many items (ie. pots) for sale 250,000-size number
 how many new colors... 400 or so

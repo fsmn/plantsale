@@ -99,6 +99,20 @@ class Order_Model extends CI_Model
 		return $output;
 	}
 	
+	function get_by_category($category, $sale_year,$order_by = "catalog_number"){
+		$this->db->from("order");
+		$this->db->join("color","order.color_id = color.id");
+		$this->db->join("common","color.common_id = common.id");
+		$this->db->where("common.category",$category);
+		$this->db->where("order.year", $sale_year);
+		$this->db->order_by("catalog_number");
+		$this->db->select("order.id,vendor_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.vendor_code");
+		$this->db->select("color.color, color.species");
+		$this->db->select("common.name, common.genus, common.category");
+		$result = $this->db->get()->result();
+		return $result;
+	}
+	
 	function get_current_year()
 	{
 		$this->db->from("order");

@@ -1,5 +1,4 @@
 <?php
-
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 $buttons [] = array (
@@ -12,13 +11,10 @@ $buttons [] = array (
 		"title" => "Home" 
 );
 
-
-
-
 $buttons [] = array (
-		"selection" => "common",
+		"selection" => "color",
 		"type" => "pass-through",
-		"text" => "<input type='text' name='common-search' id='common-search-body' class='search-field common-search' value='Find Common Names'/>" 
+		"text" => "<input type='text' name='color-search' id='color-search-body' class='search-field color-search' value='Find Plants'/>" 
 );
 
 $buttons [] = array (
@@ -26,28 +22,34 @@ $buttons [] = array (
 		"text" => "Advanced Search",
 		"class" => array (
 				"button",
-				"search-common-names"
+				"search-common-names" 
 		),
 		"type" => "span",
-		"title" => "Search among the common names"
-);
-
-$buttons [] = array (
-		"selection" => "color",
-		"type" => "pass-through",
-		"text" => "<input type='text' name='color-search' id='color-search-body' class='search-field color-search' value='Find Colors'/>" 
+		"title" => "Search among the common names" 
 );
 
 // $buttons [] = array (
-// 		"selection" => "all",
-// 		"text" => "Advanced Search",
-// 		"class" => array (
-// 				"button",
-// 				"search-colors"
-// 		),
-// 		"type" => "span",
-// 		"title" => "Search among the colors"
+// "selection" => "all",
+// "text" => "Advanced Search",
+// "class" => array (
+// "button",
+// "search-colors"
+// ),
+// "type" => "span",
+// "title" => "Search among the colors"
 // );
+
+$buttons [] = array (
+		"selection" => "order",
+		"text" => "Ordering",
+		"class" => array (
+				"button",
+				"show-ordering" 
+		),
+		"href" => "#",
+		"title" => "View the Ordering Control Panel" 
+)
+;
 
 print create_button_bar ( $buttons, array (
 		"id" => "navigation-buttons" 

@@ -91,7 +91,9 @@
 
 <div class="all-orders block">
 	<h3>Orders</h3>
-	<? $this->load->view("order/list");?>
+	<? $data["orders"] = $orders;
+	$data["show_names"] = FALSE;
+	 $this->load->view("order/list", $data);?>
 
 </div>
 <?

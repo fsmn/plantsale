@@ -128,7 +128,7 @@ $(document).ready(function() {
 		$('#color-search-body').live('blur', function(event) {
 			
 			$("#search_list").fadeOut();
-			$('#color-search-body').css({color:'#666'}).val('Find Colors');
+			$('#color-search-body').css({color:'#666'}).val('Find Plants');
 			//$("#search_list").remove();
 			
 			

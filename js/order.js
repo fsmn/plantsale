@@ -28,4 +28,6 @@ $(document).ready(function(){
 		}
 		console.log(flat_cost);
 	});
+	
+	
 });

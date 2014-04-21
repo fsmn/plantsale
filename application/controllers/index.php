@@ -4,12 +4,12 @@ class Index extends MY_Controller {
 	function __construct() {
 		parent::__construct ();
 	}
-	
+
 	function index() {
 		$data ["title"] = "Plant Sale Database";
 		$data ["target"] = "welcome";
 		$this->load->model ( "order_model", "order" );
-		
+
 		if (! get_cookie ( "sale_year" )) {
 			bake_cookie ( "sale_year", $this->order->get_current_year () );
 		}
@@ -25,23 +25,31 @@ class Index extends MY_Controller {
 		$totals->new_colors["previous"] = $this->color->get_new_colors($sale_year -1);
 		$totals->colors["current"] =  $this->color->get_colors_for_year($sale_year);
 		$totals->colors["previous"] = $this->color->get_colors_for_year($sale_year -1);
-		$totals->categories["current"] = $this->color->get_category_totals($sale_year);
-		$totals->categories["previous"] = $this->color->get_category_totals($sale_year -1);
+
 		$data["totals"] = $totals;
-		
+
 		$this->load->view ( "page/index", $data );
 	}
-	
+
 	function show_set_year(){
 		$data["uri"] = $this->input->get("uri");
 		$this->load->view("utility/sale_year", $data);
 	}
-	
-	
+
+
 	function set_year(){
-	
+
 		$year = $this->input->get("sale_year");
 		bake_cookie("sale_year", $year);
 		redirect($this->input->get("uri"));
+	}
+
+	function get_categories(){
+	    $this->load->model("color_model","color");
+	    $sale_year = get_cookie("sale_year");
+	    $categories["current"] = $this->color->get_category_totals($sale_year);
+	    $categories["previous"] = $this->color->get_category_totals($sale_year -1);
+	    $data["categories"] = $categories;
+	    $this->load->view("color/totals", $data);
 	}
 }

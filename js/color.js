@@ -154,4 +154,14 @@ $(document).ready(function() {
 				}
 			}
 		});
+		
+		$(".show-category-totals").live("click",function(){
+			$.ajax({
+				type:"get",
+				url: base_url + "index/get_categories",
+				success: function(data){
+					$("#category-totals").html(data);
+				}
+			});
+		});
 });

@@ -10,8 +10,9 @@
 <div class="button-bar">
 <p><span class="button new common-create">New Common Name</span></p>
 </div>
-<div style="width:350px;margin:0 auto;">
 <h3>Totals</h3>
+
+<div style="width:350px;margin:0 auto; float: left;">
 <table class="chart">
 <thead>
 <tr>
@@ -59,40 +60,14 @@ Total Colors
 <?=number_format(count($totals->colors["previous"]));?>
 </td>
 </tr>
-<tr>
-<td>
-Average Price
-</td>
-<td>
-<?=get_as_price($totals->price_range["current"]->average_price);?>
-</td>
-<td>
-<?=get_as_price($totals->price_range["previous"]->average_price);?>
-</td>
-</tr>
-<?foreach($totals->categories["current"] as $category) : ?>
-	<tr>
-	<td>
-	<a href="<?=site_url("order/category_totals?category=$category->category");?>"><?=$category->category;?></a>
-	</td>
-	<td>
-	<?=$category->count;?>
-
-	</td>
-	<td>
-	<? //it's clumsy, but it works ?>
-	<?foreach($totals->categories["previous"] as $old_category): ?>
-		<? if($old_category->category == $category->category):?>
-			<?=$old_category->count;?>
-		<? endif;?>
-	<? endforeach;?>
-	</td>
-	</tr>
-<?endforeach; ?>
 </tbody>
 </table>
 </div>
-
+<div style="float:left">
+<?=create_button_bar(array(array("selection"=>"color","text"=>"Show Plant Totals", "class"=>"button show-category-totals")));?>
+<div id="category-totals">
+</div>
+</div>
 <!--  how many items (ie. pots) for sale 250,000-size number
 how many new colors... 400 or so
 how many total colors... 2500 or so

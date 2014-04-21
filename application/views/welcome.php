@@ -61,28 +61,6 @@ Total Colors
 </tr>
 <tr>
 <td>
-Lowest Price
-</td>
-<td>
-<?=get_as_price($totals->price_range["current"]->min_price);?>
-</td>
-<td>
-<?=get_as_price($totals->price_range["previous"]->min_price);?>
-</td>
-</tr>
-<tr>
-<td>
-Highest Price
-</td>
-<td>
-<a href="#" title="would show the highest priced plant"><?=get_as_price($totals->price_range["current"]->max_price);?></a>
-</td>
-<td>
-<a href="#"  title="would show the highest priced plant"><?=get_as_price($totals->price_range["previous"]->max_price);?></a>
-</td>
-</tr>
-<tr>
-<td>
 Average Price
 </td>
 <td>
@@ -99,7 +77,7 @@ Average Price
 	</td>
 	<td>
 	<?=$category->count;?>
-	
+
 	</td>
 	<td>
 	<? //it's clumsy, but it works ?>

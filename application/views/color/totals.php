@@ -7,7 +7,7 @@
 <? foreach($categories["current"] as $category) : ?>
 	<tr>
 	<td>
-	<a href="<?=site_url("order/category_totals?category=$category->category");?>"><?=$category->category;?></a>
+	<a href="<?=site_url("order/totals?category=$category->category");?>"><?=$category->category;?></a>
 	</td>
 	<td>
 	<?=$category->count;?>

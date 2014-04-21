@@ -29,5 +29,15 @@ $(document).ready(function(){
 		console.log(flat_cost);
 	});
 	
+	$(".search-orders").live("click",function(){
+		$.ajax({
+			type: "get",
+			url: base_url + "order/search",
+			success: function(data){
+				show_popup("Search Orders",data, "auto");
+			}
+		});
+	});
+	
 	
 });

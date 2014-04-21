@@ -104,8 +104,10 @@ class Order_Model extends CI_Model {
 			$this->db->from ( "order" );
 			$this->db->join ( "color", "order.color_id = color.id" );
 			$this->db->join ( "common", "color.common_id = common.id" );
+			$option_keys = array_keys($options);
+			$option_values = array_values($options);
 			for($i = 0; $i < count($options); $i++){
-				$this->db->where(array_keys($options)[$i], array_values($options)[$i]);
+				$this->db->where($option_keys[$i], $option_values[$i]);
 			}
 			$this->db->where ( "order.year", $sale_year );
 			$this->db->order_by ( "catalog_number" );

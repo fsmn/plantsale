@@ -146,7 +146,7 @@ class Order_Model extends CI_Model
 	
 	function get_plant_total($year){
 		//sum(flat_size * (count_presale + count_midsale))
-		$query = sprintf("SELECT sum(`flat_size` * (`count_presale` + `count_midsale`)) as `total` FROM `order` where `year` = '%s' ",$year);
+		$query = sprintf("SELECT sum((`count_presale` + `count_midsale`)) as `total` FROM `order` where `year` = '%s' ",$year);
 		$result = $this->db->query($query)->row();
 		return $result->total;
 		

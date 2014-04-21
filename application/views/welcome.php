@@ -64,7 +64,7 @@ Total Colors
 </table>
 </div>
 <div style="float:left">
-<?=create_button_bar(array(array("selection"=>"color","text"=>"Show Plant Totals", "class"=>"button show-category-totals")));?>
+<?=create_button_bar(array(array("selection"=>"color","text"=>"Show Category Totals", "class"=>"button show-category-totals")));?>
 <div id="category-totals">
 </div>
 </div>

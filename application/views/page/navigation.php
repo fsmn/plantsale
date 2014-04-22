@@ -41,7 +41,7 @@ $buttons [] = array (
 
 $buttons [] = array (
 		"selection" => "order",
-		"text" => "Ordering",
+		"text" => "Search Orders",
 		"class" => array (
 				"button",
 				"search-orders" 

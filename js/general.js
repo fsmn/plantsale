@@ -168,7 +168,7 @@ function save_field(me)
 	my_format = $(me).parents("span").attr("format");
 	if(my_format == "multiselect"){
 		my_field = $(me).parent().children("select").attr("name");
-		my_value =  $("#sunlight").val() || [];
+		my_value =  $("#" + my_field).val() || [];
 		my_value = my_value.join(",",my_value);
 	}else{
 		my_field = $(me).attr("name");

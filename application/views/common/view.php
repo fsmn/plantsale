@@ -16,15 +16,15 @@ print create_button_bar($buttons);
 	<?=create_edit_field("sunlight",$common->sunlight, "Sunlight Requirements",array("class"=>"multiselect","attributes"=>"menu='sunlight'","format"=>"multiselect"));?>
 
 </div>
-<? $this->load->view("color/list");?>
+<? $this->load->view("variety/list");?>
 <? print create_button_bar(array(
 		array(
-		"selection"=>"color",
-		"text"=>"Add a Color",
-		"class"=>array("button","new","color-create"),
+		"selection"=>"variety",
+		"text"=>"Add a variety",
+		"class"=>array("button","new","variety-create"),
 		"id"=>sprintf("common-id_%s",$common->id),
 		"type"=>"span",
-		"title"=>"add a new color",
+		"title"=>"add a new variety",
 )
 )
 );

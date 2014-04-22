@@ -12,9 +12,9 @@ $buttons [] = array (
 );
 
 $buttons [] = array (
-		"selection" => "color",
+		"selection" => "variety",
 		"type" => "pass-through",
-		"text" => "<input type='text' name='color-search' id='color-search-body' class='search-field color-search' value='Find Plants'/>" 
+		"text" => "<input type='text' name='variety-search' id='variety-search-body' class='search-field variety-search' value='Find Plants'/>" 
 );
 
 $buttons [] = array (
@@ -33,10 +33,10 @@ $buttons [] = array (
 // "text" => "Advanced Search",
 // "class" => array (
 // "button",
-// "search-colors"
+// "search-varietys"
 // ),
 // "type" => "span",
-// "title" => "Search among the colors"
+// "title" => "Search among the varietys"
 // );
 
 $buttons [] = array (

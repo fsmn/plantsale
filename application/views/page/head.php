@@ -30,8 +30,8 @@ var base_url = '<?=base_url("index.php") . "/";?>';
 <!-- Common Name Scripts -->
 <script type="text/javascript" src="<?=base_url();?>js/common.js"></script>
 
-<!-- Color Scripts -->
-<script type="text/javascript" src="<?=base_url();?>js/color.js"></script>
+<!-- variety Scripts -->
+<script type="text/javascript" src="<?=base_url();?>js/variety.js"></script>
 
 <!-- Order Scripts -->
 <script type="text/javascript" src="<?=base_url();?>js/order.js"></script>

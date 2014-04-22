@@ -1,7 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Order_Model extends CI_Model {
-	var $color_id;
+	var $variety_id;
 	var $vendor_id;
 	var $catalog_number;
 	var $catalog_id;
@@ -32,7 +32,7 @@ class Order_Model extends CI_Model {
 	function prepare_variables() {
 
 		$variables = array (
-				"color_id",
+				"variety_id",
 				"vendor_id",
 				"catalog_number",
 				"catalog_id",
@@ -93,17 +93,16 @@ class Order_Model extends CI_Model {
 	function get($id) {
 
 		$this->db->where ( "order.id", $id );
-		$this->db->from ( "order,color" );
-		$this->db->where ( "`order`.`color_id` = `color`.`id`" );
-		$this->db->select ( "order.*, color.color" );
+		$this->db->from ( "order,variety" );
+		$this->db->where ( "`order`.`variety_id` = `variety`.`id`" );
+		$this->db->select ( "order.*, variety.variety" );
 		$output = $this->db->get ()->row ();
 		return $output;
 	
 	}
 
-	function get_for_color($color_id, $year = NULL) {
-
-		$this->db->where ( "color_id", $color_id );
+	function get_for_variety($variety_id, $year = NULL) {
+		$this->db->where ( "variety_id", $variety_id );
 		if ($year) {
 			$this->db->where ( "year", $year );
 		}
@@ -119,23 +118,21 @@ class Order_Model extends CI_Model {
 	}
 
 	function get_totals($sale_year, $options = array(), $order_by = "catalog_number") {
-
-		$this->db->from ( "order" );
-		$this->db->join ( "color", "order.color_id = color.id" );
-		$this->db->join ( "common", "color.common_id = common.id" );
-		$option_keys = array_keys ( $options );
-		$option_values = array_values ( $options );
-		for($i = 0; $i < count ( $options ); $i ++) {
-			$this->db->where ( $option_keys [$i], $option_values [$i] );
-		}
-		$this->db->where ( "order.year", $sale_year );
-		$this->db->order_by ( "catalog_number" );
-		$this->db->select ( "order.id,vendor_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.vendor_code" );
-		$this->db->select ( "color.color, color.species" );
-		$this->db->select ( "common.name, common.genus, common.category" );
-		$result = $this->db->get ()->result ();
-		return $result;
-	
+			$this->db->from ( "order" );
+			$this->db->join ( "variety", "order.variety_id = variety.id" );
+			$this->db->join ( "common", "variety.common_id = common.id" );
+			$option_keys = array_keys($options);
+			$option_values = array_values($options);
+			for($i = 0; $i < count($options); $i++){
+				$this->db->where($option_keys[$i], $option_values[$i]);
+			}
+			$this->db->where ( "order.year", $sale_year );
+			$this->db->order_by ( "catalog_number" );
+			$this->db->select ( "order.id,vendor_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.vendor_code" );
+			$this->db->select ( "variety.variety, variety.species" );
+			$this->db->select ( "common.name, common.genus, common.category" );
+			$result = $this->db->get ()->result ();
+			return $result;
 	}
 
 	function get_current_year() {
@@ -149,17 +146,15 @@ class Order_Model extends CI_Model {
 	
 	}
 
-	function get_previous_year($color_id, $current_year) {
-
+	function get_previous_year($variety_id, $current_year) {
 		$this->db->from ( "order" );
-		$this->db->where ( "color_id", $color_id );
+		$this->db->where ( "variety_id", $variety_id );
 		$this->db->where ( "year <", $current_year );
 		$this->db->order_by ( "year", "DESC" );
 		$this->db->group_by ( "year" );
 		$this->db->limit ( 1 );
 		$result = $this->db->get ()->row ();
 		return $result;
-	
 	}
 
 	function get_value($id, $field) {

@@ -40,37 +40,37 @@ Total Plants
 </tr>
 <tr>
 <td>
-New Colors
+New varietys
 </td>
 <td>
-<a href="#" title="would show a list of all new colors"><?=count($totals->new_colors["current"]);?></a>
+<a href="#" title="would show a list of all new varietys"><?=count($totals->new_varietys["current"]);?></a>
 </td>
 <td>
-<?=number_format(count($totals->new_colors["previous"]));?>
+<?=number_format(count($totals->new_varietys["previous"]));?>
 </td>
 </tr>
 <tr>
 <td>
-Total Colors
+Total varietys
 </td>
 <td>
-<?=number_format(count($totals->colors["current"]));?>
+<?=number_format(count($totals->varietys["current"]));?>
 </td>
 <td>
-<?=number_format(count($totals->colors["previous"]));?>
+<?=number_format(count($totals->varietys["previous"]));?>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 <div style="float:left">
-<?=create_button_bar(array(array("selection"=>"color","text"=>"Show Category Totals", "class"=>"button show-category-totals")));?>
+<?=create_button_bar(array(array("selection"=>"variety","text"=>"Show Category Totals", "class"=>"button show-category-totals")));?>
 <div id="category-totals">
 </div>
 </div>
 <!--  how many items (ie. pots) for sale 250,000-size number
-how many new colors... 400 or so
-how many total colors... 2500 or so
+how many new varietys... 400 or so
+how many total varietys... 2500 or so
 price range (lowest price and highest price, average price(?))
 how many in each category
 current to past year comparisons by category (number of flats pre-sale current year/previous year)

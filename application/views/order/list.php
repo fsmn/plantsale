@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-// color_order.php Chris Dart Mar 4, 2013 8:44:25 PM chrisdart@cerebratorium.com
+// variety_order.php Chris Dart Mar 4, 2013 8:44:25 PM chrisdart@cerebratorium.com
 if($orders):
 ?>
 
@@ -16,7 +16,7 @@ if($orders):
 			<th>Genus</th>
 			<th>Species</th>
 			<th>Common Name</th>
-			<th>Color</th>
+			<th>variety</th>
 			<? endif;?>
 			<th>Presale Count</th>
 			<th>Midsale Count</th>
@@ -55,7 +55,7 @@ if($orders):
 			<td><?=$order->genus;?></td>
 			<td><?=$order->species;?></td>
 			<td><?=$order->name;?></td>
-			<td><?=$order->color;?></td>
+			<td><?=$order->variety;?></td>
 			<? endif;?>
 			
 			<td class="order-count_presale field"><?=$order->count_presale;?>

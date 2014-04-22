@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$(".order-create").live("click",function(){
 		my_id = this.id.split("_")[1];
 		form_data = {
-				color_id: my_id
+				variety_id: my_id
 		};
 		$.ajax({
 			type: "get",

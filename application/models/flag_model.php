@@ -2,7 +2,7 @@
 
 class Flag_Model extends CI_Model
 {
-	var $color_id;
+	var $variety_id;
 	var $name;
 	var $rec_modified;
 	var $rec_modifier;
@@ -14,7 +14,7 @@ class Flag_Model extends CI_Model
 
 	function prepare_variables()
 	{
-		$variables = array("color_id","name");
+		$variables = array("variety_id","name");
 
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
@@ -53,8 +53,8 @@ class Flag_Model extends CI_Model
 		$this->db->delete("flag");
 	}
 
-	function get_for_color($color_id){
-		$this->db->where("color_id",$color_id);
+	function get_for_variety($variety_id){
+		$this->db->where("variety_id",$variety_id);
 		$this->db->from("flag");
 		$this->db->select("flag.*,icon.source");
 		$this->db->join("menu","flag.name=menu.key");
@@ -64,12 +64,12 @@ class Flag_Model extends CI_Model
 	}
 
 	/**
-	 * finds all the flags for a color and returns a key-value pair multi-array
-	 * @param unknown $color_id
+	 * finds all the flags for a variety and returns a key-value pair multi-array
+	 * @param unknown $variety_id
 	 * @return array
 	 */
-	function get_missing($color_id){
-		$current_flags = $this->get_for_color($color_id);
+	function get_missing($variety_id){
+		$current_flags = $this->get_for_variety($variety_id);
 		$flag_list = array();
 		foreach($current_flags as $current_flag){
 			$flag_list[] = $current_flag->name;

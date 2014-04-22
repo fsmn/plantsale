@@ -26,7 +26,7 @@ class Common_model extends CI_Model
 			$my_variable = $variables[$i];
 			if($this->input->post($my_variable)){
 				if($my_variable == "sunlight"){
-					$this->$my_variable = join(",", $this->input->post($my_variable));
+					$this->$my_variable = implode(",", $this->input->post($my_variable));
 				}else{
 					$this->$my_variable = $this->input->post($my_variable);
 				}
@@ -116,8 +116,8 @@ class Common_model extends CI_Model
 		
 		if($this->input->post("year")){
 			$year = $this->input->post("year");
-			$this->db->join("color","common.id=color.common_id");
-			$this->db->join("order","color.id=order.color_id");
+			$this->db->join("variety","common.id=variety.common_id");
+			$this->db->join("order","variety.id=order.variety_id");
 			$this->db->select("order.year");
 			$this->db->group_by("common.id");
 		}

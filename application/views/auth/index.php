@@ -5,7 +5,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <title>Friends School Plant Sale Database</title>
 <link href="<?=base_url();?>/css/main.css" type="text/css" rel="stylesheet" media="all" />
-<link href="<?=base_url();?>/css/color.css" type="text/css" rel="stylesheet" media="all" />
+<link href="<?=base_url();?>/css/variety.css" type="text/css" rel="stylesheet" media="all" />
 
 <script type="text/javascript" src="<?=base_url();?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url();?>js/password.js"></script>

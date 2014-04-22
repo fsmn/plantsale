@@ -3,12 +3,12 @@
 ?>
 <div class="block">
 <h3>Order Info for 
-<?=$order->color;?>, <?=get_current_year();?>
+<?=$order->variety;?>, <?=get_current_year();?>
 </h3>
 
 <p>
-<label>Color: </label><?=$order->color;?> 
-<a href="<?=site_url("color/view/$order->color_id");?>" class="button">View</a>
+<label>variety: </label><?=$order->variety;?> 
+<a href="<?=site_url("variety/view/$order->variety_id");?>" class="button">View</a>
 </p>
 </div>
 <input type="hidden" id="order_id" value="<?=$order->id;?>" name="order_id"/>

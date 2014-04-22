@@ -3,7 +3,7 @@
 ?>
 <form name="order-edit" action="<?=site_url("order/$action");?>"
 	method="post">
-	<input type="hidden" name="color_id" value="<?=$color_id;?>" />
+	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
 	<div class="order-year field">
 		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_current_year();?>" />
 	</div>
@@ -38,7 +38,7 @@
 	</div>
 	<div class="order-price field">
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"
-			value="<?=get_as_price(get_value($order,"price"));?>" />
+			value="<?=number_format(get_value($order,"price"));?>" />
 	</div>
 	<div class="order-vendor_code field">
 		<label for="vendor_code">Vendor Code:&nbsp;</label> <input type="text"

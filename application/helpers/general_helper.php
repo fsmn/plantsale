@@ -2,6 +2,7 @@
 function mysql_timestamp() {
 	return date ( 'Y-m-d H:i:s' );
 }
+
 function bake_cookie($name, $value) {
 	set_cookie ( array (
 			"name" => $name,
@@ -9,6 +10,7 @@ function bake_cookie($name, $value) {
 			"expire" => 0 
 	) );
 }
+
 function burn_cookie($name) {
 	set_cookie ( array (
 			"name" => $name,
@@ -16,12 +18,14 @@ function burn_cookie($name) {
 			"expire" => NULL 
 	) );
 }
+
 function create_input($object, $name, $label, $id = NULL) {
 	if (! $id) {
 		$id = $name;
 	}
 	return sprintf ( "<label for='%s'>%s: </label><input type='text' name='%s' id='%s' value='%s'/>", $name, $label, $name, $id, get_value ( $object, $name ) );
 }
+
 function get_current_year() {
 	if (date ( "m" ) > 7) { // after July
 		$year = date ( "Y" ) + 1;

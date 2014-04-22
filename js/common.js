@@ -75,7 +75,7 @@ $(document).ready(function(){
 
 	$('#common-search-body').live('focus', function(event) {
 		$('#common-search-body').val('').css( {
-			color : 'black'
+			variety : 'black'
 		});
 	});
 	
@@ -83,7 +83,7 @@ $(document).ready(function(){
 	$('#common-search-body').live('blur', function(event) {
 		
 		$("#search_list").fadeOut();
-		$('#common-search-body').css({color:'#666'}).val('Find Common Names');
+		$('#common-search-body').css({variety:'#666'}).val('Find Common Names');
 		//$("#search_list").remove();
 		
 		

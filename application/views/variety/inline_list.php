@@ -4,11 +4,11 @@
 ?>
 <div style="overflow: scroll;max-height: 25em">
 
-<table id="color-name-list" class="list compressed">
+<table id="variety-name-list" class="list compressed">
 	<?if($full_list):?>
 		<thead>
 			<tr>
-				<th>Color</th>
+				<th>variety</th>
 	
 				<th>Species</th>
 				
@@ -29,17 +29,17 @@
 	<tbody>
 		<? foreach($names as $name){ ?>
 		<tr>
-			<td><span class="color-color color-edit-row"
-				id="color-color_<?=$name->id;?>"><?=$name->color;?> </span>
+			<td><span class="variety-variety variety-edit-row"
+				id="variety-variety_<?=$name->id;?>"><?=$name->variety;?> </span>
 			</td>
-			<td><span class="color-species color-edit-row"
-				id="color-species_<?=$name->id;?>"><?=$name->species;?> </span>
+			<td><span class="variety-species variety-edit-row"
+				id="variety-species_<?=$name->id;?>"><?=$name->species;?> </span>
 			</td>
-			<td><span class="color-common-name color-edit-row"
-				id="color-common-name_<?=$name->id;?>"><a href="<?=base_url("common/view/$name->common_id");?>"><?=$name->common_name;?></a></span>
+			<td><span class="variety-common-name variety-edit-row"
+				id="variety-common-name_<?=$name->id;?>"><a href="<?=base_url("common/view/$name->common_id");?>"><?=$name->common_name;?></a></span>
 			</td>
-			<td><span class="color-species color-edit-row"
-				id="color-genus_<?=$name->id;?>"><?=$name->genus;?> </span>
+			<td><span class="variety-species variety-edit-row"
+				id="variety-genus_<?=$name->id;?>"><?=$name->genus;?> </span>
 			</td>
 			<?
 			$height = "";
@@ -51,7 +51,7 @@
 				if($name->height_unit){
 					$height .= sprintf(" %s", $name->height_unit);
 				}
-			}//end if color->min_height
+			}//end if variety->min_height
 			$width = "";
 			if($name->min_width){
 				$width = $name->min_width;
@@ -63,15 +63,15 @@
 				}
 			}
 			?>
-			<td><span class="color-height color-edit-row"
-				id="color-height_<?=$name->id;?>"><?=$height;?> </span>
+			<td><span class="variety-height variety-edit-row"
+				id="variety-height_<?=$name->id;?>"><?=$height;?> </span>
 			</td>
-				<td><span class="color-width color-edit-row"
-				id="color-width_<?=$name->id;?>"><?=$width;?> </span>
+				<td><span class="variety-width variety-edit-row"
+				id="variety-width_<?=$name->id;?>"><?=$width;?> </span>
 			</td>
 			<td>
 			<a class="button" id="id_<?=$name->id;?>"
-				href="<?=site_url("color/view/$name->id");?>">Details</a>
+				href="<?=site_url("variety/view/$name->id");?>">Details</a>
 			</td>
 		</tr>
 		<? } ?>

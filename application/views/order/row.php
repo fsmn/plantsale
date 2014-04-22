@@ -3,7 +3,7 @@
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
 ?>
 <form name="order-row" action="<?=site_url("order/$action");?>" method="post">
-<input type="hidden" name="color_id" value="<?=$color_id;?>"/>
+<input type="hidden" name="variety_id" value="<?=$variety_id;?>"/>
 <table>
 	<thead>
 		<tr>
@@ -21,7 +21,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="order-row" id="or_<?=$color_id;?>">
+		<tr class="order-row" id="or_<?=$variety_id;?>">
 			<td class="order-year field"><input type="text" name="year" value=""/>
 			</td>
 			<td class="order-vendor field"><input type="text" name="vendor_id" value=""/>

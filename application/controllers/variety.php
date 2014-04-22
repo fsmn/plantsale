@@ -1,12 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Color extends MY_Controller
+class Variety extends MY_Controller
 {
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model("color_model", "color");
+		$this->load->model("variety_model", "variety");
 		$this->load->model("common_model", "common");
 		$this->load->model("order_model", "order");
 		$this->load->model("flag_model","flag");
@@ -20,26 +20,28 @@ class Color extends MY_Controller
 	function create()
 	{
 		$this->load->model("menu_model","menu");
-		$data["target"] = "color/edit";
-		$data["color"] = "";
+		$data["target"] = "variety/edit";
+		$data["variety"] = "";
 		$data["common_id"] = $this->input->get("common_id");
 		$measure_units = $this->menu->get_pairs("measure_unit");
 		$data["measure_units"] = get_keyed_pairs($measure_units,array("key","value"),TRUE);
+		$plant_colors = $this->menu->get_pairs("plant_color",array("field"=>"value","direction"=>"ASC"));
+		$data["plant_colors"] = get_keyed_pairs($plant_colors, array("key","value"));
 		$data["action"] = "insert";
-		$data["title"] = "Add a new color";
+		$data["title"] = "Add a new variety";
 		$this->load->view($data["target"], $data);
 	}
 
 	function insert()
 	{
-		$id = $this->color->insert();
+		$id = $this->variety->insert();
 		if( $this->input->post("add_order")){
-			$data["color_id"] = $id;
+			$data["variety_id"] = $id;
 			$data["order"] = NULL;
 			$data["action"] = "insert";
 			$this->load->view("order/edit", $data);
 		}else{
-			redirect("color/view/$id");
+			redirect("variety/view/$id");
 		}
 
 
@@ -48,14 +50,14 @@ class Color extends MY_Controller
 	function view()
 	{
 		$id = $this->uri->segment(3);
-		$color = $this->color->get($id);
-		$current_order = $this->order->get_for_color($id, get_current_year());
+		$variety = $this->variety->get($id);
+		$current_order = $this->order->get_for_variety($id, get_current_year());
 		$data["current_order"] = $current_order;
-		$data["orders"] = $this->order->get_for_color($id);
-		$data["flags"] = $this->flag->get_for_color($id);
-		$data["color"] = $color;
-		$data["target"] = "color/view";
-		$data["title"] = sprintf("Viewing Info for %s (Color)", $color->color);
+		$data["orders"] = $this->order->get_for_variety($id);
+		$data["flags"] = $this->flag->get_for_variety($id);
+		$data["variety"] = $variety;
+		$data["target"] = "variety/view";
+		$data["title"] = sprintf("Viewing Info for %s (variety)", $variety->variety);
 		$this->load->view("page/index", $data);
 
 
@@ -64,12 +66,12 @@ class Color extends MY_Controller
 	function search_by_name()
 	{
 		$name = $this->input->get("name");
-		$data["names"] = $this->color->get_by_name($name);
+		$data["names"] = $this->variety->get_by_name($name);
 		$data["full_list"] = FALSE;
 		if($this->input->get("type") == "inline"){
-			$target = "color/inline_list";
+			$target = "variety/inline_list";
 		}else{
-			$target = "color/list";
+			$target = "variety/list";
 		}
 		$this->load->view($target, $data);
 	}
@@ -82,15 +84,15 @@ class Color extends MY_Controller
 	function update()
 	{
 		$id = $this->input->post("id");
-		$this->color->update("id");
-		redirect("color/view/$id");
+		$this->variety->update("id");
+		redirect("variety/view/$id");
 	}
 
 	function delete()
 	{
 		$id = $this->input->post("id");
-		$common_id = $this->color->get_value($id,"common_id");
-		$this->color->delete($id);
+		$common_id = $this->variety->get_value($id,"common_id");
+		$this->variety->delete($id);
 		if($this->input->post("ajax")){
 			echo $common_id;
 		}else{
@@ -104,7 +106,7 @@ class Color extends MY_Controller
 
 		$id = $this->input->post("id");
 		$values =	array($this->input->post("field") => $value = $this->input->post("value"));
-		$this->color->update($id, $values);
+		$this->variety->update($id, $values);
 		echo $this->input->post("value");
 	}
 
@@ -119,12 +121,12 @@ class Color extends MY_Controller
 	function insert_flag()
 	{
 		$id = $this->flag->insert();
-		$this->get_flags($this->input->post("color_id"));
+		$this->get_flags($this->input->post("variety_id"));
 	}
 
 	function get_flags($id)
 	{
-		$data["flags"] = $this->flag->get_for_color($id);
+		$data["flags"] = $this->flag->get_for_variety($id);
 		$this->load->view("flag/list",$data);
 	}
 
@@ -132,7 +134,7 @@ class Color extends MY_Controller
 	{
 		$id = $this->input->post("id");
 		$this->flag->delete($id);
-		$this->get_flags( $this->input->post("color_id"));
+		$this->get_flags( $this->input->post("variety_id"));
 	}
 
 }

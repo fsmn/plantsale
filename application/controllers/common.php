@@ -8,7 +8,7 @@ class Common extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model("common_model","common");
-		$this->load->model("color_model","color");
+		$this->load->model("variety_model","variety");
 		$this->load->model("menu_model","menu");
 
 
@@ -74,7 +74,7 @@ class Common extends MY_Controller
 	{
 		$id = $this->uri->segment(3);
 		$common = $this->common->get($id);
-		$data["colors"] = $this->color->get_by_common($id);
+		$data["varietys"] = $this->variety->get_by_common($id);
 		$data["common"] = $common;
 		$data["title"] = sprintf("Viewing Common Name: %s",$common->name);
 		$data["target"] = "common/view";

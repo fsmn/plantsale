@@ -7,6 +7,7 @@ if($orders):
 <table class="list">
 	<thead>
 		<tr>
+		<th></th>
 			<th>Year</th>
 			<th>Vendor</th>
 			<th>Flat Size</th>
@@ -16,7 +17,7 @@ if($orders):
 			<th>Genus</th>
 			<th>Species</th>
 			<th>Common Name</th>
-			<th>variety</th>
+			<th>Variety</th>
 			<? endif;?>
 			<th>Presale Count</th>
 			<th>Midsale Count</th>
@@ -24,7 +25,7 @@ if($orders):
 			<th>Pot Size</th>
 			<th>Price</th>
 			<th>Vendor Code</th>
-			<th></th>
+			
 		</tr>
 	</thead>
 	<tbody>
@@ -41,6 +42,7 @@ if($orders):
 			}
 			?>
 		<tr class="grouping" id="order_<?=$order->id;?>">
+		<td><span class="button edit edit-order" id="<? printf("edit-order_%s",$order->id);?>">Edit</span></td>
 			<td class="order-year field"><?=$order->year;?>
 			</td>
 			<td class="order-vendor field"><?=$order->vendor_id;?>
@@ -54,8 +56,8 @@ if($orders):
 			<? if($show_names):?>
 			<td><?=$order->genus;?></td>
 			<td><?=$order->species;?></td>
-			<td><?=$order->name;?></td>
-			<td><?=$order->variety;?></td>
+			<td><a href="<?=site_url("common/view/$order->common_id");?>" title="view the details for <?=$order->name;?>"><?=$order->name;?></a></td>
+			<td><a href="<?=site_url("variety/view/$order->variety_id");?>" title="view the details for <?=$order->variety;?>"><?=$order->variety;?></a></td>
 			<? endif;?>
 			
 			<td class="order-count_presale field"><?=$order->count_presale;?>
@@ -70,8 +72,7 @@ if($orders):
 			</td>
 			<td class="order-vendor_code field"><?=$order->vendor_code;?>
 			</td>
-			<td><a href="<?=site_url("order/view/$order->id");?>"
-				class="button edit">Edit</a></td>
+			
 		</tr>
 		<? endforeach;?>
 	</tbody>

@@ -33,10 +33,10 @@ $buttons [] = array (
 // "text" => "Advanced Search",
 // "class" => array (
 // "button",
-// "search-varietys"
+// "search-varieties"
 // ),
 // "type" => "span",
-// "title" => "Search among the varietys"
+// "title" => "Search among the varieties"
 // );
 
 $buttons [] = array (
@@ -44,7 +44,7 @@ $buttons [] = array (
 		"text" => "Ordering",
 		"class" => array (
 				"button",
-				"show-ordering" 
+				"search-orders" 
 		),
 		"href" => "#",
 		"title" => "View the Ordering Control Panel" 

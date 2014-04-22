@@ -13,7 +13,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<? foreach($varietys as $variety): ?>
+		<? foreach($varieties as $variety): ?>
 		<tr id="variety-row_<?=$variety->id;?>" class="variety-row">
 			<td><?=$variety->species;?></td>
 			<td class="variety-variety edit"><?=$variety->variety;?></td>

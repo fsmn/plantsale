@@ -74,7 +74,7 @@ class Common extends MY_Controller
 	{
 		$id = $this->uri->segment(3);
 		$common = $this->common->get($id);
-		$data["varietys"] = $this->variety->get_by_common($id);
+		$data["varieties"] = $this->variety->get_by_common($id);
 		$data["common"] = $common;
 		$data["title"] = sprintf("Viewing Common Name: %s",$common->name);
 		$data["target"] = "common/view";

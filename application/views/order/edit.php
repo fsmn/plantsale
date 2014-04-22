@@ -3,6 +3,7 @@
 ?>
 <form name="order-edit" action="<?=site_url("order/$action");?>"
 	method="post">
+	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
 	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
 	<div class="order-year field">
 		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_current_year();?>" />
@@ -33,8 +34,10 @@
 			name="count_midsale" value="<?=get_value($order,"count_midsale");?>" />
 	</div>
 	<div class="order-pot_size field">
-		<label for="pot_size">Pot Size:&nbsp;</label> <input type="text"
-			name="pot_size" value="<?=get_value($order,"pot_size");?>" />
+		<label for="pot_size">Pot Size:&nbsp;</label> 
+		<?=form_dropdown("pot_size",$pot_sizes, get_value($order, "pot_size"));?>
+		<!-- <input type="text"
+			name="pot_size" value="<?=get_value($order,"pot_size");?>" /> -->
 	</div>
 	<div class="order-price field">
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"

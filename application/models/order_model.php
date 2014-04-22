@@ -128,9 +128,9 @@ class Order_Model extends CI_Model {
 			}
 			$this->db->where ( "order.year", $sale_year );
 			$this->db->order_by ( "catalog_number" );
-			$this->db->select ( "order.id,vendor_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.vendor_code" );
+			$this->db->select ( "order.id,vendor_id,order.variety_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.vendor_code" );
 			$this->db->select ( "variety.variety, variety.species" );
-			$this->db->select ( "common.name, common.genus, common.category" );
+			$this->db->select ( "common.name, common.genus, common.category, common.id as common_id" );
 			$result = $this->db->get ()->result ();
 			return $result;
 	}
@@ -165,6 +165,15 @@ class Order_Model extends CI_Model {
 		$output = $this->db->get ()->row ();
 		return $output->$field;
 	
+	}
+	
+	function get_pot_sizes(){
+		$this->db->from("order");
+		$this->db->select("pot_size");
+		$this->db->group_by("pot_size");
+		$this->db->order_by("pot_size");
+		$result = $this->db->get()->result();
+		return $result;
 	}
 
 	function get_plant_total($year) {

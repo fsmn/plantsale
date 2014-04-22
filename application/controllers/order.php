@@ -83,9 +83,31 @@ class Order extends MY_Controller {
 
 		$data ["variety_id"] = $this->input->get ( "variety_id" );
 		$data ["order"] = $this->order->get_previous_year ( $data ["variety_id"], get_current_year () );
+		$pot_sizes = $this->order->get_pot_sizes ();
+		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
+				"pot_size",
+				"pot_size" 
+		) );
 		$data ["action"] = "insert";
 		$data ["target"] = "order/edit";
 		$data ['title'] = "Insert New Order";
+		$this->load->view ( $data ["target"], $data );
+	
+	}
+
+	function edit() {
+
+		$id = $this->input->get ( "id" );
+		$data ["order"] = $this->order->get ( $id );
+		$data ["variety_id"] = $data ["order"]->variety_id;
+		$pot_sizes = $this->order->get_pot_sizes ();
+		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
+				"pot_size",
+				"pot_size" 
+		) );
+		$data ["action"] = "update";
+		$data ["target"] = "order/edit";
+		$data ['title'] = "Update Order";
 		$this->load->view ( $data ["target"], $data );
 	
 	}
@@ -94,6 +116,15 @@ class Order extends MY_Controller {
 
 		$order_id = $this->order->insert ();
 		$variety_id = $this->input->post ( "variety_id" );
+		redirect ( "variety/view/$variety_id" );
+	
+	}
+
+	function update() {
+
+		$id = $this->input->post ( "id" );
+		$variety_id = $this->input->post ( "variety_id" );
+		$this->order->update ( $id );
 		redirect ( "variety/view/$variety_id" );
 	
 	}

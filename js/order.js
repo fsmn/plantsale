@@ -39,5 +39,31 @@ $(document).ready(function(){
 		});
 	});
 	
+	$(".edit-order").live("click",function(){
+		my_id = this.id.split("_")[1];
+		form_data = {
+				id: my_id,
+				ajax: 1
+		};
+		$.ajax({
+			type:"get",
+			data: form_data,
+			url: base_url + "order/edit",
+			success: function(data){
+				show_popup("Editing an Order",data,"auto");
+			}
+		});
+	});
+	
+	
+	$(".show-order-totals").live("click",function(){
+		$.ajax({
+			type: "get",
+			url: base_url + "index/get_order_totals",
+			success: function(data){
+				$("#order-totals").html(data);
+			}
+		});
+	});
 	
 });

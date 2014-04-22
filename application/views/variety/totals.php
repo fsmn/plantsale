@@ -1,9 +1,21 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
+$sale_year = get_cookie("sale_year");
 // totals.php Chris Dart Apr 21, 2014 2:06:25 PM chrisdart@cerebratorium.com
 ?>
 <table class="chart">
-
+<thead>
+<tr>
+<td>
+</td>
+<td>
+<?=$sale_year;?>
+</td>
+<td>
+<?=$sale_year -1;?>
+</td>
+</tr>
+</thead>
+<tbody>
 <? foreach($categories["current"] as $category) : ?>
 	<tr>
 	<td>
@@ -23,5 +35,5 @@
 	</td>
 	</tr>
 <?endforeach; ?>
-
+</tbody>
 </table>

@@ -112,7 +112,7 @@ class Variety_Model extends CI_Model
 		return $output->$field;
 	}
 	
-	function get_new_varietys($year)
+	function get_new_varieties($year)
 	{
 		$query = sprintf("SELECT variety.id FROM `variety` join `order` on `variety`.`id` = `order`.`variety_id`
   WHERE `variety`.`id` NOT IN (SELECT `variety_id` from `order` WHERE `year` < %s ) and `order`.`year` = %s", $year,$year);
@@ -120,7 +120,7 @@ class Variety_Model extends CI_Model
 		return $result;
 	}
 	
-	function get_varietys_for_year($year){
+	function get_varieties_for_year($year){
 		$this->db->from("variety");
 		$this->db->join("order","variety.id=order.variety_id");
 		$this->db->where("order.year", $year);

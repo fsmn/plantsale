@@ -8,26 +8,6 @@ class Index extends MY_Controller {
 	function index() {
 		$data ["title"] = "Plant Sale Database";
 		$data ["target"] = "welcome";
-		$this->load->model ( "order_model", "order" );
-
-		if (! get_cookie ( "sale_year" )) {
-			bake_cookie ( "sale_year", $this->order->get_current_year () );
-		}
-		$sale_year = get_cookie("sale_year");
-		$this->load->model("variety_model","variety");
-		$totals = new stdClass();
-		$data["sale_year"] = $sale_year;
-		$totals->total["current"] = $this->order->get_plant_total($sale_year);
-		$totals->total["previous"] = $this->order->get_plant_total($sale_year-1);
-		$totals->price_range["current"] = $this->order->get_price_range($sale_year);
-		$totals->price_range["previous"] = $this->order->get_price_range($sale_year-1);
-		$totals->new_varietys["current"] = $this->variety->get_new_varietys($sale_year);
-		$totals->new_varietys["previous"] = $this->variety->get_new_varietys($sale_year -1);
-		$totals->varietys["current"] =  $this->variety->get_varietys_for_year($sale_year);
-		$totals->varietys["previous"] = $this->variety->get_varietys_for_year($sale_year -1);
-
-		$data["totals"] = $totals;
-
 		$this->load->view ( "page/index", $data );
 	}
 
@@ -35,13 +15,35 @@ class Index extends MY_Controller {
 		$data["uri"] = $this->input->get("uri");
 		$this->load->view("utility/sale_year", $data);
 	}
-
+	
 
 	function set_year(){
 
 		$year = $this->input->get("sale_year");
 		bake_cookie("sale_year", $year);
 		redirect($this->input->get("uri"));
+	}
+	
+	function get_order_totals()
+	{
+		$sale_year = get_cookie("sale_year");
+		$totals = new stdClass();
+		$this->load->model("order_model","order");
+		$this->load->model("variety_model", "variety");
+		$data["sale_year"] = get_cookie("sale_year");
+		$totals->total["current"] = $this->order->get_plant_total($sale_year);
+		$totals->total["previous"] = $this->order->get_plant_total($sale_year-1);
+		$totals->price_range["current"] = $this->order->get_price_range($sale_year);
+		$totals->price_range["previous"] = $this->order->get_price_range($sale_year-1);
+		$totals->new_varieties["current"] = $this->variety->get_new_varieties($sale_year);
+		$totals->new_varieties["previous"] = $this->variety->get_new_varieties($sale_year -1);
+		$totals->varieties["current"] =  $this->variety->get_varieties_for_year($sale_year);
+		$totals->varieties["previous"] = $this->variety->get_varieties_for_year($sale_year -1);
+		
+		$data["totals"] = $totals;
+		
+		$this->load->view("order/totals",$data);
+		
 	}
 
 	function get_categories(){

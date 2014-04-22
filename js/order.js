@@ -80,4 +80,27 @@ $(document).ready(function(){
 		
 	});
 	
+	$(".delete-order").live("click",function(){
+		question = confirm("Are you sure you want to delete this order? This cannot be undone!");
+		if(question){
+			again = confirm("Are you really sure you want to delete this? Click cancel if you aren't sure.");
+			if(again){
+				my_id = this.id.split("_")[1];
+			
+				form_data = {
+						id: my_id,
+						ajax: 1
+				};
+				$.ajax({
+					type:"post",
+					url: base_url + "order/delete",
+					data: form_data,
+					success: function(data){
+						document.location = base_url + "variety/view/" + data;
+					}
+				});
+			}
+		}
+	});
+	
 });

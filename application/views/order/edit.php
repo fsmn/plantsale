@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
 ?>
-<form name="order-edit" action="<?=site_url("order/$action");?>"
+<form name="order-edit" id="order-edit" action="<?=site_url("order/$action");?>"
 	method="post">
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
 	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
@@ -49,5 +49,8 @@
 	</div>
 	<div>
 		<input type="submit" value="<?=ucfirst($action);?>" class="button" />
+		<? if($action == "update"): ?>
+		<span class="button delete delete-order" id="<? printf("delete-order_%s",$order->id);?>">Delete</span>
+		<? endif;?>
 	</div>
 </form>

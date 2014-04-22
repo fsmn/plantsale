@@ -89,6 +89,13 @@ class Order_Model extends CI_Model {
 		}
 	
 	}
+	
+	function delete($id){
+		$order = $this->get($id);
+		$variety_id = $order->variety_id;
+		$this->db->delete("order",array("id"=>$id));
+		return $variety_id;
+	}
 
 	function get($id) {
 

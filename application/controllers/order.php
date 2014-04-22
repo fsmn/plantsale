@@ -163,5 +163,11 @@ class Order extends MY_Controller {
 		redirect ( "variety/view/$variety_id" );
 	
 	}
+	
+	function delete(){
+		if($id = $this->input->post("id")){
+			echo $this->order->delete($id);
+		}
+	}
 
 }

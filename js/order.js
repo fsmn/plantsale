@@ -57,6 +57,9 @@ $(document).ready(function(){
 	
 	
 	$(".show-order-totals").live("click",function(){
+		$("#order-totals").ajaxStart(function(){
+			$("#order-totals").html("Loading...").fadeIn();
+		});
 		$.ajax({
 			type: "get",
 			url: base_url + "index/get_order_totals",

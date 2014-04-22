@@ -69,7 +69,7 @@ $(document).ready(function(){
 	});
 	
 	$(".add-order-sort").live("click",function(){
-		console.log("hello");
+		$(this).fadeOut();
 		$.ajax({
 			type:"get",
 			url: base_url + "order/show_sort",

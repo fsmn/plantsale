@@ -46,7 +46,7 @@ class Order extends MY_Controller {
 	}
 
 	function totals() {
-		
+		$options = array();
 		
 		if (! $sale_year = $this->input->get ( "sale_year" )) {
 			$sale_year = get_cookie ( "sale_year" );
@@ -78,10 +78,13 @@ class Order extends MY_Controller {
 			burn_cookie("flat_size");
 		}
 		
-		if($sorting = $this->input->get("sorting")){
-			$data["sorting"] = $sorting;
-			bake_cookie("sorting",implode(",", $sorting));
+		if($sorting["fields"] = $this->input->get("sorting")){
+			$sorting["direction"] = $this->input->get("direction");
+			bake_cookie("sorting",implode(",", $sorting["fields"]));
+			bake_cookie("direction",implode(",", $sorting["direction"] ));
 		}
+		
+		
 		
 		$orders = $this->order->get_totals ( $sale_year, $options , $sorting);
 		$data ["options"] = $options;

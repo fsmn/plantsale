@@ -1,45 +1,42 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
-#an envelope for the plant list. 
+// n envelope for the plant list.
 
 ?>
 
 <fieldset class="search_fieldset">
 	<legend>Search Parameters</legend>
-	<?
-	if(isset($options)){
-
-		$keys = array_keys($options);
-		$values = array_values($options);
-
-		echo "<ul>";
-
-		for($i = 0; $i < count($options); $i++){
-			$key = $keys[$i];
-			$value = $values[$i];
-			echo sprintf("<li>%s:&nbsp;<strong>%s</strong></li>",ucfirst($key),$value);
-				
-		}
-		echo "</ul>";
-
-	}else{
-		echo "<p>Showing All Orders for $sale_year</p>";
-	}
-	
-	if(isset($sorting)): ?>
-<p><strong>Sort Order</strong></p>
-<?php $sorting = $this->input->get("sorting"); ?>
+	<? if (isset ( $options )) : ?>
+		
+		<? $keys = array_keys ( $options ); ?>
+		<? $values = array_values ( $options ); ?>
+		
+		<ul>
+		
+		<? for($i = 0; $i < count ( $options ); $i ++):?>
+       	<li>
+       	<?=ucfirst($keys [$i]); ?>:&nbsp;<strong><?=$values [$i]; ?></strong>
+		</li>
+		<? endfor;?>
+		</ul>
+	<?  else : ?>
+		<p>Showing All Orders for $sale_year</p>
+	<? endif; ?>
+<p>
+		<strong>Sort Order</strong>
+	</p>
+<? $sorting = $this->input->get("sorting"); ?>
+<? $direction = $this->input->get("direction");?>
 <ul>
-<?php foreach($sorting as $sort):?>
-<li><?php echo $sort; ?></li>
-<?php endforeach; ?>
+<? for($i = 0; $i < count($sorting); $i++):?>
+<li><? printf("%s, %s", $sorting[$i], $direction[$i]); ?></li>
+<? endfor; ?>
 </ul>
-<?php endif; ?>
-	
 
 	<div class="button-box">
 		<span class="button search-orders">Refine Search</span>
 	</div>
 </fieldset>
 
-<?php $this->load->view("order/list"); ?>
+<? $this->load->view("order/list");

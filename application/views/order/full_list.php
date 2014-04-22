@@ -4,7 +4,7 @@
 
 ?>
 
-<fieldset class="search-fieldset">
+<fieldset class="search_fieldset">
 	<legend>Search Parameters</legend>
 	<?
 	if(isset($options)){
@@ -25,10 +25,20 @@
 	}else{
 		echo "<p>Showing All Orders for $sale_year</p>";
 	}
-	?>
+	
+	if(isset($sorting)): ?>
+<p><strong>Sort Order</strong></p>
+<?php $sorting = $this->input->get("sorting"); ?>
+<ul>
+<?php foreach($sorting as $sort):?>
+<li><?php echo $sort; ?></li>
+<?php endforeach; ?>
+</ul>
+<?php endif; ?>
+	
 
 	<div class="button-box">
-		<a class="button search-orders">Refine Search</a>
+		<span class="button search-orders">Refine Search</span>
 	</div>
 </fieldset>
 

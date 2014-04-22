@@ -56,6 +56,8 @@ class Common extends MY_Controller
 		$this->load->view("page/index",$data);
 
 	}
+	
+
 
 	function search_by_name()
 	{

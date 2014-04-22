@@ -68,4 +68,16 @@ $(document).ready(function(){
 		});
 	});
 	
+	$(".add-order-sort").live("click",function(){
+		console.log("hello");
+		$.ajax({
+			type:"get",
+			url: base_url + "order/show_sort",
+			success: function(data){
+				$("#sort-block").append(data);
+			}
+		});
+		
+	});
+	
 });

@@ -10,6 +10,7 @@ if($orders):
 		<th></th>
 			<th>Year</th>
 			<th>Vendor</th>
+			<th>Catalog Number</th>
 			<th>Flat Size</th>
 			<th>Flat Cost</th>
 			<th>Plant Cost</th>
@@ -45,7 +46,10 @@ if($orders):
 		<td><span class="button edit edit-order" id="<? printf("edit-order_%s",$order->id);?>">Edit</span></td>
 			<td class="order-year field"><?=$order->year;?>
 			</td>
-			<td class="order-vendor field"><?=$order->vendor_id;?>
+			<td class="order-vendor_id field"><?=$order->vendor_id;?>
+			</td>
+			<td class="order-catalog_number field">
+			<?=$order->catalog_number;?>
 			</td>
 			<td class="order-flat_size field"><?=$order->flat_size;?>
 			</td>

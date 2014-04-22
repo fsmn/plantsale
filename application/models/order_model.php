@@ -117,7 +117,7 @@ class Order_Model extends CI_Model {
 	
 	}
 
-	function get_totals($sale_year, $options = array(), $order_by = "catalog_number") {
+	function get_totals($sale_year, $options = array(), $order_by = array("catalog_number")) {
 			$this->db->from ( "order" );
 			$this->db->join ( "variety", "order.variety_id = variety.id" );
 			$this->db->join ( "common", "variety.common_id = common.id" );
@@ -127,7 +127,12 @@ class Order_Model extends CI_Model {
 				$this->db->where($option_keys[$i], $option_values[$i]);
 			}
 			$this->db->where ( "order.year", $sale_year );
-			$this->db->order_by ( "catalog_number" );
+			if(!is_array($order_by)){
+				$order_by = array($order_by);
+			}
+			foreach($order_by as $ordering){
+				$this->db->order_by ( $ordering );
+			}
 			$this->db->select ( "order.id,vendor_id,order.variety_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.vendor_code" );
 			$this->db->select ( "variety.variety, variety.species" );
 			$this->db->select ( "common.name, common.genus, common.category, common.id as common_id" );

@@ -38,23 +38,44 @@ class Order extends MY_Controller {
 				"key",
 				"value" 
 		), TRUE );
+		
+		$pot_sizes = $this->order->get_pot_sizes();
+		$data["pot_sizes"] = get_keyed_pairs($pot_sizes, array("pot_size","pot_size"));
 		$this->load->view ( "order/search", $data );
 	
 	}
 
 	function totals() {
-
+		if (! $sale_year = $this->input->get ( "sale_year" )) {
+			$sale_year = get_cookie ( "sale_year" );
+		}
+		
 		if ($category = $this->input->get ( "category" )) {
 			bake_cookie ( "category", $category );
 			$options ["category"] = $category;
+		}else{
+			burn_cookie("category");
 		}
 		if ($vendor_id = $this->input->get ( "vendor_id" )) {
 			bake_cookie ( "vendor_id", $vendor_id );
 			$options ["vendor_id"] = $vendor_id;
+		}else{
+			burn_cookie("vendor_id");
 		}
-		if (! $sale_year = $this->input->get ( "sale_year" )) {
-			$sale_year = get_cookie ( "sale_year" );
+		if ($pot_size = urldecode($this->input->get("pot_size"))) {
+			bake_cookie("pot_size",$pot_size);
+			$options["pot_size"] = $pot_size;
+		}else{
+			burn_cookie("pot_size");
 		}
+		
+		if($flat_size = $this->input->get("flat_size")){
+			bake_cookie("flat_size",$flat_size);
+			$options["flat_size"] = $flat_size;
+		}else{
+			burn_cookie("flat_size");
+		}
+		
 		$orders = $this->order->get_totals ( $sale_year, $options );
 		$data ["options"] = $options;
 		$data ["orders"] = $orders;

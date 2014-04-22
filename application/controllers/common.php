@@ -47,8 +47,8 @@ class Common extends MY_Controller
 		$params = array();
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
-			if($this->input->post($my_variable)){
-				$params[$my_variable] = $this->input->post($my_variable);
+			if($my_value = $this->input->get($my_variable)){
+				$params[$my_variable] = $my_value;
 			}
 		}
 		$data["params"] = $params;

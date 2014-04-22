@@ -50,13 +50,14 @@ function get_keyed_pairs($list, $pairs, $initialBlank = NULL, $other = NULL, $al
 	foreach ( $list as $item ) {
 		$key_name = $pairs [0];
 		$key_value = $pairs [1];
-		$output [$item->$key_name] = $item->$key_value;
+		$output [urlencode($item->$key_name)] = $item->$key_value;
 	}
 	if ($other) {
 		$output ["other"] = "Other...";
 	}
 	return $output;
 }
+
 function get_value($object, $item, $default = null) {
 	$output = $default;
 	
@@ -73,6 +74,7 @@ function get_value($object, $item, $default = null) {
 	}
 	return $output;
 }
+
 function get_as_price($int) {
 	$output = sprintf ( "$%s", number_format ( $int, 2 ) );
 	return $output;

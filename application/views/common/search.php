@@ -4,7 +4,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 ?>
 
 <form name="edit-common" id="edit-common"
-	action="<?=site_url("common/find"); ?>" method="POST">
+	action="<?=site_url("common/find"); ?>" method="GET">
 	<p>
 		<?=create_input($common,"name","Name");?>
 	</p>

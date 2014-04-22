@@ -54,7 +54,7 @@ if($orders):
 			<td class="order-plant_cost field"><?=get_as_price($plant_cost);?>
 			</td>
 			<? if($show_names):?>
-			<td><?=$order->genus;?></td>
+			<td><a href="<?=site_url(sprintf("common/find?genus=%s",$order->genus));?>"><?=$order->genus;?></a></td>
 			<td><?=$order->species;?></td>
 			<td><a href="<?=site_url("common/view/$order->common_id");?>" title="view the details for <?=$order->name;?>"><?=$order->name;?></a></td>
 			<td><a href="<?=site_url("variety/view/$order->variety_id");?>" title="view the details for <?=$order->variety;?>"><?=$order->variety;?></a></td>

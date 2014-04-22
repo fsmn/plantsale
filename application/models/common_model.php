@@ -18,17 +18,22 @@ class Common_model extends CI_Model
 		parent::__construct();
 	}
 
-	function prepare_variables()
+	function prepare_variables($method = "post")
 	{
 		$variables = array("name","genus","description","comment","category","subcategory","sunlight");
 
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
-			if($this->input->post($my_variable)){
+			if($method == "post"){
+				$my_value = $this->input->post($my_variable);
+			}elseif($method=="get"){
+				$my_value = $this->input->get($my_variable);
+			}
+			if($my_value){
 				if($my_variable == "sunlight"){
-					$this->$my_variable = implode(",", $this->input->post($my_variable));
+					$this->$my_variable = implode(",", $my_value);
 				}else{
-					$this->$my_variable = $this->input->post($my_variable);
+					$this->$my_variable = $my_value;
 				}
 			}
 		}
@@ -88,7 +93,7 @@ class Common_model extends CI_Model
 
 	function find()
 	{
-		$this->prepare_variables();
+		$this->prepare_variables("get");
 		$this->db->from("common");
 		if($this->name && !$this->genus){
 			$this->db->where("`name` LIKE '%$this->name%' OR `genus` LIKE '%$this->name%'");

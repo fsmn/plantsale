@@ -8,7 +8,7 @@
 <h2>
 	<?="$variety->common_name: $variety->variety";?>
 </h2>
-				<div class="button delete variety-delete">Delete variety</div>
+				<div class="button delete variety-delete">Delete Variety</div>
 
 <div class="grouping block variety-info" id="variety">
 	<div class='column column-odd'>

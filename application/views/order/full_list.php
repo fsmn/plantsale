@@ -17,7 +17,7 @@
 		for($i = 0; $i < count($options); $i++){
 			$key = $keys[$i];
 			$value = $values[$i];
-			echo sprintf("<li>%s <strong>%s</strong></li>",ucfirst($key),$value);
+			echo sprintf("<li>%s:&nbsp;<strong>%s</strong></li>",ucfirst($key),$value);
 				
 		}
 		echo "</ul>";

@@ -21,7 +21,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	<p>
 		<?=$sunlight;?>
 		<br />
-		<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or"),"and","id='sunlight-boolean'");?>
+		<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),"and","id='sunlight-boolean'");?>
 	</p>
 	<p>
 		<label for="description">Description:</label><br />

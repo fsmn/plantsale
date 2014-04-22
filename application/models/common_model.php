@@ -108,11 +108,13 @@ class Common_model extends CI_Model
 			$this->db->where("category",$this->category);
 		}
 		if($this->sunlight){
-			if($this->input->post("sunlight-boolean") == "or"){
+			if($this->input->get("sunlight-boolean") == "or"){
 				$my_list = explode(",", $this->sunlight);
 				foreach($my_list as $my_item){
 					$this->db->or_like("sunlight","$my_item");
 				}
+			}elseif($this->input->get("sunlight-boolean") == "only"){
+				$this->db->where("sunlight",$this->sunlight);
 			}else{
 				$this->db->like("sunlight",$this->sunlight);
 			}
@@ -126,6 +128,7 @@ class Common_model extends CI_Model
 			$this->db->select("order.year");
 			$this->db->group_by("common.id");
 		}
+		
 		$result = $this->db->get()->result();
 		return $result;
 	}

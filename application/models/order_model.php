@@ -89,12 +89,16 @@ class Order_Model extends CI_Model {
 		}
 	
 	}
-	
-	function delete($id){
-		$order = $this->get($id);
+
+	function delete($id) {
+
+		$order = $this->get ( $id );
 		$variety_id = $order->variety_id;
-		$this->db->delete("order",array("id"=>$id));
+		$this->db->delete ( "order", array (
+				"id" => $id 
+		) );
 		return $variety_id;
+	
 	}
 
 	function get($id) {
@@ -109,6 +113,7 @@ class Order_Model extends CI_Model {
 	}
 
 	function get_for_variety($variety_id, $year = NULL) {
+
 		$this->db->where ( "variety_id", $variety_id );
 		if ($year) {
 			$this->db->where ( "year", $year );
@@ -125,28 +130,39 @@ class Order_Model extends CI_Model {
 	}
 
 	function get_totals($sale_year, $options = array(), $order_by = array("fields"=>array("catalog_number"),"direction"=>array("ASC"))) {
-			$this->db->from ( "order" );
-			$this->db->join ( "variety", "order.variety_id = variety.id" );
-			$this->db->join ( "common", "variety.common_id = common.id" );
-			$option_keys = array_keys($options);
-			$option_values = array_values($options);
-			for($i = 0; $i < count($options); $i++){
-				$this->db->where($option_keys[$i], $option_values[$i]);
+
+		$this->db->from ( "order" );
+		$this->db->join ( "variety", "order.variety_id = variety.id" );
+		$this->db->join ( "common", "variety.common_id = common.id" );
+		$option_keys = array_keys ( $options );
+		$option_values = array_values ( $options );
+		for($i = 0; $i < count ( $options ); $i ++) {
+			$this->db->where ( $option_keys [$i], $option_values [$i] );
+		}
+		$this->db->where ( "order.year", $sale_year );
+		if (! is_array ( $order_by )) {
+			$order_by = array (
+					$order_by 
+			);
+		}
+		for($i = 0; $i < count ( $order_by ["fields"] ); $i ++) {
+			$order_field = "catalog_number";
+			if (array_key_exists ( "fields", $order_by ) && ! empty ( $order_by ["fields"] )) {
+				$order_field = $order_by ["fields"] [$i];
 			}
-			$this->db->where ( "order.year", $sale_year );
-			if(!is_array($order_by)){
-				$order_by = array($order_by);
+			
+			$order_direction = "ASC";
+			if (array_key_exists ( "direction", $order_by )) {
+				$order_direction = $order_by ["direction"] [$i];
 			}
-			if(count($order_by["fields"]) > 0){
-			for($i=0; $i<count($order_by["fields"]);$i++){
-				$this->db->order_by ( $order_by["fields"][$i], $order_by["direction"][$i] );
-			}
-			}
-			$this->db->select ( "order.id,vendor_id,order.variety_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.vendor_code" );
-			$this->db->select ( "variety.variety, variety.species" );
-			$this->db->select ( "common.name, common.genus, common.category, common.id as common_id" );
-			$result = $this->db->get ()->result ();
-			return $result;
+			$this->db->order_by ( $order_by ["fields"] [$i], $order_by ["direction"] [$i] );
+		}
+		$this->db->select ( "order.id,vendor_id,order.variety_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.vendor_code" );
+		$this->db->select ( "variety.variety, variety.species" );
+		$this->db->select ( "common.name, common.genus, common.category, common.id as common_id" );
+		$result = $this->db->get ()->result ();
+		return $result;
+	
 	}
 
 	function get_current_year() {
@@ -161,6 +177,7 @@ class Order_Model extends CI_Model {
 	}
 
 	function get_previous_year($variety_id, $current_year) {
+
 		$this->db->from ( "order" );
 		$this->db->where ( "variety_id", $variety_id );
 		$this->db->where ( "year <", $current_year );
@@ -169,6 +186,7 @@ class Order_Model extends CI_Model {
 		$this->db->limit ( 1 );
 		$result = $this->db->get ()->row ();
 		return $result;
+	
 	}
 
 	function get_value($id, $field) {
@@ -180,14 +198,16 @@ class Order_Model extends CI_Model {
 		return $output->$field;
 	
 	}
-	
-	function get_pot_sizes(){
-		$this->db->from("order");
-		$this->db->select("pot_size");
-		$this->db->group_by("pot_size");
-		$this->db->order_by("pot_size");
-		$result = $this->db->get()->result();
+
+	function get_pot_sizes() {
+
+		$this->db->from ( "order" );
+		$this->db->select ( "pot_size" );
+		$this->db->group_by ( "pot_size" );
+		$this->db->order_by ( "pot_size" );
+		$result = $this->db->get ()->result ();
 		return $result;
+	
 	}
 
 	function get_plant_total($year) {

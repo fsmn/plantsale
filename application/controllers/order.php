@@ -83,7 +83,8 @@ class Order extends MY_Controller {
 			bake_cookie("sorting",implode(",", $sorting["fields"]));
 			bake_cookie("direction",implode(",", $sorting["direction"] ));
 		}
-		
+		print_r($sorting);
+		die();
 		
 		
 		$orders = $this->order->get_totals ( $sale_year, $options , $sorting);

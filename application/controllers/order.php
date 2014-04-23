@@ -77,8 +77,11 @@ class Order extends MY_Controller {
 		}else{
 			burn_cookie("flat_size");
 		}
+		$sorting["fields"][] = "catalog_number";
+		$sorting["direction"][] = "ASC";
 		
-		if($sorting["fields"] = $this->input->get("sorting")){
+		if( $this->input->get("sorting")){
+			$sorting["fields"] = $this->input->get("sorting");
 			$sorting["direction"] = $this->input->get("direction");
 			bake_cookie("sorting",implode(",", $sorting["fields"]));
 			bake_cookie("direction",implode(",", $sorting["direction"] ));

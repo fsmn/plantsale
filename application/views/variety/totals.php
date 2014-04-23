@@ -19,7 +19,7 @@ $sale_year = get_cookie("sale_year");
 <? foreach($categories["current"] as $category) : ?>
 	<tr>
 	<td>
-	<a href="<?=site_url("order/totals?category=$category->category");?>"><?=$category->category;?></a>
+	<a href="<?=site_url("order/totals?category=$category->category&sorting%5B%5D=catalog_number&direction%5B%5D=ASC");?>"><?=$category->category;?></a>
 	</td>
 	<td>
 	<?=$category->count;?>

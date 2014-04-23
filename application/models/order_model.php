@@ -147,15 +147,15 @@ class Order_Model extends CI_Model {
 		}
 		for($i = 0; $i < count ( $order_by ["fields"] ); $i ++) {
 			$order_field = "catalog_number";
-			if (array_key_exists ( "fields", $order_by ) && ! empty ( $order_by ["fields"] )) {
+			if (array_key_exists ( "fields", $order_by ) && ! empty ( $order_by ["fields"][$i] )) {
 				$order_field = $order_by ["fields"] [$i];
 			}
 			
 			$order_direction = "ASC";
-			if (array_key_exists ( "direction", $order_by )) {
+			if (array_key_exists ( "direction", $order_by ) && !empty($order_by["direction"][$i])) {
 				$order_direction = $order_by ["direction"] [$i];
 			}
-			$this->db->order_by ( $order_by ["fields"] [$i], $order_by ["direction"] [$i] );
+			$this->db->order_by ( $order_field, $order_direction );
 		}
 		$this->db->select ( "order.id,vendor_id,order.variety_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.vendor_code" );
 		$this->db->select ( "variety.variety, variety.species" );

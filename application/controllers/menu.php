@@ -22,17 +22,16 @@ class Menu extends MY_Controller
 	}
 	
 	/**
-	 * AJAX function to create a quick-edit multiselect <select multiple="multiple"> fields (for use with the field editing AJAX functions in general.js
+	 * AJAX function to create a quick-edit multiselect <select multiple="multiple"> fields 
+	 * (for use with the field editing AJAX functions in general.js
 	 */
 	function get_multiselect()
 	{
 		$category = $this->input->get("category");
 		$value = explode(",",$this->input->get("value"));
 		$field = $this->input->get("field");
-	
 		$categories = $this->menu->get_pairs($category, array("field"=>"value","direction"=>"ASC"));
 		$pairs = get_keyed_pairs($categories, array("key","value"));
-	
 		$output = array();
 		$output[] = form_multiselect($field, $pairs, $value, "id='$field'" );
 		$buttons =  implode(" ", $output);

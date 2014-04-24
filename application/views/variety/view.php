@@ -19,6 +19,9 @@
 		<div class='field-set'>
 			<?=create_edit_field("species", $variety->species, "Species",array("envelope"=>"div"));?>
 		</div>
+		<div class='field-set'>
+			<label for="genus">Genus:&nbsp;</label><span class='field'><?=$variety->genus;?></span>
+		</div>
 		<? if($variety->species && $variety->genus): ?>
 		<div class='field-set'>
 			<div class="latin-name">

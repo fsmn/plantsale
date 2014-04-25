@@ -35,10 +35,10 @@ Total Plants
 New varieties
 </td>
 <td>
-<a href="#" title="would show a list of all new varieties"><?=count($totals->new_varieties["current"]);?></a>
+<a href="#" title="would show a list of all new varieties"><?=$totals->new_varieties["current"];?></a>
 </td>
 <td>
-<?=number_format(count($totals->new_varieties["previous"]));?>
+<?=number_format($totals->new_varieties["previous"]);?>
 </td>
 </tr>
 <tr>

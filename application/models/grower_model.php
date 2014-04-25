@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Vendor_model extends CI_Model
+class grower_model extends CI_Model
 {
 	var $id;
 	var $name;
@@ -65,7 +65,7 @@ class Vendor_model extends CI_Model
 	function insert()
 	{
 		$this->prepare_variables();
-		$this->db->insert("vendor",$this);
+		$this->db->insert("grower",$this);
 		return $this->db->insert_id();
 	}
 	
@@ -73,12 +73,12 @@ class Vendor_model extends CI_Model
 	{
 		$this->prepare_variables();
 		$this->db->where("id",$id);
-		$this->db->update("vendor",$this);
+		$this->db->update("grower",$this);
 	}
 	
 	function get($id,$values=NULL)
 	{
-		$this->db->from("vendor");
+		$this->db->from("grower");
 		$this->db->where("id",$id);
 		$result = $this->db->get()->row();
 		return $result;
@@ -87,12 +87,12 @@ class Vendor_model extends CI_Model
 	function delete($id)
 	{
 		$id_array = array("id"=>$id);
-		$this->db->delete("vendor",$id_array);
+		$this->db->delete("grower",$id_array);
 	}
 	
 	function get_ids()
 	{
-		$this->db->from("vendor");
+		$this->db->from("grower");
 		$this->db->select("id,name");
 		$this->db->order_by("id","ASC");
 		$result = $this->db->get()->result();

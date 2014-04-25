@@ -9,9 +9,9 @@
 		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_current_year();?>" />
 	</div>
 
-	<div class="order-vendor field">
-		<label for="vendor_id">Vendor:&nbsp;</label><input type="text"
-			name="vendor_id" value="<?=get_value($order,"vendor_id");?>" />
+	<div class="order-grower field">
+		<label for="grower_id">grower:&nbsp;</label><input type="text"
+			name="grower_id" value="<?=get_value($order,"grower_id");?>" />
 	</div>
 	<div class="order-flat_size field">
 		<label for="flat_size">Flat Size:&nbsp;</label> <input type="text"
@@ -43,9 +43,9 @@
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"
 			value="<?=number_format(get_value($order,"price"));?>" />
 	</div>
-	<div class="order-vendor_code field">
-		<label for="vendor_code">Vendor Code:&nbsp;</label> <input type="text"
-			name="vendor_code" value="<?=get_value($order,"vendor_code");?>" />
+	<div class="order-grower_code field">
+		<label for="grower_code">grower Code:&nbsp;</label> <input type="text"
+			name="grower_code" value="<?=get_value($order,"grower_code");?>" />
 	</div>
 	<div>
 		<input type="submit" value="<?=ucfirst($action);?>" class="button" />

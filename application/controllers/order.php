@@ -58,11 +58,11 @@ class Order extends MY_Controller {
 		}else{
 			burn_cookie("category");
 		}
-		if ($vendor_id = $this->input->get ( "vendor_id" )) {
-			bake_cookie ( "vendor_id", $vendor_id );
-			$options ["vendor_id"] = $vendor_id;
+		if ($grower_id = $this->input->get ( "grower_id" )) {
+			bake_cookie ( "grower_id", $grower_id );
+			$options ["grower_id"] = $grower_id;
 		}else{
-			burn_cookie("vendor_id");
+			burn_cookie("grower_id");
 		}
 		if ($pot_size = urldecode($this->input->get("pot_size"))) {
 			bake_cookie("pot_size",$pot_size);

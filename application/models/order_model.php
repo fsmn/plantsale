@@ -2,7 +2,7 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Order_Model extends CI_Model {
 	var $variety_id;
-	var $vendor_id;
+	var $grower_id;
 	var $catalog_number;
 	var $catalog_id;
 	var $year;
@@ -19,7 +19,7 @@ class Order_Model extends CI_Model {
 	var $remainder_friday;
 	var $remainder_saturday;
 	var $remainder_sunday;
-	var $vendor_code;
+	var $grower_code;
 	var $rec_modified;
 	var $rec_modifier;
 
@@ -33,7 +33,7 @@ class Order_Model extends CI_Model {
 
 		$variables = array (
 				"variety_id",
-				"vendor_id",
+				"grower_id",
 				"catalog_number",
 				"catalog_id",
 				"year",
@@ -50,7 +50,7 @@ class Order_Model extends CI_Model {
 				"remainder_friday",
 				"remainder_saturday",
 				"remainder_sunday",
-				"vendor_code" 
+				"grower_code" 
 		);
 		
 		for($i = 0; $i < count ( $variables ); $i ++) {

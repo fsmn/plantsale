@@ -15,7 +15,7 @@
 <div class="grouping order-info block" id="order">
 
 	<div class="column column-odd">
-		<?=create_edit_field("vendor_id", $order->vendor_id, "Vendor Id");?>
+		<?=create_edit_field("grower_id", $order->grower_id, "grower Id");?>
 		<?=create_edit_field("year", $order->year, "Year", array("envelope"=>"div"));?>
 		<?=create_edit_field("flat_size", $order->flat_size, "Flat Size");?>
 
@@ -46,6 +46,6 @@
 		<?=create_edit_field("remainder_saturday", $order->remainder_saturday, "Saturday Remainder");?>
 		<?=create_edit_field("remainder_sunday", $order->remainder_sunday, "Sunday Remainder");?>
 		<?=create_edit_field("count_dead", $order->count_dead, "Dead Count");?>
-		<?=create_edit_field("vendor_code", $order->vendor_code, "Vendor Code");?>
+		<?=create_edit_field("grower_code", $order->grower_code, "grower Code");?>
 	</div>
 </div>

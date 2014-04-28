@@ -83,7 +83,7 @@ class Variety_Model extends CI_Model {
 		$this->db->where ( "variety.id", $id );
 		$this->db->where ( "variety.common_id = `common`.`id`" );
 		$this->db->from ( "variety,common" );
-		$this->db->select ( "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  common.category, common.description" );
+		$this->db->select ( "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  common.category, common.description, common.extended_description, common.other_names" );
 		$result = $this->db->get ()->row ();
 		return $result;
 

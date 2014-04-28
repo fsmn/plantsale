@@ -61,6 +61,10 @@
 			</span> <a href="<?=site_url("common/view/$variety->common_id");?>"
 				title="View details for <?=$variety->common_name;?>" class="button">Details</a>
 		</p>
+		<p>
+		<label>Other Names:</label> <span class="field">
+		<?=$variety->other_names;?></span>
+		</p>
 		<p class="category">
 			<label>Category: </label> <span class="field"><?=$variety->category; ?>
 			</span>
@@ -68,6 +72,10 @@
 		<p class="description">
 			<label>General Description: </label> <span class="field" title="You can only edit this field in the common name record"><?=$variety->description; ?>
 			</span>
+		</p>
+		<p class="extended_description">
+		<label>Extended Description (for website)</label>
+		<span class="field" title="You can only edit this field in the common name record"><?=$variety->extended_description;?></span>
 		</p>
 		<p>
 				<?=create_edit_field("note", $variety->note, "Variety Description", array("class"=>"textarea","envelope"=>"div"));?>

@@ -6,9 +6,10 @@ class Common_model extends CI_Model
 	var $name;
 	var $genus;
 	var $description;
-	var $comment;
+	var $extended_description;
 	var $category;
 	var $subcategory;
+	var $other_names;
 	var $sunlight;
 	var $rec_modified;
 	var $rec_modifier;
@@ -20,7 +21,7 @@ class Common_model extends CI_Model
 
 	function prepare_variables($method = "post")
 	{
-		$variables = array("name","genus","description","comment","category","subcategory","sunlight");
+		$variables = array("name","genus","description","extended_description","category","subcategory",",other_names","sunlight");
 
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
@@ -120,7 +121,7 @@ class Common_model extends CI_Model
 			}
 		}
 		$this->db->select("common.*");
-		
+
 		if($this->input->post("year")){
 			$year = $this->input->post("year");
 			$this->db->join("variety","common.id=variety.common_id");
@@ -128,7 +129,7 @@ class Common_model extends CI_Model
 			$this->db->select("order.year");
 			$this->db->group_by("common.id");
 		}
-		
+
 		$result = $this->db->get()->result();
 		return $result;
 	}

@@ -29,7 +29,7 @@ $sale_year = get_cookie("sale_year");
 	<? //it's clumsy, but it works ?>
 	<?foreach($categories["previous"] as $old_category): ?>
 		<? if($old_category->category == $category->category):?>
-			<?=$old_category->count;?>
+			<?=number_format($old_category->count,0);?>
 		<? endif;?>
 	<? endforeach;?>
 	</td>

@@ -17,9 +17,14 @@
 <div id="order-totals">
 </div>
 </div>
-<div style="float:left">
+<div style="float:left; width: 350px;">
 <?=create_button_bar(array(array("selection"=>"variety","text"=>"Show Category Totals", "class"=>"button show-category-totals")));?>
 <div id="category-totals">
+</div>
+</div>
+<div style="float:left; width: 350px">
+<?=create_button_bar(array(array("selection"=>"variety","text"=>"Show Flat Totals", "class"=>"button show-flat-totals")));?>
+<div id="flat-totals">
 </div>
 </div>
 <!--  how many items (ie. pots) for sale 250,000-size number

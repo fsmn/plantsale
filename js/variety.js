@@ -164,4 +164,15 @@ $(document).ready(function() {
 				}
 			});
 		});
+		
+		$(".show-flat-totals").live("click",function(){
+			console.log("yes");
+			$.ajax({
+				type:"get",
+				url: base_url + "index/get_flats",
+				success: function(data){
+					$("#flat-totals").html(data);
+				}
+			});
+		});
 });

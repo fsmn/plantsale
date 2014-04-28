@@ -15,7 +15,7 @@ class Index extends MY_Controller {
 		$data["uri"] = $this->input->get("uri");
 		$this->load->view("utility/sale_year", $data);
 	}
-	
+
 
 	function set_year(){
 
@@ -23,7 +23,7 @@ class Index extends MY_Controller {
 		bake_cookie("sale_year", $year);
 		redirect($this->input->get("uri"));
 	}
-	
+
 	function get_order_totals()
 	{
 		$sale_year = get_cookie("sale_year");
@@ -39,11 +39,11 @@ class Index extends MY_Controller {
 		$totals->new_varieties["previous"] = $this->variety->get_new_varieties($sale_year -1);
 		$totals->varieties["current"] =  $this->variety->get_varieties_for_year($sale_year);
 		$totals->varieties["previous"] = $this->variety->get_varieties_for_year($sale_year -1);
-		
+
 		$data["totals"] = $totals;
-		
+
 		$this->load->view("order/totals",$data);
-		
+
 	}
 
 	function get_categories(){
@@ -51,6 +51,15 @@ class Index extends MY_Controller {
 	    $sale_year = get_cookie("sale_year");
 	    $categories["current"] = $this->variety->get_category_totals($sale_year);
 	    $categories["previous"] = $this->variety->get_category_totals($sale_year -1);
+	    $data["categories"] = $categories;
+	    $this->load->view("variety/totals", $data);
+	}
+
+	function get_flats(){
+	    $this->load->model("variety_model","variety");
+	    $sale_year = get_cookie("sale_year");
+	    $categories["current"] = $this->variety->get_flat_totals($sale_year);
+	    $categories["previous"] = $this->variety->get_flat_totals($sale_year -1);
 	    $data["categories"] = $categories;
 	    $this->load->view("variety/totals", $data);
 	}

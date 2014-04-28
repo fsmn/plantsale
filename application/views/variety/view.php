@@ -17,20 +17,11 @@
 			<?=create_edit_field("variety", $variety->variety, "Variety",array("envelope"=>"div"));?>
 		</div>
 		<div class='field-set'>
-			<?=create_edit_field("species", $variety->species, "Species",array("envelope"=>"div"));?>
-		</div>
-		<div class='field-set'>
 			<label for="genus">Genus:&nbsp;</label><span class='field'><?=$variety->genus;?></span>
 		</div>
-		<? if($variety->species && $variety->genus): ?>
 		<div class='field-set'>
-			<div class="latin-name">
-				<label>Latin Name: </label><span class="field"><em> <?=ucfirst(substr($variety->genus, 0, 1));?>.
-						<?=strtolower($variety->species);?>
-				</em> </span>
-			</div>
+			<?=create_edit_field("species", $variety->species, "Species",array("envelope"=>"div"));?>
 		</div>
-		<? endif;?>
 		<fieldset class="field-group">
 			<legend class="label">
 				<strong>Height</strong>
@@ -62,11 +53,7 @@
 			</div>
 
 		</fieldset>
-
 			<?=create_edit_field("plant_color",$variety->plant_color, "Plant Color(s)",array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?>
-		
-		<?=create_edit_field("note", $variety->note, "Note", array("class"=>"textarea","envelope"=>"div"));?>
-
 	</div>
 	<div class='common-info column column-even'>
 		<p>
@@ -79,8 +66,11 @@
 			</span>
 		</p>
 		<p class="description">
-			<label>Description: </label> <span class="field"><?=$variety->description; ?>
+			<label>General Description: </label> <span class="field" title="You can only edit this field in the common name record"><?=$variety->description; ?>
 			</span>
+		</p>
+		<p>
+				<?=create_edit_field("note", $variety->note, "Variety Description", array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
 
 		<div class="block" id="flags">

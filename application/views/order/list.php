@@ -8,6 +8,9 @@ if ($orders) :
 	<thead>
 		<tr>
 			<th></th>
+			<? if(!$show_names):?>
+			<th>Year</th>
+			<? endif;?>
 			<th>Grower</th>
 			<th>Cat&#35;</th>
 		<? if($show_names):?>
@@ -43,7 +46,10 @@ if ($orders) :
 		<tr class="grouping" id="order_<?=$order->id;?>">
 			<td><span class="button edit edit-order"
 				id="<? printf("edit-order_%s",$order->id);?>">Edit</span></td>
-
+			<? if(!$show_names):?>
+				<td class="order-year field"><?=$order->year;?>
+				</td>
+			<? endif;?>
 			<td class="order-grower_id field"><?=$order->grower_id;?>
 			</td>
 			<td class="order-catalog_number field">

@@ -27,12 +27,3 @@
 <div id="flat-totals">
 </div>
 </div>
-<!--  how many items (ie. pots) for sale 250,000-size number
-how many new varieties... 400 or so
-how many total varieties... 2500 or so
-price range (lowest price and highest price, average price(?))
-how many in each category
-current to past year comparisons by category (number of flats pre-sale current year/previous year)
-category space use
-
--->

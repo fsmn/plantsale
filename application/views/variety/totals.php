@@ -22,7 +22,7 @@ $sale_year = get_cookie("sale_year");
 	<a href="<?=site_url("order/totals?category=$category->category&sorting%5B%5D=catalog_number&direction%5B%5D=ASC");?>"><?=$category->category;?></a>
 	</td>
 	<td>
-	<?=$category->count;?>
+	<?=number_format($category->count,0);?>
 
 	</td>
 	<td>

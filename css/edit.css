@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+
+.edit-field:hover {
+	cursor: pointer;
+	background-image: url(images/edit_item.png);
+	background-repeat: no-repeat;
+	background-position: center left;
+}

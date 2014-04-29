@@ -44,8 +44,15 @@ if ($orders) :
 		}
 		?>
 		<tr class="grouping" id="order_<?=$order->id;?>">
-			<td><span class="button edit edit-order"
-				id="<? printf("edit-order_%s",$order->id);?>">Edit</span></td>
+			<td>
+			<? if(DB_ROLE == "admin"):?>
+			<span class="button edit edit-order"
+				id="<? printf("edit-order_%s",$order->id);?>">Edit</span>
+				<? else: ?>
+				 <a href="<?=site_url("order/view/$order->id");?>" class="button">View</a>
+				<? endif; ?>
+				
+				</td>
 			<? if(!$show_names):?>
 				<td class="order-year field"><?=$order->year;?>
 				</td>

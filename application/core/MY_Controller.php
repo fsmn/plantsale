@@ -13,6 +13,8 @@ class MY_Controller extends CI_Controller
 			}
 			redirect("auth");
 			die();
+		}else{
+			define("DB_ROLE",$this->session->userdata("db_role"));
 		}
 	}
 

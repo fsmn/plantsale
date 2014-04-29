@@ -39,14 +39,18 @@ class Order extends MY_Controller {
 				"value" 
 		), TRUE );
 		
-		$pot_sizes = $this->order->get_pot_sizes();
-		$data["pot_sizes"] = get_keyed_pairs($pot_sizes, array("pot_size","pot_size"));
+		$pot_sizes = $this->order->get_pot_sizes ();
+		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
+				"pot_size",
+				"pot_size" 
+		) );
 		$this->load->view ( "order/search", $data );
 	
 	}
 
 	function totals() {
-		$options = array();
+
+		$options = array ();
 		
 		if (! $sale_year = $this->input->get ( "sale_year" )) {
 			$sale_year = get_cookie ( "sale_year" );
@@ -55,42 +59,45 @@ class Order extends MY_Controller {
 		if ($category = $this->input->get ( "category" )) {
 			bake_cookie ( "category", $category );
 			$options ["category"] = $category;
-		}else{
-			burn_cookie("category");
+		} else {
+			burn_cookie ( "category" );
 		}
 		if ($grower_id = $this->input->get ( "grower_id" )) {
 			bake_cookie ( "grower_id", $grower_id );
 			$options ["grower_id"] = $grower_id;
-		}else{
-			burn_cookie("grower_id");
+		} else {
+			burn_cookie ( "grower_id" );
 		}
-		if ($pot_size = urldecode($this->input->get("pot_size"))) {
-			bake_cookie("pot_size",$pot_size);
-			$options["pot_size"] = $pot_size;
-		}else{
-			burn_cookie("pot_size");
-		}
-		
-		if($flat_size = $this->input->get("flat_size")){
-			bake_cookie("flat_size",$flat_size);
-			$options["flat_size"] = $flat_size;
-		}else{
-			burn_cookie("flat_size");
+		if ($pot_size = urldecode ( $this->input->get ( "pot_size" ) )) {
+			bake_cookie ( "pot_size", $pot_size );
+			$options ["pot_size"] = $pot_size;
+		} else {
+			burn_cookie ( "pot_size" );
 		}
 		
-		$sorting["fields"] = array("catalog_number");
-		$sorting["direction"] = array("ASC");
-		
-		if( $this->input->get("sorting")){
-			$sorting["fields"] = $this->input->get("sorting");
-			$sorting["direction"] = $this->input->get("direction");
+		if ($flat_size = $this->input->get ( "flat_size" )) {
+			bake_cookie ( "flat_size", $flat_size );
+			$options ["flat_size"] = $flat_size;
+		} else {
+			burn_cookie ( "flat_size" );
 		}
 		
-		bake_cookie("sorting",implode(",", $sorting["fields"]));
-		bake_cookie("direction",implode(",", $sorting["direction"] ));
+		$sorting ["fields"] = array (
+				"catalog_number" 
+		);
+		$sorting ["direction"] = array (
+				"ASC" 
+		);
 		
+		if ($this->input->get ( "sorting" )) {
+			$sorting ["fields"] = $this->input->get ( "sorting" );
+			$sorting ["direction"] = $this->input->get ( "direction" );
+		}
 		
-		$orders = $this->order->get_totals ( $sale_year, $options , $sorting);
+		bake_cookie ( "sorting", implode ( ",", $sorting ["fields"] ) );
+		bake_cookie ( "direction", implode ( ",", $sorting ["direction"] ) );
+		
+		$orders = $this->order->get_totals ( $sale_year, $options, $sorting );
 		$data ["options"] = $options;
 		$data ["orders"] = $orders;
 		$data ["title"] = "List of $category orders for $sale_year";
@@ -99,22 +106,24 @@ class Order extends MY_Controller {
 		$this->load->view ( "page/index", $data );
 	
 	}
+
+	function show_sort() {
+
+		$this->load->view ( "order/sort" );
 	
-	function show_sort(){
-		$this->load->view("order/sort");
 	}
 
 	function update_value() {
 
-		$id = $this->input->post ( "id" );
-		$values = array (
-				$this->input->post ( "field" ) => $value = $this->input->post ( "value" ) 
-		);
-		$output = $this->order->update ( $id, $values );
-		if ($this->input->post ( "format" ) == "currency") {
-			$output = get_as_price ( $output );
-		}
-		echo $output;
+			$id = $this->input->post ( "id" );
+			$values = array (
+					$this->input->post ( "field" ) => $value = $this->input->post ( "value" ) 
+			);
+			$output = $this->order->update ( $id, $values );
+			if ($this->input->post ( "format" ) == "currency") {
+				$output = get_as_price ( $output );
+			}
+			echo $output;
 	
 	}
 
@@ -167,11 +176,13 @@ class Order extends MY_Controller {
 		redirect ( "variety/view/$variety_id" );
 	
 	}
-	
-	function delete(){
-		if($id = $this->input->post("id")){
-			echo $this->order->delete($id);
+
+	function delete() {
+
+		if ($id = $this->input->post ( "id" )) {
+			echo $this->order->delete ( $id );
 		}
+	
 	}
 
 }

@@ -8,7 +8,9 @@
 <h2>
 	<?="$variety->common_name: $variety->variety";?>
 </h2>
+				<? if(DB_ROLE == "admin"):?>
 				<div class="button delete variety-delete">Delete Variety</div>
+				<? endif;?>
 
 <div class="grouping block variety-info" id="variety">
 	<div class='column column-odd'>
@@ -86,9 +88,10 @@
 			<div id="flag-list">
 			<? $this->load->view("flag/list");?>
 </div>
-			<? $flag_buttons[] = array("selection"=>"flag","text"=>"New Flag","type"=>"span","class"=>"button new flag-add","id"=>"fa_$variety->id");
-			echo create_button_bar($flag_buttons);
-			?>
+	<? if(DB_ROLE == "admin"):?>
+			<? $flag_buttons[] = array("selection"=>"flag","text"=>"New Flag","type"=>"span","class"=>"button new flag-add","id"=>"fa_$variety->id");?>
+			<?=create_button_bar($flag_buttons);?>
+	<?endif;?>
 		</div>
 	</div>
 </div>

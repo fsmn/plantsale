@@ -6,35 +6,39 @@
 <!--<meta name="viewport"
 		content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 		--><title><?=$title;?></title>
-<link type="text/css" rel="stylesheet" media="all" href="<?=base_url()?>css/main.css" />
-<link type="text/css" rel="stylesheet" media="all" href="<?=base_url()?>css/color.css"/>
-<link type="text/css" rel="stylesheet" media="all" href="<?=base_url()?>css/popup.css" />
-<link type="text/css" rel="stylesheet" media="print" href="<?=base_url()?>css/print.css" />
+<link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/main.css")?>" />
+<link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/color.css")?>"/>
+<link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/popup.css")?>" />
+<link type="text/css" rel="stylesheet" media="screen" href="<?=base_url("css/edit.css");?>"/>
+<link type="text/css" rel="stylesheet" media="print" href="<?=base_url("css/print.css")?>" />
 <!-- jquery scripts -->
 <script type="text/javascript">
 var base_url = '<?=base_url("index.php") . "/";?>';
 </script>
-<script type="text/javascript" src="<?=base_url();?>js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url("js/jquery.min.js");?>"></script>
 <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
  <!-- <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>  -->
-<script type="text/javascript" src="<?=base_url();?>js/jquery.validate.js"></script>
+<script type="text/javascript" src="<?=base_url("js/jquery.validate.js");?>"></script>
 <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script> -->
-<script type="text/javascript" src="<?=base_url();?>js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?=base_url("js/jquery-ui.min.js");?>"></script>
 
-<script type="text/javascript" src="<?=base_url();?>js/forms.jquery.js"></script>
-<script type="text/javascript" src="<?=base_url();?>js/cookie.jquery.js"></script>
+<script type="text/javascript" src="<?=base_url("js/forms.jquery.js");?>"></script>
+<script type="text/javascript" src="<?=base_url("js/cookie.jquery.js");?>"></script>
 
 <!-- General Script  -->
-<script type="text/javascript" src="<?=base_url();?>js/general.js"></script>
+<script type="text/javascript" src="<?=base_url("js/general.js");?>"></script>
 
+<? if(DB_ROLE == "admin") {
+   $this->load->view("page/secure_javascript.php");
+} ?>
 <!-- Common Name Scripts -->
-<script type="text/javascript" src="<?=base_url();?>js/common.js"></script>
+<script type="text/javascript" src="<?=base_url("js/common.js");?>"></script>
 
 <!-- variety Scripts -->
-<script type="text/javascript" src="<?=base_url();?>js/variety.js"></script>
+<script type="text/javascript" src="<?=base_url("js/variety.js");?>"></script>
 
 <!-- Order Scripts -->
-<script type="text/javascript" src="<?=base_url();?>js/order.js"></script>
+<script type="text/javascript" src="<?=base_url("js/order.js");?>"></script>
 
 <!-- admin scripts -->
-<script type="text/javascript" src="<?=base_url();?>js/password.js"></script>
+<script type="text/javascript" src="<?=base_url("js/password.js");?>"></script>

@@ -15,7 +15,7 @@
 <div class="grouping order-info block" id="order">
 
 	<div class="column column-odd">
-		<?=create_edit_field("grower_id", $order->grower_id, "grower Id");?>
+		<?=create_edit_field("grower_id", $order->grower_id, "Grower ID");?>
 		<?=create_edit_field("year", $order->year, "Year", array("envelope"=>"div"));?>
 		<?=create_edit_field("flat_size", $order->flat_size, "Flat Size");?>
 

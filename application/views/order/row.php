@@ -42,7 +42,11 @@
 			</td>
 			<td class="order-grower_code field"><input type="text" name="grower_code" value=""/>
 			</td>
-			<td><input type="submit" value="Add" class="button"/>
+			<td>
+			<? if(DB_ROLE == "admin"): ?>
+			<input type="submit" value="Add" class="button"/>
+			<? endif;?>
+			</td>
 		</tr>
 	</tbody>
 </table>

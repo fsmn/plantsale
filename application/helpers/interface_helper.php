@@ -205,14 +205,13 @@ function create_edit_field($field_name, $value, $label, $options = array()) {
  *        	@TODO add id option
  */
 function create_checkbox($name, $values, $selections = array()) {
-
 	$output = array ();
 	foreach ( $values as $value ) {
 		$checked = "";
-		if (in_array ( $value->value, $selections )) {
+		if (in_array ( $value->key, $selections )) {
 			$checked = "checked";
 		}
-		$output [] = sprintf ( "<label>%s</label><input type='checkbox' name='%s' value='%s' %s/><br/>", $value->value, $name, $value->value, $checked );
+		$output [] = sprintf ( "<label>%s</label><input type='checkbox' name='%s' value='%s' %s/><br/>", $value->value, $name, $value->key, $checked );
 	}
 	return implode ( "\r", $output );
 

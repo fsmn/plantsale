@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
  $lights = array();
 
-if(!get_value($common,"sunlight",FALSE)){
+if(get_value($common,"sunlight",FALSE)){
 	$lights = explode(",",get_value($common,"sunlight")) ;
 }
 

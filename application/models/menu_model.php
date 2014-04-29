@@ -95,5 +95,13 @@ class Menu_Model extends CI_Model
 		return $result;
 
 	}
+	
+	function get_value($category, $key){
+		$this->db->from("menu");
+		$this->db->where("category",$category);
+		$this->db->where("key",$key);
+		$value = $this->db->get()->row()->value;
+		return $value;
+	}
 
 }

@@ -8,9 +8,9 @@ if ($orders) :
 	<thead>
 		<tr>
 			<th></th>
-			<? if(!$show_names):?>
+		<? if(!$show_names):?>
 			<th>Year</th>
-			<? endif;?>
+		<? endif;?>
 			<th>Grower</th>
 			<th>Cat&#35;</th>
 		<? if($show_names):?>

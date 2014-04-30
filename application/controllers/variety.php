@@ -63,6 +63,43 @@ class Variety extends MY_Controller
 
 	}
 	
+	function search()
+	{
+		$this->load->model("menu_model","menu");
+		$categories = $this->menu->get_pairs("common_category",array("field"=>"value","direction"=>"ASC"));
+		$data["categories"] = get_keyed_pairs($categories, array("key","value"), TRUE);
+		$sunlight = $this->menu->get_pairs("sunlight",array("field"=>"value"));
+		$data["sunlight"] = $sunlight;
+		$plant_colors = $this->menu->get_pairs("plant_color",array("field"=>"value","direction"=>"ASC"));
+		$data["plant_colors"] = get_keyed_pairs($plant_colors, array("key","value"), TRUE);
+		$flags = $this->menu->get_pairs("flag",array("field"=>"value"));
+		$data["flags"] = get_keyed_pairs($flags, array("key","value"), TRUE);
+		$data["variety"] = NULL;
+		$this->load->view("variety/search",$data);
+	}
+	
+	function find()
+	{
+		
+		$variables = array("name","variety","genus","species","category","flag","plant color", "sunlight","description","year");
+		$data["plants"] = $this->variety->find($variables);
+		$data["title"] = "List of Varieties";
+		$data["target"] = "variety/full_list";
+		$data["full_list"] = TRUE;
+		$variables[] = "sunlight-boolean";
+		//create the legend for the paramter display
+		$params = array();
+		for($i = 0; $i < count($variables); $i++){
+			$my_variable = $variables[$i];
+			if($my_value = $this->input->get($my_variable)){
+				$params[$my_variable] = $my_value;
+			}
+		}
+		$data["params"] = $params;
+		
+		$this->load->view("page/index",$data);
+	}
+	
 	function search_by_name()
 	{
 		$name = $this->input->get("name");

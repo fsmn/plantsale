@@ -120,7 +120,7 @@ $(document).ready(function() {
 
 		$('#variety-search-body').live('focus', function(event) {
 			$('#variety-search-body').val('').css( {
-				variety : 'black'
+				color : 'black'
 			});
 		});
 		

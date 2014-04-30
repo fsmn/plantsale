@@ -1,18 +1,47 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); 
+$sunlight = create_checkbox("sunlight[]", $sunlight, array());
+
+?>
 
 <form name="search-variety" id="search-variety"
-		action="<?=site_url("variety/find"); ?>" method="POST">
+		action="<?=site_url("variety/find"); ?>" method="GET">
 	<p>
-		<?=create_input($variety,"variety","variety");?>
+		<?=create_input($variety,"name","Common Name");?>
+	</p>
+	<p>
+		<?=create_input($variety,"variety","Variety");?>
+	</p>
+	<p>
+		<?=create_input($variety,"genus","Genus");?>
 	</p>
 	<p>
 		<?=create_input($variety, "species","Species");?>
 	</p>
 	<p>
-		<label for="flag">Flag: </label>
-		<?=form_dropdown("flag",$flags,get_value($variety,"flag"),"id='flag'");?>
+		<label for="category">Category: </label>
+		<?=form_dropdown("category",$categories,"","id='category'");?>
 	</p>
 	<p>
+		<label for="flag">Flag: </label>
+		<?=form_dropdown("flag",$flags,"","id='flag'");?>
+	</p>
+	<p>
+	<label for="plant_color">Plant Color: </label>
+		<?=form_dropdown("plant_color",$plant_colors,"","id='plant_colors'");?>
+	</p>
+	<p>
+	<label for="sunlight-boolean">Sunlight Options</label>
+		<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),"and","id='sunlight-boolean'");?>
+		<br/>
+		<?=$sunlight;?>
+	</p>
+	<p>
+		<?=create_input($variety, "description","General Description");?>
+	</p>
+	<p>
+		<?=create_input($variety, "note","Variety Note");?>
+	</p>
+	<!-- <p>
 		<?=create_input($variety,"min_height","Min Height");?>
 	</p>
 		<p>
@@ -29,7 +58,7 @@
 	</p>
 		<p>
 		<?=create_input($variety,"width_unit","Unit");?>
-	</p>
+	</p> -->
 	<p>
 		<label for="year">Year: </label><input type="text" name="year"
 			value="<?=get_current_year();?>" />

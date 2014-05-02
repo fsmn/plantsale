@@ -7,7 +7,7 @@ function bake_cookie($name, $value) {
 	set_cookie ( array (
 			"name" => $name,
 			"value" => $value,
-			"expire" => 0 
+			"expire" => 0
 	) );
 }
 
@@ -15,7 +15,7 @@ function burn_cookie($name) {
 	set_cookie ( array (
 			"name" => $name,
 			"value" => "",
-			"expire" => NULL 
+			"expire" => NULL
 	) );
 }
 
@@ -46,7 +46,7 @@ function get_keyed_pairs($list, $pairs, $initialBlank = NULL, $other = NULL, $al
 	if (! empty ( $alternate )) {
 		$output [$alternate ['name']] = $alternate ['value'];
 	}
-	
+
 	foreach ( $list as $item ) {
 		$key_name = $pairs [0];
 		$key_value = $pairs [1];
@@ -60,16 +60,16 @@ function get_keyed_pairs($list, $pairs, $initialBlank = NULL, $other = NULL, $al
 
 function get_value($object, $item, $default = null) {
 	$output = $default;
-	
+
 	if ($default) {
 		$output = $default;
 	}
 	if ($object) {
-		
+
 		$var_list = get_object_vars ( $object );
 		$var_keys = array_keys ( $var_list );
 		if (in_array ( $item, $var_keys )) {
-			$output = $object->$item;
+			$output = ($object->$item);
 		}
 	}
 	return $output;

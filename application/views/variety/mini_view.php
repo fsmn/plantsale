@@ -5,24 +5,10 @@
 <input type="hidden"
 	id="order_id" name="order_id"
 	value="<?=get_value($current_order,"id");?>" />
-	<h2>
+<h2>
 	<?="$variety->common_name: $variety->variety";?>
 </h2>
-
-				<? if(DB_ROLE == "admin"):?>
-				<div class="button delete variety-delete">Delete Variety</div>
-				<? endif;?>
 <div class="grouping block variety-info" id="variety">
-	<div class='column column-odd'>
-		<div class='field-set'>
-			<?=create_edit_field("variety", $variety->variety, "Variety",array("envelope"=>"div"));?>
-		</div>
-		<div class='field-set'>
-			<label for="genus">Genus:&nbsp;</label><span class='field'><?=$variety->genus;?></span>
-		</div>
-		<div class='field-set'>
-			<?=create_edit_field("species", $variety->species, "Species",array("envelope"=>"div"));?>
-		</div>
 		<fieldset class="field-group">
 			<legend class="label">
 				<strong>Height</strong>
@@ -55,8 +41,6 @@
 
 		</fieldset>
 			<?=create_edit_field("plant_color",$variety->plant_color, "Plant Color(s)",array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?>
-	</div>
-	<div class='common-info column column-even'>
 		<p>
 			<label>Common Name:</label> <span class="field"><?=$variety->common_name;?>
 			</span> <a href="<?=site_url("common/view/$variety->common_id");?>"

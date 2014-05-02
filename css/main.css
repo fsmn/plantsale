@@ -851,3 +851,34 @@ fieldset.field-group {
 #flags {
 	width: 150px;
 }
+
+.plant-row {
+	clear: both;
+	width: 100%;
+}
+
+ul.inline-list {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: block;
+	clear: both;
+	height: 1.5em;
+}
+
+ul.inline-list li {
+	float: left; 
+	display: inline;
+}
+
+.plant-row .plant-details {
+	display: none;
+	clear: both;
+}
+
+#plant-details {
+	float: left;
+	display: none;
+	box-shadow: 2px 2px 4px #ccc;
+	padding: 1em;
+}

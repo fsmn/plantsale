@@ -34,8 +34,8 @@
 			name="count_midsale" value="<?=get_value($order,"count_midsale");?>" />
 	</div>
 	<div class="order-pot_size field">
-		<label for="pot_size">Pot Size:&nbsp;</label> 
-		<?=form_dropdown("pot_size",$pot_sizes, get_value($order, "pot_size"));?>
+		<label for="pot_size">Pot Size:&nbsp;</label>
+		<?=form_dropdown("pot_size",$pot_sizes, urlencode(get_value($order, "pot_size")));?>
 		<!-- <input type="text"
 			name="pot_size" value="<?=get_value($order,"pot_size");?>" /> -->
 	</div>

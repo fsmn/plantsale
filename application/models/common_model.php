@@ -26,7 +26,7 @@ class Common_model extends CI_Model
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
 			if($method == "post"){
-				$my_value = $this->input->post($my_variable);
+				$my_value = urldecode($this->input->post($my_variable));
 			}elseif($method=="get"){
 				$my_value = $this->input->get($my_variable);
 			}

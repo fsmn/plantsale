@@ -134,6 +134,28 @@ $(document).ready(function() {
 			
 		});
 		
+		$(".plant-row").live("hover",function(){
+			if(! $(this).hasClass("active") ){
+				my_id = this.id.split("_")[1];
+				$(this).toggleClass("active");
+				console.log(my_id);
+				form_data = {
+						ajax: "1"
+				};
+				$.ajax({
+					type: "get",
+					data: form_data,
+					url: base_url + "variety/view/" + my_id,
+					success: function(data){
+						$("#plant-details").html(data).slideDown(500);
+					}
+				});
+			}else{
+				$(this).toggleClass("active");
+			}
+			
+		});
+		
 		$(".variety-delete").live("click",function(){
 			form_data = {
 					id: $("#id").val(),

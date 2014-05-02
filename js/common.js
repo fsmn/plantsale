@@ -31,7 +31,7 @@ $(document).ready(function(){
 	$(".search-common-names").live("click",function(event){
 		$.ajax({
 			type: "get",
-			url: base_url + "variety/search",
+			url: base_url + "common/search",
 			success: function(data){
 				show_popup("Search Plants",data,"auto");
 			}

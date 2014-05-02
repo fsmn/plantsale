@@ -156,6 +156,16 @@ $(document).ready(function() {
 			
 		});
 		
+		$(".search-varieties").live("click",function(event){
+			$.ajax({
+				type: "get",
+				url: base_url + "varieties/search",
+				success: function(data){
+					show_popup("Search Plants",data,"auto");
+				}
+			});
+		});
+		
 		$(".variety-delete").live("click",function(){
 			form_data = {
 					id: $("#id").val(),

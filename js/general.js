@@ -62,4 +62,20 @@ function create_dropdown(my_field, my_category, my_value)
 }
 
 
-	
+$(window).scroll(function(){
+	var top=$('.float');
+	if($(window).scrollTop()>250){
+		if(top.css('position')!='fixed'){
+			top.css('position','fixed');
+			top.css('top', 10);
+			top.css('right',0);
+			//top.css('background-color','#000');
+		}
+	}else{
+		if(top.css('position')!='static'){
+			top.css('position','static');
+			top.css('top','inherit');
+			top.css('background-color','inherit');
+		}
+	}
+});

@@ -28,16 +28,16 @@ $buttons [] = array (
 		"title" => "Search among the common names"
 );
 
-// $buttons[] = array(
-//         "selection" => "all",
-//         "text" => "Advanced Search",
-//         "class" => array(
-//                 "button",
-//                 "search-varieties"
-//         ),
-//         "type" => "span",
-//         "title" => "Search among the varieties"
-// );
+$buttons[] = array(
+        "selection" => "all",
+        "text" => "Experimental Search (Try Me!)",
+        "class" => array(
+                "button",
+                "search-varieties"
+        ),
+        "type" => "span",
+        "title" => "Search among the varieties"
+);
 
 $buttons [] = array (
 		"selection" => "order",

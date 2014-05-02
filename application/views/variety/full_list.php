@@ -17,5 +17,5 @@
 <? endforeach;?>
 </table>
 </div>
-<div id="plant-details" class="column">
+<div id="plant-details" class="column float">
 </div>

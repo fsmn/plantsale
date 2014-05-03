@@ -178,13 +178,12 @@ class Variety_Model extends CI_Model {
 			$my_variable = $variables [$i];
 			if ($this->input->get ( $my_variable ) && $this->input->get($my_variable) != "") {
 				$my_value = $this->input->get ( $my_variable );
-				if ($my_value && $my_value != 0) {
+				if ($my_value) {
 				    $my_parameters->$my_variable = new stdClass();
 					if ($my_variable == "sunlight") {
 						$my_parameters->$my_variable->key = $my_variable;
 						$my_parameters->$my_variable->value = implode ( ",", $my_value );
 					} else {
-
 						$my_parameters->$my_variable->key = $my_variable;
 						$my_parameters->$my_variable->value = $my_value;
 					}

@@ -68,7 +68,7 @@ $(window).scroll(function(){
 		if(top.css('position')!='fixed'){
 			top.css('position','fixed');
 			top.css('top', 10);
-			top.css('right',0);
+			top.css('left','45%');
 			//top.css('background-color','#000');
 		}
 	}else{

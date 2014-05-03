@@ -134,10 +134,10 @@ $(document).ready(function() {
 			
 		});
 		
-		$(".plant-row").live("hover",function(){
+		$(".plant-row").live("hover | focus",function(){
 			if(! $(this).hasClass("active") ){
 				my_id = this.id.split("_")[1];
-				$(this).toggleClass("active");
+				$(this).addClass("active");
 				console.log(my_id);
 				form_data = {
 						ajax: "1"
@@ -151,15 +151,19 @@ $(document).ready(function() {
 					}
 				});
 			}else{
-				$(this).toggleClass("active");
+				$(this).removeClass("active");
 			}
 			
+		});
+		
+		$(".plant-row").live("blur", function(){
+			$(this).removeClass("active");
 		});
 		
 		$(".search-varieties").live("click",function(event){
 			$.ajax({
 				type: "get",
-				url: base_url + "varieties/search",
+				url: base_url + "variety/search",
 				success: function(data){
 					show_popup("Search Plants",data,"auto");
 				}

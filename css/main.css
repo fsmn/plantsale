@@ -849,7 +849,7 @@ fieldset.field-group {
 }
 
 #flags {
-	width: 150px;
+	width: 200px;
 }
 
 .plant-row {
@@ -858,17 +858,17 @@ fieldset.field-group {
 }
 
 ul.inline-list {
-	padding: 0;
+	padding: .5em 0;
 	margin: 0;
 	list-style: none;
 	display: block;
 	clear: both;
-	height: 1.5em;
+	height: 2em;
 }
 
 ul.inline-list li {
-	float: left; 
-	display: inline;
+	display: inline-block;
+	vertical-align: top;
 }
 
 .plant-row .plant-details {
@@ -876,9 +876,36 @@ ul.inline-list li {
 	clear: both;
 }
 
+.plant-info {
+	display: block;
+}
+
 #plant-details {
 	float: left;
 	display: none;
 	box-shadow: 2px 2px 4px #ccc;
 	padding: 1em;
+	left-margin: 50%;
+}
+
+
+
+.plant-info .field {
+	width: 15ex;
+	padding: 0 1ex;
+}
+
+.plant-info .field.year {
+    width: 4ex;
+}
+
+.plant-info .field.species {
+}
+
+.plant-info .field.genus {
+	width: 10ex;
+}
+
+.plant-info .field.variety, .plant-info .field.common-name{
+	width: 20ex;
 }

@@ -122,7 +122,7 @@ class Variety extends MY_Controller {
 				"species",
 				"category",
 				"flag",
-				"plant color",
+				"plant_color",
 				"sunlight",
 				"description",
 				"year"
@@ -141,7 +141,6 @@ class Variety extends MY_Controller {
 			}
 		}
 		$data ["params"] = $params;
-
 		$this->load->view ( "page/index", $data );
 
 	}

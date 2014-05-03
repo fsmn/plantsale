@@ -82,6 +82,10 @@ div.list {
 	background-color: #e9e9e9;
 }
 
+a {
+ color:#489310;
+}
+
 /*form elements*/
 .button,input[type="submit"],.button.active:hover {
 	border: none;
@@ -327,10 +331,9 @@ input.link {
 	color: #f00;
 }
 
-table.list tr:hover {
+table.list tr:hover, div.plant-row.active{
 	background-color: #cdcdcd;
 }
-
 
 
 

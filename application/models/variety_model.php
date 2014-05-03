@@ -98,8 +98,8 @@ class Variety_Model extends CI_Model {
 		$this->db->join ( "order", "variety.id = order.variety_id", "LEFT" );
 		$this->db->order_by ( "order.year", "DESC" );
 		$this->db->group_by ( "variety.id" );
-		$result = $this->db->get ()->result ();
 
+		$result = $this->db->get ()->result ();
 		return $result;
 
 	}

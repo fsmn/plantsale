@@ -886,6 +886,8 @@ ul.inline-list li {
 	box-shadow: 2px 2px 4px #ccc;
 	padding: 1em;
 	left-margin: 50%;
+	overflow: scroll;
+	height: 90%;
 }
 
 

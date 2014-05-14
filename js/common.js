@@ -1,6 +1,5 @@
-$(document).ready(function(){
 	
-	$(".common-edit").live("click",function(){
+	$(document).on("click",".common-edit",function(){
 		my_id = this.id.split("_")[1];
 		form_data = {
 				id: my_id,
@@ -17,7 +16,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$(".common-create").live("click",function(){
+	$(document).on("click",".common-create",function(){
 		$.ajax({
 			type: "get",
 			url: base_url + "common/create",
@@ -28,7 +27,7 @@ $(document).ready(function(){
 		
 	});
 	
-	$(".search-common-names").live("click",function(event){
+	$(document).on("click",".search-common-names", function(event){
 		$.ajax({
 			type: "get",
 			url: base_url + "common/search",
@@ -39,7 +38,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$('#common-search-body').live('keyup', function(event) {
+	$(document).on('keyup','#common-search-body', function(event) {
 		common_search = this.value;
 		if (common_search.length > 2 && common_search != "Find Common Names") {
 			search_words = common_search.split(' ');
@@ -73,14 +72,14 @@ $(document).ready(function(){
 	});// end stuSearch.keyup
 	
 
-	$('#common-search-body').live('focus', function(event) {
+	$(document).on('focus','#common-search-body', function(event) {
 		$('#common-search-body').val('').css( {
 			variety : 'black'
 		});
 	});
 	
 	
-	$('#common-search-body').live('blur', function(event) {
+	$(document).on('blur','#common-search-body', function(event) {
 		
 		$("#search_list").fadeOut();
 		$('#common-search-body').css({variety:'#666'}).val('Find Common Names');
@@ -89,4 +88,3 @@ $(document).ready(function(){
 		
 	});
 	
-});

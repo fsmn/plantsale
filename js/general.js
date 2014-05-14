@@ -1,26 +1,22 @@
-$(document).ready(function(){
 
+$(document).live("click",".set-current-year", function(){
+	my_uri = $(location).attr("href");
 	
-
+	form_data = {
+			uri:my_uri
+	};
 	
-	$(".set-current-year").live("click", function(){
-		my_uri = $(location).attr("href");
-		
-		form_data = {
-				uri:my_uri
-		};
-		
-		$.ajax({
-			type:"get",
-			data: form_data,
-			url:base_url + "index/show_set_year",
-			success:function(data){
-				show_popup("Set Sale Year",data,"auto");
-			}
-		});
+	$.ajax({
+		type:"get",
+		data: form_data,
+		url:base_url + "index/show_set_year",
+		success:function(data){
+			show_popup("Set Sale Year",data,"auto");
+		}
 	});
-	
 });
+	
+
 
 function show_popup(my_title,data,popup_width,x,y){
 	if(!popup_width){

@@ -1,5 +1,4 @@
-$(document).ready(function() {
-			$(".variety-create").live("click", function() {
+			$(document).on("click",".variety-create", function() {
 				my_id = this.id.split("_")[1];
 				form_data = {
 					common_id : my_id,
@@ -15,7 +14,7 @@ $(document).ready(function() {
 				});
 			});
 			
-			$(".variety-insert").live("click",function(){
+			$(document).on("click",".variety-insert",function(){
 				if($("#add_order").attr("checked")){
 					$.ajax({
 						type: "post",
@@ -31,7 +30,7 @@ $(document).ready(function() {
 			
 			});
 
-		$(".flag-add").live("click", function() {
+		$(document).on("click",".flag-add", function() {
 			my_id = $("#id").val();
 			form_data = {
 					id: my_id,
@@ -47,7 +46,7 @@ $(document).ready(function() {
 			});
 		});
 		
-		$(".flag-insert").live("change",function(){
+		$(document).on("change",".flag-insert",function(){
 			my_id = $("#id").val();
 			my_flag = $(this).val();
 			form_data = {
@@ -65,7 +64,7 @@ $(document).ready(function() {
 			});
 		});
 		
-		$(".flag-delete").live("click",function(){
+		$(document).on("click",".flag-delete",function(){
 			my_id = $(this).parent().attr("id").split("_")[1];
 			my_variety = $("#id").val();
 			form_data = {
@@ -84,7 +83,7 @@ $(document).ready(function() {
 			
 		});
 		
-		$('#variety-search-body').live('keyup', function(event) {
+		$(document).on('keyup','#variety-search-body', function(event) {
 			common_search = this.value;
 			if (common_search.length > 2 && common_search != "Find Common Names") {
 				search_words = common_search.split(' ');
@@ -118,14 +117,14 @@ $(document).ready(function() {
 		});// end stuSearch.keyup
 		
 
-		$('#variety-search-body').live('focus', function(event) {
+		$(document).on('focus','#variety-search-body', function(event) {
 			$('#variety-search-body').val('').css( {
 				color : 'black'
 			});
 		});
 		
 		
-		$('#variety-search-body').live('blur', function(event) {
+		$(document).on('blur','#variety-search-body', function(event) {
 			
 			$("#search_list").fadeOut();
 			$('#variety-search-body').css({variety:'#666'}).val('Find Plants');
@@ -134,7 +133,7 @@ $(document).ready(function() {
 			
 		});
 		
-		$(".plant-row").live("hover | focus",function(){
+		$(document).on("hover | focus",".plant-row",function(){
 			if(! $(this).hasClass("active") ){
 				my_id = this.id.split("_")[1];
 				$(this).addClass("active");
@@ -156,11 +155,11 @@ $(document).ready(function() {
 			
 		});
 		
-		$(".plant-row").live("blur", function(){
+		$(document).on("blur",".plant-row", function(){
 			$(this).removeClass("active");
 		});
 		
-		$(".search-varieties").live("click",function(event){
+		$(document).on("click",".search-varieties", function(event){
 			$.ajax({
 				type: "get",
 				url: base_url + "variety/search",
@@ -170,7 +169,7 @@ $(document).ready(function() {
 			});
 		});
 		
-		$(".variety-delete").live("click",function(){
+		$(document).on("click",".variety-delete", function(){
 			form_data = {
 					id: $("#id").val(),
 					ajax: 1
@@ -191,7 +190,7 @@ $(document).ready(function() {
 			}
 		});
 		
-		$(".show-category-totals").live("click",function(){
+		$(document).on("click",".show-category-totals", function(){
 			$.ajax({
 				type:"get",
 				url: base_url + "index/get_categories",
@@ -201,7 +200,7 @@ $(document).ready(function() {
 			});
 		});
 		
-		$(".show-flat-totals").live("click",function(){
+		$(document).on("click",".show-flat-totals", function(){
 			console.log("yes");
 			$.ajax({
 				type:"get",
@@ -211,4 +210,3 @@ $(document).ready(function() {
 				}
 			});
 		});
-});

@@ -1,5 +1,4 @@
-$(document).ready(function(){
-	$(".order-create").live("click",function(){
+	$(document).on("click",".order-create",function(){
 		my_id = this.id.split("_")[1];
 		form_data = {
 				variety_id: my_id
@@ -17,7 +16,7 @@ $(document).ready(function(){
 		
 	});
 	
-	$("input[name='flat_size'],input[name='flat_cost'],input[name='plant_cost']").live("change",function(){
+	$(document).on("change","input[name='flat_size'],input[name='flat_cost'],input[name='plant_cost']",function(){
 		flat_size = $("input[name='flat_size']").val();
 		flat_cost = $("input[name='flat_cost']").val();
 		plant_cost = $("input[name='plant_cost']").val();
@@ -29,7 +28,7 @@ $(document).ready(function(){
 		console.log(flat_cost);
 	});
 	
-	$(".search-orders").live("click",function(){
+	$(document).on("click",".search-orders",function(){
 		$.ajax({
 			type: "get",
 			url: base_url + "order/search",
@@ -39,7 +38,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$(".edit-order").live("click",function(){
+	$(document).on("click",".edit-order",function(){
 		my_id = this.id.split("_")[1];
 		form_data = {
 				id: my_id,
@@ -56,7 +55,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$(".show-order-totals").live("click",function(){
+	$(document).on("click",".show-order-totals",function(){
 		$("#order-totals").html("Loading...");
 			
 		$.ajax({
@@ -68,7 +67,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$(".add-order-sort").live("click",function(){
+	$(document).on("click",".add-order-sort", function(){
 		$(this).fadeOut();
 		$.ajax({
 			type:"get",
@@ -80,7 +79,7 @@ $(document).ready(function(){
 		
 	});
 	
-	$(".delete-order").live("click",function(){
+	$(document).on("click",".delete-order",function(){
 		question = confirm("Are you sure you want to delete this order? This cannot be undone!");
 		if(question){
 			again = confirm("Are you really sure you want to delete this? Click cancel if you aren't sure.");
@@ -103,4 +102,3 @@ $(document).ready(function(){
 		}
 	});
 	
-});

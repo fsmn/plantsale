@@ -70,14 +70,14 @@
 			<h4>Flags</h4>
 			<div id="flag-list">
 			<? $this->load->view("flag/list");?>
-</div>
+			</div>
 	<? if(DB_ROLE == "admin"):?>
 			<? $flag_buttons[] = array("selection"=>"flag","text"=>"New Flag","type"=>"span","class"=>"button new flag-add","id"=>"fa_$variety->id");?>
 			<?=create_button_bar($flag_buttons);?>
 	<?endif;?>
 		</div>
 	</div>
-</div>
+
 
 <div class="all-orders block">
 	<h3>Orders</h3>

@@ -81,7 +81,7 @@ class Variety_Model extends CI_Model
         $this->db->where("variety.common_id = `common`.`id`");
         $this->db->from("variety,common");
         $this->db->select(
-                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  common.category, common.description, common.extended_description, common.other_names");
+                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  common.category, common.description, common.sunlight, common.extended_description, common.other_names");
         $result = $this->db->get()->row();
         return $result;
     }
@@ -226,7 +226,6 @@ class Variety_Model extends CI_Model
         $this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
         $this->db->group_by("variety.id");
         $result = $this->db->get()->result();
-
         return $result;
     }
 

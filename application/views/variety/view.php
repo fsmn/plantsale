@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <input
 	type="hidden" id="id" name="id" value="<?=$variety->id;?>" />
-
 <input type="hidden"
 	id="order_id" name="order_id"
 	value="<?=get_value($current_order,"id");?>" />
@@ -79,6 +78,9 @@
 		<p class="category">
 			<label>Category: </label> <span class="field"><?=$variety->category; ?>
 			</span>
+		</p>
+		<p class="sunlight">
+		<label>Sunlight: </label> <span class="field"><?=$variety->sunlight;?></span>
 		</p>
 		<p class="description">
 			<label>General Description: </label> <span class="field" title="You can only edit this field in the common name record"><?=$variety->description; ?>

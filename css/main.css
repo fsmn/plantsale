@@ -1,6 +1,4 @@
-@import "ui.all.css";
-
-@import "ui.datepicker.css";
+@import "ui.theme.css";
 
 .narrText {
 	padding: 3px;
@@ -887,7 +885,7 @@ ul.inline-list li {
 	padding: 1em;
 	left-margin: 50%;
 	overflow: scroll;
-	height: 90%;
+	max-height: 400px;
 }
 
 

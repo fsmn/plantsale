@@ -133,7 +133,7 @@
 			
 		});
 		
-		$(document).on("hover | focus",".plant-row",function(){
+		$(document).on("click | focus",".plant-row",function(){
 			if(! $(this).hasClass("active") ){
 				my_id = this.id.split("_")[1];
 				$(this).addClass("active");

@@ -1,5 +1,5 @@
 
-$(document).live("click",".set-current-year", function(){
+$(document).on("click",".set-current-year", function(){
 	my_uri = $(location).attr("href");
 	
 	form_data = {

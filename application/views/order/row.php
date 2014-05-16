@@ -43,7 +43,7 @@
 			<td class="order-grower_code field"><input type="text" name="grower_code" value=""/>
 			</td>
 			<td>
-			<? if(DB_ROLE == "admin"): ?>
+			<? if(DB_ROLE == 1): ?>
 			<input type="submit" value="Add" class="button"/>
 			<? endif;?>
 			</td>

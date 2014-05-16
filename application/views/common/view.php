@@ -2,7 +2,7 @@
 <h2>
 	<?=$common->name;?>
 </h2>
-<? if(DB_ROLE == "admin"):?>
+<? if(DB_ROLE == 1):?>
 <? $buttons[] = array("selection" => "common" , "text" => "Edit", "class" => array("button","edit","common-edit"), "id" => "ec_$common->id", "type" => "span", "title" => "Edit this record");?>
 <?=create_button_bar($buttons);?>
 <? endif; ?>
@@ -21,7 +21,7 @@
 <?
 
 
-if (DB_ROLE == "admin") {
+if (DB_ROLE == 1) {
 	print create_button_bar ( array (
 			array (
 					"selection" => "variety",

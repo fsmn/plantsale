@@ -26,7 +26,7 @@
 					"text" => "Masquerade" );
 			?>
 			<? endif;?>
-			<? if(DB_ROLE == "admin"):?>
+			<? if(DB_ROLE == 1):?>
 			<? $edit_buttons[] = array("selection"=>"auth",
 					"class"=>"button new user-create",
 					"href"=>site_url("user/create"),
@@ -39,7 +39,7 @@
 			<?=create_edit_field("email",$user->email,"Email Address");?>
 			
 			<? //do not allow the root user to change their own role ?>
-			<? if(DB_ROLE == "admin" && $this->session->userdata("user_id") != 1):?>
+			<? if(DB_ROLE == 1 && $this->session->userdata("user_id") != 1):?>
 			<?=create_edit_field("is_active",$user->is_active,"Status", array("class"=>"dropdown","attributes"=>"menu='user_status'"));?>
 			<?=create_edit_field("db_role",$user->db_role, "Database Role",
 			array("class"=>"dropdown","attributes"=>"menu='db_role'"));?>

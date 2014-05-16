@@ -152,7 +152,7 @@ class User_model extends CI_Model
 	function set_db_role($id){
 		$data["db_role"] = $this->input->post("db_role");
 		//only the root user can make this change;
-		if(DB_ROLE == "admin" && $this->session->userdata("user_id") == 1){
+		if(DB_ROLE == 1 && $this->session->userdata("user_id") == 1){
 			$this->db->where("id", $id);
 			$this->db->update("user",$data);
 		}

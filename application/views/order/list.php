@@ -45,7 +45,7 @@ if ($orders) :
 		?>
 		<tr class="grouping" id="order_<?=$order->id;?>">
 			<td>
-			<? if(DB_ROLE == "admin"):?>
+			<? if(DB_ROLE == 1):?>
 			<span class="button edit edit-order"
 				id="<? printf("edit-order_%s",$order->id);?>">Edit</span>
 				<? else: ?>

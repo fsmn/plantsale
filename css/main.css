@@ -88,17 +88,35 @@ loggedout indicates the opposite.
 }
 
 /*Login Form elements*/
-div.login {
+.login {
 	position: relative;
-	top: 3em;
 	padding: 2em 5em;
 	text-align: left;
 	width: 30em;
 	margin: auto;
 	display: block;
 	border-radius: 5px;
-	box-shadow: 4px 4px 11px #000;
-	height: 250px;
+	box-shadow: 4px 4px 11px black;
+}
+
+.login h2 {
+	font-size: 1.5em;
+	text-align: center;
+	position: relative;
+	border-radius: 5px;
+	padding: 5px;
+	box-shadow: 1px 1px 1px black;
+}
+
+.login label {
+	display: block;
+}
+
+.login input[type="text"],.login input[type="password"] {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
 }
 
 div.login.errors {
@@ -420,6 +438,11 @@ legend {
 	position: relative;
 	padding: 0 5em 2em 2em;
 	margin-top: 2.5em;
+}
+
+.not-logged-in #main {
+	margin-top: 0;
+	padding: 0;
 }
 
 #content {

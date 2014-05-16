@@ -2,25 +2,20 @@
 
 class MY_Controller extends CI_Controller
 {
-	function __construct()
-	{
+	function __construct(){
 		parent::__construct();
-		if(!is_logged_in($this->session->all_userdata())){
-			//determine the query to redirect after login. 
+		
+		if(!$this->ion_auth->logged_in()){
+			define("DB_ROLE",0);
 			$uri = $_SERVER["REQUEST_URI"];
 			if($uri != "/auth"){
 				bake_cookie("uri", $uri);
 			}
-			redirect("auth");
-			die();
+			redirect("auth/login");
 		}else{
-			define("DB_ROLE",$this->session->userdata("db_role"));
+			$this->load->model("ion_auth_model");
+			define("DB_ROLE",$this->ion_auth_model->get_users_groups ()->row ()->id);
 		}
-	}
-
-	function index()
-	{
-		redirect();
 	}
 
 }

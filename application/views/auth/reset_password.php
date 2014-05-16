@@ -1,30 +1,23 @@
-<?php #reset_password 
-$output = "";
-if($errors):
-	if(is_array($errors)){
-		foreach($errors as $msg){
-			$output =  " -$msg<br/>\n";
-		}
-	}else{
-		$output =  "$errors";
-	}
-endif;
-?>
-<div class="login resetter">
-<div class="login-title">Password Reset</div>
-<form id="password-resetter" name="password-resetter" action="<?=site_url("auth/complete_reset")?>" method="post" >
+<h1><?php echo lang('reset_password_heading');?></h1>
 
-<div id='password_note' class='notice error-text' style="display:none"><?=$output;?></div>
-<input type="hidden" name="reset_hash" id="reset_hash" value="<?=$reset_hash;?>"/>
-<input type="hidden" name="id" id="id" value="<?=$id;?>"/>
-<div class="reset-fields">
-<p><label for="new_password">New Password: </label><br/>
-<input type="password" id="new_password" name="new_password" value=""/></p>
-<p><label for="check_password">Re-enter New Password: </label><br/>
-<input type="password" id="check_password" name="check_password" value=""/>
-</p>
-</div>
-<p><input type="submit" name="submit" id="change-password" class="button" style="display:none" value="Reset" /></p>
+<div id="infoMessage"><?php echo $message;?></div>
 
-</form>
-</div>
+<?php echo form_open('auth/reset_password/' . $code);?>
+
+	<p>
+		<label for="new_password"><?php echo sprintf(lang('reset_password_new_password_label'), $min_password_length);?></label> <br />
+		<?php echo form_input($new_password);?>
+	</p>
+
+	<p>
+		<?php echo lang('reset_password_new_password_confirm_label', 'new_password_confirm');?> <br />
+		<?php echo form_input($new_password_confirm);?>
+	</p>
+
+	<?php echo form_input($user_id);?>
+	<?php echo form_hidden($csrf); ?>
+
+	<p><?php echo form_submit('submit', lang('reset_password_submit_btn'),"class='button'");?></p>
+
+<?php echo form_close();?>
+

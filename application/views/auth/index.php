@@ -1,20 +1,31 @@
-<?php #authentication index ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<title>Friends School Plant Sale Database</title>
-<link href="<?=base_url();?>/css/main.css" type="text/css" rel="stylesheet" media="all" />
-<link href="<?=base_url();?>/css/color.css" type="text/css" rel="stylesheet" media="all" />
+<h2><?php echo lang('index_heading');?></h2>
 
-<script type="text/javascript" src="<?=base_url();?>js/jquery.min.js"></script>
-<script type="text/javascript" src="<?=base_url();?>js/password.js"></script>
-</head>
-<body class="not-logged-in <?=$this->uri->segment(1);?>">
-<div id="main">
-<?php 
-$this->load->view($target);
-?>
-</div>
-</body>
-</html>
+<div id="infoMessage"><?php echo $message;?></div>
+
+<table class="list">
+	<tr>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Email</th>
+		<th>Groups</th>
+		<th>Status</th>
+		<th>Action</th>
+	</tr>
+	<?php foreach ($users as $user):?>
+		<tr>
+			<td><?php echo $user->first_name;?></td>
+			<td><?php echo $user->last_name;?></td>
+			<td><?php echo $user->email;?></td>
+			<td>
+				<?php foreach ($user->groups as $group):?>
+					<?php echo anchor("auth/edit_group/".$group->id, $group->name) ;?><br />
+                <?php endforeach?>
+			</td>
+			<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, "Active","class='deactivate-user' id='deactivate-user_$user->id'") : anchor("auth/activate/". $user->id, "Inactive");?></td>
+			<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit', "class='button edit small edit-user' id='edit-user_$user->id'") ;?></td>
+		</tr>
+	<?php endforeach;?>
+</table>
+
+<div class="button-box"><ul class="button-list"><li><?php echo anchor('auth/create_user', "New User", "class='button new new-user'")?></li>
+<li><?php echo anchor('auth/create_group', "New Group", "class='button new new-group'")?></li></ul></div>

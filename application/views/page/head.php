@@ -31,7 +31,7 @@ var base_url = '<?=base_url("index.php") . "/";?>';
 <!-- General Script  -->
 <script type="text/javascript" src="<?=base_url("js/general.js");?>"></script>
 
-<? if(DB_ROLE == "admin") {
+<? if('DB_ROLE' == 1) {
    $this->load->view("page/secure_javascript.php");
 } ?>
 <!-- Common Name Scripts -->

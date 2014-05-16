@@ -4,10 +4,18 @@ if(isset($print) && $print == TRUE){
 }else{
 	$print = FALSE;
 }
-$body_class = $this->uri->segment(1);
+$body_classes[] = $this->uri->segment(1);
 if($this->uri->segment(1) == ""){
-	$body_class = "front";
+	$body_classes[] = "front";
 }
+
+if($this->ion_auth->logged_in()){
+	$body_classes[] = "logged-in";
+}else{
+	$body_classes[] = "not-logged-in";
+}
+
+$body_class = implode(" ",$body_classes);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -24,15 +32,14 @@ if($this->uri->segment(1) == ""){
 <? else: ?>
 <div id='page-title'>Friends School Plant Sale Database</div>
 <? endif;?>
+<? if($this->ion_auth->logged_in()):?>
 <div id='utility'><? $this->load->view('page/utility');?></div>
 <div id='navigation'>
 <?  $this->load->view('page/navigation'); ?>
 </div>
+<? endif;?>
 </div>
 <?php endif; ?>
-<div id="alert" class="message"><?=$this->session->userdata("notice");
-?></div>
-<?=$this->session->set_userdata("notice",NULL);?>
 
 <!-- main -->
 

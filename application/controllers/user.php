@@ -63,7 +63,7 @@ class user extends MY_Controller
 
 	function create()
 	{
-		if(DB_ROLE == "admin"){
+		if(DB_ROLE == 1){
 			$data["db_role"] = "user";
 			$data["action"] = "insert";
 			$data["target"] = "user/edit";
@@ -85,7 +85,7 @@ class user extends MY_Controller
 
 	function insert()
 	{
-		if(DB_ROLE == "admin"){
+		if(DB_ROLE == 1){
 			$id = $this->user->insert();
 			redirect("user/view/$id");
 		}

@@ -42,29 +42,6 @@ body {
 	margin: 3px;
 }
 
-.student_roster {
-	height: 85%;
-	overflow: auto;
-	width: 50%
-}
-
-/*
-loggedin style changes the background to make sure users can tell they are logged in.
-
-loggedout indicates the opposite.
-*/
-.loggedout {
-	font-size: 1.5em;
-	stext-align: center;
-	margin-top: -45px;
-	padding: 10px;
-	position: fixed;
-	left: 10%;
-	right: 10%;
-	width: auto;
-	border-style: solid;
-	border-width: 1px;
-}
 
 .not-logged-in #main {
 	width: 960px;
@@ -72,15 +49,7 @@ loggedout indicates the opposite.
 	display: block;
 }
 
-.loggedin {
-	position: absolute;
-	right: 10%;
-	float: right;
-	margin-top: -45px;
-	padding: 10px;
-	border-style: solid;
-	border-width: 1px;
-}
+
 
 .editForm {
 	width: 100%;
@@ -106,6 +75,8 @@ loggedout indicates the opposite.
 	border-radius: 5px;
 	padding: 5px;
 	box-shadow: 1px 1px 1px black;
+	text-transform: none;
+	background-color: #FAFFBD;
 }
 
 .login label {

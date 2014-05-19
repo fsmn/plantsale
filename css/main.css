@@ -879,7 +879,7 @@ ul.inline-list li {
 	padding: 1em;
 	left-margin: 50%;
 	overflow: scroll;
-	max-height: 400px;
+	max-height: 80%;
 }
 
 

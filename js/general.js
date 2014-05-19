@@ -63,7 +63,7 @@ $(window).scroll(function(){
 	if($(window).scrollTop()>250){
 		if(top.css('position')!='fixed'){
 			top.css('position','fixed');
-			top.css('top', 10);
+			top.css('top', 15);
 			top.css('left','45%');
 			//top.css('background-color','#000');
 		}

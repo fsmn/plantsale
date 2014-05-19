@@ -229,5 +229,62 @@ class Variety extends MY_Controller {
 		$this->get_flags ( $this->input->post ( "variety_id" ) );
 
 	}
+	
+	
+	/*** FILE MANAGEMENT ***/
+	function new_image()
+	{
+		if( $this->input->get('variety_id') ){
+			$data['variety_id'] = $this->input->get('variety_id');
+			$data['error'] = '';
+			$data['image'] = null;
+			$this->load->view('variety/image', $data);
+		}
+	
+	}
+	
+	function attach_image()
+	{
+		$config['upload_path'] = './files';
+		$this->load->helper('directory');
+		$config['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG';
+		$config['max_size'] = '1000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+	
+		$this->load->library('upload', $config);
+	
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+			print_r($error);
+		}
+		else
+		{
+			$file_data = $this->upload->data();
+			$data['image_display_name'] = $file_data['file_name'];
+			$data['image_description'] = $this->input->post('image_description');
+			$this->load->model("image_model");
+			$variety_id = $this->input->post("variety_id");
+			$id = $this->image_model->insert($variety_id, $file_data);
+			redirect("variety/view/$variety_id");
+		}
+	}
+	
+	function delete_image()
+	{
+		$id = $this->input->post("id");
+		$this->load->model("image_model");
+		$variety_id = $this->image_model->get($id)->variety_id;
+		$this->image_model->delete($id);
+		if($this->input->post("ajax")== 1){
+			$data["variety"]->id = $variety_id;
+			$this->load->view("image/view",$data);
+		}else{
+			redirect("variety/view/$variety_id");
+		}
+	}
+	
+
 
 }

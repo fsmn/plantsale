@@ -127,7 +127,7 @@
 		$(document).on('blur','#variety-search-body', function(event) {
 			
 			$("#search_list").fadeOut();
-			$('#variety-search-body').css({variety:'#666'}).val('Find Plants');
+			$('#variety-search-body').css({color:'#666'}).val('Find Plants');
 			//$("#search_list").remove();
 			
 			
@@ -201,7 +201,6 @@
 		});
 		
 		$(document).on("click",".show-flat-totals", function(){
-			console.log("yes");
 			$.ajax({
 				type:"get",
 				url: base_url + "index/get_flats",
@@ -209,4 +208,46 @@
 					$("#flat-totals").html(data);
 				}
 			});
+		});
+
+		$(document).on("click",".delete-image",function(){
+			question = confirm("Are you sure you want to delete this image? This cannot be undone!");
+			if(question){
+				query = confirm("Really, it cannot be undone in a special undoable way! Go ahead?");
+				if(query){
+					my_id = this.id.split("_")[1];
+					form_data = {
+							ajax: 1,
+							id: my_id
+					};
+					$.ajax({
+						type:"post",
+						url: base_url + "variety/delete_image/",
+						data: form_data,
+						success:function(data){
+							$("#image").html(data);
+						},
+						error: function(data){
+							$("#image").html(data);
+						}
+					});
+				}
+			}
+		});
+		
+		$(document).on("click",".add-image",function(){
+			my_id = this.id.split("_")[1];
+			form_data = {
+					ajax: 1,
+					variety_id: my_id
+			};
+			$.ajax({
+				type: "get",
+				url: base_url + "variety/new_image",
+				data: form_data,
+				success: function(data){
+					show_popup("Add an Image",data, "auto");
+				}
+			});
+			return false;
 		});

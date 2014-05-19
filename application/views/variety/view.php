@@ -55,17 +55,19 @@
 		</fieldset>
 			<?=create_edit_field("plant_color",$variety->plant_color, "Plant Color(s)",array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?>
 
-			<div class="block" id="flags">
+			
+	<div class="block" id="flags">
 			<h4>Flags</h4>
 			<div id="flag-list">
 			<? $this->load->view("flag/list");?>
-</div>
+	</div>
 	<? if(DB_ROLE == 1):?>
 			<? $flag_buttons[] = array("selection"=>"flag","text"=>"New Flag","type"=>"span","class"=>"button new flag-add","id"=>"fa_$variety->id");?>
 			<?=create_button_bar($flag_buttons);?>
 	<?endif;?>
-		</div>
 	</div>
+	</div>
+
 	<div class='common-info column column-even'>
 		<p>
 			<label>Common Name:</label> <span class="field"><a href="<?=site_url("common/view/$variety->common_id");?>"
@@ -93,7 +95,10 @@
 		<p>
 				<?=create_edit_field("note", $variety->note, "Variety Description", array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
-
+<div class="block" id="image">
+	<? $this->load->view("image/view"); ?>
+	
+</div>
 
 	</div>
 </div>

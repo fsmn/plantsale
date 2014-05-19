@@ -856,6 +856,7 @@ ul.inline-list {
 	display: block;
 	clear: both;
 	height: 2em;
+	min-width: 576px;
 }
 
 ul.inline-list li {

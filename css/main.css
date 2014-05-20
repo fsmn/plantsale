@@ -1,11 +1,5 @@
 @import "ui.theme.css";
 
-.narrText {
-	padding: 3px;
-	border-style: solid;
-	border-width: 1px;
-}
-
 .handle { /*cursor:move*/
 	
 }
@@ -42,14 +36,11 @@ body {
 	margin: 3px;
 }
 
-
 .not-logged-in #main {
 	width: 960px;
 	position: relative;
 	display: block;
 }
-
-
 
 .editForm {
 	width: 100%;
@@ -200,36 +191,6 @@ div.login-title {
 	padding-top: 1em;
 }
 
-.page-list .student_list {
-	width: 250px;
-	margin-left: 0;
-}
-
-/*student search elements*/
-div.result {
-	font-size: 1em;
-	position: absolute;
-	left: 200px;
-	max-height: 600px;
-	margin: 2%;
-	padding-right: 2%;
-	padding-left: 2%;
-}
-
-/*student list elements*/
-div.entry,div.list {
-	width: 60%;
-	text-indent: 2%;
-	height: 2ex;
-	padding: 2px;
-	border-top-width: 1px;
-	border-top-style: solid;
-	border-right-width: 1px;
-	border-right-style: solid;
-	border-left-width: 1px;
-	border-left-style: solid;
-}
-
 /*form elements*/
 .label {
 	font-size: 1em;
@@ -242,7 +203,7 @@ div.entry,div.list {
 	width: 70%;
 }
 
-.button,#navigation,#advancedSearch,#browser_warning,.notice,.warning,#searchForm fieldset,h2,h3,h4,h5,.support-view legend,input[type="submit"],#navigation input[type="text"]
+.button,#navigation,#browser_warning,.notice,.warning,h2,h3,h4,h5,input[type="submit"],#navigation input[type="text"]
 	{
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -509,64 +470,9 @@ li.attendance:first-child {
 .field {
 	margin-bottom: .5em;
 }
-/*column boxes (see attendance_list.inc.html)
-*/
-.columnbox {
-	width: 100%;
-}
 
-.quartercolumn {
-	width: 25%;
-	float: left;
-	padding-top: 5px;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-}
-
-.fifthcolumn {
-	width: 20%;
-	float: left;
-}
-
-/* Editor for Student Info page */
-#editor {
-	height: 130px;
-	width: 380px;
-	left: 280px;
-	top: 100px;
-	position: absolute;
-	visibility: hidden;
-}
-
-.chartbox {
-	width: 100%;
-	height: 25px;
-}
-
-.chartcol20 {
-	width: 20%;
-	height: 100px;
-	float: left;
-}
-
-.chartcol15 {
-	width: 15%;
-	height: 100px;
-	float: left;
-}
-
-.chartcol12 {
-	width: 12.5%;
-	height: 100px;
-	float: left;
-}
-
-.charttop {
-	width: 100%
-}
-
-.chartbottom {
-	width: 100%;
+.inline-box {
+	display: inline-block;
 }
 
 img:hover {
@@ -663,8 +569,8 @@ table.list tbody tr {
 
 table.list.compressed {
 	font-size: .9em;
-	padding:0;
-	border-spacing:0;
+	padding: 0;
+	border-spacing: 0;
 }
 
 table.files {
@@ -694,13 +600,11 @@ td.field input {
 table.chart td {
 	border: 1px solid #ddd;
 	padding: 5px;
-	
 }
 
 table.chart thead td {
 	border: none;
 	text-align: center
-	
 }
 
 a.link,input.link {
@@ -710,8 +614,6 @@ a.link,input.link {
 a.link:hover,input.link:hover {
 	cursor: pointer;
 }
-
-
 
 .icon {
 	vertical-align: middle;
@@ -779,9 +681,9 @@ ul.buttons li {
 fieldset.block label {
 	float: left;
 }
+
 .field {
 	padding: 0px 15px;
-	
 }
 
 textarea.save-field {
@@ -807,8 +709,9 @@ textarea.save-field {
 	border-right: 1px solid #ccc;
 	padding: 5px;
 }
+
 .block {
-	clear:both;
+	clear: both;
 }
 
 .field-set {
@@ -817,8 +720,8 @@ textarea.save-field {
 
 .field-group {
 	clear: both;
-
 }
+
 fieldset.field-group {
 	margin: 5px 0;
 	border: 1px solid #ddd;
@@ -828,6 +731,7 @@ fieldset.field-group {
 	float: left;
 	padding: 0;
 }
+
 .field-group .field-set label {
 	display: block;
 }
@@ -852,11 +756,12 @@ fieldset.field-group {
 ul.inline-list {
 	padding: .5em 0;
 	margin: 0;
+	margin-left: 10px;
 	list-style: none;
 	display: block;
 	clear: both;
-	height: 2em;
-	min-width: 576px;
+	min-height: 2em;
+	text-indent: -10px;
 }
 
 ul.inline-list li {
@@ -883,24 +788,23 @@ ul.inline-list li {
 	max-height: 80%;
 }
 
-
-
 .plant-info .field {
 	width: 15ex;
 	padding: 0 1ex;
 }
 
 .plant-info .field.year {
-    width: 4ex;
+	width: 4ex;
 }
 
 .plant-info .field.species {
+	
 }
 
 .plant-info .field.genus {
 	width: 10ex;
 }
 
-.plant-info .field.variety, .plant-info .field.common-name{
+.plant-info .field.variety,.plant-info .field.common-name {
 	width: 20ex;
 }

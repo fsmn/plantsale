@@ -70,7 +70,7 @@ class Variety extends MY_Controller {
 		$data ["target"] = "variety/view";
 		$data ["title"] = sprintf ( "Viewing Info for %s (variety)", $variety->variety );
 		if ($data["mini_view"] = $this->input->get ( "ajax" ) == 1) {
-			$this->load->view ("variety/view", $data );
+			$this->load->view ("variety/mini_view", $data );
 		} else {
 			$data["mini_view"] = FALSE;
 			$this->load->view ( "page/index", $data );
@@ -184,15 +184,46 @@ class Variety extends MY_Controller {
 		}
 
 	}
+	
+	function edit_value(){
+		$data["name"] = $this->input->get("field");
+
+		$value = $this->input->get("value");
+		$data["value"] = $value;
+		if(is_array($value)){
+			$data["value"] = implode(",",$value);
+		}
+		$data["id"] = $this->input->get("id");
+		$data["size"] = strlen($data["value"]) + 5;
+		$data["type"] = $this->input->get("type");
+		$data["category"] = $this->input->get("category");
+
+		switch($data["type"]){
+			case "dropdown":
+				 $output = $this->_get_dropdown($data["category"], $data["value"], $data["name"]);
+				 break;
+			case "multiselect":
+				$output = $this->_get_multiselect($data["category"],  $data["value"], $data["name"]);
+				break;
+			default:
+				$output = form_input($data);
+		}
+		
+		echo $output;
+	}
 
 	function update_value() {
 
 		$id = $this->input->post ( "id" );
+		$value = $this->input->post ( "value" );
+		if(is_array($value)){
+			$value = implode(",",$value);
+		}
 		$values = array (
-				$this->input->post ( "field" ) => $value = $this->input->post ( "value" )
+				$this->input->post ( "field" ) => $value
 		);
 		$this->variety->update ( $id, $values );
-		echo $this->input->post ( "value" );
+		echo $value;
 
 	}
 
@@ -285,6 +316,23 @@ class Variety extends MY_Controller {
 		}
 	}
 	
-
+	function _get_dropdown($category, $value, $field)
+	{
+		$this->load->model("menu_model", "menu");
+		$categories = $this->menu->get_pairs($category, array("field"=>"value","direction"=>"ASC"));
+		$pairs = get_keyed_pairs($categories, array("key","value"));
+		return form_dropdown($field, $pairs, $value, "class='live-field'");
+	}
+	
+	function _get_multiselect($category, $value, $field)
+	{
+		$this->load->model("menu_model", "menu");
+		$categories = $this->menu->get_pairs($category, array("field"=>"value","direction"=>"ASC"));
+		$pairs = get_keyed_pairs($categories, array("key","value"));
+		$output = array();
+		$output[] = form_multiselect($field, $pairs, $value, "id='$field'" );
+		$buttons =  implode(" ", $output);
+		echo $buttons . sprintf("<span class='button save-multiselect' target='%s'>Save</span>", $field);
+	}
 
 }

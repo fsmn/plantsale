@@ -14,13 +14,13 @@
 <div class="grouping block variety-info" id="variety">
 	<div class='column column-odd'>
 		<div class='field-set'>
-			<?=create_edit_field("variety", $variety->variety, "Variety",array("envelope"=>"div"));?>
+			<?=edit_field("variety", $variety->variety, "Variety","variety",$variety->id, array("envelope"=>"div"));?>
 		</div>
 		<div class='field-set'>
 			<label for="genus">Genus:&nbsp;</label><span class='field'><?=$variety->genus;?></span>
 		</div>
 		<div class='field-set'>
-			<?=create_edit_field("species", $variety->species, "Species",array("envelope"=>"div"));?>
+			<?=edit_field("species", $variety->species, "Species","variety",$variety->id, array("envelope"=>"div"));?>
 		</div>
 		<fieldset class="field-group">
 			<legend class="label">
@@ -28,13 +28,13 @@
 			</legend>
 
 			<div class="field-set">
-				<?=create_edit_field("min_height", $variety->min_height,"Min",array("envelope"=>"div"));?>
+				<?=edit_field("min_height", $variety->min_height,"Min","variety",$variety->id, array("envelope"=>"div"));?>
 			</div>
 			<div class="field-set">
-				<?=create_edit_field("max_height", $variety->max_height, "Max", array("envelope"=>"div"));?>
+				<?=edit_field("max_height", $variety->max_height, "Max", "variety",$variety->id, array("envelope"=>"div"));?>
 			</div>
 			<div class="field-set">
-				<?=create_edit_field("height_unit", $variety->height_unit, "Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
+				<?=edit_field("height_unit", $variety->height_unit, "Measure", "variety",$variety->id, array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
 			</div>
 		</fieldset>
 		<fieldset class="field-group">
@@ -43,17 +43,17 @@
 			</legend>
 
 			<div class="field-set">
-				<?=create_edit_field("min_width", $variety->min_width, "Min",array("envelope"=>"div"));?>
+				<?=edit_field("min_width", $variety->min_width, "Min","variety",$variety->id, array("envelope"=>"div"));?>
 			</div>
 			<div class="field-set">
-				<?=create_edit_field("max_width", $variety->max_width, "Max",array("envelope"=>"div"));?>
+				<?=edit_field("max_width", $variety->max_width, "Max","variety",$variety->id, array("envelope"=>"div"));?>
 			</div>
 			<div class="field-set">
-				<?=create_edit_field("width_unit", $variety->width_unit, "Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
+				<?=edit_field("width_unit", $variety->width_unit, "Measure","variety",$variety->id,  array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
 			</div>
 
 		</fieldset>
-			<?=create_edit_field("plant_color",$variety->plant_color, "Plant Color(s)",array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?>
+			<?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id, array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?>
 
 			
 	<div class="block" id="flags">

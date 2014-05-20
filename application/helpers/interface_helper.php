@@ -162,13 +162,18 @@ function create_button_bar($buttons, $options = NULL) {
  *        	(envelope, class, attributes)
  */
 function create_edit_field($field_name, $value, $label, $options = array()) {
-
 	$envelope = "p";
 	if (array_key_exists ( "envelope", $options )) {
 		$envelope = $options ["envelope"];
 	}
+	$id = "";
+	$table = "";
+	if(array_key_exists("table",$options) && array_key_exists("id",$options)){
+		$table = $options["table"];
+		$id = $options["id"];
+	}
 	/* The id is split with the "-" delimiter in javascript when the field is clicked */
-	$output [] = sprintf ( "<%s class='field-envelope' id='field-%s'>", $envelope, $field_name );
+	$output [] = sprintf ( "<%s class='field-envelope' id='%s__%s__%s'>", $envelope, $table,$field_name, $id );
 	$output [] = sprintf ( "<label>%s:&nbsp;</label>", $label );
 	if ($value == "") {
 		$value = "&nbsp;";
@@ -184,6 +189,8 @@ function create_edit_field($field_name, $value, $label, $options = array()) {
 	if (array_key_exists ( "format", $options )) {
 		$format = sprintf ( "format='%s'", $options ["format"] );
 	}
+	
+
 	/*
 	 * Attributes are non-standard html attributes that are used by javascript these can include the type of input to be generated
 	 */
@@ -191,9 +198,15 @@ function create_edit_field($field_name, $value, $label, $options = array()) {
 	if (array_key_exists ( "attributes", $options )) {
 		$attributes = $options ["attributes"];
 	}
-	$output [] = sprintf ( "<span class='%s' %s %s>%s</span></%s>", $field_class, $attributes, $format, $value, $envelope );
+	$output [] = sprintf ( "<span class='%s' %s %s name='%s'>%s</span></%s>", $field_class, $attributes, $format,$field_name, $value, $envelope );
 	return implode ( "\r", $output );
 
+}
+
+function edit_field($field_name, $value, $label, $table,$id, $options = array()){
+	$options["id"] = $id;
+	$options["table"] =$table;
+	return create_edit_field($field_name, $value, $label, $options);
 }
 
 /**
@@ -216,3 +229,5 @@ function create_checkbox($name, $values, $selections = array()) {
 	return implode ( "\r", $output );
 
 }
+
+

@@ -1,0 +1,203 @@
+@CHARSET "UTF-8";
+
+@import
+	url(http://fonts.googleapis.com/css?family=Lato:400,900|Ubuntu:400,700|Merriweather+Sans:400,800,700,300)
+	;
+
+/*
+font-family: 'Lato', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+font-family: 'Merriweather', serif;
+font-family: 'Merriweather Sans', sans-serif;
+*/
+body.tabloid.portrait {
+	height: 17in;
+	width: 11in;
+	margin: .5in;
+	padding: .5in;
+	font-family: 'Merriweather Sans', sans-serif;
+	position: relative;
+	border: 1px solid #eee;
+}
+
+.catalog-number,.common-name {
+	font-size: 4em;
+	font-weight: 800;
+}
+
+.catalog-number {
+	float: left;
+	margin-top: .5in;
+}
+
+.common-name {
+	float: right;
+	margin-top: .5in;
+	clear: right;
+}
+
+.latin-name {
+	clear: left;
+	font-weight: normal;
+	float: left;
+	font-size: 3em;
+	font-style: italic;
+	padding-top: 1in;
+}
+
+.variety {
+	float: right;
+	padding-top: 1in;
+	font-weight: 700;
+	font-size: 3em;
+	clear: right;
+	font-weight: 700;
+}
+
+.image {
+	clear: left;
+	width: 5.5in;
+	height: 5.5in;
+	margin: 0 auto;
+	padding-top: .5in;
+}
+
+img {
+	position: relative;
+	margin: 0 auto;
+	width: 5.5in;
+	height: 5.5in;
+}
+
+.description {
+	width: 10in;
+	text-align: center;
+	margin: 0 auto;
+	padding: .5in;
+	font-size: 2.5em;
+	margin: 0 auto;
+}
+
+.note {
+	width: 10in;
+	text-align: center;
+	margin: 0 auto;
+	padding-bottom: .5in;
+	font-size: 2em;
+	font-style: italic;
+}
+
+.icons {
+	position: relative;
+	margin: 0 auto;
+}
+
+.icons ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.icons ul li {
+	display: inline block;
+	float: left;
+	height: 1in;
+	width: 1in;
+	text-indent: -9999px;
+	background-repeat: no-repeat;
+}
+
+.sunlight {
+	
+}
+
+.full_sun {
+	background-image: url(../images/sun-icon.png);
+}
+
+.part-sun {
+	background-image: url(../images/part-icon.png);
+}
+
+.shade {
+	background-image: url(../images/shade-icon.png);
+}
+
+.flags {
+	
+}
+
+.bees {
+	background-image: url(../images/bees-icon.png);
+}
+
+.new {
+	background-image: url(../images/new-icon.png);
+	width: 2.37in !important;
+}
+
+.saturday {
+	
+}
+
+.details-group {
+	padding-top: 2in;
+}
+
+.price-group {
+	float: right;
+}
+.pot-size {
+	clear: both; 
+	font-weight: 300;
+	font-size: 2.5em;
+}
+
+.price {
+	font-size: 4em;
+	font-weight: 800;
+}
+
+.dimensions {
+	padding-top: .25in;
+	clear: left;
+	clear: left;
+}
+
+.dimensions .width,.dimensions .height {
+	display: inline-block;
+	padding: 0 1em;
+}
+
+.dimensions label {
+	display: block;
+	font-size: 1.5em;
+}
+
+.dimensions .text {
+	font-size: 2.5em;
+	font-weight: 300;
+}
+
+.grower-name {
+	padding-top: 1.5em;
+	font-size: 2.5em;
+	font-weight: 300;
+	font-style: italic;
+}
+
+.internals {
+	clear: both;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: #aaa;
+}
+
+.year {
+	display: inline-block;
+}
+
+.grower {
+	display: inline-block;
+}

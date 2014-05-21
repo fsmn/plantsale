@@ -247,11 +247,16 @@ class Variety extends MY_Controller
         $this->get_flags($this->input->post("variety_id"));
     }
 
-    function tabloid ()
+    function tabloid ($id)
     {
-        $this->load->view("variety/tabloid", array(
-                "title" => "Test"
-        ));
+    	$id = $this->uri->segment(3);
+    	$data['variety'] = $this->variety->get($id);
+    	$data['order'] = $this->order->get_for_variety($id,2014);
+    	$data['flags'] = $this->flag->get_for_variety($id);
+    	$data['title'] = sprintf("Tabloid Poster for %s %s",$data['variety']->common_name, $data['variety']->variety);
+    	$data["target"] = "variety/print/tabloid";
+    	$data["classes"] = "tabloid portrait";
+        $this->load->view("variety/print/index", $data);
     }
 
     /**

@@ -56,7 +56,7 @@ class Flag_Model extends CI_Model
 	function get_for_variety($variety_id){
 		$this->db->where("variety_id",$variety_id);
 		$this->db->from("flag");
-		$this->db->select("flag.*,icon.source");
+		$this->db->select("flag.*,icon.source,icon.thumbnail");
 		$this->db->join("menu","flag.name=menu.key");
 		$this->db->join("icon","menu.id=icon.menu_id");
 		$output = $this->db->get()->result();

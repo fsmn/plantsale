@@ -4,57 +4,63 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // tabloid.php Chris Dart May 20, 2014 7:58:21 PM chrisdart@cerebratorium.com
 
 ?>
-<html>
-<head>
-<title>Tabloid Sign</title>
-<link
-	type="text/css"
-	rel="stylesheet"
-	media="all"
-	href="<?=base_url("css/signage.css")?>" />
-</head>
-<body class="tabloid portrait">
-	<div class="catalog-number">A321</div>
-	<div class="common-name">Dental Floss</div>
-	<div class="latin-name">Lombricoides</div>
-	<div class="variety">Aescarus</div>
+<div class="document" style="page-break-inside: avoid;page-brea-after: always;">
+	<div class="catalog-number"><?=format_catalog($variety->id,$variety->category);?></div>
+	<div class="common-name"><?=$variety->common_name;?></div>
+	<div class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></div>
+	<div class="variety"><?=$variety->variety;?></div>
 	<div class="image">
-		<img src="<?=site_url("files/1078.jpg");?>" />
+		<img src="<?=site_url("files/$variety->image_name");?>" />
 	</div>
-	<div class="description">Fuzzy flower heads in attractive umbels. Easy
-		to grow. Seeds eaten by finches.</div>
-	<div class="note">Lavender-blue. Tall, vigorous, and good for cutting.</div>
+	<div class="description"><?=$variety->description;?></div>
+	<div class="note"><?=$variety->note;?></div>
 	<div class="details-group">
 		<div class="price-group">
-			<div class="pot-size">6 plants in a pack</div>
-			<div class="price"><?=get_as_price(5);?></div>
+			<div class="pot-size"><?=get_value($order,"pot_size");?></div>
+			<div class="price"><?=get_as_price(get_value($order,"price"));?></div>
 		</div>
 		<div class="icons">
-			<ul class="sunlight">
-				<li class="full_sun">Full Sun</li>
-				<li class="part-sun">Part Sun</li>
+		<ul class="sunlight">
+			<? $sunlight = explode(",",$variety->sunlight);
+			foreach($sunlight as $light){
+				switch($light){
+				case "full_sun":
+					echo sprintf("<li><img src='%s'/></li>", base_url("images/sun-icon.png"));
+					break;
+				case "part_sun":
+					echo sprintf("<li><img src='%s'/></li>", base_url("images/part-icon.png"));
+					break;
+				case "shade":
+					echo sprintf("<li><img src='%s'/></li>",base_url("images/shade-icon.png"));
+					break;
+				}
+			}
+			?>
 			</ul>
 			<ul class="flags">
-				<li class="bees">Bees</li>
-				<li class="new">New</li>
-				<li class="saturday">Saturday Delivery</li>
+				<? foreach($flags as $flag){
+					echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
+				}?>
 			</ul>
 		</div>
 		<div class="dimensions">
+		<?if($variety->min_width):?>
 			<div class="width">
 				<label>Width</label>
-				<div class="text">20-30 inches</div>
+				<div class="text"><?=format_dimensions($variety->min_width, $variety->max_width, $variety->width_unit);?></div>
 			</div>
+			<?endif;?>
+			<? if($variety->min_height):?>
 			<div class="height">
 				<label>Height</label>
-				<div class="text">20-30 inches</div>
+				<div class="text"><?=format_dimensions($variety->min_height, $variety->max_height, $variety->height_unit);?></div>
 			</div>
+			<?endif;?>
 		</div>
-		<div class="grower-name">Rush Creek Growers</div>
+		<div class="grower-name"><?=get_value($order,"grower_name");?></div>
 	</div>
 	<div class="internals">
-		<div class="year">Year: 2014</div>
-		<div class="grower">RC</div>
+		<div class="year">Year: <?=get_value($order,"year");?></div>
+		<div class="grower"><?=get_value($order,"grower_id");?></div>
 	</div>
-</body>
-</html>
+</div>

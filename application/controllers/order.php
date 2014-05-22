@@ -143,9 +143,8 @@ class Order extends MY_Controller {
 	
 	}
 
-	function edit() {
+	function edit($id) {
 
-		$id = $this->input->get ( "id" );
 		$data ["order"] = $this->order->get ( $id );
 		$data ["variety_id"] = $data ["order"]->variety_id;
 		$pot_sizes = $this->order->get_pot_sizes ();

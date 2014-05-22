@@ -120,6 +120,7 @@ class Order_Model extends CI_Model {
 		}
 		$this->db->from ( "order" );
 		$this->db->join("grower","order.grower_id=grower.id");
+		$this->db->select("order.*,grower.grower_name");
 		$this->db->order_by ( "year", "desc" );
 		if ($year) {
 			$output = $this->db->get ()->row ();

@@ -2,6 +2,7 @@
 $i = 1;
 
 ?>
+<h4>Click on a plant to view details. Press "tab" or "shift-tab" to move up and down the list"</h4>
 <div id="plant-box" class="column">
 <div>
 <?foreach($plants as $plant): ?>

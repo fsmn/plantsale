@@ -47,7 +47,7 @@
 		$.ajax({
 			type:"get",
 			data: form_data,
-			url: base_url + "order/edit",
+			url: base_url + "order/edit/" + my_id,
 			success: function(data){
 				show_popup("Editing an Order",data,"auto");
 			}

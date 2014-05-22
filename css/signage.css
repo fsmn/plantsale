@@ -58,13 +58,22 @@ body.tabloid.portrait {
 	height: 5.5in;
 	margin: 0 auto;
 	padding-top: .5in;
+	position: relative;
 }
 
-.image img {
+.image img.photo {
 	position: relative;
 	margin: 0 auto;
 
 	height: 5.5in;
+	box-shadow: 1px 1px 2px #666;
+}
+
+.image .saturday-delivery img {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	box-shadow: 4px 4px 8px #333;
 }
 
 .description {

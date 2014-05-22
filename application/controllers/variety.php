@@ -196,6 +196,9 @@ class Variety extends MY_Controller
             case "multiselect":
                 $output = $this->_get_multiselect($data["category"], $data["value"], $data["name"]);
                 break;
+            case "textarea":
+            	$output = form_textarea($data,$data["value"]);
+            	break;
             default:
                 $output = form_input($data);
         }

@@ -29,7 +29,10 @@ $(document).ready(function(){
 				my_type = "checkbox";
 			}else if($(this).hasClass("multiselect")){
 				my_type = "multiselect";
+			}else if($(this).hasClass("textarea")){
+				my_type = "textarea";
 			}
+			console.log(my_type);
 			form_data = {
 					table: my_attr[0],
 					field: my_name,

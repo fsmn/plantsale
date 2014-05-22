@@ -91,7 +91,7 @@
 		<span class="field" title="You can only edit this field in the common name record"><?=$variety->extended_description;?></span>
 		</p>
 		<p>
-				<?=create_edit_field("note", $variety->note, "Variety Description", array("class"=>"textarea","envelope"=>"div"));?>
+				<?=edit_field("note", $variety->note, "Variety Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
 <div class="block" id="image">
 	<? $this->load->view("image/view"); ?>

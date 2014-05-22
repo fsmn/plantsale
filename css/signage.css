@@ -1,7 +1,8 @@
 @CHARSET "UTF-8";
 
 @import
-	url(http://fonts.googleapis.com/css?family=Lato:400,900|Ubuntu:400,700|Merriweather+Sans:400,800,700,300|Merriweather:400,700,900,300);
+	url(http://fonts.googleapis.com/css?family=Lato:400,900|Ubuntu:400,700|Merriweather+Sans:400,800,700,300|Merriweather:400,700,900,300)
+	;
 
 /*
 font-family: 'Lato', sans-serif;
@@ -26,26 +27,21 @@ body.tabloid.portrait {
 
 .catalog-number {
 	float: left;
-	margin-top: .5in;
 }
 
 .common-name {
 	float: right;
-	margin-top: .5in;
 	clear: right;
 }
 
 .latin-name {
 	clear: left;
-	font-weight: normal;
 	float: left;
 	font-size: 3em;
-	padding-top: 1in;
 }
 
 .variety {
 	float: right;
-	padding-top: 1in;
 	font-weight: 700;
 	font-size: 3em;
 	clear: right;
@@ -64,7 +60,6 @@ body.tabloid.portrait {
 .image img.photo {
 	position: relative;
 	margin: 0 auto;
-
 	height: 5.5in;
 	box-shadow: 1px 1px 2px #666;
 }
@@ -115,12 +110,15 @@ body.tabloid.portrait {
 }
 
 .full_sun {
+	
 }
 
 .part-sun {
+	
 }
 
 .shade {
+	
 }
 
 .flags {
@@ -138,8 +136,9 @@ body.tabloid.portrait {
 .price-group {
 	float: right;
 }
+
 .pot-size {
-	clear: both; 
+	clear: both;
 	font-weight: 300;
 	font-size: 2.5em;
 }

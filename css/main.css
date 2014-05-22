@@ -1,12 +1,13 @@
 @import "ui.theme.css";
-
+@import
+	url(http://fonts.googleapis.com/css?family=Ubuntu:400,700,900,300);
 .handle { /*cursor:move*/
 	
 }
 
 body {
 	font-size: 13px;
-	font-family: tahoma, sans-serif;
+	font-family: 'Ubuntu', sans-serif;
 	margin: 10px;
 	padding: 10px;
 	padding-right: 15px;
@@ -421,7 +422,6 @@ h3,.support-view legend {
 
 h4 {
 	font-weight: bold;
-	text-transform: uppercase;
 	text-align: left;
 	position: relative;
 	border-style: solid;
@@ -785,7 +785,7 @@ ul.inline-list li {
 	padding: 1em;
 	left-margin: 50%;
 	overflow: scroll;
-	max-height: 80%;
+	max-height: 500px;
 }
 
 .plant-info .field {

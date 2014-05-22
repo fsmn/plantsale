@@ -1,13 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-<input
+<!-- <input
 	type="hidden" id="id" name="id" value="<?=$variety->id;?>" />
 
 <input type="hidden"
 	id="order_id" name="order_id"
-	value="<?=get_value($current_order,"id");?>" />
+	value="<?=get_value($current_order,"id");?>" /> -->
 	<h4><?=$variety->common_name;?> <?=$variety->variety;?></h4>
 <p>
-<a href="<?=base_url("variety/view/$variety->id");?>" title="View and edit the full variety record" class="button">View/Edit</a>
+<?=$this->load->view("variety/menu");?>
 </p>
 <div class="grouping block variety-info" id="variety">
 		<fieldset class="field-group inline-box">

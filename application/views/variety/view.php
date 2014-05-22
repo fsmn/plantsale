@@ -8,9 +8,7 @@
 	<?="$variety->common_name: $variety->variety";?>
 </h2>
 
-				<? if(DB_ROLE == 1):?>
-				<div class="button delete variety-delete">Delete Variety</div>
-				<? endif;?>
+				<? $this->load->view("variety/menu");?>
 <div class="grouping block variety-info" id="variety">
 	<div class='column column-odd'>
 		<div class='field-set'>

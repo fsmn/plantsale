@@ -29,6 +29,29 @@
 				}
 			
 			});
+			
+			$(document).ready(function(){
+				$(".button-box").on("click",".variety-edit",function(){
+					return false;
+				});
+				
+				$(".button-box").on("click",".variety-print-options",function(){
+//					my_id = this.id.split("_")[1];
+//					form_data = {
+//							ajax: 1,
+//					};
+//					$.ajax({
+//						type:"get",
+//						url: base_url + "variety/print_options/" + my_id,
+//						data: form_data,
+//						success: function(data){
+//							show_popup("Print Options",data,"auto");
+//						}
+//					});
+//					
+//					return false;
+				});
+			});
 
 		$(document).on("click",".flag-add", function() {
 			my_id = $("#id").val();

@@ -246,10 +246,15 @@ class Variety extends MY_Controller
         $this->flag->delete($id);
         $this->get_flags($this->input->post("variety_id"));
     }
+    
+    function print_options($id){
+    	//$data["id"] = $id;
+    	//$this->load->view("variety/print/options", $data);
+    	redirect("variety/tabloid/$id");
+    }
 
     function tabloid ($id)
     {
-    	$id = $this->uri->segment(3);
     	$data['variety'] = $this->variety->get($id);
     	$data['order'] = $this->order->get_for_variety($id,2014);
     	$data['flags'] = $this->flag->get_for_variety($id);

@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 ?>
 <div class="document" style="page-break-inside: avoid;page-brea-after: always;">
-	<div class="catalog-number"><?=$order->catalog_number;?>F003</div>
+	<div class="catalog-number"><?=$order->catalog_number;?></div>
 	<div class="common-name"><?=$variety->common_name;?></div>
 
 	<div class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></div>

@@ -38,6 +38,7 @@ body.tabloid.portrait {
 	clear: left;
 	float: left;
 	font-size: 3em;
+	padding-top: 1in;
 }
 
 .variety {
@@ -46,6 +47,7 @@ body.tabloid.portrait {
 	font-size: 3em;
 	clear: right;
 	font-weight: 700;
+	padding-top: 1in;
 }
 
 .image {

@@ -75,7 +75,7 @@ body.tabloid.portrait {
 .image img.photo {
 	position: relative;
 	margin: 0 auto;
-	height: 5.5in;
+	max-height: 5.5in;
 	width: 7in;
 	box-shadow: 1px 1px 2px #666;
 }

@@ -1,8 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $i = 1;
 ?>
-<h4>Click on a plant to view details. Press "tab" or "shift-tab" to move up and down the list"</h4>
 <?=create_button_bar(array(array("text"=>"Print Tabloid","class"=>"button print variety-print-tabloid","href"=>site_url("variety/print_result/tabloid"),"target"=>"_blank","selection"=>"print")));?>
+
+<h4>Click on a plant to view details. Press "tab" or "shift-tab" to move up and down the list"</h4>
 
 <div id="plant-box" class="column">
 	<div>

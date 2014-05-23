@@ -252,6 +252,29 @@ a.button {
 .button.print {
 	
 }
+
+
+.button.print {
+	background-color: #CF46CC;
+	background: -moz-linear-gradient(top, #CF46CC 0, #8C2D8B 100%);
+	background: linear-gradient(top, #CF46CC 0, #8C2D8B 100%);
+	background: -webkit-linear-gradient(top, #CF46CC 0, #8C2D8B 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #CF46CC),
+		color-stop(100%, #8C2D8B));
+	background: -o-linear-gradient(top, #CF46CC 0, #8C2D8B 100%);
+	background: -ms-linear-gradient(top, #CF46CC 0, #8C2D8B 100%);
+}
+
+.button.print:hover {
+	background-color:#8C2D8B ;
+	background: -moz-linear-gradient(top, #8C2D8B 0,  #CF46CC 100%);
+	background: linear-gradient(top, #8C2D8B 0, #CF46CC 100%);
+	background: -webkit-linear-gradient(top, #8C2D8B 0, #CF46CC 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #8C2D8B),
+		color-stop(100%, #CF46CC));
+	background: -o-linear-gradient(top, #8C2D8B 0, #CF46CC 100%);
+	background: -ms-linear-gradient(top, #8C2D8B 0, #CF46CC 100%);
+}
 /* #CAD6E9 */
 /* #C3D0E2 */
 /* header page layout elements */

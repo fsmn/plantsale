@@ -63,10 +63,10 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 		<label for="year">Year: </label><input type="text" name="year"
 			value="<?=get_current_year();?>" />
 	</p>
-	<p>
+	<!-- <p>
 	<label for="print_omit">Exclude Plants Omitted from Printing</label>
 	<input type="checkbox" name="print_omit" id="print_omit" value="1" checked/>
-	</p>
+	</p> -->
 	<p>
 		<input type="submit" value="Find" class="button" />
 	</p>

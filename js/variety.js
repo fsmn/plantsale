@@ -1,4 +1,32 @@
-			$(document).on("click",".variety-create", function() {
+$(document).ready(function(){
+	$(".plant-info").on("click","input[type='checkbox']",function(){
+		my_id = this.id.split("_")[1];
+		if($(this).attr("checked")){
+			checked = $(this).val();
+			$(this).parents(".plant-info").addClass("omitted");
+		}else{
+			checked = 0;
+			$(this).parents(".plant-info").removeClass("omitted");
+		}
+		form_data = {
+				id: my_id,
+				value: checked,
+				field: "print_omit"
+		};
+		$.ajax({
+			type: "post",
+			url: base_url + "order/update_value",
+			data: form_data,
+			success: function(data){
+				console.log(data);
+			}
+			
+		});
+	});
+});
+
+
+$(document).on("click",".variety-create", function() {
 				my_id = this.id.split("_")[1];
 				form_data = {
 					common_id : my_id,
@@ -160,7 +188,6 @@
 			if(! $(this).hasClass("active") ){
 				my_id = this.id.split("_")[1];
 				$(this).addClass("active");
-				console.log(my_id);
 				form_data = {
 						ajax: "1"
 				};

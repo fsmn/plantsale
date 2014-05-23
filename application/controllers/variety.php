@@ -120,9 +120,14 @@ class Variety extends MY_Controller
                 "plant_color",
                 "sunlight",
                 "description",
-                "year"
+                "year",
+        		"print_omit"
         );
         $data["plants"] = $this->variety->find($variables);
+        foreach($data["plants"] as $plant){
+        	$print_result[] = $plant->id;
+        }
+        $this->session->set_userdata("print_list",$print_result);
         $data["title"] = "List of Varieties";
         $data["target"] = "variety/full_list";
         $data["full_list"] = TRUE;
@@ -138,6 +143,8 @@ class Variety extends MY_Controller
         $data["params"] = $params;
         $this->load->view("page/index", $data);
     }
+    
+   
 
     function search_by_name ()
     {
@@ -250,13 +257,28 @@ class Variety extends MY_Controller
         $this->get_flags($this->input->post("variety_id"));
     }
     
+    function print_result(){
+    	//get the session data "print_list" from the find function
+    	$plants = $this->session->userdata("print_list");
+    	foreach($plants as $plant){
+    		$data['plants'][$plant]['variety'] = $this->variety->get($plant);
+    		$data['plants'][$plant]['order'] = $this->order->get_for_variety($plant,2014);
+    		$data['plants'][$plant]['flags'] = $this->flag->get_for_variety($plant);
+    	}
+    	$data["classes"] = "tabloid portrait";
+    	$data["title"] = "Printing List";
+    	$data["target"] = "variety/print/multiple";
+    	$this->load->view("variety/print/index",$data);
+    	
+    }
+   
     function print_options($id){
     	//$data["id"] = $id;
     	//$this->load->view("variety/print/options", $data);
     	redirect("variety/tabloid/$id");
     }
 
-    function tabloid ($id)
+    function tabloid ($id,$print = FALSE)
     {
     	$data['variety'] = $this->variety->get($id);
     	$data['order'] = $this->order->get_for_variety($id,2014);
@@ -264,7 +286,13 @@ class Variety extends MY_Controller
     	$data['title'] = sprintf("Tabloid Poster for %s %s",$data['variety']->common_name, $data['variety']->variety);
     	$data["target"] = "variety/print/tabloid";
     	$data["classes"] = "tabloid portrait";
-        $this->load->view("variety/print/index", $data);
+    	if($print){
+    		return $this->load->view($data["target"], $data, TRUE);
+    		
+    	}else{
+    		$this->load->view("variety/print/index", $data);
+    		
+    	}
     }
 
     /**

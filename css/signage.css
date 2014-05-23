@@ -20,9 +20,20 @@ body.tabloid.portrait {
 	border: 1px solid #eee;
 }
 
-.catalog-number,.common-name {
-	font-size: 4em;
+.document {
+	height: 17in;
+	width: 11in;
+	margin: 0 auto;
+	position:relative;
+	clear: both;
+}
+
+.header {
+	position: absolute; 
 	font-weight: 800;
+	font-size: 4em;
+	top: .5in;
+	width: 100%;
 }
 
 .catalog-number {
@@ -31,38 +42,41 @@ body.tabloid.portrait {
 
 .common-name {
 	float: right;
-	clear: right;
+}
+
+.subheader {
+	position: absolute;
+	top:1.5in;
+	width: 100%;
 }
 
 .latin-name {
-	clear: left;
 	float: left;
 	font-size: 3em;
-	padding-top: 1in;
 }
 
 .variety {
 	float: right;
 	font-weight: 700;
 	font-size: 3em;
-	clear: right;
 	font-weight: 700;
-	padding-top: 1in;
+	width: 50%;
+	text-align: right;
 }
 
 .image {
-	clear: left;
-	width: 7.5in;
 	height: 5.5in;
-	margin: 0 auto;
-	padding-top: .5in;
 	position: relative;
+	width: 7.5in;
+	margin: 0 auto;
+	
 }
 
 .image img.photo {
 	position: relative;
 	margin: 0 auto;
 	height: 5.5in;
+	width: 7in;
 	box-shadow: 1px 1px 2px #666;
 }
 
@@ -73,8 +87,13 @@ body.tabloid.portrait {
 	box-shadow: 4px 4px 8px #333;
 }
 
+.description-group {
+	width: 100%;
+	position: absolute;
+	top: 2.75in;
+}
+
 .description {
-	width: 10in;
 	text-align: center;
 	margin: 0 auto;
 	padding: .5in;
@@ -86,9 +105,14 @@ body.tabloid.portrait {
 	width: 10in;
 	text-align: center;
 	margin: 0 auto;
-	padding-bottom: .5in;
 	font-size: 2em;
 	font-style: italic;
+}
+
+.details-group {
+position: absolute;
+top: 14in;
+width: 100%;
 }
 
 .icons {
@@ -131,10 +155,6 @@ body.tabloid.portrait {
 	
 }
 
-.details-group {
-	padding-top: 2in;
-}
-
 .price-group {
 	float: right;
 }
@@ -171,16 +191,24 @@ body.tabloid.portrait {
 	font-weight: 300;
 }
 
+.footer-group {
+	padding-top: .25in;
+	clear: both;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+
 .grower-name {
-	padding-top: 1.5em;
 	font-size: 2.5em;
 	font-weight: 300;
 	font-style: italic;
+	float: left;
 }
 
 .internals {
-	clear: both;
-	position: absolute;
+	float: right;
 	bottom: 0;
 	right: 0;
 	color: #aaa;

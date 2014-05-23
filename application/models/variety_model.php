@@ -220,6 +220,8 @@ class Variety_Model extends CI_Model {
 					"description" 
 			) )) {
 				$this->db->like ( $parameter->key, $parameter->value );
+			}elseif($parameter->key == "print_omit"){
+				$this->db->where("(order.print_omit is NULL OR order.print_omit != 1)",NULL,FALSE);
 			} else {
 				$this->db->where ( $parameter->key, $parameter->value );
 			}
@@ -230,7 +232,7 @@ class Variety_Model extends CI_Model {
 		$this->db->select ( "variety.*" );
 		
 		// select order fields
-		$this->db->select ( "order.id as order_id,year,flat_size,flat_cost,plant_cost,pot_size,price,count_presale,count_midsale,count_dead" );
+		$this->db->select ( "order.id as order_id,year,flat_size,flat_cost,plant_cost,pot_size,price,count_presale,count_midsale,count_dead,print_omit" );
 		$this->db->select ( "sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number" );
 		$this->db->group_by ( "variety.id" );
 		$result = $this->db->get ()->result ();

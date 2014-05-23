@@ -1,6 +1,7 @@
 @import "ui.theme.css";
 @import
 	url(http://fonts.googleapis.com/css?family=Ubuntu:400,700,900,300);
+	
 .handle { /*cursor:move*/
 	
 }
@@ -150,11 +151,7 @@ div.login-title {
 
 /* general notices */
 #notice {
-	position: absolute;
-	top: 25%;
-	left: 15%;
 	overflow: auto;
-	visibility: hidden;
 	float: none;
 	padding: 12px;
 	border-style: solid;
@@ -793,6 +790,11 @@ ul.inline-list li {
 	padding: 0 1ex;
 }
 
+.plant-info .field.omit-plant {
+	width: 3ex;
+	
+}
+
 .plant-info .field.year {
 	width: 4ex;
 }
@@ -807,4 +809,8 @@ ul.inline-list li {
 
 .plant-info .field.variety,.plant-info .field.common-name {
 	width: 20ex;
+}
+
+.omitted {
+	color: #aaa;
 }

@@ -20,6 +20,7 @@ class Order_Model extends CI_Model {
 	var $remainder_saturday;
 	var $remainder_sunday;
 	var $grower_code;
+	var $print_omit;
 	var $rec_modified;
 	var $rec_modifier;
 
@@ -50,7 +51,8 @@ class Order_Model extends CI_Model {
 				"remainder_friday",
 				"remainder_saturday",
 				"remainder_sunday",
-				"grower_code"
+				"grower_code",
+				"print_omit",
 		);
 
 		for($i = 0; $i < count ( $variables ); $i ++) {

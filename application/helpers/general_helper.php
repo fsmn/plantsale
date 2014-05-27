@@ -105,10 +105,10 @@ function get_user_name($user) {
 
 function format_latin_name($genus, $species = NULL) {
 
-	$output [] = sprintf ( "<strong>%s</strong>", ucfirst ( $genus ) );
+	$output [] = ucfirst ( $genus );
 	
 	if ($species) {
-		$output [] = sprintf ( "<em>%s</em>", strtolower ( $species ) );
+		$output [] = strtolower ( $species );
 	}
 	return implode ( " ", $output );
 
@@ -120,9 +120,25 @@ function format_catalog($order_id, $category) {
 
 }
 
+function abbr_unit($measure) {
+
+	switch ($measure) {
+		case "Feet" :
+			$output = "&#39;";
+			break;
+		case "Inches" :
+		default :
+			$output = "&quot;";
+			break;
+	}
+	return $output;
+
+}
+
 function format_dimensions($min, $max, $unit = "Inches", $direction = NULL) {
 
 	$output = "";
+	
 	if ($min == $max) {
 		$output = sprintf ( "%s %s", $min, ucfirst ( $unit ) );
 	} else {

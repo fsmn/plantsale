@@ -13,8 +13,6 @@ font-family: 'Merriweather Sans', sans-serif;
 body.tabloid.portrait {
 	height: 17in;
 	width: 11in;
-	margin: .5in 0;
-	padding: .5in;
 	font-family: 'Merriweather Sans', sans-serif;
 	position: relative;
 	border: 1px solid #eee;
@@ -22,37 +20,40 @@ body.tabloid.portrait {
 
 .document {
 	height: 17in;
-	width: 11in;
+	width: 10.5in;
 	margin: 0 auto;
-	position:relative;
+	position: relative;
 	clear: both;
+	page-break-inside: avoid;
+	page-break-after: always;
 }
 
 .header {
-	position: absolute; 
-	font-weight: 800;
-	font-size: 4em;
-	top: .5in;
+	position: absolute;
+	font-size: 5.5em;
 	width: 100%;
 }
 
 .catalog-number {
 	float: left;
+	font-weight: normal;
 }
 
 .common-name {
 	float: right;
+	font-weight: 800;
 }
 
 .subheader {
 	position: absolute;
-	top:1.5in;
+	top: 1.5in;
 	width: 100%;
 }
 
 .latin-name {
 	float: left;
 	font-size: 3em;
+	font-style: italic;
 }
 
 .variety {
@@ -65,18 +66,17 @@ body.tabloid.portrait {
 }
 
 .image {
-	height: 5.5in;
+	height: 6.5in;
 	position: relative;
-	width: 7.5in;
+	width: 9.5in;
 	margin: 0 auto;
-	
 }
 
 .image img.photo {
 	position: relative;
 	margin: 0 auto;
-	max-height: 5.5in;
-	width: 7in;
+	max-height: 6.5in;
+	width: 9in;
 	box-shadow: 1px 1px 2px #666;
 }
 
@@ -91,28 +91,22 @@ body.tabloid.portrait {
 	width: 100%;
 	position: absolute;
 	top: 2.75in;
+	text-align: left;
+	font-size: 2em;
 }
 
 .description {
-	text-align: center;
-	margin: 0 auto;
-	padding: .5in;
-	font-size: 2.5em;
-	margin: 0 auto;
+padding-top:1em;
 }
 
 .note {
-	width: 10in;
-	text-align: center;
-	margin: 0 auto;
-	font-size: 2em;
-	font-style: italic;
+
 }
 
 .details-group {
-position: absolute;
-top: 14in;
-width: 100%;
+	position: absolute;
+	top: 14in;
+	width: 100%;
 }
 
 .icons {
@@ -124,10 +118,16 @@ width: 100%;
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	float: left;
+}
+
+.icons ul.sunlight {
+	display: block;
+	padding-right: 15ex;
 }
 
 .icons ul li {
-	display: inline block;
+	display: inline-block;
 	float: left;
 }
 

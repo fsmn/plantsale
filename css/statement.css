@@ -1,0 +1,224 @@
+@CHARSET "UTF-8";
+
+@import
+	url(http://fonts.googleapis.com/css?family=Lato:400,900|Ubuntu:400,700|Merriweather+Sans:400,800,700,300|Merriweather:400,700,900,300)
+	;
+
+/*
+font-family: 'Lato', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+font-family: 'Merriweather', serif;
+font-family: 'Merriweather Sans', sans-serif;
+*/
+body.tabloid.portrait {
+	height: 5.5in;
+	width: 8.5in;
+	font-family: 'Merriweather Sans', sans-serif;
+	position: relative;
+	border: 1px solid #eee;
+}
+
+.document {
+	height: 5.5in;
+	width: 8in;
+	margin: 0 auto;
+	position: relative;
+	clear: both;
+	page-break-inside: avoid;
+	page-break-after: always;
+}
+
+.header {
+	position: absolute;
+	font-size: 3.5em;
+	width: 100%;
+}
+
+.catalog-number {
+	float: left;
+	font-weight: normal;
+}
+
+.common-name {
+	float: right;
+	font-weight: 800;
+}
+
+.subheader {
+	position: absolute;
+	top: 1in;
+	width: 100%;
+}
+
+.latin-name {
+	font-size: 2em;
+	font-style: italic;
+}
+
+.variety {
+	font-size: 2.3em;
+	font-weight: 700;
+}
+
+.description-group {
+	width: 100%;
+	position: absolute;
+	top: 2in;
+	text-align: left;
+	font-size: 1em;
+}
+
+.image {
+	position: relative;
+	float: left;
+}
+
+.image img.photo {
+	position: relative;
+	margin: 0 auto;
+	height: 2.5in;
+	max-width: 4in;
+	box-shadow: 1px 1px 2px #666;
+}
+
+.image .saturday-delivery img {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	box-shadow: 4px 4px 8px #333;
+}
+
+
+
+.description-text {
+	float: right;
+width: 4.5in;
+}
+
+.note {
+
+}
+
+.details-group {
+	position: absolute;
+	top: 4in;
+	width: 100%;
+}
+
+.icons {
+	position: relative;
+	margin: 0 auto;
+	
+}
+
+.icons ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	float: left;
+}
+
+.icons ul.sunlight {
+	display: block;
+	padding-right: 15ex;
+}
+
+.icons ul li {
+	display: inline-block;
+	float: left;
+}
+
+.icons ul li img {
+	width: 36px;
+}
+
+.sunlight {
+	
+}
+
+.full_sun {
+	
+}
+
+.part-sun {
+	
+}
+
+.shade {
+	
+}
+
+.flags {
+	
+}
+
+.saturday {
+	
+}
+
+.price-group {
+	float: right;
+}
+
+.pot-size {
+	clear: both;
+	font-weight: 300;
+	font-size: 2.5em;
+}
+
+.price {
+	font-size: 4em;
+	font-weight: 800;
+}
+
+.dimensions {
+	padding-top: .25in;
+	clear: left;
+	clear: left;
+}
+
+.dimensions .width,.dimensions .height {
+	display: inline-block;
+	padding: 0 1em;
+}
+
+.dimensions label {
+	display: block;
+	font-size: 1.5em;
+}
+
+.dimensions .text {
+	font-size: 2.5em;
+	font-weight: 300;
+}
+
+.footer-group {
+	padding-top: .25in;
+	clear: both;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+.grower-name {
+	font-size: 1.5em;
+	font-weight: 300;
+	font-style: italic;
+	float: right;
+}
+
+.internals {
+	float: right;
+	bottom: 0;
+	right: 0;
+	color: #aaa;
+}
+
+.year {
+	display: inline-block;
+}
+
+.grower {
+	display: inline-block;
+}

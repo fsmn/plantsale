@@ -140,9 +140,9 @@ function format_dimensions($min, $max, $unit = "Inches", $direction = NULL) {
 	$output = "";
 	
 	if ($min == $max) {
-		$output = sprintf ( "%s %s", $min, ucfirst ( $unit ) );
+		$output = sprintf ( "%s%s", $min, ucfirst ( $unit ) );
 	} else {
-		$output = sprintf ( "%s-%s %s", $min, $max, ucfirst ( $unit ) );
+		$output = sprintf ( "%s-%s%s", $min, $max, ucfirst ( $unit ) );
 	}
 	if ($direction) {
 		$output = sprintf ( "%s %s", $output, $direction );

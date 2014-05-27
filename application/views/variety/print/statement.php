@@ -22,10 +22,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	<? endif;?>
 </div>
-<div class="description-text">
+
 	<div class="description"><?=$variety->description;?></div>
 	<div class="note"><?=$variety->note;?></div>
-</div>
 </div>
 <div class="details-group">
 	<div class="price-group">

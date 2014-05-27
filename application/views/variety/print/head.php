@@ -4,7 +4,7 @@
 	type="text/css"
 	rel="stylesheet"
 	media="all"
-	href="<?=base_url("css/signage.css")?>" />
+	href="<?=base_url("css/tabloid.css")?>" />
 	<link
 	type="text/css"
 	rel="stylesheet"

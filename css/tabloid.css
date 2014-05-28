@@ -21,12 +21,10 @@ body {
 .document {
 	height: 17in;
 	width: 11in;
-	margin: 0 auto;
 	position: relative;
 	clear: both;
 	page-break-inside: avoid;
 	page-break-after: always;
-	   border: 1px solid #eee;
 	
 }
 
@@ -133,6 +131,10 @@ padding-top:1em;
 	float: left;
 }
 
+.icons ul li img {
+    width: 72px;
+}
+
 .sunlight {
 	
 }
@@ -149,8 +151,7 @@ padding-top:1em;
 	
 }
 
-.flags {
-	
+.flags img {
 }
 
 .saturday {
@@ -209,17 +210,3 @@ padding-top:1em;
 	float: right;
 }
 
-.internals {
-	float: right;
-	bottom: 0;
-	right: 0;
-	color: #aaa;
-}
-
-.year {
-	display: inline-block;
-}
-
-.grower {
-	display: inline-block;
-}

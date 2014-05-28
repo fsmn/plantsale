@@ -13,9 +13,24 @@ font-family: 'Merriweather Sans', sans-serif;
 body.tabloid.portrait {
 	height: 17in;
 	width: 11in;
-	font-family: 'Merriweather Sans', sans-serif;
 	position: relative;
 	border: 1px solid #eee;
+}
+
+.merriweather-sans {
+	   font-family: 'Merriweather Sans', sans-serif;
+}
+
+.merriweather {
+	   font-family: 'Merriweather', sans-serif;
+}
+
+.ubuntu {
+	   font-family: 'Ubuntu', sans-serif;
+}
+
+.lato {
+	   font-family: 'Lato', sans-serif;
 }
 
 .document {
@@ -30,7 +45,7 @@ body.tabloid.portrait {
 
 .header {
 	position: absolute;
-	font-size: 5.5em;
+	font-size: 4em;
 	width: 100%;
 }
 

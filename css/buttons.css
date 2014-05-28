@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+
+.button {
+	-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	text-align: center;
+	position: static;
+	padding: .15em;
+	padding-right: .25em;
+	padding-left: .25em;
+	border-style: solid;
+	border-width: 1px;
+	cursor: pointer;
+	font-weight: normal;
+	background-image: -webkit-linear-gradient(top, #5cb85c 0, #419641 100%);
+	background-image: linear-gradient(to bottom, #5cb85c 0, #419641 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5cb85c',
+		endColorstr='#ff419641', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	background-repeat: repeat-x;
+	border-color: #3e8f3e;
+	text-decoration:none;
+	color: #fff;
+}
+
+.button-box {
+	font-family: helvetica,sans-serif;
+	height: 25px;
+}
+
+ul.button-list {
+	list-style: none;
+	padding-left: 0px;
+}
+
+ul.button-list li {
+	display: inline;
+	padding: .35em 0 .35em .25em
+}
+
+ul.button-list li .button {
+	margin: 0 5px;
+}
+
+.button.active {
+	color: #ccc;
+	opacity: .8;
+}

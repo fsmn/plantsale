@@ -106,7 +106,6 @@ a {
 	opacity: 1;
 	color: #000;
 	border: none;
-	filter: Alpha(Opacity =                                                 90);
 	/* 	background: #91b347 url(images/button_20_over.png) 50% 50% repeat-x; */
 	background: #67b021;
 	background: -moz-linear-gradient(top, #489310 0, #67b021 100%);

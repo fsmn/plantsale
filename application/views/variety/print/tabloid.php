@@ -10,8 +10,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="common-name"><?=$variety->common_name;?></div>
 	</div>
 <div class="subheader">
-	<div class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></div>
 	<div class="variety"><?=$variety->variety;?></div>
+	<div class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></div>
 	</div>
 	<div class="description-group">
 	<div class="image">

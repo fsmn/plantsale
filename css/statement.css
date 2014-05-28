@@ -1,8 +1,6 @@
 @CHARSET "UTF-8";
 
-@import
-	url(http://fonts.googleapis.com/css?family=Lato:400,900|Ubuntu:400,700|Merriweather+Sans:400,800,700,normal|Merriweather:400,700,900,normal)
-	;
+@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic);
 
 /*
 font-family: 'Lato', sans-serif;
@@ -11,29 +9,26 @@ font-family: 'Merriweather', serif;
 font-family: 'Merriweather Sans', sans-serif;
 */
 body {
-	height: 5.5in;
-	width: 8.5in;
-	position: relative;
-	margin:0;
+	width: 8.5in; 
+	margin: 0;
 	padding: 0;
-}
+	position: relative;
+font-family: 'Merriweather Sans', sans-serif;}
 
 .document {
-	height: 5.5in;
-	width: 8.5in;
+	height: 4.9in; 
+	width : 100%;
 	margin: 0;
 	padding: 0;
 	position: relative;
 	clear: both;
-	page-break-inside: avoid;
+	/*page-break-inside: avoid;*/
 	page-break-after: always;
-	border: 1px solid #eee;
-	overflow: hidden;
 }
 
 .header {
 	position: absolute;
-	font-size: 3.5em;
+	font-size: 48px;
 	width: 100%;
 }
 
@@ -49,7 +44,7 @@ body {
 
 .subheader {
 	position: absolute;
-	top: .85in;
+	top: .75in;
 	width: 100%;
 }
 
@@ -57,20 +52,21 @@ body {
 	font-size: 1.8em;
 	font-style: italic;
 	float: left;
-	width: 45%;
+	width: 49%;
 }
 
 .variety {
-	font-size: 2em;
+	font-size: 32px;
 	font-weight: 700;
 	float: right;
-	width: 45%;
+	width: 49%;
+	text-align: right;
 }
 
 .description-group {
 	width: 100%;
 	position: absolute;
-	top: 1.65in;
+	top: 1.45in;
 	text-align: left;
 	font-size: 1em;
 }
@@ -78,27 +74,29 @@ body {
 .image {
 	position: relative;
 	float: left;
+	width:240px;
+	height:240px;
+	overflow: hidden;
 }
 
 .image img.photo {
 	position: relative;
 	margin: 0 auto;
-	height: 2.5in;
-	max-width: 4in;
 	box-shadow: 1px 1px 2px #666;
+	width: 240px;
 }
 
 .image .saturday-delivery img {
 	position: absolute;
 	bottom: 0;
-	left: 0;
+	right: 0;
 	box-shadow: 4px 4px 8px #333;
 	width: .5in;
 }
 
 .description-text {
 	float: right;
-	width: 4in;
+	width: 65%;
 }
 
 .note {
@@ -112,8 +110,8 @@ body {
 .icons {
 	position: absolute;
 	margin: 0 auto;
-	top: 3.5in;
-	left: 4in
+	top: 4in;
+	left: 0;
 }
 
 .icons ul {
@@ -163,51 +161,50 @@ body {
 
 .price-group {
 	position: absolute;
-	bottom: 3.5em;
+	bottom: .6in;
 	right: 0;
 }
 
 .pot-size {
 	font-weight: normal;
-	font-size: 1.5em;
+	font-size: 24px;
 }
 
 .price {
-	font-size: 2em;
+	font-size: 32px;
 	font-weight: 800;
 }
 
 .dimensions {
 	position: absolute;
-	bottom: .25in;
-	left: 0;
+	top: 3.7in;
+	left: 4in;
 }
 
 .dimensions .width,.dimensions .height {
 	display: inline-block;
-	padding: 0 1em;
+	padding: 0 16px;
 }
 
 .dimensions label {
-	font-size: 1em;
+	font-size: 16px;
 }
 
 .dimensions .text {
-	font-size: 2em;
+	font-size: 32px;
 	font-weight: normal;
 }
 
 .footer-group {
 	position: absolute;
 	left: 0;
-	bottom: 1.3em;
+	bottom: 0;
 	width: 100%;
 }
 
 .grower-name {
-	font-size: 1em;
+	font-size: 16px;
 	font-weight: normal;
 	font-style: italic;
 	float: right;
 }
-

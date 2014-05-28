@@ -281,7 +281,8 @@ class Variety extends MY_Controller
                     $plant);
         }
         $data["classes"] = "";
-        $data["title"] = "Printing List";
+        $count = count($plants);
+        $data["title"] = sprintf("%s-Size List-%s Pages",ucfirst($format),$count);
         $data["target"] = "variety/print/multiple";
         $this->load->view("variety/print/index", $data);
     }
@@ -299,9 +300,9 @@ class Variety extends MY_Controller
         $data['variety'] = $this->variety->get($id);
         $data['order'] = $this->order->get_for_variety($id, 2014);
         $data['flags'] = $this->flag->get_for_variety($id);
-        $data['title'] = sprintf("Poster for %s %s",
+        $data['title'] = sprintf("%s-size Printout for %s %s",ucfirst($format),
                 $data['variety']->common_name, $data['variety']->variety);
-        $data["target"] = "variety/print/tabloid";
+        $data["target"] = "variety/print/$format";
         $data["classes"] = "";
         $this->load->view("variety/print/index", $data);
     }

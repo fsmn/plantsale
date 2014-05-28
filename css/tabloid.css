@@ -1,22 +1,15 @@
 @CHARSET "UTF-8";
 
 @import
-	url(http://fonts.googleapis.com/css?family=Lato:400,900|Ubuntu:400,700|Merriweather+Sans:400,800,700,300|Merriweather:400,700,900,300)
+	url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
 	;
 
-/*
-font-family: 'Lato', sans-serif;
-font-family: 'Ubuntu', sans-serif;
-font-family: 'Merriweather', serif;
-font-family: 'Merriweather Sans', sans-serif;
-*/
 body {
 	height: 17in;
 	width: 11in;
 	position: relative;
+	font-family: 'Merriweather Sans', sans-serif;
 }
-
-
 
 .document {
 	height: 17in;
@@ -25,12 +18,11 @@ body {
 	clear: both;
 	page-break-inside: avoid;
 	page-break-after: always;
-	
 }
 
 .header {
 	position: absolute;
-	font-size: 4em;
+	font-size: 64px;
 	width: 100%;
 }
 
@@ -41,42 +33,41 @@ body {
 
 .common-name {
 	float: right;
-	font-weight: 800;
+	font-weight: 700;
 }
 
 .subheader {
 	position: absolute;
-	top: 1.5in;
+	top: 1.25in;
 	width: 100%;
 }
 
 .latin-name {
-	float: left;
-	font-size: 3em;
+	float: right;
+	font-size: 48px;
 	font-style: italic;
+	margin-top: -5px;
 }
 
 .variety {
-	float: right;
-	font-weight: 700;
-	font-size: 3em;
-	font-weight: 700;
-	width: 50%;
-	text-align: right;
+	float: left;
+	font-weight: 800;
+	font-size: 64px;
 }
 
 .image {
-	height: 6.5in;
+	width: 1056px;
 	position: relative;
-	width: 9.5in;
+	height: 686px;
 	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
 }
 
 .image img.photo {
 	position: relative;
 	margin: 0 auto;
-	max-height: 6.5in;
-	width: 9in;
+	width: 11in;
 	box-shadow: 1px 1px 2px #666;
 }
 
@@ -96,11 +87,14 @@ body {
 }
 
 .description {
-padding-top:1em;
+	padding-top: 8px;
 }
 
 .note {
-
+	overflow: hidden;
+	height: 2in;
+	padding-top: 16px;
+	font-style: italic;
 }
 
 .details-group {
@@ -132,7 +126,7 @@ padding-top:1em;
 }
 
 .icons ul li img {
-    width: 72px;
+	width: 72px;
 }
 
 .sunlight {
@@ -152,6 +146,7 @@ padding-top:1em;
 }
 
 .flags img {
+	
 }
 
 .saturday {
@@ -171,6 +166,7 @@ padding-top:1em;
 .price {
 	font-size: 4em;
 	font-weight: 800;
+	text-align: right;
 }
 
 .dimensions {
@@ -209,4 +205,3 @@ padding-top:1em;
 	font-style: italic;
 	float: right;
 }
-

@@ -4,8 +4,7 @@
 <title><?=$title;?></title>
 <? $this->load->view("variety/print/head"); ?>
 </head>
-<body class="merriweather-sans <?=$classes;?>">
-<?=$this->load->view("variety/print/navigation");?>
+<body class="<?=$classes;?>">
 <? $this->load->view($target); ?>
 </body>
 </html>

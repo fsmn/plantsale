@@ -10,37 +10,24 @@ font-family: 'Ubuntu', sans-serif;
 font-family: 'Merriweather', serif;
 font-family: 'Merriweather Sans', sans-serif;
 */
-body.tabloid.portrait {
+body {
 	height: 17in;
 	width: 11in;
 	position: relative;
-	border: 1px solid #eee;
 }
 
-.merriweather-sans {
-	   font-family: 'Merriweather Sans', sans-serif;
-}
 
-.merriweather {
-	   font-family: 'Merriweather', sans-serif;
-}
-
-.ubuntu {
-	   font-family: 'Ubuntu', sans-serif;
-}
-
-.lato {
-	   font-family: 'Lato', sans-serif;
-}
 
 .document {
 	height: 17in;
-	width: 10.5in;
+	width: 11in;
 	margin: 0 auto;
 	position: relative;
 	clear: both;
 	page-break-inside: avoid;
 	page-break-after: always;
+	   border: 1px solid #eee;
+	
 }
 
 .header {

@@ -1,5 +1,21 @@
 @CHARSET "UTF-8";
 
+.merriweather-sans {
+       font-family: 'Merriweather Sans', sans-serif;
+}
+
+.merriweather {
+       font-family: 'Merriweather', sans-serif;
+}
+
+.ubuntu {
+       font-family: 'Ubuntu', sans-serif;
+}
+
+.lato {
+       font-family: 'Lato', sans-serif;
+}
+
 .button {
 	-border-radius: 3px;
 	-webkit-border-radius: 3px;

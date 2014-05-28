@@ -25,18 +25,21 @@ class Variety extends MY_Controller
         $data["variety"] = "";
         $data["common_id"] = $this->input->get("common_id");
         $measure_units = $this->menu->get_pairs("measure_unit");
-        $data["measure_units"] = get_keyed_pairs($measure_units, array(
-                "key",
-                "value"
-        ), TRUE);
-        $plant_colors = $this->menu->get_pairs("plant_color", array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
-        $data["plant_colors"] = get_keyed_pairs($plant_colors, array(
-                "key",
-                "value"
-        ));
+        $data["measure_units"] = get_keyed_pairs($measure_units,
+                array(
+                        "key",
+                        "value"
+                ), TRUE);
+        $plant_colors = $this->menu->get_pairs("plant_color",
+                array(
+                        "field" => "value",
+                        "direction" => "ASC"
+                ));
+        $data["plant_colors"] = get_keyed_pairs($plant_colors,
+                array(
+                        "key",
+                        "value"
+                ));
         $data["action"] = "insert";
         $data["title"] = "Add a new variety";
         $this->load->view($data["target"], $data);
@@ -65,7 +68,8 @@ class Variety extends MY_Controller
         $data["flags"] = $this->flag->get_for_variety($id);
         $data["variety"] = $variety;
         $data["target"] = "variety/view";
-        $data["title"] = sprintf("Viewing Info for %s (variety)", $variety->variety);
+        $data["title"] = sprintf("Viewing Info for %s (variety)",
+                $variety->variety);
         if ($data["mini_view"] = $this->input->get("ajax") == 1) {
             $this->load->view("variety/mini_view", $data);
         } else {
@@ -77,33 +81,40 @@ class Variety extends MY_Controller
     function search ()
     {
         $this->load->model("menu_model", "menu");
-        $categories = $this->menu->get_pairs("common_category", array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
-        $data["categories"] = get_keyed_pairs($categories, array(
-                "key",
-                "value"
-        ), TRUE);
-        $sunlight = $this->menu->get_pairs("sunlight", array(
-                "field" => "value"
-        ));
+        $categories = $this->menu->get_pairs("common_category",
+                array(
+                        "field" => "value",
+                        "direction" => "ASC"
+                ));
+        $data["categories"] = get_keyed_pairs($categories,
+                array(
+                        "key",
+                        "value"
+                ), TRUE);
+        $sunlight = $this->menu->get_pairs("sunlight",
+                array(
+                        "field" => "value"
+                ));
         $data["sunlight"] = $sunlight;
-        $plant_colors = $this->menu->get_pairs("plant_color", array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
-        $data["plant_colors"] = get_keyed_pairs($plant_colors, array(
-                "key",
-                "value"
-        ), TRUE);
-        $flags = $this->menu->get_pairs("flag", array(
-                "field" => "value"
-        ));
-        $data["flags"] = get_keyed_pairs($flags, array(
-                "key",
-                "value"
-        ), TRUE);
+        $plant_colors = $this->menu->get_pairs("plant_color",
+                array(
+                        "field" => "value",
+                        "direction" => "ASC"
+                ));
+        $data["plant_colors"] = get_keyed_pairs($plant_colors,
+                array(
+                        "key",
+                        "value"
+                ), TRUE);
+        $flags = $this->menu->get_pairs("flag",
+                array(
+                        "field" => "value"
+                ));
+        $data["flags"] = get_keyed_pairs($flags,
+                array(
+                        "key",
+                        "value"
+                ), TRUE);
         $data["variety"] = NULL;
         $this->load->view("variety/search", $data);
     }
@@ -121,13 +132,13 @@ class Variety extends MY_Controller
                 "sunlight",
                 "description",
                 "year",
-        		"print_omit"
+                "print_omit"
         );
         $data["plants"] = $this->variety->find($variables);
-        foreach($data["plants"] as $plant){
-        	$print_result[] = $plant->id;
+        foreach ($data["plants"] as $plant) {
+            $print_result[] = $plant->id;
         }
-        $this->session->set_userdata("print_list",$print_result);
+        $this->session->set_userdata("print_list", $print_result);
         $data["title"] = "List of Varieties";
         $data["target"] = "variety/full_list";
         $data["full_list"] = TRUE;
@@ -143,8 +154,6 @@ class Variety extends MY_Controller
         $data["params"] = $params;
         $this->load->view("page/index", $data);
     }
-    
-   
 
     function search_by_name ()
     {
@@ -160,8 +169,7 @@ class Variety extends MY_Controller
     }
 
     function edit ()
-    {
-    }
+    {}
 
     function update ()
     {
@@ -198,14 +206,16 @@ class Variety extends MY_Controller
 
         switch ($data["type"]) {
             case "dropdown":
-                $output = $this->_get_dropdown($data["category"], $data["value"], $data["name"]);
+                $output = $this->_get_dropdown($data["category"],
+                        $data["value"], $data["name"]);
                 break;
             case "multiselect":
-                $output = $this->_get_multiselect($data["category"], $data["value"], $data["name"]);
+                $output = $this->_get_multiselect($data["category"],
+                        $data["value"], $data["name"]);
                 break;
             case "textarea":
-            	$output = form_textarea($data,$data["value"]);
-            	break;
+                $output = form_textarea($data, $data["value"]);
+                break;
             default:
                 $output = form_input($data);
         }
@@ -231,10 +241,11 @@ class Variety extends MY_Controller
     {
         $id = $this->input->get("id");
         $flags = $this->flag->get_missing($id);
-        $data["flags"] = get_keyed_pairs($flags, array(
-                "key",
-                "value"
-        ), TRUE);
+        $data["flags"] = get_keyed_pairs($flags,
+                array(
+                        "key",
+                        "value"
+                ), TRUE);
         $this->load->view("flag/edit", $data);
     }
 
@@ -256,43 +267,43 @@ class Variety extends MY_Controller
         $this->flag->delete($id);
         $this->get_flags($this->input->post("variety_id"));
     }
-    
-    function print_result(){
-    	//get the session data "print_list" from the find function
-    	$plants = $this->session->userdata("print_list");
-    	foreach($plants as $plant){
-    		$data['plants'][$plant]['variety'] = $this->variety->get($plant);
-    		$data['plants'][$plant]['order'] = $this->order->get_for_variety($plant,2014);
-    		$data['plants'][$plant]['flags'] = $this->flag->get_for_variety($plant);
-    	}
-    	$data["classes"] = "tabloid portrait";
-    	$data["title"] = "Printing List";
-    	$data["target"] = "variety/print/multiple";
-    	$this->load->view("variety/print/index",$data);
-    	
-    }
-   
-    function print_options($id){
-    	//$data["id"] = $id;
-    	//$this->load->view("variety/print/options", $data);
-    	redirect("variety/tabloid/$id");
+
+    function print_result ($format)
+    {
+        // get the session data "print_list" from the find function
+        $data["format"] = $format;
+        $plants = $this->session->userdata("print_list");
+        foreach ($plants as $plant) {
+            $data['plants'][$plant]['variety'] = $this->variety->get($plant);
+            $data['plants'][$plant]['order'] = $this->order->get_for_variety(
+                    $plant, 2014);
+            $data['plants'][$plant]['flags'] = $this->flag->get_for_variety(
+                    $plant);
+        }
+        $data["classes"] = "";
+        $data["title"] = "Printing List";
+        $data["target"] = "variety/print/multiple";
+        $this->load->view("variety/print/index", $data);
     }
 
-    function tabloid ($id,$print = FALSE)
+    function print_options ($id)
     {
-    	$data['variety'] = $this->variety->get($id);
-    	$data['order'] = $this->order->get_for_variety($id,2014);
-    	$data['flags'] = $this->flag->get_for_variety($id);
-    	$data['title'] = sprintf("Tabloid Poster for %s %s",$data['variety']->common_name, $data['variety']->variety);
-    	$data["target"] = "variety/print/tabloid";
-    	$data["classes"] = "tabloid portrait";
-    	if($print){
-    		return $this->load->view($data["target"], $data, TRUE);
-    		
-    	}else{
-    		$this->load->view("variety/print/index", $data);
-    		
-    	}
+        // $data["id"] = $id;
+        // $this->load->view("variety/print/options", $data);
+        redirect("variety/print/$id");
+    }
+
+    function print_one ($id, $format)
+    {
+        $data["format"] = $format;
+        $data['variety'] = $this->variety->get($id);
+        $data['order'] = $this->order->get_for_variety($id, 2014);
+        $data['flags'] = $this->flag->get_for_variety($id);
+        $data['title'] = sprintf("Poster for %s %s",
+                $data['variety']->common_name, $data['variety']->variety);
+        $data["target"] = "variety/print/tabloid";
+        $data["classes"] = "";
+        $this->load->view("variety/print/index", $data);
     }
 
     /**
@@ -352,31 +363,38 @@ class Variety extends MY_Controller
     function _get_dropdown ($category, $value, $field)
     {
         $this->load->model("menu_model", "menu");
-        $categories = $this->menu->get_pairs($category, array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
-        $pairs = get_keyed_pairs($categories, array(
-                "key",
-                "value"
-        ));
+        $categories = $this->menu->get_pairs($category,
+                array(
+                        "field" => "value",
+                        "direction" => "ASC"
+                ));
+        $pairs = get_keyed_pairs($categories,
+                array(
+                        "key",
+                        "value"
+                ));
         return form_dropdown($field, $pairs, $value, "class='live-field'");
     }
 
     function _get_multiselect ($category, $value, $field)
     {
         $this->load->model("menu_model", "menu");
-        $categories = $this->menu->get_pairs($category, array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
-        $pairs = get_keyed_pairs($categories, array(
-                "key",
-                "value"
-        ));
+        $categories = $this->menu->get_pairs($category,
+                array(
+                        "field" => "value",
+                        "direction" => "ASC"
+                ));
+        $pairs = get_keyed_pairs($categories,
+                array(
+                        "key",
+                        "value"
+                ));
         $output = array();
         $output[] = form_multiselect($field, $pairs, $value, "id='$field'");
         $buttons = implode(" ", $output);
-        echo $buttons . sprintf("<span class='button save-multiselect' target='%s'>Save</span>", $field);
+        echo $buttons .
+                 sprintf(
+                        "<span class='button save-multiselect' target='%s'>Save</span>",
+                        $field);
     }
 }

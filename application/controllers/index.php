@@ -27,10 +27,14 @@ class Index extends MY_Controller {
 	function get_order_totals()
 	{
 		$sale_year = get_cookie("sale_year");
+		if(!$sale_year){
+			$sale_year = get_current_year();
+			bake_cookie("sale_year",$sale_year);
+		}
 		$totals = new stdClass();
 		$this->load->model("order_model","order");
 		$this->load->model("variety_model", "variety");
-		$data["sale_year"] = get_cookie("sale_year");
+		$data["sale_year"] = $sale_year;
 		$totals->total["current"] = $this->order->get_plant_total($sale_year);
 		$totals->total["previous"] = $this->order->get_plant_total($sale_year-1);
 		$totals->price_range["current"] = $this->order->get_price_range($sale_year);
@@ -49,6 +53,10 @@ class Index extends MY_Controller {
 	function get_categories(){
 	    $this->load->model("variety_model","variety");
 	    $sale_year = get_cookie("sale_year");
+	    if(!$sale_year){
+	    	$sale_year = get_current_year();
+	    	bake_cookie("sale_year",$sale_year);
+	    }
 	    $categories["current"] = $this->variety->get_category_totals($sale_year);
 	    $categories["previous"] = $this->variety->get_category_totals($sale_year -1);
 	    $data["categories"] = $categories;
@@ -58,6 +66,9 @@ class Index extends MY_Controller {
 	function get_flats(){
 	    $this->load->model("variety_model","variety");
 	    $sale_year = get_cookie("sale_year");
+	    if(!$sale_year){
+	    	$sale_year = get_current_year();
+	    }
 	    $categories["current"] = $this->variety->get_flat_totals($sale_year);
 	    $categories["previous"] = $this->variety->get_flat_totals($sale_year -1);
 	    $data["categories"] = $categories;

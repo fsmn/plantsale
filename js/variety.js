@@ -26,7 +26,7 @@ $(document).ready(function(){
 });
 
 
-$(document).on("click",".variety-create", function() {
+	$(document).on("click",".variety-create", function() {
 				my_id = this.id.split("_")[1];
 				form_data = {
 					common_id : my_id,

@@ -1,6 +1,6 @@
 @import "ui.theme.css";
 @import
-	url(http://fonts.googleapis.com/css?family=Ubuntu:400,700,900,300);
+	url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,700,900,300);
 	
 .handle { /*cursor:move*/
 	
@@ -8,7 +8,7 @@
 
 body {
 	font-size: 13px;
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Merriweather Sans', sans-serif;
 	margin: 10px;
 	padding: 10px;
 	padding-right: 15px;
@@ -229,7 +229,7 @@ td .button,.row .button,.button.small {
 }
 
 #navigation input[type="text"] {
-	height: 18px;
+	height: 22px;
 	border: 1px solid transparent;
 }
 

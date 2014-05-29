@@ -150,3 +150,7 @@ function format_dimensions($min, $max, $unit = "Inches", $direction = NULL) {
 	return $output;
 
 }
+//remove underscores, capitalize words.
+function decode_string($string){
+	
+}

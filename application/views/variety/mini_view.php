@@ -9,6 +9,9 @@
 <p>
 <?=$this->load->view("variety/menu");?>
 </p>
+<? if( $is_new):?>
+			<div id="is_new"><span class="is_new"><img src="<?=site_url("images/new.gif");?>"/>Is New</span></div>
+<? endif;?>
 <div class="grouping block variety-info" id="variety">
 		<fieldset class="field-group inline-box">
 			<legend class="label">

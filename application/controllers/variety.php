@@ -134,6 +134,7 @@ class Variety extends MY_Controller {
 				"print_omit" 
 		);
 		$data ["plants"] = $this->variety->find ( $variables );
+		$print_result = array();
 		foreach ( $data ["plants"] as $plant ) {
 			$print_result [] = $plant->id;
 		}

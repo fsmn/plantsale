@@ -1,6 +1,4 @@
 @import "ui.theme.css";
-@import
-	url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,700,900,300);
 	
 .handle { /*cursor:move*/
 	
@@ -8,7 +6,7 @@
 
 body {
 	font-size: 13px;
-	font-family: 'Merriweather Sans', sans-serif;
+	font-family: "Helvetica Neue",Tahoma, Verdana, sans-serif;
 	margin: 10px;
 	padding: 10px;
 	padding-right: 15px;

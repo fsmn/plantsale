@@ -70,6 +70,7 @@ class Variety extends MY_Controller {
 		$data ["current_order"] = $current_order;
 		$data ["orders"] = $this->order->get_for_variety ( $id );
 		$data ["flags"] = $this->flag->get_for_variety ( $id );
+		$data ["is_new"] = $this->variety->is_new ( $id );
 		$data ["variety"] = $variety;
 		$data ["target"] = "variety/view";
 		$data ["title"] = sprintf ( "Viewing Info for %s (variety)", $variety->variety );
@@ -79,6 +80,7 @@ class Variety extends MY_Controller {
 			$data ["mini_view"] = FALSE;
 			$this->load->view ( "page/index", $data );
 		}
+	
 	}
 
 	function search() {

@@ -134,6 +134,15 @@ class Variety_Model extends CI_Model {
 		return $result->new_varieties;
 	
 	}
+	
+	function is_new($id, $year = NULL){
+		if(!$year){
+			$year = get_cookie("sale_year");
+		}
+		$query = sprintf("select * from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s",$id, $year,$id, $year);
+		$result = $this->db->query($query)->num_rows();
+		return $result;
+	}
 
 	function get_varieties_for_year($year) {
 

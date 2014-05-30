@@ -101,20 +101,19 @@ a {
 }
 
 .button:hover,submit:hover {
-	transition-property: initial;
-	transition-duration: 0.25s;
+
+	transition: all .25s ease-in;
 	opacity: 1;
 	color: #000;
 	border: none;
-	/* 	background: #91b347 url(images/button_20_over.png) 50% 50% repeat-x; */
 	background: #67b021;
-	background: -moz-linear-gradient(top, #489310 0, #67b021 100%);
+	background: -moz-linear-gradient(top, #489310 0, #67b021 50%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #489310),
-		color-stop(100%, #67b021) );
-	background: -webkit-linear-gradient(top, #489310 0, #67b021 100%);
-	background: -o-linear-gradient(top, #489310 0, #67b021 100%);
-	background: -ms-linear-gradient(top, #489310 0, #67b021 100%);
-	background: linear-gradient(top, #489310 0, #67b021 100%);
+		color-stop(50%, #67b021) );
+	background: -webkit-linear-gradient(top, #489310 0, #67b021 50%);
+	background: -o-linear-gradient(top, #489310 0, #67b021 50%);
+	background: -ms-linear-gradient(top, #489310 0, #67b021 50%);
+	background: linear-gradient(top, #489310 0, #67b021 50%);
 }
 
 
@@ -150,18 +149,15 @@ a.button {
 }
 
 .button.edit:hover {
-		transition-property: initial;
-	transition-duration: 0.25s;
-	color: #eee;
+	color: #000;
 	background-color: #63ACE4;
 	background: -moz-linear-gradient(top, #0077bd 0, #63ACE4 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0077bd),
 		color-stop(100%, #63ACE4) );
-	background: -webkit-linear-gradient(top, #0077bd 0, #63ACE4 100%);
+	background: -webkit-linear-gradient(top, #0077bd 0, #63ACE4 50%);
 	background: -o-linear-gradient(top, #0077bd 0, #63ACE4 100%);
 	background: -ms-linear-gradient(top, #0077bd 0, #63ACE4 100%);
 	background: linear-gradient(top, #0077bd 0, #63ACE4 100%);
-	/* 	background-image: url(images/edit_button_hover.png); */
 }
 
 .button.new,a.button.new {

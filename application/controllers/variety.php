@@ -131,6 +131,7 @@ class Variety extends MY_Controller {
 				"sunlight",
 				"description",
 				"year",
+				"new_year",
 				"print_omit" 
 		);
 		$data ["plants"] = $this->variety->find ( $variables );

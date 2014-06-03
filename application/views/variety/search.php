@@ -18,6 +18,10 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 		<?=create_input($variety, "species","Species");?>
 	</p>
 	<p>
+	<label for="new_year">Year the Variety was Introduced:&nbsp;</label>
+	<input type="number" style="width:7ex" value="<?=get_value($variety,"new_year");?>" name="new_year" id="new_year"/>
+	</p>
+	<p>
 		<label for="category">Category: </label>
 		<?=form_dropdown("category",$categories,"","id='category'");?>
 	</p>

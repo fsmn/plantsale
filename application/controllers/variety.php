@@ -70,7 +70,7 @@ class Variety extends MY_Controller {
 		$data ["current_order"] = $current_order;
 		$data ["orders"] = $this->order->get_for_variety ( $id );
 		$data ["flags"] = $this->flag->get_for_variety ( $id );
-		$data ["is_new"] = $this->variety->is_new ( $id );
+		$data ["is_new"] = $variety->new_year == get_current_year();
 		$data ["variety"] = $variety;
 		$data ["target"] = "variety/view";
 		$data ["title"] = sprintf ( "Viewing Info for %s (variety)", $variety->variety );
@@ -241,6 +241,10 @@ class Variety extends MY_Controller {
 		$this->variety->update ( $id, $values );
 		echo $value;
 	
+	}
+	
+	function update_new_status($year){
+		$this->variety->update_all($year);
 	}
 
 	function add_flag() {

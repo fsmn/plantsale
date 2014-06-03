@@ -19,7 +19,7 @@ $buttons [] = array (
 
 $buttons [] = array (
 		"selection" => "all",
-		"text" => "Advanced Search",
+		"text" => "Common Search",
 		"class" => array (
 				"button",
 				"search-common-names"
@@ -30,7 +30,7 @@ $buttons [] = array (
 
 $buttons[] = array(
         "selection" => "all",
-        "text" => "Experimental Search (Try Me!)",
+        "text" => "Variety Search",
         "class" => array(
                 "button",
                 "search-varieties"
@@ -41,13 +41,13 @@ $buttons[] = array(
 
 $buttons [] = array (
 		"selection" => "order",
-		"text" => "Search Orders",
+		"text" => "Orders Search",
 		"class" => array (
 				"button",
 				"search-orders"
 		),
 		"href" => "#",
-		"title" => "View the Ordering Control Panel"
+		"title" => "Search Orders"
 )
 ;
 

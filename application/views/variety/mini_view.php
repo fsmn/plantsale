@@ -80,6 +80,13 @@
 			<?=create_button_bar($flag_buttons);?>
 	<?endif;?>
 		</div>
+		<div class="block" id="is-new">
+		<h4>Sale Year</h4>
+			<?=edit_field("new_year",$variety->new_year,"First Year at Sale","variety",$variety->id, array("envelope"=>"span"));?>
+			<? if( $is_new):?>
+			<span class="is-new"><img src="<?=site_url("images/new.gif");?>"/></span>
+			<? endif;?>
+			</div>
 	</div>
 
 

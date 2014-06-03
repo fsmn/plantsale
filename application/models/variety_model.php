@@ -12,6 +12,7 @@ class Variety_Model extends CI_Model {
 	var $width_unit;
 	var $plant_color;
 	var $note;
+	var $new_year;
 	var $rec_modifier;
 	var $rec_modified;
 
@@ -33,7 +34,8 @@ class Variety_Model extends CI_Model {
 				"height_unit",
 				"width_unit",
 				"note",
-				"common_id" 
+				"new_year",
+				"common_id",
 		);
 		
 		for($i = 0; $i < count ( $variables ); $i ++) {
@@ -142,6 +144,28 @@ class Variety_Model extends CI_Model {
 		$query = sprintf("select * from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s",$id, $year,$id, $year);
 		$result = $this->db->query($query)->num_rows();
 		return $result;
+	}
+	
+	function update_all($year){
+		$this->db->select("id");
+		$this->db->from("variety");
+		$this->db->where("new_year IS NULL",NULL,false);
+		$varieties = $this->db->get()->result();
+		foreach($varieties as $variety){
+			$query = sprintf("select `order`.`year` from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s",$variety->id, $year,$variety->id, $year);
+			$new_year = $this->db->query($query)->row();
+			print_r($new_year);
+			if($new_year){
+				$this->update_status($variety->id, $year);
+			}
+		}
+
+	}
+	
+	function update_status($id, $year){
+		$this->db->where("id",$id);
+		$update = array("new_year"=>$year);
+		$this->db->update("variety",$update);
 	}
 
 	function get_varieties_for_year($year) {

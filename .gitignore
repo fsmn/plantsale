@@ -6,3 +6,4 @@ application/config/database.php
 user_guide/*
 *.sql
 /files/*
+/files

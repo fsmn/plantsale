@@ -35,7 +35,7 @@ class Variety_Model extends CI_Model {
 				"width_unit",
 				"note",
 				"new_year",
-				"common_id",
+				"common_id" 
 		);
 		
 		for($i = 0; $i < count ( $variables ); $i ++) {
@@ -131,41 +131,50 @@ class Variety_Model extends CI_Model {
 
 	function get_new_varieties($year) {
 
-		$query = sprintf ( "SELECT count(`the_table`.`the_count`) as new_varieties from (SELECT count(`variety_id`) as `the_count`, `order`.`year` from variety join `order` on `variety`.`id` = `order`.`variety_id` GROUP BY `order`.`variety_id` ORDER BY `order`.`year` DESC) as `the_table` WHERE `year` = %s", $year );
-		$result = $this->db->query ( $query )->row ();
-		return $result->new_varieties;
-	
-	}
-	
-	function is_new($id, $year = NULL){
-		if(!$year){
-			$year = get_cookie("sale_year");
-		}
-		$query = sprintf("select * from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s",$id, $year,$id, $year);
-		$result = $this->db->query($query)->num_rows();
+		$this->db->where ( "new_year", $year );
+		$this->db->from ( "variety" );
+		$this->db->select ( "new_year" );
+		$result = $this->db->get ()->num_rows ();
 		return $result;
-	}
 	
-	function update_all($year){
-		$this->db->select("id");
-		$this->db->from("variety");
-		$this->db->where("new_year IS NULL",NULL,false);
-		$varieties = $this->db->get()->result();
-		foreach($varieties as $variety){
-			$query = sprintf("select `order`.`year` from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s",$variety->id, $year,$variety->id, $year);
-			$new_year = $this->db->query($query)->row();
-			print_r($new_year);
-			if($new_year){
-				$this->update_status($variety->id, $year);
+	}
+
+	function is_new($id, $year = NULL) {
+
+		if (! $year) {
+			$year = get_cookie ( "sale_year" );
+		}
+		$query = sprintf ( "select * from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s", $id, $year, $id, $year );
+		$result = $this->db->query ( $query )->num_rows ();
+		return $result;
+	
+	}
+
+	function update_all($year) {
+
+		$this->db->select ( "id" );
+		$this->db->from ( "variety" );
+		$this->db->where ( "new_year IS NULL", NULL, false );
+		$varieties = $this->db->get ()->result ();
+		foreach ( $varieties as $variety ) {
+			$query = sprintf ( "select `order`.`year` from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s", $variety->id, $year, $variety->id, $year );
+			$new_year = $this->db->query ( $query )->row ();
+			print_r ( $new_year );
+			if ($new_year) {
+				$this->update_status ( $variety->id, $year );
 			}
 		}
-
-	}
 	
-	function update_status($id, $year){
-		$this->db->where("id",$id);
-		$update = array("new_year"=>$year);
-		$this->db->update("variety",$update);
+	}
+
+	function update_status($id, $year) {
+
+		$this->db->where ( "id", $id );
+		$update = array (
+				"new_year" => $year 
+		);
+		$this->db->update ( "variety", $update );
+	
 	}
 
 	function get_varieties_for_year($year) {
@@ -253,8 +262,8 @@ class Variety_Model extends CI_Model {
 					"description" 
 			) )) {
 				$this->db->like ( $parameter->key, $parameter->value );
-			}elseif($parameter->key == "print_omit"){
-				$this->db->where("(order.print_omit is NULL OR order.print_omit != 1)",NULL,FALSE);
+			} elseif ($parameter->key == "print_omit") {
+				$this->db->where ( "(order.print_omit is NULL OR order.print_omit != 1)", NULL, FALSE );
 			} else {
 				$this->db->where ( $parameter->key, $parameter->value );
 			}

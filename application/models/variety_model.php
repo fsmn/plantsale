@@ -207,7 +207,10 @@ class Variety_Model extends CI_Model {
 		$this->db->join ( "common", "common.id=variety.common_id" );
 		$this->db->where ( "order.year", $year );
 		$this->db->group_by ( "common.category" );
-		$this->db->select ( "sum(`order`.`count_presale`) as count,common.category" );
+		$this->db->select("sum(`order`.`count_presale` + `order`.`count_midsale`) as count");
+		$this->db->select ( "sum(`order`.`count_presale`) as presale_count" );
+		$this->db->select("sum(`order`.`count_midsale`) as midsale_count");
+		$this->db->select("common.category");
 		$result = $this->db->get ()->result ();
 		return $result;
 	

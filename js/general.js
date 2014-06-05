@@ -31,6 +31,8 @@ $(document).ready(function(){
 				my_type = "multiselect";
 			}else if($(this).hasClass("textarea")){
 				my_type = "textarea";
+			}else if($(this).hasClass("autocomplete")){
+				my_type = "autocomplete";
 			}
 			console.log(my_type);
 			form_data = {
@@ -51,6 +53,10 @@ $(document).ready(function(){
 					$("#" + my_parent + " .live-field input").focus();
 				}
 			});
+	});
+	
+	$(document).on("keyup",".autocomplete",function(){
+		
 	});
 	
 	$(".field-envelope").on("blur",".live-field.text",function(){

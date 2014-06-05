@@ -221,6 +221,9 @@ class Variety extends MY_Controller {
 			case "textarea" :
 				$output = form_textarea ( $data, $data ["value"] );
 				break;
+			case "autocomplete":
+				$output = form_input($data, $data["value"],"class='autocomplete'");
+				break;
 			default :
 				$output = form_input ( $data );
 		}

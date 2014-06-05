@@ -206,6 +206,7 @@ class Variety_Model extends CI_Model {
 		$this->db->join ( "order", "variety.id=order.variety_id" );
 		$this->db->join ( "common", "common.id=variety.common_id" );
 		$this->db->where ( "order.year", $year );
+		$this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `common`.`category` = 'perennials')",NULL,FALSE);
 		$this->db->group_by ( "common.category" );
 		$this->db->select("sum(`order`.`count_presale` + `order`.`count_midsale`) as count");
 		$this->db->select ( "sum(`order`.`count_presale`) as presale_count" );

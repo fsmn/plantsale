@@ -246,6 +246,8 @@ $(document).ready(function(){
 				url: base_url + "index/get_categories",
 				success: function(data){
 					$("#category-totals").html(data);
+					document.location.href = "#category-totals-end";
+					return false;
 				}
 			});
 		});
@@ -256,6 +258,8 @@ $(document).ready(function(){
 				url: base_url + "index/get_flats",
 				success: function(data){
 					$("#flat-totals").html(data);
+					document.location.href = "#flat-totals-end";
+					return false;
 				}
 			});
 		});

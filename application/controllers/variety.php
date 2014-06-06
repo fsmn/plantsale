@@ -1,8 +1,10 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
-class Variety extends MY_Controller {
+class Variety extends MY_Controller
+{
 
-	function __construct() {
+	function __construct()
+	{
 
 		parent::__construct ();
 		$this->load->model ( "variety_model", "variety" );
@@ -12,13 +14,15 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function index() {
+	function index()
+	{
 
 		redirect ();
 	
 	}
 
-	function create() {
+	function create()
+	{
 
 		$this->load->model ( "menu_model", "menu" );
 		$data ["target"] = "variety/edit";
@@ -43,7 +47,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function insert() {
+	function insert()
+	{
 
 		$id = $this->variety->insert ();
 		if ($this->input->post ( "add_order" )) {
@@ -62,7 +67,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function view() {
+	function view()
+	{
 
 		$id = $this->uri->segment ( 3 );
 		$variety = $this->variety->get ( $id );
@@ -70,7 +76,7 @@ class Variety extends MY_Controller {
 		$data ["current_order"] = $current_order;
 		$data ["orders"] = $this->order->get_for_variety ( $id );
 		$data ["flags"] = $this->flag->get_for_variety ( $id );
-		$data ["is_new"] = $variety->new_year == get_current_year();
+		$data ["is_new"] = $variety->new_year == get_current_year ();
 		$data ["variety"] = $variety;
 		$data ["target"] = "variety/view";
 		$data ["title"] = sprintf ( "Viewing Info for %s (variety)", $variety->variety );
@@ -83,7 +89,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function search() {
+	function search()
+	{
 
 		$this->load->model ( "menu_model", "menu" );
 		$categories = $this->menu->get_pairs ( "common_category", array (
@@ -118,8 +125,10 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function find() {
+	function find()
+	{
 
+		$action = implode ( "", $this->input->get ( "action" ) );
 		$variables = array (
 				"name",
 				"variety",
@@ -135,13 +144,17 @@ class Variety extends MY_Controller {
 				"print_omit" 
 		);
 		$data ["plants"] = $this->variety->find ( $variables );
-		$print_result = array();
+		$print_list = array ();
 		foreach ( $data ["plants"] as $plant ) {
-			$print_result [] = $plant->id;
+			$print_list [] = $plant->id;
+			if($action == "history"){
+			$plant->orders = $this->order->get_for_variety ( $plant->id );
+			}
 		}
-		$this->session->set_userdata ( "print_list", $print_result );
+		$this->session->set_userdata ( "print_list", $print_list );
 		$data ["title"] = "List of Varieties";
-		$data ["target"] = "variety/full_list";
+		
+		$data ["target"] = "variety/$action";
 		$data ["full_list"] = TRUE;
 		$variables [] = "sunlight-boolean";
 		// create the legend for the paramter display
@@ -153,11 +166,13 @@ class Variety extends MY_Controller {
 			}
 		}
 		$data ["params"] = $params;
+		
 		$this->load->view ( "page/index", $data );
 	
 	}
 
-	function search_by_name() {
+	function search_by_name()
+	{
 
 		$name = $this->input->get ( "name" );
 		$data ["names"] = $this->variety->get_by_name ( $name );
@@ -171,12 +186,14 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function edit() {
+	function edit()
+	{
 
 	
 	}
 
-	function update() {
+	function update()
+	{
 
 		$id = $this->input->post ( "id" );
 		$this->variety->update ( "id" );
@@ -184,7 +201,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function delete() {
+	function delete()
+	{
 
 		$id = $this->input->post ( "id" );
 		$common_id = $this->variety->get_value ( $id, "common_id" );
@@ -197,7 +215,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function edit_value() {
+	function edit_value()
+	{
 
 		$data ["name"] = $this->input->get ( "field" );
 		
@@ -221,8 +240,8 @@ class Variety extends MY_Controller {
 			case "textarea" :
 				$output = form_textarea ( $data, $data ["value"] );
 				break;
-			case "autocomplete":
-				$output = form_input($data, $data["value"],"class='autocomplete'");
+			case "autocomplete" :
+				$output = form_input ( $data, $data ["value"], "class='autocomplete'" );
 				break;
 			default :
 				$output = form_input ( $data );
@@ -232,7 +251,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function update_value() {
+	function update_value()
+	{
 
 		$id = $this->input->post ( "id" );
 		$value = $this->input->post ( "value" );
@@ -246,12 +266,16 @@ class Variety extends MY_Controller {
 		echo $value;
 	
 	}
+
+	function update_new_status($year)
+	{
+
+		$this->variety->update_all ( $year );
 	
-	function update_new_status($year){
-		$this->variety->update_all($year);
 	}
 
-	function add_flag() {
+	function add_flag()
+	{
 
 		$id = $this->input->get ( "id" );
 		$flags = $this->flag->get_missing ( $id );
@@ -263,21 +287,24 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function insert_flag() {
+	function insert_flag()
+	{
 
 		$id = $this->flag->insert ();
 		$this->get_flags ( $this->input->post ( "variety_id" ) );
 	
 	}
 
-	function get_flags($id) {
+	function get_flags($id)
+	{
 
 		$data ["flags"] = $this->flag->get_for_variety ( $id );
 		$this->load->view ( "flag/list", $data );
 	
 	}
 
-	function delete_flag() {
+	function delete_flag()
+	{
 
 		$id = $this->input->post ( "id" );
 		$this->flag->delete ( $id );
@@ -285,7 +312,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function print_result($format) {
+	function print_result($format)
+	{
 		// get the session data "print_list" from the find function
 		$data ["format"] = $format;
 		$plants = $this->session->userdata ( "print_list" );
@@ -302,14 +330,16 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function print_options($id) {
+	function print_options($id)
+	{
 		// $data["id"] = $id;
 		// $this->load->view("variety/print/options", $data);
 		redirect ( "variety/print/$id" );
 	
 	}
 
-	function print_one($id, $format) {
+	function print_one($id, $format)
+	{
 
 		$data ["format"] = $format;
 		$data ['variety'] = $this->variety->get ( $id );
@@ -325,7 +355,8 @@ class Variety extends MY_Controller {
 	/**
 	 * * FILE MANAGEMENT **
 	 */
-	function new_image() {
+	function new_image()
+	{
 
 		if ($this->input->get ( 'variety_id' )) {
 			$data ['variety_id'] = $this->input->get ( 'variety_id' );
@@ -336,7 +367,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function attach_image() {
+	function attach_image()
+	{
 
 		$config ['upload_path'] = './files';
 		$this->load->helper ( 'directory' );
@@ -364,7 +396,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function delete_image() {
+	function delete_image()
+	{
 
 		$id = $this->input->post ( "id" );
 		$this->load->model ( "image_model" );
@@ -379,7 +412,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function _get_dropdown($category, $value, $field) {
+	function _get_dropdown($category, $value, $field)
+	{
 
 		$this->load->model ( "menu_model", "menu" );
 		$categories = $this->menu->get_pairs ( $category, array (
@@ -394,7 +428,8 @@ class Variety extends MY_Controller {
 	
 	}
 
-	function _get_multiselect($category, $value, $field) {
+	function _get_multiselect($category, $value, $field)
+	{
 
 		$this->load->model ( "menu_model", "menu" );
 		$categories = $this->menu->get_pairs ( $category, array (

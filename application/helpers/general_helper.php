@@ -135,6 +135,10 @@ function abbr_unit($measure) {
 
 }
 
+function clean_string($string){
+	return preg_replace("/[^a-zA-Z0-9\"\.]+/", " ",$string);
+}
+
 function format_dimensions($min, $max, $unit = "Inches", $direction = NULL) {
 
 	$output = "";

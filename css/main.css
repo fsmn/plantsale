@@ -552,7 +552,7 @@ table.list {
 	padding-top: 5px;
 }
 
-table.list th {
+table.list th, table.list tr.header td {
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-bottom-color: #000;
@@ -562,10 +562,18 @@ table.list tbody tr {
 	
 }
 
+table.list tr.header td {
+	font-weight: bold;
+}
+table.list tr.sublist {
+	font-size: .9em;
+}
+
 table.list.compressed {
 	font-size: .9em;
 	padding: 0;
 	border-spacing: 0;
+	max-width: 980px;
 }
 
 table.files {
@@ -601,6 +609,7 @@ table.chart thead td {
 	border: none;
 	text-align: center
 }
+
 
 a.link,input.link {
 	text-decoration: underline;

@@ -29,8 +29,12 @@
 	});
 	
 	$(document).on("click",".search-orders",function(){
+		form_data = {
+				find: 1
+		};
 		$.ajax({
 			type: "get",
+			data: form_data,
 			url: base_url + "order/search",
 			success: function(data){
 				show_popup("Search Orders",data, "auto");

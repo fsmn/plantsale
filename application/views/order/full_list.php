@@ -16,7 +16,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 		
 		<? for($i = 0; $i < count ( $options ); $i ++):?>
        	<li>
-       	<?=ucfirst($keys [$i]); ?>:&nbsp;<strong><?=$values [$i]; ?></strong>
+       	<?=ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?=clean_string($values [$i]); ?></strong>
 		</li>
 		<? endfor;?>
 		</ul>
@@ -30,7 +30,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <? $direction = $this->input->get("direction");?>
 <ul>
 <? for($i = 0; $i < count($sorting); $i++):?>
-<li><? printf("%s, %s", $sorting[$i], $direction[$i]); ?></li>
+<li><? printf("%s, %s", ucwords($sorting[$i]), $direction[$i]); ?></li>
 <? endfor; ?>
 </ul>
 

@@ -1,13 +1,15 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <p>
 <select name="sorting[]">
+<option value=""></option>
 <option value="catalog_number">Catalog Number</option>
 <option value="genus">Genus</option>
-<option value="vendor_code">Vendor Code</option>
+<option value="grower_code">Vendor Code</option>
 <option value="count_presale">Presale Count</option>
 <option value="count_midsale">Midsale Count</option>
 <option value="pot_size">Pot Size</option>
 <option value="common.name">Common Name</option>
+<option value="genus" selected>Genus</option>
 <option value="variety">Variety</option>
 </select>
 <select name="direction[]">

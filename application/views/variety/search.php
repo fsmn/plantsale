@@ -5,6 +5,8 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 
 <form name="search-variety" id="search-variety"
 		action="<?=site_url("variety/find"); ?>" method="GET">
+	<p><label for="action[]">List </label><input type="radio" name="action[]" value="full_list" checked/>&nbsp;
+<label for="action[]">Variety History</label><input type="radio" name="action[]" value="history"/></p>
 	<p>
 		<?=create_input($variety,"name","Common Name");?>
 	</p>
@@ -67,10 +69,6 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 		<label for="year">Year: </label><input type="text" name="year"
 			value="<?=get_current_year();?>" />
 	</p>
-	<!-- <p>
-	<label for="print_omit">Exclude Plants Omitted from Printing</label>
-	<input type="checkbox" name="print_omit" id="print_omit" value="1" checked/>
-	</p> -->
 	<p>
 		<input type="submit" value="Find" class="button" />
 	</p>

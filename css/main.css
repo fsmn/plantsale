@@ -550,16 +550,34 @@ table.list {
 	border-spacing: 5px 0;
 	padding-bottom: 5px;
 	padding-top: 5px;
+	border-collapse: collapse;
 }
 
-table.list th, table.list tr.header td {
+table.list thead tr, table.list tr.header td {
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-bottom-color: #000;
+border-right: 1px solid #bbb;
+border-left: 1px solid #bbb;
+	text-align: left;
+}
+
+table.list thead th, table.list tbody td {
+		border-left: 1px solid #bbb;
+		padding:5px;
 }
 
 table.list tbody tr {
-	
+	border-bottom: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+}
+
+table.list thead tr.top-row {
+	border-bottom-width: 0px;
+}
+
+table.list thead tr.top-row th {
+		text-align: center;
 }
 
 table.list tr.header td {

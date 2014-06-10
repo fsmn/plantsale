@@ -19,32 +19,25 @@ if ($order->flat_cost && ! $order->plant_cost) {
 	<td class="order-catalog_number field">
 			<?=$order->catalog_number;?>
 			</td>
-	<td class="order-count_presale field">
-			<?=$order->count_presale;?>
-			</td>
-	<td class="order-count_midsale field">
-			<?=$order->count_midsale;?>
-			</td>
-	<td class="order-total_plants field">
-				<?=$order->count_midsale + $order->count_presale;?>
-			</td>
 	<td class="order-pot_size field"  style="width:10em"><?=$order->pot_size;?>
 			</td>
 	<td class="order-flat_size field"><?=$order->flat_size;?>
-			</td>
-	<td class="order-flat_cost field"><?=get_as_price($flat_cost);?>
 			</td>
 	<td class="order-plant_cost field"><?=get_as_price($plant_cost);?>
 			</td>
 	<td class="order-price field"><?=get_as_price($order->price);?>
 			</td>
-<td class="order-count_dead field"><?=$order->count_dead;?>
+	<td class="order-count_presale field">
+			<?=$order->count_presale/$order->flat_size;?>
+			</td>
+	<td class="order-count_midsale field">
+			<?=$order->count_midsale/$order->flat_size;?>
 			</td>
 <td class="order-sellout_friday field">
-	<?=$order->sellout_friday;?>
+	<?=get_as_time($order->sellout_friday);?>
 </td>
 <td class="order-sellout_saturday field">
-	<?=$order->sellout_saturday;?>
+	<?=get_as_time($order->sellout_saturday);?>
 </td>
 <td class="order-remainder_friday field">
 	<?=$order->remainder_friday;?>
@@ -55,6 +48,7 @@ if ($order->flat_cost && ! $order->plant_cost) {
 <td class="order-remainder_sunday field">
 	<?=$order->remainder_sunday;?>
 </td>
-	<td class="order-grower_code field"><?=$order->grower_code;?>
+<td class="order-count_dead field"><?=$order->count_dead;?>
 			</td>
+	
 </tr>

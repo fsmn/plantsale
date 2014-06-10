@@ -17,25 +17,34 @@
 <div id="variety-orders" style="max-width: 900px;">
 <table class="list compressed">
 <thead>
+<tr class="top-row">
+<th></th>
+<th></th>
+<th></th>
+<th colspan=2>Sizes</th>
+<th></th>
+<th></th>
+<th colspan=2>Ordered</th>
+<th colspan=2>Sellout</th>
+<th colspan=3>Remainder</th>
+<th></th>
+</tr>
 <tr>
 <th>Year</th>
 <th>Grower</th>
 <th>Cat#</th>
-<th>Pre</th>
-<th>Mid</th>
-<th>Tot</th>
 <th>Pot Size</th>
 <th>Flat Size</th>
-<th>Flat Cost</th>
 <th>Plant Cost</th>
 <th>Price</th>
+<th>Pre</th>
+<th>Mid</th>
+<th>Friday</th>
+<th>Saturday</th>
+<th>Friday</th>
+<th>Saturday</th>
+<th>Sunday</th>
 <th>Dead</th>
-<th>Friday Sellout</th>
-<th>Saturday Sellout</th>
-<th>Fri Rem</th>
-<th>Sat Rem</th>
-<th>Sun Rem</th>
-<th>Grower Code</th>
 </tr>
 </thead>
 <tbody>

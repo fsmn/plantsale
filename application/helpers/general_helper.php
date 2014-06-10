@@ -97,6 +97,15 @@ function get_as_price($int) {
 
 }
 
+function get_as_time($time){
+	
+	$output = "";
+	if($time!="00:00:00"){
+		$output= date("g:i A",strtotime($time));
+	}
+	return $output;
+}
+
 function get_user_name($user) {
 
 	return sprintf ( "%s %s", $user->first_name, $user->last_name );

@@ -15,7 +15,11 @@ class Menu extends MY_Controller {
 		$data ["name"] = $this->input->get ( "field" );
 	
 		$value = $this->input->get ( "value" );
-		$data ["value"] = $value;
+		if($value != "&nbsp;"){
+			$data ["value"] = $value;
+		}else{
+			$data['value'] = "";
+		}
 		if (is_array ( $value )) {
 			$data ["value"] = implode ( ",", $value );
 		}
@@ -36,6 +40,9 @@ class Menu extends MY_Controller {
 				break;
 			case "autocomplete":
 				$output = form_input($data, $data["value"],"class='autocomplete'");
+				break;
+			case "time":
+				$output = sprintf("<input type'%s' name='%s' id='%s' value='%s' size='%s'",$data['type'],$data['name'],$data['id'],$data['value'],$data['size']);
 				break;
 			default :
 				$output = form_input ( $data );

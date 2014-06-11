@@ -12,49 +12,53 @@ if ($order->flat_cost && ! $order->plant_cost) {
 
 
 <tr id="order_<?=$order->id;?>">
-	<td class="order-year field"><?=$order->year;?>
+	<td class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
 				</td>
-	<td class="order-grower_id field"><?=$order->grower_id;?>
+	<td class="order-grower_id field"><?=edit_field("year",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-	<td class="order-catalog_number field">
-			<?=$order->catalog_number;?>
+	<td class="order-catalog_number field"><?=edit_field("year",$order->catalog_number,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 	<td class="order-pot_size field"  style="width:10em"><?=$order->pot_size;?>
 			</td>
-	<td class="order-flat_size field"><?=$order->flat_size;?>
+	<td class="order-flat_size field"><?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-	<td class="order-plant_cost field"><?=get_as_price($plant_cost);?>
+	<td class="order-plant_cost field">$<?=edit_field("plant_cost",$plant_cost,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-	<td class="order-price field"><?=get_as_price($order->price);?>
+	<td class="order-price field">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 	<td class="order-count_presale field">
 			<?=$order->count_presale/$order->flat_size;?>
 			</td>
+	<td class="order-received_presale field">
+	<?=edit_field("received_presale",$order->received_presale,"","order",$order->id,array("envelope"=>"span"));?>
+	</td>
 	<td class="order-count_midsale field">
 			<?=$order->count_midsale/$order->flat_size;?>
-			</td>
-				<td class="order-received_presale field">
-			<?=$order->received_presale;?>
-			</td>
+	</td>		
 	<td class="order-received_midsale field">
-			<?=$order->received_midsale;?>
+		<?=edit_field("received_midsale",$order->received_midsale,"","order",$order->id,array("envelope"=>"span"));?>
+	
 			</td>
 <td class="order-sellout_friday field">
-	<?=get_as_time($order->sellout_friday);?>
+		<?=edit_field("sellout_friday",get_as_time($order->sellout_friday),"","order",$order->id,array("envelope"=>"span","type"=>"time"));?>
 </td>
 <td class="order-sellout_saturday field">
-	<?=get_as_time($order->sellout_saturday);?>
+		<?=edit_field("sellout_saturday",get_as_time($order->sellout_saturday),"","order",$order->id,array("envelope"=>"span","type"=>"time"));?>
 </td>
 <td class="order-remainder_friday field">
-	<?=$order->remainder_friday;?>
+		<?=edit_field("remainder_friday",$order->remainder_friday,"","order",$order->id,array("envelope"=>"span"));?>
+
 </td>
 <td class="order-remainder_saturday field">
-	<?=$order->remainder_saturday;?>
+			<?=edit_field("remainder_saturday",$order->remainder_saturday,"","order",$order->id,array("envelope"=>"span"));?>
+
 </td>
 <td class="order-remainder_sunday field">
-	<?=$order->remainder_sunday;?>
+			<?=edit_field("remainder_sunday",$order->remainder_sunday,"","order",$order->id,array("envelope"=>"span"));?>
 </td>
-<td class="order-count_dead field"><?=$order->count_dead;?>
+<td class="order-count_dead field">
+			<?=edit_field("count_dead",$order->count_dead,"","order",$order->id,array("envelope"=>"span"));?>
+
 			</td>
 	
 </tr>

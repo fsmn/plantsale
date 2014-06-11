@@ -45,7 +45,7 @@ $(document).ready(function(){
 			};
 			$.ajax({
 				type:"get",
-				url: base_url + my_attr[0] + "/edit_value",
+				url: base_url +  "menu/edit_value",
 				data: form_data,
 				success: function(data){
 					$("#" + my_parent + " .edit-field").html(data);

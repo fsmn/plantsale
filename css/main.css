@@ -465,6 +465,9 @@ li.attendance:first-child {
 .field {
 	margin-bottom: .5em;
 }
+table .field {
+	padding: 0;
+}
 
 .inline-box {
 	display: inline-block;

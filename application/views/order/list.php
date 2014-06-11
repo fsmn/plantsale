@@ -54,13 +54,13 @@ if ($orders) :
 				
 				</td>
 			<? if(!$show_names):?>
-				<td class="order-year field"><?=$order->year;?>
+				<td class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
 				</td>
 			<? endif;?>
-			<td class="order-grower_id field"><?=$order->grower_id;?>
+			<td class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-catalog_number field">
-			<?=$order->catalog_number;?>
+		<?=edit_field("catalog_number",$order->catalog_number,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<? if($show_names):?>
 			<td><a
@@ -73,25 +73,25 @@ if ($orders) :
 				title="View the details for <?=$order->variety;?>"><?=$order->variety;?></a></td>
 			<? endif;?>
 			<td class="order-count_presale field">
-			<?=$order->count_presale;?>
+			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-count_midsale field">
-			<?=$order->count_midsale;?>
+			<?=edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-total_plants field">
 				<?=$order->count_midsale + $order->count_presale;?>
 			</td>
-			<td class="order-pot_size field"><?=$order->pot_size;?>
+			<td class="order-pot_size field"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-flat_size field"><?=$order->flat_size;?>
+			<td class="order-flat_size field"><?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-flat_cost field"><?=get_as_price($flat_cost);?>
+			<td class="order-flat_cost field">$<?=edit_field("flat_cost",$order->flat_cost,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-plant_cost field"><?=get_as_price($plant_cost);?>
+			<td class="order-plant_cost field">$<?=edit_field("plant_cost",$order->plant_cost,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-price field"><?=get_as_price($order->price);?>
+			<td class="order-price field">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-grower_code field"><?=$order->grower_code;?>
+			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 
 		</tr>

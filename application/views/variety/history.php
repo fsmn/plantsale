@@ -24,8 +24,8 @@
 <th colspan=2>Sizes</th>
 <th></th>
 <th></th>
-<th colspan=2>Ordered</th>
-<th colspan=2>Received</th>
+<th colspan=2>Presale</th>
+<th colspan=2>Midsale</th>
 <th colspan=2>Sellout</th>
 <th colspan=3>Remainder</th>
 <th></th>
@@ -38,15 +38,15 @@
 <th>Flat Size</th>
 <th>Plant Cost</th>
 <th>Price</th>
-<th>Pre</th>
-<th>Mid</th>
-<th>Pre</th>
-<th>Mid</th>
-<th>Friday</th>
-<th>Saturday</th>
-<th>Friday</th>
-<th>Saturday</th>
-<th>Sunday</th>
+<th>Ordered</th>
+<th>Rec&rsquo;d</th>
+<th>Ordered</th>
+<th>Rec&rsquo;d</th>
+<th>Fri</th>
+<th>Sat</th>
+<th>Fri</th>
+<th>Sat</th>
+<th>Sun</th>
 <th>Dead</th>
 </tr>
 </thead>

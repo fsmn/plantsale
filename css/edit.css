@@ -6,3 +6,8 @@
 	background-repeat: no-repeat;
 	background-position: center left;
 }
+
+table .edit-field:hover{
+	background-color: yellow;
+	background-image:none;
+}

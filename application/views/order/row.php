@@ -33,6 +33,12 @@ if ($order->flat_cost && ! $order->plant_cost) {
 	<td class="order-count_midsale field">
 			<?=$order->count_midsale/$order->flat_size;?>
 			</td>
+				<td class="order-received_presale field">
+			<?=$order->received_presale;?>
+			</td>
+	<td class="order-received_midsale field">
+			<?=$order->received_midsale;?>
+			</td>
 <td class="order-sellout_friday field">
 	<?=get_as_time($order->sellout_friday);?>
 </td>

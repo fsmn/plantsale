@@ -25,6 +25,7 @@
 <th></th>
 <th></th>
 <th colspan=2>Ordered</th>
+<th colspan=2>Received</th>
 <th colspan=2>Sellout</th>
 <th colspan=3>Remainder</th>
 <th></th>
@@ -37,6 +38,8 @@
 <th>Flat Size</th>
 <th>Plant Cost</th>
 <th>Price</th>
+<th>Pre</th>
+<th>Mid</th>
 <th>Pre</th>
 <th>Mid</th>
 <th>Friday</th>

@@ -14,6 +14,8 @@ class Order_Model extends CI_Model
 	var $price;
 	var $count_presale;
 	var $count_midsale;
+	var $received_presale;
+	var $received_midsale;
 	var $count_dead;
 	var $sellout_friday;
 	var $sellout_saturday;
@@ -48,6 +50,8 @@ class Order_Model extends CI_Model
 				"price",
 				"count_presale",
 				"count_midsale",
+				"received_presale",
+				"received_midsale",
 				"count_dead",
 				"sellout_friday",
 				"sellout_saturday",

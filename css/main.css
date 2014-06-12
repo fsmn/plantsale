@@ -1,12 +1,12 @@
 @import "ui.theme.css";
-	
+
 .handle { /*cursor:move*/
 	
 }
 
 body {
 	font-size: 13px;
-	font-family: "Helvetica Neue",Tahoma, Verdana, sans-serif;
+	font-family: "Helvetica Neue", Tahoma, Verdana, sans-serif;
 	margin: 10px;
 	padding: 10px;
 	padding-right: 15px;
@@ -72,13 +72,17 @@ body {
 
 .login label {
 	display: block;
+	font-size: 1.1em;
 }
 
 .login input[type="text"],.login input[type="password"] {
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	padding: 5px;
+	padding: 10px;
+	font-size: 1.2em;
+	border-radius: 3px;
+	border-width: 1px;
 }
 
 div.login.errors {
@@ -465,6 +469,7 @@ li.attendance:first-child {
 .field {
 	margin-bottom: .5em;
 }
+
 table .field {
 	padding: 0;
 }
@@ -556,18 +561,18 @@ table.list {
 	border-collapse: collapse;
 }
 
-table.list thead tr, table.list tr.header td {
+table.list thead tr,table.list tr.header td {
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-bottom-color: #000;
-border-right: 1px solid #bbb;
-border-left: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	border-left: 1px solid #bbb;
 	text-align: left;
 }
 
-table.list thead th, table.list tbody td {
-		border-left: 1px solid #bbb;
-		padding:5px;
+table.list thead th,table.list tbody td {
+	border-left: 1px solid #bbb;
+	padding: 5px;
 }
 
 table.list tbody tr {
@@ -580,12 +585,13 @@ table.list thead tr.top-row {
 }
 
 table.list thead tr.top-row th {
-		text-align: center;
+	text-align: center;
 }
 
 table.list tr.header td {
 	font-weight: bold;
 }
+
 table.list tr.sublist {
 	font-size: .9em;
 }
@@ -630,7 +636,6 @@ table.chart thead td {
 	border: none;
 	text-align: center
 }
-
 
 a.link,input.link {
 	text-decoration: underline;
@@ -820,7 +825,6 @@ ul.inline-list li {
 
 .plant-info .field.omit-plant {
 	width: 3ex;
-	
 }
 
 .plant-info .field.year {
@@ -842,4 +846,3 @@ ul.inline-list li {
 .omitted {
 	color: #aaa;
 }
-

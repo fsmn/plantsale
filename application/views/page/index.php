@@ -55,6 +55,7 @@ $this->load->view($target);
 <div id="sidebar"></div>
 <!-- end sidebar --></div>
 <div id='search_list'></div>
+<div id='autocomplete'></div>
 <div id="footer"><?$this->load->view('page/footer');?></div>
 </div>
 </body>

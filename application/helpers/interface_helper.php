@@ -242,3 +242,20 @@ function create_checkbox($name, $values, $selections = array())
 }
 
 
+function create_autocomplete($items, $selection, $id, $is_live = FALSE){
+	$output[] = sprintf("<ul class='autocomplete-list' id='autocomplete-%s'>", $id);
+	$output[] = "<li class='autocomplete-list-cancel link delete'>Cancel</li>";
+	foreach($items as $item){
+		$classes = array("autocomplete-item");
+		if($is_live){
+			$classes = array("autocomplete-item-live");
+		}
+		if($item->value == $selection){
+			$classes[] = "active";
+		}
+		$output[] = sprintf("<li class='%s'>%s</li>",implode(" ",$classes), $item->value);
+	}
+	$output[] = "</ul>";
+	return implode("\r",$output);
+}
+

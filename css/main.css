@@ -535,7 +535,7 @@ a.button {
 	padding-bottom: 5px;
 }
 
-#search_list {
+#search_list, #autocomplete {
 	position: absolute;
 	display: none;
 	z-index: 1000;
@@ -677,9 +677,6 @@ fieldset.advanced div.advanced {
 	margin-right: auto;
 }
 
-#search_list .studentName {
-	padding-top: 0;
-}
 
 .button-box {
 	margin-top: .5em;
@@ -845,4 +842,20 @@ ul.inline-list li {
 
 .omitted {
 	color: #aaa;
+}
+
+ul.autocomplete-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	background-color: white;
+}
+
+ul.autocomplete-list li{
+	padding: .5em 0;
+}
+
+ul.autocomplete-list li:hover {
+	cursor: pointer;
+	background-color: #aaa;
 }

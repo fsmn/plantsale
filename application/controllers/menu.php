@@ -39,6 +39,7 @@ class Menu extends MY_Controller {
 				$output = form_textarea ( $data, $data ["value"] );
 				break;
 			case "autocomplete":
+				$data["type"] = "autocomplete";
 				$output = form_input($data, $data["value"],"class='autocomplete'");
 				break;
 			case "time":
@@ -131,16 +132,16 @@ class Menu extends MY_Controller {
 	function get_autocomplete() {
 		$category = $this->input->get ( "category" );
 		$value = $this->input->get ( "value" );
-		$field = $this->input->get ( "field" );
+		$id = $this->input->get("id");
+		$is_live = FALSE;
+		if($this->input->get("is_live")){
+			$is_live = $this->input->get("is_live");
+		}
 		$categories = $this->menu->get_pairs ( $category, array (
 				"field" => "value",
 				"direction" => "ASC"
 		) );
-		$pairs = get_keyed_pairs ( $categories, array (
-				"key",
-				"value"
-		) );
-		printf("<input type='text' class='autocomplete' value='%s' menu='%s' name='%s' id='%s'/>",$value,$category,$field,$field);
+		echo create_autocomplete($categories, $value, $id, $is_live);
 		//echo form_dropdown ( $field, $pairs, $value, "class='save-field'" );
 	
 	}

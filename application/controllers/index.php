@@ -11,6 +11,12 @@ class Index extends MY_Controller {
 		$data ["target"] = "welcome";
 		$this->load->view ( "page/index", $data );
 	}
+	
+	function test(){
+		$data["target"] = "test";
+		$data["title"] = "Test";
+		$this->load->view("page/index",$data);
+	}
 
 	function show_set_year(){
 		$data["uri"] = $this->input->get("uri");

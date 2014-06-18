@@ -34,7 +34,6 @@ $(document).ready(function(){
 			}else if($(this).hasClass("autocomplete")){
 				my_type = "autocomplete";
 			}
-			console.log(my_type);
 			form_data = {
 					table: my_attr[0],
 					field: my_name,
@@ -55,13 +54,60 @@ $(document).ready(function(){
 			});
 	});
 	
-	$(document).on("keyup",".autocomplete",function(){
+	$(document).on("click",".autocomplete.edit-field",function(){
+		my_parent = $(this).parent(".field-envelope").attr("id");
+		my_attr = my_parent.split("__");
+		my_table = my_attr[0];
+		my_category = $(this).attr("menu");
+		my_value = $(this).val();
+		form_data = {
+				category: my_category,
+				value: my_value,
+				id:my_parent
+		};
+		$.ajax({
+			type:"get",
+			data: form_data,
+			url: base_url + "menu/get_autocomplete",
+			success: function(data){
+				$("#autocomplete").css({"z-index": 1000}).html(data).position({
+					my: "left top",
+					at: "left bottom",
+					of: $("#" + my_parent + " input"), 
+					collision: "fit"
+				}).show();
+			}
+		});
 		
 	});
 	
+	$("body").on("click",".autocomplete-item",function(){
+		my_val = $(this).html();
+		my_parent = $(this).parent("ul").attr("id");
+		my_id = my_parent.split("-")[1];
+		$("#" + my_id + " input").val(my_val).focus();
+		$("#autocomplete").hide().css({"left": 0, "top": 0});
+	});
+	
+	$("#autocomplete").on("click",".autocomplete-list-cancel", function(){
+		$("#autocomplete").hide().css({"left": 0, "top": 0});
+	});
+	
+	$("body").on("click",".autocomplete-item-live",function(){
+		my_val = $(this).html();
+		my_parent = $(this).parent("ul").attr("id");
+		my_id = my_parent.split("-")[1];
+		$("#" + my_id).val(my_val).focus();
+		$("#autocomplete").hide().css({"left": 0, "top": 0});
+	});
+	
+	
 	$(".field-envelope").on("blur",".live-field.text",function(){
-		//id, field, value {post}
-		update_field(this);
+		if($(this).hasClass("autocomplete")){
+			$(this).removeClass("autocomplete");
+		}else{
+			update_field(this);
+		}
 	
 	});
 	
@@ -69,6 +115,35 @@ $(document).ready(function(){
 		
 	});
 	
+	$("body").on("click",".autocomplete-live",function(){
+		my_category = $(this).attr("category");
+		my_id = this.id;
+		my_value = $(this).val();
+		form_data = {
+			category: my_category,
+			id: my_id,
+			value: my_value,
+			is_live: 1
+		};
+		console.log(form_data);
+		$.ajax({
+			type: "get",
+			url: base_url + "menu/get_autocomplete",
+			data: form_data,
+			success: function(data){
+				$("#autocomplete").css({"z-index": 1000}).html(data).position({
+					my: "left top",
+					at: "left bottom",
+					of: $("#" + my_id), 
+					collision: "fit"
+				}).show();
+			}
+		});
+	});
+	
+	$("body").on("blur",".autocomplete-live",function(){
+		$("#autocomplete").hide().css({"left": 0, "top": 0});
+	});
 	
 	
 });
@@ -98,6 +173,7 @@ function update_field(me){
 	my_parent = $(me).parent().attr("id");
 	my_attr = my_parent.split("__");
 	my_value = $(me).children().val();
+
 	form_data = {
 			table: my_attr[0],
 			field: my_attr[1],

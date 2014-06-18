@@ -66,48 +66,24 @@ $(document).ready(function(){
 				id:my_parent
 		};
 		$.ajax({
+			dataType: "json",
 			type:"get",
 			data: form_data,
 			url: base_url + "menu/get_autocomplete",
 			success: function(data){
-				$("#autocomplete").css({"z-index": 1000}).html(data).position({
-					my: "left top",
-					at: "left bottom",
-					of: $("#" + my_parent + " input"), 
-					collision: "fit"
-				}).show();
+				$("#" + my_parent + " input").autocomplete({source:data});
 			}
 		});
 		
 	});
 	
-	$("body").on("click",".autocomplete-item",function(){
-		my_val = $(this).html();
-		my_parent = $(this).parent("ul").attr("id");
-		my_id = my_parent.split("-")[1];
-		$("#" + my_id + " input").val(my_val).focus();
-		$("#autocomplete").hide().css({"left": 0, "top": 0});
-	});
-	
-	$("#autocomplete").on("click",".autocomplete-list-cancel", function(){
-		$("#autocomplete").hide().css({"left": 0, "top": 0});
-	});
-	
-	$("body").on("click",".autocomplete-item-live",function(){
-		my_val = $(this).html();
-		my_parent = $(this).parent("ul").attr("id");
-		my_id = my_parent.split("-")[1];
-		$("#" + my_id).val(my_val).focus();
-		$("#autocomplete").hide().css({"left": 0, "top": 0});
-	});
-	
-	
+
 	$(".field-envelope").on("blur",".live-field.text",function(){
-		if($(this).hasClass("autocomplete")){
-			$(this).removeClass("autocomplete");
-		}else{
+		//if($(this).hasClass("autocomplete")){
+			//$(this).removeClass("autocomplete");
+		//}else{
 			update_field(this);
-		}
+		//}
 	
 	});
 	
@@ -125,24 +101,15 @@ $(document).ready(function(){
 			value: my_value,
 			is_live: 1
 		};
-		console.log(form_data);
 		$.ajax({
+			dataType: "json",
 			type: "get",
 			url: base_url + "menu/get_autocomplete",
 			data: form_data,
 			success: function(data){
-				$("#autocomplete").css({"z-index": 1000}).html(data).position({
-					my: "left top",
-					at: "left bottom",
-					of: $("#" + my_id), 
-					collision: "fit"
-				}).show();
+				$("#" + my_id).autocomplete({source:data});
 			}
 		});
-	});
-	
-	$("body").on("blur",".autocomplete-live",function(){
-		$("#autocomplete").hide().css({"left": 0, "top": 0});
 	});
 	
 	
@@ -173,18 +140,24 @@ function update_field(me){
 	my_parent = $(me).parent().attr("id");
 	my_attr = my_parent.split("__");
 	my_value = $(me).children().val();
-
+	if(my_value == ""){
+		my_value = $(me).children("input").val();
+	}
+	
+	
 	form_data = {
 			table: my_attr[0],
 			field: my_attr[1],
 			id: my_attr[2],
 			value: my_value
 	};
+	console.log(form_data);
 	$.ajax({
 		type:"post",
 		url: base_url + my_attr[0] + "/update_value",
 		data: form_data,
 		success: function(data){
+			console.log(data);
 			$("#" + my_parent + " .live-field").html(data);
 			$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
 		}

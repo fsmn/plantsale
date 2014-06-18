@@ -39,7 +39,7 @@ class Menu extends MY_Controller {
 				$output = form_textarea ( $data, $data ["value"] );
 				break;
 			case "autocomplete":
-				$data["type"] = "autocomplete";
+				$data["type"] = "text";
 				$output = form_input($data, $data["value"],"class='autocomplete'");
 				break;
 			case "time":
@@ -141,7 +141,8 @@ class Menu extends MY_Controller {
 				"field" => "value",
 				"direction" => "ASC"
 		) );
-		echo create_autocomplete($categories, $value, $id, $is_live);
+		//echo create_autocomplete($categories, $value, $id, $is_live);
+		echo create_list($categories);
 		//echo form_dropdown ( $field, $pairs, $value, "class='save-field'" );
 	
 	}

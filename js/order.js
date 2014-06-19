@@ -106,3 +106,14 @@
 		}
 	});
 	
+	
+	$(document).on("click","input#pot_size",function(){
+		$.ajax({
+			type:"get",
+			dataType: "json",
+			url: base_url + "order/get_pot_sizes",
+			success:function(data){
+				$("input#pot_size").autocomplete({source:data});
+			}
+		});
+	});

@@ -186,5 +186,13 @@ class Order extends MY_Controller {
 		}
 	
 	}
+	
+	function get_pot_sizes(){
+		$pot_sizes = $this->order->get_pot_sizes ();
+		foreach($pot_sizes as $pot_size){
+			$output[] = $pot_size->pot_size;
+		}
+		echo json_encode($output);
+	}
 
 }

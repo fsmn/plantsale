@@ -18,7 +18,7 @@
 		<div class='field-set'>
 			<?=edit_field("species", $variety->species, "Species","variety",$variety->id, array("envelope"=>"div"));?>
 		</div>
-		<fieldset class="field-group">
+		<fieldset class="field-group inline-box">
 			<legend class="label">
 				<strong>Height</strong>
 			</legend>
@@ -33,7 +33,7 @@
 				<?=edit_field("height_unit", $variety->height_unit, "Measure", "variety",$variety->id, array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
 			</div>
 		</fieldset>
-		<fieldset class="field-group">
+		<fieldset class="field-group inline-box">
 			<legend class="label">
 				<strong>Width</strong>
 			</legend>
@@ -51,19 +51,19 @@
 		</fieldset>
 			<?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id, array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?>
 
-			
-	<div class="block" id="flags">
+
+	<div class="column odd" id="flags">
 			<h4>Flags</h4>
 			<div id="flag-list">
 			<? $this->load->view("flag/list");?>
-			
+
 	</div>
 	<? if(DB_ROLE == 1):?>
 			<? $flag_buttons[] = array("selection"=>"flag","text"=>"New Flag","type"=>"span","class"=>"button new flag-add","id"=>"fa_$variety->id");?>
 			<?=create_button_bar($flag_buttons);?>
 	<?endif;?>
 	</div>
-		<div class="block" id="is-new">
+		<div class="column even" id="is-new">
 			<h4>Sale Year</h4>
 			<?=edit_field("new_year",$variety->new_year,"First Year at Sale","variety",$variety->id, array("envelope"=>"span"));?>
 			<? if( $is_new):?>
@@ -103,7 +103,7 @@
 		</p>
 		<div class="block" id="image">
 	<? $this->load->view("image/view"); ?>
-	
+
 </div>
 
 	</div>
@@ -112,7 +112,7 @@
 <div class="all-orders block">
 	<h3>Orders</h3>
 	<?
-	
+
 $data ["orders"] = $orders;
 	$data ["show_names"] = FALSE;
 	$this->load->view ( "order/list", $data );
@@ -125,6 +125,6 @@ $order_buttons [] = array (
 		"text" => "New Order",
 		"type" => "span",
 		"class" => "button new order-create",
-		"id" => "oc_$variety->id" 
+		"id" => "oc_$variety->id"
 );
 echo create_button_bar ( $order_buttons);

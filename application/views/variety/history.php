@@ -5,12 +5,12 @@
 	<legend  title="click to show or hide the parameters">Search Parameters</legend>
 	<div class="search-parameters">
 	<? if (isset ( $options )) : ?>
-		
+
 		<? $keys = array_keys ( $options ); ?>
 		<? $values = array_values ( $options ); ?>
-		
+
 		<ul>
-		
+
 		<? for($i = 0; $i < count ( $options ); $i ++):?>
        	<li>
        	<? if(is_array($values[$i])){
@@ -60,6 +60,7 @@
 <th></th>
 <th></th>
 <th></th>
+<th></th>
 <th colspan=2>Sizes</th>
 <th></th>
 <th></th>
@@ -70,6 +71,7 @@
 <th></th>
 </tr>
 <tr>
+<th></th>
 <th>Year</th>
 <th>Grower</th>
 <th>Cat#</th>

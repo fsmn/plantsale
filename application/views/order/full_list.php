@@ -9,12 +9,12 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 	<legend title="click to show or hide the parameters">Search Parameters</legend>
 	<div class="search-parameters">
 	<? if (isset ( $options )) : ?>
-		
+
 		<? $keys = array_keys ( $options ); ?>
 		<? $values = array_values ( $options ); ?>
-		
+
 		<ul>
-		
+
 		<? for($i = 0; $i < count ( $options ); $i ++):?>
        	<li>
        	<?=ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?=clean_string($values [$i]); ?></strong>
@@ -41,4 +41,4 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 	</div>
 </fieldset>
 
-<? $this->load->view("order/list");
+<? $this->load->view("order/name_list");

@@ -156,7 +156,7 @@ function show_popup(my_title,data,popup_width,x,y){
 function update_field(me,my_type){
 	my_parent = $(me).parents(".field-envelope").attr("id");
 	my_attr = my_parent.split("__");
-	my_value = $("#" + my_parent).children(".live-field").children("input").val();
+	my_value = $("#" + my_parent).children(".live-field").children("input"|"textarea").val();
 	if(my_type == "autocomplete"){
 		my_value = $("#" + my_parent).children(".autocomplete").children("input").val();
 

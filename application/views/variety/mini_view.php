@@ -45,7 +45,7 @@
 			</div>
 
 		</fieldset>
-			<p><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?></p>
+			<p><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","class"=>"multiselect", "format"=>"multiselect"));?></p>
 		<p>
 			<label>Common Name:</label> <span class="field"><?=$variety->common_name;?>
 			</span> <a href="<?=site_url("common/view/$variety->common_id");?>"

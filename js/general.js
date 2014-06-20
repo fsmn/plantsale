@@ -103,7 +103,11 @@ $(document).on("blur",".field-envelope .live-field.text input",function(){
 });
 
 $(document).on("blur",".field-envelope .live-field textarea",function(){
-	update_field(this);
+	update_field(this, "textarea");
+});
+
+$(document).on("blur",".field-envelope .live-field select",function(){
+	update_field(this, "select");
 });
 
 $(document).on("click", ".field-envelope .save-multiselect",function(){

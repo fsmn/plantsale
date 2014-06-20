@@ -862,6 +862,10 @@ ul.inline-list li {
 	color: #aaa;
 }
 
+.no-wrap {
+	white-space:nowrap;
+}
+
 ul.autocomplete-list {
 	list-style: none;
 	margin: 0;

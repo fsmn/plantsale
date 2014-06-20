@@ -35,17 +35,17 @@
 			</legend>
 
 			<div class="field-set">
-				<?=create_edit_field("min_width", $variety->min_width, "Min",array("envelope"=>"div"));?>
+				<?=edit_field("min_width", $variety->min_width, "Min","variety",$variety->id,array("envelope"=>"div"));?>
 			</div>
 			<div class="field-set">
-				<?=create_edit_field("max_width", $variety->max_width, "Max",array("envelope"=>"div"));?>
+				<?=edit_field("max_width", $variety->max_width, "Max","variety",$variety->id,array("envelope"=>"div"));?>
 			</div>
 			<div class="field-set">
-				<?=create_edit_field("width_unit", $variety->width_unit, "Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
+				<?=edit_field("width_unit", $variety->width_unit, "Measure","variety",$variety->id, array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
 			</div>
 
 		</fieldset>
-			<?=create_edit_field("plant_color",$variety->plant_color, "Plant Color(s)",array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?>
+			<p><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?></p>
 		<p>
 			<label>Common Name:</label> <span class="field"><?=$variety->common_name;?>
 			</span> <a href="<?=site_url("common/view/$variety->common_id");?>"

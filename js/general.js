@@ -95,11 +95,13 @@ $(document).on("click",".autocomplete.edit-field",function(){
 
 $(document).on("blur",".field-envelope .live-field.text",function(){
 	if($(this).hasClass("autocomplete")){
+		console.log(this);
+		return false;
 		update_field(this, "autocomplete");
 	}else{
 		update_field(this);
 	}
-
+return false;
 });
 
 $(document).on("click", ".field-envelope .save-multiselect",function(){
@@ -153,15 +155,13 @@ function show_popup(my_title,data,popup_width,x,y){
 
 function update_field(me,my_type){
 	my_parent = $(me).parents(".field-envelope").attr("id");
-	console.log(my_parent);
 	my_attr = my_parent.split("__");
-	my_value = $(me).children().val();
+	my_value = $("#" + my_parent).children(".live-field").children("input").val();
 	if(my_type == "autocomplete"){
 		my_value = $("#" + my_parent).children(".autocomplete").children("input").val();
 
 	}else if(my_type == "multiselect"){
 		my_value = $("#" + my_parent).children(".multiselect").children("select").val();
-		console.log(my_value);
 	}
 	
 	
@@ -176,7 +176,6 @@ function update_field(me,my_type){
 		url: base_url + my_attr[0] + "/update_value",
 		data: form_data,
 		success: function(data){
-			console.log(data);
 			$("#" + my_parent + " .live-field").html(data);
 			$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
 		}

@@ -51,7 +51,7 @@ if ($orders) :
 				<? else: ?>
 				 <a href="<?=site_url("order/view/$order->id");?>" class="button">View</a>
 				<? endif; ?>
-				
+
 				</td>
 			<? if(!$show_names):?>
 				<td class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
@@ -81,15 +81,15 @@ if ($orders) :
 			<td class="order-total_plants field">
 				<?=$order->count_midsale + $order->count_presale;?>
 			</td>
-			<td class="order-pot_size field"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
+			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
 			</td>
 			<td class="order-flat_size field"><?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-flat_cost field">$<?=edit_field("flat_cost",$order->flat_cost,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-flat_cost field no-wrap">$<?=edit_field("flat_cost",$order->flat_cost,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-plant_cost field">$<?=edit_field("plant_cost",$order->plant_cost,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-plant_cost field no-wrap">$<?=edit_field("plant_cost",$order->plant_cost,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-price field">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-price field no-wrap">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>

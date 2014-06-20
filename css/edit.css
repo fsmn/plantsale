@@ -8,6 +8,5 @@
 }
 
 table .edit-field:hover{
-	background-color: yellow;
-	background-image:none;
+	padding-left:15px;
 }

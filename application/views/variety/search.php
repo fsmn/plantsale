@@ -67,6 +67,9 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 		<label for="year">Year: </label><input type="text" name="year"
 			value="<?=get_current_year();?>" />
 	</p>
+	<div id="sort-block">
+<? $this->load->view("order/sort");?>
+</div>
 	<p>
 		<input type="submit" value="Find" class="button" />
 	</p>

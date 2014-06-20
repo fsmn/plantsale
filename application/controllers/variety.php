@@ -143,7 +143,32 @@ class Variety extends MY_Controller
 				"new_year",
 				"print_omit" 
 		);
-		$data ["plants"] = $this->variety->find ( $variables );
+		$options = array();
+		for($i =0; $i< count($variables);$i++){
+			if($value = $this->input->get($variables[$i])){
+				//bake_cookie($variables[$i],$value);
+				$options[$variables[$i]] = $value;
+			}else{
+				//burn_cookie($variables[$i]);
+			}
+		}
+		$data["options"] = $options;
+		$sorting ["fields"] = array (
+				"catalog_number"
+		);
+		$sorting ["direction"] = array (
+				"ASC"
+		);
+			
+		if ($this->input->get ( "sorting" )) {
+			$sorting ["fields"] = $this->input->get ( "sorting" );
+			$sorting ["direction"] = $this->input->get ( "direction" );
+		}
+			
+		bake_cookie ( "sorting", implode ( ",", $sorting ["fields"] ) );
+		bake_cookie ( "direction", implode ( ",", $sorting ["direction"] ) );
+		$data ["plants"] = $this->variety->find ( $variables, $sorting );
+		
 		$print_list = array ();
 		foreach ( $data ["plants"] as $plant ) {
 			$print_list [] = $plant->id;

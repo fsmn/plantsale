@@ -1,6 +1,45 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-$i = 1;
+$i = 1;?>
 
+<fieldset class="search-fieldset">
+	<legend title="click to show or hide the parameters">Search Parameters</legend>
+	<div class='search-parameters'>
+	<? if (isset ( $options )) : ?>
+		
+		<? $keys = array_keys ( $options ); ?>
+		<? $values = array_values ( $options ); ?>
+		
+		<ul>
+		
+		<? for($i = 0; $i < count ( $options ); $i ++):?>
+       	<li>
+       	<? if(is_array($values[$i])){
+       		$values[$i] = implode(",",$values[$i]);
+       	}?>
+       	<?=ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?=ucwords(clean_string($values [$i])); ?></strong>
+		</li>
+		<? endfor;?>
+		</ul>
+	<?  else : ?>
+		<p>Showing All Varieties</p>
+	<? endif; ?>
+<p>
+		<strong>Sort Order</strong>
+	</p>
+<? $sorting = $this->input->get("sorting"); ?>
+<? $direction = $this->input->get("direction");?>
+<ul>
+<? for($i = 0; $i < count($sorting); $i++):?>
+<li><? printf("%s, %s", ucwords($sorting[$i]), $direction[$i]); ?></li>
+<? endfor; ?>
+</ul>
+
+	<div class="button-box">
+		<span class="button search-varieties">Refine Search</span>
+	</div>
+	</div>
+</fieldset>
+<?
 $buttons[] = array("text"=>"Print Tabloid","class"=>"button print variety-print-tabloid","href"=>site_url("variety/print_result/tabloid"),"target"=>"_blank");
 $buttons[] = array("text"=>"Print Statement","class"=>"button print variety-print-statement","href"=>site_url("variety/print_result/statement"), "target"=>"_blank");
 print create_button_bar($buttons);

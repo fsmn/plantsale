@@ -217,7 +217,7 @@ class Variety_Model extends CI_Model {
 	
 	}
 
-	function find($variables) {
+	function find($variables, $order_by) {
 
 		$my_parameters = ( object ) array ();
 		for($i = 0; $i < count ( $variables ); $i ++) {
@@ -235,6 +235,23 @@ class Variety_Model extends CI_Model {
 					}
 				}
 			}
+		}
+		if (! is_array ( $order_by )) {
+			$order_by = array (
+					$order_by
+			);
+		}
+		for($i = 0; $i < count ( $order_by ["fields"] ); $i ++) {
+			$order_field = "catalog_number";
+			if (array_key_exists ( "fields", $order_by ) && ! empty ( $order_by ["fields"] [$i] )) {
+				$order_field = $order_by ["fields"] [$i];
+			}
+				
+			$order_direction = "ASC";
+			if (array_key_exists ( "direction", $order_by ) && ! empty ( $order_by ["direction"] [$i] )) {
+				$order_direction = $order_by ["direction"] [$i];
+			}
+			$this->db->order_by ( $order_field, $order_direction );
 		}
 		$this->db->from ( "variety" );
 		$this->db->join ( "common", "variety.common_id = common.id" );
@@ -256,7 +273,7 @@ class Variety_Model extends CI_Model {
 			} elseif ($parameter->key == "name") {
 				$this->db->like ( "common.name", $parameter->value );
 			} elseif ($parameter->key == "flag") {
-				$this->db->where ( "flag.name", $parameter->value );
+				$this->db->where ( "flag.name", urldecode($parameter->value) );
 			} elseif ($parameter->key == "year") {
 				$this->db->where ( "order.year", $parameter->value );
 			} elseif (in_array ( $parameter->key, array (

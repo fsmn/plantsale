@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 
 
-<fieldset class="search_fieldset">
+<fieldset class="search-fieldset">
 	<legend>Search Parameters</legend>
 	<?
 	if(!empty($options)){

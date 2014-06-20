@@ -2,8 +2,9 @@
 
 // list.php Chris Dart Feb 27, 2013 11:07:53 AM chrisdart@cerebratorium.com
 ?>
-<fieldset class="search_fieldset">
-	<legend>Search Parameters</legend>
+<fieldset class="search-fieldset">
+	<legend title="click to show or hide the parameters">Search Parameters</legend>
+	<div class="search-parameters">
 	<?
 	if(!empty($params)){
 
@@ -29,6 +30,7 @@
 
 	<div class="button-box">
 		<span class="button search-common-names">Refine Search</span>
+	</div>
 	</div>
 </fieldset>
 <table id="common-name-list" class="list">

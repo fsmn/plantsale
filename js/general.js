@@ -107,9 +107,20 @@ $(document).ready(function(){
 			url: base_url + "menu/get_autocomplete",
 			data: form_data,
 			success: function(data){
+				console.log(data);
 				$("#" + my_id).autocomplete({source:data});
 			}
 		});
+	});
+	
+	$(".search-fieldset").on("click","legend",function(){
+		$(".search-parameters").toggle(400);
+		$(".search-fieldset").toggleClass("hidden");
+		if($(".search-fieldset").hasClass("hidden")){
+			$(".search-fieldset legend").html("Show Search Parameters");
+		}else{
+			$(".search-fieldset legend").html("Search Parameters");
+		}
 	});
 	
 	
@@ -151,13 +162,11 @@ function update_field(me){
 			id: my_attr[2],
 			value: my_value
 	};
-	console.log(form_data);
 	$.ajax({
 		type:"post",
 		url: base_url + my_attr[0] + "/update_value",
 		data: form_data,
 		success: function(data){
-			console.log(data);
 			$("#" + my_parent + " .live-field").html(data);
 			$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
 		}

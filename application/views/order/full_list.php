@@ -5,8 +5,9 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 ?>
 
-<fieldset class="search_fieldset">
-	<legend>Search Parameters</legend>
+<fieldset class="search-fieldset">
+	<legend title="click to show or hide the parameters">Search Parameters</legend>
+	<div class="search-parameters">
 	<? if (isset ( $options )) : ?>
 		
 		<? $keys = array_keys ( $options ); ?>
@@ -36,6 +37,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 	<div class="button-box">
 		<span class="button search-orders">Refine Search</span>
+	</div>
 	</div>
 </fieldset>
 

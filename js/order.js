@@ -117,3 +117,18 @@
 			}
 		});
 	});
+	
+	$(document).on("click",".pot-size-menu.edit-field",function(){
+		my_parent = $(this).parent(".field-envelope").attr("id");
+		$.ajax({
+			dataType: "json",
+			type:"get",
+			url: base_url + "order/get_pot_sizes",
+			success: function(data){
+				$("#" + my_parent + " input").autocomplete({source:data});
+			}
+		});
+		
+	});
+	
+	

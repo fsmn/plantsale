@@ -100,8 +100,9 @@ function get_as_price($int) {
 function get_as_time($time){
 	
 	$output = "";
-	if($time!="00:00:00"){
-		$output= date("g:i A",strtotime($time));
+	if($time!="0"){
+		$output = $time;
+		//$output= date("g:i A",strtotime($time));
 	}
 	return $output;
 }
@@ -146,6 +147,7 @@ function abbr_unit($measure) {
 
 function clean_string($string){
 	return preg_replace("/[^a-zA-Z0-9\"\.]+/", " ",$string);
+	
 }
 
 function format_dimensions($min, $max, $unit = "Inches", $direction = NULL) {

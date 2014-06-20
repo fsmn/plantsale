@@ -833,16 +833,16 @@ ul.inline-list li {
 }
 
 .plant-info .field {
-	width: 15ex;
-	padding: 0 1ex;
+	/*width: 15ex;*/
+	padding: 0 .25em;
 }
 
 .plant-info .field.omit-plant {
-	width: 3ex;
+	width: 1em;
 }
 
 .plant-info .field.year {
-	width: 4ex;
+
 }
 
 .plant-info .field.species {
@@ -850,11 +850,11 @@ ul.inline-list li {
 }
 
 .plant-info .field.genus {
-	width: 10ex;
+	
 }
 
 .plant-info .field.variety,.plant-info .field.common-name {
-	width: 20ex;
+	
 }
 
 .omitted {

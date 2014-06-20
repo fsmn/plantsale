@@ -5,12 +5,12 @@ $i = 1;?>
 	<legend title="click to show or hide the parameters">Search Parameters</legend>
 	<div class='search-parameters'>
 	<? if (isset ( $options )) : ?>
-		
+
 		<? $keys = array_keys ( $options ); ?>
 		<? $values = array_values ( $options ); ?>
-		
+
 		<ul>
-		
+
 		<? for($i = 0; $i < count ( $options ); $i ++):?>
        	<li>
        	<? if(is_array($values[$i])){
@@ -45,7 +45,7 @@ $buttons[] = array("text"=>"Print Statement","class"=>"button print variety-prin
 print create_button_bar($buttons);
 ?>
 
-<h4>Click on a plant to view details. Press "tab" or "shift-tab" to move up and down the list"</h4>
+<h4>Click on a plant to view details. Press "tab" or "shift-tab" to move up and down the list. Check items you do NOT want to print.</h4>
 
 <div id="plant-box" class="column">
 	<div>
@@ -55,14 +55,14 @@ print create_button_bar($buttons);
 	<? $checked = "checked";?>
 	<? endif;?>
 		<div class="plant-row" tabindex=<?=$i;?> id="plant-row_<?=$plant->id;?>">
-		<ul class="plant-info inline-list" id="plant-info_<?=$plant->id;?>">
-			<li class="field omit-plant"><?=form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant","id"=>"omit-plant_$plant->order_id","checked"=>$checked));?></li>
-			<li class="field year"><?=$plant->year;?></li>
-			<li class="field genus"><span id="genus_<?=$plant->common_id;?>"><?=$plant->genus;?></span>
-			&nbsp;<span class="species"><?=$plant->species;?></span></li>
-			<li class="field common-name"><span id="common-name_<?=$plant->common_id;?>"><?=$plant->name;?></span>
-			<span class="variety"><?=$plant->variety;?></span></li>
-		</ul>
+		<div class="plant-info inline-list" id="plant-info_<?=$plant->id;?>">
+			<span class="field omit-plant"><?=form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant","id"=>"omit-plant_$plant->order_id","checked"=>$checked));?></span>
+			<span class="field year"><?=$plant->year;?></span>
+			<span class="field genus"><span id="genus_<?=$plant->common_id;?>"><?=$plant->genus;?></span>
+			&nbsp;<span class="species"><?=$plant->species;?></span></span>
+			<span class="field common-name"><span id="common-name_<?=$plant->common_id;?>"><?=$plant->name;?></span>
+			<span class="variety"><?=$plant->variety;?></span></span>
+		</div>
 		</div>
 		<? $i++;?>
 	<? endforeach;?>

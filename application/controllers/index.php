@@ -3,7 +3,7 @@
 class Index extends MY_Controller {
 	function __construct() {
 		parent::__construct ();
-		
+
 	}
 
 	function index() {
@@ -11,7 +11,7 @@ class Index extends MY_Controller {
 		$data ["target"] = "welcome";
 		$this->load->view ( "page/index", $data );
 	}
-	
+
 	function test(){
 		$data["target"] = "test";
 		$data["title"] = "Test";
@@ -67,7 +67,7 @@ class Index extends MY_Controller {
 	    $categories["current"] = $this->variety->get_category_totals($sale_year);
 	    $categories["previous"] = $this->variety->get_category_totals($sale_year -1);
 	    $data["categories"] = $categories;
-	    $this->load->view("variety/totals", $data);
+	    $this->load->view("variety/category_totals", $data);
 	}
 
 	function get_flats(){
@@ -79,6 +79,6 @@ class Index extends MY_Controller {
 	    $categories["current"] = $this->variety->get_flat_totals($sale_year);
 	    $categories["previous"] = $this->variety->get_flat_totals($sale_year -1);
 	    $data["categories"] = $categories;
-	    $this->load->view("variety/flat_totals", $data);
+	    $this->load->view("order/flat_totals", $data);
 	}
 }

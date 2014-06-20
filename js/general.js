@@ -91,27 +91,7 @@ $(document).ready(function(){
 		
 	});
 	
-	$("body").on("click",".autocomplete-live",function(){
-		my_category = $(this).attr("category");
-		my_id = this.id;
-		my_value = $(this).val();
-		form_data = {
-			category: my_category,
-			id: my_id,
-			value: my_value,
-			is_live: 1
-		};
-		$.ajax({
-			dataType: "json",
-			type: "get",
-			url: base_url + "menu/get_autocomplete",
-			data: form_data,
-			success: function(data){
-				console.log(data);
-				$("#" + my_id).autocomplete({source:data});
-			}
-		});
-	});
+	
 	
 	$(".search-fieldset").on("click","legend",function(){
 		$(".search-parameters").toggle(400);
@@ -124,6 +104,28 @@ $(document).ready(function(){
 	});
 	
 	
+});
+
+$(document).on("click",".autocomplete-live",function(){
+	my_category = $(this).attr("category");
+	my_id = this.id;
+	my_value = $(this).val();
+	form_data = {
+		category: my_category,
+		id: my_id,
+		value: my_value,
+		is_live: 1
+	};
+	$.ajax({
+		dataType: "json",
+		type: "get",
+		url: base_url + "menu/get_autocomplete",
+		data: form_data,
+		success: function(data){
+			console.log(data);
+			$("#" + my_id).autocomplete({source:data});
+		}
+	});
 });
 
 function show_popup(my_title,data,popup_width,x,y){

@@ -39,6 +39,7 @@ loggedout indicates the opposite.
 
 /*Login Form elements*/
 div.login {
+	
 }
 
 div.error {
@@ -82,7 +83,7 @@ div.list {
 }
 
 a {
- color:#489310;
+	color: #489310;
 }
 
 /*form elements*/
@@ -93,7 +94,7 @@ a {
 	background: #489310;
 	background: -moz-linear-gradient(top, #67b021 0, #489310 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #67b021),
-		color-stop(100%, #489310) );
+		color-stop(100%, #489310));
 	background: -webkit-linear-gradient(top, #67b021 0, #489310 100%);
 	background: -o-linear-gradient(top, #67b021 0, #489310 100%);
 	background: -ms-linear-gradient(top, #67b021 0, #489310 100%);
@@ -101,7 +102,6 @@ a {
 }
 
 .button:hover,submit:hover {
-
 	transition: all .25s ease-in;
 	opacity: 1;
 	color: #000;
@@ -109,13 +109,12 @@ a {
 	background: #67b021;
 	background: -moz-linear-gradient(top, #489310 0, #67b021 50%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #489310),
-		color-stop(50%, #67b021) );
+		color-stop(50%, #67b021));
 	background: -webkit-linear-gradient(top, #489310 0, #67b021 50%);
 	background: -o-linear-gradient(top, #489310 0, #67b021 50%);
 	background: -ms-linear-gradient(top, #489310 0, #67b021 50%);
 	background: linear-gradient(top, #489310 0, #67b021 50%);
 }
-
 
 .notice .link,.notice a {
 	color: #fff;
@@ -123,7 +122,6 @@ a {
 
 .button.active {
 	opacity: 1;
-	
 }
 
 /* .button.active:hover { */
@@ -139,7 +137,7 @@ a.button {
 	background-color: #0077bd;
 	background: -moz-linear-gradient(top, #63ACE4 0, #0077bd 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #63ACE4),
-		color-stop(100%, #0077bd) );
+		color-stop(100%, #0077bd));
 	background: -webkit-linear-gradient(top, #63ACE4 0, #0077bd 100%);
 	background: -o-linear-gradient(top, #63ACE4 0, #0077bd 100%);
 	background: -ms-linear-gradient(top, #63ACE4 0, #0077bd 100%);
@@ -153,7 +151,7 @@ a.button {
 	background-color: #63ACE4;
 	background: -moz-linear-gradient(top, #0077bd 0, #63ACE4 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0077bd),
-		color-stop(100%, #63ACE4) );
+		color-stop(100%, #63ACE4));
 	background: -webkit-linear-gradient(top, #0077bd 0, #63ACE4 50%);
 	background: -o-linear-gradient(top, #0077bd 0, #63ACE4 100%);
 	background: -ms-linear-gradient(top, #0077bd 0, #63ACE4 100%);
@@ -166,7 +164,7 @@ a.button {
 	color: #000;
 	background: -moz-linear-gradient(top, #eeff11 0, #dff110 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eeff11),
-		color-stop(100%, #dff110) );
+		color-stop(100%, #dff110));
 	background: -webkit-linear-gradient(top, #eeff11 0, #dff110 100%);
 	background: -o-linear-gradient(top, #eeff11 0, #dff110 100%);
 	background: -ms-linear-gradient(top, #eeff11 0, #dff110 100%);
@@ -179,7 +177,7 @@ a.button {
 	background-color: #dff110;
 	background: -moz-linear-gradient(top, #dff110 0, #eeff11 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #dff110),
-		color-stop(100%, #eeff11) );
+		color-stop(100%, #eeff11));
 	background: -webkit-linear-gradient(top, #dff110 0, #eeff11 100%);
 	background: -o-linear-gradient(top, #dff110 0, #eeff11 100%);
 	background: -ms-linear-gradient(top, #dff110 0, #eeff11 100%);
@@ -205,7 +203,7 @@ a.button {
 	background: linear-gradient(top, #ffa111 0, #FFA500 100%);
 }
 
-.button.auth:hover{
+.button.auth:hover {
 	opacity: 1;
 	/*border: 1px solid #CC9900;
 	background-color: #FFA500;
@@ -225,7 +223,7 @@ a.button {
 	background-color: #c9192d;
 	background: -moz-linear-gradient(top, #DB5F3A 0, #c9192d 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #DB5F3A),
-		color-stop(100%, #c9192d) );
+		color-stop(100%, #c9192d));
 	background: -webkit-linear-gradient(top, #DB5F3A 0, #c9192d 100%);
 	background: -o-linear-gradient(top, #DB5F3A 0, #c9192d 100%);
 	background: -ms-linear-gradient(top, #DB5F3A 0, #c9192d 100%);
@@ -237,7 +235,7 @@ a.button {
 	background-color: #db5f3a;
 	background: -moz-linear-gradient(top, #c9192d 0, #DB5F3A 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #c9192d),
-		color-stop(100%, #DB5F3A) );
+		color-stop(100%, #DB5F3A));
 	background: -webkit-linear-gradient(top, #c9192d 0, #DB5F3A 100%);
 	background: -o-linear-gradient(top, #c9192d 0, #DB5F3A 100%);
 	background: -ms-linear-gradient(top, #c9192d 0, #DB5F3A 100%);
@@ -247,7 +245,6 @@ a.button {
 .button.print {
 	
 }
-
 
 .button.print {
 	background-color: #CF46CC;
@@ -261,8 +258,8 @@ a.button {
 }
 
 .button.print:hover {
-	background-color:#8C2D8B ;
-	background: -moz-linear-gradient(top, #8C2D8B 0,  #CF46CC 100%);
+	background-color: #8C2D8B;
+	background: -moz-linear-gradient(top, #8C2D8B 0, #CF46CC 100%);
 	background: linear-gradient(top, #8C2D8B 0, #CF46CC 100%);
 	background: -webkit-linear-gradient(top, #8C2D8B 0, #CF46CC 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #8C2D8B),
@@ -273,11 +270,11 @@ a.button {
 /* #CAD6E9 */
 /* #C3D0E2 */
 /* header page layout elements */
-#navigation, h2,h3,h4,h5,h6 {
+#navigation,h2,h3,h4,h5,h6 {
 	background-color: #fff;
 	background: -moz-linear-gradient(top, #fff 0, #ddd 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff),
-		color-stop(100%, #eee) );
+		color-stop(100%, #eee));
 	background: -webkit-linear-gradient(top, #fff 0, #eee 100%);
 	background: -o-linear-gradient(top, #fff 0, #eee 100%);
 	background: -ms-linear-gradient(top, #fff 0, #eee 100%);
@@ -356,11 +353,16 @@ input.link {
 	color: #f00;
 }
 
-table.list tr:hover, div.plant-row.active{
+table.list tr:hover,div.plant-row.active {
 	background-color: #cdcdcd;
 }
 
-
+input.autocomplete-live:hover,input.autocomplete:hover {
+	background-image: url(../images/ring.png);
+	background-repeat: no-repeat;
+	background-position-x: right;
+	background-position-y: center;
+}
 
 .search-field {
 	color: #666;

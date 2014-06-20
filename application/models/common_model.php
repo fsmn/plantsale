@@ -25,17 +25,19 @@ class Common_model extends CI_Model
 
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
+
 			if($method == "post"){
-				$my_value = urldecode($this->input->post($my_variable));
+			    $my_value = $this->input->post($my_variable);
+			    if(is_array($my_value)){
+			        $my_value = implode(",",$my_value);
+			    }
+			    $my_value = urldecode($my_value);
 			}elseif($method=="get"){
 				$my_value = $this->input->get($my_variable);
 			}
 			if($my_value){
-				if($my_variable == "sunlight"){
-					$this->$my_variable = implode(",", $my_value);
-				}else{
+
 					$this->$my_variable = $my_value;
-				}
 			}
 		}
 

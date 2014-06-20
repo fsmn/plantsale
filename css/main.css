@@ -740,11 +740,12 @@ textarea.save-field {
 	padding-bottom: 10px;
 }
 
-.column-odd {
+
+.column-odd, .column.odd {
 	padding-right: 5px;
 }
 
-.column-even {
+.column-even, .column.odd {
 	padding-left: 5px;
 }
 

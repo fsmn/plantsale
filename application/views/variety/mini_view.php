@@ -19,13 +19,14 @@
 			</legend>
 
 			<div class="field-set">
-				<?=create_edit_field("min_height", $variety->min_height,"Min",array("envelope"=>"div"));?>
+				<?=edit_field("min_height", $variety->min_height,"Min","variety",$variety->id, array("envelope"=>"div"));?>
+
 			</div>
 			<div class="field-set">
-				<?=create_edit_field("max_height", $variety->max_height, "Max", array("envelope"=>"div"));?>
+				<?=edit_field("max_height", $variety->max_height, "Max", "variety",$variety->id, array("envelope"=>"div"));?>
 			</div>
 			<div class="field-set">
-				<?=create_edit_field("height_unit", $variety->height_unit, "Measure", array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
+				<?=edit_field("height_unit", $variety->height_unit, "Measure","variety",$variety->id, array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
 			</div>
 		</fieldset>
 		<fieldset class="field-group inline-box">
@@ -70,7 +71,7 @@
 				<?=create_edit_field("note", $variety->note, "Variety Description", array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
 
-		<div class="block" id="flags">
+		<div class="column odd">
 			<h4>Flags</h4>
 			<div id="flag-list">
 			<? $this->load->view("flag/list");?>
@@ -80,7 +81,7 @@
 			<?=create_button_bar($flag_buttons);?>
 	<?endif;?>
 		</div>
-		<div class="block" id="is-new">
+		<div class="column even">
 		<h4>Sale Year</h4>
 			<?=edit_field("new_year",$variety->new_year,"First Year at Sale","variety",$variety->id, array("envelope"=>"span"));?>
 			<? if( $is_new):?>
@@ -89,7 +90,7 @@
 			</div>
 	</div>
 
-
+<!--
 <div class="all-orders block">
 	<h3>Orders</h3>
 	<? $data["orders"] = $orders;
@@ -99,4 +100,6 @@
 </div>
 <?
 $order_buttons[] = array("selection"=>"order","text"=>"New Order","type"=>"span","class"=>"button new order-create", "id" => "oc_$variety->id");
-echo create_button_bar($order_buttons);
+echo create_button_bar($order_buttons); ?>
+
+ -->

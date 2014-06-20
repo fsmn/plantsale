@@ -93,15 +93,17 @@ $(document).on("click",".autocomplete.edit-field",function(){
 });
 
 
-$(document).on("blur",".field-envelope .live-field.text",function(){
-	if($(this).hasClass("autocomplete")){
-		console.log(this);
-		return false;
+$(document).on("blur",".field-envelope .live-field.text input",function(){
+	if($(this).hasClass("ui-autocomplete-input")){
 		update_field(this, "autocomplete");
 	}else{
-		update_field(this);
+		update_field(this, "text");
 	}
-return false;
+	return false;
+});
+
+$(document).on("blur",".field-envelope .live-field textarea",function(){
+	update_field(this);
 });
 
 $(document).on("click", ".field-envelope .save-multiselect",function(){
@@ -132,6 +134,7 @@ $(document).on("click",".autocomplete-live",function(){
 	});
 });
 
+
 function show_popup(my_title,data,popup_width,x,y){
 	if(!popup_width){
 		popup_width=300;
@@ -154,16 +157,19 @@ function show_popup(my_title,data,popup_width,x,y){
 }
 
 function update_field(me,my_type){
+	console.log(my_type);
 	my_parent = $(me).parents(".field-envelope").attr("id");
 	my_attr = my_parent.split("__");
 	my_value = $("#" + my_parent).children(".live-field").children("input"|"textarea").val();
+	
 	if(my_type == "autocomplete"){
-		my_value = $("#" + my_parent).children(".autocomplete").children("input").val();
+		my_value = $("#" + my_parent).children(".live-field").children("input").val();
 
 	}else if(my_type == "multiselect"){
 		my_value = $("#" + my_parent).children(".multiselect").children("select").val();
 	}
-	
+	console.log(my_value);
+
 	
 	form_data = {
 			table: my_attr[0],

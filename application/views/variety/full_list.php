@@ -51,7 +51,7 @@ print create_button_bar($buttons);
 	<table class="list">
 	<thead>
 	<tr>
-	<th>Exclude</th>
+	<th></th>
 	<th>Year</th>
 	<th>Latin Name</th>
 	<th>Commmon Name</th>
@@ -64,8 +64,8 @@ print create_button_bar($buttons);
 		<? if($plant->print_omit ==1 ):?>
 			<? $checked = "checked";?>
 		<? endif;?>
-		<tr class="plant-row plant-info  inline-list" tabindex=<?=$i;?> id="plant-info_<?=$plant->id;?>" >
-			<td class="field omit-plant"><?=form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant","id"=>"omit-plant_$plant->order_id","checked"=>$checked));?></td>
+		<tr class="plant-row plant-info inline-list" tabindex=<?=$i;?> id="plant-info_<?=$plant->id;?>" >
+			<td class="field omit-plant"><?=form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant from printing","id"=>"omit-plant_$plant->order_id","checked"=>$checked));?></td>
 			<td class="field year"><?=$plant->year;?></td>
 			<td class="field latin-name"><?=format_latin_name($plant->genus,$plant->species);?></td>
 			<td class="field common-name"><?=$plant->name;?></td>

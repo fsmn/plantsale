@@ -353,7 +353,7 @@ input.link {
 	color: #f00;
 }
 
-table.list tr:hover,div.plant-row.active {
+table.list tr:hover,tr.plant-row.active {
 	background-color: #cdcdcd;
 }
 

@@ -632,6 +632,18 @@ td.field input {
 	width: 60px;
 }
 
+tr.plant-row td.field input{
+	width: auto;
+}
+
+tr.plant-row td.field {
+	padding: .25em;
+}
+
+tr.plant-row td.field.common-name {
+	font-weight: bold;
+}
+
 table.chart td {
 	border: 1px solid #ddd;
 	padding: 5px;
@@ -818,8 +830,11 @@ ul.inline-list li {
 	display: none;
 	clear: both;
 }
+.plant-row:hover {
+	cursor: pointer;
+}
 
-.plant-info {
+div.plant-info {
 	display: block;
 }
 

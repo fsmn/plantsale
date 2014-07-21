@@ -219,6 +219,7 @@ div.login-title {
 	cursor: pointer;
 	font-size: 1em;
 	font-weight: normal;
+	white-space:nowrap;
 }
 
 td .button,.row .button,.button.small {

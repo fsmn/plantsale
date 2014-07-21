@@ -6,7 +6,7 @@
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
 	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
 	<div class="order-year field">
-		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_current_year();?>" />
+		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_cookie("sale_year");?>" />
 	</div>
 
 	<div class="order-grower field">
@@ -55,6 +55,8 @@
 		<label for="grower_code">grower Code:&nbsp;</label> <input type="text"
 			name="grower_code" value="<?=get_value($order,"grower_code");?>" />
 	</div>
+	<input type="hidden" name="redirect_url" id="redirect_url"/>
+
 	<div>
 		<input type="submit" value="<?=ucfirst($action);?>" class="button" />
 		<? if($action == "update"): ?>
@@ -62,3 +64,4 @@
 		<? endif;?>
 	</div>
 </form>
+<script type"text/javascript">$("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));</script>

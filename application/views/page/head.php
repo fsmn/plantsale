@@ -38,4 +38,4 @@ var base_url = '<?=base_url("index.php") . "/";?>';
 
 <!-- admin scripts -->
 <script type="text/javascript" src="<?=base_url("js/password.js");?>"></script>
-<script type="text/javascript" scr="<?=base_url("js/user.js");?>"></script>
+<script type="text/javascript" src="<?=base_url("js/user.js");?>"></script>

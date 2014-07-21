@@ -31,7 +31,7 @@ class Order_Model extends CI_Model
 	{
 
 		parent::__construct ();
-	
+
 	}
 
 	function prepare_variables()
@@ -59,19 +59,19 @@ class Order_Model extends CI_Model
 				"remainder_saturday",
 				"remainder_sunday",
 				"grower_code",
-				"print_omit" 
+				"print_omit"
 		);
-		
+
 		for($i = 0; $i < count ( $variables ); $i ++) {
 			$my_variable = $variables [$i];
 			if ($this->input->post ( $my_variable )) {
 				$this->$my_variable = urldecode ( $this->input->post ( $my_variable ) );
 			}
 		}
-		
+
 		$this->rec_modified = mysql_timestamp ();
 		$this->rec_modifier = $this->session->userdata ( 'user_id' );
-	
+
 	}
 
 	function insert()
@@ -81,7 +81,7 @@ class Order_Model extends CI_Model
 		$this->db->insert ( "order", $this );
 		$id = $this->db->insert_id ();
 		return $id;
-	
+
 	}
 
 	function update($id, $values = array())
@@ -98,7 +98,7 @@ class Order_Model extends CI_Model
 				return $this->get_value ( $id, $keys [0] );
 			}
 		}
-	
+
 	}
 
 	function delete($id)
@@ -107,10 +107,10 @@ class Order_Model extends CI_Model
 		$order = $this->get ( $id );
 		$variety_id = $order->variety_id;
 		$this->db->delete ( "order", array (
-				"id" => $id 
+				"id" => $id
 		) );
 		return $variety_id;
-	
+
 	}
 
 	function get($id)
@@ -122,7 +122,7 @@ class Order_Model extends CI_Model
 		$this->db->select ( "order.*, variety.variety" );
 		$output = $this->db->get ()->row ();
 		return $output;
-	
+
 	}
 
 	function get_for_variety($variety_id, $year = NULL)
@@ -142,7 +142,7 @@ class Order_Model extends CI_Model
 			$output = $this->db->get ()->result ();
 		}
 		return $output;
-	
+
 	}
 
 	function get_totals($sale_year, $options = array(), $order_by = array("fields"=>array("catalog_number"),"direction"=>array("ASC")))
@@ -159,7 +159,7 @@ class Order_Model extends CI_Model
 		$this->db->where ( "order.year", $sale_year );
 		if (! is_array ( $order_by )) {
 			$order_by = array (
-					$order_by 
+					$order_by
 			);
 		}
 		for($i = 0; $i < count ( $order_by ["fields"] ); $i ++) {
@@ -167,7 +167,7 @@ class Order_Model extends CI_Model
 			if (array_key_exists ( "fields", $order_by ) && ! empty ( $order_by ["fields"] [$i] )) {
 				$order_field = $order_by ["fields"] [$i];
 			}
-			
+
 			$order_direction = "ASC";
 			if (array_key_exists ( "direction", $order_by ) && ! empty ( $order_by ["direction"] [$i] )) {
 				$order_direction = $order_by ["direction"] [$i];
@@ -179,7 +179,7 @@ class Order_Model extends CI_Model
 		$this->db->select ( "common.name, common.genus, common.category, common.id as common_id" );
 		$result = $this->db->get ()->result ();
 		return $result;
-	
+
 	}
 
 	function get_current_year()
@@ -191,7 +191,7 @@ class Order_Model extends CI_Model
 		$this->db->limit ( 1 );
 		$result = $this->db->get ()->row ();
 		return $result->year;
-	
+
 	}
 
 	function get_previous_year($variety_id, $current_year)
@@ -205,7 +205,24 @@ class Order_Model extends CI_Model
 		$this->db->limit ( 1 );
 		$result = $this->db->get ()->row ();
 		return $result;
-	
+
+	}
+
+	function is_latest($variety_id, $current_year)
+	{
+
+	    $this->db->from ( "order" );
+	    $this->db->where ( "variety_id", $variety_id );
+	    $this->db->where ( "year >", $current_year );
+	    $this->db->order_by ( "year", "DESC" );
+	    $this->db->group_by ( "year" );
+	    $result = $this->db->get ()->num_rows;
+	    $output = TRUE;
+	    if($result == 1){
+	        $output = FALSE;
+	    }
+	    return $output;
+
 	}
 
 	function get_value($id, $field)
@@ -216,7 +233,7 @@ class Order_Model extends CI_Model
 		$this->db->from ( "order" );
 		$output = $this->db->get ()->row ();
 		return $output->$field;
-	
+
 	}
 
 	function get_pot_sizes()
@@ -228,7 +245,7 @@ class Order_Model extends CI_Model
 		$this->db->order_by ( "pot_size" );
 		$result = $this->db->get ()->result ();
 		return $result;
-	
+
 	}
 
 	function get_plant_total($year)
@@ -237,7 +254,7 @@ class Order_Model extends CI_Model
 		$query = sprintf ( "SELECT sum((`count_presale` + `count_midsale`)) as `total` FROM `order` where `year` = '%s' ", $year );
 		$result = $this->db->query ( $query )->row ();
 		return $result->total;
-	
+
 	}
 
 	function get_price_range($year = NULL)
@@ -248,7 +265,7 @@ class Order_Model extends CI_Model
 		$this->db->where ( "year", $year );
 		$result = $this->db->get ()->row ();
 		return $result;
-	
+
 	}
 
 }

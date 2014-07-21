@@ -49,7 +49,7 @@ class Order extends MY_Controller {
 		} else {
 			$options = array ();
 
-			if (! $sale_year = $this->input->get ( "sale_year" )) {
+			if (! $sale_year = $this->input->get ( "year" )) {
 				$sale_year = get_cookie ( "sale_year" );
 			}
 
@@ -100,6 +100,9 @@ class Order extends MY_Controller {
 			bake_cookie ( "sorting", implode ( ",", $sorting ["fields"] ) );
 			bake_cookie ( "direction", implode ( ",", $sorting ["direction"] ) );
 			$orders = $this->order->get_totals ( $sale_year, $options, $sorting );
+			foreach($orders as $order){
+			    $order->latest_order  = $this->order->is_latest($order->variety_id,$order->year);
+			}
 			$data ["options"] = $options;
 			$data ["orders"] = $orders;
 			$data ["title"] = "List of $category orders for $sale_year";
@@ -165,8 +168,8 @@ class Order extends MY_Controller {
 	function insert() {
 
 		$order_id = $this->order->insert ();
-		$variety_id = $this->input->post ( "variety_id" );
-		redirect ( "variety/view/$variety_id" );
+		//$variety_id = $this->input->post ( "variety_id" );
+		redirect( $this->input->post("redirect_url") );
 
 	}
 

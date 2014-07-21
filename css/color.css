@@ -367,3 +367,7 @@ input.autocomplete-live:hover,input.autocomplete:hover {
 .search-field {
 	color: #666;
 }
+
+.disabled {
+	background-color: #eee;
+}

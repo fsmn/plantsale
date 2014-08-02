@@ -24,7 +24,6 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	<input type="number" style="width:5em" value="<?=get_value($variety,"new_year");?>" name="new_year" id="new_year"/>
 	</p>
 		<p><label for="category">Category: </label><input type="text" class="autocomplete-live" category="common_category" name="category" id="category" value=""/></p>
-	
 	<p>
 		<label for="flag">Flag: </label>
 		<?=form_dropdown("flag",$flags,"","id='flag'");?>

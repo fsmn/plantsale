@@ -13,7 +13,7 @@
 <? $this->load->view("order/sort");?>
 </div>
 <p>
-<input type="checkbox" value="1" name="show_last_only"/>Hide orders for which there is an order for the next year.
+<input type="checkbox" value="1" name="show_last_only"/>Hide plants that already have an order for the next plant sale
 </p>
 <p><input type="submit" value="Search"/></p>
 

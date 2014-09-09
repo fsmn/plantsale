@@ -138,7 +138,7 @@ $(document).on("click",".autocomplete-live",function(){
 	});
 });
 
-$(document).on("click","autocomplete-off",function(){
+$(document).on("click",".autocomplete-off",function(){
 	$("input").attr("autocomplete","off");
 });
 

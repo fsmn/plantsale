@@ -4,7 +4,7 @@
 <h4><?=$order->variety;?></h4>
 <div class="button-box">
 <ul class="button-list">
-<li><span class='button link autocomplete-off'>Turn off Autocomplete</span></li>
+<li><span class='link autocomplete-off'>Turn off Autocomplete</span></li>
 </ul>
 </div>
 <form name="order-edit" id="order-edit" action="<?=site_url("order/$action");?>"

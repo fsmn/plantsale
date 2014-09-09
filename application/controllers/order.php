@@ -53,7 +53,7 @@ class Order extends MY_Controller {
 				$sale_year = get_cookie ( "sale_year" );
 			}else{
 			    $options['year'] = $sale_year;
-			    bake_cookie("sale_year", $sale_year);
+			   // bake_cookie("sale_year", $sale_year);
 
 			}
 

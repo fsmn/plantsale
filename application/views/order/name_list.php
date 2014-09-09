@@ -88,7 +88,7 @@ if ($orders) :
 			<td><a
 				href="<?=site_url("common/view/$order->common_id");?>"
 				title="View the details for <?=$order->name;?>"><?=$order->name;?></a></td>
-			<td><a
+			<td><a style="font-weight: bold"
 				href="<?=site_url("variety/view/$order->variety_id");?>"
 				title="View the details for <?=$order->variety;?>"><?=$order->variety;?></a></td>
 			<? endif;?>

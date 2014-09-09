@@ -140,8 +140,12 @@ $(document).on("click",".autocomplete-live",function(){
 
 $(document).on("click",".autocomplete-off",function(){
 	$("input").attr("autocomplete","off");
+	$(this).html("Turn Autocomplete On").removeClass("autocomplete-off").addClass("autocomplete-on");
 });
-
+$(document).on("click",".autocomplete-on",function(){
+	$("input").attr("autocomplete","On");
+	$(this).html("Turn Autocomplete Off").removeClass("autocomplete-on").addClass("autocomplete-off");
+});
 
 function show_popup(my_title,data,popup_width,x,y){
 	if(!popup_width){

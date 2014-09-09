@@ -136,7 +136,7 @@ $(document).on("click",".autocomplete-live",function(){
 			$("#" + my_id).autocomplete({source:data});
 		}
 	});
-});
+});$(document).on("click",".reset-form",function(){})
 
 
 function show_popup(my_title,data,popup_width,x,y){
@@ -192,6 +192,7 @@ function update_field(me,my_type){
 	});
 }
 
+
 function create_dropdown(my_field, my_category, my_value)
 {
 	
@@ -213,6 +214,7 @@ function create_dropdown(my_field, my_category, my_value)
 	
 	});
 }
+
 
 
 $(window).scroll(function(){

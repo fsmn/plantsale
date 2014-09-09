@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); 
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 
 ?>
@@ -23,7 +23,12 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	<label for="new_year">Year the Variety was Introduced:&nbsp;</label>
 	<input type="number" style="width:5em" value="<?=get_value($variety,"new_year");?>" name="new_year" id="new_year"/>
 	</p>
-		<p><label for="category">Category: </label><input type="text" class="autocomplete-live" category="common_category" name="category" id="category" value=""/></p>
+		<p><label for="category">Category: </label><input type="text" class="autocomplete-live" category="common_category" name="category" id="category" value=""/>
+		</p>
+		<p>
+		<label for="subcategory">Subcategory:</label>
+		<input type="text" class="autocomplete-live" category="common_subcategory"  name="subcategory" id="subcategory" value=""/>
+		</p>
 	<p>
 		<label for="flag">Flag: </label>
 		<?=form_dropdown("flag",$flags,"","id='flag'");?>
@@ -69,7 +74,8 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	<div id="sort-block">
 <? $this->load->view("order/sort");?>
 </div>
-	<p>
-		<input type="submit" value="Find" class="button" />
-	</p>
+<? $buttons[] = array("type"=>"pass-through","text"=>"<input type='submit' value='Find' class='button'/>");
+$buttons[] = array("type"=>"pass-through","text"=>"<input type='reset' value='Reset' class='button delete'/>");
+ print create_button_bar($buttons); ?>
+
 </form>

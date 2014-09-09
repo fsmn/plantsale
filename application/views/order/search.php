@@ -2,6 +2,8 @@
 
 <form name="order-search" id="order-search" method="get" action="<?php echo base_url("order/search");?>">
 <p><label for="category">Category: </label><input type="text" class="autocomplete-live" category="common_category" name="category" id="category" value=""/></p>
+<p><label for="subcategory">Subcategory: </label><input type="text" class="autocomplete-live" category="common_subcategory" name="subcategory" id="subcategory" value=""/></p>
+
 <p><label for="genus">Genus</label>&nbsp;<input type="text" name="genus" id="genus" value=""/></p>
 <!-- <p><label for="pot_size">Pot Size</label>&nbsp;<?php echo form_dropdown("pot_size",$pot_sizes, urldecode(get_cookie("pot_size")));?></p> -->
 <p><label for="pot_size">Pot Size</label>&nbsp;<input type="text" name="pot_size" id="pot_size" value="<?=get_cookie("pot_size");?>"/></p>

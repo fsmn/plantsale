@@ -3,6 +3,8 @@
 <select name="sorting[]">
 <option value=""></option>
 <option value="catalog_number">Catalog Number</option>
+<option vallue="category">Category</option>
+<option value="subcategory">Subcategory</option>
 <option value="genus" selected>Genus</option>
 <option value="species" >Species</option>
 <option value="variety">Variety</option>

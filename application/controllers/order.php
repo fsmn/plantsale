@@ -53,6 +53,7 @@ class Order extends MY_Controller {
 				$sale_year = get_cookie ( "sale_year" );
 			}else{
 			    $options['year'] = $sale_year;
+			    bake_cookie("sale_year", $sale_year);
 
 			}
 
@@ -95,6 +96,7 @@ class Order extends MY_Controller {
 					"ASC"
 			);
 
+
 			if ($this->input->get ( "sorting" )) {
 				$sorting ["fields"] = $this->input->get ( "sorting" );
 				$sorting ["direction"] = $this->input->get ( "direction" );
@@ -105,6 +107,10 @@ class Order extends MY_Controller {
 			$orders = $this->order->get_totals ( $sale_year, $options, $sorting );
 			foreach($orders as $order){
 			    $order->latest_order  = $this->order->is_latest($order->variety_id,$order->year);
+			}
+			if($show_last_only = $this->input->get("show_last_only")){
+			    bake_cookie("show_last_only",$show_last_only);
+			    $options["Hiding Plants with Reorders Next Sale"] = "Yes";
 			}
 			$data ["options"] = $options;
 			$data ["orders"] = $orders;

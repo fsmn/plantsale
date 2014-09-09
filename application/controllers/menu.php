@@ -7,13 +7,13 @@ class Menu extends MY_Controller {
 
 		parent::__construct ();
 		$this->load->model ( "menu_model", "menu" );
-	
+
 	}
-	
+
 	function edit_value() {
-	
+
 		$data ["name"] = $this->input->get ( "field" );
-	
+
 		$value = $this->input->get ( "value" );
 		if($value != "&nbsp;"){
 			$data ["value"] = $value;
@@ -27,7 +27,7 @@ class Menu extends MY_Controller {
 		$data ["size"] = strlen ( $data ["value"] ) + 5;
 		$data ["type"] = $this->input->get ( "type" );
 		$data ["category"] = $this->input->get ( "category" );
-	
+
 		switch ($data ["type"]) {
 			case "dropdown" :
 				$output = $this->_get_dropdown ( $data ["category"], $data ["value"], $data ["name"] );
@@ -48,9 +48,9 @@ class Menu extends MY_Controller {
 			default :
 				$output = form_input ( $data );
 		}
-	
+
 		echo $output;
-	
+
 	}
 
 	/**
@@ -63,14 +63,14 @@ class Menu extends MY_Controller {
 		$field = $this->input->get ( "field" );
 		$categories = $this->menu->get_pairs ( $category, array (
 				"field" => "value",
-				"direction" => "ASC" 
+				"direction" => "ASC"
 		) );
 		$pairs = get_keyed_pairs ( $categories, array (
 				"key",
-				"value" 
+				"value"
 		) );
 		echo form_dropdown ( $field, $pairs, $value, "class='save-field'" );
-	
+
 	}
 
 	/**
@@ -84,17 +84,17 @@ class Menu extends MY_Controller {
 		$field = $this->input->get ( "field" );
 		$categories = $this->menu->get_pairs ( $category, array (
 				"field" => "value",
-				"direction" => "ASC" 
+				"direction" => "ASC"
 		) );
 		$pairs = get_keyed_pairs ( $categories, array (
 				"key",
-				"value" 
+				"value"
 		) );
 		$output = array ();
 		$output [] = form_multiselect ( $field, $pairs, $value, "id='$field'" );
 		$buttons = implode ( " ", $output );
 		echo $buttons . sprintf ( "<span class='button save-multiselect' target='%s'>Save</span>", $field );
-	
+
 	}
 
 	/**
@@ -107,13 +107,13 @@ class Menu extends MY_Controller {
 		$field = $this->input->get ( "field" );
 		$categories = $this->menu->get_pairs ( $category, array (
 				"field" => "value",
-				"direction" => "ASC" 
+				"direction" => "ASC"
 		) );
 		$pairs = get_keyed_pairs ( $categories, array (
 				"key",
-				"value" 
+				"value"
 		) );
-		
+
 		$output = array ();
 		for($i = 0; $i < count ( $categories ); $i ++) {
 			$checked = "";
@@ -121,12 +121,12 @@ class Menu extends MY_Controller {
 			if ($item->value == $value) {
 				$checked = "checked";
 			}
-			
+
 			$output [] = sprintf ( "<label for='%s'>%s</label><input type='checkbox' name='%s[$i]' id='%s' value='%s' %s/>", $item->value, $item->value, $field, $field, $item->value, $checked );
 		}
 		$buttons = implode ( " ", $output );
 		echo $buttons . sprintf ( "<span class='button save-checkbox' target='%s'>Save</span>", $field );
-	
+
 	}
 
 	function get_autocomplete() {
@@ -141,14 +141,16 @@ class Menu extends MY_Controller {
 				"field" => "value",
 				"direction" => "ASC"
 		) );
+
+		$this->session->set_flashdata("notice",$this->db->last_query());
 		//echo create_autocomplete($categories, $value, $id, $is_live);
 		echo create_list($categories);
 		//echo form_dropdown ( $field, $pairs, $value, "class='save-field'" );
-	
+
 	}
-	
+
 	function _get_dropdown($category, $value, $field) {
-	
+
 		$this->load->model ( "menu_model", "menu" );
 		$categories = $this->menu->get_pairs ( $category, array (
 				"field" => "value",
@@ -159,11 +161,11 @@ class Menu extends MY_Controller {
 				"value"
 		) );
 		return form_dropdown ( $field, $pairs, $value, "class='live-field'" );
-	
+
 	}
-	
+
 	function _get_multiselect($category, $value, $field) {
-	
+
 		$this->load->model ( "menu_model", "menu" );
 		$categories = $this->menu->get_pairs ( $category, array (
 				"field" => "value",
@@ -177,7 +179,7 @@ class Menu extends MY_Controller {
 		$output [] = form_multiselect ( $field, $pairs, $value, "id='$field'" );
 		$buttons = implode ( " ", $output );
 		echo $buttons . sprintf ( "<span class='button save-multiselect' target='%s'>Save</span>", $field );
-	
+
 	}
 
 }

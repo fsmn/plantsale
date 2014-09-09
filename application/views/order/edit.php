@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
 ?>
+<h4><?=$order->variety;?></h4>
 <form name="order-edit" id="order-edit" action="<?=site_url("order/$action");?>"
 	method="post">
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
@@ -33,6 +34,7 @@
 		<label for="count_midsale">Midsale Count:&nbsp;</label> <input type="text"
 			name="count_midsale" value="<?=get_value($order,"count_midsale");?>" />
 	</div>
+	<?php if($action == "update"):?>
 		<div class="order-received_presale field">
 		<label for="received_presale">Presale Received:&nbsp;</label> <input type="text"
 			name="received_presale" value="<?=get_value($order,"received_presale");?>" />
@@ -41,6 +43,7 @@
 		<label for="received_midsale">Midsale Received:&nbsp;</label> <input type="text"
 			name="received_midsale" value="<?=get_value($order,"received_midsale");?>" />
 	</div>
+	<?php endif;?>
 	<div class="order-pot_size field">
 		<label for="pot_size">Pot Size:&nbsp;</label>
 		<?=form_dropdown("pot_size",$pot_sizes, urlencode(get_value($order, "pot_size")));?>

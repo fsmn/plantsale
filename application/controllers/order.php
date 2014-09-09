@@ -51,6 +51,9 @@ class Order extends MY_Controller {
 
 			if (! $sale_year = $this->input->get ( "year" )) {
 				$sale_year = get_cookie ( "sale_year" );
+			}else{
+			    $options['year'] = $sale_year;
+
 			}
 
 			if ($category = $this->input->get ( "category" )) {
@@ -178,7 +181,9 @@ class Order extends MY_Controller {
 		$id = $this->input->post ( "id" );
 		$variety_id = $this->input->post ( "variety_id" );
 		$this->order->update ( $id );
-		redirect ( "variety/view/$variety_id" );
+		//redirect ( "variety/view/$variety_id" );
+		redirect( $this->input->post("redirect_url") );
+
 
 	}
 

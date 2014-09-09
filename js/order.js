@@ -1,7 +1,9 @@
 	$(document).on("click",".order-create",function(){
 		my_id = this.id.split("_")[1];
+		redirect_url = $(location).attr("href");
 		form_data = {
-				variety_id: my_id
+				variety_id: my_id,
+				
 		};
 		$.ajax({
 			type: "get",
@@ -9,8 +11,7 @@
 			url: base_url + "order/create",
 			success: function(data){
 				show_popup("New Order",data, "auto");
-				//$(".all-orders").append(data);
-				//$(".order-create").fadeOut();
+				$("#redirect_url").val(redirect_url);
 			}
 		});
 		
@@ -44,6 +45,8 @@
 	
 	$(document).on("click",".edit-order",function(){
 		my_id = this.id.split("_")[1];
+		redirect_url = $(location).attr("href");
+
 		form_data = {
 				id: my_id,
 				ajax: 1
@@ -54,6 +57,7 @@
 			url: base_url + "order/edit/" + my_id,
 			success: function(data){
 				show_popup("Editing an Order",data,"auto");
+				$("#redirect_url").val(redirect_url);
 			}
 		});
 	});

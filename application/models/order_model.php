@@ -200,6 +200,9 @@ class Order_Model extends CI_Model
 		$this->db->from ( "order" );
 		$this->db->where ( "variety_id", $variety_id );
 		$this->db->where ( "year <", $current_year );
+		$this->db->join("variety","order.variety_id=variety.id");
+		$this->db->select("order.*");
+		$this->db->select("variety.variety");
 		$this->db->order_by ( "year", "DESC" );
 		$this->db->group_by ( "year" );
 		$this->db->limit ( 1 );

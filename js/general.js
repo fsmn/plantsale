@@ -136,7 +136,11 @@ $(document).on("click",".autocomplete-live",function(){
 			$("#" + my_id).autocomplete({source:data});
 		}
 	});
-});$(document).on("click",".reset-form",function(){})
+});
+
+$(document).on("click","autocomplete-off",function(){
+	$("input").attr("autocomplete","off");
+});
 
 
 function show_popup(my_title,data,popup_width,x,y){

@@ -2,6 +2,11 @@
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
 ?>
 <h4><?=$order->variety;?></h4>
+<div class="button-box">
+<ul class="button-list">
+<li><span class='button autocomplete-off'>Turn off Autocomplete</span></li>
+</ul>
+</div>
 <form name="order-edit" id="order-edit" action="<?=site_url("order/$action");?>"
 	method="post">
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>

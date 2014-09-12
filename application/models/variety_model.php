@@ -208,11 +208,12 @@ class Variety_Model extends CI_Model {
 		$this->db->where ( "order.year", $year );
 		$this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `common`.`category` = 'perennials')",NULL,FALSE);
 		$this->db->group_by ( "common.category" );
-		$this->db->select("sum(`order`.`count_presale` + `order`.`count_midsale`) as count");
+		//$this->db->select("sum(`order`.`count_presale` + `order`.`count_midsale`) as count");
 		$this->db->select ( "sum(`order`.`count_presale`) as presale_count" );
 		$this->db->select("sum(`order`.`count_midsale`) as midsale_count");
 		$this->db->select("common.category");
 		$result = $this->db->get ()->result ();
+		$this->session->set_flashdata("notice",$this->db->last_query());
 		return $result;
 	
 	}

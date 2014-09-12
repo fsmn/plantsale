@@ -33,13 +33,13 @@ $sale_year = get_cookie("sale_year");
 	</td>
 	<td><?=number_format($category->presale_count,0);?></td>
 	<td><?=number_format($category->midsale_count,0);?></td>
-	<td style="font-weight:bold"><?=number_format($category->count,0);?></td>
+	<td style="font-weight:bold"><?=number_format($category->presale_count + $category->midsale_count,0);?></td>
 	<? //it's clumsy, but it works ?>
 	<?foreach($categories["previous"] as $old_category): ?>
 		<? if($old_category->category == $category->category):?>
 			<td><?=number_format($old_category->presale_count,0);?></td>
 	<td><?=number_format($old_category->midsale_count,0);?></td>
-	<td  style="font-weight:bold"><?=number_format($old_category->count,0);?></td>
+	<td  style="font-weight:bold"><?=number_format($old_category->presale_count + $old_category->midsale_count ,0);?></td>
 		<? endif;?>
 	<? endforeach;?>
 	</tr>

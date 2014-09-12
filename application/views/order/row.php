@@ -8,7 +8,8 @@ if ($order->flat_cost && ! $order->plant_cost) {
 	$plant_cost = $order->plant_cost;
 	$flat_cost = $order->flat_size * $order->plant_cost;
 }
-$row_classes = [];
+
+$row_classes = array();
 if($order->crop_failure == 1){
 	$row_classes[] = "crop-failure";
 }

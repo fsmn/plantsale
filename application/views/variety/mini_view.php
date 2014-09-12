@@ -90,7 +90,7 @@
 			</div>
 	</div>
 
-<!--
+
 <div class="all-orders block">
 	<h3>Orders</h3>
 	<? $data["orders"] = $orders;
@@ -100,6 +100,4 @@
 </div>
 <?
 $order_buttons[] = array("selection"=>"order","text"=>"New Order","type"=>"span","class"=>"button new order-create", "id" => "oc_$variety->id");
-echo create_button_bar($order_buttons); ?>
-
- -->
+echo create_button_bar($order_buttons);

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-$filename = "order_export.txt";
+$filename = "order_export.tsv";
 $header = "Grower ID\tYear\tCommon Name\tGenus\tSpecies\tVariety\tPot Size\tPresale Order\tMidsale Order\tFlat Size\tPot Count\tGrower Code\tCategory";
 
 $output = array($header);

@@ -34,6 +34,9 @@ if ($orders) :
 	</thead>
 	<tbody>
 		<?
+		$presale_total = 0;
+		$midsale_total = 0;
+		$flat_cost_total = 0;
     foreach ($orders as $order) :
         $flat_cost = $order->flat_cost;
         $plant_cost = $order->plant_cost;
@@ -55,6 +58,14 @@ if ($orders) :
                 $row_classes[] = "hidden";
             }
         }
+        
+        if($order->crop_failure){
+			$row_classes[] = "crop-failure";
+		}
+			        
+        $presale_total += $order->count_presale;
+        $midsale_total += $order->count_midsale;
+        $flat_cost_total += $order->flat_cost;
         ?>
 		<tr
 			class="<?=implode(" ",$row_classes);?>"
@@ -119,6 +130,32 @@ if ($orders) :
 		</tr>
 		<? endforeach;?>
 	</tbody>
+	<tfoot>
+		<tr>
+			<td></td>
+		<? if(!$show_names):?>
+			<td></td>
+		<? endif;?>
+			<td></td>
+			<td></td>
+		<? if($show_names):?>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		<? endif;?>
+			<th><?php echo number_format($presale_total);?></th>
+			<th><?php echo number_format($midsale_total);?></th>
+			<th><?php echo number_format($presale_total+ $midsale_total);?></th>
+			<th></th>
+			<th></th>
+			<th><?php echo get_as_price($flat_cost_total);?></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</tfoot>
 </table>
 
 <? endif;

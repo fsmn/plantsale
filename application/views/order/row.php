@@ -8,16 +8,24 @@ if ($order->flat_cost && ! $order->plant_cost) {
 	$plant_cost = $order->plant_cost;
 	$flat_cost = $order->flat_size * $order->plant_cost;
 }
+$row_classes = [];
+if($order->crop_failure == 1){
+	$row_classes[] = "crop-failure";
+}
+$row_classes = implode(" ",$row_classes);
 ?>
 
 <!-- order/row.php -->
-<tr id="order_<?=$order->id;?>"><td>
+<tr id="order_<?=$order->id;?>" class="<?=$row_classes;?>"><td>
 <? if(DB_ROLE == 1):?>
 			<span class="button edit edit-order"
 				id="<? printf("edit-order_%s",$order->id);?>">Edit</span>
 				<? else: ?>
 				 <a href="<?=site_url("order/view/$order->id");?>" class="button">View</a>
 				<? endif; ?>
+				<?php if($order->crop_failure):?>
+				&nbsp;CROP FAILURE&nbsp;
+				<?php endif;?>
 				</td>
 	<td class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
 				</td>

@@ -312,7 +312,7 @@ h2,h3,h4,h5,h6 {
 	background: #ff8538 url(images/warning.png) 50% 50% repeat-x;
 }
 
-.alert {
+.alert, .crop-failure {
 	background: red;
 	color: #fff;
 }

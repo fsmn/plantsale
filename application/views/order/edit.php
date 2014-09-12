@@ -2,18 +2,24 @@
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
 ?>
 <h4><?=$order->variety;?></h4>
-
+<?php if(get_value($order,"crop_failure",0)== 1):?>
+<div class='alert'>CROP FAILURE</div>
+<?php endif;?>
 <form name="order-edit" id="order-edit" action="<?=site_url("order/$action");?>"
 	method="post">
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
 	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
 	<div class="order-year field">
-		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_cookie("sale_year");?>" />
+		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_value($order,"year",get_cookie("sale_year"));?>" />
 	</div>
 
 	<div class="order-grower field">
 		<label for="grower_id">grower:&nbsp;</label><input type="text"
 			name="grower_id" value="<?=get_value($order,"grower_id");?>" />
+	</div>
+	<div class="order-crop_failure field">
+	<label for="crop_failure">Crop Failure:</label>
+	<input type="checkbox" name="crop_failure" id="crop_failure" value=1 <?php if(get_value($order,"crop_failure",0) == 1){ echo "checked";}?>/>
 	</div>
 	<div class="order-flat_size field">
 		<label for="flat_size">Flat Size:&nbsp;</label> <input type="text"

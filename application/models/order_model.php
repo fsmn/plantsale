@@ -23,6 +23,7 @@ class Order_Model extends CI_Model
 	var $remainder_saturday;
 	var $remainder_sunday;
 	var $grower_code;
+	var $crop_failure;
 	var $print_omit;
 	var $rec_modified;
 	var $rec_modifier;
@@ -59,6 +60,7 @@ class Order_Model extends CI_Model
 				"remainder_saturday",
 				"remainder_sunday",
 				"grower_code",
+				"crop_failure",
 				"print_omit"
 		);
 
@@ -174,7 +176,7 @@ class Order_Model extends CI_Model
 			}
 			$this->db->order_by ( $order_field, $order_direction );
 		}
-		$this->db->select ( "order.id,grower_id,order.variety_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.grower_code" );
+		$this->db->select ( "order.id,grower_id,order.variety_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.grower_code, order.crop_failure" );
 		$this->db->select ( "variety.variety, variety.species" );
 		$this->db->select ( "common.name, common.genus, common.category, common.id as common_id" );
 		$result = $this->db->get ()->result ();

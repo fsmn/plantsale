@@ -256,7 +256,7 @@ class Variety_Model extends CI_Model {
 		}
 		$this->db->from ( "variety" );
 		$this->db->join ( "common", "variety.common_id = common.id" );
-		$this->db->join ( "flag", "variety.id = flag.variety_id" );
+		$this->db->join ( "flag", "variety.id = flag.variety_id", "LEFT" );
 		$this->db->join ( "order", "variety.id = order.variety_id" );
 		
 		foreach ( $my_parameters as $parameter ) {
@@ -300,6 +300,7 @@ class Variety_Model extends CI_Model {
 		$this->db->select ( "sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number" );
 		$this->db->group_by ( "variety.id" );
 		$result = $this->db->get ()->result ();
+		$this->session->set_flashdata("notice",$this->db->last_query());
 		return $result;
 	
 	}

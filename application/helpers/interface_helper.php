@@ -235,7 +235,7 @@ function create_checkbox($name, $values, $selections = array())
 		if (in_array ( $value->key, $selections )) {
 			$checked = "checked";
 		}
-		$output [] = sprintf ( "<label>%s</label><input type='checkbox' name='%s' value='%s' %s/><br/>", $value->value, $name, $value->key, $checked );
+		$output [] = sprintf ( "<label>%s</label><input type='checkbox' name='%s' value='%s' %s/>&nbsp;", $value->value, $name, $value->key, $checked );
 	}
 	return implode ( "\r", $output );
 

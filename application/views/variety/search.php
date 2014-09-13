@@ -8,6 +8,10 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	<p><label for="action[]">List </label><input type="radio" name="action[]" value="full_list" checked/>&nbsp;
 <label for="action[]">Variety History</label><input type="radio" name="action[]" value="history"/></p>
 	<p>
+		<label for="year">Year: </label><input type="text" name="year"
+			value="<?=get_cookie("sale_year");?>" />
+	</p>
+	<p>
 		<?=create_input($variety,"name","Common Name");?>
 	</p>
 	<p>
@@ -67,10 +71,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 		<p>
 		<?=create_input($variety,"width_unit","Unit");?>
 	</p> -->
-	<p>
-		<label for="year">Year: </label><input type="text" name="year"
-			value="<?=get_current_year();?>" />
-	</p>
+
 	<div id="sort-block">
 <? $this->load->view("order/sort");?>
 </div>

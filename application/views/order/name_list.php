@@ -1,12 +1,31 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+//$show_names = TRUE;
 // variety_order.php Chris Dart Mar 4, 2013 8:44:25 PM
 // chrisdart@cerebratorium.com
 if ($orders) :
     ?>
 <table class="list">
 	<thead>
+	<?php if($is_inventory): ?>
+	<tr>
+		<th></th>
+		<? if(!$show_names):?>
+			<th></th>
+		<? endif;?>
+			<th colspan=2></th>
+		<? if($show_names):?>
+			<th colspan=4></th>
+			
+		<? endif;?>
+			<th colspan=4>Presale</th>
+			
+			<th colspan=4>Midsale</th>
+			<th>Sunday</th>
+			<th colspan=8></th>
+			
+	</tr>
+	<?php endif;?>
 		<tr>
 			<th></th>
 		<? if(!$show_names):?>
@@ -20,8 +39,26 @@ if ($orders) :
 			<th>Common</th>
 			<th>Variety</th>
 		<? endif;?>
-			<th>Presale</th>
+		<?php if($is_inventory):?>
+			<th>Ordered</th>
+			<th>Received</th>
+			<th>Remainder</th>
+			<th>Sellout</th>
+			<?php else: ?>
+			<th>Presale Order</th>
+			<?php endif;?>
+			<?php if($is_inventory):?>
+			
 			<th>Midsale</th>
+			<th>Received</th>
+			<th>Remainder</th>
+			<th>Sellout</th>
+			<th>Remainder</th>
+			<th>Dead Count</th>
+			
+			<?php else: ?>
+			<th>Midsale Order</th>
+			<?php endif;?>
 			<th>Total</th>
 			<th>Pot Size</th>
 			<th>Flat Size</th>
@@ -106,11 +143,39 @@ if ($orders) :
 			<td class="order-count_presale field">
 			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
+			<?php if($is_inventory):?>
+			<td class="order-received_presale field">
+			<?=edit_field("received_presale",$order->received_presale,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<td class="order-remainder_friday field">
+			<?=edit_field("remainder_friday",$order->remainder_friday,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<td class="order-sellout_friday field">
+			<?=edit_field("sellout_friday",$order->sellout_friday,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>	
+			<?php endif;?>
 			<td class="order-count_midsale field">
 			<?=edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
+			<?php if($is_inventory):?>
+			<td class="order-received_midsale field">
+			<?=edit_field("received_midsale",$order->received_midsale,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<td class="order-remainder_saturday field">
+			<?=edit_field("remainder_saturday",$order->remainder_saturday,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<td class="order-sellout_saturday field">
+			<?=edit_field("sellout_saturday",$order->sellout_saturday,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<td class="order-remainder_sunday field">
+			<?=edit_field("remainder_sunday",$order->remainder_sunday,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<td class="order-count_dead field">
+			<?=edit_field("count_dead",$order->count_dead,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<?php endif;?>
 			<td class="order-total_plants field">
-				<?=$order->count_midsale + $order->count_presale;?>
+			<?=$order->count_midsale + $order->count_presale;?>
 			</td>
 			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
 			</td>

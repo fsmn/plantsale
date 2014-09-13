@@ -127,6 +127,14 @@ class Order extends MY_Controller
 					$sorting ["direction"] = $this->input->get ( "direction" );
 				}
 				
+				if($this->input->get("show_names") == 1){
+					$data["show_names"] = TRUE;
+				}
+				$data["is_inventory"] = FALSE;
+				if($this->input->get("is_inventory") == 1){
+					$data["is_inventory"] = TRUE;
+				}
+				
 				bake_cookie ( "sorting", implode ( ",", $sorting ["fields"] ) );
 				bake_cookie ( "direction", implode ( ",", $sorting ["direction"] ) );
 				$orders = $this->order->get_totals ( $sale_year, $options, $sorting );

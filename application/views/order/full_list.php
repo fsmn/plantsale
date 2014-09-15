@@ -41,5 +41,8 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 	</div>
 	</div>
 </fieldset>
-
-<? $this->load->view("order/name_list");
+<? if($is_inventory){
+    $this->load->view("order/inventory");
+}else{
+    $this->load->view("order/name_list");
+}

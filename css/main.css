@@ -655,6 +655,15 @@ table.chart thead td {
 	text-align: center
 }
 
+table.list tfoot tr {
+	border: 1px solid #bbb;
+	border-top: 3px double #bbb;
+}
+table.list tfoot td {
+	font-weight: bold;
+	border-right: 1px solid #bbb;
+}
+
 a.link,input.link {
 	text-decoration: underline;
 }

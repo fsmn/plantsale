@@ -22,7 +22,5 @@
 <div id="sort-block">
 <? $this->load->view("order/sort");?>
 </div>
-
 <p><input type="submit" value="Search"/></p>
-
 </form>

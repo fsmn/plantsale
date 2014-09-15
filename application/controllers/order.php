@@ -10,13 +10,13 @@ class Order extends MY_Controller
 
 			parent::__construct ();
 			$this->load->model ( "order_model", "order" );
-		
+
 		}
 
 		function index()
 		{
 
-		
+
 		}
 
 		function view()
@@ -28,7 +28,7 @@ class Order extends MY_Controller
 			$data ["target"] = "order/view";
 			$data ["title"] = "Viewing Order Details";
 			$this->load->view ( "page/index", $data );
-		
+
 		}
 
 		function search()
@@ -39,24 +39,24 @@ class Order extends MY_Controller
 				$this->load->model ( "menu_model", "menu" );
 				$categories = $this->menu->get_pairs ( "common_category", array (
 						"field" => "value",
-						"direction" => "ASC" 
+						"direction" => "ASC"
 				) );
 				$data ["categories"] = get_keyed_pairs ( $categories, array (
 						"key",
-						"value" 
+						"value"
 				), TRUE );
-				
+
 				$pot_sizes = $this->order->get_pot_sizes ();
 				$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
 						"pot_size",
-						"pot_size" 
+						"pot_size"
 				) );
 				$this->load->view ( "order/search", $data );
 			}
 			else
 			{
 				$options = array ();
-				
+
 				if (! $sale_year = $this->input->get ( "year" ))
 				{
 					$sale_year = get_cookie ( "sale_year" );
@@ -66,7 +66,7 @@ class Order extends MY_Controller
 					$options ['year'] = $sale_year;
 					// bake_cookie("sale_year", $sale_year);
 				}
-				
+
 				if ($category = $this->input->get ( "category" ))
 				{
 					bake_cookie ( "category", $category );
@@ -103,7 +103,7 @@ class Order extends MY_Controller
 				{
 					burn_cookie ( "pot_size" );
 				}
-				
+
 				if ($flat_size = $this->input->get ( "flat_size" ))
 				{
 					bake_cookie ( "flat_size", $flat_size );
@@ -113,28 +113,29 @@ class Order extends MY_Controller
 				{
 					burn_cookie ( "flat_size" );
 				}
-				
+
 				$sorting ["fields"] = array (
-						"catalog_number" 
+						"catalog_number"
 				);
 				$sorting ["direction"] = array (
-						"ASC" 
+						"ASC"
 				);
-				
+
 				if ($this->input->get ( "sorting" ))
 				{
 					$sorting ["fields"] = $this->input->get ( "sorting" );
 					$sorting ["direction"] = $this->input->get ( "direction" );
 				}
-				
+
 				if($this->input->get("show_names") == 1){
 					$data["show_names"] = TRUE;
 				}
+
 				$data["is_inventory"] = FALSE;
 				if($this->input->get("is_inventory") == 1){
 					$data["is_inventory"] = TRUE;
 				}
-				
+
 				bake_cookie ( "sorting", implode ( ",", $sorting ["fields"] ) );
 				bake_cookie ( "direction", implode ( ",", $sorting ["direction"] ) );
 				$orders = $this->order->get_totals ( $sale_year, $options, $sorting );
@@ -162,14 +163,14 @@ class Order extends MY_Controller
 					$this->load->view ( "page/index", $data );
 				}
 			}
-		
+
 		}
 
 		function show_sort()
 		{
 
 			$this->load->view ( "order/sort" );
-		
+
 		}
 
 		function update_value()
@@ -177,7 +178,7 @@ class Order extends MY_Controller
 
 			$id = $this->input->post ( "id" );
 			$values = array (
-					$this->input->post ( "field" ) => $value = urldecode ( $this->input->post ( "value" ) ) 
+					$this->input->post ( "field" ) => $value = urldecode ( $this->input->post ( "value" ) )
 			);
 			$output = $this->order->update ( $id, $values );
 			if ($this->input->post ( "format" ) == "currency")
@@ -185,7 +186,7 @@ class Order extends MY_Controller
 				$output = get_as_price ( $output );
 			}
 			echo $output;
-		
+
 		}
 
 		function create()
@@ -196,13 +197,13 @@ class Order extends MY_Controller
 			$pot_sizes = $this->order->get_pot_sizes ();
 			$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
 					"pot_size",
-					"pot_size" 
+					"pot_size"
 			) );
 			$data ["action"] = "insert";
 			$data ["target"] = "order/edit";
 			$data ['title'] = "Insert New Order";
 			$this->load->view ( $data ["target"], $data );
-		
+
 		}
 
 		function edit($id)
@@ -213,13 +214,13 @@ class Order extends MY_Controller
 			$pot_sizes = $this->order->get_pot_sizes ();
 			$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
 					"pot_size",
-					"pot_size" 
+					"pot_size"
 			) );
 			$data ["action"] = "update";
 			$data ["target"] = "order/edit";
 			$data ['title'] = "Update Order";
 			$this->load->view ( $data ["target"], $data );
-		
+
 		}
 
 		function insert()
@@ -228,7 +229,7 @@ class Order extends MY_Controller
 			$order_id = $this->order->insert ();
 			// $variety_id = $this->input->post ( "variety_id" );
 			redirect ( $this->input->post ( "redirect_url" ) );
-		
+
 		}
 
 		function update()
@@ -239,7 +240,7 @@ class Order extends MY_Controller
 			$this->order->update ( $id );
 			// redirect ( "variety/view/$variety_id" );
 			redirect ( $this->input->post ( "redirect_url" ) );
-		
+
 		}
 
 		function delete()
@@ -249,7 +250,7 @@ class Order extends MY_Controller
 			{
 				echo $this->order->delete ( $id );
 			}
-		
+
 		}
 
 		function get_pot_sizes()
@@ -261,6 +262,6 @@ class Order extends MY_Controller
 				$output [] = $pot_size->pot_size;
 			}
 			echo json_encode ( $output );
-		
+
 		}
 	}

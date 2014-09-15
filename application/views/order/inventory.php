@@ -39,15 +39,11 @@ if ($orders) :
 			<th>Common</th>
 			<th>Variety</th>
 		<? endif;?>
-		<?php if($is_inventory):?>
+
 			<th>Ordered</th>
 			<th>Rec'd</th>
 			<th>Rem</th>
 			<th>Sellout</th>
-			<?php else: ?>
-			<th>Presale Order</th>
-			<?php endif;?>
-			<?php if($is_inventory):?>
 
 			<th>Ordered</th>
 			<th>Rec'd</th>
@@ -56,9 +52,7 @@ if ($orders) :
 			<th>Rem</th>
 			<th>Dead Count</th>
 
-			<?php else: ?>
-			<th>Midsale Order</th>
-			<?php endif;?>
+
 			<th>Total</th>
 			<th>Pot Size</th>
 			<th>Flat Size</th>
@@ -143,7 +137,6 @@ if ($orders) :
 			<td class="order-count_presale field">
 			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<?php if($is_inventory):?>
 			<td class="order-received_presale field">
 			<?=edit_field("received_presale",$order->received_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
@@ -153,11 +146,9 @@ if ($orders) :
 			<td class="order-sellout_friday field">
 			<?=edit_field("sellout_friday",$order->sellout_friday,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<?php endif;?>
 			<td class="order-count_midsale field">
 			<?=edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<?php if($is_inventory):?>
 			<td class="order-received_midsale field">
 			<?=edit_field("received_midsale",$order->received_midsale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
@@ -173,7 +164,6 @@ if ($orders) :
 			<td class="order-count_dead field">
 			<?=edit_field("count_dead",$order->count_dead,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<?php endif;?>
 			<td class="order-total_plants field">
 			<?=$order->count_midsale + $order->count_presale;?>
 			</td>
@@ -209,16 +199,18 @@ if ($orders) :
 			<td></td>
 			<td></td>
 		<? endif;?>
-			<th><?php echo number_format($presale_total);?></th>
-			<th><?php echo number_format($midsale_total);?></th>
-			<th><?php echo number_format($presale_total+ $midsale_total);?></th>
-			<th></th>
-			<th></th>
-			<th><?php echo get_as_price($flat_cost_total);?></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
+			<td><?php echo number_format($presale_total);?></td>
+			<td colspan=4></td>
+			<td><?php echo number_format($midsale_total);?></td>
+			<td colspan=4></td>
+			<td><?php echo number_format($presale_total+ $midsale_total);?></td>
+			<td></td>
+			<td></td>
+			<td><?php echo get_as_price($flat_cost_total);?></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 	</tfoot>
 </table>

@@ -19,7 +19,7 @@ class Variety_Model extends CI_Model {
 	function __construct() {
 
 		parent::__construct ();
-	
+
 	}
 
 	function prepare_variables() {
@@ -35,23 +35,23 @@ class Variety_Model extends CI_Model {
 				"width_unit",
 				"note",
 				"new_year",
-				"common_id" 
+				"common_id"
 		);
-		
+
 		for($i = 0; $i < count ( $variables ); $i ++) {
 			$my_variable = $variables [$i];
 			if ($this->input->post ( $my_variable )) {
 				$this->$my_variable = urldecode ( $this->input->post ( $my_variable ) );
 			}
 		}
-		
+
 		if ($this->input->post ( "plant_color" )) {
 			$this->plant_color = implode ( ",", $this->input->post ( "plant_color" ) );
 		}
-		
+
 		$this->rec_modified = mysql_timestamp ();
 		$this->rec_modifier = $this->session->userdata ( 'user_id' );
-	
+
 	}
 
 	function insert() {
@@ -60,7 +60,7 @@ class Variety_Model extends CI_Model {
 		$this->db->insert ( "variety", $this );
 		$id = $this->db->insert_id ();
 		return $id;
-	
+
 	}
 
 	function update($id, $values = array()) {
@@ -76,7 +76,7 @@ class Variety_Model extends CI_Model {
 				return $this->get_value ( $id, $keys [0] );
 			}
 		}
-	
+
 	}
 
 	function get($id) {
@@ -89,7 +89,7 @@ class Variety_Model extends CI_Model {
 		$this->db->select ( "image.id as image_id, image_name" );
 		$result = $this->db->get ()->row ();
 		return $result;
-	
+
 	}
 
 	function get_by_common($common_id) {
@@ -103,7 +103,7 @@ class Variety_Model extends CI_Model {
                  WHERE `v`.`common_id` = $common_id ORDER BY `year` DESC";
 		$result = $this->db->query ( $query )->result ();
 		return $result;
-	
+
 	}
 
 	function get_by_name($name) {
@@ -113,10 +113,10 @@ class Variety_Model extends CI_Model {
 		$this->db->order_by ( "variety", "ASC" );
 		$this->db->order_by ( "common.name", "ASC" );
 		$this->db->select ( "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  common.category, common.description" );
-		
+
 		$result = $this->db->get ( "variety" )->result ();
 		return $result;
-	
+
 	}
 
 	function get_value($id, $field) {
@@ -126,7 +126,7 @@ class Variety_Model extends CI_Model {
 		$this->db->from ( "variety" );
 		$output = $this->db->get ()->row ();
 		return $output->$field;
-	
+
 	}
 
 	function get_new_varieties($year) {
@@ -136,7 +136,7 @@ class Variety_Model extends CI_Model {
 		$this->db->select ( "new_year" );
 		$result = $this->db->get ()->num_rows ();
 		return $result;
-	
+
 	}
 
 	function is_new($id, $year = NULL) {
@@ -147,7 +147,7 @@ class Variety_Model extends CI_Model {
 		$query = sprintf ( "select * from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s", $id, $year, $id, $year );
 		$result = $this->db->query ( $query )->num_rows ();
 		return $result;
-	
+
 	}
 
 	function update_all($year) {
@@ -164,17 +164,17 @@ class Variety_Model extends CI_Model {
 				$this->update_status ( $variety->id, $year );
 			}
 		}
-	
+
 	}
 
 	function update_status($id, $year) {
 
 		$this->db->where ( "id", $id );
 		$update = array (
-				"new_year" => $year 
+				"new_year" => $year
 		);
 		$this->db->update ( "variety", $update );
-	
+
 	}
 
 	function get_varieties_for_year($year) {
@@ -184,7 +184,7 @@ class Variety_Model extends CI_Model {
 		$this->db->where ( "order.year", $year );
 		$result = $this->db->get ()->result ();
 		return $result;
-	
+
 	}
 
 	function get_category_totals($year) {
@@ -197,7 +197,7 @@ class Variety_Model extends CI_Model {
 		$this->db->select ( "count(`variety`.`id`) as count,common.category" );
 		$result = $this->db->get ()->result ();
 		return $result;
-	
+
 	}
 
 	function get_flat_totals($year) {
@@ -215,7 +215,7 @@ class Variety_Model extends CI_Model {
 		$result = $this->db->get ()->result ();
 		//$this->session->set_flashdata("notice",$this->db->last_query());
 		return $result;
-	
+
 	}
 
 	function find($variables, $order_by) {
@@ -247,7 +247,7 @@ class Variety_Model extends CI_Model {
 			if (array_key_exists ( "fields", $order_by ) && ! empty ( $order_by ["fields"] [$i] )) {
 				$order_field = $order_by ["fields"] [$i];
 			}
-				
+
 			$order_direction = "ASC";
 			if (array_key_exists ( "direction", $order_by ) && ! empty ( $order_by ["direction"] [$i] )) {
 				$order_direction = $order_by ["direction"] [$i];
@@ -258,7 +258,7 @@ class Variety_Model extends CI_Model {
 		$this->db->join ( "common", "variety.common_id = common.id" );
 		$this->db->join ( "flag", "variety.id = flag.variety_id", "LEFT" );
 		$this->db->join ( "order", "variety.id = order.variety_id" );
-		
+
 		foreach ( $my_parameters as $parameter ) {
 			if ($parameter->key == "sunlight") {
 				if ($this->input->get ( "sunlight-boolean" ) == "or") {
@@ -281,7 +281,7 @@ class Variety_Model extends CI_Model {
 					"variety",
 					"genus",
 					"species",
-					"description" 
+					"description"
 			) )) {
 				$this->db->like ( $parameter->key, $parameter->value );
 			} elseif ($parameter->key == "print_omit") {
@@ -294,29 +294,29 @@ class Variety_Model extends CI_Model {
 		$this->db->select ( "common.name,common.genus, common.sunlight, common.category" );
 		// include all variety fields (maybe change this).
 		$this->db->select ( "variety.*" );
-		
+
 		// select order fields
 		$this->db->select ( "order.id as order_id,year,flat_size,flat_cost,plant_cost,pot_size,price,count_presale,count_midsale,count_dead,print_omit" );
 		$this->db->select ( "sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number" );
 		$this->db->group_by ( "variety.id" );
 		$result = $this->db->get ()->result ();
-		//$this->session->set_flashdata("notice",$this->db->last_query());
+		$this->session->set_flashdata("notice",$this->db->last_query());
 		return $result;
-	
+
 	}
 
 	function delete($id) {
 
 		$this->db->delete ( "variety", array (
-				'id' => $id 
+				'id' => $id
 		) );
 		$this->db->delete ( "order", array (
-				'variety_id' => $id 
+				'variety_id' => $id
 		) );
 		$this->db->delete ( "flag", array (
-				'variety_id' => $id 
+				'variety_id' => $id
 		) );
-	
+
 	}
 
 }

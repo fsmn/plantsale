@@ -7,6 +7,11 @@
 	background-position: center left;
 }
 
-table .edit-field:hover{
-	padding-left:15px;
+table .edit-field:hover {
+	padding-left: 15px;
+	background-color: #FFFF96;
+}
+
+table .edit-field {
+	display: block;
 }

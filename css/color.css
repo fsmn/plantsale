@@ -369,5 +369,7 @@ input.autocomplete-live:hover,input.autocomplete:hover {
 }
 
 .disabled {
-	background-color: #eee;
+	background: none;
+	box-shadow: none;
+	background-color: #eee !important;
 }

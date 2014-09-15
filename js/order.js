@@ -77,7 +77,7 @@
 	});
 	
 	$(document).on("click",".add-order-sort", function(){
-		$(this).fadeOut();
+
 		$.ajax({
 			type:"get",
 			url: base_url + "order/show_sort",
@@ -85,6 +85,7 @@
 				$("#sort-block").append(data);
 			}
 		});
+		$(this).addClass("disabled");
 		
 	});
 	

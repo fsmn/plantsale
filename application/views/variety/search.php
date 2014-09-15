@@ -53,6 +53,9 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	<p>
 		<?=create_input($variety, "note","Variety Note");?>
 	</p>
+	<p>
+	<?=create_input($variety,"grower_id","Grower ID");?>
+	</p>
 	<!-- <p>
 		<?=create_input($variety,"min_height","Min Height");?>
 	</p>

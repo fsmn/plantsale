@@ -141,6 +141,7 @@ class Variety extends MY_Controller
 				"sunlight",
 				"description",
 				"year",
+		        "grower_id",
 				"new_year",
 				"print_omit"
 		);

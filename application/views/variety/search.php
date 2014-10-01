@@ -3,56 +3,69 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 
 ?>
 
-<form name="search-variety" id="search-variety"
+<form name="search-variety" id="search-variety" class="search-form"
 		action="<?=site_url("variety/find"); ?>" method="GET">
 	<p><label for="action[]">List </label><input type="radio" name="action[]" value="full_list" checked/>&nbsp;
 <label for="action[]">Variety History</label><input type="radio" name="action[]" value="history"/></p>
 	<p>
-		<label for="year">Year: </label><input type="text" name="year"
+		<label for="year">Year: </label><input type="number" name="year" style="width: 5em"
 			value="<?=get_cookie("sale_year");?>" />
 	</p>
-	<p>
+	<div class="field-set">
+	<div class="column first">
 		<?=create_input($variety,"name","Common Name");?>
-	</p>
-	<p>
+	</div>
+	<div class="column last">
 		<?=create_input($variety,"variety","Variety");?>
-	</p>
-	<p>
+	</div>
+	</div>
+	<div class="field-set">
+	<div class="column first">
 		<?=create_input($variety,"genus","Genus");?>
-	</p>
-	<p>
+	</div>
+	<div class="column last">
 		<?=create_input($variety, "species","Species");?>
-	</p>
-	<p>
+	</div>
+	</div>
+	<div class="field-set block">
 	<label for="new_year">Year the Variety was Introduced:&nbsp;</label>
 	<input type="number" style="width:5em" value="<?=get_value($variety,"new_year");?>" name="new_year" id="new_year"/>
-	</p>
-		<p><label for="category">Category: </label><input type="text" class="autocomplete-live" category="common_category" name="category" id="category" value=""/>
-		</p>
-		<p>
+	</div>
+		<div class="field-set block">
+		<div class="column first">
+		<label for="category">Category: </label>
+		<input type="text" class="autocomplete-live category:common_category" category="common_category" name="category" id="category" value=""/>
+		</div>
+		<div class="column last">
 		<label for="subcategory">Subcategory:</label>
 		<input type="text" class="autocomplete-live" category="common_subcategory"  name="subcategory" id="subcategory" value=""/>
-		</p>
-	<p>
+		</div>
+	</div>
+	<div class="field-set">
+	<div class="column first">
 		<label for="flag">Flag: </label>
 		<?=form_dropdown("flag",$flags,"","id='flag'");?>
-	</p>
-	<p>
+
+	</div>
+	<div class="column last">
 	<label for="plant_color">Plant Color: </label>
 		<?=form_dropdown("plant_color",$plant_colors,"","id='plant_colors'");?>
-	</p>
-	<p>
+	</div>
+	</div>
+	<div class="field-set block">
 	<label for="sunlight-boolean">Sunlight Options</label>
 		<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),"and","id='sunlight-boolean'");?>
 		<br/>
 		<?=$sunlight;?>
-	</p>
-	<p>
+	</div>
+	<div class="field-set block">
+	<div class="column first">
 		<?=create_input($variety, "description","General Description");?>
-	</p>
-	<p>
+	</div>
+	<div class="column last">
 		<?=create_input($variety, "note","Variety Note");?>
-	</p>
+	</div>
+	</div>
 	<p>
 	<?=create_input($variety,"grower_id","Grower ID");?>
 	</p>

@@ -214,7 +214,7 @@ $(document).ready(function(){
 				type: "get",
 				url: base_url + "variety/search",
 				success: function(data){
-					show_popup("Search Plants",data,"auto");
+					show_popup("Search Plants",data,"500px");
 				}
 			});
 		});

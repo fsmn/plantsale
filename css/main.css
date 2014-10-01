@@ -784,6 +784,9 @@ textarea.save-field {
 .field-set {
 	padding: 5px 0;
 }
+.search-form .field-set {
+	clear: both;
+}
 
 .field-group {
 	clear: both;
@@ -799,12 +802,30 @@ fieldset.field-group {
 	padding: 0;
 }
 
-.field-group .field-set label {
+.field-group .field-set label, .search-form .field-set .column label {
 	display: block;
 }
 
 .field-group .field-set input {
 	width: 3em;
+}
+
+#search-variety {
+	min-width: 460px;
+	display: block;
+}
+
+.search-form .field-set .column {
+	padding-right: 5px;
+}
+
+.search-form .field-set .column.right {
+	padding-right: 0;
+	padding-left: 5px;
+}
+
+.search-form .field-set .column input {
+	width: 90%;
 }
 
 #color-editor textarea {
@@ -856,6 +877,7 @@ div.plant-info {
 	left-margin: 50%;
 	overflow: scroll;
 	max-height: 500px;
+	background-color: #fff;
 }
 
 .plant-info .field {

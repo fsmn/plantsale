@@ -16,7 +16,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="description-group">
 	<div class="image">
 		<img src="<?=site_url("files/$variety->image_name");?>" class="photo" />
-				<? if($order->count_midsale > 0): ?>
+		<? if($order->count_midsale > 0): ?>
 		<div class="saturday-delivery">
 		<img src="<?=base_url("images/truck-icon.png");?>"/>
 		</div>
@@ -54,6 +54,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<? foreach($flags as $flag){
 				echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
 			}?>
+
 		</ul>
 	</div>
 	<div class="dimensions">

@@ -370,11 +370,20 @@ class Variety extends MY_Controller
 
 		$data ["format"] = $format;
 		$data ['variety'] = $this->variety->get ( $id );
-		$data ['order'] = $this->order->get_for_variety ( $id, 2014 );
+		$data ['order'] = $this->order->get_for_variety ( $id, get_cookie("sale_year") );
 		$data ['flags'] = $this->flag->get_for_variety ( $id );
+		if($data['variety']->new_year == get_cookie("sale_year")){
+		    $new = array("thumbnail"=>"new-icon.png");
+		    $data['flags'][] = (object) $new;
+
+		}
 		$data ['title'] = sprintf ( "%s-size Printout for %s %s", ucfirst ( $format ), $data ['variety']->common_name, $data ['variety']->variety );
 		$data ["target"] = "variety/print/$format";
 		$data ["classes"] = "";
+
+		if($data["order"]->crop_failure == 1){
+		    $data["classes"] = "crop-failure";
+		}
 		$this->load->view ( "variety/print/index", $data );
 
 	}

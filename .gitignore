@@ -8,3 +8,5 @@ user_guide/*
 *.sql
 /files/*
 /files
+
+application/config/database.php

@@ -27,9 +27,11 @@ $(document).ready(function(){
 			$(".search-fieldset legend").html("Search Parameters");
 		}
 	});
-	
+	$('table.list').stickytable();
+
 	
 });
+
 
 $(document).on("click",".field-envelope .edit-field",function(){
 

@@ -352,10 +352,15 @@ input.link {
 .highlight-text a {
 	color: #f00;
 }
+table.list thead tr {
+    background-color:#fff;
+}
 
 table.list tr:hover,tr.plant-row.active {
 	background-color: #cdcdcd;
 }
+
+
 
 input.autocomplete-live:hover,input.autocomplete:hover {
 	background-image: url(../images/ring.png);

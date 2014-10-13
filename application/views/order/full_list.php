@@ -34,7 +34,9 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <li><? printf("%s, %s", ucwords($sorting[$i]), $direction[$i]); ?></li>
 <? endfor; ?>
 </ul>
-
+<p>
+Total Count: <strong><?=count($orders);?> Orders</strong>
+</p>
 	<div class="button-box">
 		<span class="button search-orders">Refine Search</span>
 		<a href="<?=$_SERVER['REQUEST_URI']. "&export=true";?>" class="button" title="Export">Export List</a>
@@ -45,4 +47,5 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
     $this->load->view("order/inventory");
 }else{
     $this->load->view("order/name_list");
-}
+} ?>
+

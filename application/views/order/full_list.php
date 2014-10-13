@@ -35,7 +35,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <? endfor; ?>
 </ul>
 <p>
-Total Count: <strong><?=count($orders);?> Orders</strong>
+Found Count: <strong><?=count($orders);?> Orders</strong>
 </p>
 	<div class="button-box">
 		<span class="button search-orders">Refine Search</span>

@@ -27,7 +27,9 @@
 
 	}
 	?>
-
+<p>
+Found Count: <strong><?=count($names);?> Records</strong>
+</p>
 	<div class="button-box">
 		<span class="button search-common-names">Refine Search</span>
 	</div>

@@ -33,7 +33,9 @@ $i = 1;?>
 <li><? printf("%s, %s", ucwords($sorting[$i]), $direction[$i]); ?></li>
 <? endfor; ?>
 </ul>
-
+<p>
+Found Count: <strong><?=count($plants);?> Varieties</strong>
+</p>
 	<div class="button-box">
 		<span class="button search-varieties">Refine Search</span>
 	</div>

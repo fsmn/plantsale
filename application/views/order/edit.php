@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
 ?>
-<h4><?=$order->variety;?></h4>
+<h4><?=get_value($order,"variety","New Variety");?></h4>
 <?php if(get_value($order,"crop_failure",0)== 1):?>
 <div class='alert'>CROP FAILURE</div>
 <?php endif;?>

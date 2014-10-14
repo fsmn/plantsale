@@ -7,7 +7,7 @@
 <body class="<?=$classes;?>">
 <? $this->load->view($target); ?>
 <div id="crop-failure">
-<? if($order->crop_failure == 1):?>
+<? if(get_value($order,"crop_failure") == 1):?>
 CROP FAILURE
 <? endif;?>
 </div>

@@ -45,7 +45,6 @@ class Common_model extends CI_Model
 		$this->rec_modifier = $this->session->userdata('user_id');
 	}
 
-
 	function insert()
 	{
 		$this->prepare_variables();
@@ -66,7 +65,6 @@ class Common_model extends CI_Model
 			return $this->get_value($id, $keys[0] );
 		}
 	}
-
 
 	function get($id)
 	{
@@ -117,9 +115,13 @@ class Common_model extends CI_Model
 					$this->db->or_like("sunlight","$my_item");
 				}
 			}elseif($this->input->get("sunlight-boolean") == "only"){
-				$this->db->where("sunlight",$this->sunlight);
+			    foreach($this->sunlight as $sunlight){
+			        $this->db->where("sunlight",$sunlight);
+			    }
 			}else{
-				$this->db->like("sunlight",$this->sunlight);
+			    foreach($this->sunlight as $sunlight){
+			        $this->db->like("sunlight",$sunlight);
+			    }
 			}
 		}
 		$this->db->select("common.*");
@@ -133,6 +135,7 @@ class Common_model extends CI_Model
 		}
 
 		$result = $this->db->get()->result();
+		$this->session->set_flashdata("notice",$this->db->last_query());
 		return $result;
 	}
 

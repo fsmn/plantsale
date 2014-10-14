@@ -19,14 +19,14 @@ class Flag_Model extends CI_Model
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
 			if($this->input->post($my_variable)){
-				$this->$my_variable = $this->input->post($my_variable);
+				$this->$my_variable = urldecode($this->input->post($my_variable));
 			}
 		}
 
 		$this->rec_modified = mysql_timestamp();
 		$this->rec_modifier = $this->session->userdata('user_id');
 	}
-	
+
 
 	function insert()
 	{
@@ -75,7 +75,7 @@ class Flag_Model extends CI_Model
 			$flag_list[] = $current_flag->name;
 		}
 		$query = sprintf("SELECT `key`, `value` FROM `menu` WHERE `category` = 'flag' AND `value` not in ('%s')",implode("','", $flag_list));
-		
+
 		$output = $this->db->query($query)->result();
 
 		return $output;

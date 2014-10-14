@@ -48,7 +48,7 @@ $body_class = implode(" ",$body_classes);
 <? if($this->session->flashdata("notice")):?>
 <div id="notice"><?=$this->session->flashdata('notice');?></div>
 <? endif;?>
-<? 
+<?
 $this->load->view($target);
 ?></div>
 <!-- end content -->
@@ -58,5 +58,6 @@ $this->load->view($target);
 <div id='autocomplete'></div>
 <div id="footer"><?$this->load->view('page/footer');?></div>
 </div>
+<div class='mr-shmallow-image'><img src='/images/MrShmallow.png'/></div>
 </body>
 </html>

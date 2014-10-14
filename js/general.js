@@ -149,6 +149,16 @@ $(document).on("click",".autocomplete-on",function(){
 	$(this).html("Turn Autocomplete Off").removeClass("autocomplete-on").addClass("autocomplete-off");
 });
 
+$(document).on("click",".mr-shmallow",function(){
+	//$(".mr-shmallow-image").fadeIn();
+	$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
+
+});
+
+$(document).on('click',".mr-shmallow-image",function(){
+	$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
+});
+
 function show_popup(my_title,data,popup_width,x,y){
 	if(!popup_width){
 		popup_width=300;

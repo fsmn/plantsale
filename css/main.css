@@ -219,7 +219,7 @@ div.login-title {
 	cursor: pointer;
 	font-size: 1em;
 	font-weight: normal;
-	white-space:nowrap;
+	white-space: nowrap;
 }
 
 td .button,.row .button,.button.small {
@@ -299,8 +299,8 @@ legend {
 	transition: all .25s ease;
 }
 
-legend:hover{
-		transition: all .25s ease;
+legend:hover {
+	transition: all .25s ease;
 }
 
 /* header page layout elements */
@@ -541,7 +541,7 @@ a.button {
 	padding-bottom: 5px;
 }
 
-#search_list, #autocomplete {
+#search_list,#autocomplete {
 	position: absolute;
 	display: none;
 	z-index: 1000;
@@ -633,7 +633,7 @@ td.field input {
 	width: 60px;
 }
 
-tr.plant-row td.field input{
+tr.plant-row td.field input {
 	width: auto;
 }
 
@@ -659,6 +659,7 @@ table.list tfoot tr {
 	border: 1px solid #bbb;
 	border-top: 3px double #bbb;
 }
+
 table.list tfoot td {
 	font-weight: bold;
 	border-right: 1px solid #bbb;
@@ -691,23 +692,24 @@ fieldset.advanced div.advanced {
 	position: relative;
 	margin-bottom: 20px;
 }
-.search-fieldset.hidden{
-	border:none;
+
+.search-fieldset.hidden {
+	border: none;
 }
 
-.search-fieldset.hidden legend{
+.search-fieldset.hidden legend {
 	color: #aaa;
 }
 
 .search-fieldset legend {
 	font-size: 1.2em;
 }
+
 .search-fieldset legend:hover {
 	cursor: pointer;
 	color: #000;
-	}
-	
-	
+}
+
 .search-fieldset .button-box {
 	display: block;
 	float: right;
@@ -715,7 +717,6 @@ fieldset.advanced div.advanced {
 	margin-left: auto;
 	margin-right: auto;
 }
-
 
 .button-box {
 	margin-top: .5em;
@@ -762,12 +763,11 @@ textarea.save-field {
 	padding-bottom: 10px;
 }
 
-
-.column-odd, .column.odd {
+.column-odd,.column.odd {
 	padding-right: 5px;
 }
 
-.column-even, .column.odd {
+.column-even,.column.odd {
 	padding-left: 5px;
 }
 
@@ -784,6 +784,7 @@ textarea.save-field {
 .field-set {
 	padding: 5px 0;
 }
+
 .search-form .field-set {
 	clear: both;
 }
@@ -802,7 +803,7 @@ fieldset.field-group {
 	padding: 0;
 }
 
-.field-group .field-set label, .search-form .field-set .column label {
+.field-group .field-set label,.search-form .field-set .column label {
 	display: block;
 }
 
@@ -861,6 +862,7 @@ ul.inline-list li {
 	display: none;
 	clear: both;
 }
+
 .plant-row:hover {
 	cursor: pointer;
 }
@@ -890,7 +892,7 @@ div.plant-info {
 }
 
 .plant-info .field.year {
-
+	
 }
 
 .plant-info .field.species {
@@ -910,7 +912,7 @@ div.plant-info {
 }
 
 .no-wrap {
-	white-space:nowrap;
+	white-space: nowrap;
 }
 
 ul.autocomplete-list {
@@ -920,7 +922,7 @@ ul.autocomplete-list {
 	background-color: white;
 }
 
-ul.autocomplete-list li{
+ul.autocomplete-list li {
 	padding: .5em 0;
 }
 
@@ -929,3 +931,14 @@ ul.autocomplete-list li:hover {
 	background-color: #aaa;
 }
 
+.mr-shmallow-image {
+
+}
+.mr-shmallow-image img {
+	display: none;
+	position: absolute;
+	top: 8%;
+	left: 23%;
+	width: auto;
+	height: auto;
+}

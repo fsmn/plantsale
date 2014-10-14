@@ -312,9 +312,9 @@ h2,h3,h4,h5,h6 {
 	background: #ff8538 url(images/warning.png) 50% 50% repeat-x;
 }
 
-.alert, .crop-failure {
-	background: red;
+.alert{
 	color: #fff;
+	background: red;
 }
 
 .error {
@@ -382,4 +382,9 @@ input.autocomplete-live:hover,input.autocomplete:hover {
 
 .order-remainder_friday, .order-remainder_saturday, .order-remainder_sunday {
     background-color: #f5f5f5;
+}
+
+.crop-failure {
+    color: #000;
+    background: rgba(255,0,0,.3) url(images/gray-stripe.png) !important;
 }

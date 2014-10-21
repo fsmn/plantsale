@@ -29,8 +29,6 @@ $body_class = implode(" ",$body_classes);
 
 <? if($_SERVER['HTTP_HOST'] == "plantsale.server.fsmn"): ?>
 <div id="page-title" class="alert">WARNING: THIS IS THE STAGING SERVER!</div>
-<? elseif($_SERVER['HTTP_HOST'] == "plantsaledb.org.tripark.net"):?>
-<div id="page-title" class="alert">WARNING: THIS SERVER WILL BE SHUTTING DOWN FOR MAINTENANCE BY 4 PM CTD, TODAY</div>
 <? else: ?>
 <div id='page-title'>Friends School Plant Sale Database</div>
 <? endif;?>

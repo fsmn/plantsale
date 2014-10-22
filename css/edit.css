@@ -13,5 +13,5 @@ table .edit-field:hover {
 }
 
 table .edit-field {
-	display: block;
+	display: inline-block;
 }

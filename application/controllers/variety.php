@@ -286,7 +286,10 @@ class Variety extends MY_Controller
 
     function update_new_status ($year)
     {
-        $this->variety->update_all($year);
+        if ($year) {
+
+            $this->variety->update_all($year);
+        }
     }
 
     function add_flag ()
@@ -378,6 +381,11 @@ class Variety extends MY_Controller
         }
     }
 
+    function update_new_varieties ($sale_year)
+    {
+        $this->variety->update_all($sale_year);
+    }
+
     /**
      * * FILE MANAGEMENT **
      */
@@ -432,6 +440,9 @@ class Variety extends MY_Controller
         }
     }
 
+    /**
+     * PRIVATE FUNCTIONS
+     */
     function _get_dropdown ($category, $value, $field)
     {
         $this->load->model("menu_model", "menu");
@@ -464,9 +475,8 @@ class Variety extends MY_Controller
         $output = array();
         $output[] = form_multiselect($field, $pairs, $value, "id='$field'");
         $buttons = implode(" ", $output);
-        echo $buttons .
-                 sprintf(
-                        "<span class='button save-multiselect' target='%s'>Save</span>",
-                        $field);
+        echo $buttons . sprintf(
+                "<span class='button save-multiselect' target='%s'>Save</span>",
+                $field);
     }
 }

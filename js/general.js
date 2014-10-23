@@ -152,6 +152,13 @@ $(document).on("click",".autocomplete-on",function(){
 $(document).on("click",".mr-shmallow",function(){
 	//$(".mr-shmallow-image").fadeIn();
 	$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
+	$.ajax({
+		type:'post',
+		url: base_url + "index/user_test",
+		success: function(data){
+			console.log(data);
+		}
+	});
 
 });
 

@@ -907,6 +907,10 @@ div.plant-info {
 	
 }
 
+#variety-editor #new_year {
+	width: 5ex;
+}
+
 .omitted {
 	color: #aaa;
 }

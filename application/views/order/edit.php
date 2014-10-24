@@ -10,7 +10,7 @@
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
 	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
 	<div class="order-year field">
-		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_value($order,"year",get_cookie("sale_year"));?>" />
+		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_value($order,"year",get_cookie("sale_year"));?>" required />
 	</div>
 
 	<div class="order-grower field">
@@ -31,7 +31,7 @@
 	</div>
 	<div class="order-plant_cost field">
 		<label for="plant_cost">Plant Cost:&nbsp;</label> <input type="text"
-			name="plant_cost" value="<?=get_value($order,"plant_cost");?>" autocomplete="off" />
+			name="plant_cost" value="<?=get_value($order,"plant_cost");?>" autocomplete="off" required />
 	</div>
 	<div class="order-count_presale field">
 		<label for="count_presale">Presale Count:&nbsp;</label> <input type="text"
@@ -59,7 +59,7 @@
 	</div>
 	<div class="order-price field">
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"
-			value="<?=number_format(get_value($order,"price"));?>" autocomplete="off"/>
+			value="<?=get_value($order,"price");?>" required autocomplete="off"/>
 	</div>
 	<div class="order-grower_code field">
 		<label for="grower_code">grower Code:&nbsp;</label> <input type="text"

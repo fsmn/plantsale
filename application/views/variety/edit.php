@@ -16,7 +16,7 @@ $plant_colors = form_multiselect("plant_color[]",$plant_colors, $colors );
 <p><?=create_input($variety,"species","Species");?></p>
 <p>
 <label for="new_year">First Year at Sale (YYYY)</label>
-<input name="new_year" id="new_year" value="<?=get_cookie("sale_year");?>"/>
+<input name="new_yeara" id="new_year" value="<?=get_cookie("sale_year");?>"/>
 </p>
 <div class="field-group">
 <div class="label"><strong>Height</strong></div>

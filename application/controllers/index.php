@@ -1,5 +1,4 @@
 <?php
-
 if (! defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -25,12 +24,17 @@ class Index extends MY_Controller
         $this->load->view("page/index", $data);
     }
 
+    /**
+     * test which users are more adventurous and willing to click buttons
+     * that aren't part of their direct work flow. This is a way to find
+     * out how users learn an interface
+     */
     function user_test ()
     {
         $this->db->insert("user_log",
                 array(
                         "username" => $this->session->userdata("username"),
-                        "action" => "shmallow",
+                        "action" => "shmallow"
                 ));
     }
 
@@ -59,8 +63,8 @@ class Index extends MY_Controller
         $this->load->model("variety_model", "variety");
         $data["sale_year"] = $sale_year;
         $totals->total["current"] = $this->order->get_plant_total($sale_year);
-        $totals->total["previous"] = $this->order->get_plant_total($sale_year -
-                 1);
+        $totals->total["previous"] = $this->order->get_plant_total(
+                $sale_year - 1);
         $totals->price_range["current"] = $this->order->get_price_range(
                 $sale_year);
         $totals->price_range["previous"] = $this->order->get_price_range(
@@ -102,7 +106,8 @@ class Index extends MY_Controller
             $sale_year = get_current_year();
         }
         $categories["current"] = $this->variety->get_flat_totals($sale_year);
-        $categories["previous"] = $this->variety->get_flat_totals($sale_year - 1);
+        $categories["previous"] = $this->variety->get_flat_totals(
+                $sale_year - 1);
         $data["categories"] = $categories;
         $this->load->view("order/flat_totals", $data);
     }

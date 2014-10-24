@@ -14,7 +14,10 @@ $plant_colors = form_multiselect("plant_color[]",$plant_colors, $colors );
 <input type="hidden" id="common_id" name="common_id" value="<?=$common_id;?>"/>
 <p><?=create_input($variety,"variety","Variety");?></p>
 <p><?=create_input($variety,"species","Species");?></p>
-<p><?=create_input($variety,"new_year","First Year at Sale (four digits)");?></p>
+<p>
+<label for="new_year">First Year at Sale (YYYY)</label>
+<input name="new_year" id="new_year" value="<?=get_cookie("sale_year");?>"/>
+</p>
 <div class="field-group">
 <div class="label"><strong>Height</strong></div>
 <div class="dimension field-set"><?=create_input($variety,"min_height","Min");?></div>

@@ -7,6 +7,3 @@ application/config/email.php
 user_guide/*
 *.sql
 /files/*
-/files
-
-application/config/database.php

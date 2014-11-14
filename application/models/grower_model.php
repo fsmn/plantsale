@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class grower_model extends CI_Model
+class grower_model extends MY_Model
 {
 	var $id;
 	var $name;
@@ -23,13 +23,13 @@ class grower_model extends CI_Model
 	var $shipping_notes;
 	var $rec_modifier;
 	var $rec_modified;
-	
+
 	function __construct()
 	{
 		parent::__construct();
 	}
-	
-	
+
+
 	function prepare_variables()
 	{
 		$variables = array("id",
@@ -49,33 +49,30 @@ class grower_model extends CI_Model
 				"payment_method",
 				"shipping_id",
 				"shipping_notes",);
-	
+
 		for($i = 0; $i < count($variables); $i++){
 			$my_variable = $variables[$i];
 			if($this->input->post($my_variable)){
 					$this->$my_variable = $this->input->post($my_variable);
 			}
 		}
-	
+
 		$this->rec_modified = mysql_timestamp();
 		$this->rec_modifier = $this->session->userdata('user_id');
 	}
-	
-	
+
+
 	function insert()
 	{
 		$this->prepare_variables();
-		$this->db->insert("grower",$this);
-		return $this->db->insert_id();
+		return $this->_insert("grower");
 	}
-	
-	function update($id)
+
+	function update($id,$values = array())
 	{
-		$this->prepare_variables();
-		$this->db->where("id",$id);
-		$this->db->update("grower",$this);
+	    return $this->_update("grower",$id,$values);
 	}
-	
+
 	function get($id,$values=NULL)
 	{
 		$this->db->from("grower");
@@ -83,13 +80,12 @@ class grower_model extends CI_Model
 		$result = $this->db->get()->row();
 		return $result;
 	}
-	
+
 	function delete($id)
 	{
-		$id_array = array("id"=>$id);
-		$this->db->delete("grower",$id_array);
+	    return $this->_delete("grower",$id);
 	}
-	
+
 	function get_ids()
 	{
 		$this->db->from("grower");
@@ -98,5 +94,5 @@ class grower_model extends CI_Model
 		$result = $this->db->get()->result();
 		return $result;
 	}
-	
+
 }

@@ -21,19 +21,3 @@ function set_user_cookies ($cookies)
     }
 }
 
-/**
- *
- * @param array of objects $user_groups expecting ion_auth user_groups array of
- *        objects, each object defining the groups to which a user belongs
- *        returns true if the user is an administrator or editor.
- */
-function is_editor ($user_groups)
-{
-    $output = FALSE;
-    foreach ($user_groups as $group) {
-        if ($group->name == "admin" || $group->name == "editors") {
-            $output = TRUE;
-        }
-    }
-    return $output;
-}

@@ -11,7 +11,8 @@ if($this->uri->segment(1) == ""){
 
 if($this->ion_auth->logged_in()){
 	$body_classes[] = "logged-in";
-	if(is_editor($this->ion_auth->get_users_groups()->result())){
+	    if($this->ion_auth->in_group(array(1,2))){
+
 	    $body_classes[] = "editor";
 	}else{
 	    $body_classes[] = "viewer";
@@ -33,7 +34,6 @@ $body_class = implode(" ",$body_classes);
 <div id="page">
 <?php if(!$print): ?>
 <div id='header'>
-
 <? if($_SERVER['HTTP_HOST'] == "plantsale.server.fsmn"): ?>
 <div id="page-title" class="alert">WARNING: THIS IS THE STAGING SERVER!</div>
 <? else: ?>

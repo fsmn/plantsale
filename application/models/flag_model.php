@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Flag_Model extends CI_Model
+class Flag_Model extends MY_Model
 {
 	var $variety_id;
 	var $name;
@@ -31,26 +31,18 @@ class Flag_Model extends CI_Model
 	function insert()
 	{
 		$this->prepare_variables();
-		$this->db->insert("flag",$this);
-		$id = $this->db->insert_id();
+		$id = $this->_insert("flag");
 		return $id;
 	}
 
 	function update($id, $values = array())
 	{
-		$this->db->where("id", $id);
-		if(empty($values)){
-			$this->prepare_variables();
-			$this->db->update("flag",$this);
-		}else{
-			$this->db->update("flag",$values);
-		}
+	    return $this->_update("flag",$id, $values);
 	}
 
 	function delete($id)
 	{
-		$this->db->where("id", $id);
-		$this->db->delete("flag");
+	    return $this->_delete("flag",$id);
 	}
 
 	function get_for_variety($variety_id){

@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	/* delete all editing functions for non-editors */
 	if($("body").hasClass("viewer") || !$("body").hasClass("editor")){
-		$("body .edit, body .delete, body .new").remove();
+		$("span.edit,  span.new, span.delete,button.edit,  button.new, button.delete ,a.edit,  a.new, a.delete").remove();
 	}
 	
 	$("#utility").on("click",".set-current-year", function(){
@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 
 $(document).on("click",".field-envelope .edit-field",function(){
-
+if($("body").hasClass("editor")){
 	my_parent = $(this).parent().attr("id");
 	my_attr = my_parent.split("__");
 	my_type = "text";
@@ -73,6 +73,7 @@ $(document).on("click",".field-envelope .edit-field",function(){
 				$("#" + my_parent + " .live-field input").focus();
 			}
 		});
+}
 });
 
 $(document).on("click",".autocomplete.edit-field",function(){

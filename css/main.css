@@ -231,7 +231,7 @@ td .button,.row .button,.button.small {
 	
 }
 /*hide all editing functions from non-editors */
-.edit,  .new, .delete {
+span.edit,  span.new, span.delete,button.edit,  button.new, button.delete ,a.edit,  a.new, a.delete  {
 	visibility: hidden;
 }
 

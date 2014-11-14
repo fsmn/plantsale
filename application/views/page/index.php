@@ -11,9 +11,16 @@ if($this->uri->segment(1) == ""){
 
 if($this->ion_auth->logged_in()){
 	$body_classes[] = "logged-in";
+	if(is_editor($this->ion_auth->get_users_groups()->result())){
+	    $body_classes[] = "editor";
+	}else{
+	    $body_classes[] = "viewer";
+	}
 }else{
 	$body_classes[] = "not-logged-in";
 }
+
+
 
 $body_class = implode(" ",$body_classes);
 ?>

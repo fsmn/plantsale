@@ -1,6 +1,10 @@
 $(document).ready(function(){
+	/* delete all editing functions for non-editors */
+	if($("body").hasClass("viewer") || !$("body").hasClass("editor")){
+		$("body .edit, body .delete, body .new").remove();
+	}
+	
 	$("#utility").on("click",".set-current-year", function(){
-		my_uri = $(location).attr("href");
 		
 		form_data = {
 				uri:my_uri

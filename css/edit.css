@@ -1,13 +1,13 @@
 @CHARSET "UTF-8";
 
-.edit-field:hover {
+.admin .edit-field:hover {
 	cursor: pointer;
 	background-image: url(images/edit_item.png);
 	background-repeat: no-repeat;
 	background-position: center left;
 }
 
-table .edit-field:hover {
+.admin table .edit-field:hover {
 	padding-left: 15px;
 	background-color: #FFFF96;
 }

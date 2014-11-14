@@ -230,6 +230,14 @@ td .button,.row .button,.button.small {
 .button:hover {
 	
 }
+/*hide all editing functions from non-editors */
+.edit,  .new, .delete {
+	visibility: hidden;
+}
+
+.editor .edit, .editor .new, .editor .delete{
+visibility: visible;
+	}
 
 #navigation input[type="text"] {
 	height: 22px;

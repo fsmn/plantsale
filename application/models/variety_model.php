@@ -86,7 +86,7 @@ class Variety_Model extends MY_Model
                     (SELECT n.variety_id, MAX(n.year) AS max_year  FROM `order` n GROUP BY n.variety_id) y
                         ON y.variety_id = v.id
                  LEFT JOIN `order` o ON `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year`
-                 WHERE `v`.`common_id` = $common_id ORDER BY `year` DESC";
+                 WHERE `v`.`common_id` = $common_id ORDER BY `v`.`variety` ASC";
         $result = $this->db->query($query)->result();
         return $result;
     }

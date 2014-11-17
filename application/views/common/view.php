@@ -17,24 +17,31 @@
 	<?=edit_field("sunlight",$common->sunlight, "Sunlight Requirements","common",$common->id,array("class"=>"multiselect","attributes"=>"menu='sunlight'","format"=>"multiselect"));?>
 
 </div>
-<? $this->load->view("variety/list");?>
+
 <?
-
-
-if (DB_ROLE == 1) {
-	print create_button_bar ( array (
-			array (
+$new_variety_buttons[] = array (
 					"selection" => "variety",
 					"text" => "Add a variety",
 					"class" => array (
 							"button",
 							"new",
-							"variety-create" 
+							"variety-create"
 					),
 					"id" => sprintf ( "common-id_%s", $common->id ),
 					"type" => "span",
-					"title" => "add a new variety" 
-			) 
-	) );
+					"title" => "add a new variety"
+			);
+
+if ($this->ion_auth->in_group(array(1,2))) {
+    print create_button_bar ($new_variety_buttons);
+}
+
+?>
+<? $this->load->view("variety/list");?>
+<?
+
+
+if ($this->ion_auth->in_group(array(1,2))) {
+	print create_button_bar ($new_variety_buttons);
 }
 

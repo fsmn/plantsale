@@ -18,7 +18,7 @@ $row_classes = implode(" ",$row_classes);
 
 <!-- order/row.php -->
 <tr id="order_<?=$order->id;?>" class="<?=$row_classes;?>"><td>
-<? if(DB_ROLE == 1):?>
+<? if($this->ion_auth->in_group(array(1,2))):?>
 			<span class="button edit edit-order"
 				id="<? printf("edit-order_%s",$order->id);?>">Edit</span>
 				<? else: ?>

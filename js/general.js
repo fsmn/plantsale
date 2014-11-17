@@ -5,7 +5,8 @@ $(document).ready(function(){
 	}
 	
 	$("#utility").on("click",".set-current-year", function(){
-		
+		my_uri = $(location).attr("href");
+
 		form_data = {
 				uri:my_uri
 		};

@@ -30,9 +30,9 @@ $row_classes = implode(" ",$row_classes);
 				</td>
 	<td class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
 				</td>
-	<td class="order-grower_id field"><?=edit_field("year",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
+	<td class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-	<td class="order-catalog_number field"><?=edit_field("year",$order->catalog_number,"","order",$order->id,array("envelope"=>"span"));?>
+	<td class="order-catalog_number field"><?=edit_field("catalog_number",$order->catalog_number,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 	<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
 			</td>

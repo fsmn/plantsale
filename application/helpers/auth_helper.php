@@ -21,3 +21,10 @@ function set_user_cookies ($cookies)
     }
 }
 
+function is_editor(){
+    return array(1,2);
+}
+
+function is_admin(){
+    return array(1);
+}

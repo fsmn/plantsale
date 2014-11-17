@@ -63,6 +63,7 @@ if($("body").hasClass("editor")){
 				category: my_category,
 				value: $(this).html()
 		};
+
 		$.ajax({
 			type:"get",
 			url: base_url +  "menu/edit_value",
@@ -193,7 +194,6 @@ function show_popup(my_title,data,popup_width,x,y){
 }
 
 function update_field(me,my_type){
-	console.log(my_type);
 	my_parent = $(me).parents(".field-envelope").attr("id");
 	my_attr = my_parent.split("__");
 	my_value = $("#" + my_parent).children(".live-field").children("input"|"textarea").val();
@@ -213,6 +213,7 @@ function update_field(me,my_type){
 			id: my_attr[2],
 			value: my_value
 	};
+console.log(form_data);
 	$.ajax({
 		type:"post",
 		url: base_url + my_attr[0] + "/update_value",

@@ -146,7 +146,10 @@ class Order extends MY_Controller
                 $this->input->post("field") => $value = urldecode(
                         $this->input->post("value"))
         );
+        $this->session->set_flashdata("notice",join(",",$values));
+
         $output = $this->order->update($id, $values);
+
         if ($this->input->post("format") == "currency") {
             $output = get_as_price($output);
         }

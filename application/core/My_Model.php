@@ -22,6 +22,8 @@ class My_Model extends CI_Model
 
     function _update ($db, $id, $values)
     {
+        $this->session->set_flashdata("notice",join(",",$values));
+
         if ($this->ion_auth->in_group(array(1,2))) {
             $this->db->where("id", $id);
             if (empty($values)) {
@@ -29,6 +31,7 @@ class My_Model extends CI_Model
                 $this->db->update($db, $this);
             } else {
                 $this->db->update($db, $values);
+
                 if (count($values) == 1) {
                     $keys = array_keys($values);
                     return $this->get_value($id, $keys[0]);

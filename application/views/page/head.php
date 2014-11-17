@@ -22,8 +22,8 @@ var base_url = '<?=base_url("index.php") . "/";?>';
 <!-- General Script  -->
 <script type="text/javascript" src="<?=base_url("js/general.js");?>"></script>
 
-<? if('DB_ROLE' == 1) {
-   $this->load->view("page/secure_javascript.php");
+<? if($this->ion_auth->in_group(array(1,2))) {
+  // $this->load->view("page/secure_javascript.php");
 } ?>
 <!-- Common Name Scripts -->
 <script type="text/javascript" src="<?=base_url("js/common.js");?>"></script>

@@ -383,7 +383,7 @@ class Variety extends MY_Controller
 
     function update_new_varieties ($sale_year)
     {
-        $this->variety->update_all($sale_year);
+       print_r( $this->variety->update_all($sale_year));
     }
 
     /**

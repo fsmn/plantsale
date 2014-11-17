@@ -140,13 +140,15 @@ class Variety_Model extends MY_Model
             $output = array();
             $this->db->select("id");
             $this->db->from("variety");
-            $this->db->where("new_year IS NULL", NULL, false);
+            //$this->db->where("new_year IS NULL", NULL, false);
             $varieties = $this->db->get()->result();
+            $flashes = array();
             foreach ($varieties as $variety) {
                 $query = sprintf(
-                        "select `order`.`year` from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s",
+                        "SELECT `order`.`year` FROM `order`,`variety` WHERE `order`.`variety_id` = %s AND variety.id = `order`.variety_id  AND NOT EXISTS(SELECT `year` FROM `order` WHERE `year` < %s AND variety_id = %s)  HAVING `order`.`year` = %s;",
                         $variety->id, $year, $variety->id, $year);
                 $new_year = $this->db->query($query)->row();
+                print $query;
                 if ($new_year) {
                     $this->update_status($variety->id, $year);
                     $output[] = $this->get($variety->id);

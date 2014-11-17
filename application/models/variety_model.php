@@ -137,22 +137,23 @@ class Variety_Model extends MY_Model
     function update_all ($year)
     {
         if ($this->ion_auth->in_group(array(1,2))) {
-
-        $this->db->select("id");
-        $this->db->from("variety");
-        $this->db->where("new_year IS NULL", NULL, false);
-        $varieties = $this->db->get()->result();
-        foreach ($varieties as $variety) {
-            $query = sprintf(
-                    "select `order`.`year` from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s",
-                    $variety->id, $year, $variety->id, $year);
-            $new_year = $this->db->query($query)->row();
-            print_r($new_year);
-            if ($new_year) {
-                $this->update_status($variety->id, $year);
+            $output = array();
+            $this->db->select("id");
+            $this->db->from("variety");
+            $this->db->where("new_year IS NULL", NULL, false);
+            $varieties = $this->db->get()->result();
+            foreach ($varieties as $variety) {
+                $query = sprintf(
+                        "select `order`.`year` from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s",
+                        $variety->id, $year, $variety->id, $year);
+                $new_year = $this->db->query($query)->row();
+                if ($new_year) {
+                    $this->update_status($variety->id, $year);
+                    $output[] = $this->get($variety->id);
+                }
             }
         }
-        }
+        return $output;
     }
 
     function update_status ($id, $year)
@@ -262,12 +263,13 @@ class Variety_Model extends MY_Model
                 $this->db->where("flag.name", urldecode($parameter->value));
             } elseif ($parameter->key == "year") {
                 $this->db->where("order.year", $parameter->value);
-            } elseif (in_array($parameter->key, array(
-                    "variety",
-                    "genus",
-                    "species",
-                    "description"
-            ))) {
+            } elseif (in_array($parameter->key,
+                    array(
+                            "variety",
+                            "genus",
+                            "species",
+                            "description"
+                    ))) {
                 $this->db->like($parameter->key, $parameter->value);
             } elseif ($parameter->key == "print_omit") {
                 $this->db->where("(order.print_omit is NULL OR order.print_omit != 1)", NULL, FALSE);
@@ -291,7 +293,10 @@ class Variety_Model extends MY_Model
 
     function delete ($id)
     {
-        if ($this->ion_auth->in_group(array(1,2))) {
+        if ($this->ion_auth->in_group(array(
+                1,
+                2
+        ))) {
 
             $this->db->delete("variety", array(
                     'id' => $id

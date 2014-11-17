@@ -83,7 +83,7 @@ $config['salt_prefix']    = '$2y$';
  */
 $config['site_title']                 = "New Friends School Plant Sale Database";       // Site Title, example.com
 $config['admin_email']                = "chrisd@fsmn.org"; // Admin Email, admin@example.com
-$config['default_group']              = 'members';           // Default group, use name
+$config['default_group']              = 'viewers';           // Default group, use name
 $config['admin_group']                = 'admin';             // Default administrators group, use name
 $config['identity']                   = 'email';             // A database column which is used to login with
 $config['min_password_length']        = 8;                   // Minimum Required Length of Password
@@ -122,7 +122,7 @@ $config['file'] = "email";
 $config['email_config'] = array(
 	'mailtype' => 'html',
 	'mailpath' => '/usr/sbin/sendmail'
-	
+
 );
 
 /*

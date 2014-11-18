@@ -33,7 +33,7 @@
 			<td class="order-plant_cost field"><input type="text" name="plant_cost" value=""/>
 			</td>
 			<td class="order-count_presale field"><input type="text" name="count_presale" value=""/>
-			
+
 			<td class="order-count_midsale field"><input type="text" name="count_midsale" value=""/>
 			</td>
 			<td class="order-pot_size field"><input type="text" name="pot_size" value=""/>
@@ -43,7 +43,7 @@
 			<td class="order-grower_code field"><input type="text" name="grower_code" value=""/>
 			</td>
 			<td>
-			<? if(DB_ROLE == 1): ?>
+			<? if($this->ion_auth->in_group(array(1,2))): ?>
 			<input type="submit" value="Add" class="button"/>
 			<? endif;?>
 			</td>

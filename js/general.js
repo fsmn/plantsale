@@ -34,7 +34,7 @@ $(document).ready(function(){
 	});
 	$('table.list').stickytable();
 
-	
+ 	
 });
 
 

@@ -2,7 +2,7 @@
 
 // list.php Chris Dart Apr 2, 2013 12:47:39 PM chrisdart@cerebratorium.com
 $delete_button = "";
-if(DB_ROLE == 1){
+if(IS_EDITOR){
 	$delete_button = "<span class='button delete small flag-delete'>Delete</span>";
 }
 $output = array();

@@ -1,14 +1,6 @@
 <?php
 if (! defined('BASEPATH')) exit('No direct script access allowed');
 
-function is_logged_in ($data)
-{
-    $result = false;
-    if (array_key_exists("username", $data) && array_key_exists("db_role", $data) && array_key_exists("user_id", $data)) {
-        $result = true;
-    }
-    return $result;
-}
 
 function set_user_cookies ($cookies)
 {
@@ -19,12 +11,4 @@ function set_user_cookies ($cookies)
         $data["expire"] = 0;
         set_cookie($data);
     }
-}
-
-function is_editor(){
-    return array(1,2);
-}
-
-function is_admin(){
-    return array(1);
 }

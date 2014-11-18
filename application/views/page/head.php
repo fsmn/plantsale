@@ -7,7 +7,7 @@
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/main.css")?>" />
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/color.css")?>"/>
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/popup.css")?>" />
-<? if($this->ion_auth->in_group(array(1,2))): ?>
+<? if(IS_EDITOR): ?>
 <link type="text/css" rel="stylesheet" media="screen" href="<?=base_url("css/edit.css");?>"/>
 <? endif;?>
 <link type="text/css" rel="stylesheet" media="print" href="<?=base_url("css/print.css")?>" />
@@ -24,7 +24,7 @@ var base_url = '<?=base_url("index.php") . "/";?>';
 <!-- General Script  -->
 <script type="text/javascript" src="<?=base_url("js/general.js");?>"></script>
 
-<? if($this->ion_auth->in_group(array(1,2))) {
+<? if(IS_EDITOR) {
    //$this->load->view("page/secure_javascript.php");
 } ?>
 <!-- Common Name Scripts -->

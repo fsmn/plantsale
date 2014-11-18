@@ -8,20 +8,20 @@ $buttons [] = array (
 		"selection" => "index",
 		"text" => sprintf ( "Current Year: %s", get_cookie ( "sale_year" ) ),
 		"class" => array (
-				"button edit set-current-year" 
+				"button edit set-current-year"
 		),
-		"title" => "Set the current working year of the plant sale" 
+		"title" => "Set the current working year of the plant sale"
 );
 $buttons [] = array (
 		"selection" => "auth",
 		"text" => get_user_name ( $user ),
 		"class" => array (
 				"edit_user",
-				"button","auth" 
+				"button","auth"
 		),
-		"href" => site_url ( "auth/edit_user/" . $user->id ) 
+		"href" => site_url ( "auth/edit_user/" . $user->id )
 );
-if ($this->ion_auth->get_users_groups()->row()->id == 1) {
+if (IS_ADMIN) {
 	$buttons [] = array (
 			"selection" => "auth",
 			"text" => "Users",
@@ -38,13 +38,13 @@ $buttons [] = array (
 		"selection" => "index",
 		"text" => "Log Out",
 		"class" => array (
-				"button","auth" 
+				"button","auth"
 		),
 		"href" => site_url ( "auth/logout" ),
-		"title" => sprintf ( "Log out %s", get_user_name ( $user ) ) 
+		"title" => sprintf ( "Log out %s", get_user_name ( $user ) )
 );
 
 
 print create_button_bar ( $buttons, array (
-		"id" => "utility-buttons" 
+		"id" => "utility-buttons"
 ) );

@@ -81,7 +81,7 @@ class Image_Model extends MY_Model
 
     function delete ($id)
     {
-        if($this->ion_auth->in_group(array(1,2))){
+        if(IS_EDITOR){
         $image = $this->get($id);
         $filename = $_SERVER['DOCUMENT_ROOT'] . "files/" . $image->image_name;
         if (file_exists($filename)) {

@@ -136,7 +136,7 @@ class Variety_Model extends MY_Model
 
     function update_all ($year)
     {
-        if ($this->ion_auth->in_group(array(1,2))) {
+        if (IS_EDITOR) {
             $output = array();
             $this->db->select("id");
             $this->db->from("variety");

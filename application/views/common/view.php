@@ -2,7 +2,7 @@
 <h2>
 	<?=$common->name;?>
 </h2>
-<? if(DB_ROLE == 1):?>
+<? if(IS_EDITOR):?>
 <? $buttons[] = array("selection" => "common" , "text" => "Edit", "class" => array("button","edit","common-edit"), "id" => "ec_$common->id", "type" => "span", "title" => "Edit this record");?>
 <?=create_button_bar($buttons);?>
 <? endif; ?>
@@ -32,7 +32,7 @@ $new_variety_buttons[] = array (
 					"title" => "add a new variety"
 			);
 
-if ($this->ion_auth->in_group(array(1,2))) {
+if (IS_EDITOR) {
     print create_button_bar ($new_variety_buttons);
 }
 
@@ -41,7 +41,7 @@ if ($this->ion_auth->in_group(array(1,2))) {
 <?
 
 
-if ($this->ion_auth->in_group(array(1,2))) {
+if (IS_EDITOR) {
 	print create_button_bar ($new_variety_buttons);
 }
 

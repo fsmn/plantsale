@@ -76,7 +76,7 @@
 			<div id="flag-list">
 			<? $this->load->view("flag/list");?>
 			</div>
-	<? if(DB_ROLE == 1):?>
+	<? if(IS_EDITOR):?>
 			<? $flag_buttons[] = array("selection"=>"flag","text"=>"New Flag","type"=>"span","class"=>"button new flag-add","id"=>"fa_$variety->id");?>
 			<?=create_button_bar($flag_buttons);?>
 	<?endif;?>

@@ -43,7 +43,7 @@
 			<td class="order-grower_code field"><input type="text" name="grower_code" value=""/>
 			</td>
 			<td>
-			<? if($this->ion_auth->in_group(array(1,2))): ?>
+			<? if(IS_EDITOR): ?>
 			<input type="submit" value="Add" class="button"/>
 			<? endif;?>
 			</td>

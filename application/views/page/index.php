@@ -11,7 +11,7 @@ if($this->uri->segment(1) == ""){
 
 if($this->ion_auth->logged_in()){
 	$body_classes[] = "logged-in";
-	    if($this->ion_auth->in_group(array(1,2))){
+	    if(IS_EDITOR){
 
 	    $body_classes[] = "editor";
 	}else{

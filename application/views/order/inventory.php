@@ -173,11 +173,11 @@ if ($orders) :
 			<td class="order-flat_size field">
 			<?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-flat_cost field no-wrap">$<?=edit_field("flat_cost",$order->flat_cost,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-flat_size field" id="flat_size"><span id="edit-flat-size_<?=$order->id;?>" class="edit-cost"><?=$order->flat_size;?></span>
 			</td>
-			<td class="order-plant_cost field no-wrap">$<?=edit_field("plant_cost",$order->plant_cost,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-flat_cost field no-wrap" id="flat_cost">$<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=$order->flat_cost;?></span>
 			</td>
-			<td class="order-price field no-wrap">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-plant_cost field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=$order->plant_cost;?></span>
 			</td>
 			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>

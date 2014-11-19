@@ -84,7 +84,8 @@ class Order_Model extends MY_Model
 
     function update ($id, $values = array())
     {
-        return $this->_update("order", $id, $values);
+        $output =  $this->_update("order", $id, $values);
+        return $output;
     }
 
     function delete ($id)

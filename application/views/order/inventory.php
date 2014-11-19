@@ -5,6 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // chrisdart@cerebratorium.com
 if ($orders) :
     ?>
+    <!-- views/order/inventor.php -->
 <table class="list">
 	<thead>
 	<?php if($is_inventory): ?>
@@ -169,7 +170,8 @@ if ($orders) :
 			</td>
 			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
 			</td>
-			<td class="order-flat_size field"><?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-flat_size field">
+			<?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-flat_cost field no-wrap">$<?=edit_field("flat_cost",$order->flat_cost,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>

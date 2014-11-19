@@ -17,17 +17,52 @@
 		
 	});
 	
-	$(document).on("change","input[name='flat_size'],input[name='flat_cost'],input[name='plant_cost']",function(){
+	$(document).on("change","#order-edit input[name='flat_size'],#order-edit input[name='flat_cost'],#order-edit input[name='plant_cost']",function(){
 		flat_size = $("input[name='flat_size']").val();
 		flat_cost = $("input[name='flat_cost']").val();
 		plant_cost = $("input[name='plant_cost']").val();
-		if(flat_cost && !plant_cost){
-			$("input[name='plant_cost']").val( parseFloat(flat_cost) / parseFloat(flat_size) );
-		}else if(!flat_cost && plant_cost){
-			$("input[name='flat_cost']").val(parseFloat(flat_size) * parseFloat(plant_cost));
+		my_name = $(this).attr("name");
+		if( my_name =="flat_size"){
+			$("#order-edit input[name='flat_cost']").val(parseFloat(flat_size) * parseFloat(plant_cost));
+			$("#order-edit input[name='plant_cost']").val( parseFloat(flat_cost) / parseFloat(flat_size) );
+
+		}else if(my_name == "plant_cost"){
+			$("#order-edit input[name='flat_cost']").val(parseFloat(flat_size) * parseFloat(plant_cost));
+
+		}else if(my_name == "flat_cost"){
+			$("#order-edit input[name='plant_cost']").val( parseFloat(flat_cost) / parseFloat(flat_size) );
+
 		}
-		console.log(flat_cost);
 	});
+	
+	$(document).on("click",".edit-cost",function(){
+		my_id = this.id.split("_")[1];
+		my_field = $(this).parent(".field").attr("id");
+		
+		form_data = {
+				id: my_id
+		}
+		
+		$.ajax({
+			type: "post",
+			data: form_data,
+			url: base_url + "order/edit_cost",
+			success: function(data){
+				$("#search_list").css({"z-index": 1000}).html(data).position({
+					my: "left top",
+					at: "left bottom",
+					of: $("#edit-flat-size_" + my_id), 
+					collision: "fit"
+				}).show();
+				$("input[name='" + my_field + "'").select();
+			}
+		
+		});
+	});
+	
+	$(document).on("click","#order-edit .hide",function(){
+		$("#search_list").hide().css({"top":0,"left":0});
+	})
 	
 	$(document).on("click",".search-orders",function(){
 		form_data = {

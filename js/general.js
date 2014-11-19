@@ -205,8 +205,6 @@ function update_field(me,my_type){
 	}else if(my_type == "multiselect"){
 		my_value = $("#" + my_parent).children(".multiselect").children("select").val();
 	}
-	console.log(my_value);
-
 	
 	form_data = {
 			table: my_attr[0],
@@ -214,12 +212,12 @@ function update_field(me,my_type){
 			id: my_attr[2],
 			value: my_value
 	};
-console.log(form_data);
 	$.ajax({
 		type:"post",
 		url: base_url + my_attr[0] + "/update_value",
 		data: form_data,
 		success: function(data){
+			console.log(data);
 			$("#" + my_parent + " .live-field").html(data);
 			$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
 		}

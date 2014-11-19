@@ -12,7 +12,8 @@ class Order extends MY_Controller
     }
 
     function index ()
-    {}
+    {
+    }
 
     function view ()
     {
@@ -113,8 +114,7 @@ class Order extends MY_Controller
             bake_cookie("direction", implode(",", $sorting["direction"]));
             $orders = $this->order->get_totals($sale_year, $options, $sorting);
             foreach ($orders as $order) {
-                $order->latest_order = $this->order->is_latest(
-                        $order->variety_id, $order->year);
+                $order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
             }
             if ($show_last_only = $this->input->get("show_last_only")) {
                 bake_cookie("show_last_only", $show_last_only);
@@ -142,9 +142,9 @@ class Order extends MY_Controller
     function update_value ()
     {
         $id = $this->input->post("id");
+
         $values = array(
-                $this->input->post("field") => $value = urldecode(
-                        $this->input->post("value"))
+                $this->input->post("field") => $value = urldecode($this->input->post("value"))
         );
         $output = $this->order->update($id, $values);
 
@@ -154,11 +154,17 @@ class Order extends MY_Controller
         echo $output;
     }
 
+    function edit_cost ()
+    {
+        $id = $this->input->post("id");
+        $data["order"] = $this->order->get($id);
+        $this->load->view("order/edit_cost", $data);
+    }
+
     function create ()
     {
         $data["variety_id"] = $this->input->get("variety_id");
-        $data["order"] = $this->order->get_previous_year($data["variety_id"],
-                get_current_year());
+        $data["order"] = $this->order->get_previous_year($data["variety_id"], get_current_year());
         if (empty($data["order"])) {
             $this->load->model("variety_model", "variety");
             $order = new stdClass();
@@ -166,11 +172,10 @@ class Order extends MY_Controller
             $data["order"] = $order;
         }
         $pot_sizes = $this->order->get_pot_sizes();
-        $data["pot_sizes"] = get_keyed_pairs($pot_sizes,
-                array(
-                        "pot_size",
-                        "pot_size"
-                ));
+        $data["pot_sizes"] = get_keyed_pairs($pot_sizes, array(
+                "pot_size",
+                "pot_size"
+        ));
         $data["action"] = "insert";
         $data["target"] = "order/edit";
         $data['title'] = "Insert New Order";
@@ -182,11 +187,10 @@ class Order extends MY_Controller
         $data["order"] = $this->order->get($id);
         $data["variety_id"] = $data["order"]->variety_id;
         $pot_sizes = $this->order->get_pot_sizes();
-        $data["pot_sizes"] = get_keyed_pairs($pot_sizes,
-                array(
-                        "pot_size",
-                        "pot_size"
-                ));
+        $data["pot_sizes"] = get_keyed_pairs($pot_sizes, array(
+                "pot_size",
+                "pot_size"
+        ));
         $data["action"] = "update";
         $data["target"] = "order/edit";
         $data['title'] = "Update Order";
@@ -207,6 +211,19 @@ class Order extends MY_Controller
         $this->order->update($id);
         // redirect ( "variety/view/$variety_id" );
         redirect($this->input->post("redirect_url"));
+    }
+
+    /**
+     * this is one ugly function. It should be more elegant if I were to use the update function, but it isn't working correctly.
+     */
+    function update_cost(){
+        $id = $this->input->post("id");
+        $plant_cost = $this->input->post("plant_cost");
+        $flat_cost = $this->input->post("flat_cost");
+        $flat_size = $this->input->post("flat_size");
+        $this->order->update($id,array("flat_size"=>$flat_size,"flat_cost"=>$flat_cost,"plant_cost"=>$plant_cost));
+        redirect($this->input->post("redirect_url"));
+
     }
 
     function delete ()

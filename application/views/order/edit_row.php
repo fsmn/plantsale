@@ -2,6 +2,7 @@
 
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
 ?>
+<!-- views/order/edit_row.php -->
 <form name="order-row" action="<?=site_url("order/$action");?>" method="post">
 <input type="hidden" name="variety_id" value="<?=$variety_id;?>"/>
 <table>

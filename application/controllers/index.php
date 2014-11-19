@@ -1,6 +1,5 @@
 <?php
-if (! defined('BASEPATH'))
-    exit('No direct script access allowed');
+if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Index extends MY_Controller
 {
@@ -26,7 +25,8 @@ class Index extends MY_Controller
 
     /**
      * test which users are more adventurous and willing to click buttons
-     * that aren't part of their direct work flow. This is a way to find
+     * that aren't part of their direct work flow.
+     * This is a way to find
      * out how users learn an interface
      */
     function user_test ()
@@ -63,20 +63,13 @@ class Index extends MY_Controller
         $this->load->model("variety_model", "variety");
         $data["sale_year"] = $sale_year;
         $totals->total["current"] = $this->order->get_plant_total($sale_year);
-        $totals->total["previous"] = $this->order->get_plant_total(
-                $sale_year - 1);
-        $totals->price_range["current"] = $this->order->get_price_range(
-                $sale_year);
-        $totals->price_range["previous"] = $this->order->get_price_range(
-                $sale_year - 1);
-        $totals->new_varieties["current"] = $this->variety->get_new_varieties(
-                $sale_year);
-        $totals->new_varieties["previous"] = $this->variety->get_new_varieties(
-                $sale_year - 1);
-        $totals->varieties["current"] = $this->variety->get_varieties_for_year(
-                $sale_year);
-        $totals->varieties["previous"] = $this->variety->get_varieties_for_year(
-                $sale_year - 1);
+        $totals->total["previous"] = $this->order->get_plant_total($sale_year - 1);
+        $totals->price_range["current"] = $this->order->get_price_range($sale_year);
+        $totals->price_range["previous"] = $this->order->get_price_range($sale_year - 1);
+        $totals->new_varieties["current"] = $this->variety->get_new_varieties($sale_year);
+        $totals->new_varieties["previous"] = $this->variety->get_new_varieties($sale_year - 1);
+        $totals->varieties["current"] = $this->variety->get_varieties_for_year($sale_year);
+        $totals->varieties["previous"] = $this->variety->get_varieties_for_year($sale_year - 1);
 
         $data["totals"] = $totals;
 
@@ -92,8 +85,7 @@ class Index extends MY_Controller
             bake_cookie("sale_year", $sale_year);
         }
         $categories["current"] = $this->variety->get_category_totals($sale_year);
-        $categories["previous"] = $this->variety->get_category_totals(
-                $sale_year - 1);
+        $categories["previous"] = $this->variety->get_category_totals($sale_year - 1);
         $data["categories"] = $categories;
         $this->load->view("variety/category_totals", $data);
     }
@@ -106,8 +98,7 @@ class Index extends MY_Controller
             $sale_year = get_current_year();
         }
         $categories["current"] = $this->variety->get_flat_totals($sale_year);
-        $categories["previous"] = $this->variety->get_flat_totals(
-                $sale_year - 1);
+        $categories["previous"] = $this->variety->get_flat_totals($sale_year - 1);
         $data["categories"] = $categories;
         $this->load->view("order/flat_totals", $data);
     }

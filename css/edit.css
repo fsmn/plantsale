@@ -1,5 +1,14 @@
 @CHARSET "UTF-8";
 
+.cost-field:hover{
+	cursor:pointer;
+	background-color: #fff96 !important;
+}
+
+.edit-field {
+	min-width:2em;
+}
+
  .edit-field:hover {
 	cursor: pointer;
 	background-image: url(images/edit_item.png);

@@ -20,7 +20,7 @@
 			name="plant_cost" value="<?=get_value($order,"plant_cost");?>" style="width:7ex"  autocomplete="off" required />
 	</span>
 	<span>
-<input value="Save" type="submit" class="button save"/>
+<input value="Save" type="submit" class="button small save"/>
 <a href="#" class="hide">Cancel</a>
 	</span>
 

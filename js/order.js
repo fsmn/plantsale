@@ -36,6 +36,7 @@
 	});
 	
 	$(document).on("click",".edit-cost",function(){
+		console.log("line 39 order.js");
 		my_id = this.id.split("_")[1];
 		my_field = $(this).parent(".field").attr("id");
 		

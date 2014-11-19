@@ -181,16 +181,18 @@ class Variety_Model extends MY_Model
      * @param int(4) $year
      * get the varieties that are renewals from a previous year.
      */
-    function get_renewed_varieties($year){
+    function get_reorders($year){
         $this->db->from("variety as v");
         $this->db->from("order as o");
         $this->db->join("common as c","v.common_id = c.id");
         $this->db->select("v.*");
+        $this->db->select("o.year,o.id as order_id");
+        $this->db->select("c.name,c.sunlight,c.genus");
         $this->db->where("o.variety_id = v.id",NULL,FALSE);
         $this->db->where("o.year",$year);
         $this->db->where("v.new_year !=",$year);
         $this->db->order_by("c.category,c.name,c.genus,v.variety");
-        $result = $this->db->get()->result;
+        $result = $this->db->get()->result();
         return $result;
     }
 

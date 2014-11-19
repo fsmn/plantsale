@@ -4,7 +4,7 @@
 
 <h1>Welcome to the Friends School Plant Sale Database!</h1>
 
-<p>This could be a landing page with common activities. Maybe a user-configurable page where common tasks could be added as desired.</p>
+<p>Click on any of the buttons below to get totals overviews. Use the search field above to quickly find plants by common name, genus, variety name or species.</p>
 
 <p>
 <div class="button-bar">
@@ -30,4 +30,7 @@
 <div id="flat-totals">
 </div>
 <div id="flat-totals-end"></div>
+</div>
+<div style="float:left; width: 250px">
+<?=create_button_bar(array(array("selection"=>"variety","text"=>"List Re-ordered Plants","href"=>site_url("variety/show_reorders/" . get_cookie("sale_year")))));?>
 </div>

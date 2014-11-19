@@ -98,12 +98,8 @@ if ($orders) :
         $presale_total += $order->count_presale;
         $midsale_total += $order->count_midsale;
         $flat_cost_total += $order->flat_cost;
-        $flat_value = round($order->flat_cost/$order->flat_size,0);
-        $plant_value = round( $order->flat_size * $order->plant_cost,0);
+         $row_classes[] = has_price_discrepancy($order);
 
-        if($flat_value != $plant_value){
-            $row_classes[] = "price-discrepancy";
-        }
         ?>
 		<tr
 			class="<?=implode(" ",$row_classes);?>"

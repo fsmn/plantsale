@@ -360,8 +360,8 @@ table.list tr:hover,tr.plant-row.active {
 	background-color: #cdcdcd;
 }
 
-.price-discrepancy .edit-cost {
-	background-color: red;
+.price-discrepancy .cost-field {
+	background-color: #F79D8B;
 }
 
 

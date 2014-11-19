@@ -181,12 +181,12 @@ if ($orders) :
 			</td>
 			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
 			</td>
-			<td class="order-flat_size field" id="flat_size"><span id="edit-flat-size_<?=$order->id;?>" class="edit-cost"><?=$order->flat_size;?></span>
+			<td class="order-flat_size field cost-field" id="flat_size"><span id="edit-flat-size_<?=$order->id;?>" class="edit-cost"><?=$order->flat_size;?></span>
 
 			</td>
-			<td class="order-flat_cost field no-wrap" id="flat_cost">$<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=$order->flat_cost;?></span>
+			<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">$<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=$order->flat_cost;?></span>
 			</td>
-			<td class="order-plant_cost field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=$order->plant_cost;?></span>
+			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=$order->plant_cost;?></span>
 			</td>
 			<td class="order-price field no-wrap">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>

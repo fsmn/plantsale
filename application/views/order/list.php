@@ -12,7 +12,7 @@ if ($orders) :
 <th></th>
 <th></th>
 <th colspan=2>Sizes</th>
-<th></th>
+<th colspan=2>Prices</th>
 <th></th>
 <th colspan=2>Presale</th>
 <th colspan=2>Midsale</th>
@@ -27,6 +27,7 @@ if ($orders) :
 <th>Cat#</th>
 <th>Pot Size</th>
 <th>Flat Size</th>
+<th>Flat Cost</th>
 <th>Plant Cost</th>
 <th>Price</th>
 <th>Ordered</th>

@@ -360,7 +360,9 @@ table.list tr:hover,tr.plant-row.active {
 	background-color: #cdcdcd;
 }
 
-
+.price-discrepancy .edit-cost {
+	background-color: red;
+}
 
 
 input.autocomplete-live:hover,input.autocomplete:hover {

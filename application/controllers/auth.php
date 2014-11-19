@@ -18,7 +18,8 @@ class Auth extends CI_Controller {
 
 		$this->lang->load ( 'auth' );
 		$this->load->helper ( 'language' );
-
+		define("IS_EDITOR",0);
+		define("IS_ADMIN",0);
 	}
 
 	// redirect if needed, otherwise display the user list

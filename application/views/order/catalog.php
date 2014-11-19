@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // chrisdart@cerebratorium.com
 if ($orders) :
     ?>
-    <!-- views/order/name_list.php -->
+    <!-- views/order/catalog.php -->
 <table class="list">
 	<thead>
 	<?php if($is_inventory): ?>

@@ -46,6 +46,6 @@ Found Count: <strong><?=count($orders);?> Orders</strong>
 <? if($is_inventory){
     $this->load->view("order/inventory");
 }else{
-    $this->load->view("order/name_list");
+    $this->load->view("order/catalog");
 } ?>
 

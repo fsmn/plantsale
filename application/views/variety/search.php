@@ -11,6 +11,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 		<label for="year">Year: </label><input type="number" name="year" style="width: 5em"
 			value="<?=get_cookie("sale_year");?>" />
 	</p>
+	<p><input type="checkbox" name="crop_failure" value="1"/><label for="crop_failure">Show Only Crop Failures</label></p>
 	<div class="field-set">
 	<div class="column first">
 		<?=create_input($variety,"name","Common Name");?>

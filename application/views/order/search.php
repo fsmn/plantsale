@@ -11,6 +11,7 @@
 <p><label for="grower_id">grower ID</label>&nbsp;<input type="text" name="grower_id" style="width:3em;" value="<?php echo get_cookie("grower_id"); ?>"/></p>
 <p><label for="flat_size">Flat Size</label>&nbsp;<input type="number" name="flat_size" style="width:3em;" value="<?php echo get_cookie("flat_size"); ?>"/></p>
 <p><label for="year">Year</label>&nbsp;<input type="number" name="year" style="width:4em" value="<?php echo get_cookie("sale_year");?>"/></p>
+<p><input type="checkbox" name="crop_failure" value="1"/><label for="crop_failure">Show Only Crop Failures</label></p>
 <p>
 <input type="checkbox" name="is_inventory" id="is_inventory" value=1/>
 <label for="show_fields">Show Inventory Fields</label>

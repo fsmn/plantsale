@@ -89,6 +89,13 @@ class Order extends MY_Controller
                 burn_cookie("flat_size");
             }
 
+            if ($crop_failure = $this->input->get("crop_failure")) {
+                bake_cookie("crop_failure", $crop_failure);
+                $options["crop_failure"] = $crop_failure;
+            } else {
+                burn_cookie("crop_failure");
+            }
+
             $sorting["fields"] = array(
                     "catalog_number"
             );
@@ -214,16 +221,22 @@ class Order extends MY_Controller
     }
 
     /**
-     * this is one ugly function. It should be more elegant if I were to use the update function, but it isn't working correctly.
+     * this is one ugly function.
+     * It should be more elegant if I were to use the update function, but it
+     * isn't working correctly.
      */
-    function update_cost(){
+    function update_cost ()
+    {
         $id = $this->input->post("id");
         $plant_cost = $this->input->post("plant_cost");
         $flat_cost = $this->input->post("flat_cost");
         $flat_size = $this->input->post("flat_size");
-        $this->order->update($id,array("flat_size"=>$flat_size,"flat_cost"=>$flat_cost,"plant_cost"=>$plant_cost));
+        $this->order->update($id, array(
+                "flat_size" => $flat_size,
+                "flat_cost" => $flat_cost,
+                "plant_cost" => $plant_cost
+        ));
         redirect($this->input->post("redirect_url"));
-
     }
 
     function delete ()

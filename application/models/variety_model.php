@@ -265,7 +265,7 @@ class Variety_Model extends MY_Model
         $this->db->from("variety");
         $this->db->join("common", "variety.common_id = common.id");
         $this->db->join("flag", "variety.id = flag.variety_id", "LEFT");
-        $this->db->join("order", "variety.id = order.variety_id");
+        $this->db->join("order", "variety.id = order.variety_id","RIGHT");
 
         foreach ($my_parameters as $parameter) {
             if ($parameter->key == "sunlight") {

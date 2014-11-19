@@ -159,6 +159,7 @@ class Order_Model extends MY_Model
         $this->db->select("variety.variety, variety.species");
         $this->db->select("common.name, common.genus, common.category, common.id as common_id");
         $result = $this->db->get()->result();
+
         return $result;
     }
 

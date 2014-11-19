@@ -12,7 +12,7 @@ if ($orders) :
 <th></th>
 <th></th>
 <th colspan=2>Sizes</th>
-<th colspan=2>Prices</th>
+<th colspan=3>Prices</th>
 <th></th>
 <th colspan=2>Presale</th>
 <th colspan=2>Midsale</th>

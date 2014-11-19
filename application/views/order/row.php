@@ -63,8 +63,7 @@ $row_classes = implode(" ",$row_classes);
 		id="edit-plant-cost_<?=$order->id;?>"
 		class="edit-cost"><?=$order->plant_cost;?></span>
 	</td>
-	<td class="order-plant_cost field">$<?=edit_field("plant_cost",$plant_cost,"","order",$order->id,array("envelope"=>"span"));?>
-			</td>
+
 	<td class="order-price field">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 	<td class="order-count_presale field">

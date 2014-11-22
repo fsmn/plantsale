@@ -136,30 +136,29 @@ class Variety extends MY_Controller
                 "grower_id",
                 "new_year",
                 "print_omit",
-                "crop_failure",
+                "crop_failure"
         );
         $options = array();
         for ($i = 0; $i < count($variables); $i ++) {
             if ($value = $this->input->get($variables[$i])) {
-                if($variables[$i] == "sunlight"){
-                    bake_cookie($variables[$i],implode(",",$value));
-
+                if ($variables[$i] == "sunlight") {
+                    bake_cookie($variables[$i], implode(",", $value));
                 }
                 $options[$variables[$i]] = $value;
             } else {
-                 burn_cookie($variables[$i]);
+                burn_cookie($variables[$i]);
             }
         }
 
-        if($not_flag = $this->input->get("not_flag")){
-            bake_cookie("not_flag",$not_flag);
-        }else{
+        if ($not_flag = $this->input->get("not_flag")) {
+            bake_cookie("not_flag", $not_flag);
+        } else {
             burn_cookie("not_flag");
         }
 
-        if($sunlight_boolean = $this->input->get("sunlight-boolean")){
+        if ($sunlight_boolean = $this->input->get("sunlight-boolean")) {
             bake_cookie("sunlight-boolean", $sunlight_boolean);
-        }else{
+        } else {
             burn_cookie("sunlight-boolean");
         }
         $data["options"] = $options;
@@ -243,6 +242,7 @@ class Variety extends MY_Controller
 
     /**
      * show all the plants that have been reordered from previous years.
+     *
      * @param int(4) $year
      */
     function show_reorders ($year)
@@ -306,10 +306,13 @@ class Variety extends MY_Controller
 
     function update_new_status ($year)
     {
+        $output = "";
         if ($year) {
 
-            $this->variety->update_all($year);
+            $output = $this->variety->update_all($year);
         }
+        $this->session->set_flashdata("notice", sprintf("%s varieties were marked as new items for %s", count($output), $year));
+        redirect("index");
     }
 
     function add_flag ()

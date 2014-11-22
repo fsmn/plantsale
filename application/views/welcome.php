@@ -32,5 +32,5 @@
 <div id="flat-totals-end"></div>
 </div>
 <div style="float:left; width: 250px">
-<?=create_button_bar(array(array("selection"=>"variety","text"=>"List Re-ordered Plants","href"=>site_url("variety/show_reorders/" . get_cookie("sale_year")))));?>
+<?=create_button_bar(array(array("selection"=>"variety","text"=>"Update New Orders","href"=>site_url("variety/update_new_status/" . get_cookie("sale_year")))));?>
 </div>

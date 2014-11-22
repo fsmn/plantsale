@@ -148,7 +148,6 @@ class Variety_Model extends MY_Model
                         "SELECT `order`.`year` FROM `order`,`variety` WHERE `order`.`variety_id` = %s AND variety.id = `order`.variety_id  AND NOT EXISTS(SELECT `year` FROM `order` WHERE `year` < %s AND variety_id = %s)  HAVING `order`.`year` = %s;",
                         $variety->id, $year, $variety->id, $year);
                 $new_year = $this->db->query($query)->row();
-                print $query;
                 if ($new_year) {
                     $this->update_status($variety->id, $year);
                     $output[] = $this->get($variety->id);

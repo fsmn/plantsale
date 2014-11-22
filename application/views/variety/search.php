@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-$sunlight = create_checkbox("sunlight[]", $sunlight, array());
+$refine = $this->input->get("refine");
+$sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_cookie("sunlight")): array());
 
 ?>
-
 <form name="search-variety" id="search-variety" class="search-form"
 		action="<?=site_url("variety/find"); ?>" method="GET">
 	<p><label for="action[]">List </label><input type="radio" name="action[]" value="full_list" checked/>&nbsp;
@@ -14,48 +14,53 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	<p><input type="checkbox" name="crop_failure" value="1"/><label for="crop_failure">Show Only Crop Failures</label></p>
 	<div class="field-set">
 	<div class="column first">
-		<?=create_input($variety,"name","Common Name");?>
+		<?=create_input($variety,"name","Common Name","name", $refine);?>
 	</div>
 	<div class="column last">
-		<?=create_input($variety,"variety","Variety");?>
+		<?=create_input($variety,"variety","Variety","variety",$refine);?>
 	</div>
 	</div>
 	<div class="field-set">
 	<div class="column first">
-		<?=create_input($variety,"genus","Genus");?>
+		<?=create_input($variety,"genus","Genus","genus",$refine);?>
 	</div>
 	<div class="column last">
-		<?=create_input($variety, "species","Species");?>
+		<?=create_input($variety, "species","Species","species",$refine);?>
 	</div>
 	</div>
 	<div class="field-set block">
 	<label for="new_year">Year the Variety was Introduced:&nbsp;</label>
-	<input type="number" style="width:5em" value="<?=get_value($variety,"new_year");?>" name="new_year" id="new_year"/>
+	<input type="number" style="width:5em" value="<?=get_value($variety,"new_year",($refine ? get_cookie("new_year"):''));?>" name="new_year" id="new_year"/>
 	</div>
 		<div class="field-set block">
 		<div class="column first">
 		<label for="category">Category: </label>
-		<input type="text" class="autocomplete-live category:common_category" category="common_category" name="category" id="category" value=""/>
+		<input type="text" class="autocomplete-live category:common_category" category="common_category" name="category" id="category" value="<?=($refine == 1 ?  get_cookie("category") :"");?>"/>
 		</div>
 		<div class="column last">
 		<label for="subcategory">Subcategory:</label>
-		<input type="text" class="autocomplete-live" category="common_subcategory"  name="subcategory" id="subcategory" value=""/>
+		<input type="text" class="autocomplete-live" category="common_subcategory"  name="subcategory" id="subcategory" value="<?=($refine == 1 ?  get_cookie("subcategory") :"");?>"/>
 		</div>
 	</div>
 	<div class="field-set">
 	<div class="column first">
 		<label for="flag">Flag: </label>
-		<?=form_dropdown("flag",$flags,"","id='flag'");?>
+		<?=form_dropdown("flag",$flags,array($refine ? get_cookie("flag"):''),"id='flag'");?>
+		<br/>
+		<input type="checkbox" name="not_flag" style="width:auto;" value=1 id="not_flag"
+		<?=get_cookie("not_flag") ? "checked":"";?>
+		title="Check here if you want to find everything that is not the flag value">
+		<strong>Negate</strong>
 
 	</div>
 	<div class="column last">
 	<label for="plant_color">Plant Color: </label>
-		<?=form_dropdown("plant_color",$plant_colors,"","id='plant_colors'");?>
+		<?=form_dropdown("plant_color",$plant_colors,array($refine ? get_cookie("plant_color") : ""),"id='plant_colors'");?>
 	</div>
 	</div>
 	<div class="field-set block">
 	<label for="sunlight-boolean">Sunlight Options</label>
-		<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),"and","id='sunlight-boolean'");?>
+		<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),$refine ? get_cookie("sunlight-boolean"):"and","id='sunlight-boolean'");?>
 		<br/>
 		<?=$sunlight;?>
 	</div>
@@ -64,29 +69,29 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 		<?=create_input($variety, "description","General Description");?>
 	</div>
 	<div class="column last">
-		<?=create_input($variety, "note","Variety Note");?>
+		<?=create_input($variety, "note","Variety Note","note",$refine);?>
 	</div>
 	</div>
 	<p>
-	<?=create_input($variety,"grower_id","Grower ID");?>
+	<?=create_input($variety,"grower_id","Grower ID","grower_id",$refine);?>
 	</p>
 	<!-- <p>
-		<?=create_input($variety,"min_height","Min Height");?>
+		<?=create_input($variety,"min_height","Min Height","min_height",$refine);?>
 	</p>
 		<p>
-		<?=create_input($variety,"max_height","Max Height");?>
+		<?=create_input($variety,"max_height","Max Height","max_height",$refine);?>
 	</p>
 		<p>
-		<?=create_input($variety,"height_unit","Unit");?>
+		<?=create_input($variety,"height_unit","Unit","height_unit",$refine);?>
 	</p>
 	<p>
-		<?=create_input($variety,"min_width","Min Width");?>
+		<?=create_input($variety,"min_width","Min Width","min_width", $refine);?>
 	</p>
 		<p>
-		<?=create_input($variety,"max_width","Max Width");?>
+		<?=create_input($variety,"max_width","Max Width", "max_width", $refine);?>
 	</p>
 		<p>
-		<?=create_input($variety,"width_unit","Unit");?>
+		<?=create_input($variety,"width_unit","Unit","width_unit", $refine);?>
 	</p> -->
 
 	<div id="sort-block">

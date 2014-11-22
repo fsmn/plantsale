@@ -141,11 +141,26 @@ class Variety extends MY_Controller
         $options = array();
         for ($i = 0; $i < count($variables); $i ++) {
             if ($value = $this->input->get($variables[$i])) {
-                // bake_cookie($variables[$i],$value);
+                if($variables[$i] == "sunlight"){
+                    bake_cookie($variables[$i],implode(",",$value));
+
+                }
                 $options[$variables[$i]] = $value;
             } else {
-                // burn_cookie($variables[$i]);
+                 burn_cookie($variables[$i]);
             }
+        }
+
+        if($not_flag = $this->input->get("not_flag")){
+            bake_cookie("not_flag",$not_flag);
+        }else{
+            burn_cookie("not_flag");
+        }
+
+        if($sunlight_boolean = $this->input->get("sunlight-boolean")){
+            bake_cookie("sunlight-boolean", $sunlight_boolean);
+        }else{
+            burn_cookie("sunlight-boolean");
         }
         $data["options"] = $options;
         $sorting["fields"] = array(

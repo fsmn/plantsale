@@ -205,14 +205,25 @@ $(document).ready(function(){
 			
 		});
 		
+		
+			
+	
+		
 		$(document).on("blur",".plant-row", function(){
 			$(this).removeClass("active");
 		});
 		
 		$(document).on("click",".search-varieties", function(event){
+			form_data = false;
+			if(($(this).hasClass("refine"))){
+				form_data = {
+						refine: 1
+				};
+			}
 			$.ajax({
 				type: "get",
 				url: base_url + "variety/search",
+				data: form_data,
 				success: function(data){
 					show_popup("Search Plants",data,"500px");
 				}

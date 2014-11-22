@@ -68,6 +68,9 @@
 			<label>Category: </label> <span class="field"><?=$variety->category; ?>
 			</span>
 		</p>
+		<p class="sunlight">
+			<label>Sunlight: </label> <span class="field"><?=$variety->sunlight;?></span>
+		</p>
 		<p class="description">
 			<label>General Description: </label> <span class="field" title="You can only edit this field in the common name record"><?=$variety->description; ?>
 			</span>

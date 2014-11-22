@@ -23,12 +23,16 @@ function burn_cookie ($name)
     ));
 }
 
-function create_input ($object, $name, $label, $id = NULL)
+function create_input ($object, $name, $label, $id = NULL,$default_value = FALSE)
 {
     if (! $id) {
         $id = $name;
     }
-    return sprintf("<label for='%s'>%s: </label><input type='text' name='%s' id='%s' value='%s'/>", $name, $label, $name, $id, get_value($object, $name));
+    $value = "";
+    if($default_value){
+        $value =  get_cookie($name);
+    }
+    return sprintf("<label for='%s'>%s: </label><input type='text' name='%s' id='%s' value='%s'/>", $name, $label, $name, $id, get_value($object, $name,$value));
 }
 
 function get_current_year ()

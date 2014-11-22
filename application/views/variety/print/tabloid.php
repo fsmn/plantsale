@@ -40,10 +40,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<? $sunlight = explode(",",$variety->sunlight);
 			foreach($sunlight as $light){
 				switch($light){
-				case "full_sun":
+				case "full":
 					echo sprintf("<li><img src='%s'/></li>", base_url("images/sun-icon.png"));
 					break;
-				case "part_sun":
+				case "part":
 					echo sprintf("<li><img src='%s'/></li>", base_url("images/part-icon.png"));
 					break;
 				case "shade":

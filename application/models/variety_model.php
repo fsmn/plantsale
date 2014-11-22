@@ -235,13 +235,10 @@ class Variety_Model extends MY_Model
                 $my_value = $this->input->get($my_variable);
                 if ($my_value) {
                     $my_parameters->$my_variable = new stdClass();
-                    if ($my_variable == "sunlight") {
-                        $my_parameters->$my_variable->key = $my_variable;
-                        $my_parameters->$my_variable->value = implode(",", $my_value);
-                    } else {
+
                         $my_parameters->$my_variable->key = $my_variable;
                         $my_parameters->$my_variable->value = $my_value;
-                    }
+
                 }
             }
         }
@@ -270,19 +267,24 @@ class Variety_Model extends MY_Model
         foreach ($my_parameters as $parameter) {
             if ($parameter->key == "sunlight") {
                 if ($this->input->get("sunlight-boolean") == "or") {
-                    $my_list = explode(",", $paramter->value);
-                    foreach ($my_list as $my_item) {
+                    $my_list = $parameter->value;
+                    foreach ($parameter->value as $my_item) {
                         $this->db->or_like("sunlight", "$my_item");
                     }
                 } elseif ($this->input->get("sunlight-boolean") == "only") {
-                    $this->db->where("sunlight", $parameter->value);
+                    $this->db->where("sunlight", implode(",",$parameter->value));
                 } else {
-                    $this->db->like("sunlight", $parameter->value);
+                    $this->db->like("sunlight", implode(",",$parameter->value));
                 }
             } elseif ($parameter->key == "name") {
                 $this->db->like("common.name", $parameter->value);
             } elseif ($parameter->key == "flag") {
+                if($this->input->get("not_flag") == 1){
+                    $this->db->where(sprintf("NOT EXISTS(SELECT 1 from flag where `flag`.`name` ='%s' AND `variety`.`id` = `flag`.`variety_id`)", urldecode($parameter->value)),NULL,FALSE);
+
+                }else{
                 $this->db->where("flag.name", urldecode($parameter->value));
+                }
             } elseif ($parameter->key == "year") {
                 $this->db->where("order.year", $parameter->value);
             } elseif (in_array($parameter->key,
@@ -295,6 +297,8 @@ class Variety_Model extends MY_Model
                 $this->db->like($parameter->key, $parameter->value);
             } elseif ($parameter->key == "print_omit") {
                 $this->db->where("(order.print_omit is NULL OR order.print_omit != 1)", NULL, FALSE);
+            }elseif($parameter->key == "not_flag"){
+
             } else {
                 $this->db->where($parameter->key, $parameter->value);
             }

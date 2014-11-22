@@ -70,6 +70,7 @@ if($("body").hasClass("editor")){
 			url: base_url +  "menu/edit_value",
 			data: form_data,
 			success: function(data){
+				console.log(data);
 				$("#" + my_parent + " .edit-field").html(data);
 				$("#" + my_parent + " .edit-field").removeClass("edit-field").removeClass("field").addClass("live-field").addClass("text");
 				$("#" + my_parent + " .live-field input").focus();

@@ -37,7 +37,7 @@ $i = 1;?>
 Found Count: <strong><?=count($plants);?> Varieties</strong>
 </p>
 	<div class="button-box">
-		<span class="button search-varieties">Refine Search</span>
+		<span class="button search-varieties refine">Refine Search</span>
 	</div>
 	</div>
 </fieldset>

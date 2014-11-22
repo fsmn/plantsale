@@ -176,7 +176,7 @@ class Menu extends MY_Controller {
 				"value"
 		) );
 		$output = array ();
-		$output [] = form_multiselect ( $field, $pairs, $value, "id='$field'" );
+		$output [] = form_multiselect ( $field, $pairs, explode(",",$value), "id='$field'" );
 		$buttons = implode ( " ", $output );
 		echo $buttons . sprintf ( "<span class='button save-multiselect' target='%s'>Save</span>", $field );
 

@@ -57,6 +57,13 @@ class Order extends MY_Controller
                 // bake_cookie("sale_year", $sale_year);
             }
 
+            if($new_year = $this->input->get("new_year")){
+                $options['new_year'] = $new_year;
+                bake_cookie("new_year",$new_year);
+            }else{
+                burn_cookie("new_year");
+            }
+
             if ($category = $this->input->get("category")) {
                 bake_cookie("category", $category);
                 $options["category"] = $category;

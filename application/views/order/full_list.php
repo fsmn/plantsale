@@ -38,7 +38,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 Found Count: <strong><?=count($orders);?> Orders</strong>
 </p>
 	<div class="button-box">
-		<span class="button search-orders">Refine Search</span>
+		<span class="button search-orders refine">Refine Search</span>
 		<a href="<?=$_SERVER['REQUEST_URI']. "&export=true";?>" class="button" title="Export">Export List</a>
 	</div>
 	</div>

@@ -66,7 +66,12 @@
 	})
 	
 	$(document).on("click",".search-orders",function(){
+		refine = 0;
+		if($(this).hasClass("refine")){
+			refine = 1;
+		}
 		form_data = {
+				refine: refine,
 				find: 1
 		};
 		$.ajax({

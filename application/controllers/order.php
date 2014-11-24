@@ -70,6 +70,12 @@ class Order extends MY_Controller
             } else {
                 burn_cookie("category");
             }
+            if ($subcategory = $this->input->get("subcategory")) {
+                bake_cookie("subcategory", $category);
+                $options["subcategory"] = $category;
+            } else {
+                burn_cookie("subcategory");
+            }
             if ($grower_id = $this->input->get("grower_id")) {
                 bake_cookie("grower_id", $grower_id);
                 $options["grower_id"] = $grower_id;
@@ -103,6 +109,19 @@ class Order extends MY_Controller
                 burn_cookie("crop_failure");
             }
 
+            if($is_inventory = $this->input->get("is_inventory")){
+                bake_cookie("is_inventory",$is_inventory);
+                $special_options["is_inventory"] = $is_inventory;
+            }else{
+                burn_cookie("is_inventory");
+            }
+
+            if($show_last_only = $this->input->get("show_last_only")){
+                bake_cookie("show_last_only",$show_last_only);
+            }else{
+                burn_cookie("show_last_only");
+            }
+
             $sorting["fields"] = array(
                     "catalog_number"
             );
@@ -127,6 +146,7 @@ class Order extends MY_Controller
             bake_cookie("sorting", implode(",", $sorting["fields"]));
             bake_cookie("direction", implode(",", $sorting["direction"]));
             $orders = $this->order->get_totals($sale_year, $options, $sorting);
+            $this->session->set_flashdata("notice",$this->db->last_query());
             foreach ($orders as $order) {
                 $order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
             }

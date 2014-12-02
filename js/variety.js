@@ -51,15 +51,33 @@ $(document).on("change","#edit-common-id #common_id",function(){
 		url: base_url + "common/get_name/" + $(this).val(),
 		success: function(data){
 			if(data){
+				$("#edit-common-id #submit").fadeIn();
+				$("#edit-common-id #revert").fadeOut();
+
 			$("#edit-common-id #common-name").html(data).removeClass("alert");
 			}else{
 				$("#edit-common-id #common-name").html("No such common ID!").addClass("alert");
-				original_id = $("#original_id").val();
-				$("#common_id").val(original_id).focus();
+				$("#edit-common-id #submit").fadeOut();
+				$("#edit-common-id #revert").fadeIn();
+				$("#common_id").focus();
 			}
 		}
 	});
 	
+});
+
+$(document).on("keyup","#edit-common-id #common_id",function(){
+	if($(this).val() != $("#original_id").val()){
+		$("#change-button").fadeIn();
+	}else{
+		$("#change-button").fadeOut();
+	}
+});
+
+$(document).on("click","#edit-common-id #revert",function(){
+	original_id = $("#original_id").val();
+	$("#edit-common-id #revert").fadeOut();
+	$("#common_id").focus().val(original_id);
 });
 
 	$(document).on("click",".variety-create", function() {

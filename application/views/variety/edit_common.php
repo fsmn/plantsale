@@ -6,15 +6,17 @@
 
 ?>
 
-<form name="edit-common-id" id="edit-common-id" method="post" action="<?=site_url("variety/edit_common_id");?>">
+<form name="edit-common-id" id="edit-common-id" method="post" action="<?=site_url("variety/edit_common_id");?>" style="width: 36ex;">
 <div class="alert">Be very careful making changes. This cannot be undone!</div>
 <input type="hidden" name="id" id="id" value="<?=$variety->id;?>"/>
 <input type="hidden" name="original_id" id="original_id" value="<?=$variety->common_id;?>"/>
 <p>
-<input type="number" name="common_id" id="common_id" value="<?=$variety->common_id;?>"/>
+<input type="number" name="common_id" id="common_id" style="width:15ex" value="<?=$variety->common_id;?>"/>&nbsp;
+<span class="button small" id="change-button" style="display: none;">Check</span>
 </p>
 <div id="common-name"><?=$variety->common_name;?></div>
 <p>
-<input type="submit" name="submit" value="Change" class="button edit"/>
+<input type="submit" name="submit" id="submit" value="Change" class="button edit" style="display:none;"/>
+<span id="revert" class="button" style="display: none;">Revert</span>
 </p>
 </form>

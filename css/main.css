@@ -395,6 +395,14 @@ legend:hover {
 	
 }
 
+#footer {
+    font-size: .8em;
+    width: 150px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 /* end div layout elements */
 .search ol {
 	padding: 0;

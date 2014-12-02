@@ -256,6 +256,24 @@ class Variety extends MY_Controller
         $this->load->view("page/index", $data);
     }
 
+    function edit_common_id ()
+    {
+        if ($this->ion_auth->in_group(1)) {
+            if ($this->input->get("edit")) {
+                $id = $this->input->get("id");
+                $data["variety"] = $this->variety->get($id);
+                $this->load->view("variety/edit_common", $data);
+            } else {
+                $id = $this->input->post("id");
+                $common_id = $this->input->post("common_id");
+                $this->variety->update($id,array("common_id"=>$common_id));
+                redirect("variety/view/$id");
+            }
+        } else {
+            echo "You do not have permission to edit this!";
+        }
+    }
+
     function edit_value ()
     {
         $data["name"] = $this->input->get("field");

@@ -22,7 +22,7 @@
                 <?php endforeach?>
 			</td>
 			<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, "Active","class='deactivate-user' id='deactivate-user_$user->id'") : anchor("auth/activate/". $user->id, "Inactive");?></td>
-			<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit', "class='button edit small edit-user' id='edit-user_$user->id'") ;?></td>
+			<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit') ;?></td>
 		</tr>
 	<?php endforeach;?>
 </table>

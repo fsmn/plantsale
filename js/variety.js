@@ -23,8 +23,44 @@ $(document).ready(function(){
 			
 		});
 	});
+	$(".common-info").on("click",".change-common",function(){
+		my_id = this.id.split("_")[1];
+		question = true;
+		//question = confirm("Are you sure you want to change the common id for this variety? This cannot be undone!");
+		if(question){
+			form_data = {
+					id: my_id,
+					edit: 1
+			};
+			$.ajax({
+				type:"get",
+				data: form_data,
+				url: base_url + "variety/edit_common_id",
+				success: function(data){
+					show_popup("Change Common ID", data, "auto");
+				}
+			});
+		}
+	});
+	
+	
 });
-
+$(document).on("change","#edit-common-id #common_id",function(){
+	$.ajax({
+		type:"get",
+		url: base_url + "common/get_name/" + $(this).val(),
+		success: function(data){
+			if(data){
+			$("#edit-common-id #common-name").html(data).removeClass("alert");
+			}else{
+				$("#edit-common-id #common-name").html("No such common ID!").addClass("alert");
+				original_id = $("#original_id").val();
+				$("#common_id").val(original_id).focus();
+			}
+		}
+	});
+	
+});
 
 	$(document).on("click",".variety-create", function() {
 				my_id = this.id.split("_")[1];

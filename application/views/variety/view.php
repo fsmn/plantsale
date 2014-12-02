@@ -77,6 +77,9 @@
 			<label>Common Name:</label> <span class="field"><a
 				href="<?=site_url("common/view/$variety->common_id");?>"
 				title="View details for <?=$variety->common_name;?>"><?=$variety->common_name;?></a></span>
+				<? if($this->ion_auth->in_group(1)):?>&nbsp;
+				<span class="button edit change-common small" title="Change the &quot;Common Name&quot; of this variety" id="change-common_<?=$variety->id;?>">Change</span>
+		<? endif;?>
 		</p>
 		<p>
 			<label>Other Names:</label> <span class="field">

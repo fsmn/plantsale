@@ -90,7 +90,11 @@ class Common_model extends MY_Model
         $this->db->select($field);
         $this->db->from("common");
         $output = $this->db->get()->row();
+        if($output){
         return $output->$field;
+        }else{
+            return FALSE;
+        }
     }
 
     function find ()

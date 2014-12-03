@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$("#footer").css({"top":$(document).height()-25 + "px"});
 	/* delete all editing functions for non-editors */
 	if($("body").hasClass("viewer") || !$("body").hasClass("editor")){
 		$("span.edit,  span.new, span.delete,button.edit,  button.new, button.delete ,a.edit,  a.new, a.delete").remove();

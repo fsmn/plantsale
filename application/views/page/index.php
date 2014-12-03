@@ -31,6 +31,7 @@ $body_class = implode(" ",$body_classes);
 <? $this->load->view('page/head');?>
 </head>
 <body class="browser <?=$body_class;?>">
+<div id="page-wrapper">
 <div id="page">
 <?php if(!$print): ?>
 <div id='header'>
@@ -63,6 +64,7 @@ $this->load->view($target);
 <!-- end sidebar --></div>
 <div id='search_list'></div>
 <div id='autocomplete'></div>
+</div>
 </div>
 <div id="footer"><?$this->load->view('page/footer');?></div>
 

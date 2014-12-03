@@ -146,7 +146,7 @@ class Order extends MY_Controller
             bake_cookie("sorting", implode(",", $sorting["fields"]));
             bake_cookie("direction", implode(",", $sorting["direction"]));
             $orders = $this->order->get_totals($sale_year, $options, $sorting);
-            $this->session->set_flashdata("notice",$this->db->last_query());
+            //$this->session->set_flashdata("notice",$this->db->last_query());
             foreach ($orders as $order) {
                 $order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
             }

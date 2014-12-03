@@ -205,7 +205,7 @@ class Variety_Model extends MY_Model
         $this->db->group_by("common.category");
         $this->db->select("count(`variety`.`id`) as count,common.category");
         $result = $this->db->get()->result();
-        $this->session->set_flashdata("notice",$this->db->last_query());
+        //$this->session->set_flashdata("notice",$this->db->last_query());
         return $result;
     }
 
@@ -314,7 +314,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
         $this->db->group_by("variety.id");
         $result = $this->db->get()->result();
-        $this->session->set_flashdata("notice", $this->db->last_query());
+        //$this->session->set_flashdata("notice", $this->db->last_query());
         return $result;
     }
 

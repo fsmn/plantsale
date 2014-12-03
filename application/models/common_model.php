@@ -139,7 +139,7 @@ class Common_model extends MY_Model
         }
 
         $result = $this->db->get()->result();
-        $this->session->set_flashdata("notice", $this->db->last_query());
+        //$this->session->set_flashdata("notice", $this->db->last_query());
         return $result;
     }
 }

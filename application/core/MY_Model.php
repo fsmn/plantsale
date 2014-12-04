@@ -1,12 +1,20 @@
 <?php
 if (! defined('BASEPATH')) exit('No direct script access allowed');
 
-class My_Model extends CI_Model
+class MY_Model extends CI_Model
 {
 
     function __construct ()
     {
         parent::__construct();
+    }
+
+    function get ($db, $id)
+    {
+        $this->db->from($db);
+        $this->db->where("id", $id);
+        $result = $this->db->get()->row();
+        return $result;
     }
 
     function _insert ($db)

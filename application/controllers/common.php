@@ -11,6 +11,7 @@ class Common extends MY_Controller
         $this->load->model("common_model", "common");
         $this->load->model("variety_model", "variety");
         $this->load->model("menu_model", "menu");
+        $this->load->model("category_model","category");
     }
 
     function index ()
@@ -27,10 +28,7 @@ class Common extends MY_Controller
 
     function search ()
     {
-        $categories = $this->menu->get_pairs("common_category", array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
+        $categories = $this->category->get_pairs();
         $data["categories"] = get_keyed_pairs($categories, array(
                 "key",
                 "value"
@@ -103,10 +101,7 @@ echo $name;
 
     function create ()
     {
-        $categories = $this->menu->get_pairs("common_category", array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
+        $categories = $this->common->get_pairs();
         $data["categories"] = get_keyed_pairs($categories, array(
                 "key",
                 "value"
@@ -131,10 +126,7 @@ echo $name;
     function edit ()
     {
         $id = $this->uri->segment(3);
-        $categories = $this->menu->get_pairs("common_category", array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
+        $categories = $this->category->get_pairs();
         $data["categories"] = get_keyed_pairs($categories, array(
                 "key",
                 "value"

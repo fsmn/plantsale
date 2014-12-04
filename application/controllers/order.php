@@ -9,6 +9,7 @@ class Order extends MY_Controller
     {
         parent::__construct();
         $this->load->model("order_model", "order");
+        $this->load->model("category_model","category");
     }
 
     function index ()
@@ -29,11 +30,7 @@ class Order extends MY_Controller
     {
         if ($this->input->get("find")) {
             $this->load->model("menu_model", "menu");
-            $categories = $this->menu->get_pairs("common_category",
-                    array(
-                            "field" => "value",
-                            "direction" => "ASC"
-                    ));
+            $categories = $this->category->get_pairs();
             $data["categories"] = get_keyed_pairs($categories,
                     array(
                             "key",

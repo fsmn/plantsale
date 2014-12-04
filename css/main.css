@@ -805,6 +805,10 @@ textarea.save-field {
 	padding: 5px 0;
 }
 
+.label-break label{
+	display: block;
+}
+
 .search-form .field-set {
 	clear: both;
 }

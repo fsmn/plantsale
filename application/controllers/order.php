@@ -9,7 +9,7 @@ class Order extends MY_Controller
     {
         parent::__construct();
         $this->load->model("order_model", "order");
-        $this->load->model("category_model","category");
+        $this->load->model("category_model", "category");
     }
 
     function index ()
@@ -31,11 +31,6 @@ class Order extends MY_Controller
         if ($this->input->get("find")) {
             $this->load->model("menu_model", "menu");
             $categories = $this->category->get_pairs();
-            $data["categories"] = get_keyed_pairs($categories,
-                    array(
-                            "key",
-                            "value"
-                    ), TRUE);
 
             $pot_sizes = $this->order->get_pot_sizes();
             $data["pot_sizes"] = get_keyed_pairs($pot_sizes,
@@ -54,68 +49,37 @@ class Order extends MY_Controller
                 // bake_cookie("sale_year", $sale_year);
             }
 
-            if($new_year = $this->input->get("new_year")){
+            if ($new_year = $this->input->get("new_year")) {
                 $options['new_year'] = $new_year;
-                bake_cookie("new_year",$new_year);
-            }else{
+                bake_cookie("new_year", $new_year);
+            } else {
                 burn_cookie("new_year");
             }
+            $keys = array(
+                    "category",
+                    "subcategory",
+                    "name",
+                    "genus",
+                    "variety",
+                    "species",
+                    "grower_id",
+                    "potsize",
+                    "flat_size",
+                    "crop_failure"
+            );
 
-            if ($category = $this->input->get("category")) {
-                bake_cookie("category", $category);
-                $options["category"] = $category;
-            } else {
-                burn_cookie("category");
-            }
-            if ($subcategory = $this->input->get("subcategory")) {
-                bake_cookie("subcategory", $category);
-                $options["subcategory"] = $category;
-            } else {
-                burn_cookie("subcategory");
-            }
-            if ($grower_id = $this->input->get("grower_id")) {
-                bake_cookie("grower_id", $grower_id);
-                $options["grower_id"] = $grower_id;
-            } else {
-                burn_cookie("grower_id");
-            }
-            if ($genus = $this->input->get("genus")) {
-                bake_cookie("genus", $genus);
-                $options["genus"] = $genus;
-            } else {
-                burn_cookie("genus");
-            }
-            if ($pot_size = urldecode($this->input->get("pot_size"))) {
-                bake_cookie("pot_size", $pot_size);
-                $options["pot_size"] = $pot_size;
-            } else {
-                burn_cookie("pot_size");
-            }
+            $this->set_options($options, $keys);
 
-            if ($flat_size = $this->input->get("flat_size")) {
-                bake_cookie("flat_size", $flat_size);
-                $options["flat_size"] = $flat_size;
-            } else {
-                burn_cookie("flat_size");
-            }
-
-            if ($crop_failure = $this->input->get("crop_failure")) {
-                bake_cookie("crop_failure", $crop_failure);
-                $options["crop_failure"] = $crop_failure;
-            } else {
-                burn_cookie("crop_failure");
-            }
-
-            if($is_inventory = $this->input->get("is_inventory")){
-                bake_cookie("is_inventory",$is_inventory);
+            if ($is_inventory = $this->input->get("is_inventory")) {
+                bake_cookie("is_inventory", $is_inventory);
                 $special_options["is_inventory"] = $is_inventory;
-            }else{
+            } else {
                 burn_cookie("is_inventory");
             }
 
-            if($show_last_only = $this->input->get("show_last_only")){
-                bake_cookie("show_last_only",$show_last_only);
-            }else{
+            if ($show_last_only = $this->input->get("show_last_only")) {
+                bake_cookie("show_last_only", $show_last_only);
+            } else {
                 burn_cookie("show_last_only");
             }
 
@@ -143,7 +107,7 @@ class Order extends MY_Controller
             bake_cookie("sorting", implode(",", $sorting["fields"]));
             bake_cookie("direction", implode(",", $sorting["direction"]));
             $orders = $this->order->get_totals($sale_year, $options, $sorting);
-            //$this->session->set_flashdata("notice",$this->db->last_query());
+            // $this->session->set_flashdata("notice",$this->db->last_query());
             foreach ($orders as $order) {
                 $order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
             }
@@ -153,6 +117,9 @@ class Order extends MY_Controller
             }
             $data["options"] = $options;
             $data["orders"] = $orders;
+            if(!$category = $this->input->get("category")){
+                $category = "All";
+            }
             $data["title"] = "List of $category orders for $sale_year";
             if ($this->input->get("export")) {
                 $this->load->helper("download");
@@ -255,11 +222,12 @@ class Order extends MY_Controller
         $plant_cost = $this->input->post("plant_cost");
         $flat_cost = $this->input->post("flat_cost");
         $flat_size = $this->input->post("flat_size");
-        $this->order->update($id, array(
-                "flat_size" => $flat_size,
-                "flat_cost" => $flat_cost,
-                "plant_cost" => $plant_cost
-        ));
+        $this->order->update($id,
+                array(
+                        "flat_size" => $flat_size,
+                        "flat_cost" => $flat_cost,
+                        "plant_cost" => $plant_cost
+                ));
         redirect($this->input->post("redirect_url"));
     }
 

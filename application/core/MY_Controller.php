@@ -1,5 +1,4 @@
 <?php
-
 if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller
@@ -26,6 +25,23 @@ class MY_Controller extends CI_Controller
             define("IS_ADMIN", $this->ion_auth->in_group(array(
                     1
             )));
+        }
+    }
+
+    function set_option (&$options, $key)
+    {
+        if ($value = urldecode($this->input->get($key))) {
+            bake_cookie($key, $value);
+            $options[$key] = $value;
+        } else {
+            burn_cookie($key);
+        }
+    }
+
+    function set_options (&$options, $keys = array())
+    {
+        foreach ($keys as $key) {
+         $this->set_option($options, $key);
         }
     }
 }

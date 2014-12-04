@@ -132,7 +132,7 @@ class Order_Model extends MY_Model
         $option_keys = array_keys($options);
         $option_values = array_values($options);
         for ($i = 0; $i < count($options); $i ++) {
-            $this->db->where($option_keys[$i], $option_values[$i]);
+            $this->db->like($option_keys[$i], $option_values[$i]);
         }
         $this->db->where("order.year", $sale_year);
         if (! is_array($order_by)) {
@@ -158,6 +158,7 @@ class Order_Model extends MY_Model
                 "order.received_presale,order.received_midsale,order.sellout_friday,order.sellout_saturday,order.remainder_friday,order.remainder_saturday,order.remainder_sunday,order.count_dead");
         $this->db->select("variety.variety, variety.species,variety.new_year");
         $this->db->select("common.name, common.genus, common.category, common.id as common_id");
+        print_r($this->db->last_query());
         $result = $this->db->get()->result();
 
         return $result;

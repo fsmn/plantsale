@@ -192,6 +192,7 @@ class Variety_Model extends MY_Model
         $this->db->where("v.new_year !=",$year);
         $this->db->order_by("c.category,c.name,c.genus,v.variety");
         $result = $this->db->get()->result();
+        $this->session->set_flashdata("notice",$this->db->last_query());
         return $result;
     }
 

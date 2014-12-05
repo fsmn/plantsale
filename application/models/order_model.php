@@ -132,7 +132,12 @@ class Order_Model extends MY_Model
         $option_keys = array_keys($options);
         $option_values = array_values($options);
         for ($i = 0; $i < count($options); $i ++) {
+            if($option_keys[$i] != "show-non-reorders"){
             $this->db->like($option_keys[$i], $option_values[$i]);
+            }else{
+                //get the items that are not reordered in the next year.
+                $this->db->where(sprintf("NOT EXISTS (SELECT `year` from `order` as `o` WHERE `o`.`variety_id` = `order`.`variety_id` and `year` = '%s') ",$sale_year + 1),NULL,FALSE);
+            }
         }
         $this->db->where("order.year", $sale_year);
         if (! is_array($order_by)) {
@@ -159,6 +164,7 @@ class Order_Model extends MY_Model
         $this->db->select("variety.variety, variety.species,variety.new_year");
         $this->db->select("common.name, common.genus, common.category, common.id as common_id");
         $result = $this->db->get()->result();
+        $this->session->set_flashdata("notice",$this->db->last_query());
         return $result;
     }
 
@@ -236,5 +242,15 @@ class Order_Model extends MY_Model
         $this->db->where("year", $year);
         $result = $this->db->get()->row();
         return $result;
+    }
+/**
+ *
+ * @param int(4) $base_year
+ * @param int(4) $comparison_year
+ */
+    function get_non_reorders($base_year, $comparison_year){
+        $query  = sprintf("select * from `order` as `o`, `variety` as `v` WHERE `v`.`id`= `o`.`variety_id` and `o`.`year` ='%s'
+        and not exists (select `year` from `order`, `variety` where `o`.`variety_id` = `order`.`variety_id` and `year` ='%s')", $base_year,$comparison_year);
+
     }
 }

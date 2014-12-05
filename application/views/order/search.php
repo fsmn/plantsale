@@ -1,6 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $refine = $this->input->get("refine");
 ?>
+<script type="text/javascript">
+$("#year").change(function(){
+$("#non-reorder-year").html(Number($("#year").val()) + 1);
+
+});
+</script>
 <form name="order-search" id="order-search" method="get" action="<?php echo base_url("order/search");?>">
 <div class="field-set label-break">
 <div class="column first">
@@ -36,7 +42,7 @@ $refine = $this->input->get("refine");
 </div>
 <div class="field-set label-break">
 <div class="column first">
-<label for="year">Year</label><input type="number" name="year" style="width:4em" value="<?php echo get_cookie("sale_year");?>"/>
+<label for="year">Year</label><input type="number" id="year" name="year" style="width:4em" value="<?php echo get_cookie("sale_year");?>"/>
 </div>
 <div class="column last">
 <label for="new_year">First Year at Sale</label><input type="number" name="new_year" title "(enter current year for all new items)" style="width:4em" value="<?=$refine?get_cookie("new_year"):"";?>"/>
@@ -52,6 +58,10 @@ $refine = $this->input->get("refine");
 <p>
 <input type="checkbox" value="1" name="show_last_only" <?=$refine && get_cookie("show_last_only")?"checked":"";?>/>
 <label for="show_last_only">Hide plants that already have an order for the next plant sale</label>
+</p>
+<p>
+<input type="checkbox" value="1" name="show-non-reorders" <?=$refine && get_cookie("show-non-reorders")?"checked":"";?>/>
+<label for="show-non-reorders">Show only plants that were not reordered for <span id='non-reorder-year'><?=get_cookie("sale_year")+1;?></span></label>
 </p>
 </div>
 <div id="sort-block">

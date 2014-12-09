@@ -11,10 +11,10 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	<p>
 		<?=create_input($common, "genus","Genus");?>
 	</p>
-	<p><label for="category">Category: </label><input type="text" class="autocomplete-live" category="common_category" name="category" id="category" value=""/></p>
-	
+	<p><label for="category">Category: </label><input type="text" class="autocomplete-live" category="category" name="category" id="category" value=""/></p>
+<p><label for="category_id">New Category field:</label><?=form_dropdown("category_id",$categories,'id="category"');?></p>
 	<p>
-		<?=create_input($common,"subcategory","Subcategory");?>
+		<label for="subcategory">Subcategory: </label><input type="text" class="autocomplete-live" category="subcategory" name="subcategory" id="subcategory" value=""/>
 	</p>
 	<p>
 		<?=$sunlight;?>

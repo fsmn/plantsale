@@ -26,9 +26,18 @@ class Category_Model extends MY_Model
     function get_pairs ()
     {
         $this->db->from("category");
-        $this->db->select("`category` as `key`, `category` as `value`");
+        $this->db->select("`id` as `key`, `category` as `value`");
         $this->db->order_by("category", "ASC");
         $result = $this->db->get()->result();
+        return $result;
+    }
+
+    function get_id ($category)
+    {
+        $this->db->from("category");
+        $this->db->where("category", $category);
+        $this->db->select("id");
+        $result = $this->db->get()->row()->id;
         return $result;
     }
 }

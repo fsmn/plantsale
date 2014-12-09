@@ -132,12 +132,18 @@ $(document).on("click",".autocomplete-live",function(){
 	my_category = $(this).attr("category");
 	my_id = this.id;
 	my_value = $(this).val();
+	my_parent = false;
+	if(my_id == "subcategory"){
+		my_parent = $("#category").val();
+	}
 	form_data = {
 		category: my_category,
 		id: my_id,
 		value: my_value,
+		parent: my_parent,
 		is_live: 1
 	};
+	console.log(form_data);
 	$.ajax({
 		dataType: "json",
 		type: "get",

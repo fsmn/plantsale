@@ -22,4 +22,16 @@ class Subcategory_Model extends MY_Model
         $result = $this->db->get()->result();
         return $result;
     }
+
+    function get_pairs ($category_id = NULL)
+    {
+        if($category_id){
+            $this->db->where("category_id",$category_id);
+        }
+        $this->db->from("subcategory");
+        $this->db->select("`id` as `key`, `subcategory` as `value`");
+        $this->db->order_by("subcategory", "ASC");
+        $result = $this->db->get()->result();
+        return $result;
+    }
 }

@@ -101,7 +101,7 @@ echo $name;
 
     function create ()
     {
-        $categories = $this->common->get_pairs();
+        $categories = $this->category->get_pairs();
         $data["categories"] = get_keyed_pairs($categories, array(
                 "key",
                 "value"

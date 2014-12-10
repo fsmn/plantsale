@@ -74,6 +74,9 @@ class Menu extends MY_Controller
         $category = $this->input->get("category");
         $value = $this->input->get("value");
         $field = $this->input->get("field");
+        
+        echo $this->_get_dropdown($category, $value, $field, $this->input->get("parent"));
+        die();
         switch ($category) {
             case "category":
                 $categories = $this->category->get_pairs();
@@ -215,7 +218,7 @@ class Menu extends MY_Controller
         $pairs = get_keyed_pairs($categories, array(
                 "key",
                 "value"
-        ));
+        ),TRUE);
         return form_dropdown($field, $pairs, $value, "class='live-field'");
     }
 

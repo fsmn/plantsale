@@ -69,7 +69,7 @@ class Menu extends MY_Controller
      * AJAX function to create quick-edit dropdown <select> fields (for use with
      * the field editing AJAX functions in general.js
      */
-    function get_dropdown ($category,$value,$field,$parent = NULL)
+    function get_dropdown ()
     {
         $category = $this->input->get("category");
         $value = $this->input->get("value");

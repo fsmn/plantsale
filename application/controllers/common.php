@@ -20,7 +20,7 @@ class Common extends MY_Controller
 			redirect ();
 			die ();
 			$this->load->library ( "image_moo" );
-			
+
 			$source = IMAGE_PATH . "/Admin.jpg";
 			$this->image_moo->load ( $source )->resize ( 650, 650 )->save ( IMAGE_PATH . "/thumbs/admin.jpg" );
 		}
@@ -30,15 +30,15 @@ class Common extends MY_Controller
 			$categories = $this->category->get_pairs ();
 			$data ["categories"] = get_keyed_pairs ( $categories, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$subcategories = $this->subcategory->get_pairs ();
 			$data ["subcategories"] = get_keyed_pairs ( $subcategories, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$sunlight = $this->menu->get_pairs ( "sunlight", array (
-					"field" => "value" 
+					"field" => "value"
 			) );
 			$data ["sunlight"] = $sunlight;
 			$data ["common"] = NULL;
@@ -51,7 +51,7 @@ class Common extends MY_Controller
 			$data ["title"] = "List of Common Names";
 			$data ["target"] = "common/list";
 			$data ["full_list"] = TRUE;
-			
+
 			// create the legend for the paramter display
 			$variables = array (
 					"name",
@@ -60,7 +60,7 @@ class Common extends MY_Controller
 					"subcategory_id",
 					"sunlight",
 					"description",
-					"year" 
+					"year"
 			);
 			$params = array ();
 			for($i = 0; $i < count ( $variables ); $i ++)
@@ -69,10 +69,29 @@ class Common extends MY_Controller
 				if ($my_value = $this->input->get ( $my_variable ))
 				{
 					$params [$my_variable] = $my_value;
+					bake_cookie($my_variable, $my_value);
+				}else{
+				    burn_cookie($my_variable);
 				}
 			}
+			if (array_key_exists ( "category_id", $params ))
+			{
+			    $this->load->model ( "category_model", "category" );
+			    $category = $this->category->get ( $params ["category_id"] )->category;
+			    $params ["category"] = $category;
+			    $title_category[] = $category;
+			    unset ( $params ["category_id"] );
+			}
+			if (array_key_exists ( "subcategory_id", $params ))
+			{
+			    $this->load->model ( "subcategory_model", "subcategory" );
+			    $subcategory =  $this->subcategory->get ( $params ["subcategory_id"] )->subcategory;
+			    $params ["subcategory"] = $subcategory;
+			    $title_category[] = $subcategory;
+			    unset ( $params ["subcategory_id"] );
+			}
 			$data ["params"] = $params;
-			
+
 			$this->load->view ( "page/index", $data );
 		}
 
@@ -112,18 +131,18 @@ class Common extends MY_Controller
 		function create ()
 		{
 			$categories = $this->category->get_pairs ();
-			
+
 			$data ["categories"] = get_keyed_pairs ( $categories, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$subcategories = $this->subcategory->get_pairs ();
 			$data ["subcategories"] = get_keyed_pairs ( $subcategories, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$sunlight = $this->menu->get_pairs ( "sunlight", array (
-					"field" => "value" 
+					"field" => "value"
 			) );
 			$data ["sunlight"] = $sunlight;
 			$data ["action"] = "insert";
@@ -145,15 +164,15 @@ class Common extends MY_Controller
 			$categories = $this->category->get_pairs ();
 			$data ["categories"] = get_keyed_pairs ( $categories, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$subcategories = $this->subcategory->get_pairs ();
 			$data ["subcategories"] = get_keyed_pairs ( $subcategories, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$sunlight = $this->menu->get_pairs ( "sunlight", array (
-					"field" => "value" 
+					"field" => "value"
 			) );
 			$data ["sunlight"] = $sunlight;
 			$data ["action"] = "update";
@@ -187,7 +206,7 @@ class Common extends MY_Controller
 				$value = implode ( ",", $value );
 			}
 			$values = array (
-					$field => $value 
+					$field => $value
 			);
 			$output = $this->common->update ( $id, $values );
 			if ($output == "")

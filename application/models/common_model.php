@@ -77,6 +77,7 @@ class Common_model extends MY_Model
         $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $this->db->select("common.*,subcategory.subcategory,category.category");
         $output = $this->db->get()->row();
+
         return $output;
     }
 
@@ -139,20 +140,21 @@ class Common_model extends MY_Model
                 }
             }
         }
-        $this->db->join("category","common.category_id = category.id");
-        $this->db->join("subcategory","common.subcategory_id = subcategory.id");
+        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $this->db->select("common.id,common.category_id,common.subcategory_id,name,genus,description,extended_description,other_names,sunlight");
         $this->db->select("category.category,subcategory.subcategory");
 
-        if ($this->input->post("year")) {
-            $year = $this->input->post("year");
+        if ($year = $this->input->get("year")) {
             $this->db->join("variety", "common.id=variety.common_id");
             $this->db->join("order", "variety.id=order.variety_id");
             $this->db->select("order.year");
+            $this->db->where("year",$year);
             $this->db->group_by("common.id");
         }
 
         $result = $this->db->get()->result();
+        $this->_log();
         return $result;
     }
 }

@@ -6,7 +6,7 @@ if (! defined ( 'BASEPATH' ))
 
 /**
  *
- * @param array $data        	
+ * @param array $data
  * @return string boolean array
  *         required:
  *         "text" key for the button text
@@ -17,21 +17,21 @@ if (! defined ( 'BASEPATH' ))
  *         "class" defaults to "button" but can be replaced by any other classes as defined in the css or javascript
  *         "id" is completely optional
  *         "enclosure" is an option array with type class and id keys. This is used if the particular button needs an added container (for AJAX manipulation)
- *        
+ *
  *         EXAMPLES
  *         A button that provides a standard url (type and class are defaults "a" and "button");
  *         $data = array( "text" => "View Record", "href" => "/index.php/record/view/2352");
  *         returns: <a href="/index.php/record/view/2352" class="button">View Record</a>
- *        
+ *
  *         A button that triggers a jquery script by class with an id that is parsed by the jQuery to parse for a relevant database table key:
  *         $data = array( "text" => "Edit Record", "type" => "span", "class" => "button edit-record" "id" => "er_2532" );
  *         returns <span class="button edit-record" id="er_2532">Edit Record</span>
- *        
+ *
  *         A Button that needs a surrounding span for jQuery mainpulation:
  *         $data = array( "text" => "Edit Record", "type" => "span", "class" => "button edit-record" "id" => "er_2532",
  *         "enclosure" => array("type" => "span", "id" => "edit-record-span" ) );
  *         returns:<span id="edit-record-span"><span class="button edit-record" id="er_2532">Edit Record</span></span>
- *        
+ *
  */
 function create_button($data)
 {
@@ -53,40 +53,40 @@ function create_button($data)
 				$href = "href='#'";
 			}
 		}
-		
+
 		if (array_key_exists ( "target", $data )) {
 			$target = "target='" . $data ["target"] . "'";
 		}
-		
+
 		if (array_key_exists ( "title", $data )) {
 			$title = "title ='" . $data ["title"] . "'";
 		}
 		if ($type != "pass-through") {
-			
+
 			if (array_key_exists ( "class", $data )) {
 				if (! is_array ( $data ["class"] )) {
 					$data ["class"] = array (
-							$data ["class"] 
+							$data ["class"]
 					);
 				}
 			} else {
 				$data ["class"] = array (
-						"button" 
+						"button"
 				);
 			}
-			
+
 			if (array_key_exists ( "selection", $data ) && preg_match ( "/" . str_replace ( "/", "\/", $data ["selection"] ) . "/", $_SERVER ['REQUEST_URI'] )) {
 				$data ["class"] [] = "active";
 			}
 			$class = sprintf ( "class='%s'", implode ( " ", $data ["class"] ) );
-			
+
 			$id = "";
 			if (array_key_exists ( "id", $data )) {
 				$id = "id='" . $data ["id"] . "'";
 			}
-			
+
 			$button = "<$type $href $id $class $target $title>$text</$type>";
-			
+
 			if (array_key_exists ( "enclosure", $data )) {
 				if (array_key_exists ( "type", $data ["enclosure"] )) {
 					$enc_type = $data ["enclosure"] ["type"];
@@ -115,7 +115,7 @@ function create_button($data)
  *
  * @param
  *        	compound array $buttons
- * @param array $options        	
+ * @param array $options
  * @return string
  */
 function create_button_bar($buttons, $options = NULL)
@@ -128,17 +128,17 @@ function create_button_bar($buttons, $options = NULL)
 		if (array_key_exists ( "id", $options )) {
 			$id = sprintf ( "id='%s'", $options ["id"] );
 		}
-		
+
 		if (array_key_exists ( "selection", $options )) {
 			$selection = $options ["selection"];
 		}
-		
+
 		if (array_key_exists ( "class", $options )) {
 			$class = $options ["class"];
 		}
 	}
 	$button_list = array ();
-	
+
 	// the "selection" option indicates the page in the interface. Currently as indicated by the uri->segment(1)
 	foreach ( $buttons as $button ) {
 		/*
@@ -146,7 +146,7 @@ function create_button_bar($buttons, $options = NULL)
 		 */
 		$button_list [] = create_button ( $button );
 	}
-	
+
 	$contents = implode ( "</li><li>", $button_list );
 	$template = "<ul class='button-list'><li>$contents</li></ul>";
 	$output = "<div class='button-box $class'  $id>$template</div>";
@@ -157,9 +157,9 @@ function create_button_bar($buttons, $options = NULL)
 /**
  * create a field set that can be edited with AJAX on the fly.
  *
- * @param string $field_name        	
- * @param string $value        	
- * @param string $label        	
+ * @param string $field_name
+ * @param string $value
+ * @param string $label
  * @param array $options
  *        	(envelope, class, attributes)
  */
@@ -169,6 +169,11 @@ function create_edit_field($field_name, $value, $label, $options = array())
 	$envelope = "p";
 	if (array_key_exists ( "envelope", $options )) {
 		$envelope = $options ["envelope"];
+	}
+
+	$field_wrapper = "span";
+	if (array_key_exists ( "field-wrapper", $options )) {
+	    $field_wrapper = $options ["field-wrapper"];
 	}
 	$id = "";
 	$table = "";
@@ -184,7 +189,7 @@ function create_edit_field($field_name, $value, $label, $options = array())
 	if ($value == "") {
 		$value = "&nbsp;";
 	}
-	
+
 	/* add additional classes to the actual field */
 	$classes [] = "edit-field field";
 	if (array_key_exists ( "class", $options )) {
@@ -195,7 +200,7 @@ function create_edit_field($field_name, $value, $label, $options = array())
 	if (array_key_exists ( "format", $options )) {
 		$format = sprintf ( "format='%s'", $options ["format"] );
 	}
-	
+
 	/*
 	 * Attributes are non-standard html attributes that are used by javascript these can include the type of input to be generated
 	 */
@@ -203,8 +208,8 @@ function create_edit_field($field_name, $value, $label, $options = array())
 	if (array_key_exists ( "attributes", $options )) {
 		$attributes = $options ["attributes"];
 	}
-	$output [] = sprintf ( "<span class='%s' %s %s name='%s'>%s</span></%s>", $field_class, $attributes, $format, $field_name, $value, $envelope );
-	
+	$output [] = sprintf ( "<%s class='%s' %s %s name='%s'>%s</%s></%s>",$field_wrapper, $field_class, $attributes, $format, $field_name, $value,$field_wrapper, $envelope );
+
 	return implode ( "\r", $output );
 
 }
@@ -221,8 +226,8 @@ function edit_field($field_name, $value, $label, $table, $id, $options = array()
 /**
  * create a checkbox with labels
  *
- * @param string $name        	
- * @param array $values        	
+ * @param string $name
+ * @param array $values
  * @param array $selections
  *        	@TODO add id option
  */
@@ -255,7 +260,7 @@ function create_autocomplete($items, $selection, $id, $is_live = FALSE){
 		$output[] = sprintf("<li class='%s'>%s</li>",implode(" ",$classes), $item->value);
 	}
 	$output[] = "<li class='autocomplete-list-cancel button link'>Cancel</li>";
-	
+
 	$output[] = "</ul>";
 	return implode("\r",$output);
 }

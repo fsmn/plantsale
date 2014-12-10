@@ -58,4 +58,12 @@ class MY_Model extends CI_Model
             return FALSE;
         }
     }
+
+    function _log ($element = "notice")
+    {
+        $last_query = $this->db->last_query();
+        if ($this->ion_auth->user()->row()->id == 1) {
+            $this->session->set_flashdata($element, $last_query);
+        }
+    }
 }

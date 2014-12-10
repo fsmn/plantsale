@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
+print $this->input->post("year");
 // list.php Chris Dart Feb 27, 2013 11:07:53 AM chrisdart@cerebratorium.com
 ?>
 <fieldset class="search-fieldset">
@@ -31,7 +31,7 @@
 Found Count: <strong><?=count($names);?> Records</strong>
 </p>
 	<div class="button-box">
-		<span class="button search-common-names">Refine Search</span>
+		<span class="button refine search-common-names">Refine Search</span>
 	</div>
 	</div>
 </fieldset>
@@ -45,9 +45,12 @@ Found Count: <strong><?=count($names);?> Records</strong>
 
 			<th>Category</th>
 
+			<th>Subcategory</th>
+
 			<th>Sunlight</th>
 
 			<th>Description</th>
+			<th>Extended Description</th>
 
 			<th></th>
 		</tr>
@@ -56,23 +59,27 @@ Found Count: <strong><?=count($names);?> Records</strong>
 	<tbody>
 		<? foreach($names as $name){ ?>
 		<tr>
-			<td><span class="common-name common-edit-row"
-				id="cnid_<?=$name->id;?>"><?=$name->name;?> </span>
+			<td><?=edit_field("name", $name->name, "","common",$name->id,array("envelope"=>"span"));?>
 			</td>
-			<td><span class="common-genus common-edit-row"
-				id="cgid_<?=$name->id;?>"><?=$name->genus;?> </span>
+			<td>
+			<?=edit_field("genus", $name->genus, "","common",$name->id,array("envelope"=>"span"));?>
+
 			</td>
 
-			<td><span class="common-category common-edit-row"
-				id="ccid_<?=$name->id;?>"><?=$name->category;?> </span>
+			<td><?=edit_field("category_id", $name->category, "","common",$name->id, array("envelope"=>"span","class"=>"category-dropdown"));?>
 			</td>
-			<td><span class="common-sunlight common-edit-row"
-				id="csid_<?=$name->id;?>"> <?=$name->sunlight;?>
-			</span>
+			<td>
+			<?=edit_field("subcategory_id", $name->subcategory, "","common",$name->id, array("envelope"=>"span","class"=>"subcategory-dropdown"));?>
+			</td>
+			<td>	<?=edit_field("sunlight",$name->sunlight, "","common",$name->id,array("envelope"=>"span","class"=>"multiselect","attributes"=>"menu='sunlight'","format"=>"multiselect"));?>
+
 			</td>
 
-			<td><span class="common-description common-edit-row"
-				id="cdid_<?=$name->id;?>"><?=$name->description;?> </span>
+			<td>	<?=edit_field("description", $name->description, "","common",$name->id, array("envelope"=>"span","class"=>"textarea"));?>
+
+			</td>
+			<td>
+				<?=edit_field("extended_description", $name->extended_description, "","common",$name->id, array("envelope"=>"span","class"=>"textarea"));?>
 			</td>
 
 			<td><a class="button" id="id_<?=$name->id;?>"

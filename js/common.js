@@ -31,8 +31,18 @@
 	});
 	
 	$(document).on("click",".search-common-names", function(event){
+		refine = 0;
+		if($(this).hasClass("refine")){
+			refine = 1;
+		}
+		form_data = {
+				refine: refine,
+				find: 1
+		}
+		
 		$.ajax({
 			type: "get",
+			data: form_data,
 			url: base_url + "common/search",
 			success: function(data){
 				show_popup("Search Plants",data,"auto");

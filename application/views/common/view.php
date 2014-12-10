@@ -9,8 +9,8 @@
 <div class="grouping" id="common">
 	<input type="hidden" name="id" id="id" value="<?=$common->id;?>" />
 	<?=edit_field("genus", $common->genus, "Genus","common",$common->id);?>
-	<?=edit_field("category", $common->category, "Category","common",$common->id, array("envelope"=>"span","class"=>"autocomplete","attributes"=>"menu='common_category'"));?>
-	<?=edit_field("subcategory", $common->subcategory, "Subcategory","common",$common->id);?>
+	<?=edit_field("category_id", $common->category, "Category","common",$common->id, array("envelope"=>"p","class"=>"category-dropdown"));?>
+	<?=edit_field("subcategory_id", $common->subcategory, "Subcategory","common",$common->id,array("envelope"=>"p","class"=>"subcategory-dropdown"));?>
 	<?=edit_field("description", $common->description, "Description","common",$common->id, array("class"=>"textarea"));?>
 	<?=edit_field("extended_description", $common->extended_description, "Extended Description (for web)","common",$common->id, array("class"=>"textarea"));?>
 	<?=edit_field("other_names",$common->other_names, "Other Names","common",$common->id);?>

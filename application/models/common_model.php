@@ -10,6 +10,8 @@ class Common_model extends MY_Model
     var $extended_description;
     var $category;
     var $subcategory;
+    var $category_id;
+    var $subcategory_id;
     var $other_names;
     var $sunlight;
     var $rec_modified;
@@ -27,8 +29,8 @@ class Common_model extends MY_Model
                 "genus",
                 "description",
                 "extended_description",
-                "category",
-                "subcategory",
+                "category_id",
+                "subcategory_id",
                 ",other_names",
                 "sunlight"
         );
@@ -69,8 +71,11 @@ class Common_model extends MY_Model
 
     function get ($id)
     {
-        $this->db->where("id", $id);
+        $this->db->where("common.id", $id);
         $this->db->from("common");
+        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
+        $this->db->select("common.*,subcategory.subcategory,category.category");
         $output = $this->db->get()->row();
         return $output;
     }
@@ -112,6 +117,12 @@ class Common_model extends MY_Model
         if ($this->category) {
             $this->db->where("category", $this->category);
         }
+        if($this->category_id){
+            $this->db->where("common.category_id",$this->category_id);
+        }
+        if($this->subcategory_id){
+            $this->db->where("common.subcategory_id",$this->subcategory_id);
+        }
         if ($this->sunlight) {
             if ($this->input->get("sunlight-boolean") == "or") {
                 $my_list = explode(",", $this->sunlight);
@@ -128,7 +139,10 @@ class Common_model extends MY_Model
                 }
             }
         }
-        $this->db->select("common.*");
+        $this->db->join("category","common.category_id = category.id");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id");
+        $this->db->select("common.id,common.category_id,common.subcategory_id,name,genus,description,extended_description,other_names,sunlight");
+        $this->db->select("category.category,subcategory.subcategory");
 
         if ($this->input->post("year")) {
             $year = $this->input->post("year");
@@ -139,7 +153,7 @@ class Common_model extends MY_Model
         }
 
         $result = $this->db->get()->result();
-        //$this->session->set_flashdata("notice", $this->db->last_query());
+        $this->session->set_flashdata("notice", $this->db->last_query());
         return $result;
     }
 }

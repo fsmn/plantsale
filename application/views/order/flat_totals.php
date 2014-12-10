@@ -29,7 +29,7 @@ $sale_year = get_cookie("sale_year");
 <? foreach($categories["current"] as $category) : ?>
 	<tr>
 	<td>
-	<a href="<?=site_url("order/search?year=$sale_year&category=$category->category&sorting%5B%5D=genus&direction%5B%5D=ASC");?>"><?=$category->category;?></a>
+	<a href="<?=site_url("order/search?year=$sale_year&category_id=$category->category_id&sorting%5B%5D=genus&direction%5B%5D=ASC");?>"><?=$category->category;?></a>
 	</td>
 	<td><?=number_format($category->presale_count,0);?></td>
 	<td><?=number_format($category->midsale_count,0);?></td>

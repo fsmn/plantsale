@@ -3,7 +3,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 
 ?>
 
-<form name="edit-common" id="edit-common"
+<form name="search-common" id="search-common"
 	action="<?=site_url("common/find"); ?>" method="GET">
 	<p>
 		<?=create_input($common,"name","Name");?>
@@ -11,11 +11,9 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	<p>
 		<?=create_input($common, "genus","Genus");?>
 	</p>
-	<p><label for="category">Category: </label><input type="text" class="autocomplete-live" category="common_category" name="category" id="category" value=""/></p>
-	
-	<p>
-		<?=create_input($common,"subcategory","Subcategory");?>
-	</p>
+<p><label for="category_id">Category: </label><?=form_dropdown("category_id",$categories,FALSE,'id="category_id"');?></p>
+	<p ><label for="subcategory_id">Subcategory: </label><span id="subcategory-envelope"><?=form_dropdown("subcategory_id",$subcategories,'id="subcategory_id"');?></span></p>
+
 	<p>
 		<?=$sunlight;?>
 		<br />

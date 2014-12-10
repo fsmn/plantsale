@@ -34,12 +34,11 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 	</div>
 		<div class="field-set block">
 		<div class="column first">
-		<label for="category">Category: </label>
-		<input type="text" class="autocomplete-live category:common_category" category="common_category" name="category" id="category" value="<?=($refine == 1 ?  get_cookie("category") :"");?>"/>
+		<label for="category_id">Category: </label><?=form_dropdown("category_id",$categories,($refine ? get_cookie("category_id"):""),'id="category_id"');?>
 		</div>
 		<div class="column last">
-		<label for="subcategory">Subcategory:</label>
-		<input type="text" class="autocomplete-live" category="common_subcategory"  name="subcategory" id="subcategory" value="<?=($refine == 1 ?  get_cookie("subcategory") :"");?>"/>
+	<label for="subcategory_id">Subcategory: </label><span id="subcategory-envelope"><?=form_dropdown("subcategory_id",$subcategories,($refine ? get_cookie("subcategory_id"):""),'id="subcategory_id"');?></span>
+		
 		</div>
 	</div>
 	<div class="field-set">

@@ -14,6 +14,10 @@ class Subcategory_Model extends MY_Model
         parent::__construct();
     }
 
+    function get($id){
+    	return $this->_get("subcategory",$id);
+    	
+    }
     function get_for_category ($category_id)
     {
         $this->db->from("subcategory");

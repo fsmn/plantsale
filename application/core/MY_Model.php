@@ -9,7 +9,7 @@ class MY_Model extends CI_Model
         parent::__construct();
     }
 
-    function get ($db, $id)
+    function _get ($db, $id)
     {
         $this->db->from($db);
         $this->db->where("id", $id);

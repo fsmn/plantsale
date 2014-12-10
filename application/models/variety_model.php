@@ -198,7 +198,6 @@ class Variety_Model extends MY_Model
         $this->db->where("v.new_year !=",$year);
         $this->db->order_by("category.category,c.name,c.genus,v.variety");
         $result = $this->db->get()->result();
-        $this->session->set_flashdata("notice",$this->db->last_query());
         return $result;
     }
 
@@ -212,9 +211,8 @@ class Variety_Model extends MY_Model
         $this->db->where("order.year", $year);
         $this->db->not_like("order.pot_size","bare");
         $this->db->group_by("common.category");
-        $this->db->select("count(`variety`.`id`) as count,category.category");
+        $this->db->select("count(`variety`.`id`) as count,category.category,category.id");
         $result = $this->db->get()->result();
-        $this->session->set_flashdata("notice",$this->db->last_query());
         return $result;
     }
 
@@ -223,16 +221,16 @@ class Variety_Model extends MY_Model
         $this->db->from("variety");
         $this->db->join("order", "variety.id=order.variety_id");
         $this->db->join("common", "common.id=variety.common_id");
+        $this->db->join("category","common.category_id = category.id","LEFT");
         $this->db->where("order.year", $year);
-        $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `common`.`category` = 'perennials')", NULL, FALSE);
+        $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category`.`category` = 'perennials')", NULL, FALSE);
         $this->db->group_by("common.category");
         // $this->db->select("sum(`order`.`count_presale` +
         // `order`.`count_midsale`) as count");
         $this->db->select("sum(`order`.`count_presale`) as presale_count");
         $this->db->select("sum(`order`.`count_midsale`) as midsale_count");
-        $this->db->select("common.category");
+        $this->db->select("category.category,category.id as category_id");        
         $result = $this->db->get()->result();
-        // $this->session->set_flashdata("notice",$this->db->last_query());
         return $result;
     }
 
@@ -271,6 +269,8 @@ class Variety_Model extends MY_Model
         }
         $this->db->from("variety");
         $this->db->join("common", "variety.common_id = common.id");
+        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $this->db->join("flag", "variety.id = flag.variety_id", "LEFT");
         $this->db->join("order", "variety.id = order.variety_id","RIGHT");
 
@@ -308,13 +308,15 @@ class Variety_Model extends MY_Model
             } elseif ($parameter->key == "print_omit") {
                 $this->db->where("(order.print_omit is NULL OR order.print_omit != 1)", NULL, FALSE);
             }elseif($parameter->key == "not_flag"){
-
+            	//no action taken
+            }elseif($parameter->key == "category_id"){
+            	$this->db->where("common.category_id",$parameter->value);
             } else {
                 $this->db->where($parameter->key, $parameter->value);
             }
         }
         // select common fields
-        $this->db->select("common.name,common.genus, common.sunlight, common.category");
+        $this->db->select("common.name,common.genus, common.sunlight, category.category, subcategory.subcategory");
         // include all variety fields (maybe change this).
         $this->db->select("variety.*");
 
@@ -323,7 +325,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
         $this->db->group_by("variety.id");
         $result = $this->db->get()->result();
-        //$this->session->set_flashdata("notice", $this->db->last_query());
+        $this->session->set_flashdata("notice", $this->db->last_query());
         return $result;
     }
 

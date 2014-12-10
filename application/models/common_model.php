@@ -71,10 +71,11 @@ class Common_model extends MY_Model
 
     function get ($id)
     {
-        $this->db->where("id", $id);
+        $this->db->where("common.id", $id);
         $this->db->from("common");
-        $this->db->join("category","common.category_id = category.id");
-        $this->db->join("subcategory","common.subcategory_id = subcategory.id");
+        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
+        $this->db->select("common.*,subcategory.subcategory,category.category");
         $output = $this->db->get()->row();
         return $output;
     }

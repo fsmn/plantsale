@@ -40,7 +40,7 @@
 		});
 	});
 	
-	$(document).on("change","#search-common #category_id", function(){
+	$(document).on("change","select#category_id", function(){
 		my_parent = $(this).val();
 		
 		form_data = {

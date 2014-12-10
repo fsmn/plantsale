@@ -34,6 +34,16 @@ class Menu extends MY_Controller
             case "dropdown":
                 $output = $this->_get_dropdown($data["category"], $data["value"], $data["name"]);
                 break;
+            case "category-dropdown":
+            	$this->load->model("common_model","common");
+            	$common = $this->common->get($data["id"]);
+            	$output = $this->_get_dropdown($data["category"],$common->category_id,$data["name"]);
+            	break;
+            case "subcategory-dropdown":
+            	$this->load->model("common_model","common"); 
+            	$common =  $this->common->get($data["id"]);
+            	$output = $this->_get_dropdown($data["category"],$common->subcategory_id,$data["name"],$common->category_id);
+            	break;
             case "multiselect":
                 $output = $this->_get_multiselect($data["category"], $data["value"], $data["name"]);
                 break;
@@ -59,7 +69,7 @@ class Menu extends MY_Controller
      * AJAX function to create quick-edit dropdown <select> fields (for use with
      * the field editing AJAX functions in general.js
      */
-    function get_dropdown ()
+    function get_dropdown ($category,$value,$field,$parent = NULL)
     {
         $category = $this->input->get("category");
         $value = $this->input->get("value");
@@ -74,6 +84,8 @@ class Menu extends MY_Controller
                 }else{
                     $categories = $this->subcategory->get_pairs();
                 }
+                //array_unshift($categories,(object)array("key"=>0,"value"=>""));
+                
                 break;
             default:
 
@@ -82,10 +94,11 @@ class Menu extends MY_Controller
                         "direction" => "ASC"
                 ));
         }
+      
         $pairs = get_keyed_pairs($categories, array(
                 "key",
                 "value"
-        ));
+        ),TRUE);
         echo form_dropdown($field, $pairs, $value, "class='save-field'");
     }
 
@@ -177,13 +190,28 @@ class Menu extends MY_Controller
         // echo form_dropdown ( $field, $pairs, $value, "class='save-field'" );
     }
 
-    function _get_dropdown ($category, $value, $field)
+    function _get_dropdown ($category, $value, $field,$parent_id = FALSE)
     {
-        $this->load->model("menu_model", "menu");
-        $categories = $this->menu->get_pairs($category, array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
+    	switch ($category) {
+    		case "category":
+    			$categories = $this->category->get_pairs();
+    			break;
+    		case "subcategory":
+    			if($parent_id){
+    				$categories = $this->subcategory->get_pairs($parent_id);
+    			}else{
+    				$categories = $this->subcategory->get_pairs();
+    			}
+    	
+    			break;
+    		default:
+    	
+    			$categories = $this->menu->get_pairs($category, array(
+    			"field" => "value",
+    			"direction" => "ASC"
+    					));
+    	}
+    	
         $pairs = get_keyed_pairs($categories, array(
                 "key",
                 "value"

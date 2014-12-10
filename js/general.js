@@ -56,6 +56,12 @@ if($("body").hasClass("editor")){
 			my_type = "textarea";
 		}else if($(this).hasClass("autocomplete")){
 			my_type = "autocomplete";
+		}else if($(this).hasClass("category-dropdown")){
+			my_type = "category-dropdown";
+			my_category = "category";
+		}else if($(this).hasClass("subcategory-dropdown")){
+			my_type = "subcategory-dropdown";
+			my_category = "subcategory";
 		}
 		form_data = {
 				table: my_attr[0],
@@ -65,13 +71,13 @@ if($("body").hasClass("editor")){
 				category: my_category,
 				value: $(this).html()
 		};
-
+console.log(form_data);
 		$.ajax({
 			type:"get",
 			url: base_url +  "menu/edit_value",
 			data: form_data,
 			success: function(data){
-				console.log(data);
+				
 				$("#" + my_parent + " .edit-field").html(data);
 				$("#" + my_parent + " .edit-field").removeClass("edit-field").removeClass("field").addClass("live-field").addClass("text");
 				$("#" + my_parent + " .live-field input").focus();
@@ -107,6 +113,7 @@ $(document).on("click",".autocomplete.edit-field",function(){
 $(document).on("blur",".field-envelope .live-field.text input",function(){
 	if($(this).hasClass("ui-autocomplete-input")){
 		update_field(this, "autocomplete");
+	
 	}else{
 		update_field(this, "text");
 	}
@@ -116,10 +123,21 @@ $(document).on("blur",".field-envelope .live-field.text input",function(){
 $(document).on("blur",".field-envelope .live-field textarea",function(){
 	update_field(this, "textarea");
 });
+$(document).on("blur",".field-envelope .live-field.category-dropdown select",function(){
+	console.log("here");
+	update_field(this, "category-dropdown");
+});
+
+$(document).on("blur",".field-envelope .live-field.subcategory-dropdown select",function(){
+	update_field(this, "subcategory-dropdown");
+});
+
 
 $(document).on("blur",".field-envelope .live-field select",function(){
 	update_field(this, "select");
 });
+
+
 
 $(document).on("click", ".field-envelope .save-multiselect",function(){
 	console.log(this);
@@ -159,6 +177,7 @@ $(document).on("click",".autocomplete-off",function(){
 	$("input").attr("autocomplete","off");
 	$(this).html("Turn Autocomplete On").removeClass("autocomplete-off").addClass("autocomplete-on");
 });
+
 $(document).on("click",".autocomplete-on",function(){
 	$("input").attr("autocomplete","On");
 	$(this).html("Turn Autocomplete Off").removeClass("autocomplete-on").addClass("autocomplete-off");
@@ -206,26 +225,32 @@ function update_field(me,my_type){
 	my_parent = $(me).parents(".field-envelope").attr("id");
 	my_attr = my_parent.split("__");
 	my_value = $("#" + my_parent).children(".live-field").children("input"|"textarea").val();
-	
+	my_category = false;
 	if(my_type == "autocomplete"){
 		my_value = $("#" + my_parent).children(".live-field").children("input").val();
 
 	}else if(my_type == "multiselect"){
 		my_value = $("#" + my_parent).children(".multiselect").children("select").val();
+	}else if(my_type == "category-dropdown"){
+		my_category = "category";
+	}else if(my_type == "subcategory-dropdown"){
+		my_category = "subcategory";
 	}
 	
 	form_data = {
 			table: my_attr[0],
 			field: my_attr[1],
 			id: my_attr[2],
-			value: my_value
+			value: my_value,
+			category: my_category
 	};
+	console.log(form_data);
+
 	$.ajax({
 		type:"post",
 		url: base_url + my_attr[0] + "/update_value",
 		data: form_data,
 		success: function(data){
-			console.log(data);
 			$("#" + my_parent + " .live-field").html(data);
 			$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
 		}

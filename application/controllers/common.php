@@ -173,6 +173,18 @@ echo $name;
         if ($output == "") {
             $output = "&nbsp;";
         }
+        if($category = $this->input->post("category")){
+        	switch($category){
+        		case "category":
+        			$this->load->model("category_model","category");
+        			$output = $this->category->get($value)->category;
+        			break;
+        		case "subcategory":
+        			$this->load->model("subcategory_model","subcategory");
+        			$output = $this->subcategory->get($value)->subcategory;
+        			break;
+        	}
+        }
         echo $output;
     }
 }

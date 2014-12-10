@@ -69,7 +69,11 @@ class Menu extends MY_Controller
                 $categories = $this->category->get_pairs();
                 break;
             case "subcategory":
-                $categories = $this->subcategory->get_pairs();
+                if($category_id = $this->input->get("parent")){
+                    $categories = $this->subcategory->get_pairs($category_id);
+                }else{
+                    $categories = $this->subcategory->get_pairs();
+                }
                 break;
             default:
 

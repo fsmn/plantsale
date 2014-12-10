@@ -129,6 +129,8 @@ class Order_Model extends MY_Model
         $this->db->from("order");
         $this->db->join("variety", "order.variety_id = variety.id");
         $this->db->join("common", "variety.common_id = common.id");
+        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $option_keys = array_keys($options);
         $option_values = array_values($options);
         for ($i = 0; $i < count($options); $i ++) {
@@ -162,7 +164,8 @@ class Order_Model extends MY_Model
         $this->db->select(
                 "order.received_presale,order.received_midsale,order.sellout_friday,order.sellout_saturday,order.remainder_friday,order.remainder_saturday,order.remainder_sunday,order.count_dead");
         $this->db->select("variety.variety, variety.species,variety.new_year");
-        $this->db->select("common.name, common.genus, common.category, common.id as common_id");
+        $this->db->select("common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id");
+        $this->db->select("category.category,subcategory.subcategory");
         $result = $this->db->get()->result();
         $this->session->set_flashdata("notice",$this->db->last_query());
         return $result;

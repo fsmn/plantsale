@@ -40,6 +40,27 @@
 		});
 	});
 	
+	$(document).on("change","#search-common #category_id", function(){
+		my_parent = $(this).val();
+		
+		form_data = {
+				parent: $("#category_id").val(),
+				category:"subcategory",
+				field: "subcategory_id",
+				value: ""
+		};
+		console.log(form_data);
+		$.ajax({
+			type:"get",
+			url: base_url + "menu/get_dropdown",
+			data: form_data,
+			success:function(data){
+				$("#subcategory-envelope").html(data);
+			},
+			error: function(data){
+			}
+		});
+	});
 	
 	$(document).on('keyup','#common-search-body', function(event) {
 		common_search = this.value;

@@ -70,9 +70,11 @@ class Variety_Model extends MY_Model
         $this->db->where("variety.id", $id);
         $this->db->from("variety");
         $this->db->join("common", "variety.common_id = common.id");
+        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $this->db->join("image", "variety.id=image.variety_id", "LEFT");
         $this->db->select(
-                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  common.category, common.description, common.sunlight, common.extended_description, common.other_names");
+                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,subcategory.subcategory,  category.category, common.description, common.sunlight, common.extended_description, common.other_names");
         $this->db->select("image.id as image_id, image_name");
         $result = $this->db->get()->row();
         return $result;
@@ -95,10 +97,12 @@ class Variety_Model extends MY_Model
     {
         $this->db->where("`variety` LIKE '%$name%' OR `common`.`name` LIKE '%$name%' OR `variety`.`species` LIKE '%$name%' OR `common`.`genus` LIKE '%$name%'");
         $this->db->join("common", "variety.common_id=common.id");
+        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $this->db->order_by("variety", "ASC");
         $this->db->order_by("common.name", "ASC");
         $this->db->select(
-                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  common.category, common.description");
+                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  category.category, subcategory.subcategory, common.description");
 
         $result = $this->db->get("variety")->result();
         return $result;
@@ -184,13 +188,15 @@ class Variety_Model extends MY_Model
         $this->db->from("variety as v");
         $this->db->from("order as o");
         $this->db->join("common as c","v.common_id = c.id");
+        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $this->db->select("v.*");
         $this->db->select("o.year,o.id as order_id");
         $this->db->select("c.name,c.sunlight,c.genus");
         $this->db->where("o.variety_id = v.id",NULL,FALSE);
         $this->db->where("o.year",$year);
         $this->db->where("v.new_year !=",$year);
-        $this->db->order_by("c.category,c.name,c.genus,v.variety");
+        $this->db->order_by("category.category,c.name,c.genus,v.variety");
         $result = $this->db->get()->result();
         $this->session->set_flashdata("notice",$this->db->last_query());
         return $result;
@@ -201,12 +207,14 @@ class Variety_Model extends MY_Model
         $this->db->from("variety");
         $this->db->join("order", "variety.id=order.variety_id");
         $this->db->join("common", "common.id=variety.common_id");
+        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $this->db->where("order.year", $year);
         $this->db->not_like("order.pot_size","bare");
         $this->db->group_by("common.category");
-        $this->db->select("count(`variety`.`id`) as count,common.category");
+        $this->db->select("count(`variety`.`id`) as count,category.category");
         $result = $this->db->get()->result();
-        //$this->session->set_flashdata("notice",$this->db->last_query());
+        $this->session->set_flashdata("notice",$this->db->last_query());
         return $result;
     }
 

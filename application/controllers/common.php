@@ -12,6 +12,8 @@ class Common extends MY_Controller
         $this->load->model("variety_model", "variety");
         $this->load->model("menu_model", "menu");
         $this->load->model("category_model","category");
+        $this->load->model("subcategory_model","subcategory");
+
     }
 
     function index ()
@@ -33,6 +35,8 @@ class Common extends MY_Controller
                 "key",
                 "value"
         ), TRUE);
+        $subcategories = $this->subcategory->get_pairs();
+        $data["subcategories"] = get_keyed_pairs($subcategories, array("key","value"),TRUE);
         $sunlight = $this->menu->get_pairs("sunlight", array(
                 "field" => "value"
         ));
@@ -52,7 +56,8 @@ class Common extends MY_Controller
         $variables = array(
                 "name",
                 "genus",
-                "category",
+                "category_id",
+                "subcategory_id",
                 "sunlight",
                 "description",
                 "year"

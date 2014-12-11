@@ -213,17 +213,23 @@ class Common extends MY_Controller
 			{
 				$output = "&nbsp;";
 			}
+			/*special tasks for categories:
+			 * need to return the category name instead of the value
+			 * for improved UX
+			 */
 			if ($category = $this->input->post ( "category" ))
 			{
-				switch ($category)
+				switch ($field)
 				{
-					case "category" :
+					case "category_id" :
 						$this->load->model ( "category_model", "category" );
 						$output = $this->category->get ( $value )->category;
 						break;
-					case "subcategory" :
+					case "subcategory_id" :
 						$this->load->model ( "subcategory_model", "subcategory" );
-						$output = $this->subcategory->get ( $value )->subcategory;
+						if($sub = $this->subcategory->get ( $value )){
+						$output = $sub->subcategory;
+						}
 						break;
 				}
 			}

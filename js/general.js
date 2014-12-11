@@ -185,19 +185,32 @@ $(document).on("click",".autocomplete-on",function(){
 
 $(document).on("click",".mr-shmallow",function(){
 	//$(".mr-shmallow-image").fadeIn();
-	$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
-	$.ajax({
-		type:'post',
-		url: base_url + "index/user_test",
-		success: function(data){
-			console.log(data);
-		}
-	});
+	if($(this).hasClass("on")){
+		$(this).removeClass("on");
+		$("body").animate({backgroundColor: "#aa000",color: "#fff"},1000);
+		//$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
+		$.ajax({
+			type:'post',
+			url: base_url + "index/user_test",
+			success: function(data){
+				console.log(data);
+			}
+		});
+		$(this).html("Oh Ick! Change it back!");
+		$(this).css({fontFamily:"Courier"});
+
+	}else{
+		$(this).addClass("on");
+		$(this).html("Try This Out!");
+	}
+	
 
 });
 
 $(document).on('click',".mr-shmallow-image",function(){
 	$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
+	
+	
 });
 
 function show_popup(my_title,data,popup_width,x,y){

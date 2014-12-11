@@ -60,12 +60,16 @@ class Common_model extends MY_Model
     function insert ()
     {
         $this->prepare_variables();
+        if($this->category_id == 1 && !$this->subcategory_id){
+            $this->db->where("common.subcategory_id",9);// update all annuals that are not categorized as "general"
+        }
         $id = $this->_insert("common");
         return $id;
     }
 
     function update ($id, $values = array())
     {
+
         return $this->_update("common", $id, $values);
     }
 
@@ -75,7 +79,8 @@ class Common_model extends MY_Model
         $this->db->from("common");
         $this->db->join("category","common.category_id = category.id","LEFT");
         $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
-        $this->db->select("common.*,subcategory.subcategory,category.category");
+        $this->db->select("common.*");
+        $this->db->select("subcategory.subcategory,category.category");
         $output = $this->db->get()->row();
 
         return $output;

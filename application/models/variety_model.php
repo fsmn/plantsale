@@ -210,9 +210,11 @@ class Variety_Model extends MY_Model
         $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $this->db->where("order.year", $year);
         $this->db->not_like("order.pot_size","bare");
-        $this->db->group_by("common.category");
+        $this->db->group_by("common.category_id");
+        $this->db->order_by("category.category");
         $this->db->select("count(`variety`.`id`) as count,category.category,category.id");
         $result = $this->db->get()->result();
+        $this->_log("notice");
         return $result;
     }
 
@@ -224,13 +226,15 @@ class Variety_Model extends MY_Model
         $this->db->join("category","common.category_id = category.id","LEFT");
         $this->db->where("order.year", $year);
         $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category`.`category` = 'perennials')", NULL, FALSE);
-        $this->db->group_by("common.category");
+        $this->db->group_by("common.category_id");
+        $this->db->order_by("category.category");
         // $this->db->select("sum(`order`.`count_presale` +
         // `order`.`count_midsale`) as count");
         $this->db->select("sum(`order`.`count_presale`) as presale_count");
         $this->db->select("sum(`order`.`count_midsale`) as midsale_count");
-        $this->db->select("category.category,category.id as category_id");        
+        $this->db->select("category.category,category.id as category_id");
         $result = $this->db->get()->result();
+        $this->_log("notice");
         return $result;
     }
 

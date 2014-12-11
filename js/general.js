@@ -119,7 +119,6 @@ $(document).on("blur",".field-envelope .live-field.text input",function(){
 	}
 	return false;
 });
-
 $(document).on("blur",".field-envelope .live-field textarea",function(){
 	update_field(this, "textarea");
 });
@@ -183,7 +182,8 @@ $(document).on("click",".autocomplete-on",function(){
 	$(this).html("Turn Autocomplete Off").removeClass("autocomplete-on").addClass("autocomplete-off");
 });
 
-$(document).on("click",".mr-shmallow",function(){
+$(document).ready(function(){
+$(".mr-shmallow").bind("click",function(){
 	//$(".mr-shmallow-image").fadeIn();
 	if(!$("#page").hasClass("on")){
 		$("#page").addClass("on").effect("bounce");
@@ -203,7 +203,8 @@ $(document).on("click",".mr-shmallow",function(){
 		$("#page").removeClass("on").effect("bounce");
 		$(this).html("Try This Out!");
 	}
-	
+
+});
 
 });
 

@@ -118,9 +118,7 @@ class Common_model extends MY_Model
         } elseif (! $this->name && $this->genus) {
             $this->db->where("`name` LIKE '%$this->genus%' OR `genus` LIKE '%$this->genus%'");
         }
-        if ($this->category) {
-            $this->db->where("category", $this->category);
-        }
+
         if($this->category_id){
             $this->db->where("common.category_id",$this->category_id);
         }

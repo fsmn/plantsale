@@ -8,8 +8,6 @@ class Common_model extends MY_Model
     var $genus;
     var $description;
     var $extended_description;
-    var $category;
-    var $subcategory;
     var $category_id;
     var $subcategory_id;
     var $other_names;

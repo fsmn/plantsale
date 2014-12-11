@@ -52,13 +52,13 @@ $buttons[] = array(
 
 $buttons[] = array(
 	"selection"=>"all",
-        "text"=>"Click Here",
+        "text"=>"Try This Out!",
         "class"=>array(
 	"button",
                 "mr-shmallow",
                 ),
         "href" =>"#",
-        "title" =>"Look Lively!",
+        "title" =>"More Experiments",
 );
 
 

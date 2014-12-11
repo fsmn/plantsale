@@ -25,4 +25,6 @@
 	</span>
 
 </form>
-<script type"text/javascript">$("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));</script>
+<script type"text/javascript">
+$("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));
+</script>

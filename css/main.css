@@ -970,3 +970,7 @@ ul.autocomplete-list li:hover {
 	width: auto;
 	height: auto;
 }
+
+.mr-shmallow.on ,#page.on{
+	font-family: "Monaco",serif;
+}

@@ -185,9 +185,11 @@ $(document).on("click",".autocomplete-on",function(){
 
 $(document).on("click",".mr-shmallow",function(){
 	//$(".mr-shmallow-image").fadeIn();
-	if($(this).hasClass("on")){
-		$(this).removeClass("on");
-		$("body").animate({backgroundColor: "#aa000",color: "#fff"},1000);
+	if(!$("#page").hasClass("on")){
+		$("#page").addClass("on").effect("bounce");
+		$(this).html("Oh Ick! Change it back!");
+
+		//$("#page").animate({backgroundColor: "#aa000"},1000);
 		//$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
 		$.ajax({
 			type:'post',
@@ -196,11 +198,9 @@ $(document).on("click",".mr-shmallow",function(){
 				console.log(data);
 			}
 		});
-		$(this).html("Oh Ick! Change it back!");
-		$(this).css({fontFamily:"Courier"});
 
 	}else{
-		$(this).addClass("on");
+		$("#page").removeClass("on").effect("bounce");
 		$(this).html("Try This Out!");
 	}
 	
@@ -208,7 +208,7 @@ $(document).on("click",".mr-shmallow",function(){
 });
 
 $(document).on('click',".mr-shmallow-image",function(){
-	$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
+	//$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
 	
 	
 });

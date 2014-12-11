@@ -1,13 +1,16 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <h2>
-	<?=$common->name;?>
+	<?=edit_field("name", $common->name, "","common",$common->id,array("envelope"=>"span"));?>
+
 </h2>
 <? if(IS_EDITOR):?>
 <? $buttons[] = array("selection" => "common" , "text" => "Edit", "class" => array("button","edit","common-edit"), "id" => "ec_$common->id", "type" => "span", "title" => "Edit this record");?>
+<? $buttons[] = array("selection"=>"common","text"=>"Delete","class"=>array("button","delete","delete-common"), "id"=>"delete-common_$common->id","type"=>"span","title"=>"Delete this Common");?>
 <?=create_button_bar($buttons);?>
 <? endif; ?>
 <div class="grouping" id="common">
 	<input type="hidden" name="id" id="id" value="<?=$common->id;?>" />
+
 	<?=edit_field("genus", $common->genus, "Genus","common",$common->id);?>
 	<?=edit_field("category_id", $common->category, "Category","common",$common->id, array("envelope"=>"p","class"=>"category-dropdown"));?>
 	<?=edit_field("subcategory_id", $common->subcategory, "Subcategory","common",$common->id,array("envelope"=>"p","class"=>"subcategory-dropdown"));?>

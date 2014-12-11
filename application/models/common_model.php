@@ -160,4 +160,8 @@ class Common_model extends MY_Model
         $this->_log();
         return $result;
     }
+
+    function delete($id){
+        $this->_delete("common", $id);
+    }
 }

@@ -26,16 +26,27 @@ function burn_cookie ($name)
     ));
 }
 
-function create_input ($object, $name, $label, $id = NULL,$default_value = FALSE)
+function create_input ($object, $name, $label, $id = NULL,$default_value = FALSE,$required = FALSE, $classes = array())
 {
     if (! $id) {
         $id = $name;
+    }
+    $class = "";
+    if($classes){
+if(is_array($classes)){
+    $class = join(" ",$classes);
+}else{
+    $class = $classes;
+}
+    }
+    if($required){
+        $required = "required";
     }
     $value = "";
     if($default_value){
         $value =  get_cookie($name);
     }
-    return sprintf("<label for='%s'>%s: </label><input type='text' name='%s' id='%s' value='%s'/>", $name, $label, $name, $id, get_value($object, $name,$value));
+    return sprintf("<label for='%s'>%s: </label><input type='text' name='%s' id='%s' value='%s' class='%s' %s/>", $name, $label, $name, $id, get_value($object, $name,$value),$class,$required);
 }
 
 function get_current_year ()
@@ -57,7 +68,7 @@ function get_keyed_pairs ($list, $pairs, $initialBlank = NULL, $other = NULL, $a
 {
     $output = false;
     if ($initialBlank) {
-        $output[] = "";
+        $output[""] = "";
     }
     if (! empty($alternate)) {
         $output[$alternate['name']] = $alternate['value'];

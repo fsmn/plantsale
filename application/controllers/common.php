@@ -236,6 +236,7 @@ $this->load->view("page/index",$data);
         if ($id = $this->input->post("id")) {
             if ($this->variety->get_by_common($id) == FALSE) {
                 $this->common->delete($id);
+                redirect("index");
             }
         }
     }

@@ -545,9 +545,10 @@ class Variety extends MY_Controller
 			$config ['upload_path'] = './files';
 			$this->load->helper ( 'directory' );
 			$config ['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG';
-			$config ['max_size'] = '1000';
-			$config ['max_width'] = '1024';
-			$config ['max_height'] = '768';
+			$config ['max_size'] = '2048';
+			$config ['max_width'] = '0';
+			$config ['max_height'] = '0';
+			$config['file_name'] = $this->input->post("variety_id") . $file_data['file_ext'];
 
 			$this->load->library ( 'upload', $config );
 
@@ -560,9 +561,11 @@ class Variety extends MY_Controller
 			}
 			else
 			{
+			    $config['file_name'] = $this->input->post("variety_id") . $file_data['file_ext'];
+
 				$file_data = $this->upload->data ();
 				$data ['image_display_name'] = $file_data ['file_name'];
-				$data ['image_description'] = $this->input->post ( 'image_description' );
+				$data ['image_source'] = $this->input->post ( 'image_source' );
 				$this->load->model ( "image_model" );
 				$variety_id = $this->input->post ( "variety_id" );
 				$id = $this->image_model->insert ( $variety_id, $file_data );

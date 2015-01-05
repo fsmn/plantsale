@@ -12,18 +12,21 @@ $i = 1;?>
 		<ul>
 
 		<? for($i = 0; $i < count ( $options ); $i ++):?>
-       	<li>
        	<? if(is_array($values[$i])){
        		$values[$i] = implode(",",$values[$i]);
        	}?>
-       	<? if($values[$i] == 1 && $keys[$i] == "no_image"): ?>
-       	  <strong>Only Showing Varieties without Images</strong>
-       	<? else:
-       	echo ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?=ucwords(clean_string($values [$i]));
+       	<? if($keys[$i] == "no_image"): ?>
+       	<? if($values[$i] == 1 ): ?>
+       	        	<li>
+       	  <strong>Only Showing Varieties without Images</strong></li>
+       	  <?else: ?>
+       	  <?endif;?>
+       	<? else:?>
+       	<li>
+       	<? echo ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?=ucwords(clean_string($values [$i]));?></strong>
+</li>
+       <?	endif;?>
 
-       	endif;?>
-       	</strong>
-		</li>
 		<? endfor;?>
 		</ul>
 	<?  else : ?>

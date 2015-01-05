@@ -13,6 +13,10 @@
 			<div id="is_new"><span class="is_new"><img src="<?=site_url("images/new.gif");?>"/>Is New</span></div>
 <? endif;?>
 <div class="grouping block variety-info" id="variety">
+<div class="block" id="image" style="float:right">
+	<? $this->load->view("image/view"); ?>
+
+</div>
 <div class='field-set'>
 			<?=edit_field("variety", $variety->variety, "Variety","variety",$variety->id, array("envelope"=>"div"));?>
 		</div>
@@ -22,6 +26,7 @@
 		<div class='field-set'>
 			<?=edit_field("species", $variety->species, "Species","variety",$variety->id, array("envelope"=>"div"));?>
 		</div>
+
 		<fieldset class="field-group inline-box">
 			<legend class="label">
 				<strong>Height</strong>

@@ -70,8 +70,8 @@ class Variety_Model extends MY_Model
         $this->db->where("variety.id", $id);
         $this->db->from("variety");
         $this->db->join("common", "variety.common_id = common.id");
-        $this->db->join("category","common.category_id = category.id","LEFT");
-        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
+        $this->db->join("category", "common.category_id = category.id", "LEFT");
+        $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->join("image", "variety.id=image.variety_id", "LEFT");
         $this->db->select(
                 "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,subcategory.subcategory,  category.category, common.description, common.sunlight, common.extended_description, common.other_names");
@@ -97,8 +97,8 @@ class Variety_Model extends MY_Model
     {
         $this->db->where("`variety` LIKE '%$name%' OR `common`.`name` LIKE '%$name%' OR `variety`.`species` LIKE '%$name%' OR `common`.`genus` LIKE '%$name%'");
         $this->db->join("common", "variety.common_id=common.id");
-        $this->db->join("category","common.category_id = category.id","LEFT");
-        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
+        $this->db->join("category", "common.category_id = category.id", "LEFT");
+        $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->order_by("variety", "ASC");
         $this->db->order_by("common.name", "ASC");
         $this->db->select(
@@ -144,7 +144,7 @@ class Variety_Model extends MY_Model
             $output = array();
             $this->db->select("id");
             $this->db->from("variety");
-            //$this->db->where("new_year IS NULL", NULL, false);
+            // $this->db->where("new_year IS NULL", NULL, false);
             $varieties = $this->db->get()->result();
             $flashes = array();
             foreach ($varieties as $variety) {
@@ -181,21 +181,22 @@ class Variety_Model extends MY_Model
 
     /**
      *
-     * @param int(4) $year
-     * get the varieties that are renewals from a previous year.
+     * @param int(4) $year get the varieties that are renewals from a previous
+     *        year.
      */
-    function get_reorders($year){
+    function get_reorders ($year)
+    {
         $this->db->from("variety as v");
         $this->db->from("order as o");
-        $this->db->join("common as c","v.common_id = c.id");
-        $this->db->join("category","common.category_id = category.id","LEFT");
-        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
+        $this->db->join("common as c", "v.common_id = c.id");
+        $this->db->join("category", "common.category_id = category.id", "LEFT");
+        $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->select("v.*");
         $this->db->select("o.year,o.id as order_id");
         $this->db->select("c.name,c.sunlight,c.genus");
-        $this->db->where("o.variety_id = v.id",NULL,FALSE);
-        $this->db->where("o.year",$year);
-        $this->db->where("v.new_year !=",$year);
+        $this->db->where("o.variety_id = v.id", NULL, FALSE);
+        $this->db->where("o.year", $year);
+        $this->db->where("v.new_year !=", $year);
         $this->db->order_by("category.category,c.name,c.genus,v.variety");
         $result = $this->db->get()->result();
         return $result;
@@ -206,10 +207,10 @@ class Variety_Model extends MY_Model
         $this->db->from("variety");
         $this->db->join("order", "variety.id=order.variety_id");
         $this->db->join("common", "common.id=variety.common_id");
-        $this->db->join("category","common.category_id = category.id","LEFT");
-        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
+        $this->db->join("category", "common.category_id = category.id", "LEFT");
+        $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->where("order.year", $year);
-        $this->db->not_like("order.pot_size","bare");
+        $this->db->not_like("order.pot_size", "bare");
         $this->db->group_by("common.category_id");
         $this->db->order_by("category.category");
         $this->db->select("count(`variety`.`id`) as count,category.category,category.id");
@@ -223,7 +224,7 @@ class Variety_Model extends MY_Model
         $this->db->from("variety");
         $this->db->join("order", "variety.id=order.variety_id");
         $this->db->join("common", "common.id=variety.common_id");
-        $this->db->join("category","common.category_id = category.id","LEFT");
+        $this->db->join("category", "common.category_id = category.id", "LEFT");
         $this->db->where("order.year", $year);
         $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category`.`category` = 'perennials')", NULL, FALSE);
         $this->db->group_by("common.category_id");
@@ -248,9 +249,8 @@ class Variety_Model extends MY_Model
                 if ($my_value) {
                     $my_parameters->$my_variable = new stdClass();
 
-                        $my_parameters->$my_variable->key = $my_variable;
-                        $my_parameters->$my_variable->value = $my_value;
-
+                    $my_parameters->$my_variable->key = $my_variable;
+                    $my_parameters->$my_variable->value = $my_value;
                 }
             }
         }
@@ -273,11 +273,14 @@ class Variety_Model extends MY_Model
         }
         $this->db->from("variety");
         $this->db->join("common", "variety.common_id = common.id");
-        $this->db->join("category","common.category_id = category.id","LEFT");
-        $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
+        $this->db->join("category", "common.category_id = category.id", "LEFT");
+        $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->join("flag", "variety.id = flag.variety_id", "LEFT");
-        $this->db->join("order", "variety.id = order.variety_id","RIGHT");
-
+        $this->db->join("order", "variety.id = order.variety_id", "RIGHT");
+        if ($this->input->get("no_image")) {
+            $this->db->join("image", "variety.id = image.variety_id", "LEFT");
+            $this->db->where("image.id IS NULL", NULL, FALSE);
+        }
         foreach ($my_parameters as $parameter) {
             if ($parameter->key == "sunlight") {
                 if ($this->input->get("sunlight-boolean") == "or") {
@@ -286,18 +289,19 @@ class Variety_Model extends MY_Model
                         $this->db->or_like("sunlight", "$my_item");
                     }
                 } elseif ($this->input->get("sunlight-boolean") == "only") {
-                    $this->db->where("sunlight", implode(",",$parameter->value));
+                    $this->db->where("sunlight", implode(",", $parameter->value));
                 } else {
-                    $this->db->like("sunlight", implode(",",$parameter->value));
+                    $this->db->like("sunlight", implode(",", $parameter->value));
                 }
             } elseif ($parameter->key == "name") {
                 $this->db->like("common.name", $parameter->value);
             } elseif ($parameter->key == "flag") {
-                if($this->input->get("not_flag") == 1){
-                    $this->db->where(sprintf("NOT EXISTS(SELECT 1 from flag where `flag`.`name` ='%s' AND `variety`.`id` = `flag`.`variety_id`)", urldecode($parameter->value)),NULL,FALSE);
-
-                }else{
-                $this->db->where("flag.name", urldecode($parameter->value));
+                if ($this->input->get("not_flag") == 1) {
+                    $this->db->where(
+                            sprintf("NOT EXISTS(SELECT 1 from flag where `flag`.`name` ='%s' AND `variety`.`id` = `flag`.`variety_id`)",
+                                    urldecode($parameter->value)), NULL, FALSE);
+                } else {
+                    $this->db->where("flag.name", urldecode($parameter->value));
                 }
             } elseif ($parameter->key == "year") {
                 $this->db->where("order.year", $parameter->value);
@@ -311,10 +315,10 @@ class Variety_Model extends MY_Model
                 $this->db->like($parameter->key, $parameter->value);
             } elseif ($parameter->key == "print_omit") {
                 $this->db->where("(order.print_omit is NULL OR order.print_omit != 1)", NULL, FALSE);
-            }elseif($parameter->key == "not_flag"){
-            	//no action taken
-            }elseif($parameter->key == "category_id"){
-            	$this->db->where("common.category_id",$parameter->value);
+            } elseif ($parameter->key == "not_flag") {
+                // no action taken
+            } elseif ($parameter->key == "category_id") {
+                $this->db->where("common.category_id", $parameter->value);
             } else {
                 $this->db->where($parameter->key, $parameter->value);
             }

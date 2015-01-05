@@ -12,14 +12,14 @@ class Variety extends MY_Controller
 			$this->load->model ( "common_model", "common" );
 			$this->load->model ( "order_model", "order" );
 			$this->load->model ( "flag_model", "flag" );
-		
+
 		}
 
 		function index()
 		{
 
 			redirect ();
-		
+
 		}
 
 		function create()
@@ -32,20 +32,20 @@ class Variety extends MY_Controller
 			$measure_units = $this->menu->get_pairs ( "measure_unit" );
 			$data ["measure_units"] = get_keyed_pairs ( $measure_units, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$plant_colors = $this->menu->get_pairs ( "plant_color", array (
 					"field" => "value",
-					"direction" => "ASC" 
+					"direction" => "ASC"
 			) );
 			$data ["plant_colors"] = get_keyed_pairs ( $plant_colors, array (
 					"key",
-					"value" 
+					"value"
 			) );
 			$data ["action"] = "insert";
 			$data ["title"] = "Add a new variety";
 			$this->load->view ( $data ["target"], $data );
-		
+
 		}
 
 		function insert()
@@ -59,7 +59,7 @@ class Variety extends MY_Controller
 				$pot_sizes = $this->order->get_pot_sizes ();
 				$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
 						"pot_size",
-						"pot_size" 
+						"pot_size"
 				) );
 				$data ["action"] = "insert";
 				$this->load->view ( "order/edit", $data );
@@ -68,7 +68,7 @@ class Variety extends MY_Controller
 			{
 				redirect ( "variety/view/$id" );
 			}
-		
+
 		}
 
 		function view()
@@ -93,7 +93,7 @@ class Variety extends MY_Controller
 				$data ["mini_view"] = FALSE;
 				$this->load->view ( "page/index", $data );
 			}
-		
+
 		}
 
 		function search()
@@ -105,35 +105,35 @@ class Variety extends MY_Controller
 			$categories = $this->category->get_pairs ();
 			$data ["categories"] = get_keyed_pairs ( $categories, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$subcategories = $this->subcategory->get_pairs ();
 			$data ["subcategories"] = get_keyed_pairs ( $subcategories, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$sunlight = $this->menu->get_pairs ( "sunlight", array (
-					"field" => "value" 
+					"field" => "value"
 			) );
 			$data ["sunlight"] = $sunlight;
 			$plant_colors = $this->menu->get_pairs ( "plant_color", array (
 					"field" => "value",
-					"direction" => "ASC" 
+					"direction" => "ASC"
 			) );
 			$data ["plant_colors"] = get_keyed_pairs ( $plant_colors, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$flags = $this->menu->get_pairs ( "flag", array (
-					"field" => "value" 
+					"field" => "value"
 			) );
 			$data ["flags"] = get_keyed_pairs ( $flags, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$data ["variety"] = NULL;
 			$this->load->view ( "variety/search", $data );
-		
+
 		}
 
 		function find()
@@ -155,7 +155,7 @@ class Variety extends MY_Controller
 					"grower_id",
 					"new_year",
 					"print_omit",
-					"crop_failure" 
+					"crop_failure",
 			);
 			$options = array ();
 			for($i = 0; $i < count ( $variables ); $i ++)
@@ -177,6 +177,7 @@ class Variety extends MY_Controller
 							bake_cookie ( $my_variable, implode ( ",", $my_value ) );
 							$options [$my_variable] = implode ( ",", $my_value );
 							break;
+
 						default :
 							$options [$my_variable] = $my_value;
 					}
@@ -186,7 +187,7 @@ class Variety extends MY_Controller
 					burn_cookie ( $my_variable );
 				}
 			}
-			
+
 			if ($not_flag = $this->input->get ( "not_flag" ))
 			{
 				bake_cookie ( "not_flag", $not_flag );
@@ -195,7 +196,9 @@ class Variety extends MY_Controller
 			{
 				burn_cookie ( "not_flag" );
 			}
-			
+
+
+
 			if ($sunlight_boolean = $this->input->get ( "sunlight-boolean" ))
 			{
 				if (array_key_exists ( "sunlight", $options ))
@@ -209,12 +212,12 @@ class Variety extends MY_Controller
 				burn_cookie ( "sunlight-boolean" );
 			}
 			$sorting ["fields"] = array (
-					"catalog_number" 
+					"catalog_number"
 			);
 			$sorting ["direction"] = array (
-					"ASC" 
+					"ASC"
 			);
-			
+
 			if ($this->input->get ( "sorting" ))
 			{
 				$sorting ["fields"] = $this->input->get ( "sorting" );
@@ -224,6 +227,12 @@ class Variety extends MY_Controller
 			bake_cookie ( "sorting", implode ( ",", $sorting ["fields"] ) );
 			bake_cookie ( "direction", implode ( ",", $sorting ["direction"] ) );
 			$data ["plants"] = $this->variety->find ( $variables, $sorting );
+			if($no_image = $this->input->get('no_image')){
+			    bake_cookie("no_image",$no_image);
+			}else{
+			    burn_cookie("no_image");
+			}
+			$data["options"]["no_image"] = $no_image;
 			$print_list = array ();
 			foreach ( $data ["plants"] as $plant )
 			{
@@ -235,12 +244,12 @@ class Variety extends MY_Controller
 			}
 			$this->session->set_userdata ( "print_list", $print_list );
 			$data ["title"] = "List of Varieties";
-			
+
 			$data ["target"] = "variety/$action";
 			$data ["full_list"] = TRUE;
-			
+
 			$this->load->view ( "page/index", $data );
-		
+
 		}
 
 		function search_by_name()
@@ -258,13 +267,13 @@ class Variety extends MY_Controller
 				$target = "variety/list";
 			}
 			$this->load->view ( $target, $data );
-		
+
 		}
 
 		function edit()
 		{
 
-		
+
 		}
 
 		function update()
@@ -273,7 +282,7 @@ class Variety extends MY_Controller
 			$id = $this->input->post ( "id" );
 			$this->variety->update ( "id" );
 			redirect ( "variety/view/$id" );
-		
+
 		}
 
 		function delete()
@@ -290,13 +299,13 @@ class Variety extends MY_Controller
 			{
 				redirect ( "common/view/$common_id" );
 			}
-		
+
 		}
 
 		/**
 		 * show all the plants that have been reordered from previous years.
 		 *
-		 * @param int(4) $year        	
+		 * @param int(4) $year
 		 */
 		function show_reorders($year)
 		{
@@ -309,7 +318,7 @@ class Variety extends MY_Controller
 			$data ['target'] = "variety/full_list";
 			$data ['title'] = "List of reordered plants for $year";
 			$this->load->view ( "page/index", $data );
-		
+
 		}
 
 		function edit_common_id()
@@ -328,7 +337,7 @@ class Variety extends MY_Controller
 					$id = $this->input->post ( "id" );
 					$common_id = $this->input->post ( "common_id" );
 					$this->variety->update ( $id, array (
-							"common_id" => $common_id 
+							"common_id" => $common_id
 					) );
 					redirect ( "variety/view/$id" );
 				}
@@ -337,14 +346,14 @@ class Variety extends MY_Controller
 			{
 				echo "You do not have permission to edit this!";
 			}
-		
+
 		}
 
 		function edit_value()
 		{
 
 			$data ["name"] = $this->input->get ( "field" );
-			
+
 			$value = $this->input->get ( "value" );
 			$data ["value"] = $value;
 			if (is_array ( $value ))
@@ -355,7 +364,7 @@ class Variety extends MY_Controller
 			$data ["size"] = strlen ( $data ["value"] ) + 5;
 			$data ["type"] = $this->input->get ( "type" );
 			$data ["category"] = $this->input->get ( "category" );
-			
+
 			switch ($data ["type"])
 			{
 				case "dropdown" :
@@ -373,9 +382,9 @@ class Variety extends MY_Controller
 				default :
 					$output = form_input ( $data );
 			}
-			
+
 			echo $output;
-		
+
 		}
 
 		function update_value()
@@ -388,11 +397,11 @@ class Variety extends MY_Controller
 				$value = implode ( ",", $value );
 			}
 			$values = array (
-					$this->input->post ( "field" ) => $value 
+					$this->input->post ( "field" ) => $value
 			);
 			$this->variety->update ( $id, $values );
 			echo $value;
-		
+
 		}
 
 		function update_new_status($year)
@@ -401,12 +410,12 @@ class Variety extends MY_Controller
 			$output = "";
 			if ($year)
 			{
-				
+
 				$output = $this->variety->update_all ( $year );
 			}
 			$this->session->set_flashdata ( "notice", sprintf ( "%s varieties were marked as new items for %s", count ( $output ), $year ) );
 			redirect ( "index" );
-		
+
 		}
 
 		function add_flag()
@@ -416,10 +425,10 @@ class Variety extends MY_Controller
 			$flags = $this->flag->get_missing ( $id );
 			$data ["flags"] = get_keyed_pairs ( $flags, array (
 					"key",
-					"value" 
+					"value"
 			), TRUE );
 			$this->load->view ( "flag/edit", $data );
-		
+
 		}
 
 		function insert_flag()
@@ -427,7 +436,7 @@ class Variety extends MY_Controller
 
 			$id = $this->flag->insert ();
 			$this->get_flags ( $this->input->post ( "variety_id" ) );
-		
+
 		}
 
 		function get_flags($id)
@@ -435,7 +444,7 @@ class Variety extends MY_Controller
 
 			$data ["flags"] = $this->flag->get_for_variety ( $id );
 			$this->load->view ( "flag/list", $data );
-		
+
 		}
 
 		function delete_flag()
@@ -444,7 +453,7 @@ class Variety extends MY_Controller
 			$id = $this->input->post ( "id" );
 			$this->flag->delete ( $id );
 			$this->get_flags ( $this->input->post ( "variety_id" ) );
-		
+
 		}
 
 		function print_result($format)
@@ -463,7 +472,7 @@ class Variety extends MY_Controller
 			$data ["title"] = sprintf ( "%s-Size List-%s Pages", ucfirst ( $format ), $count );
 			$data ["target"] = "variety/print/multiple";
 			$this->load->view ( "variety/print/index", $data );
-		
+
 		}
 
 		function print_options($id)
@@ -471,7 +480,7 @@ class Variety extends MY_Controller
 			// $data["id"] = $id;
 			// $this->load->view("variety/print/options", $data);
 			redirect ( "variety/print/$id" );
-		
+
 		}
 
 		function print_one($id, $format)
@@ -486,14 +495,14 @@ class Variety extends MY_Controller
 				if ($data ['variety']->new_year == get_cookie ( "sale_year" ))
 				{
 					$new = array (
-							"thumbnail" => "new-icon.png" 
+							"thumbnail" => "new-icon.png"
 					);
 					$data ['flags'] [] = ( object ) $new;
 				}
 				$data ['title'] = sprintf ( "%s-size Printout for %s %s", ucfirst ( $format ), $data ['variety']->common_name, $data ['variety']->variety );
 				$data ["target"] = "variety/print/$format";
 				$data ["classes"] = "";
-				
+
 				if (get_value ( $data ["order"], "crop_failure" ) == 1)
 				{
 					$data ["classes"] = "crop-failure";
@@ -504,14 +513,14 @@ class Variety extends MY_Controller
 			{
 				show_error ( sprintf ( "%s has no orders in %s", $data ['variety']->variety, get_cookie ( "sale_year" ) ) );
 			}
-		
+
 		}
 
 		function update_new_varieties($sale_year)
 		{
 
 			print_r ( $this->variety->update_all ( $sale_year ) );
-		
+
 		}
 
 		/**
@@ -527,7 +536,7 @@ class Variety extends MY_Controller
 				$data ['image'] = null;
 				$this->load->view ( 'variety/image', $data );
 			}
-		
+
 		}
 
 		function attach_image()
@@ -539,13 +548,13 @@ class Variety extends MY_Controller
 			$config ['max_size'] = '1000';
 			$config ['max_width'] = '1024';
 			$config ['max_height'] = '768';
-			
+
 			$this->load->library ( 'upload', $config );
-			
+
 			if (! $this->upload->do_upload ())
 			{
 				$error = array (
-						'error' => $this->upload->display_errors () 
+						'error' => $this->upload->display_errors ()
 				);
 				print_r ( $error );
 			}
@@ -559,7 +568,7 @@ class Variety extends MY_Controller
 				$id = $this->image_model->insert ( $variety_id, $file_data );
 				redirect ( "variety/view/$variety_id" );
 			}
-		
+
 		}
 
 		function delete_image()
@@ -578,7 +587,7 @@ class Variety extends MY_Controller
 			{
 				redirect ( "variety/view/$variety_id" );
 			}
-		
+
 		}
 
 		/**
@@ -590,14 +599,14 @@ class Variety extends MY_Controller
 			$this->load->model ( "menu_model", "menu" );
 			$categories = $this->menu->get_pairs ( $category, array (
 					"field" => "value",
-					"direction" => "ASC" 
+					"direction" => "ASC"
 			) );
 			$pairs = get_keyed_pairs ( $categories, array (
 					"key",
-					"value" 
+					"value"
 			) );
 			return form_dropdown ( $field, $pairs, $value, "class='live-field'" );
-		
+
 		}
 
 		function _get_multiselect($category, $value, $field)
@@ -606,16 +615,16 @@ class Variety extends MY_Controller
 			$this->load->model ( "menu_model", "menu" );
 			$categories = $this->menu->get_pairs ( $category, array (
 					"field" => "value",
-					"direction" => "ASC" 
+					"direction" => "ASC"
 			) );
 			$pairs = get_keyed_pairs ( $categories, array (
 					"key",
-					"value" 
+					"value"
 			) );
 			$output = array ();
 			$output [] = form_multiselect ( $field, $pairs, $value, "id='$field'" );
 			$buttons = implode ( " ", $output );
 			echo $buttons . sprintf ( "<span class='button save-multiselect' target='%s'>Save</span>", $field );
-		
+
 		}
 	}

@@ -38,7 +38,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 		</div>
 		<div class="column last">
 	<label for="subcategory_id">Subcategory: </label><span id="subcategory-envelope"><?=form_dropdown("subcategory_id",$subcategories,($refine ? get_cookie("subcategory_id"):""),'id="subcategory_id"');?></span>
-		
+
 		</div>
 	</div>
 	<div class="field-set">
@@ -73,6 +73,9 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 	</div>
 	<p>
 	<?=create_input($variety,"grower_id","Grower ID","grower_id",$refine);?>
+	</p>
+	<p>
+<input type="checkbox" name="no_image" id="no_image" value="1"/><label for="no_image">Missing Image</label>
 	</p>
 	<!-- <p>
 		<?=create_input($variety,"min_height","Min Height","min_height",$refine);?>

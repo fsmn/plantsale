@@ -16,7 +16,13 @@ $i = 1;?>
        	<? if(is_array($values[$i])){
        		$values[$i] = implode(",",$values[$i]);
        	}?>
-       	<?=ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?=ucwords(clean_string($values [$i])); ?></strong>
+       	<? if($values[$i] == 1 && $keys[$i] == "no_image"): ?>
+       	  <strong>Only Showing Varieties without Images</strong>
+       	<? else:
+       	echo ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?=ucwords(clean_string($values [$i]));
+
+       	endif;?>
+       	</strong>
 		</li>
 		<? endfor;?>
 		</ul>

@@ -1,25 +1,37 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
 
-$filename = "order_export.tsv";
-$header = "Grower ID\tYear\tCommon Name\tGenus\tSpecies\tVariety\tPot Size\tPresale Order\tMidsale Order\tFlat Size\tPot Count\tGrower Code\tCategory";
+defined('BASEPATH') or exit('No direct script access allowed');
 
-$output = array($header);
-foreach($orders as $order){
-	$line[] = $order->grower_id;
-	$line[] = $order->year;
-	$line[] = $order->name;
-	$line[] = $order->genus;
-	$line[] = $order->species;
-	$line[] = $order->variety;
-	$line[] = $order->pot_size;
-	$line[] = $order->count_presale;
-	$line[] = $order->count_midsale;
-	$line[] = $order->flat_size;
-	$line[] = ($order->count_presale + $order->count_midsale) * $order->flat_size;
-	$line[] = $order->grower_code;
-	$line[] = $order->category;
-	$output[] = implode("\t", $line);
-	$line = NULL;
+$filename = "order_export.txt";
+//Define the fields desired for output in this array
+$fields = array(
+        "grower_id" => "Grower ID",
+        "year" => "Year",
+        "name" => "Common Name",
+        "genus" => "Genus",
+        "species" => "Species",
+        "variety" => "Variety",
+        "pot_size" => "Pot Size",
+        "count_presale" => "Presale Order",
+        "count_midsale" => "Midsale Order",
+        "flat_size" => "Flat Size",
+        "flat_cost" => "Flat Cost",
+        "grower_code" => "Grower Code",
+        "category" => "Category"
+);
+foreach (array_values($fields) as $value) {
+    $header_values[] = $value;
+}
+
+$output = array(
+        implode("\t", $header_values)
+);
+foreach ($orders as $order) {
+    foreach (array_keys($fields) as $key) {
+        $line[] = $order->$key;
+    }
+    $output[] = implode("\t", $line);
+    $line = NULL;
 }
 
 $data = implode("\n", $output);

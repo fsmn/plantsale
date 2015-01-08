@@ -229,6 +229,11 @@ td .button,.row .button,.button.small {
 	padding: .25em .5em;
 }
 
+.grower.total.row {
+	font-size: normal;
+	border-bottom: 1px solid #000;
+}
+
 .button:hover {
 	
 }

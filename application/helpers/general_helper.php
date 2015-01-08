@@ -173,6 +173,30 @@ function format_dimensions ($min, $max, $unit = "Inches", $direction = NULL)
     return $output;
 }
 
+function format_address($grower)
+
+{
+    $street = array();
+    if ($grower->street_address) {
+        $street[] = $grower->street_address;
+    }
+    if ($grower->po_box) {
+        $street[] = $grower->po_box;
+    }
+    if ($grower->city) {
+        $locale = sprintf("%s, %s %s", $grower->city, $grower->state, $grower->zip);
+    } else {
+        $locale = "<span class='highlight'>NO CITY ENTERED</span>";
+    }
+    if(empty($street)){
+        $street = "<span class='highlight'>NO STREET OR PO ENTERED</span>";
+    }else{
+        $street = implode(" ",$street);
+    }
+
+    return array("street"=>$street,"locale"=>$locale);
+}
+
 /**
  *
  * @param stObj $order

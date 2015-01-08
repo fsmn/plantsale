@@ -59,9 +59,9 @@ class Order_Model extends MY_Model
 					"remainder_sunday",
 					"grower_code",
 					"crop_failure",
-					"print_omit" 
+					"print_omit"
 			);
-			
+
 			for($i = 0; $i < count ( $variables ); $i ++)
 			{
 				$my_variable = $variables [$i];
@@ -70,7 +70,7 @@ class Order_Model extends MY_Model
 					$this->$my_variable = urldecode ( $this->input->post ( $my_variable ) );
 				}
 			}
-			
+
 			$this->rec_modified = mysql_timestamp ();
 			$this->rec_modifier = $this->session->userdata ( 'user_id' );
 		}
@@ -162,7 +162,7 @@ class Order_Model extends MY_Model
 			if (! is_array ( $order_by ))
 			{
 				$order_by = array (
-						$order_by 
+						$order_by
 				);
 			}
 			for($i = 0; $i < count ( $order_by ["fields"] ); $i ++)
@@ -172,7 +172,7 @@ class Order_Model extends MY_Model
 				{
 					$order_field = $order_by ["fields"] [$i];
 				}
-				
+
 				$order_direction = "ASC";
 				if (array_key_exists ( "direction", $order_by ) && ! empty ( $order_by ["direction"] [$i] ))
 				{
@@ -269,12 +269,15 @@ class Order_Model extends MY_Model
 
 		/**
 		 *
-		 * @param int(4) $base_year        	
-		 * @param int(4) $comparison_year        	
+		 * @param int(4) $base_year
+		 * @param int(4) $comparison_year
 		 */
 		function get_non_reorders ( $base_year, $comparison_year )
 		{
 			$query = sprintf ( "select * from `order` as `o`, `variety` as `v` WHERE `v`.`id`= `o`.`variety_id` and `o`.`year` ='%s'
         and not exists (select `year` from `order`, `variety` where `o`.`variety_id` = `order`.`variety_id` and `year` ='%s')", $base_year, $comparison_year );
 		}
+
+
+
 	}

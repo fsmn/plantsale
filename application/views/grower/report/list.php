@@ -7,7 +7,9 @@
 </thead>
 <tbody>
 <? foreach($growers as $grower){
+    if($grower[0]){
     $this->load->view("grower/report/row",array("grower"=>$grower[0]));
+    }
 } ?>
 </tbody>
 </table>

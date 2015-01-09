@@ -11,6 +11,8 @@
 <?=edit_field("city", $grower->city, "City","grower",$grower->id);?>
 <?=edit_field("state", $grower->state, "State/Province","grower",$grower->id);?>
 <?=edit_field("zip", $grower->zip, "Postal Code","grower",$grower->id);?>
+<?=edit_field("country", $grower->country, "Country","grower",$grower->id);?>
+
 <?=edit_field("website", $grower->website, "Website","grower",$grower->id);?>
 <?=edit_field("email", $grower->email, "Email","grower",$grower->id,array("class"=>"email"));?>
 <?=edit_field("phone", $grower->phone, "Phone","grower",$grower->id);?>

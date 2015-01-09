@@ -194,7 +194,13 @@ function format_address($grower)
         $street = implode(" ",$street);
     }
 
-    return array("street"=>$street,"locale"=>$locale);
+    if(empty($grower->country)){
+        $country = "USA";
+    }else{
+        $country = $grower->country;
+    }
+
+    return array("street"=>$street,"locale"=>$locale, "country"=>$country);
 }
 
 /**

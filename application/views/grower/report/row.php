@@ -4,13 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 // row.php Chris Dart Jan 8, 2015 2:59:57 PM chrisdart@cerebratorium.com
 
-/*
- * INSERT INTO `grower` (`id`, `grower_name`, `street_address`, `po_box`,
- * `city`, `state`, `zip`, `website`, `email`, `phone`, `fax`, `shipping_notes`)
- * VALUES ('AA', 'Arrowhead Alpines', '1310 N Gregory Rd', 'PO Box 857',
- * 'Fowlerville', 'MI', '48836', '', '', '517-223-3581', '', '1769');
- */
-
+$year = get_cookie("sale_year");
 
 ?>
 <tr class="row grower total">
@@ -20,4 +14,5 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<td class="field"><?=$address["street"];?></td>
 	<td class="field"><?=$address["locale"];?></td>
 		<td class="field"><?=get_as_price($grower->total);?></td>
+		<td class="field"><a href="<?=base_url("order/search?grower_id=$grower->id&year=$year&sorting%5B%5D=genus&direction%5B%5D=ASC");?>" title="View current orders for this grower">Current Orders</a></td>
 </tr>

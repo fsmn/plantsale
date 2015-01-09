@@ -55,7 +55,7 @@ class grower extends MY_Controller
         foreach ($ids as $id) {
             $data["growers"][] = $this->grower->get_totals($id->grower_id, $year);
         }
-
+$data["year"] = $year;
         $data["title"] = "Totals Report by Grower for $year";
         $data["target"] = "grower/report/list";
         $this->load->view("page/index", $data);

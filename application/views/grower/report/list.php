@@ -4,6 +4,25 @@
 ?>
 <table class="list">
 <thead>
+<tr>
+<th>
+ID
+</th>
+<th>
+Name
+</th>
+<th>
+Street
+</th>
+<th>
+City, State, Zip
+</th>
+<th>
+Totals for <?=$year;?>
+</th>
+<th>
+</th>
+</tr>
 </thead>
 <tbody>
 <? foreach($growers as $grower){

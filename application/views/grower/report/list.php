@@ -2,6 +2,9 @@
 
 // report.php Chris Dart Jan 8, 2015 2:58:21 PM chrisdart@cerebratorium.com
 ?>
+<div class="button-box">
+<a href="<?=$_SERVER['REQUEST_URI']. "?export=true";?>" class="button" title="Export">Export List</a>
+</div>
 <table class="list">
 <thead>
 <tr>
@@ -20,7 +23,7 @@ City, State, Zip
 <th>
 Totals for <?=$year;?>
 </th>
-<th>
+<th class="no-print">
 </th>
 </tr>
 </thead>

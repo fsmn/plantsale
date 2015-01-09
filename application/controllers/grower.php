@@ -26,25 +26,22 @@ class grower extends MY_Controller
 
     function update_value ()
     {
-        $id = $this->input->post ( "id" );
-        $value = $this->input->post ( "value" );
-        $field = $this->input->post ( "field" );
-        if (is_array ( $value ))
-        {
-            $value = implode ( ",", $value );
+        $id = $this->input->post("id");
+        $value = $this->input->post("value");
+        $field = $this->input->post("field");
+        if (is_array($value)) {
+            $value = implode(",", $value);
         }
-        $values = array (
+        $values = array(
                 $field => $value
         );
-        $output = $this->grower->update ( $id, $values );
-        if ($output == "")
-        {
+        $output = $this->grower->update($id, $values);
+        if ($output == "") {
             $output = "&nbsp;";
         }
 
         echo $output;
     }
-
 
     function totals ($year = NULL)
     {
@@ -55,9 +52,16 @@ class grower extends MY_Controller
         foreach ($ids as $id) {
             $data["growers"][] = $this->grower->get_totals($id->grower_id, $year);
         }
-$data["year"] = $year;
+        $data["year"] = $year;
         $data["title"] = "Totals Report by Grower for $year";
-        $data["target"] = "grower/report/list";
-        $this->load->view("page/index", $data);
+        if ($this->input->get("export")) {
+            $this->load->helper ( "download" );
+            $this->load->view("grower/report/export", $data);
+
+        } else {
+            $data["target"] = "grower/report/list";
+            $this->load->view("page/index", $data);
+
+        }
     }
 }

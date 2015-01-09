@@ -16,5 +16,5 @@ $year = get_cookie("sale_year");
 	echo $address["country"] != "USA"? ", " . $address["country"]:"";
 	?></td>
 		<td class="field"><?=get_as_price($grower->total);?></td>
-		<td class="field"><a href="<?=base_url("order/search?grower_id=$grower->id&year=$year&sorting%5B%5D=genus&direction%5B%5D=ASC");?>" title="View current orders for this grower">Current Orders</a></td>
+		<td class="field no-print"><a href="<?=base_url("order/search?grower_id=$grower->id&year=$year&sorting%5B%5D=genus&direction%5B%5D=ASC");?>" title="View current orders for this grower">Current Orders</a></td>
 </tr>

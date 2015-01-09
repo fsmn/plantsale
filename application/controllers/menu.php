@@ -40,7 +40,7 @@ class Menu extends MY_Controller
             	$output = $this->_get_dropdown($data["category"],$common->category_id,$data["name"]);
             	break;
             case "subcategory-dropdown":
-            	$this->load->model("common_model","common"); 
+            	$this->load->model("common_model","common");
             	$common =  $this->common->get($data["id"]);
             	$output = $this->_get_dropdown($data["category"],$common->subcategory_id,$data["name"],$common->category_id);
             	break;
@@ -58,6 +58,10 @@ class Menu extends MY_Controller
                 $output = sprintf("<input type'%s' name='%s' id='%s' value='%s' size='%s'", $data['type'], $data['name'], $data['id'], $data['value'],
                         $data['size']);
                 break;
+                case "email":
+                    $output = sprintf("<input type'%s' name='%s' id='%s' value='%s' size='%s'", $data['type'], $data['name'], $data['id'], $data['value'],
+                    $data['size']);
+                    break;
             default:
                 $output = form_input($data);
         }
@@ -74,7 +78,7 @@ class Menu extends MY_Controller
         $category = $this->input->get("category");
         $value = $this->input->get("value");
         $field = $this->input->get("field");
-        
+
         echo $this->_get_dropdown($category, $value, $field, $this->input->get("parent"));
         die();
         switch ($category) {
@@ -88,7 +92,7 @@ class Menu extends MY_Controller
                     $categories = $this->subcategory->get_pairs();
                 }
                 //array_unshift($categories,(object)array("key"=>0,"value"=>""));
-                
+
                 break;
             default:
 
@@ -97,7 +101,7 @@ class Menu extends MY_Controller
                         "direction" => "ASC"
                 ));
         }
-      
+
         $pairs = get_keyed_pairs($categories, array(
                 "key",
                 "value"
@@ -205,16 +209,16 @@ class Menu extends MY_Controller
     			}else{
     				$categories = $this->subcategory->get_pairs();
     			}
-    	
+
     			break;
     		default:
-    	
+
     			$categories = $this->menu->get_pairs($category, array(
     			"field" => "value",
     			"direction" => "ASC"
     					));
     	}
-    	
+
         $pairs = get_keyed_pairs($categories, array(
                 "key",
                 "value"

@@ -14,7 +14,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 ?>
 <tr class="row grower total">
-	<td class="field"><?=$grower->grower_name;?></td>
+<td class="field"><a href="<?=base_url("grower/view/$grower->id");?>" title="view and edit the grower record"><?=$grower->id;?></a></td>
+	<td class="field"><a href="<?=base_url("grower/view/$grower->id");?>" title="View and edit the grower record"><?=$grower->grower_name;?></a></td>
 	<? $address = format_address($grower); ?>
 	<td class="field"><?=$address["street"];?></td>
 	<td class="field"><?=$address["locale"];?></td>

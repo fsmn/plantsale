@@ -9,6 +9,19 @@ class MY_Model extends CI_Model
         parent::__construct();
     }
 
+    function _get_value ($db, $id, $field)
+    {
+        $this->db->where("id", $id);
+        $this->db->select($field);
+        $this->db->from($db);
+        $output = $this->db->get()->row();
+        if($output){
+            return $output->$field;
+        }else{
+            return FALSE;
+        }
+    }
+
     function _get ($db, $id)
     {
         $this->db->from($db);
@@ -16,6 +29,8 @@ class MY_Model extends CI_Model
         $result = $this->db->get()->row();
         return $result;
     }
+
+
 
     function _insert ($db)
     {

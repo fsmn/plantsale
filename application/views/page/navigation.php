@@ -51,6 +51,14 @@ $buttons[] = array(
 );
 
 $buttons[] = array(
+	"selection" => "grower",
+        "text"=> "Grower Totals",
+        "class"=> array("button","grower-totals"),
+        "href"=>base_url("grower/totals"),
+        "title" => "Get Dollar Totals for All Growers for the current year",
+);
+
+$buttons[] = array(
 	"selection"=>"all",
         "text"=>"Try This Out!",
         "class"=>array(

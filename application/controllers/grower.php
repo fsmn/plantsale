@@ -11,6 +11,45 @@ class grower extends MY_Controller
         $this->load->model("contact_model", "contact");
     }
 
+    function view ($id)
+    {
+        if ($grower = $this->grower->get($id)) {
+            $data["grower"] = $grower;
+            $data["target"] = "grower/view";
+            $data["title"] = sprintf("Viewing Details for %s", $id);
+            $this->load->view("page/index", $data);
+        } else {
+            show_error(
+                    "The grower with ID $id could not be found. Press the back arrow, and notify the database administrator if you believe this error is a mistake.");
+        }
+    }
+
+    function update_value ()
+    {
+        $id = $this->input->post ( "id" );
+        $value = $this->input->post ( "value" );
+        $field = $this->input->post ( "field" );
+        if (is_array ( $value ))
+        {
+            $value = implode ( ",", $value );
+        }
+        $values = array (
+                $field => $value
+        );
+        $output = $this->grower->update ( $id, $values );
+        if ($output == "")
+        {
+            $output = "&nbsp;";
+        }
+        /*
+         * special tasks for categories: need to return the category name
+        * instead of the value for improved UX
+        */
+
+        echo $output;
+    }
+
+
     function totals ($year = NULL)
     {
         if (! $year) {

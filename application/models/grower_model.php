@@ -74,6 +74,12 @@ class grower_model extends MY_Model
         return $this->_update("grower", $id, $values);
     }
 
+    function get_value ( $id, $field)
+    {
+        return $this->_get_value("grower",$id,$field);
+    }
+
+
     function get ($id, $values = NULL)
     {
         $this->db->from("grower");
@@ -106,7 +112,7 @@ class grower_model extends MY_Model
                 "SELECT sum(`o`.`total`) as `total`, `grower`.* FROM (SELECT `grower_id`, (`count_presale` + `count_midsale`) * `flat_cost` as `total` FROM (`order`) WHERE `year` = '%s' AND `order`.`grower_id` = '%s' )  as `o` JOIN `grower` on `grower`.`id` = `o`.`grower_id` GROUP BY `o`.`grower_id`",
                 $year, $id);
         $result = $this->db->query($query)->result();
-        $this->_log("notice");
+       // $this->_log("notice");
         return $result;
     }
 }

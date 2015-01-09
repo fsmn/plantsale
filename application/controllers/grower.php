@@ -24,6 +24,32 @@ class grower extends MY_Controller
         }
     }
 
+    function is_unique ($id)
+    {
+        $output = TRUE;
+        if ($this->grower->is_unique($id) == 1) {
+            $output = FALSE;
+        }
+        echo $output;
+        return $output;
+    }
+
+    function create ()
+    {
+        $data["grower"] = NULL;
+        $data["action"] = "insert";
+        $data["target"] = "grower/edit";
+        $data["title"] = "Add New Grower";
+        $this->load->view("page/index", $data);
+    }
+
+    function insert ()
+    {
+        $this->grower->insert();
+        $id = $this->input->post("id");
+        redirect("grower/view/$id");
+    }
+
     function update_value ()
     {
         $id = $this->input->post("id");
@@ -55,13 +81,11 @@ class grower extends MY_Controller
         $data["year"] = $year;
         $data["title"] = "Totals Report by Grower for $year";
         if ($this->input->get("export")) {
-            $this->load->helper ( "download" );
+            $this->load->helper("download");
             $this->load->view("grower/report/export", $data);
-
         } else {
             $data["target"] = "grower/report/list";
             $this->load->view("page/index", $data);
-
         }
     }
 }

@@ -4,10 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class grower_model extends MY_Model
 {
     var $id;
-    var $name;
-    var $street;
-    var $unit_type;
-    var $unit;
+    var $grower_name;
+    var $street_address;
+    var $po_box;
     var $city;
     var $state;
     var $zip;
@@ -15,14 +14,14 @@ class grower_model extends MY_Model
     var $phone;
     var $email;
     var $website;
-    var $contact_id;
-    var $billing_id;
-    var $account;
-    var $payment_method;
-    var $shipping_id;
+   // var $contact_id;
+   // var $billing_id;
+   // var $account;
+   // var $payment_method;
+   // var $shipping_id;
     var $shipping_notes;
-    var $rec_modifier;
-    var $rec_modified;
+   // var $rec_modifier;
+  //  var $rec_modified;
 
     function __construct ()
     {
@@ -33,10 +32,9 @@ class grower_model extends MY_Model
     {
         $variables = array(
                 "id",
-                "name",
-                "street",
-                "unit_type",
-                "unit",
+                "grower_name",
+                "street_address",
+                "po_box",
                 "city",
                 "state",
                 "zip",
@@ -44,11 +42,6 @@ class grower_model extends MY_Model
                 "phone",
                 "email",
                 "website",
-                "contact_id",
-                "billing_id",
-                "account",
-                "payment_method",
-                "shipping_id",
                 "shipping_notes"
         );
 
@@ -59,14 +52,19 @@ class grower_model extends MY_Model
             }
         }
 
-        $this->rec_modified = mysql_timestamp();
-        $this->rec_modifier = $this->session->userdata('user_id');
+       // $this->rec_modified = mysql_timestamp();
+        //$this->rec_modifier = $this->session->userdata('user_id');
     }
 
     function insert ()
     {
         $this->prepare_variables();
         return $this->_insert("grower");
+    }
+
+    function is_unique($id){
+         return $this->db->query("SELECT id FROM grower WHERE id='$id'")->num_rows();
+
     }
 
     function update ($id, $values = array())

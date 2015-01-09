@@ -189,7 +189,7 @@ function format_address($grower)
         $locale = "<span class='highlight'>NO CITY ENTERED</span>";
     }
     if(empty($street)){
-        $street = "<span class='highlight'>NO STREET OR PO ENTERED</span>";
+        $street = "<span class='highlight'>NO STREET OR PO BOX ENTERED</span>";
     }else{
         $street = implode(" ",$street);
     }

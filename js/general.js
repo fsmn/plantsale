@@ -35,9 +35,25 @@ $(document).ready(function(){
 	});
 	$('table.list').stickytable();
 
- 	
 });
 
+	$(document).on("blur","#grower-id", function(){
+		my_id = $("#grower-id").val();
+		$.ajax({
+			type:"get",
+			url: base_url + "grower/is_unique/" + my_id,
+			success: function(data){
+				if(data == false){
+					$("#unique-id").html("This ID is not unique!");
+					$("#grower-id").addClass("notice");
+
+				}else{
+					$("#unique-id").html("OK");
+					$("#grower-id").removeClass("notice");
+				}
+			}
+		});
+	});
 
 $(document).on("click",".field-envelope .edit-field",function(){
 if($("body").hasClass("editor")){

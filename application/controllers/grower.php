@@ -41,10 +41,6 @@ class grower extends MY_Controller
         {
             $output = "&nbsp;";
         }
-        /*
-         * special tasks for categories: need to return the category name
-        * instead of the value for improved UX
-        */
 
         echo $output;
     }

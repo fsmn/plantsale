@@ -189,8 +189,8 @@ class Variety_Model extends MY_Model
         $this->db->from("variety as v");
         $this->db->from("order as o");
         $this->db->join("common as c", "v.common_id = c.id");
-        $this->db->join("category", "common.category_id = category.id", "LEFT");
-        $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
+        $this->db->join("category", "c.category_id = category.id", "LEFT");
+        $this->db->join("subcategory", "c.subcategory_id = subcategory.id", "LEFT");
         $this->db->select("v.*");
         $this->db->select("o.year,o.id as order_id");
         $this->db->select("c.name,c.sunlight,c.genus");

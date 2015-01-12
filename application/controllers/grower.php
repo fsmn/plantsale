@@ -34,9 +34,30 @@ class grower extends MY_Controller
         return $output;
     }
 
-    function create ()
+    function show_orphans ()
+    {
+        $orphans = $this->grower->get_orphans();
+        $data["title"] = "Orphan Grower Records";
+        $data["target"] = "grower/orphans";
+        if(!empty($orphans)){
+            $data["message"] = "The Following Orphan Records were Found";
+            $data["orphans"] = $orphans;
+        }else{
+            $data["orphans"] = NULL;
+            $data["message"] =  "No Orphan Growers Were Found.";
+        }
+        $this->load->view("page/index",$data);
+    }
+
+    function create ($id = NULL)
     {
         $data["grower"] = NULL;
+
+        if ($id) {
+            $data["grower"] = (object) array(
+                    "id" => strtoupper($id)
+            );
+        }
         $data["action"] = "insert";
         $data["target"] = "grower/edit";
         $data["title"] = "Add New Grower";

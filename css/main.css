@@ -964,6 +964,15 @@ ul.autocomplete-list li:hover {
 	background-color: #aaa;
 }
 
+.badge {
+	display: inline-block;
+	color: red;
+	background-color: white;
+	border-radius: 3px;
+	height: 1.1em;
+	width: 1.1em;
+}
+
 .mr-shmallow-image {
 
 }

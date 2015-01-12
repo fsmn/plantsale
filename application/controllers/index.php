@@ -11,8 +11,10 @@ class Index extends MY_Controller
 
     function index ()
     {
+        $this->load->model("grower_model","grower");
         $data["title"] = "Plant Sale Database";
         $data["target"] = "welcome";
+        $data["orphan_count"] = count($this->grower->get_orphans());
         $this->load->view("page/index", $data);
     }
 

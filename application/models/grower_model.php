@@ -77,6 +77,19 @@ class grower_model extends MY_Model
         return $this->_get_value("grower",$id,$field);
     }
 
+    function get_orphans ()
+    {
+        $this->db->select("order.grower_id");
+        $this->db->from("order");
+        $this->db->join("grower", "order.grower_id = grower.id", "LEFT");
+        $this->db->where("grower.id IS NULL", NULL, FALSE);
+        $this->db->where("order.grower_id !=", "");
+        $this->db->where("order.year",get_cookie("sale_year"));
+        $this->db->group_by("grower_id");
+        $result = $this->db->get()->result();
+        return $result;
+
+    }
 
     function get ($id, $values = NULL)
     {

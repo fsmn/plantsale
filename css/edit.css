@@ -17,10 +17,18 @@
 }
 
  table .edit-field:hover {
-	padding-left: 15px;
+	text-indent: 15px;
 	background-color: #FFFF96;
 }
 
 table .edit-field {
 	display: inline-block;
+}
+
+#order-edit input[type="text"] {
+	width:3em;
+}
+
+#order-edit input[name="grower_code"] {
+	width: 5em;
 }

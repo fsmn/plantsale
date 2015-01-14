@@ -9,6 +9,10 @@
 	method="post">
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
 	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
+	<? if($action == "update"):?>
+	<div class="field-set">
+	<div class="column first">
+	<? endif;?>
 	<div class="order-year field">
 		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_value($order,"year",get_cookie("sale_year"));?>" required />
 	</div>
@@ -41,6 +45,20 @@
 		<label for="count_midsale">Midsale Count:&nbsp;</label> <input type="text"
 			name="count_midsale" value="<?=get_value($order,"count_midsale");?>" autocomplete="off"/>
 	</div>
+		<div class="order-pot_size field">
+		<label for="pot_size">Pot Size:&nbsp;</label>
+		<?=form_dropdown("pot_size",$pot_sizes, urlencode(get_value($order, "pot_size")));?>
+	</div>
+	<div class="order-price field">
+		<label for="price">Price:&nbsp;</label> <input type="text" name="price"
+			value="<?=get_value($order,"price");?>" required autocomplete="off"/>
+	</div>
+	<div class="order-grower_code field">
+		<label for="grower_code">Grower Code:&nbsp;</label> <input type="text"
+			name="grower_code" value="<?=get_value($order,"grower_code");?>" />
+	</div>
+	</div>
+	<div class="column last">
 	<?php if($action == "update"):?>
 		<div class="order-received_presale field">
 		<label for="received_presale">Presale Received:&nbsp;</label> <input type="text"
@@ -50,28 +68,42 @@
 		<label for="received_midsale">Midsale Received:&nbsp;</label> <input type="text"
 			name="received_midsale" value="<?=get_value($order,"received_midsale");?>" autocomplete="off" />
 	</div>
-	<?php endif;?>
-	<div class="order-pot_size field">
-		<label for="pot_size">Pot Size:&nbsp;</label>
-		<?=form_dropdown("pot_size",$pot_sizes, urlencode(get_value($order, "pot_size")));?>
-		<!-- <input type="text"
-			name="pot_size" value="<?=get_value($order,"pot_size");?>" class='autocomplete-live' category='pot_size' /> -->
+		<div class="order-sellout_friday field">
+		<label for="sellout_friday">Sellout Friday:&nbsp;</label> <input type="text"
+			name="sellout_friday" value="<?=get_value($order,"sellout_friday");?>" size="6"/>
 	</div>
-	<div class="order-price field">
-		<label for="price">Price:&nbsp;</label> <input type="text" name="price"
-			value="<?=get_value($order,"price");?>" required autocomplete="off"/>
+	<div class="order-sellout_saturday field">
+		<label for="sellout_saturday">Sellout Saturday:&nbsp;</label> <input type="text"
+			name="sellout_saturday" value="<?=get_value($order,"sellout_saturday");?>"size="6" />
 	</div>
-	<div class="order-grower_code field">
-		<label for="grower_code">grower Code:&nbsp;</label> <input type="text"
-			name="grower_code" value="<?=get_value($order,"grower_code");?>" />
+		<div class="order-remainder_saturday field">
+		<label for="remainder_saturday">Remainder Saturday:&nbsp;</label> <input type="text"
+			name="remainder_saturday" value="<?=get_value($order,"remainder_saturday");?>" size="3"/>
 	</div>
-	<input type="hidden" name="redirect_url" id="redirect_url"/>
+		<div class="order-remainder_saturday field">
+		<label for="remainder_saturday">Remainder Saturday:&nbsp;</label> <input type="text"
+			name="remainder_saturday" value="<?=get_value($order,"remainder_saturday");?>"  size="3" />
+	</div>
+	<div class="order-remainder_sunday field">
+		<label for="remainder_sunday">Remainder Sunday:&nbsp;</label> <input type="text"
+			name="remainder_sunday" value="<?=get_value($order,"remainder_sunday");?>" size="3" />
+	</div>
+	<div class="order-count_dead field">
+		<label for="count_dead">Dead Count:&nbsp;</label> <input type="text"
+			name="count_dead" value="<?=get_value($order,"count_dead");?>" size="3"  />
+	</div>
+	</div>
+	</div>
+		<?php endif;?>
 
-	<div>
+	<input type="hidden" name="redirect_url" id="redirect_url"/>
+	<div style="clear:both">
 		<input type="submit" value="<?=ucfirst($action);?>" class="button" />
 		<? if($action == "update"): ?>
 		<span class="button delete delete-order" id="<? printf("delete-order_%s",$order->id);?>">Delete</span>
 		<? endif;?>
 	</div>
 </form>
-<script type"text/javascript">$("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));</script>
+<script type"text/javascript">
+$("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));
+</script>

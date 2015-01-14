@@ -56,51 +56,7 @@ Found Count: <strong><?=count($plants);?> Varieties</strong>
 			</h4>
 	</div>
 <div id="variety-orders" style="max-width: 900px;">
-<table class="list compressed">
-<thead>
-<tr class="top-row">
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th colspan=2>Sizes</th>
-<th></th>
-<th></th>
-<th colspan=2>Presale</th>
-<th colspan=2>Midsale</th>
-<th colspan=2>Sellout</th>
-<th colspan=3>Remainder</th>
-<th></th>
-</tr>
-<tr>
-<th></th>
-<th>Year</th>
-<th>Grower</th>
-<th>Cat#</th>
-<th>Pot Size</th>
-<th>Flat Size</th>
-<th>Plant Cost</th>
-<th>Price</th>
-<th>Ordered</th>
-<th>Rec&rsquo;d</th>
-<th>Ordered</th>
-<th>Rec&rsquo;d</th>
-<th>Fri</th>
-<th>Sat</th>
-<th>Fri</th>
-<th>Sat</th>
-<th>Sun</th>
-<th>Dead</th>
-</tr>
-</thead>
-<tbody>
-<? foreach($plant->orders as $order):?>
+<? $data["orders"] = $plant->orders;
+$this->load->view("order/list",$data);
+endforeach;
 
-<? $this->load->view("order/row",array("order"=>$order));?>
-<? endforeach; ?>
-</tbody>
-</table>
-</div>
-</div>
-
-<? endforeach;

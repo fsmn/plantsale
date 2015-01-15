@@ -17,12 +17,22 @@ $fields = array(
         "pot_size" => "Pot Size",
         "count_presale" => "Presale Order",
         "count_midsale" => "Midsale Order",
+        "received_presale" => "Received Presale",
+        "received_midsale" => "Received Midsale",
+        "sellout_friday" => "Sellout Time Friday",
+        "sellout_saturday" => "Sellout Time Saturday",
+        "remainder_friday" => "Remainder Friday",
+        "remainder_saturday" => "Remainder Saturday",
+        "remainder_sunday" => "Remainder Sunday",
+        "count_dead"=>"Count of Dead Plants",
+        "crop_failure" => "Crop Failure",
         "flat_size" => "Flat Size",
         "flat_cost" => "Flat Cost",
         "plant_cost" => "Plant Cost",
         "price" => "Sale Price",
-        "grower_code" => "Grower Code",
+        "grower_code" => "Grower Code"
 );
+
 foreach (array_values($fields) as $value) {
     $header_values[] = $value;
 }
@@ -36,7 +46,7 @@ foreach ($orders as $order) {
         if ($key == "new_year") {
             if ($order->$key == $current_year) {
                 $line[] = "New";
-            }else{
+            } else {
                 $line[] = "";
             }
         } else {

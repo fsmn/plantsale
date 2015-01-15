@@ -180,7 +180,9 @@ class Order_Model extends MY_Model
 				}
 				$this->db->order_by ( $order_field, $order_direction );
 			}
-			$this->db->select ( "order.id,grower_id,order.variety_id, order.year, order.catalog_number, order.flat_size, order.flat_cost, order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.grower_code, order.crop_failure" );
+			$this->db->select ( "order.*");
+// 			$this->db->select("order.plant_cost, order.pot_size, order.price,order.count_presale, order.count_midsale,order.grower_code, order.count_dead,order.crop_failure" );
+// 			$this->db->select("order.")
 			$this->db->select ( "order.received_presale,order.received_midsale,order.sellout_friday,order.sellout_saturday,order.remainder_friday,order.remainder_saturday,order.remainder_sunday,order.count_dead" );
 			$this->db->select ( "variety.variety, variety.species,variety.new_year" );
 			$this->db->select ( "common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id" );

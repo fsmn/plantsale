@@ -2,11 +2,12 @@
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
 ?>
 <h4><?=get_value($order,"variety","New Variety");?></h4>
-<?php if(get_value($order,"crop_failure",0)== 1):?>
-<div class='alert'>CROP FAILURE</div>
-<?php endif;?>
+
 <form name="order-edit" id="order-edit" action="<?=site_url("order/$action");?>"
 	method="post">
+	<?php if(get_value($order,"crop_failure",0)== 1):?>
+<div class='alert'>CROP FAILURE</div>
+<?php endif;?>
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
 	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
 	<? if($action == "update"):?>
@@ -27,7 +28,7 @@
 	</div>
 	<div class="order-flat_size field">
 		<label for="flat_size">Flat Size:&nbsp;</label> <input type="text"
-			name="flat_size" value="<?=get_value($order,"flat_size");?>" required autocomplete="off"/>
+			name="flat_size" valuecrop_failure="<?=get_value($order,"flat_size");?>" required autocomplete="off"/>
 	</div>
 	<div class="order-flat_cost field">
 		<label for="flat_cost">Flat Cost:&nbsp;</label> <input type="text"
@@ -106,4 +107,12 @@
 </form>
 <script type"text/javascript">
 $("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));
+
+$("#order-edit").on("change","#crop_failure",function(){
+	if($("#crop_failure").prop("checked")){
+	    $("#order-edit .alert").fadeIn().html("CROP FAILURE");
+	}else{
+		$("#order-edit .alert").fadeOut().html("");
+	}
+});
 </script>

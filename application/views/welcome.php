@@ -7,7 +7,10 @@ if($orphan_count > 0){
     $plural = $orphan_count > 1?"s":"";
 $action_buttons[] = array("text"=>"Show $orphan_count Orphan Grower$plural <span class='badge'>$orphan_count</span>","title"=>"There $verb $orphan_count grower$plural with no grower record. Click here to fix this.","class"=>array("button"),"href"=>site_url("grower/show_orphans"));
 }
-$action_buttons[] = array("selection"=>"variety","text"=>"Update New Orders","class"=>"button edit","title"=>"Update records for all orders made the first time this year","href"=>site_url("variety/update_new_status/" . get_cookie("sale_year")));
+$action_buttons[] = array("selection"=>"variety","text"=>"Update New Varieties","class"=>"button edit","title"=>"Update records for all varieties ordered for the first time this year","href"=>site_url("variety/update_new_status/" . get_cookie("sale_year")));
+if(IS_ADMIN){
+$action_buttons[] = array("selection"=>"order","text"=>"Set Catalog Numbers","class"=>array("button edit"),"title"=>"Update all catalog numbers for the current year","href"=>site_url("order/set_catalog_numbers") );
+}
 ?>
 
 <h1>Welcome to the Friends School Plant Sale Database!</h1>

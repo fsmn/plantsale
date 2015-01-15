@@ -231,6 +231,28 @@ class Order_Model extends MY_Model
 			return $output;
 		}
 
+		function get_for_catalog ($year, $category = NULL)
+		{
+		    $this->db->from("order");
+		    $this->db->join("variety", "order.variety_id = variety.id");
+		    $this->db->join("common", "variety.common_id = common.id");
+		    $this->db->join("category", "common.category_id = category.id", "LEFT");
+		    $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
+		    $this->db->where("order.year", $year);
+		    if ($category) {
+		        $this->db->where("common.category_id", $category);
+		    }
+		    $this->db->order_by("category.category", "ASC");
+		    $this->db->order_by("subcategory.subcategory", "ASC");
+		    $this->db->order_by("common.name", "ASC");
+		    $this->db->order_by("order.price", "ASC");
+		    $this->db->order_by("order.pot_size", "ASC");
+		    $this->db->order_by("variety.variety", "ASC");
+		    $this->db->select("order.id,category.category");
+		    $result = $this->db->get()->result();
+		    return $result;
+		}
+
 		function get_value ( $id, $field )
 		{
 			$this->db->where ( "id", $id );

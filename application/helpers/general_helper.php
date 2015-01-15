@@ -7,8 +7,8 @@ function mysql_timestamp ()
 
 function bake_cookie ($name, $value)
 {
-    if(is_array($value)){
-        $value = implode(",",$value);
+    if (is_array($value)) {
+        $value = implode(",", $value);
     }
     set_cookie(array(
             "name" => $name,
@@ -26,27 +26,28 @@ function burn_cookie ($name)
     ));
 }
 
-function create_input ($object, $name, $label, $id = NULL,$default_value = FALSE,$required = FALSE, $classes = array())
+function create_input ($object, $name, $label, $id = NULL, $default_value = FALSE, $required = FALSE, $classes = array())
 {
     if (! $id) {
         $id = $name;
     }
     $class = "";
-    if($classes){
-if(is_array($classes)){
-    $class = join(" ",$classes);
-}else{
-    $class = $classes;
-}
+    if ($classes) {
+        if (is_array($classes)) {
+            $class = join(" ", $classes);
+        } else {
+            $class = $classes;
+        }
     }
-    if($required){
+    if ($required) {
         $required = "required";
     }
     $value = "";
-    if($default_value){
-        $value =  get_cookie($name);
+    if ($default_value) {
+        $value = get_cookie($name);
     }
-    return sprintf("<label for='%s'>%s: </label><input type='text' name='%s' id='%s' value='%s' class='%s' %s/>", $name, $label, $name, $id, get_value($object, $name,$value),$class,$required);
+    return sprintf("<label for='%s'>%s: </label><input type='text' name='%s' id='%s' value='%s' class='%s' %s/>", $name, $label, $name, $id,
+            get_value($object, $name, $value), $class, $required);
 }
 
 function get_current_year ()
@@ -173,7 +174,7 @@ function format_dimensions ($min, $max, $unit = "Inches", $direction = NULL)
     return $output;
 }
 
-function format_address($grower)
+function format_address ($grower)
 
 {
     $street = array();
@@ -188,37 +189,41 @@ function format_address($grower)
     } else {
         $locale = "<span class='highlight'>NO CITY ENTERED</span>";
     }
-    if(empty($street)){
+    if (empty($street)) {
         $street = "<span class='highlight'>NO STREET OR PO BOX ENTERED</span>";
-    }else{
-        $street = implode(" ",$street);
+    } else {
+        $street = implode(" ", $street);
     }
 
-    if(empty($grower->country)){
+    if (empty($grower->country)) {
         $country = "USA";
-    }else{
+    } else {
         $country = $grower->country;
     }
 
-    return array("street"=>$street,"locale"=>$locale, "country"=>$country);
+    return array(
+            "street" => $street,
+            "locale" => $locale,
+            "country" => $country
+    );
 }
 
 /**
  *
  * @param stObj $order
- * @return string
- * if the difference between two prices is greater than a set
- * amount, there is a discrepancy.
- * This is used exclusively to provide a class tag for the orders where there
- * mistakes may have been entered into the system due to a bug in the
- * user interface.
+ * @return string if the difference between two prices is greater than a set
+ *         amount, there is a discrepancy.
+ *         This is used exclusively to provide a class tag for the orders where
+ *         there
+ *         mistakes may have been entered into the system due to a bug in the
+ *         user interface.
  */
 function has_price_discrepancy ($order)
 {
     $plant_value = round($order->flat_size * $order->plant_cost, 2);
     $output = "";
-    if ( abs($plant_value -$order->flat_cost) > .15 ) {
-       $output = "price-discrepancy";
+    if (abs($plant_value - $order->flat_cost) > .15) {
+        $output = "price-discrepancy";
     }
     return $output;
 }
@@ -228,3 +233,26 @@ function decode_string ($string)
 {
 }
 
+/**
+ * Create a custom sql sorting string.
+ *
+ * @param array $values
+ * @param string $field
+ * @return string
+ */
+function get_custom_order ($values = array(NULL,"Hostas","Daylilies","Coleus","Basil","Lavender"), $field = "name")
+{
+    // @TODO there should be a UI-available tool for global sorting.
+    $order[] = "CASE";
+    for ($i = 0; $i < count($values); $i ++) {
+        $my_value = $values[$i];
+        $x = $i + 1;
+        if ($my_value == "NULL" || $my_value == NULL) {
+            $order[] = "WHEN `$field` IS NULL THEN $x";
+        } else {
+            $order[] = "WHEN `$field`='$my_value' THEN $x";
+        }
+    }
+    $order[] = "END";
+    return implode(" ", $order);
+}

@@ -336,6 +336,8 @@ class Variety_Model extends MY_Model
         return $result;
     }
 
+
+
     function delete ($id)
     {
         if ($this->ion_auth->in_group(array(

@@ -3,70 +3,37 @@ defined('BASEPATH') or exit('No direct script access allowed');
 //$show_names = TRUE;
 // variety_order.php Chris Dart Mar 4, 2013 8:44:25 PM
 // chrisdart@cerebratorium.com
+
 if ($orders) :
     ?>
+
     <!-- views/order/catalog.php -->
-<table class="list">
+    <h5>Click on a header to hide the column [<a href="#" class=" reset-columns">Reset</a>]</h5>
+<table class="list catalog">
 	<thead>
-	<?php if($is_inventory): ?>
-	<tr>
-		<th></th>
-		<? if(!$show_names):?>
-			<th></th>
-		<? endif;?>
-			<th colspan=2></th>
-		<? if($show_names):?>
-			<th colspan=4></th>
 
-		<? endif;?>
-			<th colspan=4>Presale</th>
-
-			<th colspan=4>Midsale</th>
-			<th>Sunday</th>
-			<th colspan=8></th>
-
-	</tr>
-	<?php endif;?>
 		<tr>
-			<th></th>
+			<th class="hide-column"></th>
 		<? if(!$show_names):?>
-			<th>Year</th>
+			<th class="hide-column">Year</th>
 		<? endif;?>
-			<th>Grower</th>
-			<th>Cat&#35;</th>
+			<th class="hide-column">Grower</th>
+			<th  class="hide-column">Cat&#35;</th>
 		<? if($show_names):?>
-			<th>Genus</th>
-			<th>Species</th>
-			<th>Common</th>
-			<th>Variety</th>
+			<th  class="hide-column">Genus</th>
+			<th  class="hide-column">Species</th>
+			<th  class="hide-column">Common</th>
+			<th  class="hide-column">Variety</th>
 		<? endif;?>
-		<?php if($is_inventory):?>
-			<th>Ordered</th>
-			<th>Rec'd</th>
-			<th>Rem</th>
-			<th>Sellout</th>
-			<?php else: ?>
-			<th>Presale Order</th>
-			<?php endif;?>
-			<?php if($is_inventory):?>
-
-			<th>Ordered</th>
-			<th>Rec'd</th>
-			<th>Rem</th>
-			<th>Sellout</th>
-			<th>Rem</th>
-			<th>Dead Count</th>
-
-			<?php else: ?>
-			<th>Midsale Order</th>
-			<?php endif;?>
-			<th>Total</th>
-			<th>Pot Size</th>
-			<th>Flat Size</th>
-			<th>Flat Cost</th>
-			<th>Plant Cost</th>
-			<th>Price</th>
-			<th>Grower Code</th>
+			<th  class="hide-column">Presale Order</th>
+			<th  class="hide-column">Midsale Order</th>
+			<th class="hide-column" >Total</th>
+			<th class="hide-column">Pot Size</th>
+			<th class="hide-column">Flat Size</th>
+			<th class="hide-column">Flat Cost</th>
+			<th class="hide-column">Plant Cost</th>
+			<th class="hide-column">Price</th>
+			<th class="hide-column" >Grower Code</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -226,4 +193,4 @@ if ($orders) :
 	</tfoot>
 </table>
 
-<? endif;
+<? endif; ?>

@@ -973,6 +973,10 @@ ul.autocomplete-list li:hover {
 	width: 1.1em;
 }
 
+.hide-column {
+	cursor: pointer;
+}
+
 .mr-shmallow-image {
 
 }

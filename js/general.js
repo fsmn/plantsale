@@ -21,7 +21,21 @@ $(document).ready(function(){
 			}
 		});
 	});
-
+	
+	$("table.list.catalog").on("click","th", function(){
+		id = $("table.list th").index(this);
+		id = Number(id) + 1;
+		target = 'td:nth-child(' + id  + ')';
+		console.log(target);
+		$(target).hide();
+		$(this).hide();
+		$("table.list .top-row").hide();
+	});
+	
+	$("h5").on("click",".reset-columns",function(){
+		$("table.list.catalog th").show();
+		$("table.list.catalog td").show();
+	});
 	
 	
 	$(".search-fieldset").on("click","legend",function(){
@@ -223,6 +237,8 @@ $(".mr-shmallow").bind("click",function(){
 });
 
 });
+
+
 
 $(document).on('click',".mr-shmallow-image",function(){
 	//$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});

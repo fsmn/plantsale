@@ -43,6 +43,8 @@ Found Count: <strong><?=count($orders);?> Orders</strong>
 	</div>
 	</div>
 </fieldset>
+
+
 <? if($is_inventory){
     $this->load->view("order/inventory");
 }else{

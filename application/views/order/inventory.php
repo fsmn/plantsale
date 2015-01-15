@@ -9,7 +9,7 @@ if ($orders) :
 <table class="list">
 	<thead>
 	<?php if($is_inventory): ?>
-	<tr>
+	<tr class="top-row">
 		<th></th>
 		<? if(!$show_names):?>
 			<th></th>

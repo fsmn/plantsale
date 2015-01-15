@@ -6,9 +6,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 if ($orders) :
     ?>
     <!-- views/order/inventor.php -->
-<table class="list">
+        <h5 class="column-instructions">Click on a header to hide the column [<a href="#" class=" reset-columns">Reset</a>]</h5>
+
+<table class="list inventory hideable-columns">
 	<thead>
-	<?php if($is_inventory): ?>
 	<tr class="top-row">
 		<th></th>
 		<? if(!$show_names):?>
@@ -26,7 +27,6 @@ if ($orders) :
 			<th colspan=8></th>
 
 	</tr>
-	<?php endif;?>
 		<tr>
 			<th></th>
 		<? if(!$show_names):?>
@@ -175,13 +175,14 @@ if ($orders) :
 			<td class="order-flat_size field">
 			<?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-flat_size field cost-field" id="flat_size"><span id="edit-flat-size_<?=$order->id;?>" class="edit-cost"><?=$order->flat_size;?></span>
-			</td>
 			<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">$<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=$order->flat_cost;?></span>
 			</td>
 			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=$order->plant_cost;?></span>
 			</td>
-			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-price field">
+			<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<td class="order-grower_code field">$<?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="re-order field"><span
 				id="oc_<?=$order->variety_id;?>"

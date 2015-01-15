@@ -22,19 +22,21 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("table.list.catalog").on("click","th", function(){
-		id = $("table.list th").index(this);
+	$("table.list.hideable-columns").on("click","th", function(){
+		$("table.list.hideable-columns .top-row").remove();
+
+		id = $("table.list.hideable-columns th").index(this);
 		id = Number(id) + 1;
-		target = 'td:nth-child(' + id  + ')';
+		target = '.hideable-columns td:nth-child(' + id  + ')';
 		console.log(target);
+
 		$(target).hide();
 		$(this).hide();
-		$("table.list .top-row").hide();
 	});
 	
-	$("h5").on("click",".reset-columns",function(){
-		$("table.list.catalog th").show();
-		$("table.list.catalog td").show();
+	$(".column-instructions").on("click",".reset-columns",function(){
+		$("table.list.hideable-columns th").show();
+		$("table.list.hideable-columns td").show();
 	});
 	
 	

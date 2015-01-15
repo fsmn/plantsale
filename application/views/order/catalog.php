@@ -8,8 +8,8 @@ if ($orders) :
     ?>
 
     <!-- views/order/catalog.php -->
-    <h5>Click on a header to hide the column [<a href="#" class=" reset-columns">Reset</a>]</h5>
-<table class="list catalog">
+    <h5 class="column-instructions">Click on a header to hide the column [<a href="#" class=" reset-columns">Reset</a>]</h5>
+<table class="list catalog hideable-columns">
 	<thead>
 
 		<tr>

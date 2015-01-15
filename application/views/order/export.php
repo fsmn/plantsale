@@ -37,8 +37,8 @@ foreach (array_values($fields) as $value) {
     $header_values[] = $value;
 }
 
-$output = array('"' .
-        implode('","', $header_values ). '"'
+$output = array(
+        implode(",", $header_values )
 );
 foreach ($orders as $order) {
     $current_year = $order->year;
@@ -53,7 +53,7 @@ foreach ($orders as $order) {
             $line[] = $order->$key;
         }
     }
-    $output[] = '"' . implode('","', $line) . '"';
+    $output[] = "\"" . implode("\",\"", $line) . "\"";
     $line = NULL;
 }
 

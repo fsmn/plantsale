@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$filename = "order_export.txt";
+$filename = "order_export.csv";
 // Define the fields desired for output in this array
 $fields = array(
         "grower_id" => "Grower ID",
@@ -37,8 +37,8 @@ foreach (array_values($fields) as $value) {
     $header_values[] = $value;
 }
 
-$output = array(
-        implode("\t", $header_values)
+$output = array('"' .
+        implode('","', $header_values ). '"'
 );
 foreach ($orders as $order) {
     $current_year = $order->year;
@@ -53,7 +53,7 @@ foreach ($orders as $order) {
             $line[] = $order->$key;
         }
     }
-    $output[] = implode("\t", $line);
+    $output[] = '"' . implode('","', $line) . '"';
     $line = NULL;
 }
 

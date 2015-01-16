@@ -32,6 +32,7 @@ if ($orders) :
 			<th class="hide-column">Flat Size</th>
 			<th class="hide-column">Flat Cost</th>
 			<th class="hide-column">Plant Cost</th>
+			<th class="hide-column">Order Total</th>
 			<th class="hide-column">Price</th>
 			<th class="hide-column" >Grower Code</th>
 			<th></th>
@@ -70,7 +71,7 @@ if ($orders) :
 
         $presale_total += $order->count_presale;
         $midsale_total += $order->count_midsale;
-        $flat_cost_total += $order->flat_cost;
+        $flat_cost_total += $order->flat_cost * ($order->count_presale + $order->count_midsale);
         $row_classes[] = has_price_discrepancy($order);
         ?>
 		<tr
@@ -155,7 +156,9 @@ if ($orders) :
 			</td>
 			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=$order->plant_cost;?></span>
 			</td>
-			<td class="order-price field no-wrap">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-order_total field order_total no-wrap">$<?=$order->flat_cost * ($order->count_presale + $order->count_midsale);?>
+			</td>
+			<td class="order-price field price-field no-wrap">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
@@ -184,8 +187,9 @@ if ($orders) :
 			<th><?php echo number_format($presale_total+ $midsale_total);?></th>
 			<th></th>
 			<th></th>
-			<th><?php echo get_as_price($flat_cost_total);?></th>
 			<th></th>
+			<th></th>
+			<th><?php echo get_as_price($flat_cost_total);?></th>
 			<th></th>
 			<th></th>
 			<th></th>

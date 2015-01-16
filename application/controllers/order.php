@@ -16,7 +16,8 @@ class Order extends MY_Controller
 
 		function index()
 		{
-
+print_r(get_cookie("sorting_fields"));
+print_r(get_cookie("sorting_direction"));
 
 		}
 
@@ -56,6 +57,7 @@ class Order extends MY_Controller
 						"key",
 						"value"
 				), TRUE );
+
 				$this->load->view ( "order/search", $data );
 			}
 			else
@@ -127,6 +129,9 @@ class Order extends MY_Controller
 				{
 					$sorting ["fields"] = $this->input->get ( "sorting" );
 					$sorting ["direction"] = $this->input->get ( "direction" );
+					bake_cookie("sorting_fields",serialize($sorting["fields"]));
+					bake_cookie("sorting_direction",serialize($sorting["direction"]));
+
 				}
 
 				if ($this->input->get ( "show_names" ) == 1)
@@ -195,8 +200,12 @@ class Order extends MY_Controller
 
 		function show_sort()
 		{
+		    if($ajax = $this->input->get("basic_sort")){
+		        $data["basic_sort"] = TRUE;
+		        $this->load->view ( "order/sort" ,$data);
 
-			$this->load->view ( "order/sort" );
+		    }
+
 
 		}
 

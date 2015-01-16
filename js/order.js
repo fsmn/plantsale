@@ -118,12 +118,16 @@
 	});
 	
 	$(document).on("click",".add-order-sort", function(){
-
+		form_data = {
+				basic_sort: 1
+		};
 		$.ajax({
 			type:"get",
 			url: base_url + "order/show_sort",
+			data: form_data,
 			success: function(data){
 				$("#sort-block").append(data);
+				console.log(data);
 			}
 		});
 		$(this).addClass("disabled");

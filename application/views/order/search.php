@@ -65,7 +65,8 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 </p>
 </div>
 <div id="sort-block">
-<? $this->load->view("order/sort");?>
+<? $data["basic_sort"] = $refine?FALSE:TRUE; ?>
+<? $this->load->view("order/sort",$data);?>
 </div>
 <p><input type="submit" class="button" value="Search"/></p>
 </form>

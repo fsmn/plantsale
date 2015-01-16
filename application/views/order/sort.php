@@ -1,24 +1,50 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<p>
-<select name="sorting[]">
-<option value=""></option>
-<option value="catalog_number">Catalog Number</option>
-<option value="category">Category</option>
-<option value="subcategory">Subcategory</option>
-<option value="genus" selected>Genus</option>
-<option value="species" >Species</option>
-<option value="variety">Variety</option>
-<option value="grower_code">Vendor Code</option>
-<option value="count_presale">Presale Count</option>
-<option value="count_midsale">Midsale Count</option>
-<option value="pot_size">Pot Size</option>
-<option value="common.name">Common Name</option>
-</select>
-<select name="direction[]">
-<option value="ASC">Ascending</option>
-<option value="DESC">Descending</option>
-</select>
+<?php
 
-<?php echo create_button(array("selection"=>"any","text"=>"Add Sort Option","type"=>"span","class"=>"button add-order-sort small"));?>
-</p>
-<p>
+defined('BASEPATH') or exit('No direct script access allowed');
+$sorting = array(
+        NULL => NULL,
+        "catalog_number" => "Catalog Number",
+        "category" => "Category",
+        "subcategory" => "Subcategory",
+        "genus" => "Genus",
+        "species" => "Species",
+        "variety" => "Variety",
+        "grower_code" => "Vendor Code",
+        "count_presale" => "Presale Count",
+        "count_midsale" => "Midsale Count",
+        "pot_size" => "Pot Size",
+        "common.name" => "Common Name"
+);
+$direction = array(
+        "ASC" => "Ascending",
+        "DESC" => "Descending"
+);
+
+$button = create_button(array(
+        "selection" => "any",
+        "text" => "Add Sort Option",
+        "type" => "span",
+        "class" => "button add-order-sort small"
+));
+$saved_sort = get_cookie("sorting_fields");
+if ($saved_sort && $basic_sort == FALSE) {
+    $saved_sort = unserialize($saved_sort);
+    $saved_direction = unserialize(get_cookie("sorting_direction"));
+    for ($i = 0; $i < count($saved_sort); $i ++) {
+        $output[] = "<p>";
+        $output[] = form_dropdown("sorting[]", $sorting, $saved_sort[$i]);
+        $output[] = form_dropdown("direction[]", $direction, $saved_direction[$i]);
+        $output[] = $button;
+        $output[] = "</p>";
+    }
+} else {
+    $output[] = "<p>";
+    $output[] = form_dropdown("sorting[]", $sorting, "genus");
+    $output[] = form_dropdown("direction[]", $direction, "ASC");
+    $output[] = $button;
+    $output[] = "</p>";
+}
+
+echo implode("\r", $output);
+
+

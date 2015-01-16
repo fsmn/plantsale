@@ -180,9 +180,9 @@ if ($orders) :
 			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=$order->plant_cost;?></span>
 			</td>
 			<td class="order-price field">
-			<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
+			$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-grower_code field">$<?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="re-order field"><span
 				id="oc_<?=$order->variety_id;?>"

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$filename = "order_export.csv";
+//$filename = "order_export.csv";
 // Define the fields desired for output in this array
 $fields = array(
         "grower_id" => "Grower ID",
@@ -24,7 +24,7 @@ $fields = array(
         "remainder_friday" => "Remainder Friday",
         "remainder_saturday" => "Remainder Saturday",
         "remainder_sunday" => "Remainder Sunday",
-        "count_dead"=>"Count of Dead Plants",
+        "count_dead" => "Count of Dead Plants",
         "crop_failure" => "Crop Failure",
         "flat_size" => "Flat Size",
         "flat_cost" => "Flat Cost",
@@ -33,12 +33,31 @@ $fields = array(
         "grower_code" => "Grower Code"
 );
 
+if ($export_type == "grower") {
+    $fields = array(
+            "name" => "Common Name",
+            "genus" => "Genus",
+            "species" => "Species",
+            "variety" => "Variety",
+            "category" => "Category",
+            "subcategory" => "Subcategory",
+            "pot_size" => "Pot Size",
+            "count_presale" => "Wednesday",
+            "count_midsale" => "Saturday",
+            "flat_size" => "Flat Size",
+            "flat_cost" => "Flat Cost",
+            "plant_cost" => "Plant Cost",
+            "price" => "Sale Price",
+            "grower_code" => "Grower Code"
+    );
+}
+
 foreach (array_values($fields) as $value) {
     $header_values[] = $value;
 }
 
 $output = array(
-        implode(",", $header_values )
+        implode(",", $header_values)
 );
 foreach ($orders as $order) {
     $current_year = $order->year;

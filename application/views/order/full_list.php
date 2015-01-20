@@ -31,7 +31,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <? $direction = $this->input->get("direction");?>
 <ul>
 <? for($i = 0; $i < count($sorting); $i++):?>
-<li><? printf("%s, %s", ucwords($sorting[$i]), $direction[$i]); ?></li>
+<li><? printf("%s, %s", clean_string(ucwords($sorting[$i])), $direction[$i]); ?></li>
 <? endfor; ?>
 </ul>
 <p>
@@ -39,10 +39,15 @@ Found Count: <strong><?=count($orders);?> Orders</strong>
 </p>
 	<div class="button-box">
 		<span class="button search-orders refine">Refine Search</span>
-		<a href="<?=$_SERVER['REQUEST_URI']. "&export=true";?>" class="button" title="Export">Export List</a>
+
 	</div>
 	</div>
 </fieldset>
+
+<? $buttons[] = array("text"=>"Full Export","title"=>"Export all the fields using the current sort","class"=>array("button","array"), "href"=>$_SERVER['REQUEST_URI']. "&export=true" );
+$buttons[] = array("text"=>"Grower Export","title"=>"Export grower fields using a special grower export","class"=>array("button","array"), "href"=>$_SERVER['REQUEST_URI']. "&export=true&export_type=grower" );
+print create_button_bar($buttons);
+?>
 
 
 <? if($is_inventory){

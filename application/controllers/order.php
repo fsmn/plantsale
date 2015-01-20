@@ -134,6 +134,13 @@ print_r(get_cookie("sorting_direction"));
 
 				}
 
+				if($this->input->get("export_type") == "grower"){
+				    $sorting["fields"] = array("grower_code","genus","common.name","variety","species");
+				    $sorting["direction"] = array("ASC","ASC","ASC","ASC","ASC");
+				    bake_cookie("sorting_fields",serialize($sorting["fields"]));
+				    bake_cookie("sorting_direction",serialize($sorting["direction"]));
+				}
+
 				if ($this->input->get ( "show_names" ) == 1)
 				{
 					$data ["show_names"] = TRUE;
@@ -185,6 +192,13 @@ print_r(get_cookie("sorting_direction"));
 				$data ["title"] = "List of $category orders for $sale_year";
 				if ($this->input->get ( "export" ))
 				{
+				    $data["export_type"] = "standard";
+				    $data["filename"] = "order_export.csv";
+
+				    if($export_type = $this->input->get("export_type")){
+				        $data["filename"] = $this->input->get("grower_id") . "-export.csv";
+				        $data["export_type"] = $export_type;
+				    }
 					$this->load->helper ( "download" );
 					$this->load->view ( "order/export", $data );
 				}

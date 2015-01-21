@@ -12,6 +12,7 @@ if ($orders) :
 	<thead>
 	<tr class="top-row">
 		<th></th>
+		<th></th>
 		<? if(!$show_names):?>
 			<th></th>
 		<? endif;?>
@@ -28,6 +29,7 @@ if ($orders) :
 
 	</tr>
 		<tr>
+		<th></th>
 			<th></th>
 		<? if(!$show_names):?>
 			<th>Year</th>
@@ -104,7 +106,13 @@ if ($orders) :
 		<tr
 			class="<?=implode(" ",$row_classes);?>"
 			id="order_<?=$order->id;?>">
-			<td>
+
+
+			<td class="no-wrap">
+			<? if(IS_ADMIN):?>
+				<span class="omit-row button" id="omit-order_<?=$order->id;?>">Omit</span>
+
+			<? endif;?>
 			<? if(IS_EDITOR):?>
 			<span
 				class="button edit edit-order"
@@ -114,7 +122,6 @@ if ($orders) :
 				href="<?=site_url("order/view/$order->id");?>"
 				class="button">View</a>
 				<? endif; ?>
-
 				</td>
 			<? if(!$show_names):?>
 				<td class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
@@ -184,7 +191,7 @@ if ($orders) :
 			</td>
 			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="re-order field"><span
+<td class="re-order field"><span
 				id="oc_<?=$order->variety_id;?>"
 				class="button new order-create">Re-order</span></td>
 		</tr>

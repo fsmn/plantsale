@@ -1,4 +1,8 @@
-	$(document).on("click",".order-create",function(){
+$(document).ready(function(){
+
+});
+
+$(document).on("click",".order-create",function(){
 		my_id = this.id.split("_")[1];
 		redirect_url = $(location).attr("href");
 		form_data = {
@@ -182,7 +186,45 @@
 		
 	});
 	
-	
-  
+
+	$(document).on("click",".batch-update-orders",function(){
+		batch_update_orders();
+	});
     
+	$(document).ready(function(){
+		$("table.list").on("click",".omit-row",function(){
+			omit_row(this);
+		});
+	})
+	
+	function omit_row(me){
+		var my_id = me.id.split("_")[1];
+		console.log(my_id);
+		$("#order_" + my_id).remove();
+	}
+	
+	function batch_update_orders(){
+		var id_array = $.map($(".edit-order"),function(n,i){
+			return n.id.split("_")[1];
+		});
+		form_data = {
+				ids: id_array,
+				action: "edit"
+		};
+		console.log(id_array);
+		
+		$.ajax({
+			type:"post",
+			data: form_data,
+			url: base_url + "order/batch_update",
+			success: function(data){
+				show_popup("Batch Updater",data,"auto");
+			}
+			
+		});
+	}
+	
+	function batch_update_warning(){
+		
+	}
  

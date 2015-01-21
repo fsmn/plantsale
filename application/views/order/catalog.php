@@ -77,7 +77,10 @@ if ($orders) :
 		<tr
 			class="<?=implode(" ",$row_classes);?>"
 			id="order_<?=$order->id;?>">
-			<td>
+			<td class="no-wrap">
+			<? if(IS_ADMIN):?>
+			<span class="omit-row button" id="omit-order_<?=$order->id;?>">Omit</span>
+			<? endif;?>
 			<? if(IS_EDITOR):?>
 			<span
 				class="button edit edit-order"

@@ -5,6 +5,8 @@ $(document).ready(function(){
 		$("span.edit,  span.new, span.delete,button.edit,  button.new, button.delete ,a.edit,  a.new, a.delete").remove();
 	}
 	
+
+	
 	$("#utility").on("click",".set-current-year", function(){
 		my_uri = $(location).attr("href");
 

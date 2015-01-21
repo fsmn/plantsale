@@ -28,7 +28,7 @@
 	</div>
 	<div class="order-flat_size field">
 		<label for="flat_size">Flat Size:&nbsp;</label> <input type="text"
-			name="flat_size" valuecrop_failure="<?=get_value($order,"flat_size");?>" required autocomplete="off"/>
+			name="flat_size" value="<?=get_value($order,"flat_size");?>" required autocomplete="off"/>
 	</div>
 	<div class="order-flat_cost field">
 		<label for="flat_cost">Flat Cost:&nbsp;</label> <input type="text"

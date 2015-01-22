@@ -47,7 +47,7 @@ Found Count: <strong><?=count($orders);?> Orders</strong>
 <? $buttons[] = array("text"=>"Full Export","title"=>"Export all the fields using the current sort","class"=>array("button","array"), "href"=>$_SERVER['REQUEST_URI']. "&export=true" );
 $buttons[] = array("text"=>"Grower Export","title"=>"Export grower fields using a special grower export","class"=>array("button","array"), "href"=>$_SERVER['REQUEST_URI']. "&export=true&export_type=grower" );
 if(IS_ADMIN){
-$buttons[] = array("text"=>"Batch Update","title"=>"Batch Update values for all the listed orders.","class"=>array("button","batch-update-orders"));
+$buttons[] = array("text"=>"Batch Update","title"=>"Batch Update values for all the listed orders.","class"=>array("button","batch-update-orders","edit"));
 }
 print create_button_bar($buttons);
 ?>

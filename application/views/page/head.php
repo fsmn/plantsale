@@ -23,10 +23,13 @@ var base_url = '<?=base_url("index.php") . "/";?>';
 
 <!-- General Script  -->
 <script type="text/javascript" src="<?=base_url("js/general.js");?>"></script>
-
-<? if(IS_EDITOR) {
-   //$this->load->view("page/secure_javascript.php");
-} ?>
+<? if($this->ion_auth->in_group(3)):?>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("span.edit,  span.new, span.delete,button.edit,  button.new, button.delete ,a.edit,  a.new, a.delete").remove();
+});
+</script>
+<? endif; ?>
 <!-- Common Name Scripts -->
 <script type="text/javascript" src="<?=base_url("js/common.js");?>"></script>
 

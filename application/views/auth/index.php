@@ -1,7 +1,11 @@
-<h2><?php echo lang('index_heading');?></h2>
+<?php defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
-<div id="infoMessage"><?php echo $message;?></div>
+$buttons[] = array("text"=>"Create User","class"=>array("button new"),"href"=>site_url("auth/create_user"));
+$buttons[] = array("text"=>"Create Group","class"=>array("button new"),"href"=>site_url("auth/create_group"));
 
+?> <h2>Users</h2>
+
+<?=create_button_bar($buttons); ?>
 <table class="list">
 	<tr>
 		<th>First Name</th>
@@ -26,6 +30,3 @@
 		</tr>
 	<?php endforeach;?>
 </table>
-
-<div class="button-box"><ul class="button-list"><li><?php echo anchor('auth/create_user', "New User", "class='button new new-user'")?></li>
-<li><?php echo anchor('auth/create_group', "New Group", "class='button new new-group'")?></li></ul></div>

@@ -44,7 +44,7 @@ function create_input ($object, $name, $label, $id = NULL, $default_value = FALS
     }
     $value = "";
     if ($default_value) {
-        $value = get_cookie($name);
+        $value = $default_value;
     }
     return sprintf("<label for='%s'>%s: </label><input type='text' name='%s' id='%s' value='%s' class='%s' %s/>", $name, $label, $name, $id,
             get_value($object, $name, $value), $class, $required);

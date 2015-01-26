@@ -16,8 +16,9 @@ $fields = array(
         "phone" => "Phone",
         "fax" => "Fax"
 );
-foreach ($fields as $field => $key) {
-    $output[] = sprintf("<p>%s</p>", create_input($grower, $field, $key, $field, NULL, FALSE));
+foreach ($fields as $field => $label) {
+
+    $output[] = sprintf("<p>%s</p>", create_input($grower, $field, $label, $field));
 }
 ?>
 <form

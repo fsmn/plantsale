@@ -12,6 +12,105 @@ class Menu extends MY_Controller
         $this->load->model("subcategory_model", "subcategory");
     }
 
+    function show_all ($category = FALSE)
+    {
+        if (IS_ADMIN) {
+            $data["items"] = $this->menu->get_all($category);
+            $data["categories"] = $this->menu->get_categories(FALSE);
+
+            if ($category) {
+                $data["title"] = "Showing Menu Items for $category";
+            } else {
+                $data["title"] = "Showing All Menu Items";
+            }
+        } else {
+            $data["title"] = "You are not authorized to view this page.";
+            $data["items"] = NULL;
+            $this->session->set_flashdata("notice", "You are not authorized to do edit menu items");
+        }
+        $data["target"] = "menu/list";
+
+        $this->load->view("page/index", $data);
+    }
+
+    function show_categories ()
+    {
+        $data["categories"] = $this->menu->get_categories(FALSE);
+        $data["target"] = "menu/categories";
+    }
+
+    function create ()
+    {
+        if (IS_ADMIN) {
+            $data["title"] = "Editing a Menu Item";
+            $data["target"] = "menu/edit";
+            $data["ajax"] = FALSE;
+            $data["action"] = "insert";
+            $data["item"] = NULL;
+            $data["categories"] = get_keyed_pairs($this->menu->get_categories(FALSE), array(
+                    "category",
+                    "category"
+            ));
+            $page = "page/index";
+            if ($this->input->get("ajax")) {
+                $data["ajax"] = TRUE;
+                $page = $data["target"];
+            }
+            $this->load->view($page, $data);
+        }
+    }
+
+    function edit ($id = NULL)
+    {
+        if ($id) {
+            $data["title"] = "Editing a Menu Item";
+            $data["target"] = "menu/edit";
+            $data["ajax"] = FALSE;
+            $data["categories"] = get_keyed_pairs($this->menu->get_categories(FALSE), array(
+                    "category",
+                    "category"
+            ));
+
+            $page = "page/index";
+            if ($this->input->get("ajax")) {
+                $data["ajax"] = TRUE;
+
+                $page = $data["target"];
+            }
+
+            if (IS_ADMIN) {
+                $data["action"] = "update";
+                $data["item"] = $this->menu->get($id);
+            } else {
+                $data["item"] = NULL;
+                $data["title"] = "No Access";
+                $data["action"] = FALSE;
+            }
+            $this->load->view($page, $data);
+        }
+    }
+
+    function insert ()
+    {
+        if (IS_ADMIN) {
+            $item = $this->menu->insert();
+            $this->session->set_flashdata("notice", "The item was successfully added");
+            redirect("menu/show_all/$item->category");
+        }
+    }
+
+    function update ()
+    {
+        if (IS_ADMIN) {
+            if ($id = $this->input->post("id")) {
+                $item = $this->menu->update($id);
+                $this->session->set_flashdata("notice", "The item was successfully updated");
+
+                redirect("menu/show_all/$item->category");
+            }
+        }
+    }
+
     function edit_value ()
     {
         $data["name"] = $this->input->get("field");
@@ -35,15 +134,15 @@ class Menu extends MY_Controller
                 $output = $this->_get_dropdown($data["category"], $data["value"], $data["name"]);
                 break;
             case "category-dropdown":
-            	$this->load->model("common_model","common");
-            	$common = $this->common->get($data["id"]);
-            	$output = $this->_get_dropdown($data["category"],$common->category_id,$data["name"]);
-            	break;
+                $this->load->model("common_model", "common");
+                $common = $this->common->get($data["id"]);
+                $output = $this->_get_dropdown($data["category"], $common->category_id, $data["name"]);
+                break;
             case "subcategory-dropdown":
-            	$this->load->model("common_model","common");
-            	$common =  $this->common->get($data["id"]);
-            	$output = $this->_get_dropdown($data["category"],$common->subcategory_id,$data["name"],$common->category_id);
-            	break;
+                $this->load->model("common_model", "common");
+                $common = $this->common->get($data["id"]);
+                $output = $this->_get_dropdown($data["category"], $common->subcategory_id, $data["name"], $common->category_id);
+                break;
             case "multiselect":
                 $output = $this->_get_multiselect($data["category"], $data["value"], $data["name"]);
                 break;
@@ -58,10 +157,10 @@ class Menu extends MY_Controller
                 $output = sprintf("<input type'%s' name='%s' id='%s' value='%s' size='%s'", $data['type'], $data['name'], $data['id'], $data['value'],
                         $data['size']);
                 break;
-                case "email":
-                    $output = sprintf("<input type'%s' name='%s' id='%s' value='%s' size='%s'", $data['type'], $data['name'], $data['id'], $data['value'],
-                    $data['size']);
-                    break;
+            case "email":
+                $output = sprintf("<input type'%s' name='%s' id='%s' value='%s' size='%s'", $data['type'], $data['name'], $data['id'], $data['value'],
+                        $data['size']);
+                break;
             default:
                 $output = form_input($data);
         }
@@ -86,26 +185,27 @@ class Menu extends MY_Controller
                 $categories = $this->category->get_pairs();
                 break;
             case "subcategory":
-                if($category_id = $this->input->get("parent")){
+                if ($category_id = $this->input->get("parent")) {
                     $categories = $this->subcategory->get_pairs($category_id);
-                }else{
+                } else {
                     $categories = $this->subcategory->get_pairs();
                 }
-                //array_unshift($categories,(object)array("key"=>0,"value"=>""));
+                // array_unshift($categories,(object)array("key"=>0,"value"=>""));
 
                 break;
             default:
 
-                $categories = $this->menu->get_pairs($category, array(
-                        "field" => "value",
-                        "direction" => "ASC"
-                ));
+                $categories = $this->menu->get_pairs($category,
+                        array(
+                                "field" => "value",
+                                "direction" => "ASC"
+                        ));
         }
 
         $pairs = get_keyed_pairs($categories, array(
                 "key",
                 "value"
-        ),TRUE);
+        ), TRUE);
         echo form_dropdown($field, $pairs, $value, "class='save-field'");
     }
 
@@ -175,7 +275,7 @@ class Menu extends MY_Controller
         if ($this->input->get("is_live")) {
             $is_live = $this->input->get("is_live");
         }
-    switch ($category) {
+        switch ($category) {
             case "category":
                 $categories = $this->category->get_pairs();
                 break;
@@ -185,10 +285,11 @@ class Menu extends MY_Controller
                 break;
             default:
 
-                $categories = $this->menu->get_pairs($category, array(
-                        "field" => "value",
-                        "direction" => "ASC"
-                ));
+                $categories = $this->menu->get_pairs($category,
+                        array(
+                                "field" => "value",
+                                "direction" => "ASC"
+                        ));
         }
 
         // $this->session->set_flashdata("notice",$this->db->last_query());
@@ -197,32 +298,33 @@ class Menu extends MY_Controller
         // echo form_dropdown ( $field, $pairs, $value, "class='save-field'" );
     }
 
-    function _get_dropdown ($category, $value, $field,$parent_id = FALSE)
+    function _get_dropdown ($category, $value, $field, $parent_id = FALSE)
     {
-    	switch ($category) {
-    		case "category":
-    			$categories = $this->category->get_pairs();
-    			break;
-    		case "subcategory":
-    			if($parent_id){
-    				$categories = $this->subcategory->get_pairs($parent_id);
-    			}else{
-    				$categories = $this->subcategory->get_pairs();
-    			}
+        switch ($category) {
+            case "category":
+                $categories = $this->category->get_pairs();
+                break;
+            case "subcategory":
+                if ($parent_id) {
+                    $categories = $this->subcategory->get_pairs($parent_id);
+                } else {
+                    $categories = $this->subcategory->get_pairs();
+                }
 
-    			break;
-    		default:
+                break;
+            default:
 
-    			$categories = $this->menu->get_pairs($category, array(
-    			"field" => "value",
-    			"direction" => "ASC"
-    					));
-    	}
+                $categories = $this->menu->get_pairs($category,
+                        array(
+                                "field" => "value",
+                                "direction" => "ASC"
+                        ));
+        }
 
         $pairs = get_keyed_pairs($categories, array(
                 "key",
                 "value"
-        ),TRUE);
+        ), TRUE);
         return form_dropdown($field, $pairs, $value, "class='live-field'");
     }
 

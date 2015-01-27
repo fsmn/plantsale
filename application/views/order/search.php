@@ -45,7 +45,7 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 <label for="year">Year</label><input type="number" id="year" name="year" style="width:4em" value="<?php echo get_cookie("sale_year");?>"/>
 </div>
 <div class="column last">
-<label for="new_year">First Year at Sale</label><input type="number" name="new_year" title "(enter current year for all new items)" style="width:4em" value="<?=$refine?get_cookie("new_year"):"";?>"/>
+<label for="new_year">First Year at Sale</label><input type="number" name="new_year" title="(enter current year for all new items)" style="width:4em" value="<?=$refine?get_cookie("new_year"):"";?>"/>
 </div>
 </div>
 <div class="field-set">

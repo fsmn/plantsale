@@ -49,7 +49,7 @@ if ($orders) :
             "Ordered",
             "Rec&rsquo;d",
             "Ordered",
-            "Rec&resquo;d",
+            "Rec&rsquo;d",
             "Fri",
             "Sat",
             "Fri",

@@ -11,6 +11,8 @@ class Variety extends MY_Controller
         $this->load->model("common_model", "common");
         $this->load->model("order_model", "order");
         $this->load->model("flag_model", "flag");
+        $this->load->library("field");
+
     }
 
     function index ()

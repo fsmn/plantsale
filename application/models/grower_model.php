@@ -125,7 +125,7 @@ class grower_model extends MY_Model
                 "SELECT sum(`o`.`total`) as `total`, `grower`.* FROM (SELECT `grower_id`, (IFNULL(`count_presale`,0) + IFNULL(`count_midsale`,0)) * `flat_cost` as `total` FROM (`order`) WHERE `year` = '%s' AND `order`.`grower_id` = '%s' )  as `o` LEFT JOIN `grower` on `grower`.`id` = `o`.`grower_id` GROUP BY `o`.`grower_id`",
                 $year, $id);
         $result = $this->db->query($query)->row();
-        $this->_log("notice");
+        //$this->_log("notice");
         return $result;
     }
 }

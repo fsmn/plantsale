@@ -99,7 +99,7 @@ if ($orders) :
 
         $presale_total += $order->count_presale;
         $midsale_total += $order->count_midsale;
-        $flat_cost_total += $order->flat_cost;
+        $flat_cost_total += $order->flat_cost * ($order->count_presale + $order->count_midsale);
          $row_classes[] = has_price_discrepancy($order);
 
         ?>

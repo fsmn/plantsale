@@ -8,7 +8,6 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <input type="hidden" id="action" name="action" value="update"/>
 <h2>DANGER: Updating <?=count($ids);?> Records</h2>
 <p class="notice">Changes you submit here cannot be undone!</p>
-<div class="order-flat_size field">
 
 	<div class="order-flat_size field">
 		<label for="flat_size">Flat Size:&nbsp;</label> <input type="text"
@@ -38,7 +37,6 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"
 			value="" autocomplete="off"/>
 	</div>
-	<div>
 	<input type="submit" class="button" class="button delete"/>
 </form>
 

@@ -273,3 +273,16 @@ function create_list($items){
 	}
 	return json_encode($output);
 }
+
+/**
+ * $field_name string
+ * $source_object stdObj
+ * $parent string
+ * $wrapper string
+ * $extras multidimensional array required wrapper and envelope
+
+function wrapped_field($field_name,$value,$table,$id, $wrapper = "span",$extra = array("envelope"=>"span")){
+   // return $source_object->$field_name;
+    $output = sprintf("<%s class='field %s-%s'>%s</%s>",$wrapper, $table,$field_name,edit_field($field_name,$value,"",$table,$id,$extra),$wrapper);
+    return $output;
+} */

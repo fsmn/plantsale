@@ -1,24 +1,28 @@
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
-
+$countries = array("USA"=>"USA","Canada"=>"Canada");
 // view.php Chris Dart Jan 8, 2015 5:30:58 PM chrisdart@cerebratorium.com
 $fields = array(
-        "grower_name" => "Name",
-        "street_address" => "Street Address",
-        "po_box" => "PO Box",
-        "city" => "City",
-        "state" => "State",
-        "zip" => "Zip",
-        "country" => "Country",
-        "website" => "Website",
-        "email" => "Email",
-        "phone" => "Phone",
-        "fax" => "Fax"
+        "grower_name" => array("label"=>"Name"),
+        "street_address" => array("label"=>"Street Address"),
+        "po_box" => array("label"=>"PO Box"),
+        "city" => array("label"=>"City"),
+        "state" => array("label"=>"State"),
+        "zip" => array("label"=>"Zip"),
+        "country" => array("label"=>"Country","type"=>"dropdown","options"=>$countries),
+        "website" => array("label"=>"Website"),
+        "email" => array("label"=>"Email"),
+        "phone" => array("label"=>"Phone"),
+        "fax" => array("label"=>"Fax"),
 );
-foreach ($fields as $field => $label) {
+foreach ($fields as $field ) {
+if(array_key_exists("type",$field) && $field["type"] == "dropdown"){
+    $output[] = sprintf("<p><label for='%s'>%s:&nbsp;</label>%s</p>",$field, $field["label"],form_dropdown($field,$field["options"],"USA"));
+}else{
 
-    $output[] = sprintf("<p>%s</p>", create_input($grower, $field, $label, $field));
+    $output[] = sprintf("<p>%s</p>", create_input($grower, $field, $field["label"], $field));
+}
 }
 ?>
 <form

@@ -37,7 +37,7 @@
 Found Count: <strong><?=count($plants);?> Varieties</strong>
 </p>
 	<div class="button-box">
-		<span class="button search-varieties">Refine Search</span>
+		<span class="button search-varieties refine">Refine Search</span>
 	</div>
 	</div>
 </fieldset>
@@ -58,5 +58,7 @@ Found Count: <strong><?=count($plants);?> Varieties</strong>
 <div id="variety-orders" style="max-width: 900px;">
 <? $data["orders"] = $plant->orders;
 $this->load->view("order/list",$data);
-endforeach;
+endforeach; ?>
+</div>
+</div>
 

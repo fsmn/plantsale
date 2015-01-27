@@ -161,6 +161,8 @@ class Variety extends MY_Controller
                     default:
                         $options[$my_variable] = $my_value;
                 }
+                bake_cookie($my_variable,$my_value);
+
             } else {
                 burn_cookie($my_variable);
             }

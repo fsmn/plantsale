@@ -215,7 +215,7 @@ class Variety_Model extends MY_Model
         $this->db->order_by("category.category");
         $this->db->select("count(`variety`.`id`) as count,category.category,category.id");
         $result = $this->db->get()->result();
-        $this->_log("notice");
+       // $this->_log("notice");
         return $result;
     }
 
@@ -235,7 +235,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sum(`order`.`count_midsale`) as midsale_count");
         $this->db->select("category.category,category.id as category_id");
         $result = $this->db->get()->result();
-        $this->_log("notice");
+        //$this->_log("notice");
         return $result;
     }
 

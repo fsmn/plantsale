@@ -599,6 +599,7 @@ table.list thead tr,table.list tr.header td {
 	border-right: 1px solid #bbb;
 	border-left: 1px solid #bbb;
 	text-align: left;
+	border-top: 1px solid #bbb;
 }
 
 table.list thead th,table.list tbody td {

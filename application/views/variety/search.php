@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $refine = $this->input->get("refine");
 $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_cookie("sunlight")): array());
-
 ?>
 <form name="search-variety" id="search-variety" class="search-form"
 		action="<?=site_url("variety/find"); ?>" method="GET">
@@ -97,7 +96,9 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 	</p> -->
 
 	<div id="sort-block">
-<? $this->load->view("order/sort");?>
+<?
+$data["basic_sort"] = TRUE;
+$this->load->view("order/sort",$data);?>
 </div>
 <? $buttons[] = array("type"=>"pass-through","text"=>"<input type='submit' value='Find' class='button'/>");
 $buttons[] = array("type"=>"pass-through","text"=>"<input type='reset' value='Reset' class='button delete'/>");

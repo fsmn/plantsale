@@ -95,10 +95,19 @@ class grower extends MY_Controller
         if (! $year) {
             $year = get_current_year();
         }
+        $data["orphan_count"] = count($this->grower->get_orphans());
         $ids = $this->grower->get_ids($year);
+        $growers = array();
+        $grand_total = 0;
         foreach ($ids as $id) {
-            $data["growers"][] = $this->grower->get_totals($id->grower_id, $year);
+            $my_grower = $this->grower->get_totals($id->id,$year);
+           $growers[] =  $this->load->view("grower/report/row",array("grower"=>$my_grower),TRUE);
+            $grand_total += $my_grower->total;
+          //  $growers[$id] = $this->grower->get_totals($id->grower_id, $year);
         }
+        $data["grand_total"] = $grand_total;
+        $data["ids"] = $ids;
+        $data["growers"] = $growers;
         $data["year"] = $year;
         $data["title"] = "Totals Report by Grower for $year";
         if ($this->input->get("export")) {

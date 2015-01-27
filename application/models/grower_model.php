@@ -106,24 +106,26 @@ class grower_model extends MY_Model
 
     function get_ids ($year = NULL)
     {
-        $this->db->from("order");
+        $this->db->from("grower");
         if ($year) {
             $this->db->where("year", $year);
         }
-        $this->db->select("grower_id");
-        $this->db->order_by("grower_id", "ASC");
-        $this->db->group_by("grower_id");
+        $this->db->join("order","grower.id = order.grower_id");
+        $this->db->select("grower.id");
+        $this->db->order_by("grower.id", "ASC");
+        $this->db->group_by("grower.id");
         $result = $this->db->get()->result();
+       // $this->_log("notice");
         return $result;
     }
 
     function get_totals ($id, $year)
     {
         $query = sprintf(
-                "SELECT sum(`o`.`total`) as `total`, `grower`.* FROM (SELECT `grower_id`, (`count_presale` + `count_midsale`) * `flat_cost` as `total` FROM (`order`) WHERE `year` = '%s' AND `order`.`grower_id` = '%s' )  as `o` JOIN `grower` on `grower`.`id` = `o`.`grower_id` GROUP BY `o`.`grower_id`",
+                "SELECT sum(`o`.`total`) as `total`, `grower`.* FROM (SELECT `grower_id`, (IFNULL(`count_presale`,0) + IFNULL(`count_midsale`,0)) * `flat_cost` as `total` FROM (`order`) WHERE `year` = '%s' AND `order`.`grower_id` = '%s' )  as `o` LEFT JOIN `grower` on `grower`.`id` = `o`.`grower_id` GROUP BY `o`.`grower_id`",
                 $year, $id);
-        $result = $this->db->query($query)->result();
-       // $this->_log("notice");
+        $result = $this->db->query($query)->row();
+        $this->_log("notice");
         return $result;
     }
 }

@@ -354,10 +354,11 @@ class Order extends MY_Controller
             if ($this->input->post("action") == "edit") {
                 $data["ids"] = $this->input->post("ids");
                 $pot_sizes = $this->order->get_pot_sizes();
-                $data["pot_sizes"] = get_keyed_pairs($pot_sizes, array(
-                        "pot_size",
-                        "pot_size"
-                ));
+                $data["pot_sizes"] = get_keyed_pairs($pot_sizes,
+                        array(
+                                "pot_size",
+                                "pot_size"
+                        ));
                 $this->load->view("order/batch_update", $data);
             } elseif ($this->input->post("action") == "update") {
                 $target = $this->input->post("target");
@@ -375,8 +376,18 @@ class Order extends MY_Controller
                 $values = array();
                 foreach ($fields as $field) {
                     if ($this->input->post($field)) {
-                      //  $values[] = sprintf("`%s` = '%s'",$field, urldecode($this->input->post($field)));
-                      $values[$field] = urldecode($this->input->post($field));
+                        // $values[] = sprintf("`%s` = '%s'",$field,
+                        // urldecode($this->input->post($field)));
+                        $my_value = urldecode($this->input->post($field));
+                        switch ($field) {
+                            case "flat_cost":
+                            case "plant_cost":
+                            case "price":
+                                $values[$field] = preg_replace("/[^0-9,.]/", "", $my_value);
+                                break;
+                            default:
+                                $values[$field] = $my_value;
+                        }
                     }
                 }
                 if ($values) {

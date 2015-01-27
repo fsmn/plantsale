@@ -22,11 +22,11 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 			name="plant_cost" value="" autocomplete="off"  />
 	</div>
 	<div class="order-count_presale field">
-		<label for="count_presale">Presale Count:&nbsp;</label> <input type="text"
+		<label for="count_presale">Presale Count:&nbsp;</label> <input type="number"
 			name="count_presale" value="" autocomplete="off" />
 	</div>
 	<div class="order-count_midsale field">
-		<label for="count_midsale">Midsale Count:&nbsp;</label> <input type="text"
+		<label for="count_midsale">Midsale Count:&nbsp;</label> <input type="number"
 			name="count_midsale" value="" autocomplete="off"/>
 	</div>
 		<div class="order-pot_size field">

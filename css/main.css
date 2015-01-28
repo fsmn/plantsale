@@ -269,6 +269,7 @@ visibility: visible;
 ul.button-list {
 	list-style: none;
 	padding-left: 0px;
+	margin: 0;
 }
 
 ul.button-list li {
@@ -552,11 +553,11 @@ a.button {
 }
 
 .button-box {
-	height: 25px;
+	margin: .5em 0;
+	height: 1.5em;
 }
 
 .button-box .delete {
-	*margin-top: -5px;
 }
 
 .button-bar {
@@ -744,10 +745,7 @@ fieldset.advanced div.advanced {
 	margin-right: auto;
 }
 
-.button-box {
-	margin-top: .5em;
-	*padding-bottom: .5em;
-}
+
 
 ul.buttons {
 	list-style: none;
@@ -976,6 +974,10 @@ ul.autocomplete-list li:hover {
 
 .hide-column {
 	cursor: pointer;
+}
+
+span.fa {
+	padding-left: .5em;
 }
 
 .mr-shmallow-image {

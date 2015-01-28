@@ -6,6 +6,7 @@
 		--><title><?=$title;?></title>
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/main.css")?>" />
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/color.css")?>"/>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" media="screen"/>
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/popup.css")?>" />
 <? if(IS_EDITOR): ?>
 <link type="text/css" rel="stylesheet" media="screen" href="<?=base_url("css/edit.css");?>"/>

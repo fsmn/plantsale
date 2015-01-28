@@ -217,6 +217,21 @@ a.button {
 	background: linear-gradient(top, #ffa111 0, #FFA500 100%);*/
 }
 
+.button.export {
+	background-color: #2f96b4;
+	background: -moz-linear-gradient(top, #5bc0de 0, #2f96b4 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #5bc0de),
+        color-stop(100%, #2f96b4));
+    background: -webkit-linear-gradient(top, #5bc0de 0, #2f96b4 100%);
+    background: -o-linear-gradient(top, #5bc0de 0, #2f96b4 100%);
+    background: -ms-linear-gradient(top, #5bc0de 0, #2f96b4 100%);
+	background: linear-gradient(top,#5bc0de 0, #2f96b4 100%);
+}
+
+.button.export:hover {
+	background-color: #5bc0de;
+}
+
 /* #DB5F3A */
 /* #C9192D */
 .button.delete {

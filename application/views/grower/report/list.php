@@ -3,7 +3,7 @@
 // report.php Chris Dart Jan 8, 2015 2:58:21 PM chrisdart@cerebratorium.com
 //$grand_total = 0;
 ?>
-<? $buttons[] = array("text"=>"Export","class"=>"button","title"=>"Export as Spreadsheet","href"=>$_SERVER['REQUEST_URI']. "?export=true");?>
+<? $buttons[] = array("text"=>"Export","class"=>array("button","export"),"title"=>"Export as Spreadsheet","href"=>$_SERVER['REQUEST_URI']. "?export=true");?>
 <?if($orphan_count > 0){
     $verb = $orphan_count == 1?"is":"are";
     $plural = $orphan_count > 1?"s":"";

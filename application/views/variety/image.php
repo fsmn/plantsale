@@ -6,7 +6,7 @@
 <input type="hidden" name="id" id="id" value="<?=get_value($image,'id');?>"/>
 
 <p>
-<strong>Image must be no larger than 2 MB<strong>
+<strong>Image must be no larger than 2 MB</strong>
 <br/>
 	<input type="file" name="userfile" class="" size="20" /></p>
 	<p><label for="image_source">Attribution or Source</label><br />

@@ -67,6 +67,7 @@ print create_button_bar($buttons);
 	<th>Latin Name</th>
 	<th>Commmon Name</th>
 	<th>Variety</th>
+	<th>Pot Size</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -81,6 +82,7 @@ print create_button_bar($buttons);
 			<td class="field latin-name"><?=format_latin_name($plant->genus,$plant->species);?></td>
 			<td class="field common-name"><?=$plant->name;?></td>
 			<td class="field variety"><?=$plant->variety;?></td>
+			<td class="field pot-size"><?=$plant->pot_size;?></td>
 		</tr>
 		<? $i++;?>
 	<? endforeach;?>

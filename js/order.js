@@ -190,12 +190,23 @@ $(document).on("click",".order-create",function(){
 	$(document).on("click",".batch-update-orders",function(){
 		batch_update_orders();
 	});
+	
+	$(document).on("change","#pot-size-menu",function(){
+		console.log($(this).val());
+		if($(this).val()== "other"){
+			my_parent = $(this).parent();
+			$(this).remove();
+			my_parent.append("<input name='pot_size' required value=''/>");
+			my_parent.children("input").focus();
+		}
+	})
     
 	$(document).ready(function(){
 		$("table.list").on("click",".omit-row",function(){
 			omit_row(this);
 		});
-	})
+	});
+	
 	
 	function omit_row(me){
 		var my_id = me.id.split("_")[1];

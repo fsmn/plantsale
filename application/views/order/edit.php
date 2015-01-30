@@ -48,7 +48,7 @@
 	</div>
 		<div class="order-pot_size field">
 		<label for="pot_size">Pot Size:&nbsp;</label>
-		<?=form_dropdown("pot_size",$pot_sizes, urlencode(get_value($order, "pot_size")));?>
+		<?=form_dropdown("pot_size",$pot_sizes, urlencode(get_value($order, "pot_size")),"id='pot-size-menu'");?>
 	</div>
 	<div class="order-price field">
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"

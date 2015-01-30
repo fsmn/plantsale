@@ -289,7 +289,7 @@ class Order extends MY_Controller
         $data["pot_sizes"] = get_keyed_pairs($pot_sizes, array(
                 "pot_size",
                 "pot_size"
-        ));
+        ),NULL,TRUE);
         $data["action"] = "update";
         $data["target"] = "order/edit";
         $data['title'] = "Update Order";

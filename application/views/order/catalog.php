@@ -155,9 +155,9 @@ if ($orders) :
 			<td class="order-flat_size field cost-field" id="flat_size"><span id="edit-flat-size_<?=$order->id;?>" class="edit-cost"><?=$order->flat_size;?></span>
 
 			</td>
-			<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">$<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=$order->flat_cost;?></span>
+			<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">$<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->flat_cost,2);?></span>
 			</td>
-			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=$order->plant_cost;?></span>
+			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->plant_cost,2);?></span>
 			</td>
 			<td class="order-order_total field order_total no-wrap">$<?=$order->flat_cost * ($order->count_presale + $order->count_midsale);?>
 			</td>

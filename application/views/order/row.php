@@ -55,13 +55,13 @@ $row_classes = implode(" ",$row_classes);
 		class="order-flat_cost field cost-field no-wrap"
 		id="flat_cost">$<span
 		id="edit-flat-cost_<?=$order->id;?>"
-		class="edit-cost"><?=$order->flat_cost;?></span>
+		class="edit-cost"><?=number_format($order->flat_cost,2);?></span>
 	</td>
 	<td
 		class="order-plant_cost field cost-field no-wrap"
 		id="plant_cost">$<span
 		id="edit-plant-cost_<?=$order->id;?>"
-		class="edit-cost"><?=$order->plant_cost;?></span>
+		class="edit-cost"><?=number_format($order->plant_cost,2);?></span>
 	</td>
 
 	<td class="order-price field">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>

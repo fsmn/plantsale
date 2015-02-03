@@ -76,7 +76,7 @@ if (IS_EDITOR) {
 }
 
 ?>
-<div class="column-right">
+<div class="column-right common-varieties">
 <? $this->load->view("variety/list");?>
 </div>
 

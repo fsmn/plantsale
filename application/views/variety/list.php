@@ -5,7 +5,7 @@
 	<thead>
 		<tr>
 			<th>Species</th>
-			<th>variety</th>
+			<th>Variety</th>
 			<th>Height</th>
 			<th>Width</th>
 			<th>Year</th>

@@ -80,7 +80,8 @@ class Order extends MY_Controller
                     "pot_size",
                     "flat_size",
                     "crop_failure",
-                    "show-non-reorders"
+                    "show-non-reorders",
+                    "grower_code",
             );
 
             $this->set_options($options, $keys);

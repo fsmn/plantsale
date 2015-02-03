@@ -48,10 +48,17 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 <label for="new_year">First Year at Sale</label><input type="number" name="new_year" title="(enter current year for all new items)" style="width:4em" value="<?=$refine?get_cookie("new_year"):"";?>"/>
 </div>
 </div>
-<div class="field-set">
-<p><label for="grower_id">grower ID</label>&nbsp;<input type="text" name="grower_id" style="width:3em;" value="<?=$refine?get_cookie("grower_id"):"";?>"/></p>
+<div class="field-set" >
+<div class="column first"><label for="grower_id">Grower ID</label>&nbsp;<input type="text" name="grower_id" style="width:3em;" value="<?=$refine?get_cookie("grower_id"):"";?>"/></div>
+<div class="column last"><label for="grower_code">Grower Code</label>&nbsp;<input type="text" name="grower_code" style="width:4em;" value="<?=$refine?get_cookie("grower_code"):"";?>">
+</div>
+
+</div>
+<div class="field-set" style="clear:both">
 <p><input type="checkbox" name="crop_failure" value="1" <?=$refine && get_cookie("crop_failure")?"checked":"";?>/>&nbsp;<label for="crop_failure">Show Only Crop Failures</label></p>
+
 <p>
+
 <input type="checkbox" name="is_inventory" id="is_inventory" value=1 <?=$refine && get_cookie("is_inventory")?"checked":"";?> />
 <label for="show_fields">Show Inventory Fields</label>
 </p>

@@ -97,6 +97,7 @@ if ($orders) :
 			<td class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-catalog_number field">
+			<!-- if there is no catalog number, show the first letter of the category -->
 		<?=edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<? if($show_names):?>

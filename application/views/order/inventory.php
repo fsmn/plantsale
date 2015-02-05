@@ -89,7 +89,7 @@ if ($orders)
 			$flat_cost = $order->flat_size * $order->plant_cost;
 		}
 		$row_classes = array (
-				"grouping" 
+				"grouping"
 		);
 		$latest_year = get_value ( $order, "latest_year", TRUE );
 		if (! $order->latest_order)
@@ -100,17 +100,17 @@ if ($orders)
 				$row_classes [] = "hidden";
 			}
 		}
-		
+
 		if ($order->crop_failure)
 		{
 			$row_classes [] = "crop-failure";
 		}
-		
+
 		$presale_total += $order->count_presale;
 		$midsale_total += $order->count_midsale;
 		$flat_cost_total += $order->flat_cost * ($order->count_presale + $order->count_midsale);
 		$row_classes [] = has_price_discrepancy ( $order );
-		
+
 		?>
 		<tr class="<?=implode(" ",$row_classes);?>"
 			id="order_<?=$order->id;?>">
@@ -123,10 +123,10 @@ if ($orders)
 			<? endif;?>
 			<? if(IS_EDITOR):?>
 			<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-order"),"id"=>"edit-order_$order->id"));?>
-			
+
 				<? else: ?>
 				<?php echo create_button(array("text"=>"Details","class"=>array("button","details","view-order"),"href"=>site_url("order/view/$order->id")));?>
-				
+
 				<? endif; ?>
 				</td>
 			<? if(!$show_names):?>
@@ -136,7 +136,11 @@ if ($orders)
 			<td class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-catalog_number field">
+			<? if($order->catalog_number):?>
 		<?=edit_field("catalog_number",$order->catalog_number,"","order",$order->id,array("envelope"=>"span"));?>
+		<? else: ?>
+		<?=ucfirst(substr($order->category,1,1));?>
+		<? endif;?>
 			</td>
 			<? if($show_names):?>
 			<td><a

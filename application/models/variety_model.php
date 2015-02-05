@@ -215,7 +215,7 @@ class Variety_Model extends MY_Model
         $this->db->order_by("category.category");
         $this->db->select("count(`variety`.`id`) as count,category.category,category.id");
         $result = $this->db->get()->result();
-       // $this->_log("notice");
+        // $this->_log("notice");
         return $result;
     }
 
@@ -226,7 +226,12 @@ class Variety_Model extends MY_Model
         $this->db->join("common", "common.id=variety.common_id");
         $this->db->join("category", "common.category_id = category.id", "LEFT");
         $this->db->where("order.year", $year);
-        $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category`.`category` = 'perennials')", NULL, FALSE);
+        $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE); //exclude bare-root perennials
+
+        $this->db->where("subcategory_id !=", 3); // no hanging baskets
+        $this->db->where("subcategory_id !=", 4); // no indoor annuals
+        $this->db->where("subcategory_id !=", 8); // no perennial water plants
+
         $this->db->group_by("common.category_id");
         $this->db->order_by("category.category");
         // $this->db->select("sum(`order`.`count_presale` +
@@ -335,8 +340,6 @@ class Variety_Model extends MY_Model
         $result = $this->db->get()->result();
         return $result;
     }
-
-
 
     function delete ($id)
     {

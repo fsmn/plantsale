@@ -97,11 +97,7 @@ if ($orders) :
 			<td class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-catalog_number field">
-			<? if($order->catalog_number):?>
-		<?=edit_field("catalog_number",$order->catalog_number,"","order",$order->id,array("envelope"=>"span"));?>
-		<? else: ?>
-		<?=ucfirst(substr($order->category,1,1));?>
-		<? endif;?>
+		<?=edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<? if($show_names):?>
 			<td><a

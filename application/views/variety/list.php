@@ -43,8 +43,10 @@
 			</td>
 			<td class="variety-width edit"><?=$width;?></td>
 			<td class="variety-year edit"><?=$variety->year;?></td>
-			<td class="variety-view edit"><a class="button"
-				href="<?=site_url("variety/view/$variety->id");?>">View</a></td>
+			<td class="variety-view edit">
+						<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"id"=>"id_$variety->id","href"=>site_url("variety/view/$variety->id")));?>
+			
+			</td>
 		</tr>
 
 		<? endforeach; ?>

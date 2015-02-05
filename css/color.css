@@ -132,7 +132,7 @@ a.button {
 	color: #fff;
 }
 
-.button.edit {
+.button.edit, .button.update {
 	border: none;
 	background-color: #0077bd;
 	background: -moz-linear-gradient(top, #63ACE4 0, #0077bd 100%);
@@ -146,7 +146,7 @@ a.button {
 	color: #fff;
 }
 
-.button.edit:hover {
+.button.edit:hover, .button.update:hover {
 	color: #000;
 	background-color: #63ACE4;
 	background: -moz-linear-gradient(top, #0077bd 0, #63ACE4 100%);
@@ -158,7 +158,7 @@ a.button {
 	background: linear-gradient(top, #0077bd 0, #63ACE4 100%);
 }
 
-.button.new,a.button.new {
+.button.new,a.button.new, .button.insert {
 	border: 1px solid #ddd000;
 	background-color: #eff11;
 	color: #000;
@@ -172,7 +172,7 @@ a.button {
 	/* 		background-image: url(images/new_button.png); */
 }
 
-.button.new:hover,.button.new.active {
+.button.new:hover,.button.new.active,.button.insert:hover, .button.insert.active {
 	border: 1px solid #ddd000;
 	background-color: #dff110;
 	background: -moz-linear-gradient(top, #dff110 0, #eeff11 100%);

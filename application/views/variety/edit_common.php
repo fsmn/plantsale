@@ -12,11 +12,12 @@
 <input type="hidden" name="original_id" id="original_id" value="<?=$variety->common_id;?>"/>
 <p>
 <input type="number" name="common_id" id="common_id" style="width:15ex" value="<?=$variety->common_id;?>"/>&nbsp;
-<span class="button small" id="change-button" style="display: none;">Check</span>
+<?php echo create_button(array("text"=>"Check","class"=>array("button","small"),"id"=>"change-button"));?>
 </p>
 <div id="common-name"><?=$variety->common_name;?></div>
 <p>
 <input type="submit" name="submit" id="submit" value="Change" class="button edit" style="display:none;"/>
-<span id="revert" class="button" style="display: none;">Revert</span>
+<?php echo create_button(array("text"=>"Revert","class"=>array("button","hidden"),"id"=>"revert"));?>
+
 </p>
 </form>

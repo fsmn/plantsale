@@ -26,13 +26,10 @@ $row_classes = implode(" ",$row_classes);
 	class="<?=$row_classes;?>">
 	<td>
 <? if(IS_EDITOR):?>
-			<span
-		class="button edit edit-order"
-		id="<? printf("edit-order_%s",$order->id);?>">Edit</span>
+			<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-order"),"id"=>sprintf("edit-order_%s",$order->id)));?>
 				<? else: ?>
-				 <a
-		href="<?=site_url("order/view/$order->id");?>"
-		class="button">View</a>
+				<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("order/view/$order->id")));?>
+				</a>
 				<? endif; ?>
 				<?php if($order->crop_failure):?>
 				&nbsp;CROP FAILURE&nbsp;

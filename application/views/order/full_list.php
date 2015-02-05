@@ -37,15 +37,13 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <p>
 Found Count: <strong><?=count($orders);?> Orders</strong>
 </p>
-	<div class="button-box">
-		<span class="button search-orders refine">Refine Search</span>
-
-	</div>
+<?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","refine","search-orders"))));?>
+	
 	</div>
 </fieldset>
 
-<? $buttons[] = array("text"=>"Full Export","title"=>"Export all the fields using the current sort","class"=>array("button","array"), "href"=>$_SERVER['REQUEST_URI']. "&export=true" );
-$buttons[] = array("text"=>"Grower Export","title"=>"Export grower fields using a special grower export","class"=>array("button","array"), "href"=>$_SERVER['REQUEST_URI']. "&export=true&export_type=grower" );
+<? $buttons[] = array("text"=>"Full Export","title"=>"Export all the fields using the current sort","class"=>array("button","export"), "href"=>$_SERVER['REQUEST_URI']. "&export=true" );
+$buttons[] = array("text"=>"Grower Export","title"=>"Export grower fields using a special grower export","class"=>array("button","export"), "href"=>$_SERVER['REQUEST_URI']. "&export=true&export_type=grower" );
 if(IS_ADMIN){
 $buttons[] = array("text"=>"Batch Update","title"=>"Batch Update values for all the listed orders.","class"=>array("button","batch-update-orders","edit"));
 }

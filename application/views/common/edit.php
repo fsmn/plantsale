@@ -25,5 +25,5 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $lights );
 </p>
 <p><label for="description">Description:</label><br/>
 <textarea name="description" id="description"><?=get_value($common,"description");?></textarea></p>
-<p><input type="submit" value="<?=ucfirst($action);?>" class="button new"/></p>
+<p><input type="submit" value="<?=ucfirst($action);?>" class="button <?php echo $action;?>"/></p>
 </form>

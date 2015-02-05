@@ -37,7 +37,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"
 			value="" autocomplete="off"/>
 	</div>
-	<input type="submit" class="button" class="button delete"/>
+	<input type="submit" class="button" class="button warning"/>
 </form>
 
 <script type="text/javascript">

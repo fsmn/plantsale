@@ -30,9 +30,7 @@ print $this->input->post("year");
 <p>
 Found Count: <strong><?=count($names);?> Records</strong>
 </p>
-	<div class="button-box">
-		<span class="button refine search-common-names">Refine Search</span>
-	</div>
+<?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","refine","search","search-common-names"))));?>
 	</div>
 </fieldset>
 <table id="common-name-list" class="list">
@@ -57,7 +55,7 @@ Found Count: <strong><?=count($names);?> Records</strong>
 	</thead>
 	<? endif; ?>
 	<tbody>
-		<? foreach($names as $name){ ?>
+		<? foreach($names as $name): ?>
 		<tr>
 			<td><?=edit_field("name", $name->name, "","common",$name->id,array("envelope"=>"span"));?>
 			</td>
@@ -82,10 +80,11 @@ Found Count: <strong><?=count($names);?> Records</strong>
 				<?=edit_field("extended_description", $name->extended_description, "","common",$name->id, array("envelope"=>"span","class"=>"textarea"));?>
 			</td>
 
-			<td><a class="button" id="id_<?=$name->id;?>"
-				href="<?=site_url("common/view/$name->id");?>">Details</a>
+			<td>
+			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$name->id")));?>
+			
 			</td>
 		</tr>
-		<? } ?>
+		<? endforeach; ?>
 	</tbody>
 </table>

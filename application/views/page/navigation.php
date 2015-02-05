@@ -22,6 +22,7 @@ $buttons[] = array(
         "text" => "Common Search",
         "class" => array(
                 "button",
+        		"search",
                 "search-common-names",
         ),
         "type" => "span",
@@ -33,6 +34,7 @@ $buttons[] = array(
         "text" => "Variety Search",
         "class" => array(
                 "button",
+        		"search",
                 "search-varieties",
         ),
         "type" => "span",
@@ -44,6 +46,7 @@ $buttons[] = array(
         "text" => "Orders Search",
         "class" => array(
                 "button",
+        		"search",
                 "search-orders"
         ),
         "href" => "#",

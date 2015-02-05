@@ -62,8 +62,8 @@
 			<p><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","class"=>"multiselect", "format"=>"multiselect"));?></p>
 		<p>
 			<label>Common Name:</label> <span class="field"><?=$variety->common_name;?>
-			</span> <a href="<?=site_url("common/view/$variety->common_id");?>"
-				title="View details for <?=$variety->common_name;?>" class="button">Details</a>
+			</span> 
+						<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$variety->common_id"),"title"=>"View details for $variety->common_name"));?>
 		</p>
 		<p>
 		<label>Other Names:</label> <span class="field">

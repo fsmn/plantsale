@@ -36,9 +36,8 @@
 <p>
 Found Count: <strong><?=count($plants);?> Varieties</strong>
 </p>
-	<div class="button-box">
-		<span class="button search-varieties refine">Refine Search</span>
-	</div>
+	<?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","search-varieties","refine"))));?>
+
 	</div>
 </fieldset>
 <? foreach($plants as $plant):?>

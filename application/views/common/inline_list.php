@@ -33,8 +33,10 @@
 			<td><span class="common-category common-edit-row"
 				id="ccid_<?=$name->id;?>"><?=$name->category;?> </span>
 			</td>
-			<td><a class="button" id="id_<?=$name->id;?>"
-				href="<?=site_url("common/view/$name->id");?>">Details</a>
+			<td>
+			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$name->id")));?>
+			<a class="button" id="id_<?=$name->id;?>"
+				href="<?=site_url("common/view/$name->id");?>">Details <?php echo add_fa_icon(array("details"));?></a>
 			</td>
 		</tr>
 		<? } ?>

@@ -42,7 +42,7 @@ if(array_key_exists("type",$field) && $field["type"] == "dropdown"){
 <p>
 		<input
 			type="submit"
-			class="button add"
+			class="button <?php echo $action;?>"
 			value="<?=ucfirst($action);?>" />
 	</p>
 </form>

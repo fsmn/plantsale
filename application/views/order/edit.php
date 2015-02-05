@@ -99,9 +99,9 @@
 
 	<input type="hidden" name="redirect_url" id="redirect_url"/>
 	<div style="clear:both">
-		<input type="submit" value="<?=ucfirst($action);?>" class="button" />
+		<input type="submit" value="<?=ucfirst($action);?>" class="button <?php echo $action;?>" />
 		<? if($action == "update"): ?>
-		<span class="button delete delete-order" id="<? printf("delete-order_%s",$order->id);?>">Delete</span>
+		<?php echo create_button(array("text"=>"Delete","class"=>array("button","delete","delete-order"),"id"=>"delete-order_$order->id"));?>
 		<? endif;?>
 	</div>
 </form>

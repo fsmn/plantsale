@@ -79,16 +79,14 @@ if ($orders) :
 			id="order_<?=$order->id;?>">
 			<td class="no-wrap">
 			<? if(IS_ADMIN):?>
-			<span class="omit-row button" id="omit-order_<?=$order->id;?>">Omit</span>
+			<span class="omit-row omit button" id="omit-order_<?=$order->id;?>">Omit</span>
 			<? endif;?>
 			<? if(IS_EDITOR):?>
-			<span
-				class="button edit edit-order"
-				id="<? printf("edit-order_%s",$order->id);?>">Edit</span>
+			<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-order"),"id"=>sprintf("edit-order_%s",$order->id)));?>
+			
 				<? else: ?>
-				 <a
-				href="<?=site_url("order/view/$order->id");?>"
-				class="button">View</a>
+				<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("order/view/$order->id")));?>
+				 
 				<? endif; ?>
 
 				</td>
@@ -165,9 +163,9 @@ if ($orders) :
 			</td>
 			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="re-order field"><span
-				id="oc_<?=$order->variety_id;?>"
-				class="button new order-create">Re-order</span></td>
+			<td class="re-order field">
+			<?php echo create_button(array("text"=>"Re-order","id"=>"oc_$order->variety_id","class"=>array("button","new","order-create")));?>
+			</td>
 		</tr>
 		<? endforeach;?>
 	</tbody>

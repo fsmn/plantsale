@@ -70,8 +70,7 @@
 				id="variety-width_<?=$name->id;?>"><?=$width;?> </span>
 			</td>
 			<td>
-			<a class="button" id="id_<?=$name->id;?>"
-				href="<?=site_url("variety/view/$name->id");?>">Details</a>
+			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"id"=>"id_$name->id","href"=>site_url("variety/view/$name->id")));?>
 			</td>
 		</tr>
 		<? } ?>

@@ -8,7 +8,8 @@
 
 <p>
 <label>variety: </label><?=$order->variety;?> 
-<a href="<?=site_url("variety/view/$order->variety_id");?>" class="button">View</a>
+				<?php echo create_button_bar(array(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("variety/view/$order->variety_id"))));?>
+
 </p>
 </div>
 <input type="hidden" id="order_id" value="<?=$order->id;?>" name="order_id"/>

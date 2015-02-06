@@ -41,7 +41,7 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 </div>
 </div>
 <div class="field-set" style="clear:both;">
-Use numeric operators like &gt;, &lt;, =, !=
+Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_operators">Help</a>
 </div>
 <div class="field-set label-break">
 <div class="column tryptych first">

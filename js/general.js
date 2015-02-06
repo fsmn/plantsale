@@ -237,6 +237,25 @@ $(".mr-shmallow").bind("click",function(){
 });
 
 
+$(document).on("click",".help",function(event){
+			var keys=this.id.split("_");//expect the id to be in the format "helpTopic_helpSubtopic"
+			var my_topic=keys[0];
+			var my_subtopic=keys[1];
+			 form_data = {
+					topic: my_topic,
+					subtopic: my_subtopic,
+					ajax: '1'
+			};
+			$.ajax({
+				type: "get",
+				url: base_url + "help/get",
+				data: form_data,
+				success: function(data){
+					var title="Help with "+ my_topic + "->"+ my_subtopic;
+					show_popup(title, data, "300px");
+				}
+			});
+	});//end function(event)
 
 $(document).on('click',".mr-shmallow-image",function(){
 	//$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});

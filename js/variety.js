@@ -232,7 +232,7 @@ $(document).on("click","#edit-common-id #revert",function(){
 		$(document).on('blur','#variety-search-body', function(event) {
 			
 			$("#search_list").fadeOut();
-			$('#variety-search-body').css({color:'#666'}).val('Find Plants');
+			$('#variety-search-body').css({color:'#666'}).val($('#variety-search-body').attr('placeholder'));
 			//$("#search_list").remove();
 			
 			

@@ -256,3 +256,4 @@ function get_custom_order ($values = array(NULL,"Hostas","Daylilies","Coleus","B
     $order[] = "END";
     return implode(" ", $order);
 }
+

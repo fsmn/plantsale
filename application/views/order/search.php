@@ -42,13 +42,13 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 </div>
 <div class="field-set label-break">
 <div class="column tryptych first">
-<label for="flat_cost">Flat Cost&nbsp;</label>$<input type="number" name="flat_cost" id="flat_cost" style="width:4em;" value="<?=get_cookie("flat_cost");?>"'/>
+<label for="flat_cost">Flat Cost&nbsp;</label>$<input type="text" name="flat_cost" id="flat_cost" style="width:4em;" value="<?=get_cookie("flat_cost");?>"'/>
 </div>
 <div class="column tryptych">
-<label for="plant_cost">Plant Cost&nbsp;</label>$<input type="number" name="plant_cost" id="plant_cost" style="width:4em;"value="<?=get_cookie("plant_cost");?>"'/>
+<label for="plant_cost">Plant Cost&nbsp;</label>$<input type="text" name="plant_cost" id="plant_cost" style="width:4em;"value="<?=get_cookie("plant_cost");?>"'/>
 </div>
 <div class="column tryptych last">
-<label for="price">Sale Price&nbsp;</label>$<input type="number" name="price" style="width:4em;" value="<?=$refine?get_cookie("price"):"";?>"/>
+<label for="price">Sale Price&nbsp;</label>$<input type="text" name="price" style="width:4em;" value="<?=$refine?get_cookie("price"):"";?>"/>
 </div>
 </div>
 <div class="field-set label-break">

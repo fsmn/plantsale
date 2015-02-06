@@ -148,6 +148,11 @@ class Order_Model extends MY_Model
                 case "subcategory_id":
                     $this->db->where("common.subcategory_id", $value);
                     break;
+                case "plant_cost":
+                case "price":
+                case "flat_cost":
+                    $this->where_operator($key, $value);
+                    break;
                 default:
                     $this->db->like($key, $value);
             }
@@ -177,6 +182,7 @@ class Order_Model extends MY_Model
         $this->db->select("common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id");
         $this->db->select("category.category,subcategory.subcategory");
         $result = $this->db->get()->result();
+        $this->_log("notice");
         return $result;
     }
 
@@ -287,8 +293,7 @@ class Order_Model extends MY_Model
     {
         $query = sprintf(
                 "select * from `order` as `o`, `variety` as `v` WHERE `v`.`id`= `o`.`variety_id` and `o`.`year` ='%s'
-        and not exists (select `year` from `order`, `variety` where `o`.`variety_id` = `order`.`variety_id` and `year` ='%s')",
-                $base_year, $comparison_year);
+        and not exists (select `year` from `order`, `variety` where `o`.`variety_id` = `order`.`variety_id` and `year` ='%s')", $base_year, $comparison_year);
     }
 
     function batch_update ($ids, $values)
@@ -299,6 +304,25 @@ class Order_Model extends MY_Model
             $this->db->set($values);
             $this->db->update();
             $this->session->set_flashdata("notice", "The following orders have been updated: $ids");
+        }
+    }
+
+    function where_operator ($field, $value)
+    {
+        $operator = preg_replace("/[^\<\>\=\!]/", "", $value);
+
+        $value = preg_replace("/[^0-9.,]/", "", $value);
+        switch($operator){
+        	case "=":
+        	    $this->db->where($field, $value);
+        	     break;
+        	case ">":
+        	case "<":
+        	    $this->db->where("CAST(`$field` AS DECIMAL) $operator", $value, NULL, FALSE);
+        	     break;
+        	default:
+        	    $this->db->like($field, $value);
+
         }
     }
 }

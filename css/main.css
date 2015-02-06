@@ -230,7 +230,7 @@ div.login-title {
 }
 
 .button:hover{
-    box-shadow: 1px 1px 2px #333 inset;
+    box-shadow: 0 0 4px rgba(15, 15, 15, .4) inset !important;
 }
 
 td .button,.row .button,.button.small {

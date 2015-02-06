@@ -40,6 +40,9 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 <label for="flat_size">Flat Size</label><input type="number" name="flat_size" style="width:3em;" value="<?=$refine?get_cookie("flat_size"):"";?>"/>
 </div>
 </div>
+<div class="field-set" style="clear:both;">
+Use numeric operators like &gt;, &lt;, =, !=
+</div>
 <div class="field-set label-break">
 <div class="column tryptych first">
 <label for="flat_cost">Flat Cost&nbsp;</label>$<input type="text" name="flat_cost" id="flat_cost" style="width:4em;" value="<?=get_cookie("flat_cost");?>"'/>

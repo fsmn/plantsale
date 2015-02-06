@@ -172,7 +172,6 @@ class Order extends MY_Controller
             }
             $data["options"] = $options;
             $data["orders"] = $orders;
-print_r($options);
             if (! empty($title_category)) {
                 $category = implode(" ", $title_category);
             } else {

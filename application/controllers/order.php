@@ -82,6 +82,9 @@ class Order extends MY_Controller
                     "crop_failure",
                     "show-non-reorders",
                     "grower_code",
+                    "flat_cost",
+                    "plant_cost",
+                    "price",
             );
 
             $this->set_options($options, $keys);

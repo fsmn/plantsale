@@ -325,4 +325,14 @@ class Order_Model extends MY_Model
 
         }
     }
+
+    function test(){
+        $this->db->from("variety");
+        $this->db->where("variety.id",3166);
+        $this->db->join("flag","variety.id = flag.variety_id");
+        $this->db->join("flag_token","flag.name = flag_token.flag","LEFT");
+
+        return $this->db->get()->row();
+
+    }
 }

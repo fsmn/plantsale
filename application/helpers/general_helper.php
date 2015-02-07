@@ -159,17 +159,19 @@ function clean_string ($string)
     return preg_replace("/[^a-zA-Z0-9\"\.\<\>\=]+/", " ", $string);
 }
 
-function format_dimensions ($min, $max, $unit = "Inches", $direction = NULL)
+function format_dimensions ($min = FALSE, $max = FALSE, $unit = "Inches", $direction = NULL)
 {
     $output = "";
-
-    if ($min == $max) {
+    if ($min == FALSE && $max == FALSE) {
+        $output = "";
+    } elseif ($min == $max ||$max == FALSE) {
         $output = sprintf("%s%s", $min, ucfirst($unit));
     } else {
         $output = sprintf("%s-%s%s", $min, $max, ucfirst($unit));
-    }
+
     if ($direction) {
         $output = sprintf("%s %s", $output, $direction);
+    }
     }
     return $output;
 }

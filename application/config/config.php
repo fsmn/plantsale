@@ -357,7 +357,7 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['proxy_ips'] = '';
-
+ini_set( 'default_charset', 'UTF-8' );
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

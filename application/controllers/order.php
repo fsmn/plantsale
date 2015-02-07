@@ -14,7 +14,10 @@ class Order extends MY_Controller
 
     function index ()
     {
-       print in_array("=",array(">","<"));
+        $data["text"] = $this->order->test()->token;
+        $data["target"] = "order/quark/test";
+        $data["title"] = "Barf";
+        $this->load->view("page/index", $data);
     }
 
     function view ()
@@ -83,7 +86,7 @@ class Order extends MY_Controller
                     "grower_code",
                     "flat_cost",
                     "plant_cost",
-                    "price",
+                    "price"
             );
 
             $this->set_options($options, $keys);
@@ -291,7 +294,7 @@ class Order extends MY_Controller
         $data["pot_sizes"] = get_keyed_pairs($pot_sizes, array(
                 "pot_size",
                 "pot_size"
-        ),NULL,TRUE);
+        ), NULL, TRUE);
         $data["action"] = "update";
         $data["target"] = "order/edit";
         $data['title'] = "Update Order";

@@ -388,7 +388,7 @@ class Variety extends MY_Controller
         $plants = $this->session->userdata("print_list");
         foreach ($plants as $plant) {
             $data['plants'][$plant]['variety'] = $this->variety->get($plant);
-            $data['plants'][$plant]['order'] = $this->order->get_for_variety($plant, 2014);
+            $data['plants'][$plant]['order'] = $this->order->get_for_variety($plant, get_current_year());
             $data['plants'][$plant]['flags'] = $this->flag->get_for_variety($plant);
         }
         $data["classes"] = "";
@@ -434,6 +434,16 @@ class Variety extends MY_Controller
     function update_new_varieties ($sale_year)
     {
         print_r($this->variety->update_all($sale_year));
+    }
+
+    function quark(){
+        $plants = $this->session->userdata("print_list");
+        foreach ($plants as $plant) {
+            $data['plants'][$plant]['variety'] = $this->variety->get($plant);
+            $data['plants'][$plant]['order'] = $this->order->get_for_variety($plant, get_current_year());
+            $data['plants'][$plant]['flags'] = $this->flag->get_for_variety($plant);
+        }
+
     }
 
     /**

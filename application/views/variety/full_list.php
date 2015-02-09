@@ -46,10 +46,11 @@ $i = 1;?>
 Found Count: <strong><?=count($plants);?> Varieties</strong>
 </p>
 <?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","search-varieties","refine"))));?>
-	
+
 	</div>
 </fieldset>
 <?
+$buttons[] = array("text"=>"Quark Export","class"=>"button export","href"=>site_url("variety/quark"));
 $buttons[] = array("text"=>"Print Tabloid","class"=>"button print variety-print-tabloid","href"=>site_url("variety/print_result/tabloid"),"target"=>"_blank");
 $buttons[] = array("text"=>"Print Statement","class"=>"button print variety-print-statement","href"=>site_url("variety/print_result/statement"), "target"=>"_blank");
 print create_button_bar($buttons);

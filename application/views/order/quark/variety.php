@@ -5,7 +5,7 @@
 ?>
 
 @Pot and Price:$6.00<\_><?=$order->pot_size;?>
-@Copy After Copy:<@Number In-text><?=$order->catalog_number;?><@$p> <@In text Goudy Sans Bold><?=$order->variety?$order->variety:$order->species;?><@$p><\_>
-<?=$order->note;?> <?=$order->min_height?format_dimensions($order->min_height,$order->max_height,abbr_unit($order->height_measure),"h"):"";?>
-<?=$order->min_width?format_dimensions($order->min_width,$order->max_width,abbr_unit($order->width_measure),"w"):"";?>
+@Copy After Copy:<@Number In-text><?=$variety->catalog_number;?><@$p> <@In text Goudy Sans Bold><?=$variety->variety?$variety->variety:$variety->species;?><@$p><\_>
+<?=$variety->note;?> <?=$variety->min_height?format_dimensions($variety->min_height,$variety->max_height,abbr_unit($variety->height_measure),"h"):"";?>
+<?=$variety->min_width?format_dimensions($variety->min_width,$variety->max_width,abbr_unit($variety->width_measure),"w"):"";?>
 foreach flag.

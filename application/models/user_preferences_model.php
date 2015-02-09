@@ -20,7 +20,12 @@ class User_Preferences_Model extends MY_Model
         $this->db->where("user_id", $user_id);
         $this->db->where("preference_id", $preference_id);
         $result = $this->db->get()->row();
-        return $result->value;
+        if(empty($result)){
+            $output = 0;
+        }else{
+            $output = $result->value;
+        }
+        return $output;
     }
 
     function get_all ($user_id)

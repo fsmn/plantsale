@@ -63,7 +63,6 @@ if (IS_EDITOR) {
 	<?=edit_field("category_id", $common->category, "Category","common",$common->id, array("envelope"=>"p","class"=>"category-dropdown"));?>
 	<?=edit_field("subcategory_id", $common->subcategory, "Subcategory","common",$common->id,array("envelope"=>"p","class"=>"subcategory-dropdown"));?>
 	<?=edit_field("description", $common->description, "Description","common",$common->id, array("class"=>"textarea","envelope"=>"div","field-wrapper"=>"div"));?>
-	<?=edit_field("extended_description", $common->extended_description, "Extended Description (for web)","common",$common->id, array("class"=>"textarea","envelope"=>"div","field-wrapper"=>"div"));?>
 	<?=edit_field("other_names",$common->other_names, "Other Names","common",$common->id);?>
 	<?=edit_field("sunlight",$common->sunlight, "Sunlight Requirements","common",$common->id,array("class"=>"multiselect","attributes"=>"menu='sunlight'","format"=>"multiselect"));?>
 

@@ -13,7 +13,7 @@ class Variety_Model extends MY_Model
     var $height_unit;
     var $width_unit;
     var $plant_color;
-    var $note;
+    var $extended_description;
     var $new_year;
     var $rec_modifier;
     var $rec_modified;
@@ -34,7 +34,7 @@ class Variety_Model extends MY_Model
                 "max_width",
                 "height_unit",
                 "width_unit",
-                "note",
+                "extended_description",
                 "new_year",
                 "common_id"
         );
@@ -74,7 +74,7 @@ class Variety_Model extends MY_Model
         $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->join("image", "variety.id=image.variety_id", "LEFT");
         $this->db->select(
-                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,subcategory.subcategory,  category.category, common.description, common.sunlight, common.extended_description, common.other_names");
+                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,subcategory.subcategory,  category.category, common.description, common.sunlight, variety.extended_description, common.other_names");
         $this->db->select("image.id as image_id, image_name");
         $result = $this->db->get()->row();
         return $result;
@@ -320,7 +320,7 @@ class Variety_Model extends MY_Model
                             "genus",
                             "species",
                             "description",
-                            "note"
+                            "extended_description"
                     )
                     )) {
                 $this->db->like($parameter->key, $parameter->value);

@@ -138,7 +138,7 @@ class Variety extends MY_Controller
                 "grower_id",
                 "new_year",
                 "print_omit",
-                "note",
+                "extended_description",
                 "crop_failure",
         );
         $options = array();

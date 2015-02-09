@@ -48,7 +48,6 @@ Found Count: <strong><?=count($names);?> Records</strong>
 			<th>Sunlight</th>
 
 			<th>Description</th>
-			<th>Extended Description</th>
 
 			<th></th>
 		</tr>
@@ -76,13 +75,10 @@ Found Count: <strong><?=count($names);?> Records</strong>
 			<td>	<?=edit_field("description", $name->description, "","common",$name->id, array("envelope"=>"span","class"=>"textarea"));?>
 
 			</td>
-			<td>
-				<?=edit_field("extended_description", $name->extended_description, "","common",$name->id, array("envelope"=>"span","class"=>"textarea"));?>
-			</td>
 
 			<td>
 			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$name->id")));?>
-			
+
 			</td>
 		</tr>
 		<? endforeach; ?>

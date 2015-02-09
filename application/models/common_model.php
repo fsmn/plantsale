@@ -7,7 +7,6 @@ class Common_model extends MY_Model
     var $name;
     var $genus;
     var $description;
-    var $extended_description;
     var $category_id;
     var $subcategory_id;
     var $other_names;
@@ -26,7 +25,6 @@ class Common_model extends MY_Model
                 "name",
                 "genus",
                 "description",
-                "extended_description",
                 "category_id",
                 "subcategory_id",
                 ",other_names",
@@ -143,7 +141,7 @@ class Common_model extends MY_Model
         }
         $this->db->join("category","common.category_id = category.id","LEFT");
         $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
-        $this->db->select("common.id,common.category_id,common.subcategory_id,name,genus,description,extended_description,other_names,sunlight");
+        $this->db->select("common.id,common.category_id,common.subcategory_id,name,genus,description,other_names,sunlight");
         $this->db->select("category.category,subcategory.subcategory");
 
         if ($year = $this->input->get("year")) {

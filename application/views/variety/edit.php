@@ -34,7 +34,7 @@ $plant_colors = form_multiselect("plant_color[]",$plant_colors, $colors );
 <div class="label"><strong>Plant Color(s)</strong></div>
 <div class="field-set"><?php echo $plant_colors; ?></div>
 </div>
-<div class="field-group"><label for="note">Note:</label><br/><textarea id="note" name="note"><?=get_value($variety,"note");?></textarea></div>
+<div class="field-group"><label for="extended_description">Note:</label><br/><textarea id="extended_description" name="extended_description"><?=get_value($variety,"extended_description");?></textarea></div>
 <div class="field-group"><label for="add_order">Add a New Order for this variety:</label><input type="checkbox" id="add_order" name="add_order" checked value="true"/>
 </div>
 <div class="button-box">

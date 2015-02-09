@@ -62,7 +62,7 @@
 			<p><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","class"=>"multiselect", "format"=>"multiselect"));?></p>
 		<p>
 			<label>Common Name:</label> <span class="field"><?=$variety->common_name;?>
-			</span> 
+			</span>
 						<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$variety->common_id"),"title"=>"View details for $variety->common_name"));?>
 		</p>
 		<p>
@@ -81,11 +81,7 @@
 			</span>
 		</p>
 		<p class="extended_description">
-		<label>Extended Description (for website)</label>
-		<span class="field" title="You can only edit this field in the common name record"><?=$variety->extended_description;?></span>
-		</p>
-		<p>
-				<?=create_edit_field("note", $variety->note, "Variety Description", array("class"=>"textarea","envelope"=>"div"));?>
+				<?=create_edit_field("extended_description", $variety->extended_description, "Variety Description", array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
 
 		<div class="column odd">

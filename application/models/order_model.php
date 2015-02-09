@@ -153,6 +153,7 @@ class Order_Model extends MY_Model
                 case "flat_cost":
                     $this->where_operator($key, $value);
                     break;
+
                 default:
                     $this->db->like($key, $value);
             }

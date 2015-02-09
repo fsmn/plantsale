@@ -13,7 +13,8 @@ $sorting = array(
         "count_presale" => "Presale Count",
         "count_midsale" => "Midsale Count",
         "pot_size" => "Pot Size",
-        "common.name" => "Common Name"
+        "common.name" => "Common Name",
+        "price"=>"Sale Price",
 );
 $direction = array(
         "ASC" => "Ascending",

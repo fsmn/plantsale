@@ -226,7 +226,9 @@ class Variety_Model extends MY_Model
         $this->db->join("common", "common.id=variety.common_id");
         $this->db->join("category", "common.category_id = category.id", "LEFT");
         $this->db->where("order.year", $year);
-        $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE); //exclude bare-root perennials
+        $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE); // exclude
+                                                                                                            // bare-root
+                                                                                                            // perennials
 
         $this->db->where("subcategory_id !=", 3); // no hanging baskets
         $this->db->where("subcategory_id !=", 4); // no indoor annuals
@@ -240,7 +242,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sum(`order`.`count_midsale`) as midsale_count");
         $this->db->select("category.category,category.id as category_id");
         $result = $this->db->get()->result();
-        //$this->_log("notice");
+        // $this->_log("notice");
         return $result;
     }
 
@@ -287,7 +289,9 @@ class Variety_Model extends MY_Model
             $this->db->where("image.id IS NULL", NULL, FALSE);
         }
         foreach ($my_parameters as $parameter) {
-            if ($parameter->key == "sunlight") {
+            if ($parameter->value == "NULL" && $parameter->key != "name") {
+                $this->db->where("$parameter->key IS NULL");
+            } elseif ($parameter->key == "sunlight") {
                 if ($this->input->get("sunlight-boolean") == "or") {
                     $my_list = $parameter->value;
                     foreach ($parameter->value as $my_item) {
@@ -315,8 +319,10 @@ class Variety_Model extends MY_Model
                             "variety",
                             "genus",
                             "species",
-                            "description"
-                    ))) {
+                            "description",
+                            "note"
+                    )
+                    )) {
                 $this->db->like($parameter->key, $parameter->value);
             } elseif ($parameter->key == "print_omit") {
                 $this->db->where("(order.print_omit is NULL OR order.print_omit != 1)", NULL, FALSE);
@@ -338,6 +344,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
         $this->db->group_by("variety.id");
         $result = $this->db->get()->result();
+        //$this->_log("notice");
         return $result;
     }
 

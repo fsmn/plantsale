@@ -108,7 +108,7 @@ class Variety extends MY_Controller
         $data["plant_colors"] = get_keyed_pairs($plant_colors, array(
                 "key",
                 "value"
-        ), TRUE);
+        ), TRUE,FALSE,array("name"=>"NULL","value"=>"NULL--No Color Selected")); //include option to search for an empty color
         $flags = $this->menu->get_pairs("flag", array(
                 "field" => "value"
         ));
@@ -138,7 +138,8 @@ class Variety extends MY_Controller
                 "grower_id",
                 "new_year",
                 "print_omit",
-                "crop_failure"
+                "note",
+                "crop_failure",
         );
         $options = array();
         for ($i = 0; $i < count($variables); $i ++) {

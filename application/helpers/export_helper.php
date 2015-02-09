@@ -163,4 +163,7 @@ function format_saturday($format = "quark")
 
 function format_quark_dimensions(){
 
+    format_dimensions($common->min_height,$common->max_height,$common->height_unit == "Inches"?"”":"’","h");
+    format_dimensions($common->min_width,$common->max_width,$common->width_unit == "Inches"?"”":"’","h");
+
 }

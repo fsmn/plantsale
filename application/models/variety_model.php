@@ -289,8 +289,10 @@ class Variety_Model extends MY_Model
             $this->db->where("image.id IS NULL", NULL, FALSE);
         }
         foreach ($my_parameters as $parameter) {
-            if ($parameter->value == "NULL" && $parameter->key != "name") {
+            if (trim($parameter->value) == "NULL" && $parameter->key != "name") {
                 $this->db->where("$parameter->key IS NULL");
+            }elseif(trim($parameter->value) == "NOT NULL" && $parameter->key != "name"){
+                $this->db->where("$parameter->key IS NOT NULL");
             } elseif ($parameter->key == "sunlight") {
                 if ($this->input->get("sunlight-boolean") == "or") {
                     $my_list = $parameter->value;

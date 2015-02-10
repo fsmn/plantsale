@@ -170,7 +170,7 @@ function format_dimensions ($min = FALSE, $max = FALSE, $unit = "Inches", $direc
         $output = sprintf("%s-%s%s", $min, $max, ucfirst($unit));
 
     if ($direction) {
-        $output = sprintf("%s %s", $output, $direction);
+        $output = sprintf("%s%s", $output, $direction);
     }
     }
     return $output;

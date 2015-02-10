@@ -111,7 +111,7 @@
 		</p>
 		<p class="print_description">
 
-			 <?=edit_field("print_description", $variety->print_description, "Variety Print Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
+			 <?=edit_field("print_description", $variety->print_description, "Variety Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
 			<p class="web_description">
 

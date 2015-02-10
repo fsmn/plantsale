@@ -112,7 +112,7 @@
 		<div class="print_description">
 			<div class="field-envelope"
 				id="variety__print_description__<?=$variety->id?>">
-				<label>Variety Print Description:&nbsp;</label> <span
+				<label>Variety Description:&nbsp;</label> <span
 					class="textarea live-field text" name="print_description"><textarea
 						name="print_description" cols="40" rows="10"
 						id="print-description_<?=$variety->id;?>" size="5" type="textarea" category=""><?=get_value($variety,"print_description");?></textarea></span>

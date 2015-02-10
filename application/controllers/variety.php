@@ -17,7 +17,10 @@ class Variety extends MY_Controller
 
     function index ()
     {
-        redirect();
+       $data["variety"] = $this->variety->get(16);
+       $data["variety"]->flags = $this->flag->get_for_variety(16);
+$this->load->helper("export");
+       $this->load->view("order/quark/variety",$data);
     }
 
     function create ()

@@ -12,7 +12,7 @@ foreach($varieties as $variety):
 <?=$variety->description;?></p>
 <? if($variety->print_description):?>
 <p>
-<strong>Variety Print Descriptionn</strong><br/>
+<strong>Variety Descriptionn</strong><br/>
 <?=$variety->print_description;?>
 </p>
 <? endif; ?>

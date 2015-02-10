@@ -485,7 +485,7 @@ class Variety extends MY_Controller
             $this->load->model("image_model");
             $variety_id = $this->input->post("variety_id");
             $id = $this->image_model->insert($variety_id, $file_data);
-            redirect("variety/view/$variety_id");
+           // redirect("variety/view/$variety_id");
         }
     }
 
@@ -496,7 +496,6 @@ class Variety extends MY_Controller
         $variety_id = $this->image_model->get($id)->variety_id;
         unlink("./files/$variety_id.jpg");
         $this->image_model->delete($id);
-
         if ($this->input->post("ajax") == 1) {
            $data["variety"] = NULL;
            $data["variety_id"] = $variety_id;

@@ -137,7 +137,6 @@ $(document).on("click",".autocomplete.edit-field",function(){
 	
 });
 
-
 $(document).on("blur",".field-envelope .live-field.text input",function(){
 	if($(this).hasClass("ui-autocomplete-input")){
 		update_field(this, "autocomplete");
@@ -164,7 +163,7 @@ $(document).on("blur",".field-envelope .live-field select",function(){
 	update_field(this, "select");
 });
 
-
+//*/
 
 $(document).on("click", ".field-envelope .save-multiselect",function(){
 	console.log(this);

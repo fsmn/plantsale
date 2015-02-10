@@ -1035,6 +1035,11 @@ span.fa {
 	
 }
 
+
+.description label, .extended_description label {
+	display:block;
+}
+
 .mr-shmallow-image {
 	
 }

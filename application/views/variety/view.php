@@ -110,6 +110,7 @@
 		
 		</p>
 		<p class="extended_description">
+		
 			 <?=edit_field("extended_description", $variety->extended_description, "Variety Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
 		<div class="block" id="image">

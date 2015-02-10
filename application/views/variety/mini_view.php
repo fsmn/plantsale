@@ -30,14 +30,30 @@
 			</legend>
 
 			<div class="field-set">
-				<?=edit_field("min_height", $variety->min_height,"Min","variety",$variety->id, array("envelope"=>"div"));?>
-
+				<div class="field-envelope"
+					id="variety__min_height__<?=$variety->id;?>">
+					<label>Min:&nbsp;</label> <span class="live-field text"
+						name="min_height"><input type="text" name="min_height" value="6"
+						id="min-height_<?=$variety->id;?>" size="6" category=""></span>
+				</div>
 			</div>
 			<div class="field-set">
-				<?=edit_field("max_height", $variety->max_height, "Max", "variety",$variety->id, array("envelope"=>"div"));?>
+				<div class="field-envelope"
+					id="variety__max_height__<?=$variety->id;?>">
+					<label>Max:&nbsp;</label> <span class="live-field text"
+						name="max_height"><input type="text" name="max_height" value=""
+						id="max-height_<?=$variety->id;?>" size="5" category=""></span>
+				</div>
 			</div>
-			<div class="field-set" >
-				<?=edit_field("height_unit", $variety->height_unit, "Measure","variety",$variety->id, array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
+			<div class="field-set">
+				<div class="field-envelope"
+					id="variety__height_unit__<?=$variety->id;?>">
+					<label>Measure:&nbsp;</label> <span
+						class="dropdown live-field text" menu="measure_unit"
+						name="height_unit">
+<?php echo form_dropdown("height_unit",array("0"=>"","Feet"=>"Feet","Inches"=>"Inches"),get_value($variety,"height_unit"),"class='live-field'");?>
+</span>
+				</div>
 			</div>
 		</fieldset>
 		<fieldset class="field-group inline-box">
@@ -46,40 +62,62 @@
 			</legend>
 
 			<div class="field-set">
-				<?=edit_field("min_width", $variety->min_width, "Min","variety",$variety->id,array("envelope"=>"div"));?>
+				<div class="field-envelope" id="variety__min_width__<?=$variety->id;?>">
+<label>Min:&nbsp;</label>
+<span class="live-field text" name="min_width"><input type="text" name="min_width" value="" id="min-width_<?=$variety->id;?>" size="5" category=""></span></div>
 			</div>
 			<div class="field-set">
-				<?=edit_field("max_width", $variety->max_width, "Max","variety",$variety->id,array("envelope"=>"div"));?>
+<div class="field-envelope" id="variety__max_width__<?=$variety->id;?>">
+<label>Max:&nbsp;</label>
+<span class="live-field text" name="max_width"><input type="text" name="max_width" value="" id="max-width_<?=$variety->id;?>" size="5" category=""></span></div>
 			</div>
 			<div class="field-set">
-				<?=edit_field("width_unit", $variety->width_unit, "Measure","variety",$variety->id, array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
-			</div>
+
+			<div class="field-envelope" id="variety__width_unit__<?=$variety->id;?>">
+<label>Measure:&nbsp;</label>
+<span class="dropdown live-field text" menu="measure_unit" name="width_unit">
+<?php echo form_dropdown("width_unit",array("0"=>"","Feet"=>"Feet","Inches"=>"Inches"),get_value($variety,"width_unit"),"class='live-field'");?>
+
+</span></div>
+</div>
 
 		</fieldset>
-		<p><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","class"=>"multiselect", "format"=>"multiselect"));?></p>
-		<p>
+		<div><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","class"=>"multiselect", "format"=>"multiselect"));?></div>
+		<div>
 			<label>Common Name:</label> <span class="field"><?=$variety->common_name;?>
 			</span>
 						<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$variety->common_id"),"title"=>"View details for $variety->common_name"));?>
-		</p>
-		<p>
+		</div>
+		<div>
 			<label>Other Names:</label> <span class="field">
 		<?=$variety->other_names;?></span>
-		</p>
-		<p class="category">
+		</div>
+		<div class="category">
 			<label>Category: </label> <span class="field"><?=$variety->category; ?>
 			</span>
-		</p>
+		</div>
 		<p class="sunlight">
 			<label>Sunlight: </label> <span class="field"><?=$variety->sunlight;?></span>
 		</p>
-		<p class="description">
-		   <?=edit_field("description", $variety->description, "General Description","common",$variety->common_id, array("class"=>"textarea","envelope"=>"div"));?>
-		</p>
-		<p class="extended_description">
-							<?=edit_field("extended_description", $variety->extended_description, "Variety Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
-				
-		</p>
+		<div class="description">
+			<div class="field-envelope"
+				id="common__description__<?=$variety->common_id;?>">
+				<label>General Description:&nbsp;</label> <span
+					class="textarea live-field text" name="description"><textarea
+						name="description" cols="40" rows="10"
+						id="description_<?=$variety->common_id;?>" size="127" type="textarea"
+						category=""><?php echo get_value($variety,"description");?></textarea></span>
+			</div>
+		</div>
+		<div class="extended_description">
+			<div class="field-envelope"
+				id="variety__extended_description__<?=$variety->id?>">
+				<label>Variety Description:&nbsp;</label> <span
+					class="textarea live-field text" name="extended_description"><textarea
+						name="extended_description" cols="40" rows="10"
+						id="extended-description_<?=$variety->id;?>" size="5" type="textarea" category=""><?=get_value($variety,"extended_description");?></textarea></span>
+			</div>
+		</div>
 
 		<div class="column odd">
 			<h4>Flags</h4>

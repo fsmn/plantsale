@@ -75,6 +75,7 @@ class Variety extends MY_Controller
         $data["target"] = "variety/view";
         $data["title"] = sprintf("Viewing Info for %s (variety)", $variety->variety);
         if ($data["mini_view"] = $this->input->get("ajax") == 1) {
+        	$data["variety_id"] = $id;
             $this->load->view("variety/mini_view", $data);
         } else {
             $data["mini_view"] = FALSE;
@@ -463,11 +464,11 @@ class Variety extends MY_Controller
     {
         $config['upload_path'] = './files';
         $this->load->helper('directory');
-        $config['allowed_types'] = 'gif|jpg|png|GIF|JPG|JPEG';
+        $config['allowed_types'] = 'jpg';
         $config['max_size'] = '2048';
         $config['max_width'] = '0';
         $config['max_height'] = '0';
-        $config['file_name'] = $this->input->post("variety_id") . $file_data['file_ext'];
+       $config['file_name'] = $this->input->post("variety_id") . ".jpg";
 
         $this->load->library('upload', $config);
 
@@ -477,7 +478,6 @@ class Variety extends MY_Controller
             );
             print_r($error);
         } else {
-            $config['file_name'] = $this->input->post("variety_id") . $file_data['file_ext'];
 
             $file_data = $this->upload->data();
             $data['image_display_name'] = $file_data['file_name'];
@@ -494,9 +494,12 @@ class Variety extends MY_Controller
         $id = $this->input->post("id");
         $this->load->model("image_model");
         $variety_id = $this->image_model->get($id)->variety_id;
+        unlink("./files/$variety_id.jpg");
         $this->image_model->delete($id);
+
         if ($this->input->post("ajax") == 1) {
-            $data["variety"]->id = $variety_id;
+           $data["variety"] = NULL;
+           $data["variety_id"] = $variety_id;
             $this->load->view("image/view", $data);
         } else {
             redirect("variety/view/$variety_id");

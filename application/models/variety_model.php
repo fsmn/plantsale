@@ -222,11 +222,12 @@ class Variety_Model extends MY_Model
         $this->db->join("category", "common.category_id = category.id", "LEFT");
         $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->where("order.year", $year);
-        //exclude bare root perennials
+        /*//exclude bare root perennials
         $this->db->where("NOT (`order`.`pot_size` LIKE '%bare%' AND `category`.`id` = 7)",NULL,FALSE);
         $this->db->where("subcategory_id !=", 3); // no hanging baskets
         $this->db->where("subcategory_id !=", 4); // no indoor annuals
         $this->db->where("subcategory_id !=", 8); // no perennial water plants
+        */
         $this->db->group_by("common.category_id");
         $this->db->order_by("category.category");
         $this->db->select("count(`variety`.`id`) as count,category.category,category.id");

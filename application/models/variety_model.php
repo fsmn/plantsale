@@ -174,7 +174,14 @@ class Variety_Model extends MY_Model
     {
         $this->db->from("variety");
         $this->db->join("order", "variety.id=order.variety_id");
+        $this->db->join("common","common.id = variety.common_id");
         $this->db->where("order.year", $year);
+        $this->db->order_by("category_id");
+        $this->db->order_by("subcategory_id");
+        $this->db->order_by("common.name");
+        $this->db->order_by("variety.variety");
+        $this->db->select("variety.*");
+        $this->db->select("common.description,common.name");
         $result = $this->db->get()->result();
         return $result;
     }
@@ -210,12 +217,16 @@ class Variety_Model extends MY_Model
         $this->db->join("category", "common.category_id = category.id", "LEFT");
         $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->where("order.year", $year);
-        $this->db->not_like("order.pot_size", "bare");
+        //exclude bare root perennials
+        $this->db->where("NOT (`order`.`pot_size` LIKE '%bare%' AND `category`.`id` = 7)",NULL,FALSE);
+        $this->db->where("subcategory_id !=", 3); // no hanging baskets
+        $this->db->where("subcategory_id !=", 4); // no indoor annuals
+        $this->db->where("subcategory_id !=", 8); // no perennial water plants
         $this->db->group_by("common.category_id");
         $this->db->order_by("category.category");
         $this->db->select("count(`variety`.`id`) as count,category.category,category.id");
         $result = $this->db->get()->result();
-        //$this->_log("notice");
+        $this->_log("notice");
         return $result;
     }
 
@@ -226,10 +237,8 @@ class Variety_Model extends MY_Model
         $this->db->join("common", "common.id=variety.common_id");
         $this->db->join("category", "common.category_id = category.id", "LEFT");
         $this->db->where("order.year", $year);
-        $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE); // exclude
-                                                                                                            // bare-root
-                                                                                                            // perennials
-
+        //exclude bare root perennials
+        $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE);
         $this->db->where("subcategory_id !=", 3); // no hanging baskets
         $this->db->where("subcategory_id !=", 4); // no indoor annuals
         $this->db->where("subcategory_id !=", 8); // no perennial water plants

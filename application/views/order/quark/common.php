@@ -28,3 +28,27 @@ catalog_number
 common_name
 genus
 description
+
+catalog_export~Price_Pot_Size Combo_One_Color &
+"@Copy After Copy:" &
+"<@Number In-text>" &
+current_orders::catalog_number &
+"<@$p>" & " " &
+" " &
+Color &
+", " &
+"<I>" &
+Left(Common_Names::Genus;1) & "." &
+" " &
+Species &
+"<\I>" &
+" " &
+flagC~New Item Icon &
+flag~Saturday Yes &
+"--" &
+Item Notes &
+" " &
+catalog_export~Height_Display &
+catalog_export~width_display &
+" " &
+catalog_export~flags

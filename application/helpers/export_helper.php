@@ -140,7 +140,7 @@ function format_flags ($flags, $format = "quark")
 /**
  * Assume that the determination of new year is calculated elsewhere.
  */
-function format_new($format = "quark")
+function format_new ($format = "quark")
 {
     if ($format == "quark") {
         $output = "◊";
@@ -150,8 +150,7 @@ function format_new($format = "quark")
     return $output;
 }
 
-
-function format_saturday($format = "quark")
+function format_saturday ($format = "quark")
 {
     if ($format == "quark") {
         $output = "ß";
@@ -161,9 +160,14 @@ function format_saturday($format = "quark")
     return $output;
 }
 
-function format_quark_dimensions(){
-
-    format_dimensions($common->min_height,$common->max_height,$common->height_unit == "Inches"?"”":"’","h");
-    format_dimensions($common->min_width,$common->max_width,$common->width_unit == "Inches"?"”":"’","h");
-
+function format_quark_dimensions ($dimensions)
+{
+    $output = array();
+    if ($dimensions->min_height || $dimensions->max_height) {
+        $output["height"] = format_dimensions($dimensions->min_height, $dimensions->max_height, $dimensions->height_unit == "Inches" ? "”" : "’", "h");
+    }
+    if ($dimensions->min_width || $dimensions->max_width) {
+        $output["width"] = format_dimensions($dimensions->min_width, $dimensions->max_width, $dimensions->width_unit == "Inches" ? "”" : "’", "w");
+    }
+    return implode("-", $output);
 }

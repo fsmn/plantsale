@@ -75,7 +75,7 @@ class Variety extends MY_Controller
         $data["target"] = "variety/view";
         $data["title"] = sprintf("Viewing Info for %s (variety)", $variety->variety);
         $data["variety_id"] = $id;
-        
+
         if ($data["mini_view"] = $this->input->get("ajax") == 1) {
             $this->load->view("variety/mini_view", $data);
         } else {
@@ -446,6 +446,15 @@ class Variety extends MY_Controller
             $data['plants'][$plant]['flags'] = $this->flag->get_for_variety($plant);
         }
 
+    }
+
+    function waste_paper(){
+        $data["varieties"]  = $this->variety->get_varieties_for_year(get_current_year());
+        $data["title"] = "Wasting Trees";
+        $data["target"] = "variety/print/paper_waste";
+        $data["format"] = "print";
+        $data["classes"] = "";
+        $this->load->view("variety/print/index",$data);
     }
 
     /**

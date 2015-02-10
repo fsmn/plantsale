@@ -4,8 +4,30 @@
 
 ?>
 
-@Pot and Price:$6.00<\_><?=$order->pot_size;?>
-@Copy After Copy:<@Number In-text><?=$variety->catalog_number;?><@$p> <@In text Goudy Sans Bold><?=$variety->variety?$variety->variety:$variety->species;?><@$p><\_>
-<?=$variety->note;?> <?=$variety->min_height?format_dimensions($variety->min_height,$variety->max_height,abbr_unit($variety->height_measure),"h"):"";?>
-<?=$variety->min_width?format_dimensions($variety->min_width,$variety->max_width,abbr_unit($variety->width_measure),"w"):"";?>
-foreach flag.
+@Pot and Price:$6.00<\_><?=$variety->pot_size;?>
+@Copy After Copy:<@Number In-text><?=$variety->catalog_number;?><@$p>
+<I><?=$variety->variety?$variety->variety:$variety->species;?><\I>
+<?=$variety->note;?> <?=format_quark_dimensions($variety);?>
+<?=format_flags($variety->flags,"quark");?>
+"@Copy After Copy:" &
+"<@Number In-text>" &
+current_orders::catalog_number &
+"<@$p>" & " " &
+" " &
+Color &
+", " &
+"<I>" &
+Left(Common_Names::Genus;1) & "." &
+" " &
+Species &
+"<\I>" &
+" " &
+flagC~New Item Icon &
+flag~Saturday Yes &
+"--" &
+Item Notes &
+" " &
+catalog_export~Height_Display &
+catalog_export~width_display &
+" " &
+catalog_export~flags

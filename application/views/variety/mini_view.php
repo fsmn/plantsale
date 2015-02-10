@@ -33,7 +33,7 @@
 				<div class="field-envelope"
 					id="variety__min_height__<?=$variety->id;?>">
 					<label>Min:&nbsp;</label> <span class="live-field text"
-						name="min_height"><input type="text" name="min_height" value="<?=$vareity->min_height;?>"
+						name="min_height"><input type="text" name="min_height" value="<?=$variety->min_height;?>"
 						id="min-height_<?=$variety->id;?>" size="6" category=""></span>
 				</div>
 			</div>
@@ -41,7 +41,7 @@
 				<div class="field-envelope"
 					id="variety__max_height__<?=$variety->id;?>">
 					<label>Max:&nbsp;</label> <span class="live-field text"
-						name="max_height"><input type="text" name="max_height" value="<?=$vareity->max_height;?>"
+						name="max_height"><input type="text" name="max_height" value="<?=$variety->max_height;?>"
 						id="max-height_<?=$variety->id;?>" size="5" category=""></span>
 				</div>
 			</div>
@@ -64,12 +64,12 @@
 			<div class="field-set">
 				<div class="field-envelope" id="variety__min_width__<?=$variety->id;?>">
 <label>Min:&nbsp;</label>
-<span class="live-field text" name="min_width"><input type="text" name="min_width" value="<?=$vareity->min_width;?>" id="min-width_<?=$variety->id;?>" size="5" category=""></span></div>
+<span class="live-field text" name="min_width"><input type="text" name="min_width" value="<?=$variety->min_width;?>" id="min-width_<?=$variety->id;?>" size="5" category=""></span></div>
 			</div>
 			<div class="field-set">
 <div class="field-envelope" id="variety__max_width__<?=$variety->id;?>">
 <label>Max:&nbsp;</label>
-<span class="live-field text" name="max_width"><input type="text" name="max_width" value="<?=$vareity->max_width;?>" id="max-width_<?=$variety->id;?>" size="5" category=""></span></div>
+<span class="live-field text" name="max_width"><input type="text" name="max_width" value="<?=$variety->max_width;?>" id="max-width_<?=$variety->id;?>" size="5" category=""></span></div>
 			</div>
 			<div class="field-set">
 

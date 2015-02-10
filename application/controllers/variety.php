@@ -74,8 +74,9 @@ class Variety extends MY_Controller
         $data["variety"] = $variety;
         $data["target"] = "variety/view";
         $data["title"] = sprintf("Viewing Info for %s (variety)", $variety->variety);
+        $data["variety_id"] = $id;
+        
         if ($data["mini_view"] = $this->input->get("ajax") == 1) {
-        	$data["variety_id"] = $id;
             $this->load->view("variety/mini_view", $data);
         } else {
             $data["mini_view"] = FALSE;

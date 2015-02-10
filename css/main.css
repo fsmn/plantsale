@@ -1036,7 +1036,7 @@ span.fa {
 }
 
 
-.description label, .extended_description label {
+.description label, .print_description label , .web_description label{
 	display:block;
 }
 

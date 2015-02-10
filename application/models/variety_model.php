@@ -13,7 +13,8 @@ class Variety_Model extends MY_Model
     var $height_unit;
     var $width_unit;
     var $plant_color;
-    var $extended_description;
+    var $print_description;
+    var $web_description;
     var $new_year;
     var $rec_modifier;
     var $rec_modified;
@@ -34,7 +35,8 @@ class Variety_Model extends MY_Model
                 "max_width",
                 "height_unit",
                 "width_unit",
-                "extended_description",
+                "print_description",
+                "web_description",
                 "new_year",
                 "common_id"
         );
@@ -74,7 +76,7 @@ class Variety_Model extends MY_Model
         $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->join("image", "variety.id=image.variety_id", "LEFT");
         $this->db->select(
-                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,subcategory.subcategory,  category.category, common.description, common.sunlight, variety.extended_description, common.other_names");
+                "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,subcategory.subcategory,  category.category, common.description, common.sunlight, variety.print_description,variety.web_description, common.other_names");
         $this->db->select("image.id as image_id, image_name");
         $result = $this->db->get()->row();
         return $result;
@@ -170,12 +172,15 @@ class Variety_Model extends MY_Model
         $this->db->update("variety", $update);
     }
 
-    function get_varieties_for_year ($year)
+    function get_varieties_for_year ($year, $only_new=FALSE)
     {
         $this->db->from("variety");
         $this->db->join("order", "variety.id=order.variety_id");
         $this->db->join("common","common.id = variety.common_id");
         $this->db->where("order.year", $year);
+        if($only_new){
+            $this->db->where("variety.new_year",$year);
+        }
         $this->db->order_by("category_id");
         $this->db->order_by("subcategory_id");
         $this->db->order_by("common.name");
@@ -331,7 +336,8 @@ class Variety_Model extends MY_Model
                             "genus",
                             "species",
                             "description",
-                            "extended_description"
+                            "print_description",
+                            "web_description",
                     )
                     )) {
                 $this->db->like($parameter->key, $parameter->value);

@@ -106,12 +106,16 @@
 			<label>Sunlight: </label> <span class="field"><?=$variety->sunlight;?></span>
 		</p>
 		<p class="description">
-						 <?=edit_field("description", $variety->description, "General Description","common",$variety->common_id, array("class"=>"textarea","envelope"=>"div"));?>
-		
+						 <?=edit_field("description", $variety->description, "General Description (from Common)","common",$variety->common_id, array("class"=>"textarea","envelope"=>"div"));?>
+
 		</p>
-		<p class="extended_description">
-		
-			 <?=edit_field("extended_description", $variety->extended_description, "Variety Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
+		<p class="print_description">
+
+			 <?=edit_field("print_description", $variety->print_description, "Variety Print Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
+		</p>
+			<p class="web_description">
+
+			 <?=edit_field("web_description", $variety->web_description, "Variety Web Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
 		<div class="block" id="image">
 	<? $this->load->view("image/view"); ?>

@@ -27,7 +27,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </div>
 <div class="description-text">
 	<div class="description"><?=$variety->description;?></div>
-	<div class="extended_description"><?=$variety->extended_description;?></div>
+	<div class="print_description"><?=$variety->print_description;?></div>
 </div>
 </div>
 <div class="details-group">

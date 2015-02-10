@@ -10,10 +10,17 @@ foreach($varieties as $variety):
 <p>
 <strong>Common (General) Description</strong><br/>
 <?=$variety->description;?></p>
-<? if($variety->extended_description):?>
+<? if($variety->print_description):?>
 <p>
-<strong>Variety (Extended for the Web) Version</strong><br/>
-<?=$variety->extended_description;?>
+<strong>Variety Print Descriptionn</strong><br/>
+<?=$variety->print_description;?>
+</p>
+<? endif; ?>
+
+<? if($variety->web_description):?>
+<p>
+<strong>Variety Web Descriptionn</strong><br/>
+<?=$variety->web_description;?>
 </p>
 <? endif; ?>
 </div>

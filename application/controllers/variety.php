@@ -140,7 +140,8 @@ class Variety extends MY_Controller
                 "grower_id",
                 "new_year",
                 "print_omit",
-                "extended_description",
+                "web_description",
+                "print_description",
                 "crop_failure",
         );
         $options = array();
@@ -448,8 +449,8 @@ class Variety extends MY_Controller
 
     }
 
-    function waste_paper(){
-        $data["varieties"]  = $this->variety->get_varieties_for_year(get_current_year());
+    function show_copy_text(){
+        $data["varieties"]  = $this->variety->get_varieties_for_year(get_current_year(), TRUE);
         $data["title"] = "Wasting Trees";
         $data["target"] = "variety/print/paper_waste";
         $data["format"] = "print";

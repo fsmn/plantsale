@@ -68,7 +68,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 		<?=create_input($variety, "description","General Description");?>
 	</div>
 	<div class="column last">
-		<?=create_input($variety, "extended_description","Variety Description","extended_description",$refine);?>
+		<?=create_input($variety, "print_description","Variety Print Description","print_description",$refine);?>
 	</div>
 	</div>
 	<p>

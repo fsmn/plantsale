@@ -102,20 +102,29 @@
 		<div class="description">
 			<div class="field-envelope"
 				id="common__description__<?=$variety->common_id;?>">
-				<label>General Description:&nbsp;</label> <span
+				<label>General Description (from Common):&nbsp;</label> <span
 					class="textarea live-field text" name="description"><textarea
 						name="description" cols="40" rows="10"
 						id="description_<?=$variety->common_id;?>" size="127" type="textarea"
 						category=""><?php echo get_value($variety,"description");?></textarea></span>
 			</div>
 		</div>
-		<div class="extended_description">
+		<div class="print_description">
 			<div class="field-envelope"
-				id="variety__extended_description__<?=$variety->id?>">
-				<label>Variety Description:&nbsp;</label> <span
-					class="textarea live-field text" name="extended_description"><textarea
-						name="extended_description" cols="40" rows="10"
-						id="extended-description_<?=$variety->id;?>" size="5" type="textarea" category=""><?=get_value($variety,"extended_description");?></textarea></span>
+				id="variety__print_description__<?=$variety->id?>">
+				<label>Variety Print Description:&nbsp;</label> <span
+					class="textarea live-field text" name="print_description"><textarea
+						name="print_description" cols="40" rows="10"
+						id="print-description_<?=$variety->id;?>" size="5" type="textarea" category=""><?=get_value($variety,"print_description");?></textarea></span>
+			</div>
+		</div>
+		<div class="web_description">
+			<div class="field-envelope"
+				id="variety__web_description__<?=$variety->id?>">
+				<label>Variety Web Description:&nbsp;</label> <span
+					class="textarea live-field text" name="web_description"><textarea
+						name="web_description" cols="40" rows="10"
+						id="print-description_<?=$variety->id;?>" size="5" type="textarea" category=""><?=get_value($variety,"web_description");?></textarea></span>
 			</div>
 		</div>
 

@@ -106,9 +106,8 @@
 			<label>Sunlight: </label> <span class="field"><?=$variety->sunlight;?></span>
 		</p>
 		<p class="description">
-			<label>General Description: </label> <span class="field"
-				title="You can only edit this field in the common name record"><?=$variety->description; ?>
-			</span>
+						 <?=edit_field("description", $variety->description, "General Description","common",$variety->common_id, array("class"=>"textarea","envelope"=>"div"));?>
+		
 		</p>
 		<p class="extended_description">
 			 <?=edit_field("extended_description", $variety->extended_description, "Variety Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>

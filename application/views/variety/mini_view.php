@@ -1,24 +1,21 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-<!-- <input
-	type="hidden" id="id" name="id" value="<?=$variety->id;?>" />
 
-<input type="hidden"
-	id="order_id" name="order_id"
-	value="<?=get_value($current_order,"id");?>" /> -->
-	<h4><?=$variety->common_name;?> <?=$variety->variety;?></h4>
-<p>
-<?=$this->load->view("variety/menu");?>
-</p>
+<h4><?=$variety->common_name;?> <?=$variety->variety;?></h4>
 <? if( $is_new):?>
-			<div id="is_new"><span class="is_new"><img src="<?=site_url("images/new.gif");?>"/>Is New</span></div>
+<div id="is_new">
+	<span class="is_new"><img src="<?=site_url("images/new.gif");?>" />Is
+		New</span>
+</div>
 <? endif;?>
-<div class="grouping block variety-info" id="variety">
-<div class="block" id="image" style="float:right">
+<div class="variety-mini-view">
+	<div class="grouping block variety-info" id="variety">
+		<div class="block" id="image">
 	<? $this->load->view("image/view"); ?>
 
 </div>
-<div class='field-set'>
-			<?=edit_field("variety", $variety->variety, "Variety","variety",$variety->id, array("envelope"=>"div"));?>
+		<div class='field-set' tabindex=1>
+			<?=edit_field("variety", $variety->variety, "Variety","variety",$variety->id, array("envelope"=>"span"));?>
+			<?php echo create_button(array("text"=>"Edit","class"=>"button edit variety-edit","id"=>"edit-variety_$variety->id","href"=>site_url("variety/view/$variety->id"),"selection"=>"home"));?>
 		</div>
 		<div class='field-set'>
 			<label for="genus">Genus:&nbsp;</label><span class='field'><?=$variety->genus;?></span>
@@ -39,7 +36,7 @@
 			<div class="field-set">
 				<?=edit_field("max_height", $variety->max_height, "Max", "variety",$variety->id, array("envelope"=>"div"));?>
 			</div>
-			<div class="field-set">
+			<div class="field-set" >
 				<?=edit_field("height_unit", $variety->height_unit, "Measure","variety",$variety->id, array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"div"));?>
 			</div>
 		</fieldset>
@@ -59,14 +56,14 @@
 			</div>
 
 		</fieldset>
-			<p><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","class"=>"multiselect", "format"=>"multiselect"));?></p>
+		<p><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","class"=>"multiselect", "format"=>"multiselect"));?></p>
 		<p>
 			<label>Common Name:</label> <span class="field"><?=$variety->common_name;?>
 			</span>
 						<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$variety->common_id"),"title"=>"View details for $variety->common_name"));?>
 		</p>
 		<p>
-		<label>Other Names:</label> <span class="field">
+			<label>Other Names:</label> <span class="field">
 		<?=$variety->other_names;?></span>
 		</p>
 		<p class="category">
@@ -77,11 +74,11 @@
 			<label>Sunlight: </label> <span class="field"><?=$variety->sunlight;?></span>
 		</p>
 		<p class="description">
-			<label>General Description: </label> <span class="field" title="You can only edit this field in the common name record"><?=$variety->description; ?>
-			</span>
+		   <?=edit_field("description", $variety->description, "General Description","common",$variety->common_id, array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
 		<p class="extended_description">
-				<?=create_edit_field("extended_description", $variety->extended_description, "Variety Description", array("class"=>"textarea","envelope"=>"div"));?>
+							<?=edit_field("extended_description", $variety->extended_description, "Variety Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
+				
 		</p>
 
 		<div class="column odd">
@@ -95,22 +92,11 @@
 	<?endif;?>
 		</div>
 		<div class="column even">
-		<h4>Sale Year</h4>
+			<h4>Sale Year</h4>
 			<?=edit_field("new_year",$variety->new_year,"First Year at Sale","variety",$variety->id, array("envelope"=>"span"));?>
 			<? if( $is_new):?>
-			<span class="is-new"><img src="<?=site_url("images/new.gif");?>"/></span>
+			<span class="is-new"><img src="<?=site_url("images/new.gif");?>" /></span>
 			<? endif;?>
 			</div>
 	</div>
-
-
-<div class="all-orders block">
-	<h3>Orders</h3>
-	<? $data["orders"] = $orders;
-	$data["show_names"] = FALSE;
-	 $this->load->view("order/list", $data);?>
-
 </div>
-<?
-$order_buttons[] = array("selection"=>"order","text"=>"New Order","type"=>"span","class"=>"button new order-create", "id" => "oc_$variety->id");
-echo create_button_bar($order_buttons);

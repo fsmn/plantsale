@@ -156,5 +156,6 @@ class Index extends MY_Controller
         $data["subcategory"] = $subcategory;
         $data["commons"] = $commons;
         $this->load->view("variety/quark/index", $data);
+        redirect("index");
     }
 }

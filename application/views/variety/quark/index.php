@@ -10,7 +10,7 @@ $output = array("<v9.30><e8>");
 foreach($commons as $common){
 	$data["common"]  = $common;
 	if(count($common->varieties) > 1){
-		$output[] = quark_multiple($common);// $this->load->view("variety/quark/multiple",$data,TRUE);
+		$output[] = quark_multiple($common);
 	}else{
 		$output[] = quark_single($common);
 	}
@@ -19,5 +19,8 @@ foreach($commons as $common){
 }
 
 $quark = implode("\n", $output);
+$this->load->helper('file');
+write_file("./downloads/$filename",$quark);
+
 force_download($filename, $quark);
 

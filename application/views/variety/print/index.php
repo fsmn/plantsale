@@ -6,10 +6,5 @@
 </head>
 <body class="<?=$classes;?>">
 <? $this->load->view($target); ?>
-<div id="crop-failure">
-<? if(get_value($order,"crop_failure") == 1):?>
-CROP FAILURE
-<? endif;?>
-</div>
 </body>
 </html>

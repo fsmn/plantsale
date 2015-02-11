@@ -14,8 +14,8 @@ foreach($commons as $common){
 	}else{
 		$output[] = quark_single($common);
 	}
-	
- 	
+
+
 }
 
 $quark = implode("\n", $output);

@@ -7,3 +7,4 @@ application/config/email.php
 user_guide/*
 *.sql
 /files/*
+/downloads/*

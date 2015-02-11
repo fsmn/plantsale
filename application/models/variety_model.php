@@ -71,7 +71,7 @@ class Variety_Model extends MY_Model
     {
         $this->db->where("variety.id", $id);
         $this->db->from("variety");
-        $this->db->join("common", "variety.common_id = common.id","LEFT");
+        $this->db->join("common", "variety.common_id = common.id");
         $this->db->join("category", "common.category_id = category.id", "LEFT");
         $this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
         $this->db->join("image", "variety.id=image.variety_id", "LEFT");
@@ -84,7 +84,7 @@ class Variety_Model extends MY_Model
 
     function get_by_common ($common_id)
     {
-        $query = "SELECT v.*, o.*
+        $query = "SELECT v.*, o.year
             FROM `variety` v
                 LEFT JOIN
                     (SELECT n.variety_id, MAX(n.year) AS max_year  FROM `order` n GROUP BY n.variety_id) y
@@ -92,6 +92,7 @@ class Variety_Model extends MY_Model
                  LEFT JOIN `order` o ON `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year`
                  WHERE `v`.`common_id` = $common_id ORDER BY `v`.`variety` ASC";
         $result = $this->db->query($query)->result();
+        $this->_log("notice");
         return $result;
     }
 

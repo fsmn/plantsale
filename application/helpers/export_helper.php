@@ -26,6 +26,10 @@ function format_sunlight ($sunlight, $format = "quark")
                 $output .= "///";
             }
         }
+        if($format == "quark"){
+        	$output = sprintf("<f\"FSMPlantSaleIcons\">%s<f$>",$output);
+        	 
+        }
         return $output;
     }
 }
@@ -38,7 +42,7 @@ function format_sunlight ($sunlight, $format = "quark")
  */
 function format_flags ($flags, $format = "quark")
 {
-    $output = "";
+    $output = FALSE;
     foreach ($flags as $flag) {
         switch ($flag->name) {
             case "Bees":
@@ -134,6 +138,12 @@ function format_flags ($flags, $format = "quark")
                 break;
         }
     }
+    if($format == "quark"){
+    	if($output){
+    	$output = sprintf("<f\"FSMPlantSaleIcons\">%s<f$>",$output);
+    			
+    	}
+    }
     return $output;
 }
 
@@ -143,17 +153,19 @@ function format_flags ($flags, $format = "quark")
 function format_new ($format = "quark")
 {
     if ($format == "quark") {
-        $output = "◊";
+        $output = sprintf("<f\"FSMPlantSaleIcons\">%s<f$>","◊");
     } else {
         $output = "Y";
     }
+    
     return $output;
 }
 
 function format_saturday ($format = "quark")
 {
     if ($format == "quark") {
-        $output = "ß";
+        $output =  sprintf("<f\"FSMPlantSaleIcons\">%s<f$>","ß");
+        
     } else {
         $output = "qqq";
     }

@@ -104,4 +104,42 @@ class Index extends MY_Controller
         $data["categories"] = $categories;
         $this->load->view("order/flat_totals", $data);
     }
+    
+    function show_quark_export(){
+    	//get all categories, get subcategories, display a list with links to each. 
+    	$this->load->model("category_model","category");
+    	$this->load->model("subcategory_model","subcategory");
+    	$categories = $this->category->get_all();
+    	foreach($categories as $category){
+    		$category->subcategories = $this->subcategory->get_for_category($category->id);
+    	}
+    	$data["categories"] = $categories;
+    	$this->load->view("variety/quark/categories",$data);
+    }
+    
+    function quark(){
+    	$this->load->helper("export");
+    	$this->load->helper("download");
+    	$this->load->model("common_model","common");
+    	$this->load->model("variety_model","variety");
+    	$this->load->model("flag_model","flag");
+    	
+    	if($category_id = $this->input->get("category_id") && $subcategory_id = $this->input->get("subcategory_id")){
+    		$commons = $this->common->get_for_year ( 2015 ,$category_id, $subcategory_id);
+    	}elseif($category_id = $this->input->get("category_id")){
+    		$commons = $this->common->get_for_year ( 2015 ,$category_id);
+    	}else{
+    		$commons = $this->common->get_for_year ( 2015);
+    	}
+    	
+    	foreach ( $commons as $common )
+    	{
+    		$common->varieties = $this->variety->get_by_common($common->id);
+    		foreach($common->varieties as $variety){
+    			$variety->flags = $this->flag->get_for_variety($variety->id);
+    		}
+    	
+    	}
+    	$this->load->view("variety/quark/index",array("commons"=>$commons));
+    }
 }

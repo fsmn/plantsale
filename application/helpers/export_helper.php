@@ -160,14 +160,58 @@ function format_saturday ($format = "quark")
     return $output;
 }
 
-function format_quark_dimensions ($dimensions)
+function format_quark_dimensions ($object)
 {
     $output = array();
-    if ($dimensions->min_height || $dimensions->max_height) {
-        $output["height"] = format_dimensions($dimensions->min_height, $dimensions->max_height, $dimensions->height_unit == "Inches" ? "”" : "’", "h");
+    if ($object->min_height || $object->max_height) {
+        $output["height"] = format_dimensions($object->min_height, $object->max_height, $object->height_unit == "Inches" ? "”" : "’", "h");
     }
-    if ($dimensions->min_width || $dimensions->max_width) {
-        $output["width"] = format_dimensions($dimensions->min_width, $dimensions->max_width, $dimensions->width_unit == "Inches" ? "”" : "’", "w");
+    if ($object->min_width || $object->max_width) {
+        $output["width"] = format_dimensions($object->min_width, $object->max_width, $object->width_unit == "Inches" ? "”" : "’", "w");
     }
-    return implode("-", $output);
+    return implode(" by ", $output);
+}
+
+function format_description($description,$object,$format = FALSE){
+	$output[] = $description;
+	
+		if($object->print_description){
+		$output[] = $object->print_description;
+		}
+		if($format == "web"){
+			if($object->web_description){
+				$output[] = $object->web_description;
+			}
+		}
+		return implode(" ",$output);
+}
+
+function quark_single($common){
+	$variety = $common->varieties[0];
+	$output[] = sprintf("@Common Name:<@Number In-text>%s<@\$p>%s",$variety->catalog_number,$common->name);
+	$output[] = $variety->count_midsale?format_saturday("quark"):"";
+	$output[] = $variety->new_year == get_current_year()?format_new("quark"):"";
+	$output[] = sprintf("<p>@Latin Name:%s", format_latin_name($common->genus,$variety->species));
+	$output[] = sprintf("<$>'%s'<$>",$variety->variety);
+	$output[] = sprintf("<p>@Copy:%s", format_description($common->description,$variety,"quark"));
+	$output[] = format_quark_dimensions($variety);
+	$output[] = sprintf(" %s", format_sunlight($common->sunlight,"quark"));
+	$output[] = format_flags($variety->flags,"quark");
+	$output[] = sprintf("<p>@Pot and Price Right:%s--%s", get_as_price($variety->price), $variety->pot_size);
+	return implode("",$output);
+}
+
+function quark_multiple($common){
+
+	$output[] = sprintf("@Common Name:%s<p>@Latin Name:%s<p>@Copy:%s %s",$common->name,$common->genus, $common->description,format_sunlight($common->sunlight,"quark"));
+
+	foreach($common->varieties as $variety){
+		$output[] = sprintf("\r@Pot and Price:%s>[\_]%s:",get_as_price($variety->price),$variety->pot_size);
+		$output[] = sprintf("\r@Copy After Copy:<@Number In-text>%s<@\$p>",$variety->catalog_number);
+		$output[] = sprintf("%s @Latin Name:%s",$variety->variety,format_latin_name($common->genus,$variety->species) );
+		$output[] = $variety->new_year == get_current_year()?format_new("quark"):"";
+		$output[] = ($variety->count_midsale && $variety->count_midsale > 0)?format_saturday("quark"):"";
+		$output[] = sprintf("--%s %s %s",$variety->print_description,format_quark_dimensions($variety),format_flags($variety->flags,"quark") );
+	}
+	return implode("",$output);
 }

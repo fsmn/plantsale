@@ -328,6 +328,18 @@ $(document).on("click","#edit-common-id #revert",function(){
 				}
 			});
 		});
+		
+		$(document).on("click",".show-quark-export",function(){
+			url = $(this).attr("href");
+			$.ajax({
+				type:"get",
+				url: url,
+				success: function(data){
+					$("#quark-export").html(data);
+				}
+			});
+			return false;
+		});
 
 		$(document).on("click",".delete-image",function(){
 			question = confirm("Are you sure you want to delete this image? This cannot be undone!");

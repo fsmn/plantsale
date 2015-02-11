@@ -38,7 +38,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /*Images directory */
 define("IMAGE_PATH", $_SERVER['DOCUMENT_ROOT'] . "/images");
-define('APP_VERSION', "3");
+define('APP_VERSION', "3.1");
 
 
 /* End of file constants.php */

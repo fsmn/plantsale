@@ -40,3 +40,11 @@ $action_buttons[] = array("selection"=>"order","text"=>"Set Catalog Numbers","cl
 </div>
 <div id="flat-totals-end"></div>
 </div>
+<? if(IS_ADMIN): ?>
+<div style="float:left; width: 250px">
+<?=create_button_bar(array(array("selection"=>"index","text"=>"Show Quark Export","href"=>site_url("index/show_quark_export"), "class"=>"button show-quark-export")));?>
+<div id="quark-export">
+</div>
+<div id="quark-export-end"></div>
+</div>
+<? endif; 

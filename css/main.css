@@ -1008,6 +1008,7 @@ span.fa {
 .variety-info #image {
 	position: relative;
 }
+
 .variety-info #image .button {
 	position: absolute;
 	left: 0;
@@ -1025,19 +1026,30 @@ span.fa {
 	width: 100px;
 	float: none;
 }
+
 .variety-mini-view #image {
 	float: right;
 }
 
-
-.variety-mini-view  #image .button  {
+.variety-mini-view  #image .button {
 	position: relative;
-	
 }
 
+.description label, .print_description label, .web_description label {
+	display: block;
+}
 
-.description label, .print_description label , .web_description label{
-	display:block;
+ul.list.categories {
+	padding: 0;
+}
+
+ul.list.categories  li {
+	list-style: none;
+}
+
+ul.list.categories  li a {
+	padding: .25em 0;
+	display: block;
 }
 
 .mr-shmallow-image {

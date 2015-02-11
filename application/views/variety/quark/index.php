@@ -21,6 +21,5 @@ foreach($commons as $common){
 $quark = implode("\n", $output);
 $this->load->helper('file');
 write_file("./downloads/$filename",$quark);
-
 force_download($filename, $quark);
 

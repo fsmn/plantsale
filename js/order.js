@@ -111,12 +111,13 @@ $(document).on("click",".order-create",function(){
 	
 	$(document).on("click",".show-order-totals",function(){
 		$("#order-totals").html("Loading...");
-			
+		$(".front-page-widget").fadeOut();
+
 		$.ajax({
 			type: "get",
 			url: base_url + "index/get_order_totals",
 			success: function(data){
-				$("#order-totals").html(data);
+				$("#order-totals").html(data).fadeIn();
 			}
 		});
 	});

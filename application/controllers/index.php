@@ -123,13 +123,21 @@ class Index extends MY_Controller
     	$this->load->model("common_model","common");
     	$this->load->model("variety_model","variety");
     	$this->load->model("flag_model","flag");
+    	$this->load->model("category_model","category");
+    	$this->load->model("subcategory_model","subcategory");
+    	$category = "";
+    	$subcategory = "";
+    	
     	
     	if($category_id = $this->input->get("category_id") && $subcategory_id = $this->input->get("subcategory_id")){
-    		$commons = $this->common->get_for_year ( 2015 ,$category_id, $subcategory_id);
+    		$commons = $this->common->get_for_year (  get_current_year() ,$category_id, $subcategory_id);
+    	$category = $this->category->get($category_id)->category;
+    	$subcategory = $this->subcategory->get($subcategory_id)->subcategory;
     	}elseif($category_id = $this->input->get("category_id")){
-    		$commons = $this->common->get_for_year ( 2015 ,$category_id);
+    		$commons = $this->common->get_for_year ( get_current_year() ,$category_id);
+    		$category = $this->category->get($category_id)->category;
     	}else{
-    		$commons = $this->common->get_for_year ( 2015);
+    		$commons = $this->common->get_for_year ( get_current_year());
     	}
     	
     	foreach ( $commons as $common )
@@ -140,6 +148,9 @@ class Index extends MY_Controller
     		}
     	
     	}
-    	$this->load->view("variety/quark/index",array("commons"=>$commons));
+    	$data["category"] = $category;
+    	$data["subcategory"] = $subcategory;
+    	$data["commons"] = $commons;
+    	$this->load->view("variety/quark/index",$data);
     }
 }

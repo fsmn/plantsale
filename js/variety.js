@@ -306,11 +306,13 @@ $(document).on("click","#edit-common-id #revert",function(){
 		});
 		
 		$(document).on("click",".show-category-totals", function(){
+			$(".front-page-widget").fadeOut();
+
 			$.ajax({
 				type:"get",
 				url: base_url + "index/get_categories",
 				success: function(data){
-					$("#category-totals").html(data);
+					$("#category-totals").html(data).fadeIn();
 					document.location.href = "#category-totals-end";
 					return false;
 				}
@@ -318,11 +320,13 @@ $(document).on("click","#edit-common-id #revert",function(){
 		});
 		
 		$(document).on("click",".show-flat-totals", function(){
+			$(".front-page-widget").fadeOut();
+
 			$.ajax({
 				type:"get",
 				url: base_url + "index/get_flats",
 				success: function(data){
-					$("#flat-totals").html(data);
+					$("#flat-totals").html(data).fadeIn();
 					document.location.href = "#flat-totals-end";
 					return false;
 				}
@@ -330,15 +334,24 @@ $(document).on("click","#edit-common-id #revert",function(){
 		});
 		
 		$(document).on("click",".show-quark-export",function(){
-			url = $(this).attr("href");
+			$(".front-page-widget").fadeOut();
+			
 			$.ajax({
 				type:"get",
-				url: url,
+				url: base_url + "index/show_quark_export",
 				success: function(data){
-					$("#quark-export").html(data);
+					$("#quark-export").fadeIn().html(data);
 				}
 			});
+			
+			
+		});
+		
+		$(document).on("click",".show-quark-export.active",function(){
+			$("#quark-export").hide();
+			$(this).removeClass("active").addClass("ready");
 			return false;
+			
 		});
 
 		$(document).on("click",".delete-image",function(){

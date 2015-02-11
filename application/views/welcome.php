@@ -23,26 +23,26 @@ $action_buttons[] = array("selection"=>"order","text"=>"Set Catalog Numbers","cl
 <h3>Totals</h3>
 
 <div style="width:250px;margin:0 auto; float: left;">
-<?=create_button_bar(array(array("selection"=>"order","text"=>"Show Order Totals","href"=>"#order-totals-end","class"=>"button show-order-totals ready")));?>
+<?=create_button_bar(array(array("selection"=>"order","text"=>"Show Order Totals","href"=>"#order-totals-end","class"=>"button show-order-totals")));?>
 <div id="order-totals" class="front-page-widget">
 </div>
 <div id="order-totals-end"></div>
 </div>
 <div style="float:left; width: 250px;">
-<?=create_button_bar(array(array("selection"=>"variety","text"=>"Show Category Totals","href"=>"#category-totals-end", "class"=>"button show-category-totals ready")));?>
+<?=create_button_bar(array(array("selection"=>"variety","text"=>"Show Category Totals","href"=>"#category-totals-end", "class"=>"button show-category-totals")));?>
 <div id="category-totals"  class="front-page-widget">
 </div>
 <div id="category-totals-end"></div>
 </div>
 <div style="float:left; width: 250px">
-<?=create_button_bar(array(array("selection"=>"variety","text"=>"Show Flat Totals","href"=>"#flat-totals-end", "class"=>"button show-flat-totals ready")));?>
+<?=create_button_bar(array(array("selection"=>"variety","text"=>"Show Flat Totals","href"=>"#flat-totals-end", "class"=>"button show-flat-totals")));?>
 <div id="flat-totals"  class="front-page-widget">
 </div>
 <div id="flat-totals-end"></div>
 </div>
 <? if(IS_ADMIN): ?>
 <div style="float:left; width: 250px">
-<?=create_button_bar(array(array("selection"=>"index","text"=>"Export for Quark","href"=>"#quark-export-end", "class"=>"button show-quark-export .ready")));?>
+<?=create_button_bar(array(array("selection"=>"index","text"=>"Export for Quark","href"=>"#quark-export-end", "class"=>"button export show-quark-export")));?>
 <div id="quark-export" class="front-page-widget">
 </div>
 <div id="quark-export-end"></div>

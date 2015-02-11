@@ -1052,6 +1052,10 @@ ul.list.categories  li a {
 	display: block;
 }
 
+.front-page-widget {
+	display: none;
+}
+
 .mr-shmallow-image {
 	
 }

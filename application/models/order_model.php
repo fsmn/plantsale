@@ -25,7 +25,7 @@ class Order_Model extends MY_Model
     var $remainder_sunday;
     var $grower_code;
     var $crop_failure;
-    var $print_omit;
+    var $omit;
     var $rec_modified;
     var $rec_modifier;
 
@@ -59,7 +59,7 @@ class Order_Model extends MY_Model
                 "remainder_sunday",
                 "grower_code",
                 "crop_failure",
-                "print_omit"
+                "omit"
         );
 
         for ($i = 0; $i < count($variables); $i ++) {

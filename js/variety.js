@@ -3,15 +3,15 @@ $(document).ready(function(){
 		my_id = this.id.split("_")[1];
 		if($(this).attr("checked")){
 			checked = $(this).val();
-			$(this).parents(".plant-info").addClass("omitted");
+			$(this).parents(".plant-info").addClass("omitted").removeClass("print");
 		}else{
 			checked = 0;
-			$(this).parents(".plant-info").removeClass("omitted");
+			$(this).parents(".plant-info").removeClass("omitted").addClass("print");
 		}
 		form_data = {
 				id: my_id,
 				value: checked,
-				field: "print_omit"
+				field: "omit"
 		};
 		$.ajax({
 			type: "post",
@@ -395,3 +395,53 @@ $(document).on("click","#edit-common-id #revert",function(){
 			});
 			return false;
 		});
+		
+		$(document).on("click",".variety-print-tabloid", function(event){
+			event.preventDefault();
+			
+			batch_print_varieties(this,"tabloid");
+		});
+		
+		$(document).on("click",".variety-print-statement",function(event){
+			event.preventDefault();
+			
+			batch_print_varieties(this,"statement");
+		});
+		
+		function batch_print_varieties(me,format){
+		
+			url = $(me).attr('href');
+			show_popup("Preparing","Preparing Printout. Please wait <div id='progressbar'></div>","auto");
+			var progressbar = $( "#progressbar" )
+			progressbar.progressbar({
+			      value: 0,
+			      max: 100
+			    });
+			
+			function progress(){
+				var val = progressbar.progressbar("value") || 0;
+				progressbar.progressbar("value", val + .25);
+				if(val < 99){
+					setTimeout(progress, 100);
+				}
+			}
+			setTimeout(progress,3000);
+			var id_array = $.map($("tr.plant-row.plant-info.print"),function(n,i){
+				return n.id.split("_")[1];
+			});
+			form_data = {
+					ids: id_array,
+			};
+			console.log(id_array);
+			
+			$.ajax({
+				type:"post",
+				data: form_data,
+				url: base_url + "variety/print_result/" + format,
+				success: function(data){
+					
+					document.write(data);
+				}
+				
+			});
+		}

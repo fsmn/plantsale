@@ -147,7 +147,7 @@ class Variety extends MY_Controller
 					"year",
 					"grower_id",
 					"new_year",
-					"print_omit",
+					"omit",
 					"web_description",
 					"print_description",
 					"crop_failure"
@@ -300,7 +300,7 @@ class Variety extends MY_Controller
 			$data ['plants'] = $this->variety->get_reorders ( $year );
 			foreach ( $data ['plants'] as $plant )
 			{
-				$plant->print_omit = 0;
+				$plant->omit = 0;
 			}
 			$data ['target'] = "variety/full_list";
 			$data ['title'] = "List of reordered plants for $year";
@@ -430,7 +430,9 @@ class Variety extends MY_Controller
 		{
 			// get the session data "print_list" from the find function
 			$data ["format"] = $format;
-			$plants = $this->session->userdata ( "print_list" );
+			$plants = $this->input->post ( "ids" );
+			
+			if($plants){
 			foreach ( $plants as $plant )
 			{
 				$data ['plants'] [$plant] ['variety'] = $this->variety->get ( $plant );
@@ -441,7 +443,9 @@ class Variety extends MY_Controller
 			$count = count ( $plants );
 			$data ["title"] = sprintf ( "%s-Size List-%s Pages", ucfirst ( $format ), $count );
 			$data ["target"] = "variety/print/multiple";
+			
 			$this->load->view ( "variety/print/index", $data );
+			}
 		}
 
 		function print_options ( $id )

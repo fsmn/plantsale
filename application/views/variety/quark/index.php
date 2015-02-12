@@ -1,6 +1,4 @@
 <?php  defined('BASEPATH') OR exit('No direct script access allowed');
-print subcategory_order();
-die();
 
 $categories = "";
 if($category && $subcategory){

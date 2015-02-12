@@ -143,7 +143,6 @@ class Index extends MY_Controller
         } else {
             $commons = $this->common->get_for_year(get_current_year());
         }
-
         foreach ($commons as $common) {
             $common->varieties = $this->variety->get_by_common($common->id);
             foreach ($common->varieties as $variety) {

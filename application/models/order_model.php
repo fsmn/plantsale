@@ -229,6 +229,7 @@ class Order_Model extends MY_Model
 
     function get_for_catalog ($year, $category = NULL)
     {
+        $this->load->helper("export");
         $this->db->from("order");
         $this->db->join("variety", "order.variety_id = variety.id");
         $this->db->join("common", "variety.common_id = common.id");
@@ -239,7 +240,7 @@ class Order_Model extends MY_Model
             $this->db->where("common.category_id", $category);
         }
         $this->db->order_by("category.category", "ASC");
-        $this->db->order_by("subcategory.subcategory", "ASC");
+        $this->db->order_by("(". subcategory_order() . ")");
         $this->db->order_by("common.name", "ASC");
         $this->db->order_by("order.price", "ASC");
         $this->db->order_by("order.pot_size", "ASC");

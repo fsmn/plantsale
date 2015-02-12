@@ -1056,6 +1056,10 @@ ul.list.categories  li a {
 	display: none;
 }
 
+#quark-export ul {
+	padding: 0 10px;
+}
+
 .mr-shmallow-image {
 	
 }

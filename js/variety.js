@@ -306,7 +306,6 @@ $(document).on("click","#edit-common-id #revert",function(){
 		});
 		
 		$(document).on("click",".show-category-totals", function(){
-			$(".front-page-widget").fadeOut();
 
 			$.ajax({
 				type:"get",
@@ -320,7 +319,6 @@ $(document).on("click","#edit-common-id #revert",function(){
 		});
 		
 		$(document).on("click",".show-flat-totals", function(){
-			$(".front-page-widget").fadeOut();
 
 			$.ajax({
 				type:"get",
@@ -334,15 +332,24 @@ $(document).on("click","#edit-common-id #revert",function(){
 		});
 		
 		$(document).on("click",".show-quark-export",function(){
-			$(".front-page-widget").fadeOut();
-			
+			if($(this).hasClass("active")){
+				$("#quark-export").fadeOut();
+				$(this).removeClass("active").addClass("ready");
+			}else{
+				$(this).addClass("active").removeClass("ready");
 			$.ajax({
 				type:"get",
 				url: base_url + "index/show_quark_export",
 				success: function(data){
-					$("#quark-export").fadeIn().html(data);
+					$("#quark-export").fadeIn().html(data).position({
+						my: "left top",
+						at: "left bottom",
+						of: $(".show-quark-export"), 
+						collision: "fit"
+					}).show();
 				}
 			});
+			}
 			
 			
 		});
@@ -352,6 +359,11 @@ $(document).on("click","#edit-common-id #revert",function(){
 			$(this).removeClass("active").addClass("ready");
 			return false;
 			
+		});
+		
+		$(document).on("click",".hide-quark-export",function(){
+			$("#quark-export").hide();
+			$(".show-quark-export.active").removeClass("active").addClass("ready");
 		});
 
 		$(document).on("click",".delete-image",function(){

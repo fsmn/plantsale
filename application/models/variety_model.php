@@ -92,7 +92,6 @@ class Variety_Model extends MY_Model
                  LEFT JOIN `order` o ON `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year`
                  WHERE `v`.`common_id` = $common_id ORDER BY `v`.`variety` ASC";
         $result = $this->db->query($query)->result();
-        $this->_log("notice");
         return $result;
     }
 

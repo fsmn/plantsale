@@ -736,6 +736,8 @@ fieldset.advanced div.advanced {
 	display: block;
 	position: relative;
 	margin-bottom: 20px;
+	box-shadow: 1px 1px 3px #999;
+	border: none;
 }
 
 .search-fieldset.hidden {

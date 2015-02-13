@@ -182,7 +182,7 @@ class Order_Model extends MY_Model
 						"plant_cost",
 						"price",
 				) )) {
-					$this->db->order_by ( "CAST(`$order_field` as SIGNED INTEGER)", $order_direction );
+					$this->db->order_by ( "CAST(`$order_field` as DECIMAL)", $order_direction );
 				}
 				else {
 					$this->db->order_by ( $order_field, $order_direction );

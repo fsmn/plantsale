@@ -158,7 +158,7 @@ if ($orders) :
 			</td>
 			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->plant_cost,2);?></span>
 			</td>
-			<td class="order-order_total field order_total no-wrap">$<?=$order->flat_cost * ($order->count_presale + $order->count_midsale);?>
+			<td class="order-order_total field order_total no-wrap">$<?=round($order->flat_cost * ($order->count_presale + $order->count_midsale),2);?>
 			</td>
 			<td class="order-price field price-field no-wrap">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>

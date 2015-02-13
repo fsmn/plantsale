@@ -226,6 +226,7 @@ function quark_single ($common)
     $output[] = sprintf(" %s", format_sunlight($common->sunlight, "quark"));
     $output[] = format_flags($variety->flags, "quark");
     $output[] = sprintf("<p>@Pot and Price Right:%s--%s", get_as_price(get_value($order, "price")), get_value($order, "pot_size"));
+    return implode("",$output);
 }
 
 function quark_multiple ($common)

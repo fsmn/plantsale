@@ -391,3 +391,10 @@ input.autocomplete-live:hover,input.autocomplete:hover {
     color: #000;
     background: rgba(255, 0, 0, .3) url(images/gray-stripe.png) !important;
 }
+
+#quark-export {
+	background-color: #fff;
+	box-shadow: 1px 1px 3px #999;
+
+}
+

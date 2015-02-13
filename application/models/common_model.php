@@ -153,14 +153,13 @@ class Common_model extends MY_Model
         }
 
         $result = $this->db->get()->result();
-        $this->_log();
         return $result;
     }
 
     function delete($id){
         $this->_delete("common", $id);
     }
-    
+
     function get_for_year($year,$category_id=NULL,$subcategory_id=NULL){
     	$this->db->from("common");
     	$this->db->join("category","common.category_id=category.id","LEFT");
@@ -174,15 +173,15 @@ class Common_model extends MY_Model
     			$this->db->where("common.subcategory_id",$subcategory_id);
     		}
     	}
-    	
+
     	$this->db->select("common.*");
     	$this->db->order_by("order.catalog_number");
     	$this->db->order_by("category.category");
-    	$this->db->order_by("subcategory.subcategory");
+    	$this->db->order_by("(" . subcategory_order() . ")");
     	$this->db->group_by("common.id");
     	$result = $this->db->get()->result();
     	$this->_log("notice");
     	return $result;
-    	
+
     }
 }

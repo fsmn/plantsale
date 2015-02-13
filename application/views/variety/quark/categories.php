@@ -5,7 +5,10 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 ?>
 <div class="categories-list">
 <h5>Click on a category or subcategory to download the quark export for the current year.</h5>
+<?=create_button(array("text"=>"Hide","class"=>"button hide-quark-export small","href"=>"#"));?>
+
 	<ul class="categories list">
+	<li class="category item"><a class="export" href="<?=site_url("index/quark");?>">All Categories <i class='fa fa-cloud-download'></i></a></li>
 <? foreach($categories as $category): ?>
 <li class="category item"><a class="export"
 			href="<?=site_url("index/quark?category_id=$category->id");?>"

@@ -247,7 +247,7 @@ $(document).on("click","#quark-export a.export",function(event){
 	
 	function progress(){
 		var val = progressbar.progressbar("value") || 0;
-		progressbar.progressbar("value", val + .25);
+		progressbar.progressbar("value", val + .1);
 		if(val < 99){
 			setTimeout(progress, 100);
 		}

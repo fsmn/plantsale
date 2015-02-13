@@ -144,13 +144,11 @@ class Index extends MY_Controller
             $commons = $this->common->get_for_year(get_current_year());
         }
         foreach ($commons as $common) {
-            $common->varieties = $this->variety->get_by_common($common->id);
+            $common->varieties = $this->variety->get_for_quark($common->id,get_current_year());
             foreach ($common->varieties as $variety) {
                 $variety->flags = $this->flag->get_for_variety($variety->id);
-                $variety->order = $this->order->get_for_variety($variety->id,get_current_year());
             }
         }
-
         $data["category"] = $category;
         $data["subcategory"] = $subcategory;
         $data["commons"] = $commons;

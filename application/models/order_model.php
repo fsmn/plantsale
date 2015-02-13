@@ -106,7 +106,7 @@ class Order_Model extends MY_Model
 			return $output;
 		}
 
-		function get_for_variety ( $variety_id, $year = NULL )
+		function get_for_variety ( $variety_id, $year = FALSE )
 		{
 			$this->db->where ( "variety_id", $variety_id );
 			if ($year) {
@@ -122,6 +122,7 @@ class Order_Model extends MY_Model
 			else {
 				$output = $this->db->get ()->result ();
 			}
+			$this->_log("notice");
 			return $output;
 		}
 

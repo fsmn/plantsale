@@ -84,15 +84,30 @@ class Variety_Model extends MY_Model
 
     function get_by_common ($common_id)
     {
-        $query = "SELECT v.*, o.year
+        $query = "SELECT `v`.*, `o`.`year`
             FROM `variety` v
                 LEFT JOIN
                     (SELECT n.variety_id, MAX(n.year) AS max_year  FROM `order` n GROUP BY n.variety_id) y
                         ON y.variety_id = v.id
-                 LEFT JOIN `order` o ON `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year`
-                 WHERE `v`.`common_id` = $common_id ORDER BY `v`.`variety` ASC";
+                  JOIN `order` o ON `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year`
+                 WHERE `v`.`common_id` = $common_id ORDER BY CAST(`o`.`price` AS DECIMAL), `o`.`pot_size`, `v`.`variety` ASC";
         $result = $this->db->query($query)->result();
+        $this->_log("notice");
         return $result;
+    }
+    
+    function get_for_quark($common_id,$year){
+    	$this->db->from("variety");
+    	$this->db->join("order","variety.id = order.variety_id");
+    	$this->db->where("common_id",$common_id);
+    	$this->db->where("year",$year);
+    	$this->db->select("variety.*");
+    	$this->db->select("order.year, order.pot_size,order.price,order.catalog_number,order.count_midsale");
+    	$this->db->order_by("CAST(order.price as DECIMAL)");
+    	$this->db->order_by("order.pot_size");
+    	$this->db->order_by("variety");
+    	$result = $this->db->get()->result();
+    	return $result;
     }
 
     function get_by_name ($name)

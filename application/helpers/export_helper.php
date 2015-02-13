@@ -215,9 +215,8 @@ function subcategory_order ($categories = array())
 function quark_single ($common)
 {
     $variety = $common->varieties[0];
-    $order = $variety->order;
-    $output[] = sprintf("@Common Name:<@Number In-text>%s<@\$p>%s", get_value($order, "catalog_number"), $common->name);
-    $output[] = (get_value($order, "count_midsale") > 0) ? format_saturday("quark") : "";
+    $output[] = sprintf("@Common Name:<@Number In-text>%s<@\$p>%s", $variety->catalog_number, $common->name);
+    $output[] = $variety->count_midsale > 0 ? format_saturday("quark") : "";
     $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
     $output[] = sprintf("<p>@Latin Name:%s", format_latin_name($common->genus, $variety->species));
     $output[] = sprintf("<$>'%s'<$>", $variety->variety);
@@ -225,7 +224,7 @@ function quark_single ($common)
     $output[] = format_quark_dimensions($variety);
     $output[] = sprintf(" %s", format_sunlight($common->sunlight, "quark"));
     $output[] = format_flags($variety->flags, "quark");
-    $output[] = sprintf("<p>@Pot and Price Right:%s--%s", get_as_price(get_value($order, "price")), get_value($order, "pot_size"));
+    $output[] = sprintf("<p>@Pot and Price Right:%s--%s", get_as_price($variety->price), $variety->pot_size);
     return implode("",$output);
 }
 
@@ -233,14 +232,12 @@ function quark_multiple ($common)
 {
     $output[] = sprintf("@Common Name:%s<p>@Latin Name:%s<p>@Copy:%s %s", $common->name, $common->genus, $common->description,
             format_sunlight($common->sunlight, "quark"));
-
     foreach ($common->varieties as $variety) {
-        $order = $variety->order;
-        $output[] = sprintf("\r@Pot and Price:%s>--%s:", get_as_price(get_value($order, "price")), get_value($order, "pot_size"));
-        $output[] = sprintf("\r@Copy After Copy:<@Number In-text>%s<@\$p>", get_value($order, "catalog_number"));
+        $output[] = sprintf("\r@Pot and Price:%s>--%s:", get_as_price($variety->price), $variety->pot_size);
+        $output[] = sprintf("\r@Copy After Copy:<@Number In-text>%s<@\$p>", get_value($variety, "catalog_number"));
         $output[] = sprintf("%s @Latin Name:%s", $variety->variety, format_latin_name($common->genus, $variety->species));
         $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
-        $output[] = (get_value($order, "count_midsale") > 0) ? format_saturday("quark") : "";
+        $output[] = (get_value($variety, "count_midsale") > 0) ? format_saturday("quark") : "";
         $output[] = sprintf("--%s %s %s", $variety->print_description, format_quark_dimensions($variety), format_flags($variety->flags, "quark"));
     }
     return implode("", $output);

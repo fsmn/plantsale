@@ -95,6 +95,8 @@
 		<div class="category">
 			<label>Category: </label> <span class="field"><?=$variety->category; ?>
 			</span>
+			<label>Subcategory: </label> <span class="field"><?=$variety->subcategory; ?>
+			</span>
 		</div>
 		<p class="sunlight">
 			<label>Sunlight: </label> <span class="field"><?=$variety->sunlight;?></span>

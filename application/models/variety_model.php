@@ -291,7 +291,14 @@ class Variety_Model extends MY_Model
             if (array_key_exists("direction", $order_by) && ! empty($order_by["direction"][$i])) {
                 $order_direction = $order_by["direction"][$i];
             }
+            
+            if($order_field = "subcategory"){
+            	$this->load->helper("export");
+            	$this->db->order_by("(" . subcategory_order() . ")");
+            	
+            }else{
             $this->db->order_by($order_field, $order_direction);
+            }
         }
         $this->db->from("variety");
         $this->db->join("common", "variety.common_id = common.id");

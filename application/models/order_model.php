@@ -183,8 +183,10 @@ class Order_Model extends MY_Model
 						"price",
 				) )) {
 					$this->db->order_by ( "CAST(`$order_field` as DECIMAL)", $order_direction );
-				}
-				else {
+				}elseif($order_field = "subcategory") {
+					$this->load->helper("export");
+					$this->db->order_by("(". subcategory_order() . ")" );
+				}else{
 					$this->db->order_by ( $order_field, $order_direction );
 				}
 			}

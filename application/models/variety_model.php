@@ -103,6 +103,7 @@ class Variety_Model extends MY_Model
     	$this->db->where("year",$year);
     	$this->db->select("variety.*");
     	$this->db->select("order.year, order.pot_size,order.price,order.catalog_number,order.count_midsale");
+    	$this->db->order_by("order.catalog_number");
     	$this->db->order_by("CAST(order.price as DECIMAL)");
     	$this->db->order_by("order.pot_size");
     	$this->db->order_by("variety");

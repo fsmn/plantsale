@@ -193,16 +193,16 @@ function format_quark_dimensions ($object)
 
 function format_description ($description, $object, $format = FALSE)
 {
-    $output[] = $description;
 
     if ($object->print_description) {
-        $output[] = $object->print_description;
+        $output[] = trim($object->print_description);
     }
-    if ($format == "web") {
-        if ($object->web_description) {
-            $output[] = $object->web_description;
-        }
-    }
+//     if ($format == "web") {
+//         if ($object->web_description) {
+//             $output[] = trim($object->web_description);
+//         }
+//     }
+    $output[] = $description;
     return implode(" ", $output);
 }
 

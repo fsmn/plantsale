@@ -184,12 +184,13 @@ class Order_Model extends MY_Model
 						"price",
 				) )) {
 					$this->db->order_by ( "CAST(`$order_field` as DECIMAL)", $order_direction );
-				}elseif($order_field = "subcategory") {
+				}elseif($order_field == "subcategory") {
 					$this->load->helper("export");
 					$this->db->order_by("(". subcategory_order() . ")" );
 				}else{
 					$this->db->order_by ( $order_field, $order_direction );
 				}
+				
 			}
 			$this->db->select ( "order.*" );
 			$this->db->select ( "order.received_presale,order.received_midsale,order.sellout_friday,order.sellout_saturday,order.remainder_friday,order.remainder_saturday,order.remainder_sunday,order.count_dead" );
@@ -197,7 +198,6 @@ class Order_Model extends MY_Model
 			$this->db->select ( "common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id" );
 			$this->db->select ( "category.category,subcategory.subcategory" );
 			$result = $this->db->get ()->result ();
-			// $this->_log("notice");
 			return $result;
 		}
 
@@ -253,13 +253,15 @@ class Order_Model extends MY_Model
 				$this->db->where ( "common.category_id", $category );
 			}
 			$this->db->order_by ( "category.category", "ASC" );
+			$this->load->helper("export");
 			$this->db->order_by("(". subcategory_order() . ")" );
 			$this->db->order_by ( "common.name", "ASC" );
-			$this->db->order_by ( "order.price", "ASC" );
+			$this->db->order_by ( "CAST(order.price as DECIMAL)", "ASC" );
 			$this->db->order_by ( "order.pot_size", "ASC" );
 			$this->db->order_by ( "variety.variety", "ASC" );
 			$this->db->select ( "order.id,category.category" );
 			$result = $this->db->get ()->result ();
+			$this->_log("notice");
 			return $result;
 		}
 

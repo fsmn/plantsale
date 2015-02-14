@@ -169,14 +169,20 @@ function format_saturday ($format = "quark")
     return $output;
 }
 
+/**
+ * format the dimensions of the dimensions of the object
+ * @param  $object
+ * @return string
+ * If a variety doesn't have a measurmement, then assume inches. 
+ */
 function format_quark_dimensions ($object)
 {
     $output = array();
     if ($object->min_height || $object->max_height) {
-        $output["height"] = format_dimensions($object->min_height, $object->max_height, $object->height_unit == "Inches" ? "”" : "’", "h");
+        $output["height"] = format_dimensions($object->min_height, $object->max_height, $object->height_unit == "Inches" || $object->height_unit == NULL ? "”" : "’", "h");
     }
     if ($object->min_width || $object->max_width) {
-        $output["width"] = format_dimensions($object->min_width, $object->max_width, $object->width_unit == "Inches" ? "”" : "’", "w");
+        $output["width"] = format_dimensions($object->min_width, $object->max_width, $object->width_unit == "Inches" || $object->width_unit == NULL ? "”" : "’", "w");
     }
     return implode(" by ", $output);
 }
@@ -215,11 +221,11 @@ function subcategory_order ($categories = array())
 function quark_single ($common)
 {
     $variety = $common->varieties[0];
-    $output[] = sprintf("@Common Name:<@Number In-text>%s<@\$p>%s", $variety->catalog_number, $common->name);
+    $output[] = sprintf("@Common Name:<@Number In-text>%s<@\$p> %s", $variety->catalog_number, $common->name);
     $output[] = $variety->count_midsale > 0 ? format_saturday("quark") : "";
     $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
     $output[] = sprintf("<p>@Latin Name:%s", format_latin_name($common->genus, $variety->species));
-    $output[] = sprintf("<$>'%s'<$>", $variety->variety);
+    $output[] = sprintf("<f\"GoudySansITCbyBT-Medium\"> %s<f$>", $variety->variety);
     $output[] = sprintf("<p>@Copy:%s", format_description($common->description, $variety, "quark"));
     $output[] = format_quark_dimensions($variety);
     $output[] = sprintf(" %s", format_sunlight($common->sunlight, "quark"));
@@ -232,10 +238,30 @@ function quark_multiple ($common)
 {
     $output[] = sprintf("@Common Name:%s<p>@Latin Name:%s<p>@Copy:%s %s", $common->name, $common->genus, $common->description,
             format_sunlight($common->sunlight, "quark"));
+    
+    //set prices and pot sizes based on if they repeat. 
+    $base_price = FALSE;
+    $base_size = FALSE;
     foreach ($common->varieties as $variety) {
-        $output[] = sprintf("\r@Pot and Price:%s>--%s:", get_as_price($variety->price), $variety->pot_size);
-        $output[] = sprintf("\r@Copy After Copy:<@Number In-text>%s<@\$p>", get_value($variety, "catalog_number"));
-        $output[] = sprintf("%s @Latin Name:%s", $variety->variety, format_latin_name($common->genus, $variety->species));
+    	$price = FALSE;
+    	$pot_size = FALSE;
+    	if($base_price != $variety->price){
+    		$price = $variety->price;
+    		$base_price = $variety->price;
+    	}
+    	if($base_size == $variety->pot_size){
+    		$pot_size = $variety->pot_size;
+    		$base_size = $variety->pot_size;
+    	}
+    	if($price  && $pot_size){
+    		$output[] = sprintf("\r@Pot and Price:%s--%s:", get_as_price($price), $pot_size);
+    	}elseif($price){
+    		$output[] = sprintf("\r@Pot and Price:%s",get_as_price($price));
+    	}elseif($pot_size){
+    		$output[] = sprintf("\r@Pot and Price:%s",$pot_size);
+    	}
+        $output[] = sprintf("\r@Copy After Copy:<@Number In-text>%s<t><\_>", $variety->catalog_number);
+        $output[] = sprintf("<@In text Goudy Sans Bold>%s<@\$p> <I>%s</I>", $variety->variety, format_latin_name(substr(ucfirst($common->genus),0,1), $variety->species));
         $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
         $output[] = (get_value($variety, "count_midsale") > 0) ? format_saturday("quark") : "";
         $output[] = sprintf("--%s %s %s", $variety->print_description, format_quark_dimensions($variety), format_flags($variety->flags, "quark"));

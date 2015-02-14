@@ -16,7 +16,9 @@ class Variety extends MY_Controller
 
 		function index ()
 		{
-
+			$this->load->helper("export");
+			$variety = array("min_height"=>FALSE,"max_height"=>FALSE,"height_unit"=>FALSE,"min_width"=>2,"max_width"=>5,"width_unit"=>FALSE);
+			echo format_quark_dimensions((object)$variety);
 		}
 
 		function create ()

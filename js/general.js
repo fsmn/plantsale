@@ -114,6 +114,18 @@ console.log(form_data);
 }
 });
 
+$(document).on("click",".set-catalog-numbers",function(event){
+	event.preventDefault();
+	href = $(this).attr("href");
+	first_question = confirm("Are you sure you want to update catalog numbers? This cannot be easily undone without some saddness.");
+	if(first_question){
+		second_question = confirm("Are you absolutely sure? Make sure you note the time you did this in case you need to revert to an earlier state.");
+		if(second_question){
+			location.href = href;
+		}
+	}
+});
+
 $(document).on("click",".autocomplete.edit-field",function(){
 	my_parent = $(this).parent(".field-envelope").attr("id");
 	my_attr = my_parent.split("__");

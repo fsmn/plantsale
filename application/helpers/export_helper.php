@@ -1,37 +1,40 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 // quark_helper.php Chris Dart Feb 9, 2015 4:34:51 PM
 // chrisdart@cerebratorium.com
-function format_sunlight ($sunlight, $format = "quark")
+function format_sunlight ( $sunlight, $format = "quark" )
 {
-    $output = "";
-    if ($format == "quark") {
-        if (strstr($sunlight, "full")) {
-            $output .= "Í";
-        }
-        if (strstr($sunlight, "part")) {
-            $output .= "∏";
-        }
-        if (strstr($sunlight, "shade")) {
-            $output .= "Ó";
-        } else {
-            if (strstr($sunlight, "full")) {
-                $output .= "+++";
-            }
-            if (strstr($sunlight, "part")) {
-                $output .= "%%%";
-            }
-            if (strstr($sunlight, "shade")) {
-                $output .= "///";
-            }
-        }
-        if ($format == "quark") {
-            $output = sprintf("<f\"FSMPlantSaleIcons\">%s<f$>", $output);
-        }
-        return $output;
-    }
+	$output = "";
+	if ($format == "quark") {
+		if (strstr ( $sunlight, "full" )) {
+			$output .= "Í";
+		}
+		if (strstr ( $sunlight, "part" )) {
+			$output .= "∏";
+		}
+		if (strstr ( $sunlight, "shade" )) {
+			$output .= "Ó";
+		}
+	}
+	else {
+		if (strstr ( $sunlight, "full" )) {
+			$output .= "+++";
+		}
+		if (strstr ( $sunlight, "part" )) {
+			$output .= "%%%";
+		}
+		if (strstr ( $sunlight, "shade" )) {
+			$output .= "///";
+		}
+	}
+	
+	if ($format == "quark") {
+		$output = sprintf ( "<f\"FSMPlantSaleIcons\">%s<f$>", $output );
+	}
+	return $output;
 }
+
 
 /**
  * the rules for codes are baffling and require special knowledge,

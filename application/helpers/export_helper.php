@@ -225,12 +225,12 @@ function subcategory_order ($categories = array())
 function quark_single ($common)
 {
     $variety = $common->varieties[0];
-    $output[] = sprintf("@Common Name:<@Number In-text>%s<@\$p> %s", $variety->catalog_number, $common->name);
+    $output[] = sprintf("@Common Name:<@Number In-text>%s<@\$p> %s ", $variety->catalog_number, $common->name);
     $output[] = $variety->count_midsale > 0 ? format_saturday("quark") : "";
     $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
-    $output[] = sprintf("<p>@Latin Name:%s", format_latin_name($common->genus, $variety->species));
+    $output[] = sprintf("<p>@Latin Name:%s ", format_latin_name($common->genus, $variety->species));
     $output[] = sprintf("<f\"GoudySansITCbyBT-Medium\"> %s<f$>", $variety->variety);
-    $output[] = sprintf("<p>@Copy:%s", format_description($common->description, $variety, "quark"));
+    $output[] = sprintf("<p>@Copy:%s ", format_description($common->description, $variety, "quark"));
     $output[] = format_quark_dimensions($variety);
     $output[] = sprintf(" %s", format_sunlight($common->sunlight, "quark"));
     $output[] = format_flags($variety->flags, "quark");
@@ -253,21 +253,20 @@ function quark_multiple ($common)
     		$price = $variety->price;
     		$base_price = $variety->price;
     	}
-    	if($base_size == $variety->pot_size){
+    	if($price){
     		$pot_size = $variety->pot_size;
-    		$base_size = $variety->pot_size;
     	}
     	if($price  && $pot_size){
-    		$output[] = sprintf("\r@Pot and Price:%s--%s:", get_as_price($price), $pot_size);
+    		$output[] = sprintf("<p>@Pot and Price:%s--%s:", get_as_price($price), $pot_size);
     	}elseif($price){
-    		$output[] = sprintf("\r@Pot and Price:%s",get_as_price($price));
+    		$output[] = sprintf("<p>@Pot and Price:%s",get_as_price($price));
     	}elseif($pot_size){
-    		$output[] = sprintf("\r@Pot and Price:%s",$pot_size);
+    		$output[] = sprintf("<p>@Pot and Price:%s",$pot_size);
     	}
-        $output[] = sprintf("\r@Copy After Copy:<@Number In-text>%s<t><\_>", $variety->catalog_number);
-        $output[] = sprintf("<@In text Goudy Sans Bold>%s<@\$p> <I>%s</I>", $variety->variety, format_latin_name(substr(ucfirst($common->genus),0,1), $variety->species));
+        $output[] = sprintf("<p>@Copy After Copy:<@Number In-text>%s<t><\_>", $variety->catalog_number);
+        $output[] = sprintf("<@In text Goudy Sans Bold>%s<@\$p> <I>%s</I> ", $variety->variety, format_latin_name(substr(ucfirst($common->genus),0,1), $variety->species));
         $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
-        $output[] = (get_value($variety, "count_midsale") > 0) ? format_saturday("quark") : "";
+        $output[] = (get_value($variety, "count_midsale") > 0) ? " ". format_saturday("quark") : "";
         $output[] = sprintf("--%s %s %s", $variety->print_description, format_quark_dimensions($variety), format_flags($variety->flags, "quark"));
     }
     return implode("", $output);

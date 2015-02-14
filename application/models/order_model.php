@@ -177,12 +177,7 @@ class Order_Model extends MY_Model
 				}
 				
 				// if the $order_field is a price field or integer, sort as number.
-				if (in_array ( $order_field, array (
-						"flat_size",
-						"flat_cost",
-						"plant_cost",
-						"price",
-				) )) {
+				if ( $order_field == "flat_size") {
 					$this->db->order_by ( "CAST(`$order_field` as DECIMAL)", $order_direction );
 				}elseif($order_field == "subcategory") {
 					$this->load->helper("export");
@@ -256,7 +251,7 @@ class Order_Model extends MY_Model
 			$this->load->helper("export");
 			$this->db->order_by("(". subcategory_order() . ")" );
 			$this->db->order_by ( "common.name", "ASC" );
-			$this->db->order_by ( "CAST(order.price as DECIMAL)", "ASC" );
+			$this->db->order_by ( "order.price", "ASC" );
 			$this->db->order_by ( "order.pot_size", "ASC" );
 			$this->db->order_by ( "variety.variety", "ASC" );
 			$this->db->select ( "order.id,category.category" );

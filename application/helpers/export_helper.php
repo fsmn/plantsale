@@ -121,6 +121,7 @@ function format_flags ($flags, $format = "quark")
                 } else {
                     $output .= "OrganicB";
                 }
+                break;
             case "Poisonous":
                 if ($format == "quark") {
                     $output .= "¥";

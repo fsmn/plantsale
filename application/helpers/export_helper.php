@@ -209,7 +209,7 @@ function format_description ($description, $object, $format = FALSE)
 function subcategory_order ($categories = array())
 {
     if (! $categories) {
-        $categories = array("Indoor Plants","Miniature Gardens","Succulents","General","Hanging Baskets");
+        $categories = array("Indoor Plants","Miniature Gardens","Succulents","General Annuals","Hanging Baskets");
     }
     $category_order = "CASE ";
 

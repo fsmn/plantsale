@@ -256,7 +256,6 @@ class Order_Model extends MY_Model
 			$this->db->order_by ( "variety.variety", "ASC" );
 			$this->db->select ( "order.id,category.category" );
 			$result = $this->db->get ()->result ();
-			$this->_log("notice");
 			return $result;
 		}
 

@@ -27,9 +27,9 @@ foreach ($commons as $common) {
             $common->name,
             $common->subcategory && ! strstr($common->subcategory, "General") ? sprintf("%s - %s", $common->category, $common->subcategory) : $common->category,
             $common->description,
-            strstr($common->sunlight, "full") ? "+++" : "",
-            strstr($common->sunlight, "part") ? "%%%" : "",
-            strstr($common->sunlight, "shade") ? "///" : ""
+            strstr($common->sunlight, "full") ? 5 : "",
+            strstr($common->sunlight, "part") ? 6 : "",
+            strstr($common->sunlight, "shade") ? 7 : ""
     );
     if ($extension == "csv") {
         $output[] = "\"" . implode("\",\"", $line) . "\"";

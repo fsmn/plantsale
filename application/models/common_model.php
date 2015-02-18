@@ -160,7 +160,7 @@ class Common_model extends MY_Model
         $this->_delete("common", $id);
     }
 
-    function get_for_year($year,$category_id=NULL,$subcategory_id=NULL){
+    function get_for_year($year,$category_id=FALSE,$subcategory_id=FALSE){
     	$this->db->from("common");
     	$this->db->join("category","common.category_id=category.id","LEFT");
     	$this->db->join("subcategory","common.subcategory_id=subcategory.id","LEFT");

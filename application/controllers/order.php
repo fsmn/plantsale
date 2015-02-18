@@ -224,9 +224,10 @@ class Order extends MY_Controller
         echo $output;
     }
 
-    function catalog_update_selector(){
-$data["categories"] = $this->category->get_all();
-$this->load->view("order/catalog_categories",$data);
+    function catalog_update_selector ()
+    {
+        $data["categories"] = $this->category->get_all();
+        $this->load->view("order/catalog_categories", $data);
     }
 
     function set_catalog_numbers ($year = NULL)
@@ -235,11 +236,14 @@ $this->load->view("order/catalog_categories",$data);
             $year = get_cookie("sale_year");
         }
         $target_category = "";
-        if($category_id = $this->input->get("category_id")){
-            $categories = (object)array("category"=>(object)array("id"=>$category_id));
+        if ($category_id = $this->input->get("category_id")) {
+            $categories = (object) array(
+                    "category" => (object) array(
+                            "id" => $category_id
+                    )
+            );
             $target_category = $categories->category->category;
-
-        }else{
+        } else {
             $categories = $this->category->get_all();
         }
         $count = 0;

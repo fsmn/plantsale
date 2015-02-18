@@ -53,7 +53,7 @@ foreach ($varieties as $variety) {
             $variety->species,
             str_replace(",", "\r", $variety->plant_color),
             $variety->other_names,
-            $variety->subcategory && !strstr($variety->subcategory, "General") ? sprintf("%s-%s", $variety->category, $variety->subcategory) : $variety->category,
+            $variety->subcategory ? $variety->web_label : $variety->category,
             $variety->print_description,
             $variety->web_description,
             $variety->price,

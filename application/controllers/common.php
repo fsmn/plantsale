@@ -253,7 +253,7 @@ class Common extends MY_Controller
 		{
 			if ($id = $this->input->post ( "id" ))
 			{
-				if ($this->variety->get_by_common ( $id ) == FALSE)
+				if ($this->variety->get_for_common ( $id ) == FALSE)
 				{
 					$this->common->delete ( $id );
 					redirect ( "index" );

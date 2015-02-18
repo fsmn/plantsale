@@ -82,9 +82,11 @@ class Variety_Model extends MY_Model
         return $result;
     }
 
+    /** Deprecated **/
     function get_by_common ($common_id)
     {
-        $query = "SELECT `v`.*, `o`.`year`
+        return $this->get_for_common($common_id);
+       /*  $query = "SELECT `v`.*, `o`.`year`
             FROM `variety` v
                 LEFT JOIN
                     (SELECT n.variety_id, MAX(n.year) AS max_year  FROM `order` n GROUP BY n.variety_id) y
@@ -93,7 +95,7 @@ class Variety_Model extends MY_Model
                  WHERE `v`.`common_id` = $common_id ORDER BY `o`.`year` DESC, `v`.`variety`";
         $result = $this->db->query($query)->result();
         $this->_log("notice");
-        return $result;
+        return $result; */
     }
 
     function get_for_common ($common_id)

@@ -38,20 +38,20 @@ class Variety_Model extends MY_Model
 					"print_description",
 					"web_description",
 					"new_year",
-					"common_id" 
+					"common_id"
 			);
-			
+
 			for($i = 0; $i < count ( $variables ); $i ++) {
 				$my_variable = $variables [$i];
 				if ($this->input->post ( $my_variable )) {
 					$this->$my_variable = urldecode ( $this->input->post ( $my_variable ) );
 				}
 			}
-			
+
 			if ($this->input->post ( "plant_color" )) {
 				$this->plant_color = implode ( ",", $this->input->post ( "plant_color" ) );
 			}
-			
+
 			$this->rec_modified = mysql_timestamp ();
 			$this->rec_modifier = $this->session->userdata ( 'user_id' );
 		}
@@ -120,7 +120,7 @@ class Variety_Model extends MY_Model
 			$this->db->order_by ( "variety", "ASC" );
 			$this->db->order_by ( "common.name", "ASC" );
 			$this->db->select ( "variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  category.category, subcategory.subcategory, common.description" );
-			
+
 			$result = $this->db->get ( "variety" )->result ();
 			return $result;
 		}
@@ -161,7 +161,6 @@ class Variety_Model extends MY_Model
 				$this->db->from ( "variety" );
 				// $this->db->where("new_year IS NULL", NULL, false);
 				$varieties = $this->db->get ()->result ();
-				$flashes = array ();
 				foreach ( $varieties as $variety ) {
 					$query = sprintf ( "SELECT `order`.`year` FROM `order`,`variety` WHERE `order`.`variety_id` = %s AND variety.id = `order`.variety_id  AND NOT EXISTS(SELECT `year` FROM `order` WHERE `year` < %s AND variety_id = %s)  HAVING `order`.`year` = %s;", $variety->id, $year, $variety->id, $year );
 					$new_year = $this->db->query ( $query )->row ();
@@ -178,7 +177,7 @@ class Variety_Model extends MY_Model
 		{
 			$this->db->where ( "id", $id );
 			$update = array (
-					"new_year" => $year 
+					"new_year" => $year
 			);
 			$this->db->update ( "variety", $update );
 		}
@@ -261,7 +260,7 @@ class Variety_Model extends MY_Model
 			$this->db->where ( "subcategory_id !=", 3 ); // no hanging baskets
 			$this->db->where ( "subcategory_id !=", 4 ); // no indoor annuals
 			$this->db->where ( "subcategory_id !=", 8 ); // no perennial water plants
-			
+
 			$this->db->group_by ( "common.category_id" );
 			$this->db->order_by ( "category.category" );
 			// $this->db->select("sum(`order`.`count_presale` +
@@ -283,7 +282,7 @@ class Variety_Model extends MY_Model
 					$my_value = $this->input->get ( $my_variable );
 					if ($my_value) {
 						$my_parameters->$my_variable = new stdClass ();
-						
+
 						$my_parameters->$my_variable->key = $my_variable;
 						$my_parameters->$my_variable->value = $my_value;
 					}
@@ -291,7 +290,7 @@ class Variety_Model extends MY_Model
 			}
 			if (! is_array ( $order_by )) {
 				$order_by = array (
-						$order_by 
+						$order_by
 				);
 			}
 			for($i = 0; $i < count ( $order_by ["fields"] ); $i ++) {
@@ -299,12 +298,12 @@ class Variety_Model extends MY_Model
 				if (array_key_exists ( "fields", $order_by ) && ! empty ( $order_by ["fields"] [$i] )) {
 					$order_field = $order_by ["fields"] [$i];
 				}
-				
+
 				$order_direction = "ASC";
 				if (array_key_exists ( "direction", $order_by ) && ! empty ( $order_by ["direction"] [$i] )) {
 					$order_direction = $order_by ["direction"] [$i];
 				}
-				
+
 				if ($order_field = "subcategory") {
 					$this->load->helper ( "export" );
 					$this->db->order_by ( "(" . subcategory_order () . ")" );
@@ -364,7 +363,7 @@ class Variety_Model extends MY_Model
 						"species",
 						"description",
 						"print_description",
-						"web_description" 
+						"web_description"
 				) )) {
 					$this->db->like ( $parameter->key, $parameter->value );
 				}
@@ -385,7 +384,7 @@ class Variety_Model extends MY_Model
 			$this->db->select ( "common.name,common.genus, common.sunlight, category.category, subcategory.subcategory" );
 			// include all variety fields (maybe change this).
 			$this->db->select ( "variety.*" );
-			
+
 			// select order fields
 			$this->db->select ( "order.id as order_id,year,flat_size,flat_cost,plant_cost,pot_size,price,count_presale,count_midsale,count_dead,omit" );
 			$this->db->select ( "sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number" );
@@ -419,7 +418,7 @@ class Variety_Model extends MY_Model
 		{
 			$query = "select web_id from variety order by web_id DESC LIMIT 1";
 			$web_id = $this->db->query ( $query )->row ()->web_id + 1;
-			
+
 			return $web_id;
 		}
 
@@ -439,17 +438,17 @@ class Variety_Model extends MY_Model
 		{
 			if ($this->ion_auth->in_group ( array (
 					1,
-					2 
+					2
 			) )) {
-				
+
 				$this->db->delete ( "variety", array (
-						'id' => $id 
+						'id' => $id
 				) );
 				$this->db->delete ( "order", array (
-						'variety_id' => $id 
+						'variety_id' => $id
 				) );
 				$this->db->delete ( "flag", array (
-						'variety_id' => $id 
+						'variety_id' => $id
 				) );
 			}
 			else {

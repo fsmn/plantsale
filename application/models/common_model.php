@@ -175,8 +175,11 @@ class Common_model extends MY_Model
     	}
 
     	$this->db->select("common.*");
+    	$this->db->select("category.category");
+    	$this->db->select("subcategory.subcategory");
     	$this->db->order_by("order.catalog_number");
     	$this->db->order_by("category.category");
+    	$this->load->helper("export");
     	$this->db->order_by("(" . subcategory_order() . ")");
     	$this->db->group_by("common.id");
     	$result = $this->db->get()->result();

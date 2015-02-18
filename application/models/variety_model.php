@@ -95,7 +95,7 @@ class Variety_Model extends MY_Model
         $this->_log("notice");
         return $result;
     }
-    
+
     function get_for_quark($common_id,$year){
     	$this->db->from("variety");
     	$this->db->join("order","variety.id = order.variety_id");
@@ -307,11 +307,11 @@ class Variety_Model extends MY_Model
             if (array_key_exists("direction", $order_by) && ! empty($order_by["direction"][$i])) {
                 $order_direction = $order_by["direction"][$i];
             }
-            
+
             if($order_field = "subcategory"){
             	$this->load->helper("export");
             	$this->db->order_by("(" . subcategory_order() . ")");
-            	
+
             }else{
             $this->db->order_by($order_field, $order_direction);
             }
@@ -386,6 +386,25 @@ class Variety_Model extends MY_Model
         $this->db->group_by("variety.id");
         $result = $this->db->get()->result();
         //$this->_log("notice");
+        return $result;
+    }
+
+    function get_for_web($year){
+        $this->db->from("variety");
+        $this->db->join("common","variety.common_id = common.id");
+        $this->db->join("order","variety.id = order.variety_id");
+        $this->db->join("category","common.category_id=category.id");
+        $this->db->join("subcategory","common.subcategory_id=subcategory.id");
+        $this->db->where("order.year",$year);
+        $this->db->where("subcategory.subcategory !=","Hanging Baskets");
+        $this->db->select("variety.id, variety.common_id, variety.plant_color,variety.variety,variety.species, variety.min_height,variety.max_height,variety.height_unit,variety.min_width,variety.max_width,
+        variety.width_unit,variety.new_year,variety.print_description,variety.web_description");
+        $this->db->select("common.other_names");
+        $this->db->select("order.catalog_number, order.price,order.pot_size,order.count_midsale");
+        $this->db->select("category.category");
+        $this->db->select("subcategory.subcategory");
+        $result = $this->db->get()->result();
+        $this->_log("notice");
         return $result;
     }
 

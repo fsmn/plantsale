@@ -28,7 +28,7 @@ function format_sunlight ( $sunlight, $format = "quark" )
 			$output .= "///";
 		}
 	}
-	
+
 	if ($format == "quark") {
 		$output = sprintf ( "<f\"FSMPlantSaleIcons\">%s<f$>", $output );
 	}
@@ -55,6 +55,12 @@ function format_flags ($flags, $format = "quark")
                     $output = "Bee";
                 }
                 break;
+            case "Birds":
+                if($format=="quark"){
+                    $output .= "ı";
+                }else{
+                    $output = "BirdB";
+                }
             case "Butterflies":
                 if ($format == "quark") {
                     $output .= "∫";
@@ -177,7 +183,7 @@ function format_saturday ($format = "quark")
  * format the dimensions of the dimensions of the object
  * @param  $object
  * @return string
- * If a variety doesn't have a measurmement, then assume inches. 
+ * If a variety doesn't have a measurmement, then assume inches.
  */
 function format_quark_dimensions ($object)
 {
@@ -242,8 +248,8 @@ function quark_multiple ($common)
 {
     $output[] = sprintf("@Common Name:%s<p>@Latin Name:%s<p>@Copy:%s %s", $common->name, $common->genus, $common->description,
             format_sunlight($common->sunlight, "quark"));
-    
-    //set prices and pot sizes based on if they repeat. 
+
+    //set prices and pot sizes based on if they repeat.
     $base_price = FALSE;
     $base_size = FALSE;
     foreach ($common->varieties as $variety) {

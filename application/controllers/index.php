@@ -116,7 +116,7 @@ class Index extends MY_Controller
             $category->subcategories = $this->subcategory->get_for_category($category->id);
         }
         $data["categories"] = $categories;
-        $this->load->view("variety/quark/categories", $data);
+        $this->load->view("export/quark/categories", $data);
     }
 
     function quark ()
@@ -144,7 +144,7 @@ class Index extends MY_Controller
             $commons = $this->common->get_for_year(get_current_year());
         }
         foreach ($commons as $common) {
-            $common->varieties = $this->variety->get_for_quark($common->id,get_current_year());
+            $common->varieties = $this->variety->get_for_quark($common->id, get_current_year());
             foreach ($common->varieties as $variety) {
                 $variety->flags = $this->flag->get_for_variety($variety->id);
             }
@@ -152,6 +152,37 @@ class Index extends MY_Controller
         $data["category"] = $category;
         $data["subcategory"] = $subcategory;
         $data["commons"] = $commons;
-        $this->load->view("variety/quark/index", $data);
+        $this->load->view("export/quark/index", $data);
+    }
+    
+    function web_selector(){
+    $this->load->view("export/web/selector");
+    }
+
+    function web ($year, $type)
+    {
+        $this->load->helper("download");
+        if ($type == "variety") {
+            // $year = get_cookie("sale_year");
+            $this->load->model("variety_model", "variety");
+            $this->load->model("flag_model", "flag");
+            $varieties = $this->variety->get_for_web($year);
+            foreach ($varieties as $variety) {
+                $list = array();
+                $flags = $this->flag->get_for_variety($variety->id);
+                foreach ($flags as $flag) {
+                    $list[] = $flag->name;
+                }
+                $variety->flags = $list;
+            }
+            $data["varieties"] = $varieties;
+            $data["year"] = $year;
+            $this->load->view("export/web/varieties", $data);
+        } elseif ($type == "common") {
+            $data = array();
+            $this->load->model("common_model", "common");
+            $data["commons"] = $this->common->get_for_year($year);
+            $this->load->view("export/web/common", $data);
+        }
     }
 }

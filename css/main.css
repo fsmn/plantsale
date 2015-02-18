@@ -1041,20 +1041,23 @@ span.fa {
 	display: block;
 }
 
-ul.list.categories {
+ul.list {
 	padding: 0;
 }
 
-ul.list.categories  li {
+ul.list  li {
 	list-style: none;
 }
 
-ul.list.categories  li a {
+ul.list  li a {
 	padding: .25em 0;
 	display: block;
 }
 
 .front-page-widget {
+	display: none;
+}
+#quark-export {
 	display: none;
 }
 

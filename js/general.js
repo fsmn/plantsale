@@ -278,6 +278,28 @@ $(document).on("click","#quark-export a.export",function(event){
 	});
 });
 
+$(document).on("click",".export-for-web",function(event){
+	event.preventDefault();
+			if($(this).hasClass("active")){
+				$("#quark-export").fadeOut();
+				$(this).removeClass("active").addClass("ready");
+			}else{
+				$(this).addClass("active").removeClass("ready");
+			$.ajax({
+				type: "get",
+				url: base_url + "index/web_selector",
+				success: function(data){
+					$("#quark-export").fadeIn().html(data).position({
+						my: "left top",
+						at: "right bottom",
+						of: $(".show-quark-export"), 
+						collision: "fit"
+					}).show();
+				}
+			});
+			}
+});
+
 $(document).on("click",".help",function(event){
 			var keys=this.id.split("_");//expect the id to be in the format "helpTopic_helpSubtopic"
 			var my_topic=keys[0];

@@ -333,15 +333,17 @@ $(document).on("click","#edit-common-id #revert",function(){
 		
 		$(document).on("click",".show-quark-export",function(){
 			if($(this).hasClass("active")){
-				$("#quark-export").fadeOut();
+				$("#category-selector").removeClass("scroll").fadeOut();
 				$(this).removeClass("active").addClass("ready");
+				
 			}else{
 				$(this).addClass("active").removeClass("ready");
+				$("#category-selector").addClass("scroll");
 			$.ajax({
 				type:"get",
 				url: base_url + "index/show_quark_export",
 				success: function(data){
-					$("#quark-export").fadeIn().html(data).position({
+					$("#category-selector").fadeIn().html(data).position({
 						my: "left top",
 						at: "left bottom",
 						of: $(".show-quark-export"), 
@@ -355,14 +357,14 @@ $(document).on("click","#edit-common-id #revert",function(){
 		});
 		
 		$(document).on("click",".show-quark-export.active",function(){
-			$("#quark-export").hide();
+			$("#category-selector").hide();
 			$(this).removeClass("active").addClass("ready");
 			return false;
 			
 		});
 		
 		$(document).on("click",".hide-quark-export",function(){
-			$("#quark-export").hide();
+			$("#category-selector").hide();
 			$(".show-quark-export.active").removeClass("active").addClass("ready");
 		});
 

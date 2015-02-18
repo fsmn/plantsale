@@ -1057,12 +1057,16 @@ ul.list  li a {
 .front-page-widget {
 	display: none;
 }
-#quark-export {
+#category-selector {
 	display: none;
 }
 
-#quark-export ul {
+#category-selector ul {
 	padding: 0 10px;
+}
+
+.scroll {
+	overflow: scroll;
 }
 
 .mr-shmallow-image {

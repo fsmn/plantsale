@@ -248,7 +248,7 @@ $(".mr-shmallow").bind("click",function(){
 });
 
 //download the quark files show a progress bar for entertainment purposes. 
-$(document).on("click","#quark-export a.export",function(event){
+$(document).on("click","#category-selector a.export",function(event){
 	event.preventDefault();
 	show_popup("Downloading","Please wait <div id='progressbar'></div>","auto");
 	var progressbar = $( "#progressbar" )
@@ -280,8 +280,9 @@ $(document).on("click","#quark-export a.export",function(event){
 
 $(document).on("click",".export-for-web",function(event){
 	event.preventDefault();
+	me = $(this);
 			if($(this).hasClass("active")){
-				$("#quark-export").fadeOut();
+				$("#category-selector").fadeOut();
 				$(this).removeClass("active").addClass("ready");
 			}else{
 				$(this).addClass("active").removeClass("ready");
@@ -289,10 +290,33 @@ $(document).on("click",".export-for-web",function(event){
 				type: "get",
 				url: base_url + "index/web_selector",
 				success: function(data){
-					$("#quark-export").fadeIn().html(data).position({
+					$("#category-selector").fadeIn().html(data).position({
 						my: "left top",
-						at: "right bottom",
-						of: $(".show-quark-export"), 
+						at: "left bottom",
+						of: me, 
+						collision: "fit"
+					}).show();
+				}
+			});
+			}
+});
+
+$(document).on("click",".show-catalog-updater",function(event){
+	event.preventDefault();
+	me = $(this);
+			if($(this).hasClass("active")){
+				$("#category-selector").fadeOut();
+				$(this).removeClass("active").addClass("ready");
+			}else{
+				$(this).addClass("active").removeClass("ready");
+			$.ajax({
+				type: "get",
+				url: base_url + "order/catalog_update_selector",
+				success: function(data){
+					$("#category-selector").fadeIn().html(data).position({
+						my: "left top",
+						at: "left bottom",
+						of: me, 
 						collision: "fit"
 					}).show();
 				}

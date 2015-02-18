@@ -48,7 +48,7 @@ foreach ($varieties as $variety) {
     $line = array(
             $variety->common_id,
             $variety->catalog_number,
-            $variety->id,
+            "P" . $variety->id,
             $variety->variety,
             $variety->species,
             str_replace(",", "\r", $variety->plant_color),

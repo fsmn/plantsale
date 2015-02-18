@@ -25,7 +25,7 @@ foreach ($commons as $common) {
     $line = array(
             $common->id,
             $common->name,
-            $common->subcategory && ! strstr($common->subcategory, "General") ? sprintf("%s-%s", $common->category, $common->subcategory) : $common->category,
+            $common->subcategory && ! strstr($common->subcategory, "General") ? sprintf("%s - %s", $common->category, $common->subcategory) : $common->category,
             $common->description,
             strstr($common->sunlight, "full") ? "+++" : "",
             strstr($common->sunlight, "part") ? "%%%" : "",

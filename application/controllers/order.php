@@ -224,13 +224,25 @@ class Order extends MY_Controller
         echo $output;
     }
 
+    function catalog_update_selector(){
+$data["categories"] = $this->category->get_all();
+$this->load->view("order/catalog_categories",$data);
+    }
+
     function set_catalog_numbers ($year = NULL)
     {
         if (! $year) {
             $year = get_cookie("sale_year");
         }
+        $target_category = "";
+        if($category_id = $this->input->get("category_id")){
+            $categories = (object)array("category"=>(object)array("id"=>$category_id));
+            $target_category = $categories->category->category;
+
+        }else{
+            $categories = $this->category->get_all();
+        }
         $count = 0;
-        $categories = $this->category->get_all();
         foreach ($categories as $category) {
             $orders = $this->order->get_for_catalog($year, $category->id);
             $t = 1;
@@ -254,7 +266,8 @@ class Order extends MY_Controller
                 $t ++;
             }
         }
-        $this->session->set_flashdata("notice", sprintf("%s orders have had their catalog number updated", $count));
+
+        $this->session->set_flashdata("notice", sprintf("%s %s orders have had their catalog number updated", $count, $target_category));
         redirect("index");
     }
 

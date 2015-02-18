@@ -9,7 +9,7 @@ $action_buttons[] = array("text"=>"Show $orphan_count Orphan Grower$plural <span
 }
 $action_buttons[] = array("selection"=>"variety","text"=>"Update New Varieties","class"=>"button edit","title"=>"Update records for all varieties ordered for the first time this year","href"=>site_url("variety/update_new_status/" . get_cookie("sale_year")));
 if(IS_ADMIN){
-$action_buttons[] = array("selection"=>"order","text"=>"Set Catalog Numbers","class"=>array("button edit set-catalog-numbers"),"title"=>"Update all catalog numbers for the current year","href"=>site_url("order/set_catalog_numbers") );
+$action_buttons[] = array("selection"=>"order","text"=>"Set Catalog Numbers","class"=>array("button edit show-catalog-updater"),"title"=>"Update all catalog numbers for the current year","href"=>site_url("order/set_catalog_numbers") );
 $action_buttons[] = array("selection"=>"index","text"=>"Export for Quark","href"=>"#", "class"=>"button export ready show-quark-export");
 $action_buttons[] = array("selection"=>"index","text"=>"Export for Web","href"=>"#", "class"=>"button export ready export-for-web");
 
@@ -22,7 +22,7 @@ $action_buttons[] = array("selection"=>"index","text"=>"Export for Web","href"=>
 
 <p>
 <?=create_button_bar($action_buttons);?>
-<div id="quark-export" style="width: 250px;position:absolute; overflow:scroll; max-height: 500px;">
+<div id="category-selector" style="width: 250px;position:absolute; max-height: 500px;">
 </div>
 <h3>Totals</h3>
 

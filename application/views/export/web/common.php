@@ -27,6 +27,7 @@ foreach ($commons as $common) {
                 $common->id,
                 $common->name,
                 $common->subcategory && ! strstr($common->subcategory, "General") ? sprintf("%s - %s", $common->category, $common->subcategory) : $common->category,
+                $common->genus,
                 $common->description,
                 strstr($common->sunlight, "full") ? 5 : "",
                 strstr($common->sunlight, "part") ? 6 : "",

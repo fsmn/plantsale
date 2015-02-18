@@ -259,13 +259,13 @@ function quark_multiple ($common)
     		$price = $variety->price;
     		$base_price = $variety->price;
     	}
-    	if($price){
+    	//if($price){
     		$pot_size = $variety->pot_size;
-    	}
+    	//}
     	if($price  && $pot_size){
     		$output[] = sprintf("<p>@Pot and Price:%s--%s:", get_as_price($price), $pot_size);
-    	}elseif($price){
-    		$output[] = sprintf("<p>@Pot and Price:%s",get_as_price($price));
+    	//}elseif($price){
+    		//$output[] = sprintf("<p>@Pot and Price:%s",get_as_price($price));
     	}elseif($pot_size){
     		$output[] = sprintf("<p>@Pot and Price:%s",$pot_size);
     	}

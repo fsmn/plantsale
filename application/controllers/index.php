@@ -166,6 +166,7 @@ class Index extends MY_Controller
             // $year = get_cookie("sale_year");
             $this->load->model("variety_model", "variety");
             $this->load->model("flag_model", "flag");
+            $this->variety->update_web_ids();
             $varieties = $this->variety->get_for_web($year);
             foreach ($varieties as $variety) {
                 $list = array();

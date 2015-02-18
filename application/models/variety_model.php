@@ -399,10 +399,9 @@ class Variety_Model extends MY_Model
 			$this->db->from ( "variety" );
 			$this->db->join ( "common", "variety.common_id = common.id" );
 			$this->db->join ( "order", "variety.id = order.variety_id" );
-			$this->db->join ( "category", "common.category_id=category.id" );
-			$this->db->join ( "subcategory", "common.subcategory_id=subcategory.id" );
+			$this->db->join ( "category", "common.category_id=category.id","LEFT" );
+			$this->db->join ( "subcategory", "common.subcategory_id=subcategory.id","LEFT" );
 			$this->db->where ( "order.year", $year );
-			$this->db->where ( "subcategory.subcategory !=", "Hanging Baskets" );
 			$this->db->select ( "variety.web_id id, variety.common_id, variety.plant_color,variety.variety,variety.species, variety.min_height,variety.max_height,variety.height_unit,variety.min_width,variety.max_width,
         variety.width_unit,variety.new_year,variety.print_description,variety.web_description" );
 			$this->db->select ( "common.other_names" );

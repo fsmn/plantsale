@@ -271,7 +271,7 @@ class Order extends MY_Controller
             }
         }
 
-        $this->session->set_flashdata("notice", sprintf("%s %s orders have had their catalog number updated", $count, $target_category));
+       $this->session->set_flashdata("notice", sprintf("%s %s orders have had their catalog number updated", $count, $target_category));
         redirect("index");
     }
 

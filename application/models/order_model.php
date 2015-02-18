@@ -59,16 +59,16 @@ class Order_Model extends MY_Model
 					"remainder_sunday",
 					"grower_code",
 					"crop_failure",
-					"omit" 
+					"omit"
 			);
-			
+
 			for($i = 0; $i < count ( $variables ); $i ++) {
 				$my_variable = $variables [$i];
 				if ($this->input->post ( $my_variable )) {
 					$this->$my_variable = urldecode ( $this->input->post ( $my_variable ) );
 				}
 			}
-			
+
 			$this->rec_modified = mysql_timestamp ();
 			$this->rec_modifier = $this->session->userdata ( 'user_id' );
 		}
@@ -153,7 +153,7 @@ class Order_Model extends MY_Model
 					case "flat_cost" :
 						$this->where_operator ( $key, $value );
 						break;
-					
+
 					default :
 						$this->db->like ( $key, $value );
 				}
@@ -161,21 +161,21 @@ class Order_Model extends MY_Model
 			$this->db->where ( "order.year", $sale_year );
 			if (! is_array ( $order_by )) {
 				$order_by = array (
-						$order_by 
+						$order_by
 				);
 			}
 			for($i = 0; $i < count ( $order_by ["fields"] ); $i ++) {
 				$order_field = "catalog_number";
 				if (array_key_exists ( "fields", $order_by ) && ! empty ( $order_by ["fields"] [$i] )) {
-					
+
 					$order_field = $order_by ["fields"] [$i];
 				}
-				
+
 				$order_direction = "ASC";
 				if (array_key_exists ( "direction", $order_by ) && ! empty ( $order_by ["direction"] [$i] )) {
 					$order_direction = $order_by ["direction"] [$i];
 				}
-				
+
 				// if the $order_field is a price field or integer, sort as number.
 				if ( $order_field == "flat_size") {
 					$this->db->order_by ( "CAST(`$order_field` as DECIMAL)", $order_direction );
@@ -185,7 +185,7 @@ class Order_Model extends MY_Model
 				}else{
 					$this->db->order_by ( $order_field, $order_direction );
 				}
-				
+
 			}
 			$this->db->select ( "order.*" );
 			$this->db->select ( "order.received_presale,order.received_midsale,order.sellout_friday,order.sellout_saturday,order.remainder_friday,order.remainder_saturday,order.remainder_sunday,order.count_dead" );
@@ -250,12 +250,14 @@ class Order_Model extends MY_Model
 			$this->db->order_by ( "category.category", "ASC" );
 			$this->load->helper("export");
 			$this->db->order_by("(". subcategory_order() . ")" );
+			$this->db->order_by("subcategory.subcategory");
 			$this->db->order_by ( "common.name", "ASC" );
 			$this->db->order_by ( "order.price", "ASC" );
 			$this->db->order_by ( "order.pot_size", "ASC" );
 			$this->db->order_by ( "variety.variety", "ASC" );
 			$this->db->select ( "order.id,category.category" );
 			$result = $this->db->get ()->result ();
+			$this->_log("notice");
 			return $result;
 		}
 
@@ -297,8 +299,8 @@ class Order_Model extends MY_Model
 
 		/**
 		 *
-		 * @param int(4) $base_year        	
-		 * @param int(4) $comparison_year        	
+		 * @param int(4) $base_year
+		 * @param int(4) $comparison_year
 		 */
 		function get_non_reorders ( $base_year, $comparison_year )
 		{
@@ -320,7 +322,7 @@ class Order_Model extends MY_Model
 		function where_operator ( $field, $value )
 		{
 			$operator = preg_replace ( "/[^\<\>\=\!]/", "", $value );
-			
+
 			$value = preg_replace ( "/[^0-9.,]/", "", $value );
 			switch ($operator) {
 				case "=" :
@@ -341,7 +343,7 @@ class Order_Model extends MY_Model
 			$this->db->where ( "variety.id", 3166 );
 			$this->db->join ( "flag", "variety.id = flag.variety_id" );
 			$this->db->join ( "flag_token", "flag.name = flag_token.flag", "LEFT" );
-			
+
 			return $this->db->get ()->row ();
 		}
 	}

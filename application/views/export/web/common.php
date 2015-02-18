@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 $extension = "csv";
-//$extension = "tab";
+// $extension = "tab";
 // common.php Chris Dart Feb 17, 2015 4:22:01 PM chrisdart@cerebratorium.com
 $filename = "common_web_" . date("Y-m-d_H-i-s") . "." . $extension;
 $header = array(
@@ -22,20 +22,22 @@ if ($extension == "csv") {
 }
 
 foreach ($commons as $common) {
-    $line = array(
-            $common->id,
-            $common->name,
-            $common->subcategory && ! strstr($common->subcategory, "General") ? sprintf("%s - %s", $common->category, $common->subcategory) : $common->category,
-            $common->description,
-            strstr($common->sunlight, "full") ? 5 : "",
-            strstr($common->sunlight, "part") ? 6 : "",
-            strstr($common->sunlight, "shade") ? 7 : ""
-    );
-    if ($extension == "csv") {
-        $output[] = "\"" . implode("\",\"", $line) . "\"";
-        //$output[] =  implode(",", $line);
-    } else {
-        $output[] = implode("\t", $line);
+    if (! strstr($common->subcategory, "Hanging")) {
+        $line = array(
+                $common->id,
+                $common->name,
+                $common->subcategory && ! strstr($common->subcategory, "General") ? sprintf("%s - %s", $common->category, $common->subcategory) : $common->category,
+                $common->description,
+                strstr($common->sunlight, "full") ? 5 : "",
+                strstr($common->sunlight, "part") ? 6 : "",
+                strstr($common->sunlight, "shade") ? 7 : ""
+        );
+        if ($extension == "csv") {
+            $output[] = "\"" . implode("\",\"", $line) . "\"";
+            // $output[] = implode(",", $line);
+        } else {
+            $output[] = implode("\t", $line);
+        }
     }
 }
 

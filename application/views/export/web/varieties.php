@@ -45,6 +45,7 @@ $header = array(
 $output[] = implode(",",$header);
 
 foreach ($varieties as $variety) {
+    if(!strstr($variety->subcategory,"Hanging")){
     $line = array(
             $variety->common_id,
             $variety->catalog_number,
@@ -80,6 +81,7 @@ foreach ($varieties as $variety) {
             in_array("Bees", $variety->flags)
     );
     $output[] = "\"" . implode("\",\"", $line) . "\"";
+    }
 }
 
 $data = implode("\n", $output);

@@ -68,6 +68,10 @@ Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_
 </div>
 
 </div>
+<div class="field-set" style="clear:both;">
+<label for="flag">Flag</label>
+<?=form_dropdown("flag",$flags);?>
+</div>
 <div class="field-set" style="clear:both">
 <p><input type="checkbox" name="crop_failure" value="1" <?=$refine && get_cookie("crop_failure")?"checked":"";?>/>&nbsp;<label for="crop_failure">Show Only Crop Failures</label></p>
 

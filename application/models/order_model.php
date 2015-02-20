@@ -133,6 +133,7 @@ class Order_Model extends MY_Model
 			$this->db->join ( "common", "variety.common_id = common.id" );
 			$this->db->join ( "category", "common.category_id = category.id", "LEFT" );
 			$this->db->join ( "subcategory", "common.subcategory_id = subcategory.id", "LEFT" );
+			$this->db->join("flag","flag.variety_id=variety.id","LEFT");
 			$option_keys = array_keys ( $options );
 			$option_values = array_values ( $options );
 			for($i = 0; $i < count ( $options ); $i ++) {
@@ -153,7 +154,9 @@ class Order_Model extends MY_Model
 					case "flat_cost" :
 						$this->where_operator ( $key, $value );
 						break;
-
+					case "flag":
+					    $this->db->where("flag.name",$value);
+					    break;
 					default :
 						$this->db->like ( $key, $value );
 				}
@@ -193,6 +196,7 @@ class Order_Model extends MY_Model
 			$this->db->select ( "common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id" );
 			$this->db->select ( "category.category,subcategory.subcategory" );
 			$result = $this->db->get ()->result ();
+			$this->_log("notice");
 			return $result;
 		}
 

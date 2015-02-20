@@ -37,7 +37,13 @@ class Order extends MY_Controller
             $this->load->model("category_model", "category");
             $this->load->model("subcategory_model", "subcategory");
             $categories = $this->category->get_pairs();
-
+            $flags = $this->menu->get_pairs ( "flag", array (
+                    "field" => "value"
+            ) );
+            $data ["flags"] = get_keyed_pairs ( $flags, array (
+                    "key",
+                    "value"
+            ), TRUE );
             $pot_sizes = $this->order->get_pot_sizes();
             $data["pot_sizes"] = get_keyed_pairs($pot_sizes, array(
                     "pot_size",
@@ -86,7 +92,8 @@ class Order extends MY_Controller
                     "grower_code",
                     "flat_cost",
                     "plant_cost",
-                    "price"
+                    "price",
+                    "flag",
             );
 
             $this->set_options($options, $keys);

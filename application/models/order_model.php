@@ -6,7 +6,6 @@ class Order_Model extends MY_Model
 		var $variety_id;
 		var $grower_id;
 		var $catalog_number;
-		var $catalog_id;
 		var $year;
 		var $flat_size;
 		var $flat_cost;
@@ -40,7 +39,6 @@ class Order_Model extends MY_Model
 					"variety_id",
 					"grower_id",
 					"catalog_number",
-					"catalog_id",
 					"year",
 					"flat_size",
 					"flat_cost",

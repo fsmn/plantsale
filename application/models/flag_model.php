@@ -24,7 +24,7 @@ class Flag_Model extends MY_Model
 		}
 
 		$this->rec_modified = mysql_timestamp();
-		$this->rec_modifier = $this->session->userdata('user_id');
+		$this->rec_modifier = $this->ion_auth->get_user_id();
 	}
 
 
@@ -40,6 +40,24 @@ class Flag_Model extends MY_Model
 	    return $this->_update("flag",$id, $values);
 	}
 
+	/**
+	 * Update the flags for a set of variety ids
+	 * @param array $ids
+	 * @param string $flag
+	 */
+	function batch_update($variety_ids, $flag){
+		$rec_modified = mysql_timestamp();
+		$rec_modifier = $this->ion_auth->get_user_id();
+		$values = array();
+		
+		foreach($variety_ids as $id){
+			$values[] = sprintf("(%s,'%s','%s','%s')", $id, $flag, $rec_modified, $rec_modifier);
+		}
+		$query = sprintf("REPLACE INTO flag (`variety_id`,`name`,`rec_modified`,`rec_modifier`) VALUES%s;", implode(",",$values));
+		$this->db->query($query);
+		
+	}
+	
 	function delete($id)
 	{
 	    return $this->_delete("flag",$id);

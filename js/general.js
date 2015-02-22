@@ -430,7 +430,26 @@ function create_dropdown(my_field, my_category, my_value)
 	});
 }
 
+$(document).ready(function(){
+	$("table.list").on("click",".omit-row",function(){
+		if($(this).hasClass("plant-info")){
+			if($(this).attr("checked")){
+			omit_row(this,"#plant-info_");
+			}
 
+		}else if($(this).hasClass("order-info")){
+			omit_row(this,"#order_");
+		}
+	});
+});
+
+
+function omit_row(me,target){
+	var my_id = me.id.split("_")[1];
+	console.log(target + my_id);
+	$(target + my_id).remove();
+	
+}
 
 $(window).scroll(function(){
 	var top=$('.float');

@@ -426,7 +426,6 @@ class Order extends MY_Controller
                             "No Changes Made"
                     );
                 }
-                print_r($result);
                 $order_search = get_cookie("order_search");
                 redirect("order/search?$order_search");
             }

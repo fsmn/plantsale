@@ -52,6 +52,9 @@ Found Count: <strong><?=count($plants);?> Varieties</strong>
 <?
 $buttons[] = array("text"=>"Print Tabloid","class"=>"button print variety-print-tabloid","href"=>site_url("variety/print_result/tabloid"),"target"=>"_blank");
 $buttons[] = array("text"=>"Print Statement","class"=>"button print variety-print-statement","href"=>site_url("variety/print_result/statement"), "target"=>"_blank");
+if(IS_ADMIN){
+$buttons[] = array("text"=>"Batch Flag Update","title"=>"Batch update flags for the listed items", "class"=>"button batch-update-flags edit","href"=>$_SERVER['REQUEST_URI']);
+}
 print create_button_bar($buttons);
 ?>
 
@@ -79,7 +82,7 @@ print create_button_bar($buttons);
 		<? endif;?>
 		<tr class="plant-row plant-info inline-list <?=$class; ?>" tabindex=<?=$i;?> id="plant-info_<?=$plant->id;?>" >
 			<td class="field omit-plant">
-			<?=form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant from printing","id"=>"omit-plant_$plant->order_id","checked"=>$checked,"class"=>"omit-row omit"));?></td>
+			<?=form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant from printing","id"=>"omit-plant_$plant->id","checked"=>$checked,"class"=>"omit-row omit plant-info"));?></td>
 			<td class="field year"><?=$plant->year;?></td>
 			<td class="field latin-name"><?=format_latin_name($plant->genus,$plant->species);?></td>
 			<td class="field common-name"><?=$plant->name;?></td>

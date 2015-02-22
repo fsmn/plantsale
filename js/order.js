@@ -202,18 +202,7 @@ $(document).on("click",".order-create",function(){
 		}
 	})
     
-	$(document).ready(function(){
-		$("table.list").on("click",".omit-row",function(){
-			omit_row(this);
-		});
-	});
-	
-	
-	function omit_row(me){
-		var my_id = me.id.split("_")[1];
-		console.log(my_id);
-		$("#order_" + my_id).remove();
-	}
+
 	
 	function batch_update_orders(){
 		var id_array = $.map($(".edit-order"),function(n,i){

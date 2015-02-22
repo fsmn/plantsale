@@ -155,6 +155,9 @@ class Order_Model extends MY_Model
 					case "flag":
 					    $this->db->where("flag.name",$value);
 					    break;
+					case "name":
+						$this->db->where("common.name",$value);
+						break;
 					default :
 						$this->db->like ( $key, $value );
 				}

@@ -193,6 +193,7 @@ class Order_Model extends MY_Model
 			$this->db->select ( "variety.variety, variety.species,variety.new_year" );
 			$this->db->select ( "common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id" );
 			$this->db->select ( "category.category,subcategory.subcategory" );
+			$this->db->group_by("order.id");
 			$result = $this->db->get ()->result ();
 			$this->_log("notice");
 			return $result;

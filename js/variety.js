@@ -447,14 +447,20 @@ $(document).on("click","#edit-common-id #revert",function(){
 					ids: id_array,
 			};
 			console.log(id_array);
-			
 			$.ajax({
 				type:"post",
 				data: form_data,
 				url: base_url + "variety/print_result/" + format,
 				success: function(data){
 					
-					document.write(data);
+					var win=window.open('about:blank');
+			        with(win.document)
+			        {
+			            open();
+			            write(data);
+			            close();
+			            $(".ui-dialog, .ui-widget-overlay").hide();
+			        }
 				}
 				
 			});

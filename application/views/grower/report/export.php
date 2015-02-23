@@ -24,7 +24,7 @@ $output = array(
 );
 foreach ($growers as $grower) {
     foreach (array_keys($fields) as $key) {
-        $line[] = $grower[0]->$key;
+        $line[] = $grower->$key;
     }
     $output[] = implode("\t", $line);
     $line = NULL;

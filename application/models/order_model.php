@@ -196,7 +196,8 @@ class Order_Model extends MY_Model
 				}
 			}
 			$this->db->select ( "order.*" );
-			$this->db->select ( "order.received_presale,order.received_midsale,order.sellout_friday,order.sellout_saturday,order.remainder_friday,order.remainder_saturday,order.remainder_sunday,order.count_dead" );
+			$this->db->select("`order`.`count_presale` + `order`.`count_midsale` AS `flat_count`");
+			//$this->db->select ( "order.received_presale,order.received_midsale,order.sellout_friday,order.sellout_saturday,order.remainder_friday,order.remainder_saturday,order.remainder_sunday,order.count_dead" );
 			$this->db->select ( "variety.variety, variety.species,variety.new_year" );
 			$this->db->select ( "common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id" );
 			$this->db->select ( "category.category,subcategory.subcategory" );

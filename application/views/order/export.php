@@ -45,7 +45,7 @@ if ($export_type == "grower") {
             "pot_size" => "Pot Size",
             "count_presale" => "Wednesday",
             "count_midsale" => "Saturday",
-    		"flat_count" => "Flat Count",
+    		"flat_count" => "Total Flats",
             "flat_size" => "Flat Size",
             "flat_cost" => "Flat Cost",
             "plant_cost" => "Plant Cost",

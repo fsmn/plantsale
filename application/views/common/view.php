@@ -67,6 +67,8 @@ if (IS_EDITOR) {
 	<?=edit_field("sunlight",$common->sunlight, "Sunlight Requirements","common",$common->id,array("class"=>"multiselect","attributes"=>"menu='sunlight'","format"=>"multiselect"));?>
 
 </div>
+
+<div class="column-right common-varieties">
 <?
 if (IS_EDITOR) {
     print create_button_bar(array(
@@ -75,7 +77,6 @@ if (IS_EDITOR) {
 }
 
 ?>
-<div class="column-right common-varieties">
 <? $this->load->view("variety/list");?>
 </div>
 

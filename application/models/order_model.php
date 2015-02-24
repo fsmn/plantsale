@@ -196,7 +196,7 @@ class Order_Model extends MY_Model
 				}
 			}
 			$this->db->select ( "order.*" );
-			$this->db->select("IF(`order`.`count_presale` IS NULL, 0,`order`.`count_presale`) + IF(`order`.`count_midsale` IS NULL,0,`order`.`count_midsale`) as `flat_total`",FALSE);
+			$this->db->select("IF(`order`.`count_presale` IS NULL, 0,`order`.`count_presale`) + IF(`order`.`count_midsale` IS NULL,0,`order`.`count_midsale`) as `flat_count`",FALSE);
 			$this->db->select ( "variety.variety, variety.species,variety.new_year" );
 			$this->db->select ( "common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id" );
 			$this->db->select ( "category.category,subcategory.subcategory" );

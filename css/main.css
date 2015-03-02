@@ -940,6 +940,20 @@ div.plant-info {
 	background-color: #fff;
 }
 
+#plant-details textarea {
+	max-height: 7em;
+	width: 100%;
+}
+
+#plant-details .description .field-envelope, #plant-details .web_description  .field-envelope, #plant-details .print_description   .field-envelope{
+	float: left;
+	width: 30%;
+	margin:.5em;
+}
+#plant-details .flag-list .flag-row{
+	display: inline;
+}
+
 .plant-info .field {
 	/*width: 15ex;*/
 	padding: 0 .25em;

@@ -77,6 +77,6 @@ if (IS_EDITOR) {
 }
 
 ?>
-<? $this->load->view("variety/list");?>
+<? $this->load->view("variety/list/list");?>
 </div>
 

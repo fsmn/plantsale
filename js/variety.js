@@ -153,6 +153,7 @@ $(document).on("click","#edit-common-id #revert",function(){
 		
 		$(document).on("change",".flag-insert",function(){
 			my_id = $(this).parents(".flag-list").attr("id").split("_")[1];
+			console.log(my_id);
 			my_flag = $(this).val();
 			form_data = {
 					variety_id: my_id,

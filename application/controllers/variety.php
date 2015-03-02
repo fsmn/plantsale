@@ -228,14 +228,14 @@ class Variety extends MY_Controller
 				$print_list [] = $plant->id;
 				if ($action == "history") {
 					$plant->orders = $this->order->get_for_variety ( $plant->id );
-				}elseif($action == "flag_list"){
+				}elseif($action == "flags"){
 				    $plant->flags = $this->flag->get_for_variety($plant->id);
 				}
 			}
 			$this->session->set_userdata ( "print_list", $print_list );
 			$data ["title"] = "List of Varieties";
 
-			$data ["target"] = "variety/$action";
+			$data ["target"] = "variety/list/$action";
 			$data ["full_list"] = TRUE;
 
 			$this->load->view ( "page/index", $data );
@@ -247,10 +247,10 @@ class Variety extends MY_Controller
 			$data ["names"] = $this->variety->get_by_name ( $name );
 			$data ["full_list"] = FALSE;
 			if ($this->input->get ( "type" ) == "inline") {
-				$target = "variety/inline_list";
+				$target = "variety/list/inline";
 			}
 			else {
-				$target = "variety/list";
+				$target = "variety/list/list";
 			}
 			$this->load->view ( $target, $data );
 		}
@@ -290,7 +290,7 @@ class Variety extends MY_Controller
 			foreach ( $data ['plants'] as $plant ) {
 				$plant->omit = 0;
 			}
-			$data ['target'] = "variety/full_list";
+			$data ['target'] = "variety/list/full";
 			$data ['title'] = "List of reordered plants for $year";
 			$this->load->view ( "page/index", $data );
 		}

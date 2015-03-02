@@ -300,7 +300,11 @@ ul.button-list li .button {
 }
 
 ul.button-list li .button.delete {
-	margin-top: -5px;
+	/*margin-top: -5px;*/
+}
+
+.delete {
+    /*float: right;*/
 }
 
 .mini-buttons ul.button-list li .button {
@@ -320,9 +324,7 @@ textarea {
 	font-size: 1em;
 }
 
-.delete {
-	/*float: right;*/
-}
+
 
 label {
 	font-weight: bold;

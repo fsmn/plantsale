@@ -54,7 +54,7 @@
 
 	<div class="column odd" id="flags">
 			<h4>Flags</h4>
-			<div id="flag-list">
+			<div class="flag-list" id="flag-list_<?=$variety->id;?>">
 			<? $this->load->view("flag/list");?>
 
 	</div>

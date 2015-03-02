@@ -6,7 +6,9 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 <form name="search-variety" id="search-variety" class="search-form"
 		action="<?=site_url("variety/find"); ?>" method="GET">
 	<p><label for="action[]">List </label><input type="radio" name="action[]" value="full_list" checked/>&nbsp;
-<label for="action[]">Variety History</label><input type="radio" name="action[]" value="history"/></p>
+<label for="action[]">Variety History</label><input type="radio" name="action[]" value="history"/>&nbsp;
+<label for="action[]">Flag Listing</label><input type="radio" name="action[]" value="flag_list"/>
+</p>
 	<p>
 		<label for="year">Year: </label><input type="number" name="year" style="width: 5em"
 			value="<?=get_cookie("sale_year");?>" />

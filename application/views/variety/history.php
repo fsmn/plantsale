@@ -1,45 +1,9 @@
 <?php defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+
+$this->load->view("variety/list/header");
 ?>
 
-<fieldset class="search-fieldset">
-	<legend  title="click to show or hide the parameters">Search Parameters</legend>
-	<div class="search-parameters">
-	<? if (isset ( $options )) : ?>
 
-		<? $keys = array_keys ( $options ); ?>
-		<? $values = array_values ( $options ); ?>
-
-		<ul>
-
-		<? for($i = 0; $i < count ( $options ); $i ++):?>
-       	<li>
-       	<? if(is_array($values[$i])){
-       		$values[$i] = implode(",",$values[$i]);
-       	}?>
-       	<?=ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?=ucwords(clean_string($values [$i])); ?></strong>
-		</li>
-		<? endfor;?>
-		</ul>
-	<?  else : ?>
-		<p>Showing All Varieties</p>
-	<? endif; ?>
-<p>
-		<strong>Sort Order</strong>
-	</p>
-<? $sorting = $this->input->get("sorting"); ?>
-<? $direction = $this->input->get("direction");?>
-<ul>
-<? for($i = 0; $i < count($sorting); $i++):?>
-<li><? printf("%s, %s", ucwords($sorting[$i]), $direction[$i]); ?></li>
-<? endfor; ?>
-</ul>
-<p>
-Found Count: <strong><?=count($plants);?> Varieties</strong>
-</p>
-	<?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","search-varieties","refine"))));?>
-
-	</div>
-</fieldset>
 <? foreach($plants as $plant):?>
 <div id="variety-row_<?=$plant->id;?>" style="padding-top:2em;">
 

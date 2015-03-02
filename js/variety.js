@@ -136,7 +136,7 @@ $(document).on("click","#edit-common-id #revert",function(){
 			});
 
 		$(document).on("click",".flag-add", function() {
-			my_id = $("#id").val();
+			my_id = this.id.split("_")[1];
 			form_data = {
 					id: my_id,
 					ajax: 1
@@ -146,13 +146,13 @@ $(document).on("click","#edit-common-id #revert",function(){
 				url: base_url + "variety/add_flag",
 				data: form_data,
 				success: function(data){
-					$("#flag-list").append(data);
+					$("#flag-list_" + my_id).append(data);
 				}
 			});
 		});
 		
 		$(document).on("change",".flag-insert",function(){
-			my_id = $("#id").val();
+			my_id = $(this).parents(".flag-list").attr("id").split("_")[1];
 			my_flag = $(this).val();
 			form_data = {
 					variety_id: my_id,
@@ -164,14 +164,14 @@ $(document).on("click","#edit-common-id #revert",function(){
 				url: base_url + "variety/insert_flag",
 				data: form_data,
 				success: function(data){
-					$("#flag-list").html(data);
+					$("#flag-list_" + my_id ).html(data);
 				}
 			});
 		});
 		
 		$(document).on("click",".flag-delete",function(){
 			my_id = $(this).parent().attr("id").split("_")[1];
-			my_variety = $("#id").val();
+			my_variety = $(this).parents(".flag-list").attr("id").split("_")[1];
 			form_data = {
 					id: my_id,
 					variety_id: my_variety,
@@ -182,7 +182,7 @@ $(document).on("click","#edit-common-id #revert",function(){
 				url: base_url + "variety/delete_flag",
 				data: form_data,
 				success: function(data){
-					$("#flag-list").html(data);
+					$("#flag-list_"+ my_variety).html(data);
 				}
 			});
 			

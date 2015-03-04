@@ -446,7 +446,7 @@ class Variety_Model extends MY_Model
         foreach ($result as $item) {
             // $query = "SET @rank:=$web_id; update variety set
             // web_id=@rank:=@rank+1 where web_id is null";
-            $this->_update("variety", $item->id, $web_id);
+            $this->_update("variety", $item->id, array("web_id"=>$web_id));
             $web_id ++;
         }
     }

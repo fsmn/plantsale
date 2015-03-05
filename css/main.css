@@ -328,7 +328,7 @@ legend:hover {
 #header {
 	padding: 0;
 	position: relative;
-	height: 60px;
+	height: 100px;
 }
 
 #page-title {
@@ -395,8 +395,7 @@ legend:hover {
 /* end header page layout elements */ /*main div layout elements */
 #main {
 	position: relative;
-	padding: 0 5em 2em 2em;
-	margin-top: 2.5em;
+	padding: 1em 5em 2em 2em;
 }
 
 .not-logged-in #main {
@@ -554,6 +553,10 @@ a.button {
 .button-box {
 	margin: .5em 0;
 	height: 1.5em;
+}
+
+#main .button-box {
+	height: 2em;
 }
 
 .button-box .delete {

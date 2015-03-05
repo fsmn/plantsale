@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	$(".message.notice, .message.alert").click(function(e){
-		$(this).remove();
+		$(this).fadeOut();
 	});
 	
 	$("#footer").css({"top":$(document).height()-25 + "px"});

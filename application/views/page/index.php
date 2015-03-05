@@ -36,7 +36,7 @@ $body_class = implode(" ",$body_classes);
 <?php if(!$print): ?>
 <div id='header'>
 <? if($_SERVER['HTTP_HOST'] == "plantsale.server.fsmn"): ?>
-<div id="page-title" class="alert">WARNING: THIS IS THE STAGING SERVER!</div>
+<div id="page-title" class="message alert">WARNING: THIS IS THE STAGING SERVER!</div>
 <? else: ?>
 <div id='page-title'>Friends School Plant Sale Database</div>
 <? endif;?>

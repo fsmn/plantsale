@@ -18,6 +18,12 @@ backgrounds: #C7D7E9
     background-color: #F8DA4E;
 }
 
+.message.alert {
+	color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
 .striped {
     background-color: #c7d7e9;
 }
@@ -64,8 +70,7 @@ div.login-title {
 }
 
 #notice {
-    background-color: #fcfcaa;
-    border-color: black;
+
 }
 
 div.result {
@@ -120,6 +125,12 @@ a {
 
 .notice .link,.notice a {
     color: #fff;
+}
+
+.message.notice {
+	color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
 }
 
 .button.active {
@@ -305,17 +316,7 @@ h2,h3,h4,h5,h6 {
     color: white;
 }
 
-.warning,.notice,.error {
-    color: black;
-    opacity: .90;
-    filter: Alpha(Opacity = 90);
-    background: #ff8538 url(images/warning.png) 50% 50% repeat-x;
-}
 
-.alert {
-    color: #fff;
-    background: red;
-}
 
 .error {
     background: #ff0;

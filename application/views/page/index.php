@@ -54,7 +54,10 @@ $body_class = implode(" ",$body_classes);
 <div id="main"><!-- content -->
 <div id="content">
 <? if($this->session->flashdata("notice")):?>
-<div id="notice"><?=$this->session->flashdata('notice');?></div>
+<div id="notice" class="message notice"><?=$this->session->flashdata('notice');?></div>
+<? endif;?>
+<? if($this->session->flashdata("alert")):?>
+<div id="alert" class="message alert"><?=$this->session->flashdata('alert');?></div>
 <? endif;?>
 <?
 $this->load->view($target);

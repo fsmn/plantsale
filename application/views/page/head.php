@@ -39,6 +39,8 @@ $(document).ready(function(){
 
 <!-- Order Scripts -->
 <script type="text/javascript" src="<?=base_url("js/order.js");?>"></script>
+<!-- Grower and Contact Script -->
+<script type="text/javascript" src="<?=base_url("js/grower.js");?>"></script>
 
 <!-- admin scripts -->
 <script type="text/javascript" src="<?=base_url("js/password.js");?>"></script>

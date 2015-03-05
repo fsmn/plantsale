@@ -1,4 +1,9 @@
 $(document).ready(function(){
+	
+	$(".message.notice, .message.alert").click(function(e){
+		$(this).remove();
+	});
+	
 	$("#footer").css({"top":$(document).height()-25 + "px"});
 	
 	$("#utility").on("click",".set-current-year", function(){

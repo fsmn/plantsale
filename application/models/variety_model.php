@@ -94,7 +94,7 @@ class Variety_Model extends MY_Model
                   JOIN `order` o ON `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year`
                  WHERE `v`.`common_id` = $common_id ORDER BY `o`.`year` DESC, `v`.`variety`";
         $result = $this->db->query($query)->result();
-        $this->_log("notice");
+        $this->_log("alert");
         return $result; */
     }
 
@@ -270,7 +270,7 @@ class Variety_Model extends MY_Model
         $this->db->order_by("category.category");
         $this->db->select("count(`variety`.`id`) as count,category.category,category.id");
         $result = $this->db->get()->result();
-        $this->_log("notice");
+        $this->_log("alert");
         return $result;
     }
 
@@ -296,7 +296,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sum(`order`.`count_midsale`) as midsale_count");
         $this->db->select("category.category,category.id as category_id");
         $result = $this->db->get()->result();
-        // $this->_log("notice");
+        // $this->_log("alert");
         return $result;
     }
 
@@ -406,7 +406,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
         $this->db->group_by("variety.id");
         $result = $this->db->get()->result();
-        // $this->_log("notice");
+        // $this->_log("alert");
         return $result;
     }
 
@@ -426,7 +426,7 @@ class Variety_Model extends MY_Model
         $this->db->select("category.category");
         $this->db->select("subcategory.web_label,subcategory.subcategory");
         $result = $this->db->get()->result();
-        $this->_log("notice");
+        $this->_log("alert");
         return $result;
     }
 

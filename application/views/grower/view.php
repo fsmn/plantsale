@@ -3,8 +3,9 @@
 // view.php Chris Dart Jan 8, 2015 5:30:58 PM chrisdart@cerebratorium.com
 
 ?>
+<h2>Grower: <?=$grower->grower_name !=""?$grower->grower_name:$grower->id;?></h2>
 
-<h2><?=$title;?></h2>
+<div class="column left">
 <?=edit_field("grower_name", $grower->grower_name, "Grower Name","grower",$grower->id);?>
 <?=edit_field("street_address", $grower->street_address, "Street Address","grower",$grower->id);?>
 <?=edit_field("po_box", $grower->po_box, "PO Box","grower",$grower->id);?>
@@ -18,7 +19,11 @@
 <?=edit_field("phone", $grower->phone, "Phone","grower",$grower->id);?>
 <?=edit_field("fax", $grower->fax, "Fax","grower",$grower->id);?>
 <?=edit_field("shipping_notes", $grower->shipping_notes, "Shipping Notes","grower",$grower->id,array("class"=>"textarea","envelope"=>"div", "field-wrapper"=>"div"));?>
-
-
-
-<p class="highlight">More features to come!</p>
+</div>
+<div class="column right last">
+<h3>Contacts</h3>
+<?=create_button_bar(array(array("text"=>"New Contact","href"=>site_url("contact/create/$grower->id"),"class"=>"button new create-contact mini")));?>
+<? foreach($grower->contacts as $contact): ?>
+<? $this->load->view("contact/view", array("contact"=>$contact));?>
+<? endforeach;?>
+</div>

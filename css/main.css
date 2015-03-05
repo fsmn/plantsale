@@ -27,13 +27,17 @@ body {
 .hidden {
 	display: none;
 }
+/* general notices */
 
 .message {
-	font-size: .9em;
-	padding: 2px;
-	border: 1px solid black;
-	margin: 3px;
+    padding: .5em;
+    border-radius: 4px; 
+    margin: 3px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+    
 }
+
 
 .not-logged-in #main {
 	width: 960px;
@@ -150,26 +154,7 @@ div.login-title {
 	width: 300px;
 }
 
-/* general notices */
-#notice {
-	overflow: auto;
-	float: none;
-	padding: 12px;
-	border-style: solid;
-	border-width: 1px;
-}
 
-.notice {
-	font-size: 1em;
-	font-weight: bold;
-	cursor: pointer;
-	padding: 3px;
-}
-
-.alert {
-	padding: 3px;
-	font-weight: bold;
-}
 
 #new_popup {
 	display: none;
@@ -202,7 +187,7 @@ div.login-title {
 	width: 70%;
 }
 
-#browser_warning, .notice, .warning, h2, h3, h4, h5, input[type="submit"],
+ h2, h3, h4, h5, input[type="submit"],
 	#navigation input[type="text"] {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -561,12 +546,6 @@ label {
 	visibility: hidden;
 }
 
-#browser_warning {
-	font-size: 1.2em;
-	width: 50%;
-	padding: 5px;
-	text-align: center;
-}
 
 a.button {
 	text-decoration: none;

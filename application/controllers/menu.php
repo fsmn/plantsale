@@ -292,7 +292,6 @@ class Menu extends MY_Controller
                         ));
         }
 
-        // $this->session->set_flashdata("notice",$this->db->last_query());
         // echo create_autocomplete($categories, $value, $id, $is_live);
         echo create_list($categories);
         // echo form_dropdown ( $field, $pairs, $value, "class='save-field'" );

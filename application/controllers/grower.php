@@ -14,6 +14,7 @@ class grower extends MY_Controller
     function view ($id)
     {
         if ($grower = $this->grower->get($id)) {
+            $grower->contacts = $this->contact->get_for_grower($id);
             $data["grower"] = $grower;
             $data["target"] = "grower/view";
             $data["title"] = sprintf("Viewing Details for %s", $id);
@@ -114,7 +115,7 @@ class grower extends MY_Controller
         $data["growers"] = $growers;
         $data["year"] = $year;
         $data["title"] = "Totals Report by Grower for $year";
-       
+
         if ($this->input->get("export")) {
             $this->load->helper("download");
             $this->load->view("grower/report/export", $data);

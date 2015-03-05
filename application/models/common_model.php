@@ -183,7 +183,7 @@ class Common_model extends MY_Model
     	$this->db->order_by("(" . subcategory_order() . ")");
     	$this->db->group_by("common.id");
     	$result = $this->db->get()->result();
-    	$this->_log("notice");
+    	$this->_log("alert");
     	return $result;
 
     }

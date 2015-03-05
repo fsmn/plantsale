@@ -226,31 +226,7 @@ $(document).on("click",".autocomplete-on",function(){
 	$(this).html("Turn Autocomplete Off").removeClass("autocomplete-on").addClass("autocomplete-off");
 });
 
-$(document).ready(function(){
-$(".mr-shmallow").bind("click",function(){
-	//$(".mr-shmallow-image").fadeIn();
-	if(!$("#page").hasClass("on")){
-		$("#page").addClass("on").effect("bounce");
-		$(this).html("Oh Ick! Change it back!");
 
-		//$("#page").animate({backgroundColor: "#aa000"},1000);
-		//$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
-		$.ajax({
-			type:'post',
-			url: base_url + "index/user_test",
-			success: function(data){
-				console.log(data);
-			}
-		});
-
-	}else{
-		$("#page").removeClass("on").effect("bounce");
-		$(this).html("Try This Out!");
-	}
-
-});
-
-});
 
 //download the quark files show a progress bar for entertainment purposes. 
 $(document).on("click","#category-selector a.export",function(event){
@@ -349,8 +325,30 @@ $(document).on("click",".help",function(event){
 			});
 	});//end function(event)
 
+
+$(document).ready(function(){
+	$(".mr-shmallow").bind("click",function(){
+		$(".mr-shmallow-image").fadeIn();
+		if(!$("#page").hasClass("on")){
+
+			$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
+			$.ajax({
+				type:'post',
+				url: base_url + "index/user_test",
+				success: function(data){
+					console.log(data);
+				}
+			});
+
+		}else{
+			$("#page").removeClass("on").effect("bounce");
+		}
+
+	});
+
+	});
 $(document).on('click',".mr-shmallow-image",function(){
-	//$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
+	$(".mr-shmallow-image img").toggle({effect: "puff",percent:200});
 	
 	
 });

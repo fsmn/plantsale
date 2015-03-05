@@ -61,16 +61,16 @@ $buttons[] = array(
         "title" => "Get Dollar Totals for All Growers for the current year",
 );
 
-$buttons[] = array(
-	"selection"=>"all",
-        "text"=>"Try This Out!",
-        "class"=>array(
-	"button",
-                "mr-shmallow",
-                ),
-        "href" =>"#",
-        "title" =>"More Experiments",
-);
+// $buttons[] = array(
+// 	"selection"=>"all",
+//         "text"=>"Try This Out!",
+//         "class"=>array(
+// 	"button",
+//                 "mr-shmallow",
+//                 ),
+//         "href" =>"#",
+//         "title" =>"More Experiments",
+// );
 
 
 

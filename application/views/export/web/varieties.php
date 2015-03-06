@@ -63,7 +63,7 @@ foreach ($varieties as $variety) {
             $variety->height_unit == "Feet" ? $variety->max_height * 12 : $variety->max_height,
             $variety->width_unit == "Feet" ? $variety->min_width * 12 : $variety->min_width,
             $variety->width_unit == "Feet" ? $variety->max_width * 12 : $variety->max_width,
-            $variety->year = $variety->new_year ? 1 : 0,
+            $variety->year == $variety->new_year ? 1 : 0,
             $variety->count_midsale > 0 ? 1 : 0,
             in_array("Birds", $variety->flags),
             in_array("Butterflies", $variety->flags),

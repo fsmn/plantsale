@@ -21,7 +21,7 @@
 <td><?=$item->key;?></td>
 <td><?=$item->value;?></td>
 <td>
-<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-menu-item"),"id"=>"edit-menu-item_$item->id"),"href"=>site_url("menu/edit/$item->id"));?>
+<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-menu-item"),"id"=>"edit-menu-item_$item->id","href"=>site_url("menu/edit/$item->id")));?>
 </tr>
 <? endforeach;?>
 </tbody>

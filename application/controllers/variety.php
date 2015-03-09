@@ -556,7 +556,7 @@ class Variety extends MY_Controller
 				$this->load->model ( "image_model" );
 				$variety_id = $this->input->post ( "variety_id" );
 				$id = $this->image_model->insert ( $variety_id, $file_data );
-				// redirect("variety/view/$variety_id");
+				redirect("variety/view/$variety_id");
 			}
 		}
 

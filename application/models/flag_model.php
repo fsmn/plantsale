@@ -49,15 +49,15 @@ class Flag_Model extends MY_Model
 		$rec_modified = mysql_timestamp();
 		$rec_modifier = $this->ion_auth->get_user_id();
 		$values = array();
-		
+
 		foreach($variety_ids as $id){
 			$values[] = sprintf("(%s,'%s','%s','%s')", $id, $flag, $rec_modified, $rec_modifier);
 		}
 		$query = sprintf("REPLACE INTO flag (`variety_id`,`name`,`rec_modified`,`rec_modifier`) VALUES%s;", implode(",",$values));
 		$this->db->query($query);
-		
+
 	}
-	
+
 	function delete($id)
 	{
 	    return $this->_delete("flag",$id);
@@ -70,6 +70,14 @@ class Flag_Model extends MY_Model
 		$this->db->join("menu","flag.name=menu.key");
 		$this->db->join("icon","menu.id=icon.menu_id");
 		$output = $this->db->get()->result();
+		return $output;
+	}
+
+	function get_for_web($variety_id){
+	    $this->db->where("variety_id",$variety_id);
+		$this->db->from("flag");
+		$this->db->select("flag.name");
+		$output = $this->db->get()->result_array();
 		return $output;
 	}
 

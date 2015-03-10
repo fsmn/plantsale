@@ -419,7 +419,7 @@ class Variety_Model extends MY_Model
         $this->db->join("subcategory", "common.subcategory_id=subcategory.id", "LEFT");
         $this->db->where("order.year", $year);
         $this->db->select(
-                "variety.web_id id, variety.common_id, variety.plant_color,variety.variety,variety.species, variety.min_height,variety.max_height,variety.height_unit,variety.min_width,variety.max_width,
+                "variety.id, variety.web_id, variety.common_id, variety.plant_color,variety.variety,variety.species, variety.min_height,variety.max_height,variety.height_unit,variety.min_width,variety.max_width,
         variety.width_unit,variety.new_year,variety.print_description,variety.web_description");
         $this->db->select("common.other_names");
         $this->db->select("order.catalog_number,order.year, order.price,order.pot_size,order.count_midsale");

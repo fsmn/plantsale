@@ -1,11 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-// varieties.php Chris Dart Feb 17"," 2015 2:57:55 PM chrisdart@cerebratorium.com
+// varieties.php Chris Dart Feb 17"," 2015 2:57:55 PM
+// chrisdart@cerebratorium.com
 
-
-
-$filename = "varieties_web_" . date("Y-m-d_H-i-s"). ".csv";
+$filename = "varieties_web_" . date("Y-m-d_H-i-s") . ".csv";
 
 $header = array(
         "_kf_Link_To_Common_Name",
@@ -42,45 +41,46 @@ $header = array(
         "flag~US Native Exp"
 );
 
-$output[] = implode(",",$header);
+$output[] = implode(",", $header);
 
 foreach ($varieties as $variety) {
-    if(!strstr($variety->subcategory,"Hanging")){
-    $line = array(
-            $variety->common_id,
-            $variety->catalog_number,
-            "P" . $variety->id,
-            $variety->variety,
-            $variety->species,
-            str_replace(",", "\r", $variety->plant_color),
-            $variety->other_names,
-            $variety->subcategory ? $variety->web_label : $variety->category,
-            str_replace("'","&rsquo;",str_replace("\"","&quot;",$variety->print_description)),
-            str_replace("'","&rsquo;",str_replace("\"","&quot;",$variety->web_description)),
-            $variety->price,
-            str_replace("'","&rsquo;",str_replace("\"","&quot;",$variety->pot_size)),
-            $variety->height_unit == "Feet" ? $variety->min_height * 12 : $variety->min_height,
-            $variety->height_unit == "Feet" ? $variety->max_height * 12 : $variety->max_height,
-            $variety->width_unit == "Feet" ? $variety->min_width * 12 : $variety->min_width,
-            $variety->width_unit == "Feet" ? $variety->max_width * 12 : $variety->max_width,
-            $variety->year == $variety->new_year ? 1 : 0,
-            $variety->count_midsale > 0 ? 1 : 0,
-            in_array("Birds", $variety->flags),
-            in_array("Butterflies", $variety->flags),
-            in_array("Cold Sensitive", $variety->flags),
-            in_array("Interesting Foliage", $variety->flags),
-            in_array("Culinary", $variety->flags),
-            in_array("Edible Flowers", $variety->flags),
-            in_array("Ground Cover", $variety->flags),
-            in_array("Hummingbirds", $variety->flags),
-            in_array("Medicinal", $variety->flags),
-            in_array("Minnesota Native", $variety->flags),
-            in_array("Organic", $variety->flags),
-            in_array("Poisonous", $variety->flags),
-            in_array("Rock Garden", $variety->flags),
-            in_array("Bees", $variety->flags)
-    );
-    $output[] = "\"" . implode("\",\"", $line) . "\"";
+    if (! strstr($variety->subcategory, "Hanging")) {
+        $flags = $variety->flags;
+        $line = array(
+                $variety->common_id,
+                $variety->catalog_number,
+                "P" . $variety->web_id,
+                $variety->variety,
+                $variety->species,
+                str_replace(",", "\r", $variety->plant_color),
+                $variety->other_names,
+                $variety->subcategory ? $variety->web_label : $variety->category,
+                str_replace("'", "&rsquo;", str_replace("\"", "&quot;", $variety->print_description)),
+                str_replace("'", "&rsquo;", str_replace("\"", "&quot;", $variety->web_description)),
+                $variety->price,
+                str_replace("'", "&rsquo;", str_replace("\"", "&quot;", $variety->pot_size)),
+                $variety->height_unit == "Feet" ? $variety->min_height * 12 : $variety->min_height,
+                $variety->height_unit == "Feet" ? $variety->max_height * 12 : $variety->max_height,
+                $variety->width_unit == "Feet" ? $variety->min_width * 12 : $variety->min_width,
+                $variety->width_unit == "Feet" ? $variety->max_width * 12 : $variety->max_width,
+                $variety->year == $variety->new_year ? 1 : 0,
+                $variety->count_midsale > 0 ? 1 : 0,
+                in_array("Birds", $flags),
+                in_array("Butterflies", $flags),
+                in_array("Cold Sensitive", $flags),
+                in_array("Interesting Foliage", $flags),
+                in_array("Culinary", $flags),
+                in_array("Edible Flowers", $flags),
+                in_array("Ground Cover", $flags),
+                in_array("Hummingbirds", $flags),
+                in_array("Medicinal", $flags),
+                in_array("Minnesota Native", $flags),
+                in_array("Organic", $flags),
+                in_array("Poisonous", $flags),
+                in_array("Rock Garden", $flags),
+                in_array("Bees", $flags)
+        );
+        $output[] = "\"" . implode("\",\"", $line) . "\"";
     }
 }
 

@@ -172,11 +172,13 @@ class Index extends MY_Controller
             foreach ($varieties as $variety) {
                 $list = array();
                 $flags = $this->flag->get_for_variety($variety->id);
+
                 foreach ($flags as $flag) {
                     $list[] = $flag->name;
                 }
                 $variety->flags = $list;
             }
+
             $data["varieties"] = $varieties;
             $data["year"] = $year;
             $this->load->view("export/web/varieties", $data);

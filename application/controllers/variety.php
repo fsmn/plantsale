@@ -78,13 +78,12 @@ class Variety extends MY_Controller
 			$current_order = $this->order->get_for_variety ( $id, get_current_year () );
 			$data ["current_order"] = $current_order;
 			$data ["orders"] = $this->order->get_for_variety ( $id );
-			$data ["flags"] = $this->flag->get_for_variety ( $id );
+			$data["flags"] = $this->flag->get_for_variety($id);
 			$data ["is_new"] = $variety->new_year == get_current_year ();
 			$data ["variety"] = $variety;
 			$data ["target"] = "variety/view";
 			$data ["title"] = sprintf ( "Viewing Info for %s (variety)", $variety->variety );
 			$data ["variety_id"] = $id;
-
 			if ($data ["mini_view"] = $this->input->get ( "ajax" ) == 1) {
 				$this->load->view ( "variety/mini_view", $data );
 			}

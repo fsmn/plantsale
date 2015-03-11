@@ -20,9 +20,7 @@ class Index extends MY_Controller
 
     function test ()
     {
-        $data["target"] = "test";
-        $data["title"] = "Test";
-        $this->load->view("page/index", $data);
+        echo format_dimensions(5,8,"\"");
     }
 
     /**

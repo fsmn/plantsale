@@ -1,10 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
-// tabloid.php Chris Dart May 20, 2014 7:58:21 PM chrisdart@cerebratorium.com
+$classes = array("document");
+$has_image = TRUE;
+if(!$variety->image_name){
+    $classes[] = "no-image";
+    $has_image = FALSE;
+}
 $saturday_delivery = $order->count_midsale?1:0;
 ?>
-<div class="document">
+<div class="<?php echo implode(" ",$classes);?>">
 	<div class="header">
 	<div class="catalog-number"><?=$order->catalog_number;?></div>
 	<div class="common-name"><?=$variety->common_name;?></div>
@@ -27,12 +31,14 @@ $saturday_delivery = $order->count_midsale?1:0;
 	</div>
 	</div>
 	<div class="description-group">
+	<? if($has_image):?>
 	<div class="image">
 		<img src="<?=site_url("files/$variety->image_name");?>" class="photo" />
 				<? if($order->count_midsale > 0): ?>
 
 	<? endif;?>
 </div>
+<? endif;?>
 <div class="details">
 <div class="icons-dimensions">
 <ul class="sunlight icons">
@@ -53,13 +59,13 @@ $saturday_delivery = $order->count_midsale?1:0;
 			?>
 		</ul>
 		<div class="dimensions">
-	<?if($variety->min_width):?>
+	<?if($variety->min_width || $variety->max_width):?>
 		<div class="width">
 			<label>Width</label>
 			<div class="text"><?=format_dimensions($variety->min_width, $variety->max_width, abbr_unit($variety->width_unit));?></div>
 		</div>
 		<?endif;?>
-		<? if($variety->min_height):?>
+		<? if($variety->min_height || $variety->max_height):?>
 		<div class="height">
 			<label>Height</label>
 			<div class="text"><?=format_dimensions($variety->min_height, $variety->max_height, abbr_unit($variety->height_unit));?></div>
@@ -90,3 +96,5 @@ $saturday_delivery = $order->count_midsale?1:0;
 		<div class="grower-name"><?=get_value($order,"grower_name");?></div>
 	</div>
 </div>
+
+<? $classes = array();

@@ -2,8 +2,16 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 // tabloid.php Chris Dart May 20, 2014 7:58:21 PM chrisdart@cerebratorium.com
+
+$classes = array("document");
+$has_image = TRUE;
+if(!$variety->image_name){
+    $classes[] = "no-image";
+    $has_image = FALSE;
+}
+$saturday_delivery = $order->count_midsale?1:0;
 ?>
-<div class="document">
+<div class="<?=implode(" ",$classes);?>">
 <? if($variety->new_year == get_cookie("sale_year")):?>
 			<div id="is-new"><img src="<?=base_url("images/new-icon.png");?>"/></div>
 			<? endif;?>
@@ -13,18 +21,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="common-name"><?=$variety->common_name;?></div>
 	</div>
 <div class="subheader">
-	<div class="variety"><?=$variety->variety;?></div>
-	<div class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></div>
-	</div>
-	<div class="description-group">
-	<div class="image">
-		<img src="<?=site_url("files/$variety->image_name");?>" class="photo" />
 <? if($order->count_midsale > 0): ?>
 		<div class="saturday-delivery">
 		<img src="<?=base_url("images/truck-icon.png");?>"/>
 		</div>
 	<? endif;?>
+	<div class="variety"><?=$variety->variety;?></div>
+	<div class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></div>
+	</div>
+	<div class="description-group">
+	<? if($has_image):?>
+	<div class="image">
+		<img src="<?=site_url("files/$variety->image_name");?>" class="photo" />
+
 </div>
+<? endif;?>
 <div class="description-text">
 	<div class="description"><?=$variety->description;?></div>
 	<div class="print_description"><?=$variety->print_description;?></div>

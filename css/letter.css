@@ -1,5 +1,8 @@
 @CHARSET "UTF-8";
-
+@font-face{
+	font-family: plant-icons;
+	src: url(fonts/Plant-Icons-7.otf)
+}
 @import
 	url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
 	;
@@ -65,14 +68,15 @@ vertical-align: top;
   position: relative;
   overflow: hidden;
   float: left;
-  padding: .25in;
+  margin-right: .25in;
 }
 
 .image img.photo {
-	position: relative;
+	position: absolute;
 	margin: 0 auto;
 	width: 100%;
-	max-width: 5in;
+	width: 5in;
+	height: 5in;
 }
 
 .saturday-delivery,.is-new {
@@ -165,6 +169,7 @@ ul.icons li img {
 .flags.icons {
 	position:absolute;
 	bottom: 0;
+	background-color: rgba(255,255,255,.7);
 	
 }
 
@@ -187,6 +192,17 @@ ul.icons li img {
 
 .shade {
 	
+}
+
+
+
+.flags li {
+	font-family: plant-icons;
+	font-size: 65px;
+}
+
+.flags li.poisonous {
+	background-color: lime;
 }
 
 .flags img {

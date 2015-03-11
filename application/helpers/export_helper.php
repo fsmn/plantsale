@@ -46,7 +46,7 @@ function format_flags ($flags, $format = "quark")
     foreach ($flags as $flag) {
         switch ($flag->name) {
             case "Bees":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "Ω";
                     // If(flag~Bee > "a";"Ω";"")
                 } else {
@@ -54,90 +54,91 @@ function format_flags ($flags, $format = "quark")
                 }
                 break;
             case "Birds":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "ı";
                 } else {
                     $output = "BirdB";
                 }
+                break;
             case "Butterflies":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "∫";
                 } else {
                     $output .= "ButterB";
                 }
                 break;
             case "Cold Sensitive":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "†";
                 } else {
                     $output .= "ColdB";
                 }
                 break;
             case "Culinary":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "Ç";
                 } else {
                     $output .= "CulinaryB";
                 }
                 break;
             case "Edible Flowers":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "´";
                 } else {
                     $output .= "EdibleB";
                 }
                 break;
             case "Ground Cover":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "˝";
                 } else {
                     $output = "GroundB";
                 }
                 break;
             case "Hummingbirds":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "˙";
                 } else {
                     $output .= "HummB";
                 }
                 break;
             case "Interesting Foliage":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "ç";
                 } else {
                     $output .= "FoliageB";
                 }
                 break;
             case "Medicinal":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "Â";
                 } else {
                     $output .= "MedicinalB";
                 }
                 break;
             case "Minnesota Native":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "˜";
                 } else {
                     $output .= "NativeB";
                 }
                 break;
             case "Organic":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "Ø";
                 } else {
                     $output .= "OrganicB";
                 }
                 break;
             case "Poisonous":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "¥";
                 } else {
                     $output .= "PoisonousB";
                 }
                 break;
             case "Rock Garden":
-                if ($format == "quark") {
+                if ($format == "quark" || $format == "poster") {
                     $output .= "‰";
                 } else {
                     $output .= "RockB";

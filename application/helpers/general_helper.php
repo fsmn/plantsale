@@ -262,3 +262,10 @@ function get_custom_order ($values = array(NULL,"Hostas","Daylilies","Coleus","B
     return implode(" ", $order);
 }
 
+function css_classify($string){
+  $string = preg_replace('~[^A-z\ ]+~','',$string);
+  $string =   str_replace(" ", "-", $string);
+  $string = strtolower($string);
+  return $string;
+}
+

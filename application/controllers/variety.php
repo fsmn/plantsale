@@ -438,6 +438,7 @@ class Variety extends MY_Controller
 
 		function print_result ( $format )
 		{
+		    $this->load->helper("export");
 			// get the session data "print_list" from the find function
 			$data ["format"] = $format;
 			$plants = $this->input->post ( "ids" );
@@ -466,6 +467,7 @@ class Variety extends MY_Controller
 
 		function print_one ( $id, $format )
 		{
+		    $this->load->helper("export");
 			$data ["format"] = $format;
 			$data ['variety'] = $this->variety->get ( $id );
 			$data ['order'] = $this->order->get_for_variety ( $id, get_cookie ( "sale_year" ) );

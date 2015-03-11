@@ -1,0 +1,230 @@
+@CHARSET "UTF-8";
+
+@import
+	url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
+	;
+
+body {
+	height: 8.5in;
+	width: 11in;
+	position: relative;
+
+	font-family: 'Merriweather Sans', sans-serif;
+}
+
+.document {
+	height: 8in;
+	width: 11in;
+	position: relative;
+	clear: both;
+	   overflow:hidden;
+	page-break-inside: avoid;
+	page-break-after: always;
+}
+
+.header {
+	font-size: 42pt;
+	width: 100%;
+}
+
+.catalog-number {
+	display: inline-block;
+	font-weight: normal;
+}
+
+.common-name {
+	display: inline-block;
+	margin-left: .5in;
+	font-weight: 700;
+}
+
+.subheader {
+	width: 100%;
+}
+
+.latin-name {
+	font-size: 36pt;
+	font-style: italic;
+	display: inline-block;
+vertical-align: top;
+}
+
+.latin-name.saturday {
+	margin-left: .5in;
+}
+
+.variety {
+	font-weight: 800;
+	font-size: 42pt;
+}
+
+.image {
+  width: 5in;
+  height: 5in;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  float: left;
+  padding: .25in;
+}
+
+.image img.photo {
+	position: relative;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 5in;
+}
+
+.saturday-delivery,.is-new {
+	display: inline-block;
+}
+
+.saturday-delivery img, .is-new img {
+	max-height: .7in;
+}
+.is-new img {
+	max-width: 1in;
+	padding-right: .125in;
+}
+
+.image .saturday-delivery img {
+	
+}
+
+.variety-name{
+	clear: both;
+}
+
+.details {
+	display: inline-block;
+	width: 4in;
+	margin-top: .5in;
+}
+
+.description-group {
+	text-align: left;
+}
+
+.description {
+	margin-top: 8px;
+}
+
+.print_description {
+	overflow: hidden;
+	padding-top: 16px;
+	font-style: italic;
+}
+
+.details-group {
+	
+}
+
+.icons {
+	position: relative;
+	margin: 0 auto;
+}
+
+ul.icons {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul.sunlight {
+	display: inline-block;
+}
+
+ul.icons li {
+	display: inline-block;
+}
+
+ul.icons li img {
+ max-height:.4in;
+}
+
+.dimensions {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.dimensions .width,.dimensions .height {
+	display: inline-block;
+	padding: 0 1em;
+}
+
+.dimensions label {
+	display: block;
+	font-size: 9pt;
+}
+
+.dimensions .text {
+	font-size: 30pt;
+	font-weight: 300;
+}
+
+.sunlight {
+	
+}
+
+.full_sun {
+	
+}
+
+.part-sun {
+	
+}
+
+.shade {
+	
+}
+
+.flags img {
+	
+}
+
+
+
+.pot-size {
+  display: inline-block;
+  font-weight: 300;
+  font-size: 36pt;
+  width: 48%;
+}
+
+.price {
+	display: inline-block;
+  font-size: 36pt;
+  font-weight: 800;
+  text-align: right;
+  width: 48%;
+  vertical-align: top;
+}
+
+.footer-group {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.grower-name {
+font-size: 10pt;
+  font-weight: 300;
+  font-style: italic;
+  text-align: right;
+}
+
+#crop-failure {
+	position: absolute;
+	font-weight: bold;
+	font-size: 7em;
+	color: red;
+	opacity: .8;
+	top: 0%;
+	text-align: center;
+	width: 50%;
+	left: 0%;
+}
+
+#is-new {
+	position: absolute;
+}

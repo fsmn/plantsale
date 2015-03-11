@@ -471,12 +471,12 @@ class Variety extends MY_Controller
 			$data ['order'] = $this->order->get_for_variety ( $id, get_cookie ( "sale_year" ) );
 			if ($data ['order']) {
 				$data ['flags'] = $this->flag->get_for_variety ( $id );
-				if ($data ['variety']->new_year == get_cookie ( "sale_year" )) {
-					$new = array (
-							"thumbnail" => "new-icon.png"
-					);
-					$data ['flags'] [] = ( object ) $new;
-				}
+// 				if ($data ['variety']->new_year == get_cookie ( "sale_year" )) {
+// 					$new = array (
+// 							"thumbnail" => "new-icon.png"
+// 					);
+// 					$data ['flags'] [] = ( object ) $new;
+// 				}
 				$data ['title'] = sprintf ( "%s-size Printout for %s %s", ucfirst ( $format ), $data ['variety']->common_name, $data ['variety']->variety );
 				$data ["target"] = "variety/print/$format";
 				$data ["classes"] = "";

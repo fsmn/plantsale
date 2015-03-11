@@ -74,7 +74,7 @@ class MY_Model extends CI_Model
         }
     }
 
-    function _log ($element = "notice")
+    function _log ($element = "alert")
     {
         $last_query = $this->db->last_query();
         $this->load->model("user_preferences_model","user_prefs");

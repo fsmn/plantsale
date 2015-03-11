@@ -422,6 +422,11 @@ $(document).on("click","#edit-common-id #revert",function(){
 			
 			batch_print_varieties(this,"statement");
 		});
+		$(document).on("click",".variety-print-letter",function(event){
+			event.preventDefault();
+			
+			batch_print_varieties(this,"letter");
+		});
 		
 		function batch_print_varieties(me,format){
 		

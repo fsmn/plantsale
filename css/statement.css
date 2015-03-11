@@ -5,14 +5,16 @@
 
 body {
 	width: 8.5in;
+	height: 5.5in;
 	margin: 0;
 	padding: 0;
 	position: relative;
 	font-family: 'Merriweather Sans', sans-serif;
+	padding: .125in;
 }
 
 .document {
-	height: 4.9in;
+	height: 100%;
 	width: 100%;
 	margin: 0;
 	padding: 0;
@@ -23,80 +25,89 @@ body {
 }
 
 .header {
-	position: absolute;
-	font-size: 48px;
-	width: 100%;
+	
 }
 
 .catalog-number {
-	float: left;
+	display: inline-block;
 	font-weight: normal;
+	font-size: 40pt;
+	padding-right:.125in;
 }
 
 .common-name {
-	float: right;
+	display:inline-block;
 	font-weight: 800;
+	font-size: 42pt;
 }
 
 .subheader {
-	position: absolute;
-	top: .75in;
-	width: 100%;
+	
 }
 
+.special-icons {
+	display: inline-block;
+}
+.special-icons li.icon {
+	display: inline-block;
+}
+
+.saturday-delivery img, .is-new img {
+    max-height: .7in;
+}
+
+.is-new {
+	display:inline-block;
+	vertical-align: top;
+}
+.is-new img {
+    max-width: 1in;
+    padding-right: .125in;
+}
+
+
 .latin-name {
-	font-size: 1.8em;
+	font-size: 24pt;
 	font-style: italic;
-	float: left;
-	width: 49%;
+	display: inline-block;
+	vertical-align: top;
+
 }
 
 .variety {
 	font-size: 32px;
 	font-weight: 700;
-	float: right;
-	width: 49%;
-	text-align: right;
 }
 
 .description-group {
 	width: 100%;
-	position: absolute;
-	top: 1.45in;
-	text-align: left;
-	font-size: 1em;
 }
 
 .image {
 	position: relative;
-	float: left;
 	width: 240px;
 	height: 240px;
 	overflow: hidden;
+	display: inline-block;
+	padding: 0 .125in;
 }
 
 .image img.photo {
 	position: relative;
 	margin: 0 auto;
-	box-shadow: 1px 1px 2px #666;
 	width: 240px;
 }
 
-.image .saturday-delivery img {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	box-shadow: 4px 4px 8px #333;
-	width: .5in;
-}
 
 .description-text {
-	float: right;
 	width: 65%;
+	display: inline-block;
+	vertical-align: top;
 }
 
 .print_description {
-	
+	padding-top: .125in;
+	font-style: italic;
 }
 
 .web_description {
@@ -105,25 +116,24 @@ body {
 
 .details-group {
 	width: 100%;
+	display: inline-block;
+	clear: both;
 }
 
 .icons {
-	position: absolute;
-	margin: 0 auto;
-	top: 4in;
-	left: 0;
+clear: both;
 }
 
 .icons ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	float: left;
 }
 
 .icons ul.sunlight {
 	display: block;
-	padding-right: 15ex;
+	float: left;
+	padding-right: .25in;
 }
 
 .icons ul li {
@@ -136,8 +146,10 @@ body {
 }
 
 .sunlight {
-	
+	padding-right: 10pt;
 }
+
+
 
 .full_sun {
 	
@@ -160,9 +172,7 @@ body {
 }
 
 .price-group {
-	position: absolute;
-	bottom: .6in;
-	right: 0;
+float:right;
 }
 
 .pot-size {
@@ -176,14 +186,13 @@ body {
 }
 
 .dimensions {
-	position: absolute;
-	top: 3.7in;
-	left: 4in;
+float: left;
 }
 
 .dimensions .width,.dimensions .height {
 	display: inline-block;
 	padding: 0 16px;
+	
 }
 
 .dimensions label {
@@ -196,17 +205,14 @@ body {
 }
 
 .footer-group {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
+	
 }
 
 .grower-name {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: normal;
 	font-style: italic;
-	float: right;
+	text-align: right;
 }
 
 #crop-failure {

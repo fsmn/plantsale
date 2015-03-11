@@ -98,7 +98,7 @@ vertical-align: top;
 .details {
 	display: inline-block;
 	width: 4in;
-	margin-top: .5in;
+	margin-top: .25in;
 }
 
 .description-group {
@@ -162,8 +162,19 @@ ul.icons li img {
 	font-weight: 300;
 }
 
-.sunlight {
+.flags.icons {
+	position:absolute;
+	bottom: 0;
 	
+}
+
+.sunlight {
+	display: inline-block;
+}
+
+.sunlight img {
+	max-height: 100% !important;
+    height: .65in !important;
 }
 
 .full_sun {
@@ -182,12 +193,15 @@ ul.icons li img {
 	
 }
 
+.price-group {
+	padding-bottom: .125in;
+}
 
 
 .pot-size {
   display: inline-block;
   font-weight: 300;
-  font-size: 36pt;
+  font-size: 30pt;
   width: 48%;
 }
 

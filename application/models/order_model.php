@@ -120,7 +120,7 @@ class Order_Model extends MY_Model
 			else {
 				$output = $this->db->get ()->result ();
 			}
-			$this->_log ( "alert" );
+			//$this->_log ( "alert" );
 			return $output;
 		}
 
@@ -202,7 +202,7 @@ class Order_Model extends MY_Model
 			$this->db->select ( "category.category,subcategory.subcategory" );
 			$this->db->group_by ( "order.id" );
 			$result = $this->db->get ()->result ();
-			$this->_log ( "alert" );
+			//$this->_log ( "alert" );
 			return $result;
 		}
 
@@ -267,7 +267,7 @@ class Order_Model extends MY_Model
 			$this->db->order_by ( "variety.variety", "ASC" );
 			$this->db->select ( "order.id,category.category" );
 			$result = $this->db->get ()->result ();
-			$this->_log ( "alert" );
+			//$this->_log ( "alert" );
 			return $result;
 		}
 

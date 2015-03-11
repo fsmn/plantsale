@@ -87,7 +87,12 @@ $saturday_delivery = $order->count_midsale?1:0;
 		</ul>
 		<ul class="flags">
 			<? foreach($flags as $flag){
+			    if($flag->name == "Poisonous"){
+echo sprintf("<li style='background-color:yellow'><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
+
+}else{
 				echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
+				}
 			}?>
 
 		</ul>

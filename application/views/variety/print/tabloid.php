@@ -12,22 +12,29 @@ if(!$variety->image_name){
 $saturday_delivery = $order->count_midsale?1:0;
 ?>
 <div class="<?=implode(" ",$classes);?>">
-<? if($variety->new_year == get_cookie("sale_year")):?>
-			<div id="is-new"><img src="<?=base_url("images/new-icon.png");?>"/></div>
-			<? endif;?>
-
 	<div class="header">
 	<div class="catalog-number"><?=$order->catalog_number;?></div>
 	<div class="common-name"><?=$variety->common_name;?></div>
 	</div>
 <div class="subheader">
-<? if($order->count_midsale > 0): ?>
-		<div class="saturday-delivery">
+<? if($saturday_delivery || $variety->new_year == get_cookie("sale_year")):?>
+<div class="special-icons">
+	<? if($order->count_midsale > 0): ?>
+
+		<div class="icon saturday-delivery">
 		<img src="<?=base_url("images/truck-icon.png");?>"/>
 		</div>
+
 	<? endif;?>
-	<div class="variety"><?=$variety->variety;?></div>
-	<div class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></div>
+	<? if($variety->new_year == get_cookie("sale_year")):?>
+<div class="icon is-new">
+		<img src="<?=base_url("images/new-icon.png");?>"/>
+		</div>
+		<?endif;?>
+</div>
+<? endif;?>
+	<span class="variety"><?=$variety->variety;?></span>
+	<span class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></span>
 	</div>
 	<div class="description-group">
 	<? if($has_image):?>

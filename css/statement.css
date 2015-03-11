@@ -61,7 +61,7 @@ body {
 	vertical-align: top;
 }
 .is-new img {
-    max-width: 1in;
+	max-width: 1.3in;
     padding-right: .125in;
 }
 
@@ -89,7 +89,7 @@ body {
 	height: 240px;
 	overflow: hidden;
 	display: inline-block;
-	padding: 0 .125in;
+	padding-right: .125in;
 }
 
 .image img.photo {
@@ -173,6 +173,7 @@ clear: both;
 
 .price-group {
 float:right;
+text-align: right;
 }
 
 .pot-size {
@@ -191,7 +192,7 @@ float: left;
 
 .dimensions .width,.dimensions .height {
 	display: inline-block;
-	padding: 0 16px;
+	padding-right: 16px;
 	
 }
 

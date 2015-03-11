@@ -4,6 +4,11 @@
 	url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
 	;
 
+
+@font-face{
+    font-family: plant-icons;
+    src: url(fonts/Plant-Icons-7.otf)
+}
 body {
 	height: 17in;
 	width: 11in;

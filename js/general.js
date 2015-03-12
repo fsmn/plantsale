@@ -74,25 +74,26 @@ $(document).ready(function(){
 
 $(document).on("click",".field-envelope .edit-field",function(){
 if($("body").hasClass("editor")){
-	my_parent = $(this).parent().attr("id");
+	me = $(this);
+	my_parent = me.parent().attr("id");
 	my_attr = my_parent.split("__");
 	my_type = "text";
-	my_category = $(this).attr('menu');
-	my_name = $(this).attr("name");
-		if($(this).hasClass("dropdown")){
+	my_category = me.attr('menu');
+	my_name = me.attr("name");
+		if(me.hasClass("dropdown")){
 			my_type = "dropdown";
-		}else if($(this).hasClass("checkbox")){
+		}else if(me.hasClass("checkbox")){
 			my_type = "checkbox";
-		}else if($(this).hasClass("multiselect")){
+		}else if(me.hasClass("multiselect")){
 			my_type = "multiselect";
-		}else if($(this).hasClass("textarea")){
+		}else if(me.hasClass("textarea")){
 			my_type = "textarea";
-		}else if($(this).hasClass("autocomplete")){
+		}else if(me.hasClass("autocomplete")){
 			my_type = "autocomplete";
-		}else if($(this).hasClass("category-dropdown")){
+		}else if(me.hasClass("category-dropdown")){
 			my_type = "category-dropdown";
 			my_category = "category";
-		}else if($(this).hasClass("subcategory-dropdown")){
+		}else if(me.hasClass("subcategory-dropdown")){
 			my_type = "subcategory-dropdown";
 			my_category = "subcategory";
 		}
@@ -102,7 +103,7 @@ if($("body").hasClass("editor")){
 				id: my_attr[2],
 				type: my_type,
 				category: my_category,
-				value: $(this).html()
+				value: me.html()
 		};
 console.log(form_data);
 		$.ajax({
@@ -110,10 +111,10 @@ console.log(form_data);
 			url: base_url +  "menu/edit_value",
 			data: form_data,
 			success: function(data){
-				
 				$("#" + my_parent + " .edit-field").html(data);
 				$("#" + my_parent + " .edit-field").removeClass("edit-field").removeClass("field").addClass("live-field").addClass("text");
 				$("#" + my_parent + " .live-field input").focus();
+				
 			}
 		});
 }
@@ -390,6 +391,11 @@ function update_field(me,my_type){
 		my_category = "subcategory";
 	}
 	
+	is_persistent = $(me).hasClass("persistent");
+	if(is_persistent && my_value === ""){
+		return false;
+	}
+	
 	form_data = {
 			table: my_attr[0],
 			field: my_attr[1],
@@ -404,8 +410,10 @@ function update_field(me,my_type){
 		url: base_url + my_attr[0] + "/update_value",
 		data: form_data,
 		success: function(data){
+			if(!is_persistent){
 			$("#" + my_parent + " .live-field").html(data);
 			$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
+			}
 		}
 	});
 }

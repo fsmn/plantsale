@@ -7,10 +7,10 @@ if ($orders)
 :
 	?>
 <!-- views/order/inventor.php -->
-<h5 class="column-instructions">
-	Click on a header to hide the column [<a href="#"
+<h2 class="column-instructions">
+	Click on a header label to hide a column [<a href="#"
 		class=" reset-columns">Reset</a>]
-</h5>
+</h2>
 
 <table class="list inventory hideable-columns">
 	<thead>
@@ -22,7 +22,7 @@ if ($orders)
 		<? endif;?>
 			<th colspan=2></th>
 		<? if($show_names):?>
-			<th colspan=4></th>
+			<th colspan=3></th>
 
 		<? endif;?>
 			<th colspan=4>Presale</th>
@@ -65,8 +65,8 @@ if ($orders)
 			<th>Flat Cost</th>
 			<th>Plant Cost</th>
 			<th>Price</th>
-			<th>Grower Code</th>
-			<th></th>
+			<th>Grower Code</th> 
+			<!-- <th></th>-->
 		</tr>
 	</thead>
 	<tbody>
@@ -116,13 +116,13 @@ if ($orders)
 			id="order_<?=$order->id;?>">
 
 
-			<td class="no-wrap">
+			<td class="no-wrap" >
 			<? if(IS_ADMIN):?>
-				<span class="omit-row omit button" id="omit-order_<?=$order->id;?>">Omit</span>
+				<span tabindex=-1 class="omit-row omit button" id="omit-order_<?=$order->id;?>">Omit</span>
 
 			<? endif;?>
 			<? if(IS_EDITOR):?>
-			<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-order"),"id"=>"edit-order_$order->id"));?>
+			<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-order"),"id"=>"edit-order_$order->id","tabindex"=>"-1'"));?>
 
 				<? else: ?>
 				<?php echo create_button(array("text"=>"Details","class"=>array("button","details","view-order"),"href"=>site_url("order/view/$order->id")));?>
@@ -130,55 +130,55 @@ if ($orders)
 				<? endif; ?>
 				</td>
 			<? if(!$show_names):?>
-				<td class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
+				<td tabindex=-1 class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
 				</td>
 			<? endif;?>
-			<td class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
+			<td tabindex=-1 class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-catalog_number field">
+			<td tabindex=-1 class="order-catalog_number field">
 				<!-- if there is no catalog number, show the first letter of the category -->
 			    <?=edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<? if($show_names):?>
-			<td><a
+			<td><a tabindex=-1
 				href="<?=site_url(sprintf("common/find?genus=%s",$order->genus));?>"
 				title="View all <?=$order->genus;?>"><?=$order->genus;?></a></td>
-			<td><?=$order->species;?></td>
-			<td><a href="<?=site_url("common/view/$order->common_id");?>"
+			<td tabindex=-1><?=$order->species;?></td>
+			<td><a tabindex=-1 href="<?=site_url("common/view/$order->common_id");?>"
 				title="View the details for <?=$order->name;?>"><?=$order->name;?></a></td>
-			<td><a style="font-weight: bold"
+			<td><a tabindex=-1 style="font-weight: bold"
 				href="<?=site_url("variety/view/$order->variety_id");?>"
 				title="View the details for <?=$order->variety;?>"><?=$order->variety;?></a></td>
 			<? endif;?>
-			<td class="order-count_presale field">
+			<td  tabindex=-1 class="order-count_presale field">
 			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-received_presale field">
-			<?=edit_field("received_presale",$order->received_presale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("received_presale",$order->received_presale,"order",$order->id,array("envelope"=>"span")); ?>
 			</td>
 			<td class="order-remainder_friday field">
-			<?=edit_field("remainder_friday",$order->remainder_friday,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-sellout_friday field">
-			<?=edit_field("sellout_friday",$order->sellout_friday,"","order",$order->id,array("envelope"=>"span"));?>
+			<td  class="order-sellout_friday field">
+			<?=live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-count_midsale field">
+			<td tabindex=-1 class="order-count_midsale field">
 			<?=edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-received_midsale field">
-			<?=edit_field("received_midsale",$order->received_midsale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("received_midsale",$order->received_midsale,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-remainder_saturday field">
-			<?=edit_field("remainder_saturday",$order->remainder_saturday,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-sellout_saturday field">
-			<?=edit_field("sellout_saturday",$order->sellout_saturday,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-remainder_sunday field">
-			<?=edit_field("remainder_sunday",$order->remainder_sunday,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-count_dead field">
-			<?=edit_field("count_dead",$order->count_dead,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("count_dead",$order->count_dead,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-total_plants field">
 			<?=$order->count_midsale + $order->count_presale;?>
@@ -191,17 +191,17 @@ if ($orders)
 			<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">$<span
 				id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->flat_cost,2);?></span>
 			</td>
-			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span
+			<td tabindex=-1 class="no-wrap order-plant_cost field cost-field no-wrap" id="plant_cost">$<span
 				id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->plant_cost,2);?></span>
 			</td>
-			<td class="order-price field">
+			<td tabindex=-1 class="no-wrap order-price field">
 			$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
-			</td>
-			<td class="re-order field">
-				<?php echo create_button(array("text"=>"Re-order","id"=>"oc_$order->variety_id","class"=>array("button","new","reorder","order-create")));?>
-			</td>
+			 <td tabindex=-1 class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
+			</td> 
+			<!--<td tabindex=-1 class="re-order field">
+				<?php echo create_button(array("text"=>"Re-order","id"=>"oc_$order->variety_id","class"=>array("button","new","reorder","order-create"),"tabindex"=>"-1"));?>
+			</td>-->
 		</tr>
 		<? endforeach;?>
 	</tbody>
@@ -220,17 +220,17 @@ if ($orders)
 			<td></td>
 		<? endif;?>
 			<td><?php echo number_format($presale_total);?></td>
-			<td colspan=4></td>
+			<td colspan=3></td>
 			<td><?php echo number_format($midsale_total);?></td>
-			<td colspan=4></td>
+			<td colspan=5></td>
 			<td><?php echo number_format($presale_total+ $midsale_total);?></td>
 			<td></td>
 			<td></td>
 			<td><?php echo get_as_price($flat_cost_total);?></td>
 			<td></td>
 			<td></td>
-			<td></td>
-			<td></td>
+			<!-- <td></td> 
+			<td></td>-->
 		</tr>
 	</tfoot>
 </table>

@@ -639,6 +639,11 @@ table.list.compressed {
 	max-width: 980px;
 }
 
+table.list.inventory thead th, table.list.inventory tbody td {
+	border-left: 1px solid #bbb;
+	padding: 2px;
+}
+
 table.files {
 	border-spacing: 5px;
 }

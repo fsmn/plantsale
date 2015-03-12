@@ -35,100 +35,85 @@ if (! defined ( 'BASEPATH' ))
  */
 function create_button ( $data )
 {
-	if (array_key_exists ( "text", $data ))
-	{
+	if (array_key_exists ( "text", $data )) {
 		$type = "a";
 		$href = "";
 		$title = "";
 		$target = "";
+		$tabindex = "";
 		$text = $data ["text"];
-		if (array_key_exists ( "type", $data ))
-		{
-			if (isset ( $data ["type"] ))
-			{
+		if (array_key_exists ( "type", $data )) {
+			if (isset ( $data ["type"] )) {
 				$type = $data ["type"];
 			}
 		}
-		else
-		{
-			if (array_key_exists ( "href", $data ))
-			{
+		else {
+			if (array_key_exists ( "href", $data )) {
 				$href = "href='" . $data ["href"] . "'";
 			}
-			else
-			{
+			else {
 				$href = "href='#'";
 			}
 		}
 		
-		if (array_key_exists ( "target", $data ))
-		{
+		if (array_key_exists ( "target", $data )) {
 			$target = "target='" . $data ["target"] . "'";
 		}
 		
-		if (array_key_exists ( "title", $data ))
-		{
+		if (array_key_exists ( "title", $data )) {
 			$title = "title ='" . $data ["title"] . "'";
 		}
-		if ($type != "pass-through")
-		{
+		if(array_key_exists("tabindex",$data)){
+			$tabindex = sprintf(" tabindex=%s ",$data["tabindex"]);
+					
+		}
+		if ($type != "pass-through") {
 			
-			if (array_key_exists ( "class", $data ))
-			{
-				if (! is_array ( $data ["class"] ))
-				{
+			if (array_key_exists ( "class", $data )) {
+				if (! is_array ( $data ["class"] )) {
 					$data ["class"] = explode ( " ", $data ["class"] );
 				}
 			}
-			else
-			{
+			else {
 				$data ["class"] = array (
 						"button" 
 				);
 			}
 			$text = $text . add_fa_icon ( $data ["class"] );
 			
-			if (array_key_exists ( "selection", $data ) && preg_match ( "/" . str_replace ( "/", "\/", $data ["selection"] ) . "/", $_SERVER ['REQUEST_URI'] ))
-			{
+			if (array_key_exists ( "selection", $data ) && preg_match ( "/" . str_replace ( "/", "\/", $data ["selection"] ) . "/", $_SERVER ['REQUEST_URI'] )) {
 				$data ["class"] [] = "active";
 			}
 			$class = sprintf ( "class='%s'", implode ( " ", $data ["class"] ) );
 			
 			$id = "";
-			if (array_key_exists ( "id", $data ))
-			{
+			if (array_key_exists ( "id", $data )) {
 				$id = "id='" . $data ["id"] . "'";
 			}
 			
-			$button = "<$type $href $id $class $target $title>$text</$type>";
+			$button = "<$type $href $id $class $tabindex $target $title>$text</$type>";
 			
-			if (array_key_exists ( "enclosure", $data ))
-			{
-				if (array_key_exists ( "type", $data ["enclosure"] ))
-				{
+			if (array_key_exists ( "enclosure", $data )) {
+				if (array_key_exists ( "type", $data ["enclosure"] )) {
 					$enc_type = $data ["enclosure"] ["type"];
 					$enc_class = "";
 					$enc_id = "";
-					if (array_key_exists ( "class", $data ["enclosure"] ))
-					{
+					if (array_key_exists ( "class", $data ["enclosure"] )) {
 						$enc_class = "class='" . $data ["enclosure"] ["class"] . "'";
 					}
-					if (array_key_exists ( "id", $data ["enclosure"] ))
-					{
+					if (array_key_exists ( "id", $data ["enclosure"] )) {
 						$enc_id = "id='" . $data ["enclosure"] ["id"] . "'";
 					}
 					$button = "<$enc_type $enc_class $enc_id>$button</$enc_type>";
 				}
 			}
 		}
-		else
-		{
+		else {
 			return $data ["text"];
 		}
 		return $button;
 	}
-	else
-	{
+	else {
 		return FALSE;
 	}
 }
@@ -145,28 +130,23 @@ function create_button_bar ( $buttons, $options = NULL )
 	$id = "";
 	$selection = "";
 	$class = "mini";
-	if ($options)
-	{
-		if (array_key_exists ( "id", $options ))
-		{
+	if ($options) {
+		if (array_key_exists ( "id", $options )) {
 			$id = sprintf ( "id='%s'", $options ["id"] );
 		}
 		
-		if (array_key_exists ( "selection", $options ))
-		{
+		if (array_key_exists ( "selection", $options )) {
 			$selection = $options ["selection"];
 		}
 		
-		if (array_key_exists ( "class", $options ))
-		{
+		if (array_key_exists ( "class", $options )) {
 			$class = $options ["class"];
 		}
 	}
 	$button_list = array ();
 	
 	// the "selection" option indicates the page in the interface. Currently as indicated by the uri->segment(1)
-	foreach ( $buttons as $button )
-	{
+	foreach ( $buttons as $button ) {
 		/*
 		 * if($button["selection"] == $selection){ if(array_key_exists("class",$button)){ $button["class"] .= " active"; }else{ $button["class"] = "button active"; } }
 		 */
@@ -191,44 +171,37 @@ function create_button_bar ( $buttons, $options = NULL )
 function create_edit_field ( $field_name, $value, $label, $options = array() )
 {
 	$envelope = "p";
-	if (array_key_exists ( "envelope", $options ))
-	{
+	if (array_key_exists ( "envelope", $options )) {
 		$envelope = $options ["envelope"];
 	}
 	
 	$field_wrapper = "span";
-	if (array_key_exists ( "field-wrapper", $options ))
-	{
+	if (array_key_exists ( "field-wrapper", $options )) {
 		$field_wrapper = $options ["field-wrapper"];
 	}
 	$id = "";
 	$table = "";
-	if (array_key_exists ( "table", $options ) && array_key_exists ( "id", $options ))
-	{
+	if (array_key_exists ( "table", $options ) && array_key_exists ( "id", $options )) {
 		$table = $options ["table"];
 		$id = $options ["id"];
 	}
 	/* The id is split with the "-" delimiter in javascript when the field is clicked */
 	$output [] = sprintf ( "<%s class='field-envelope' id='%s__%s__%s'>", $envelope, $table, $field_name, $id );
-	if ($label != "")
-	{
+	if ($label != "") {
 		$output [] = sprintf ( "<label>%s:&nbsp;</label>", $label );
 	}
-	if ($value == "")
-	{
+	if ($value == "") {
 		$value = "&nbsp;";
 	}
 	
 	/* add additional classes to the actual field */
 	$classes [] = "edit-field field";
-	if (array_key_exists ( "class", $options ))
-	{
+	if (array_key_exists ( "class", $options )) {
 		$classes [] = $options ["class"];
 	}
 	$field_class = implode ( " ", $classes );
 	$format = "";
-	if (array_key_exists ( "format", $options ))
-	{
+	if (array_key_exists ( "format", $options )) {
 		$format = sprintf ( "format='%s'", $options ["format"] );
 	}
 	
@@ -236,8 +209,7 @@ function create_edit_field ( $field_name, $value, $label, $options = array() )
 	 * Attributes are non-standard html attributes that are used by javascript these can include the type of input to be generated
 	 */
 	$attributes = "";
-	if (array_key_exists ( "attributes", $options ))
-	{
+	if (array_key_exists ( "attributes", $options )) {
 		$attributes = $options ["attributes"];
 	}
 	$output [] = sprintf ( "<%s class='%s' %s %s name='%s'>%s</%s></%s>", $field_wrapper, $field_class, $attributes, $format, $field_name, $value, $field_wrapper, $envelope );
@@ -253,6 +225,46 @@ function edit_field ( $field_name, $value, $label, $table, $id, $options = array
 }
 
 /**
+ * create a persistent field that updates the database on blur through ajax
+ * @param string $field_name
+ * @param string $value
+ * @param string $table
+ * @param string $id
+ * @param array $options
+ * @return string
+ */
+
+function live_field ( $field_name, $value, $table, $id, $options = array() )
+{
+	if(IS_ADMIN){
+	$size = 14;
+	if (in_array ( "size", $options )) {
+		$size = $options ["size"];
+	}
+	$envelope = "div";
+	if (in_array ( "envelope", $options )) {
+		$envelope = $options ["envelope"];
+	}
+	$label = "";
+	if (in_array ( "label", $options )) {
+		$label = sprintf ( "<label>%s</label>", $options ["label"] );
+	}
+	$output = sprintf ( "<%s class='field-envelope' id='%s__%s__%s'>%s
+		<span class='live-field text' name='%s'>
+		<input type='text' name='%s' value='%s' class='persistent' id='%s_%s' style='width:%spx'></span>
+		</%s>", $envelope, $table, $field_name, $id, $label, $field_name, $field_name, $value, $field_name, $id, $size, $envelope );
+	}else{
+		$label = "";
+		if(in_array("label",$options)){
+			$label = $options["label"];
+		}
+		$output = edit_field($field_name,$value,$label,$table,$id,$options);
+	}
+	return $output;
+	
+}
+
+/**
  * create a checkbox with labels
  *
  * @param string $name        	
@@ -263,11 +275,9 @@ function edit_field ( $field_name, $value, $label, $table, $id, $options = array
 function create_checkbox ( $name, $values, $selections = array() )
 {
 	$output = array ();
-	foreach ( $values as $value )
-	{
+	foreach ( $values as $value ) {
 		$checked = "";
-		if (in_array ( $value->key, $selections ))
-		{
+		if (in_array ( $value->key, $selections )) {
 			$checked = "checked";
 		}
 		$output [] = sprintf ( "<label>%s</label><input type='checkbox' name='%s' value='%s' %s/>&nbsp;", $value->value, $name, $value->key, $checked );
@@ -278,19 +288,16 @@ function create_checkbox ( $name, $values, $selections = array() )
 function create_autocomplete ( $items, $selection, $id, $is_live = FALSE )
 {
 	$output [] = sprintf ( "<ul class='autocomplete-list' id='autocomplete-%s'>", $id );
-	foreach ( $items as $item )
-	{
+	foreach ( $items as $item ) {
 		$classes = array (
 				"autocomplete-item" 
 		);
-		if ($is_live)
-		{
+		if ($is_live) {
 			$classes = array (
 					"autocomplete-item-live" 
 			);
 		}
-		if ($item->value == $selection)
-		{
+		if ($item->value == $selection) {
 			$classes [] = "active";
 		}
 		$output [] = sprintf ( "<li class='%s'>%s</li>", implode ( " ", $classes ), $item->value );
@@ -304,8 +311,7 @@ function create_autocomplete ( $items, $selection, $id, $is_live = FALSE )
 function create_list ( $items )
 {
 	$output = array ();
-	foreach ( $items as $item )
-	{
+	foreach ( $items as $item ) {
 		array_push ( $output, $item->value );
 	}
 	return json_encode ( $output );
@@ -314,53 +320,43 @@ function create_list ( $items )
 /**
  * accepts an plain array of values.
  * Searches for certain key terms and returns an icon if such exists.
- * 
+ *
  * @param array $class        	
  * @return string
  */
 function add_fa_icon ( $class = array() )
 {
-	if(!is_array($class)){
-		$class = explode(" ",$class);
+	if (! is_array ( $class )) {
+		$class = explode ( " ", $class );
 	}
-	if (in_array ( "reorder", $class ))
-	{
+	if (in_array ( "reorder", $class )) {
 		$output = "&nbsp;<i class='fa fa-shopping-cart'></i>";
 	}
-	elseif (in_array ( "export", $class ))
-	{
+	elseif (in_array ( "export", $class )) {
 		$output = "&nbsp;<i class='fa fa-cloud-download'></i>";
 	}
-	elseif (in_array ( "edit", $class ))
-	{
+	elseif (in_array ( "edit", $class )) {
 		$output = "&nbsp;<i class='fa fa-pencil-square-o'></i>";
 	}
-	elseif (in_array ( "update", $class ))
-	{
+	elseif (in_array ( "update", $class )) {
 		$output = "&nbsp;<i class='fa fa-arrow-up'></i>";
 	}
-	elseif (in_array ( "new", $class ))
-	{
+	elseif (in_array ( "new", $class )) {
 		$output = "&nbsp;<i class='fa fa-star'></i>";
 	}
-	elseif (in_array ( "details", $class ))
-	{
+	elseif (in_array ( "details", $class )) {
 		$output = "&nbsp;<i class='fa fa-eye'></i>";
 	}
-	elseif (in_array ( "refine", $class ))
-	{
+	elseif (in_array ( "refine", $class )) {
 		$output = "&nbsp;<i class='fa fa-search'></i>";
 	}
-	elseif (in_array ( "delete", $class ))
-	{
+	elseif (in_array ( "delete", $class )) {
 		$output = "&nbsp;<i class='fa fa-exclamation-triangle'></i>";
 	}
-	elseif (in_array ( "print", $class ))
-	{
+	elseif (in_array ( "print", $class )) {
 		$output = "&nbsp;<i class='fa fa-print'></i>";
 	}
-	else
-	{
+	else {
 		$output = "";
 	}
 	return $output;

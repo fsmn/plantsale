@@ -110,6 +110,10 @@ body {
 	vertical-align: top;
 }
 
+.no-image .description-text {
+	width: 100%;
+}
+
 .print_description {
 	padding-top: .125in;
 	font-style: italic;

@@ -172,6 +172,16 @@ clear: both;
 	
 }
 
+.flags li, .sunlight li,.icon.is-new, .icon.saturday-delivery {
+	font-family: plant-icons;
+	font-size: 46px;
+}
+
+.flags li.poisonous {
+	background-color: rgb(6, 255, 0);
+}
+
+
 .saturday {
 	
 }

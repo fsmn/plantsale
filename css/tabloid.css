@@ -4,11 +4,11 @@
 	url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
 	;
 
-
-@font-face{
-    font-family: plant-icons;
-    src: url(fonts/Plant-Icons-7.otf)
+@font-face {
+	font-family: plant-icons;
+	src: url(fonts/Plant-Icons-7.otf)
 }
+
 body {
 	height: 17in;
 	width: 11in;
@@ -43,7 +43,7 @@ body {
 
 .subheader {
 	width: 100%;
-	clear:both;
+	clear: both;
 }
 
 .special-icons {
@@ -54,31 +54,29 @@ body {
 .saturday-delivery, .is-new {
 	display: inline-block;
 	vertical-align: middle;
-	
 }
 
 .saturday-delivery img {
-    
+	
 }
 
 .is-new img {
-    vertical-align: top;
+	vertical-align: top;
 }
 
 .latin-name {
-text-align: right;
-  font-size: 48px;
-  font-style: italic;
-  vertical-align: middle;
-  display: inline-block;
-  float: right;
-  margin-top: 30px;
+	text-align: right;
+	font-size: 48px;
+	font-style: italic;
+	vertical-align: middle;
+	display: inline-block;
+	float: right;
+	margin-top: 30px;
 }
 
 .variety {
 	display: inline-block;
-	   vertical-align: middle;
-	 
+	vertical-align: middle;
 	font-weight: 800;
 	font-size: 64px;
 }
@@ -98,8 +96,6 @@ text-align: right;
 	width: 11in;
 	box-shadow: 1px 1px 2px #666;
 }
-
-
 
 .description-group {
 	width: 100%;
@@ -170,6 +166,15 @@ text-align: right;
 	
 }
 
+.flags li, .sunlight li, .icon.is-new, .icon.saturday-delivery {
+	font-family: plant-icons;
+	font-size: 74px;
+}
+
+.flags li.poisonous {
+	background-color: rgb(6, 255, 0);
+}
+
 .saturday {
 	
 }
@@ -196,7 +201,7 @@ text-align: right;
 	clear: left;
 }
 
-.dimensions .width,.dimensions .height {
+.dimensions .width, .dimensions .height {
 	display: inline-block;
 	padding: 0 1em;
 }

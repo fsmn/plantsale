@@ -17,14 +17,16 @@ $saturday_delivery = $order->count_midsale?1:0;
 <div class="subheader">
 <? if($saturday_delivery):?>
 <span class="saturday-delivery">
-		<img src="<?=base_url("images/truck-icon.png");?>"/>
+		<!-- <img src="<?=base_url("images/truck-icon.png");?>"/> -->
+		<?=format_saturday("poster"); ?>
 		</span>
 		<?endif;?>
 	<span class="latin-name<?=$saturday_delivery?' saturday':'';?>"><?=format_latin_name($variety->genus,$variety->species);?></span>
 	<div class="variety-name">
 	<? if($variety->new_year == get_cookie("sale_year")):?>
 <span class="is-new">
-		<img src="<?=base_url("images/new-icon.png");?>"/>
+		<!-- <img src="<?=base_url("images/new-icon.png");?>"/> -->
+		<?=format_new("poster"); ?>
 		</span>
 		<?endif;?>
 	<span class="variety"><?=$variety->variety;?></span>
@@ -49,21 +51,27 @@ $saturday_delivery = $order->count_midsale?1:0;
 	</div>
 <div class="icons-dimensions">
 <ul class="sunlight icons">
-			<? $sunlight = explode(",",$variety->sunlight);
+	<? 
+			$sunlight = explode(",",$variety->sunlight);
 			foreach($sunlight as $light){
-				switch($light){
-				case "full":
-					echo sprintf("<li><img src='%s'/></li>", base_url("images/sun-icon.png"));
-					break;
-				case "part":
-					echo sprintf("<li><img src='%s'/></li>", base_url("images/part-icon.png"));
-					break;
-				case "shade":
-					echo sprintf("<li><img src='%s'/></li>",base_url("images/shade-icon.png"));
-					break;
-				}
+				echo sprintf("<li class='%s'>%s</li>",css_classify($light),format_sunlight($light,"poster"));
 			}
 			?>
+			<? //$sunlight = explode(",",$variety->sunlight);
+// 			foreach($sunlight as $light){
+// 				switch($light){
+// 				case "full":
+// 					echo sprintf("<li><img src='%s'/></li>", base_url("images/sun-icon.png"));
+// 					break;
+// 				case "part":
+// 					echo sprintf("<li><img src='%s'/></li>", base_url("images/part-icon.png"));
+// 					break;
+// 				case "shade":
+// 					echo sprintf("<li><img src='%s'/></li>",base_url("images/shade-icon.png"));
+// 					break;
+// 				}
+// 			}
+// 			?>
 		</ul>
 <div class="dimensions">
 	<?if($variety->min_width || $variety->max_width):?>

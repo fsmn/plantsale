@@ -6,7 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 function format_sunlight ($sunlight, $format = "quark")
 {
     $output = "";
-    if ($format == "quark") {
+    if ($format == "quark" || $format == "poster") {
         if (strstr($sunlight, "full")) {
             $output .= "Í";
         }
@@ -161,6 +161,8 @@ function format_new ($format = "quark")
 {
     if ($format == "quark") {
         $output = sprintf("<f\"FSMPlantSaleIcons\">%s<f$>", "◊");
+    }elseif($format == "poster"){
+    	$output = "◊";
     } else {
         $output = "Y";
     }
@@ -172,6 +174,8 @@ function format_saturday ($format = "quark")
 {
     if ($format == "quark") {
         $output = sprintf("<f\"FSMPlantSaleIcons\">%s<f$>", "ß");
+    }elseif($format == "poster"){
+    	$output = "ß";
     } else {
         $output = "qqq";
     }

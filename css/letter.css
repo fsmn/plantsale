@@ -170,9 +170,10 @@ ul.icons li img {
 .flags.icons {
 	position:absolute;
 	bottom: 0;
-	background-color: rgba(255,255,255,.8);
+width: 100%;
 	
 }
+
 
 .sunlight {
 	display: inline-block;
@@ -194,17 +195,27 @@ ul.icons li img {
 .shade {
 	
 }
-
-
-
 .flags li {
+		background-color: rgba(255,255,255,.8);
+		padding: 0 1px; 
+}
+
+
+.flags li,.sunlight li,.is-new, .saturday-delivery {
 	font-family: plant-icons;
 	font-size: 65px;
 }
 
-.flags li.poisonous {
-	background-color: lime;
+.flags li.minnesota-native {
+	/*background-color: rgba(166, 250, 125, 0.75);*/
 }
+
+.flags li.poisonous {
+	background-color: rgba(6, 255, 0, 0.85);
+	float: right;
+}
+
+
 
 .flags img {
 	

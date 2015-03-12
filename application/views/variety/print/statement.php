@@ -21,13 +21,15 @@ $saturday_delivery = $order->count_midsale?1:0;
 	<? if($order->count_midsale > 0): ?>
 
 		<span class="icon saturday-delivery">
-		<img src="<?=base_url("images/truck-icon.png");?>"/>
+		<!-- <img src="<?=base_url("images/truck-icon.png");?>"/> -->
+		<?=format_saturday("poster"); ?>
 		</span>
 
 	<? endif;?>
 	<? if($variety->new_year == get_cookie("sale_year")):?>
 <span class="icon is-new">
-		<img src="<?=base_url("images/new-icon.png");?>"/>
+		<!-- <img src="<?=base_url("images/new-icon.png");?>"/> -->
+		<?=format_new("poster"); ?>
 		</span>
 		<?endif;?>
 </div>
@@ -69,30 +71,17 @@ $saturday_delivery = $order->count_midsale?1:0;
 	</div>
 	<div class="icons">
 		<ul class="sunlight">
-			<? $sunlight = explode(",",$variety->sunlight);
+			<? 
+			$sunlight = explode(",",$variety->sunlight);
 			foreach($sunlight as $light){
-				switch($light){
-				case "full":
-					echo sprintf("<li><img src='%s'/></li>", base_url("images/sun-icon.png"));
-					break;
-				case "part":
-					echo sprintf("<li><img src='%s'/></li>", base_url("images/part-icon.png"));
-					break;
-				case "shade":
-					echo sprintf("<li><img src='%s'/></li>",base_url("images/shade-icon.png"));
-					break;
-				}
+				echo sprintf("<li class='%s'>%s</li>",css_classify($light),format_sunlight($light));
 			}
 			?>
 		</ul>
 		<ul class="flags">
 			<? foreach($flags as $flag){
-			    if($flag->name == "Poisonous"){
-echo sprintf("<li style='background-color:yellow'><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
-
-}else{
-				echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
-				}
+			    echo sprintf("<li class='%s'>%s</li>",css_classify($flag->name),format_flags(array($flag),"poster"));
+				//echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
 			}?>
 
 		</ul>

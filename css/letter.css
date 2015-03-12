@@ -202,7 +202,7 @@ width: 100%;
 
 
 .flags li,.sunlight li,.is-new, .saturday-delivery {
-	font-family: plant-icons;
+	font-family: plant-icons, "FSM Plant Sale Icons";
 	font-size: 65px;
 }
 

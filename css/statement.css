@@ -173,7 +173,7 @@ clear: both;
 }
 
 .flags li, .sunlight li,.icon.is-new, .icon.saturday-delivery {
-	font-family: plant-icons;
+	font-family: plant-icons, "FSM Plant Sale Icons";
 	font-size: 46px;
 }
 

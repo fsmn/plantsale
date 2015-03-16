@@ -8,7 +8,12 @@
 	.no-print {
 		display: none;
 	}
+	a {
+	color: #000;
+	text-decoration: none;
+	}
 }
+
 </style>
 </head>
 <body class="<?=$classes;?>">

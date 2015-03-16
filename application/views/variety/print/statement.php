@@ -44,7 +44,7 @@ $saturday_delivery = $order->count_midsale?1:0;
 </div>
 <? endif;?>
 <div class="description-text">
-<div class="variety"><?=$variety->variety;?></div>
+<div class="variety"><a href="<?=site_url("variety/view/$variety->id");?>" target="_blank"><?=$variety->variety;?></a></div>
 	<div class="description"><?=$variety->description;?></div>
 	<div class="print_description"><?=$variety->print_description;?></div>
 </div>
@@ -71,7 +71,7 @@ $saturday_delivery = $order->count_midsale?1:0;
 	</div>
 	<div class="icons">
 		<ul class="sunlight">
-			<? 
+			<?
 			$sunlight = explode(",",$variety->sunlight);
 			foreach($sunlight as $light){
 				echo sprintf("<li class='%s'>%s</li>",css_classify($light),format_sunlight($light));

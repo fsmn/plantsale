@@ -1,10 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->view("variety/list/header");
 $i = 1;
-$buttons[] = array("text"=>"Print Tabloid","class"=>"button print variety-print-tabloid","href"=>site_url("variety/print_result/tabloid"),"target"=>"_blank");
-$buttons[] = array("text"=>"Print Statement","class"=>"button print variety-print-statement","href"=>site_url("variety/print_result/statement"), "target"=>"_blank");
-$buttons[] = array("text"=>"Print Letter","class"=>"button print variety-print-letter","href"=>site_url("variety/print_result/letter"), "target"=>"_blank");
-
+// $buttons[] = array("text"=>"Print Tabloid","class"=>"button print variety-print-tabloid","href"=>site_url("variety/print_result/tabloid"),"target"=>"_blank");
+// $buttons[] = array("text"=>"Print Statement","class"=>"button print variety-print-statement","href"=>site_url("variety/print_result/statement"), "target"=>"_blank");
+// $buttons[] = array("text"=>"Print Letter","class"=>"button print variety-print-letter","href"=>site_url("variety/print_result/letter"), "target"=>"_blank");
+$buttons[] = array("text"=>"Print Posters","class"=>"button print print-poster-batch");
 if(IS_ADMIN){
 $buttons[] = array("text"=>"Batch Flag Update","title"=>"Batch update flags for the listed items", "class"=>"button batch-update-flags edit","href"=>$_SERVER['REQUEST_URI']);
 }

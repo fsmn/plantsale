@@ -411,6 +411,12 @@ $(document).on("click","#edit-common-id #revert",function(){
 			return false;
 		});
 		
+		$(document).on("click",".print-poster-batch",function(event){
+			event.preventDefault();
+			print_poster_selector();
+			
+		});
+		
 		$(document).on("click",".variety-print-tabloid", function(event){
 			event.preventDefault();
 			
@@ -427,6 +433,24 @@ $(document).on("click","#edit-common-id #revert",function(){
 			
 			batch_print_varieties(this,"letter");
 		});
+		
+		function print_poster_selector(){
+			var id_array = $.map($("tr.plant-row.plant-info.print"),function(n,i){
+				return n.id.split("_")[1];
+			});
+			form_data = {
+					ids: id_array,
+					format: "select"
+			};
+			$.ajax({
+				type: "post",
+				data: form_data,
+				url: base_url + "variety/print_result",
+				success: function(data){
+					show_popup("Select Format",data,"auto");
+				}
+			});
+		}
 		
 		function batch_print_varieties(me,format){
 		

@@ -1,0 +1,248 @@
+@CHARSET "UTF-8";
+
+/*** SHOVEL-FOOT LAYOUT ***/
+
+@import
+    url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
+    ;
+
+@font-face {
+    font-family: plant-icons;
+    src: url(fonts/Plant-Icons-7.otf)
+}
+
+body {
+    height: 11in;
+    width: 8.5in;
+    position: relative;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.document {
+    height: 11in;
+    width: 7in;
+    position: relative;
+    clear: both;
+    page-break-inside: avoid;
+    page-break-after: always;
+}
+
+.header {
+    font-size: 47px;
+    width: 100%;
+    clear: both;
+}
+
+.catalog-number {
+    float: left;
+    font-weight: normal;
+}
+
+.common-name {
+    float: right;
+    font-weight: 700;
+}
+
+.subheader {
+    width: 100%;
+    clear: both;
+}
+
+.special-icons {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.saturday-delivery, .is-new {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.saturday-delivery img {
+    
+}
+
+.is-new img {
+    vertical-align: top;
+}
+
+.latin-name {
+    text-align: right;
+    font-size: 40px;
+    font-style: italic;
+    vertical-align: middle;
+    display: inline-block;
+    float: right;
+}
+
+.variety {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 800;
+    font-size: 48px;
+}
+
+.image {
+    width: auto;
+    position: relative;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.image img.photo {
+    position: relative;
+    margin: 0 auto;
+    width: 7in;
+}
+
+.description-group {
+    width: 100%;
+    text-align: left;
+    font-size: 1.25em;
+}
+
+.description {
+    padding-top: 8px;
+}
+
+.print_description {
+    overflow: hidden;
+    padding-top: 16px;
+    font-style: italic;
+}
+
+.details-group {
+position: absolute;
+bottom: 0;
+    width: 100%;
+}
+
+.icons {
+    position: relative;
+    margin: 0 auto;
+}
+
+.icons ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+}
+
+.icons ul.sunlight {
+    display: block;
+    padding-right: 30px;
+}
+
+.icons ul li {
+    display: inline-block;
+    float: left;
+}
+
+.icons ul li img {
+    width: 72px;
+}
+
+.sunlight {
+    
+}
+
+.full_sun {
+    
+}
+
+.part-sun {
+    
+}
+
+.shade {
+    
+}
+
+.flags img {
+    
+}
+
+.flags li, .sunlight li, .icon.is-new, .icon.saturday-delivery {
+    font-family: plant-icons,"FSM Plant Sale Icons";
+    font-size: 50px;
+}
+
+.flags li.poisonous {
+    background-color: rgb(6, 255, 0);
+}
+
+.saturday {
+    
+}
+
+.price-group {
+    float: right;
+}
+
+.pot-size {
+    clear: both;
+    font-weight: 300;
+    font-size: 2.5em;
+}
+
+.price {
+    font-size: 4em;
+    font-weight: 800;
+    text-align: right;
+}
+
+.dimensions {
+    padding-top: .25in;
+    clear: left;
+    clear: left;
+}
+
+.dimensions .width, .dimensions .height {
+    display: inline-block;
+    padding: 0 1em;
+}
+
+.dimensions label {
+    display: block;
+    font-size: 1.5em;
+}
+
+.dimensions .text {
+    font-size: 2.5em;
+    font-weight: 300;
+}
+
+.footer-group {
+    padding-top: .25in;
+    clear: both;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.grower-name {
+    font-size: 1.5em;
+    font-weight: 300;
+    font-style: italic;
+    float: right;
+}
+
+#crop-failure {
+    position: absolute;
+    font-weight: bold;
+    font-size: 7em;
+    color: red;
+    opacity: .8;
+    top: 0%;
+    text-align: center;
+    width: 50%;
+    left: 0%;
+}
+
+#is-new {
+    position: absolute;
+}

@@ -924,7 +924,7 @@ div.plant-info {
 	left-margin: 50%;
 	overflow: scroll;
 	max-height: 500px;
-	background-color: #fff;
+	background-color: #fefefe !important;
 }
 
 #plant-details textarea {

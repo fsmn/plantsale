@@ -331,7 +331,7 @@ class Variety_Model extends MY_Model
                 $order_direction = $order_by["direction"][$i];
             }
 
-            if ($order_field = "subcategory") {
+            if ($order_field == "subcategory") {
                 $this->load->helper("export");
                 $this->db->order_by("(" . subcategory_order() . ")");
             } else {
@@ -406,7 +406,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
         $this->db->group_by("variety.id");
         $result = $this->db->get()->result();
-        // $this->_log("alert");
+        $this->_log("alert");
         return $result;
     }
 

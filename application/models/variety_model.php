@@ -406,7 +406,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
         $this->db->group_by("variety.id");
         $result = $this->db->get()->result();
-        $this->_log("alert");
+        //$this->_log("alert");
         return $result;
     }
 

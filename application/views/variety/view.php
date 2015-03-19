@@ -127,8 +127,9 @@
 </div>
 
 <div class="all-orders block">
-			<p><span class="message"><?=get_value($variety,"needs_bag",0)?"Based on the pot size, this variety will require a bag for packaging. ":"";?></span></p>
-
+<? if(get_value($variety,"needs_bag",0)):?>
+			<p><span class="message">Based on the pot size, this variety will require a bag for packaging.</span></p>
+<? endif; ?>
 	<h3>Orders</h3>
 	<?
 

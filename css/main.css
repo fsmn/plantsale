@@ -769,7 +769,7 @@ textarea.save-field {
 
 .column {
 	width: 45%;
-	float: left;
+	vertical-align:top;
 	display: inline-block;
 	padding-right: 1em;
 	padding-bottom: 10px;

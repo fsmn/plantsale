@@ -252,6 +252,7 @@ $(document).on("click","#edit-common-id #revert",function(){
 					url: base_url + "variety/view/" + my_id,
 					success: function(data){
 						$("#plant-details").html(data).slideDown(500);
+						$("#plant-details").css({display: "inline-block"});
 					}
 				});
 			}else{

@@ -311,11 +311,12 @@ class Variety_Model extends MY_Model
      */
     function update_needs_bag ()
     {
-        $query = "update variety, `order` set needs_bag = 1 where variety.id = `order`.`variety_id` and (`order`.`pot_size` LIKE '%bareroot%' OR
-`order`.`pot_size` LIKE '%bulb%'  OR
-`order`.`pot_size` LIKE '%plug%' OR
-`order`.`pot_size` LIKE '%pound%')";
+        $query = sprintf("update `variety`, `order` SET `needs_bag` = 1 WHERE `order`.`year` = '%s' AND `variety`.`id` = `order`.`variety_id` and (`order`.`pot_size` LIKE '%s' OR
+`order`.`pot_size` LIKE '%s'  OR
+`order`.`pot_size` LIKE '%s' OR
+`order`.`pot_size` LIKE '%s')",get_current_year(),"%bareroot%","%bulb%", "%bulb%","%pound%" );
         $this->db->query($query);
+        $this->_log("alert");
     }
 
     function find ($variables, $order_by)

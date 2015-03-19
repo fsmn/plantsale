@@ -50,12 +50,6 @@
 
 		</fieldset>
 			<?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id, array("class"=>"multiselect","attributes"=>"menu='plant_color'","format"=>"multiselect"));?>
-			<div class="field-envelope" id="variety__needs_bag__<?=$variety->id;?>">
-		<span class="live-field checkbox" name="needs_bag">
-		<input type="checkbox" name="needs_bag" title="This variety needs a bag for packaging" <?=get_value($variety,"needs_bag",0)?"checked":"";?> value="1" class="persistent" id="needs_bag_<?=$variety->id;?>" style="width:14px"><label for="needs_bag">Needs a Bag</label></span>
-		</div>
-
-
 
 	<div class="column odd" id="flags">
 			<h4>Flags</h4>
@@ -133,6 +127,8 @@
 </div>
 
 <div class="all-orders block">
+			<p><span class="message"><?=get_value($variety,"needs_bag",0)?"Based on the pot size, this variety will require a bag for packaging. ":"";?></span></p>
+
 	<h3>Orders</h3>
 	<?
 

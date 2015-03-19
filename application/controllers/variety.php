@@ -123,7 +123,13 @@ class Variety extends MY_Controller
                     "value"
             ), TRUE);
             $data["variety"] = NULL;
+            if($this->input->get("ajax")){
             $this->load->view("variety/search", $data);
+            }else{
+                $data["title"] = "Variety Search";
+                $data["target"] = "variety/search";
+                $this->load->view("page/index",$data);
+            }
         }
     }
 

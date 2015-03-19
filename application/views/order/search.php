@@ -45,10 +45,10 @@ Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_
 </div>
 <div class="field-set label-break">
 <div class="column tryptych first">
-<label for="flat_cost">Flat Cost&nbsp;</label>$<input type="text" name="flat_cost" id="flat_cost" style="width:4em;" value="<?=get_cookie("flat_cost");?>"'/>
+<label for="flat_cost">Flat Cost&nbsp;</label>$<input type="text" name="flat_cost" id="flat_cost" style="width:4em;" value="<?=get_cookie("flat_cost");?>"/>
 </div>
 <div class="column tryptych">
-<label for="plant_cost">Plant Cost&nbsp;</label>$<input type="text" name="plant_cost" id="plant_cost" style="width:4em;"value="<?=get_cookie("plant_cost");?>"'/>
+<label for="plant_cost">Plant Cost&nbsp;</label>$<input type="text" name="plant_cost" id="plant_cost" style="width:4em;"value="<?=get_cookie("plant_cost");?>"/>
 </div>
 <div class="column tryptych last">
 <label for="price">Sale Price&nbsp;</label>$<input type="text" name="price" style="width:4em;" value="<?=$refine?get_cookie("price"):"";?>"/>
@@ -73,21 +73,21 @@ Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_
 <?=form_dropdown("flag",$flags);?>
 </div>
 <div class="field-set" style="clear:both">
-<p><input type="checkbox" name="crop_failure" value="1" <?=$refine && get_cookie("crop_failure")?"checked":"";?>/>&nbsp;<label for="crop_failure">Show Only Crop Failures</label></p>
+<div class="field-set"><input type="checkbox" name="crop_failure" value="1" <?=$refine && get_cookie("crop_failure")?"checked":"";?>/>&nbsp;<label for="crop_failure">Show Only Crop Failures</label></div>
 
-<p>
+<div class="field-set">
 
 <input type="checkbox" name="is_inventory" id="is_inventory" value=1 <?=$refine && get_cookie("is_inventory")?"checked":"";?> />
 <label for="show_fields">Show Inventory Fields</label>
-</p>
-<p>
+</div>
+<div class="field-set">
 <input type="checkbox" value="1" name="show_last_only" <?=$refine && get_cookie("show_last_only")?"checked":"";?>/>
 <label for="show_last_only">Hide plants that already have an order for the next plant sale</label>
-</p>
-<p>
+</div>
+<div class="field-set">
 <input type="checkbox" value="1" name="show-non-reorders" <?=$refine && get_cookie("show-non-reorders")?"checked":"";?>/>
 <label for="show-non-reorders">Show only plants that were not reordered for <span id='non-reorder-year'><?=get_cookie("sale_year")+1;?></span></label>
-</p>
+</div>
 </div>
 <div id="sort-block">
 <? $data["basic_sort"] = $refine?FALSE:TRUE; ?>

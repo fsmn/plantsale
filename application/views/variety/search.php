@@ -6,15 +6,22 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 <form name="search-variety" id="search-variety" class="search-form"
 		action="<?=site_url("variety/search"); ?>" method="GET">
 		<input type="hidden" name="find" id="find" value="1"/>
-	<p><label for="action[]">List </label><input type="radio" name="action[]" value="full" checked/>&nbsp;
+	<div class="field-set"><label for="action[]">List </label><input type="radio" name="action[]" value="full" checked/>&nbsp;
 <label for="action[]">Variety History</label><input type="radio" name="action[]" value="history"/>&nbsp;
 <label for="action[]">Flag Listing</label><input type="radio" name="action[]" value="flags"/>
-</p>
-	<p>
+</div>
+	<div class="field-set block">
 		<label for="year">Year: </label><input type="number" name="year" style="width: 5em"
-			value="<?=get_cookie("sale_year");?>" />
-	</p>
-	<p><input type="checkbox" name="crop_failure" value="1"/><label for="crop_failure">Show Only Crop Failures</label></p>
+			value="<?=get_cookie("sale_year");?>" /> &nbsp;
+			<label for="new_year">First Year at Sale:&nbsp;</label>
+	<input type="number" style="width:5em" value="<?=get_value($variety,"new_year",($refine ? get_cookie("new_year"):''));?>" name="new_year" id="new_year"/>
+	</div>
+	<div class="field-set" style="font-size: .9em"><input type="checkbox" name="crop_failure" value="1"/><label for="crop_failure">Show Only Crop Failures</label>
+	&nbsp;
+	<input type="checkbox" name="no_image" id="no_image" <?= $refine && get_cookie("needs_bag")== 1?"checked":"";?> value="1"/><label for="no_image">Missing Image</label>
+&nbsp;
+<input type="checkbox" name="needs_bag" id="needs_bag" <?=$refine && get_cookie("needs_bag") == 1 ?"checked":"";?> value="1"/><label for="no_image">Needs Bag</label>
+	</div>
 	<div class="field-set">
 	<div class="column first">
 		<?=create_input($variety,"name","Common Name","name", $refine);?>
@@ -30,10 +37,6 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 	<div class="column last">
 		<?=create_input($variety, "species","Species","species",$refine);?>
 	</div>
-	</div>
-	<div class="field-set block">
-	<label for="new_year">Year the Variety was Introduced:&nbsp;</label>
-	<input type="number" style="width:5em" value="<?=get_value($variety,"new_year",($refine ? get_cookie("new_year"):''));?>" name="new_year" id="new_year"/>
 	</div>
 		<div class="field-set block">
 		<div class="column first">
@@ -60,11 +63,10 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 		<?=form_dropdown("plant_color",$plant_colors,array($refine ? get_cookie("plant_color") : ""),"id='plant_colors'");?>
 	</div>
 	</div>
-	<div class="field-set block">
+	<div class="field-set block box">
 	<label for="sunlight-boolean">Sunlight Options</label>
-		<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),$refine ? get_cookie("sunlight-boolean"):"and","id='sunlight-boolean'");?>
-		<br/>
-		<?=$sunlight;?>
+&nbsp;<?=$sunlight;?>	&nbsp;	<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),$refine ? get_cookie("sunlight-boolean"):"and","id='sunlight-boolean'");?>
+
 	</div>
 	<div class="field-set block">
 	<div class="column first">
@@ -74,14 +76,12 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 		<?=create_input($variety, "print_description","Variety Description","print_description",$refine);?>
 	</div>
 	</div>
-	<p>
+	<div class="field-set block">
 	<?=create_input($variety,"grower_id","Grower ID","grower_id",$refine);?>
-	</p>
-	<p>
-<input type="checkbox" name="no_image" id="no_image" <?= $refine && get_cookie("needs_bag")== 1?"checked":"";?> value="1"/><label for="no_image">Missing Image</label>
-&nbsp;
-<input type="checkbox" name="needs_bag" id="needs_bag" <?=$refine && get_cookie("needs_bag") == 1 ?"checked":"";?> value="1"/><label for="no_image">Needs Bag</label>
-</p>
+	</div>
+	<div>
+
+</div>
 	<!-- <p>
 		<?=create_input($variety,"min_height","Min Height","min_height",$refine);?>
 	</p>

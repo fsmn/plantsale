@@ -37,7 +37,7 @@ $buttons[] = array(
         		"search",
                 "search-varieties",
         ),
-        "type" => "span",
+        "href"=> site_url("variety/search?find=1"),
         "title" => "Search among the varieties"
 );
 

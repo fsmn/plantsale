@@ -269,10 +269,15 @@ $(document).on("click","#edit-common-id #revert",function(){
 		});
 		
 		$(document).on("click",".search-varieties", function(event){
-			form_data = false;
+			
+			event.preventDefault();
+			form_data = {
+					ajax: 1
+					};
 			if(($(this).hasClass("refine"))){
 				form_data = {
-						refine: 1
+						refine: 1,
+						ajax: 1
 				};
 			}
 			$.ajax({

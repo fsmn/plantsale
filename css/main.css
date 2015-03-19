@@ -480,28 +480,6 @@ h3, h4, h5, .support-view legend {
 	padding-left: 10px;
 }
 
-/*attendance values*/
-ol.attendance {
-	padding: 0;
-	margin: 0;
-	display: inline
-}
-
-li.attendance {
-	display: inline;
-	padding-left: .5em;
-	margin-left: .5em;
-	margin-top: .5em;
-	border-left: .01em solid black;
-	color: black
-}
-
-li.attendance:first-child {
-	padding-left: 0;
-	border-left: none;
-	margin-left: 0
-}
-
 .field {
 	margin-bottom: .5em;
 }
@@ -851,7 +829,11 @@ fieldset.field-group {
 .field-group .field-set label, .search-form .field-set .column label {
 	display: block;
 }
-
+.search-form .field-set.box {
+	border: 1px solid #999;
+	padding-left:5px;
+	padding-right: 5px;
+}
 .field-group .field-set input {
 	width: 3em;
 }
@@ -859,6 +841,8 @@ fieldset.field-group {
 #search-variety {
 	min-width: 460px;
 	display: block;
+	max-width: 600px;
+	margin: 0 auto;
 }
 
 .search-form .field-set .column {

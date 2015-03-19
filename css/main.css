@@ -833,6 +833,9 @@ fieldset.field-group {
 	border: 1px solid #999;
 	padding-left:5px;
 	padding-right: 5px;
+	border-radius: 3px;
+	box-shadow: 2px 2px 3px #aaa;
+	background-color: #f1f1f1;
 }
 .field-group .field-set input {
 	width: 3em;

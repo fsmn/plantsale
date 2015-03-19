@@ -16,7 +16,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 			<label for="new_year">First Year at Sale:&nbsp;</label>
 	<input type="number" style="width:5em" value="<?=get_value($variety,"new_year",($refine ? get_cookie("new_year"):''));?>" name="new_year" id="new_year"/>
 	</div>
-	<div class="field-set" style="font-size: .9em"><input type="checkbox" name="crop_failure" value="1"/><label for="crop_failure">Show Only Crop Failures</label>
+	<div class="field-set box" style="font-size: .9em"><input type="checkbox" name="crop_failure" value="1"/><label for="crop_failure">Show Only Crop Failures</label>
 	&nbsp;
 	<input type="checkbox" name="no_image" id="no_image" <?= $refine && get_cookie("needs_bag")== 1?"checked":"";?> value="1"/><label for="no_image">Missing Image</label>
 &nbsp;

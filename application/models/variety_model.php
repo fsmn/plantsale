@@ -84,20 +84,21 @@ class Variety_Model extends MY_Model
         return $result;
     }
 
-    /** Deprecated **/
+    /**
+     * Deprecated *
+     */
     function get_by_common ($common_id)
     {
         return $this->get_for_common($common_id);
-       /*  $query = "SELECT `v`.*, `o`.`year`
-            FROM `variety` v
-                LEFT JOIN
-                    (SELECT n.variety_id, MAX(n.year) AS max_year  FROM `order` n GROUP BY n.variety_id) y
-                        ON y.variety_id = v.id
-                  JOIN `order` o ON `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year`
-                 WHERE `v`.`common_id` = $common_id ORDER BY `o`.`year` DESC, `v`.`variety`";
-        $result = $this->db->query($query)->result();
-        $this->_log("alert");
-        return $result; */
+        /*
+         * $query = "SELECT `v`.*, `o`.`year` FROM `variety` v LEFT JOIN (SELECT
+         * n.variety_id, MAX(n.year) AS max_year FROM `order` n GROUP BY
+         * n.variety_id) y ON y.variety_id = v.id JOIN `order` o ON
+         * `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year` WHERE
+         * `v`.`common_id` = $common_id ORDER BY `o`.`year` DESC,
+         * `v`.`variety`"; $result = $this->db->query($query)->result();
+         * $this->_log("alert"); return $result;
+         */
     }
 
     function get_for_common ($common_id)
@@ -109,9 +110,9 @@ class Variety_Model extends MY_Model
         $this->load->model("order_model", "order");
         foreach ($result as $variety) {
             $year = $this->db->query(sprintf("SELECT `year` FROM `order` `o` WHERE `o`.`variety_id` = '$variety->id' ORDER BY `o`.`year` DESC LIMIT 1"))->row();
-            if($year){
-            $variety->year = $year->year;
-            }else{
+            if ($year) {
+                $variety->year = $year->year;
+            } else {
                 $variety->year = NULL;
             }
         }
@@ -288,7 +289,7 @@ class Variety_Model extends MY_Model
         $this->db->where("subcategory_id !=", 3); // no hanging baskets
         $this->db->where("subcategory_id !=", 4); // no indoor annuals
         $this->db->where("subcategory_id !=", 8); // no perennial water
-                                                     // plants
+                                                  // plants
 
         $this->db->group_by("common.category_id");
         $this->db->order_by("category.category");
@@ -302,8 +303,24 @@ class Variety_Model extends MY_Model
         return $result;
     }
 
+    /**
+     * *
+     * maintenance function to update whether items need bags.
+     * This can be run at any time, but is generally run when the variety find
+     * function is run
+     */
+    function update_needs_bag ()
+    {
+        $query = "update variety, `order` set needs_bag = 1 where variety.id = `order`.`variety_id` and (`order`.`pot_size` LIKE '%bareroot%' OR
+`order`.`pot_size` LIKE '%bulb%'  OR
+`order`.`pot_size` LIKE '%plug%' OR
+`order`.`pot_size` LIKE '%pound%')";
+        $this->db->query($query);
+    }
+
     function find ($variables, $order_by)
     {
+        $this->update_needs_bag();
         $my_parameters = (object) array();
         for ($i = 0; $i < count($variables); $i ++) {
             $my_variable = $variables[$i];
@@ -408,7 +425,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
         $this->db->group_by("variety.id");
         $result = $this->db->get()->result();
-        //$this->_log("alert");
+        // $this->_log("alert");
         return $result;
     }
 
@@ -448,7 +465,9 @@ class Variety_Model extends MY_Model
         foreach ($result as $item) {
             // $query = "SET @rank:=$web_id; update variety set
             // web_id=@rank:=@rank+1 where web_id is null";
-            $this->_update("variety", $item->id, array("web_id"=>$web_id));
+            $this->_update("variety", $item->id, array(
+                    "web_id" => $web_id
+            ));
             $web_id ++;
         }
     }

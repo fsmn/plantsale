@@ -164,6 +164,10 @@ $(document).on("blur",".field-envelope .live-field.text input",function(){
 	}
 	return false;
 });
+$(document).on("blur",".field-envelope .live-field input[type='checkbox']",function(){
+	update_field(this, "checkbox");
+});
+
 $(document).on("blur",".field-envelope .live-field textarea",function(){
 	update_field(this, "textarea");
 });
@@ -389,10 +393,19 @@ function update_field(me,my_type){
 		my_category = "category";
 	}else if(my_type == "subcategory-dropdown"){
 		my_category = "subcategory";
+	}else if(my_type == "checkbox"){
+		my_category = "checkbox";
+		if($(me).attr("checked") == true){
+			my_value = 1;
+		}else {
+			my_value = 0;
+		}
 	}
 	
 	is_persistent = $(me).hasClass("persistent");
-	if(is_persistent && my_value === ""){
+	
+	//don't do anything if the value is empty and it is a persistent field 
+	if(is_persistent && my_value == ""){
 		return false;
 	}
 	

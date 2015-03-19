@@ -78,8 +78,10 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 	<?=create_input($variety,"grower_id","Grower ID","grower_id",$refine);?>
 	</p>
 	<p>
-<input type="checkbox" name="no_image" id="no_image" value="1"/><label for="no_image">Missing Image</label>
-	</p>
+<input type="checkbox" name="no_image" id="no_image" <?= $refine && get_cookie("needs_bag")== 1?"checked":"";?> value="1"/><label for="no_image">Missing Image</label>
+&nbsp;
+<input type="checkbox" name="needs_bag" id="needs_bag" <?=$refine && get_cookie("needs_bag") == 1 ?"checked":"";?> value="1"/><label for="no_image">Needs Bag</label>
+</p>
 	<!-- <p>
 		<?=create_input($variety,"min_height","Min Height","min_height",$refine);?>
 	</p>

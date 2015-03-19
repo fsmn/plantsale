@@ -156,6 +156,7 @@ class Variety extends MY_Controller
                 "omit",
                 "web_description",
                 "print_description",
+                "needs_bag",
                 "crop_failure"
         );
         $options = array();

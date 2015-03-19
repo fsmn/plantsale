@@ -4,7 +4,8 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 ?>
 <div class="message">Enter "NULL" (with no spaces) in any field to find records with no entry in that field. Enter "NOT NULL" to find items where that field is not empty.</div>
 <form name="search-variety" id="search-variety" class="search-form"
-		action="<?=site_url("variety/find"); ?>" method="GET">
+		action="<?=site_url("variety/search"); ?>" method="GET">
+		<input type="hidden" name="find" id="find" value="1"/>
 	<p><label for="action[]">List </label><input type="radio" name="action[]" value="full" checked/>&nbsp;
 <label for="action[]">Variety History</label><input type="radio" name="action[]" value="history"/>&nbsp;
 <label for="action[]">Flag Listing</label><input type="radio" name="action[]" value="flags"/>

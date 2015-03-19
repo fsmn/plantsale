@@ -93,43 +93,47 @@ class Variety extends MY_Controller
 
     function search ()
     {
-        $this->load->model("menu_model", "menu");
-        $this->load->model("category_model", "category");
-        $this->load->model("subcategory_model", "subcategory");
-        $categories = $this->category->get_pairs();
-        $data["categories"] = get_keyed_pairs($categories, array(
-                "key",
-                "value"
-        ), TRUE);
-        $subcategories = $this->subcategory->get_pairs();
-        $data["subcategories"] = get_keyed_pairs($subcategories, array(
-                "key",
-                "value"
-        ), TRUE);
-        $sunlight = $this->menu->get_pairs("sunlight", array(
-                "field" => "value"
-        ));
-        $data["sunlight"] = $sunlight;
-        $plant_colors = $this->menu->get_pairs("plant_color", array(
-                "field" => "value",
-                "direction" => "ASC"
-        ));
-        $data["plant_colors"] = get_keyed_pairs($plant_colors, array(
-                "key",
-                "value"
-        ), TRUE, FALSE, array(
-                "name" => "NULL",
-                "value" => "NULL--No Color Selected"
-        )); // include option to search for an empty color
-        $flags = $this->menu->get_pairs("flag", array(
-                "field" => "value"
-        ));
-        $data["flags"] = get_keyed_pairs($flags, array(
-                "key",
-                "value"
-        ), TRUE);
-        $data["variety"] = NULL;
-        $this->load->view("variety/search", $data);
+        if ($this->input->get("find")) {
+            $this->find();//eventually merge search and find functions.
+        } else {
+            $this->load->model("menu_model", "menu");
+            $this->load->model("category_model", "category");
+            $this->load->model("subcategory_model", "subcategory");
+            $categories = $this->category->get_pairs();
+            $data["categories"] = get_keyed_pairs($categories, array(
+                    "key",
+                    "value"
+            ), TRUE);
+            $subcategories = $this->subcategory->get_pairs();
+            $data["subcategories"] = get_keyed_pairs($subcategories, array(
+                    "key",
+                    "value"
+            ), TRUE);
+            $sunlight = $this->menu->get_pairs("sunlight", array(
+                    "field" => "value"
+            ));
+            $data["sunlight"] = $sunlight;
+            $plant_colors = $this->menu->get_pairs("plant_color", array(
+                    "field" => "value",
+                    "direction" => "ASC"
+            ));
+            $data["plant_colors"] = get_keyed_pairs($plant_colors, array(
+                    "key",
+                    "value"
+            ), TRUE, FALSE, array(
+                    "name" => "NULL",
+                    "value" => "NULL--No Color Selected"
+            )); // include option to search for an empty color
+            $flags = $this->menu->get_pairs("flag", array(
+                    "field" => "value"
+            ));
+            $data["flags"] = get_keyed_pairs($flags, array(
+                    "key",
+                    "value"
+            ), TRUE);
+            $data["variety"] = NULL;
+            $this->load->view("variety/search", $data);
+        }
     }
 
     function find ()
@@ -433,11 +437,11 @@ class Variety extends MY_Controller
         $data["format"] = $format;
 
         if ($format == "select") {
-            $data["ids"] = implode(",",$plants);
+            $data["ids"] = implode(",", $plants);
             $this->load->view("variety/print/selector", $data);
         } else {
             $this->load->helper("export");
-            $plants = explode(",",$plants);
+            $plants = explode(",", $plants);
             if ($plants) {
                 foreach ($plants as $plant) {
                     $data['plants'][$plant]['variety'] = $this->variety->get($plant);

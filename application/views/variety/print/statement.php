@@ -12,7 +12,7 @@ $saturday_delivery = $order->count_midsale?1:0;
 $common_size = "";
 $length = strlen($variety->common_name);
 
-if($length > 34){
+if($length > 27){
     $common_size = "style='font-size:28pt'";
 }elseif($length > 20){
     $common_size = "style='font-size:35pt'";

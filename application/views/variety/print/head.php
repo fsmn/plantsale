@@ -5,4 +5,21 @@
 	rel="stylesheet"
 	media="all"
 	href="<?=base_url("css/$format.css")?>" />
-</head>
+
+	<style type="text/css">
+@media print {
+	.no-print {
+		display: none;
+	}
+
+}
+a {
+	text-decoration: none;
+	color: #000;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+
+</style>

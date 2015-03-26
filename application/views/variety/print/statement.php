@@ -9,11 +9,13 @@ if(!$variety->image_name){
     $has_image = FALSE;
 }
 $saturday_delivery = $order->count_midsale?1:0;
+$common_size = "";
+
 ?>
 <div class="<? echo implode(" ",$classes);?>">
 	<div class="header">
 	<div class="catalog-number"><?=$order->catalog_number;?></div>
-	<div class="common-name"><?=$variety->common_name;?></div>
+	<div class="common-name"  <?=strlen($variety->common_name) >20?"style='font-size: 35pt;'":"";?>><?=$variety->common_name;?></div>
 	</div>
 <div class="subheader">
 <? if($saturday_delivery || $variety->new_year == get_cookie("sale_year")):?>
@@ -92,8 +94,8 @@ $saturday_delivery = $order->count_midsale?1:0;
 		<div class="grower-name"><?=get_value($order,"grower_name");?></div>
 	</div>
 </div>
-<div id="crop-failure">
+<!--  <div id="crop-failure">
 <? if(isset($order) && get_value($order,"crop_failure") == 1):?>
 CROP FAILURE
 <? endif;?>
-</div>
+</div>-->

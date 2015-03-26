@@ -10,12 +10,19 @@ if(!$variety->image_name){
 }
 $saturday_delivery = $order->count_midsale?1:0;
 $common_size = "";
+$length = strlen($variety->common_name);
+
+if($length > 34){
+    $common_size = "style='font-size:28pt'";
+}elseif($length > 20){
+    $common_size = "style='font-size:35pt'";
+}
 
 ?>
 <div class="<? echo implode(" ",$classes);?>">
 	<div class="header">
 	<div class="catalog-number"><?=$order->catalog_number;?></div>
-	<div class="common-name"  <?=strlen($variety->common_name) >20?"style='font-size: 35pt;'":"";?>><?=$variety->common_name;?></div>
+	<div class="common-name"  <?=$common_size;?>><?=$variety->common_name;?></div>
 	</div>
 <div class="subheader">
 <? if($saturday_delivery || $variety->new_year == get_cookie("sale_year")):?>

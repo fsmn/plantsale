@@ -3,6 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 // statement.php Chris Dart May 20, 2014 7:58:21 PM chrisdart@cerebratorium.com
 $classes = array("document");
+
+if(isset($row_class)){
+    $classes[] = $row_class;
+}
 $has_image = TRUE;
 if(!$variety->image_name){
     $classes[] = "no-image";

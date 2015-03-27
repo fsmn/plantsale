@@ -1,34 +1,39 @@
 @CHARSET "UTF-8";
 
 @import
-	url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic);
+	url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
+	;
 
-@font-face{
-    font-family: plant-icons;
-    src: url(fonts/Plant-Icons-7.otf)
+@font-face {
+	font-family: plant-icons;
+	src: url(fonts/Plant-Icons-7.otf)
 }
 
-
 body {
-	width: 8.5in;
 	height: 5.5in;
+	width: 8.5in;
 	margin: 0;
 	padding: 0;
 	position: relative;
 	font-family: 'Merriweather Sans', sans-serif;
-	padding: .125in;
+	
 }
 
-
 .document {
-	height: 100%;
+height: 100%;
 	width: 100%;
 	margin: 0;
 	padding: 0;
 	position: relative;
 	clear: both;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.document.even {
 	/*page-break-inside: avoid;*/
 	page-break-after: always;
+	margin-top: .2in;
 }
 
 .header {
@@ -39,11 +44,11 @@ body {
 	display: inline-block;
 	font-weight: normal;
 	font-size: 40pt;
-	padding-right:.125in;
+	padding-right: .125in;
 }
 
 .common-name {
-	display:inline-block;
+	display: inline-block;
 	font-weight: 800;
 	font-size: 42pt;
 }
@@ -55,30 +60,30 @@ body {
 .special-icons {
 	display: inline-block;
 }
+
 .special-icons li.icon {
 	display: inline-block;
 }
 
-.saturday-delivery img, .is-new img {
-    max-height: .7in;
+.saturday-delivery img,.is-new img {
+	max-height: .7in;
 }
 
 .is-new {
-	display:inline-block;
+	display: inline-block;
 	vertical-align: top;
 }
+
 .is-new img {
 	max-width: 1.3in;
-    padding-right: .125in;
+	padding-right: .125in;
 }
-
 
 .latin-name {
 	font-size: 24pt;
 	font-style: italic;
 	display: inline-block;
 	vertical-align: top;
-
 }
 
 .variety {
@@ -105,7 +110,6 @@ body {
 	width: 240px;
 }
 
-
 .description-text {
 	width: 65%;
 	display: inline-block;
@@ -122,7 +126,7 @@ body {
 }
 
 .web_description {
-    
+	
 }
 
 .details-group {
@@ -132,7 +136,7 @@ body {
 }
 
 .icons {
-clear: both;
+	clear: both;
 }
 
 .icons ul {
@@ -160,8 +164,6 @@ clear: both;
 	padding-right: 10pt;
 }
 
-
-
 .full_sun {
 	
 }
@@ -178,7 +180,7 @@ clear: both;
 	
 }
 
-.flags li, .sunlight li,.icon.is-new, .icon.saturday-delivery {
+.flags li,.sunlight li,.icon.is-new,.icon.saturday-delivery {
 	font-family: plant-icons, "FSM Plant Sale Icons";
 	font-size: 46px;
 }
@@ -187,14 +189,13 @@ clear: both;
 	background-color: rgb(6, 255, 0);
 }
 
-
 .saturday {
 	
 }
 
 .price-group {
-float:right;
-text-align: right;
+	float: right;
+	text-align: right;
 }
 
 .pot-size {
@@ -208,13 +209,12 @@ text-align: right;
 }
 
 .dimensions {
-float: left;
+	float: left;
 }
 
 .dimensions .width,.dimensions .height {
 	display: inline-block;
 	padding-right: 16px;
-	
 }
 
 .dimensions label {

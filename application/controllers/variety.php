@@ -16,8 +16,6 @@ class Variety extends MY_Controller
 
     function index ()
     {
-
-
     }
 
     function create ()
@@ -66,13 +64,13 @@ class Variety extends MY_Controller
     {
         $id = $this->uri->segment(3);
         $formats = array(
-                        "statement",
-                        "tabloid",
-                        "letter",
-                        "shovel_foot",
-                        "thumbnail"
-                );
-        foreach($formats as $format){
+                "letter",
+                "tabloid",
+                "letter",
+                "shovel_foot",
+                "thumbnail"
+        );
+        foreach ($formats as $format) {
             $this->resize_image($id, $format);
         }
 
@@ -599,7 +597,7 @@ class Variety extends MY_Controller
      * @param unknown $format
      * @param string $force_update
      */
-    function resize_image ($image_name, $format, $force_update = FALSE)
+    function resize_image ($image_name, $format, $force_update = FALSE, $config = array())
     {
         if (in_array($format,
                 array(
@@ -610,11 +608,11 @@ class Variety extends MY_Controller
                         "thumbnail"
                 ))) {
             $this->load->helper("file");
-            if (! get_file_info("./files/$format/$image_name.jpg")) {
-                $config = array();
+            $config['source_image'] = "./files/$image_name.jpg";
+            $config['new_image'] = "./files/$format/$image_name.jpg";
+           // if (! get_file_info($config['new_image'])) {
                 $config['image_library'] = 'gd2';
-                $config['source_image'] = "./files/$image_name.jpg";
-                $config['new_image'] = "./files/$format/$image_name.jpg";
+
                 $config['maintain_ratio'] = TRUE;
                 $config['quality'] = "75";
                 switch ($format) {
@@ -638,9 +636,10 @@ class Variety extends MY_Controller
                         $config['width'] = 100;
                         $config['height'] = 100;
                 }
+                print_r($config);
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
-            }
+           //}
         }
     }
 

@@ -636,7 +636,6 @@ class Variety extends MY_Controller
                         $config['width'] = 100;
                         $config['height'] = 100;
                 }
-                print_r($config);
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
            //}

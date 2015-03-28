@@ -35,7 +35,7 @@ $saturday_delivery = $order->count_midsale?1:0;
 	<div class="description-group">
 	<? if($has_image):?>
 	<div class="image">
-		<img src="<?=site_url("files/$variety->image_name");?>" class="photo" />
+		<img src="<?=site_url("files/letter/$variety->image_name");?>" class="photo" />
 				<ul class="flags icons">
 			<? foreach($flags as $flag){
 			    echo sprintf("<li class='%s'>%s</li>",css_classify($flag->name),format_flags(array($flag),"poster"));

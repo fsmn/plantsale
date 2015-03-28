@@ -16,7 +16,8 @@ class Variety extends MY_Controller
 
     function index ()
     {
-        $this->variety->update_needs_bag();
+
+
     }
 
     function create ()
@@ -64,6 +65,17 @@ class Variety extends MY_Controller
     function view ()
     {
         $id = $this->uri->segment(3);
+        $formats = array(
+                        "statement",
+                        "tabloid",
+                        "letter",
+                        "shovel_foot",
+                        "thumbnail"
+                );
+        foreach($formats as $format){
+            $this->resize_image($id, $format);
+        }
+
         $variety = $this->variety->get($id);
         $current_order = $this->order->get_for_variety($id, get_current_year());
         $data["current_order"] = $current_order;
@@ -85,7 +97,7 @@ class Variety extends MY_Controller
     function search ()
     {
         if ($this->input->get("find")) {
-            $this->find();//eventually merge search and find functions.
+            $this->find(); // eventually merge search and find functions.
         } else {
             $this->load->model("menu_model", "menu");
             $this->load->model("category_model", "category");
@@ -104,10 +116,11 @@ class Variety extends MY_Controller
                     "field" => "value"
             ));
             $data["sunlight"] = $sunlight;
-            $plant_colors = $this->menu->get_pairs("plant_color", array(
-                    "field" => "value",
-                    "direction" => "ASC"
-            ));
+            $plant_colors = $this->menu->get_pairs("plant_color",
+                    array(
+                            "field" => "value",
+                            "direction" => "ASC"
+                    ));
             $data["plant_colors"] = get_keyed_pairs($plant_colors, array(
                     "key",
                     "value"
@@ -123,12 +136,12 @@ class Variety extends MY_Controller
                     "value"
             ), TRUE);
             $data["variety"] = NULL;
-            if($this->input->get("ajax")){
-            $this->load->view("variety/search", $data);
-            }else{
+            if ($this->input->get("ajax")) {
+                $this->load->view("variety/search", $data);
+            } else {
                 $data["title"] = "Variety Search";
                 $data["target"] = "variety/search";
-                $this->load->view("page/index",$data);
+                $this->load->view("page/index", $data);
             }
         }
     }
@@ -445,6 +458,9 @@ class Variety extends MY_Controller
                     $data['plants'][$plant]['variety'] = $this->variety->get($plant);
                     $data['plants'][$plant]['order'] = $this->order->get_for_variety($plant, get_current_year());
                     $data['plants'][$plant]['flags'] = $this->flag->get_for_variety($plant);
+                    if ($format) {
+                        $this->resize_image($plant, $format);
+                    }
                 }
                 $data["classes"] = "";
                 $count = count($plants);
@@ -468,6 +484,7 @@ class Variety extends MY_Controller
         $this->load->helper("export");
         $data["format"] = $format;
         $data['variety'] = $this->variety->get($id);
+        $this->resize_image($id, $format);
         $data['order'] = $this->order->get_for_variety($id, get_cookie("sale_year"));
         if ($data['order']) {
             $data['flags'] = $this->flag->get_for_variety($id);
@@ -570,6 +587,60 @@ class Variety extends MY_Controller
             $this->load->view("image/view", $data);
         } else {
             redirect("variety/view/$variety_id");
+        }
+    }
+
+    /**
+     * using the GD2 image manipulation system, this creates any new files if
+     * none exist.
+     * The $force_update option can be used to forceably update all files.
+     *
+     * @param unknown $image_name
+     * @param unknown $format
+     * @param string $force_update
+     */
+    function resize_image ($image_name, $format, $force_update = FALSE)
+    {
+        if (in_array($format,
+                array(
+                        "statement",
+                        "tabloid",
+                        "letter",
+                        "shovel_foot",
+                        "thumbnail"
+                ))) {
+            $this->load->helper("file");
+            if (! get_file_info("./files/$format/$image_name.jpg")) {
+                $config = array();
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = "./files/$image_name.jpg";
+                $config['new_image'] = "./files/$format/$image_name.jpg";
+                $config['maintain_ratio'] = TRUE;
+                $config['quality'] = "75";
+                switch ($format) {
+                    case "statement":
+                        $config['width'] = 250;
+                        $config['height'] = 250;
+                        break;
+                    case "tabloid":
+                        $config['width'] = 792;
+                        $config['height'] = 792;
+                        break;
+                    case "letter":
+                        $config['width'] = 480;
+                        $config['height'] = 480;
+                        break;
+                    case "shovel_foot":
+                        $config['width'] = 540;
+                        $config['height'] = 540;
+                        break;
+                    case "thumbnail":
+                        $config['width'] = 100;
+                        $config['height'] = 100;
+                }
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+            }
         }
     }
 

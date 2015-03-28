@@ -73,7 +73,7 @@ class Variety extends MY_Controller
                         "thumbnail"
                 );
         foreach($formats as $format){
-            $this->resize_image($id, $format);
+            $this->resize_image($id, "letter");
         }
 
         $variety = $this->variety->get($id);

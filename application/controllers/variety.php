@@ -64,15 +64,15 @@ class Variety extends MY_Controller
     {
         $id = $this->uri->segment(3);
         $formats = array(
-                "letter",
+                "statement",
                 "tabloid",
                 "letter",
                 "shovel_foot",
                 "thumbnail"
         );
-        foreach ($formats as $format) {
-            $this->resize_image($id, $format);
-        }
+        // foreach ($formats as $format) {
+        $this->resize_image($id, "statement", TRUE);
+        // }
 
         $variety = $this->variety->get($id);
         $current_order = $this->order->get_for_variety($id, get_current_year());
@@ -451,15 +451,17 @@ class Variety extends MY_Controller
         } else {
             $this->load->helper("export");
             $plants = explode(",", $plants);
+            $alerts = array();
             if ($plants) {
                 foreach ($plants as $plant) {
                     $data['plants'][$plant]['variety'] = $this->variety->get($plant);
                     $data['plants'][$plant]['order'] = $this->order->get_for_variety($plant, get_current_year());
                     $data['plants'][$plant]['flags'] = $this->flag->get_for_variety($plant);
                     if ($format) {
-                        $this->resize_image($plant, $format);
+                        $alerts[] = $this->resize_image($plant, $format, TRUE);
                     }
                 }
+
                 $data["classes"] = "";
                 $count = count($plants);
                 $data["title"] = sprintf("%s-Size List-%s Pages", ucfirst($format), $count);
@@ -568,6 +570,7 @@ class Variety extends MY_Controller
             $this->load->model("image_model");
             $variety_id = $this->input->post("variety_id");
             $id = $this->image_model->insert($variety_id, $file_data);
+            $this->resize_image($variety_id, "statement");
             redirect("variety/view/$variety_id");
         }
     }
@@ -597,22 +600,24 @@ class Variety extends MY_Controller
      * @param unknown $format
      * @param string $force_update
      */
-    function resize_image ($image_name, $format, $force_update = FALSE, $config = array())
+    function resize_image ($image_name, $format, $force_update = FALSE)
     {
-        if (in_array($format,
-                array(
-                        "statement",
-                        "tabloid",
-                        "letter",
-                        "shovel_foot",
-                        "thumbnail"
-                ))) {
-            $this->load->helper("file");
-            $config['source_image'] = "./files/$image_name.jpg";
-            $config['new_image'] = "./files/$format/$image_name.jpg";
-           // if (! get_file_info($config['new_image'])) {
-                $config['image_library'] = 'gd2';
+        if (in_array($format, array(
+                "statement",
+                "tabloid",
+                "letter",
+                "shovel_foot",
+                "thumbnail"
+        ))) {
 
+            $this->load->helper("file");
+            $source_image = "./files/$image_name.jpg";
+            $new_image = "./files/$format/$image_name.jpg";
+            if (! get_file_info($new_image) || $force_update) {
+
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = $source_image;
+                $config['new_image'] = $new_image;
                 $config['maintain_ratio'] = TRUE;
                 $config['quality'] = "75";
                 switch ($format) {
@@ -636,9 +641,14 @@ class Variety extends MY_Controller
                         $config['width'] = 100;
                         $config['height'] = 100;
                 }
+
                 $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
-           //}
+                if (! $this->image_lib->resize()) {
+                    return $this->image_lib->display_errors() . $source_image;
+                }
+
+                $this->image_lib->clear();
+            }
         }
     }
 

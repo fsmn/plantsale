@@ -1,3 +1,5 @@
+<?php ?>
+<!--
 <?xml version="1.0" encoding="utf-8"?>
 <rss
 	version="2.0"
@@ -42,4 +44,4 @@ http://db.friendsschoolplantsale.com/variety/rss
 </item>
  <?php endforeach;?>
   </channel>
- </rss>
+ </rss>-->

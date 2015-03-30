@@ -29,7 +29,6 @@ $row_classes = implode(" ",$row_classes);
 			<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-order"),"id"=>sprintf("edit-order_%s",$order->id)));?>
 				<? else: ?>
 				<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("order/view/$order->id")));?>
-				</a>
 				<? endif; ?>
 				<?php if($order->crop_failure):?>
 				&nbsp;CROP FAILURE&nbsp;

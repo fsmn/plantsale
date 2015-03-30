@@ -6,7 +6,7 @@
 foreach($varieties as $variety):
 ?>
 <div class="variety-info">
-<h3><?=$variety->name;?> (ID=<?=$variety->common_id;?>), <?=$variety->variety;?> (ID=<?=$variety->id;?>)</h4>
+<h3><?=$variety->name;?> (ID=<?=$variety->common_id;?>), <?=$variety->variety;?> (ID=<?=$variety->id;?>)</h3>
 <p>
 <strong>Common (General) Description</strong><br/>
 <?=$variety->description;?></p>

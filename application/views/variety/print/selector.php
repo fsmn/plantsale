@@ -28,7 +28,7 @@ $formats = array(
 		<?=form_dropdown("format",$formats);?>
 		</p>
 		<p>
-		<input type="submit" class="button" target="_blank" value="Create"/>
+		<input type="submit" class="button" value="Create"/>
 		</p>
 
 </form>

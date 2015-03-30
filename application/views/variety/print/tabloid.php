@@ -41,7 +41,7 @@ $saturday_delivery = $order->count_midsale?1:0;
 	<div class="description-group">
 	<? if($has_image):?>
 	<div class="image">
-		<img src="<?=site_url("files/tabloid/$variety->image_name");?>" class="photo" />
+		<img src="<?=site_url("files/$variety->image_name");?>" class="photo" />
 
 </div>
 <? endif;?>

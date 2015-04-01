@@ -82,6 +82,7 @@ body {
 }
 
 .image {
+	padding-top:.5em;
 	width: 1056px;
 	position: relative;
 	height: 686px;

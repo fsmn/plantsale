@@ -101,10 +101,11 @@ body {
 	width: 100%;
 	text-align: left;
 	font-size: 2em;
-	padding-top: .75em;
+
 }
 
 .description {
+	   padding-top: .75em;
 }
 
 .print_description {

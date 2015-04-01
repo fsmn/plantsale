@@ -117,7 +117,7 @@ body {
 
 .details-group {
 	position: absolute;
-	bottom: 0;
+	bottom: 2em;
 	width: 100%;
 }
 

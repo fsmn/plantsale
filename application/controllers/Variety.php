@@ -62,6 +62,7 @@ class Variety extends MY_Controller
 
     function view ()
     {
+        $this->output->enable_profiler(TRUE);
         $id = $this->uri->segment(3);
         $formats = array(
                 "statement",

@@ -286,10 +286,10 @@ class Variety_Model extends MY_Model
         $this->db->where("order.year", $year);
         // exclude bare root perennials
         $this->db->where("NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE);
-        $this->db->where("subcategory_id !=", 3); // no hanging baskets
-        $this->db->where("subcategory_id !=", 4); // no indoor annuals
-        $this->db->where("subcategory_id !=", 8); // no perennial water
-                                                  // plants
+//         $this->db->where("subcategory_id !=", 3); // no hanging baskets
+//         $this->db->where("subcategory_id !=", 4); // no indoor annuals
+//         $this->db->where("subcategory_id !=", 8); // no perennial water
+           $this->db->where("(`common`.`subcategory_id` != 3 AND `common`.`subcategory_id` !=4 AND `common`.`subcategory_id` !=8 OR `common`.`subcategory_id` IS NULL)",NULL,FALSE)   ;                                    // plants
 
         $this->db->group_by("common.category_id");
         $this->db->order_by("category.category");
@@ -299,7 +299,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sum(`order`.`count_midsale`) as midsale_count");
         $this->db->select("category.category,category.id as category_id");
         $result = $this->db->get()->result();
-        // $this->_log("alert");
+        $this->_log("alert");
         return $result;
     }
 

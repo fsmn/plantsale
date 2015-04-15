@@ -16,6 +16,7 @@ class Variety extends MY_Controller
 
     function index ()
     {
+        $this->variety->update_needs_bag();
     }
 
     function create ()

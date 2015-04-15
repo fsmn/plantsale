@@ -289,7 +289,7 @@ class Variety_Model extends MY_Model
 //         $this->db->where("subcategory_id !=", 3); // no hanging baskets
 //         $this->db->where("subcategory_id !=", 4); // no indoor annuals
 //         $this->db->where("subcategory_id !=", 8); // no perennial water
-           $this->db->where("(`common`.`subcategory_id` != 3 AND `common`.`subcategory_id` !=4 AND `common`.`subcategory_id` !=8 OR `common`.`subcategory_id` IS NULL)",NULL,FALSE)   ;                                    // plants
+           $this->db->where("(`common`.`subcategory_id` != 3 AND `common`.`subcategory_id` !=4 AND `common`.`subcategory_id` !=8 OR `common`.`subcategory_id` IS NULL)",NULL,FALSE);                                    // plants
 
         $this->db->group_by("common.category_id");
         $this->db->order_by("category.category");
@@ -311,6 +311,9 @@ class Variety_Model extends MY_Model
      */
     function update_needs_bag ()
     {
+
+        $query = sprintf("update `variety` SET needs_bag = 0;");
+        $this->db->query($query);
         $query = sprintf("update `variety`, `order` SET `needs_bag` = 1 WHERE `order`.`year` = '%s' AND `variety`.`id` = `order`.`variety_id` and (`order`.`pot_size` LIKE '%s' OR
 `order`.`pot_size` LIKE '%s'  OR
 `order`.`pot_size` LIKE '%s' OR

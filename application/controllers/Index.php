@@ -11,10 +11,16 @@ class Index extends MY_Controller
 
     function index ()
     {
+        /* A little maintenance for variety bag information */
+        $this->load->model("variety_model","variety");
+        $this->variety->update_needs_bag();
+        /* Find any orphan growers--ones entered in orders, but do not have a grower record in the database */
         $this->load->model("grower_model", "grower");
+        /* end maintenance on varieties and growers */
         $data["title"] = "Plant Sale Database";
-        $data["target"] = "welcome";
+        $data["target"] = "welcome"
         $data["orphan_count"] = count($this->grower->get_orphans());
+
         $this->load->view("page/index", $data);
     }
 
@@ -93,7 +99,6 @@ class Index extends MY_Controller
     function get_flats ()
     {
         $this->load->model("variety_model", "variety");
-        $this->variety->update_needs_bag();
         $sale_year = get_cookie("sale_year");
         if (! $sale_year) {
             $sale_year = get_current_year();

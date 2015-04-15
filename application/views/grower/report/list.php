@@ -23,10 +23,10 @@ ID
 Name
 </th>
 <th>
-Street
+Email/Phone
 </th>
 <th>
-City, State, Zip
+Address
 </th>
 <th>
 Totals for <?=$year;?>

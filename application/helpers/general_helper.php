@@ -238,6 +238,17 @@ function decode_string ($string)
 {
 }
 
+function format_email ($object, $field)
+{
+    $email = get_value($object, $field);
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $output = sprintf("<a href='mailto:%s' title='send an email to %s'>%s</a>", $email, $email, $email);
+    } else {
+        $output = $email;
+    }
+    return $output;
+}
+
 /**
  * Create a custom sql sorting string.
  *
@@ -262,10 +273,11 @@ function get_custom_order ($values = array(NULL,"Hostas","Daylilies","Coleus","B
     return implode(" ", $order);
 }
 
-function css_classify($string){
-  $string = preg_replace('~[^A-z\ ]+~','',$string);
-  $string =   str_replace(" ", "-", $string);
-  $string = strtolower($string);
-  return $string;
+function css_classify ($string)
+{
+    $string = preg_replace('~[^A-z\ ]+~', '', $string);
+    $string = str_replace(" ", "-", $string);
+    $string = strtolower($string);
+    return $string;
 }
 

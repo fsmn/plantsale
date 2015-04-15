@@ -93,6 +93,7 @@ class Index extends MY_Controller
     function get_flats ()
     {
         $this->load->model("variety_model", "variety");
+        $this->variety->update_needs_bag();
         $sale_year = get_cookie("sale_year");
         if (! $sale_year) {
             $sale_year = get_current_year();

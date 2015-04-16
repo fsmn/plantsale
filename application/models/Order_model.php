@@ -83,6 +83,7 @@ class Order_Model extends MY_Model
 		function update ( $id, $values = array() )
 		{
 			$output = $this->_update ( "order", $id, $values );
+			$this->_log("alert");
 			return $output;
 		}
 

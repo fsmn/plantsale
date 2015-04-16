@@ -19,8 +19,12 @@
 	</div>
 
 	<div class="order-grower field">
-		<label for="grower_id">grower:&nbsp;</label><input type="text"
+		<label for="grower_id">Grower:&nbsp;</label><input type="text"
 			name="grower_id" value="<?=get_value($order,"grower_id");?>" />
+	</div>
+	<div class="order-catalog_number field">
+	<label for="catalog_number">Catalog Number</label>
+	<input type="text" name="catalog_number" value="<?=get_value($order,"catalog_number");?>"/>
 	</div>
 	<div class="order-crop_failure field">
 	<label for="crop_failure">Crop Failure:</label>

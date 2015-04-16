@@ -77,30 +77,17 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_c
 	</div>
 	</div>
 	<div class="field-set block">
+	<div class="column first">
 	<?=create_input($variety,"grower_id","Grower ID","grower_id",$refine);?>
+	</div>
+	<div class="column last">
+		<?=create_input($variety,"catalog_number","Catalog Number","catalog_number",$refine);?>
+
+	</div>
 	</div>
 	<div>
 
 </div>
-	<!-- <p>
-		<?=create_input($variety,"min_height","Min Height","min_height",$refine);?>
-	</p>
-		<p>
-		<?=create_input($variety,"max_height","Max Height","max_height",$refine);?>
-	</p>
-		<p>
-		<?=create_input($variety,"height_unit","Unit","height_unit",$refine);?>
-	</p>
-	<p>
-		<?=create_input($variety,"min_width","Min Width","min_width", $refine);?>
-	</p>
-		<p>
-		<?=create_input($variety,"max_width","Max Width", "max_width", $refine);?>
-	</p>
-		<p>
-		<?=create_input($variety,"width_unit","Unit","width_unit", $refine);?>
-	</p> -->
-
 	<div id="sort-block">
 <?
 $data["basic_sort"] = TRUE;

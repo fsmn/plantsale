@@ -20,7 +20,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-.price:hover,.pot-size:hover {
+.price:hover,.pot-size:hover, .catalog-number:hover {
 	background-color: yellow;
 	cursor: pointer;
 }

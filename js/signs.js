@@ -1,4 +1,4 @@
-$(document).on("click",".price, .pot-size", function(){
+$(document).on("click",".price, .pot-size, .catalog-number", function(){
 	var my_field = this;
 	var my_class = $(my_field).attr("class");
 	var my_value = $(my_field).html();
@@ -10,7 +10,7 @@ $(document).on("click",".price, .pot-size", function(){
 	$(my_field).children("input").focus();
 });
 
-$(document).on("blur",".price_field, .pot-size_field", function(){
+$(document).on("blur",".price_field, .pot-size_field, .catalog-number_field", function(){
 	var my_field = this;
 	var my_child = $(this).children("input");
 	var my_value = my_child.val();

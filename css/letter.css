@@ -227,14 +227,14 @@ width: 100%;
 }
 
 
-.pot-size {
+.pot-size, .pot-size_field input {
   display: inline-block;
   font-weight: 300;
   font-size: 30pt;
   width: 48%;
 }
 
-.price {
+.price, .price_field input {
 	display: inline-block;
   font-size: 36pt;
   font-weight: 800;

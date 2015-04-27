@@ -193,17 +193,17 @@ height: 100%;
 	
 }
 
-.price-group {
+.price-group  {
 	float: right;
 	text-align: right;
 }
 
-.pot-size {
+.pot-size, .pot-size_field input {
 	font-weight: normal;
 	font-size: 24px;
 }
 
-.price {
+.price, .price_field input {
 	font-size: 32px;
 	font-weight: 800;
 }

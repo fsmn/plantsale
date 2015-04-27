@@ -53,7 +53,8 @@ $saturday_delivery = $order->count_midsale?1:0;
 <div class="details-group">
 	<div class="price-group">
 		<div class="pot-size"><?=get_value($order,"pot_size");?></div>
-		<div class="price"><?=get_as_price(get_value($order,"price"));?></div>
+		<div class="price" id="price_<?=$order->id;?>"><?=get_as_price(get_value($order,"price"));?></div>
+
 	</div>
 	<div class="icons">
 		<ul class="sunlight">

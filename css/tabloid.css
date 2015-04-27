@@ -185,13 +185,13 @@ body {
 	float: right;
 }
 
-.pot-size {
+.pot-size , .pot-size_field input {
 	clear: both;
 	font-weight: 300;
 	font-size: 2.5em;
 }
 
-.price {
+.price, .price_field input {
 	font-size: 4em;
 	font-weight: 800;
 	text-align: right;

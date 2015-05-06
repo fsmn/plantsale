@@ -273,7 +273,7 @@ class Variety_Model extends MY_Model
         $this->db->order_by("category.category");
         $this->db->select("count(`variety`.`id`) as count,category.category,category.id");
         $result = $this->db->get()->result();
-        $this->_log("alert");
+       // $this->_log("alert");
         return $result;
     }
 
@@ -299,7 +299,7 @@ class Variety_Model extends MY_Model
         $this->db->select("sum(`order`.`count_midsale`) as midsale_count");
         $this->db->select("category.category,category.id as category_id");
         $result = $this->db->get()->result();
-        $this->_log("alert");
+        //$this->_log("alert");
         return $result;
     }
 
@@ -319,7 +319,7 @@ class Variety_Model extends MY_Model
 `order`.`pot_size` LIKE '%s' OR
 `order`.`pot_size` LIKE '%s')",get_current_year(),"%bareroot%","%bulb%", "%bulb%","%pound%" );
         $this->db->query($query);
-        $this->_log("alert");
+        //$this->_log("alert");
     }
 
     function find ($variables, $order_by)
@@ -449,7 +449,7 @@ class Variety_Model extends MY_Model
         $this->db->select("category.category");
         $this->db->select("subcategory.web_label,subcategory.subcategory");
         $result = $this->db->get()->result();
-        $this->_log("alert");
+        //$this->_log("alert");
         return $result;
     }
 

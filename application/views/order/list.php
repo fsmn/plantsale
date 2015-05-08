@@ -58,6 +58,7 @@ if ($orders) :
             "Dead"
     );
     ?>
+    <!-- order/list -->
 <table class="list compressed">
 	<thead>
 		<tr class="top-row">

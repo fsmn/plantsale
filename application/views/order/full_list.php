@@ -4,7 +4,8 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 // n envelope for the plant list.
 
 ?>
-
+<!-- order/full_list -->
+<?php if(!$is_sellouts):?>
 <fieldset class="search-fieldset">
 	<legend title="click to show or hide the parameters">Search Parameters</legend>
 	<div class="search-parameters">
@@ -49,10 +50,12 @@ $buttons[] = array("text"=>"Batch Update","title"=>"Batch Update values for all 
 }
 print create_button_bar($buttons);
 ?>
-
+<?php endif;?>
 
 <? if($is_inventory){
     $this->load->view("order/inventory");
+}elseif($is_sellouts){
+	$this->load->view("order/sellouts");
 }else{
     $this->load->view("order/catalog");
 } ?>

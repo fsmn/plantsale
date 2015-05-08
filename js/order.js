@@ -202,6 +202,17 @@ $(document).on("click",".order-create",function(){
 		}
 	})
     
+	$(document).on("click",".order-crop_failure .crop_failure-checkbox",function(){
+		is_checked = $(this).attr("checked");
+		my_id = this.id.split("_")[1];
+		if(is_checked == "checked"){
+			my_value = 1;
+		}else{
+			my_value = 0;
+		}
+		update_crop_failure(my_id,my_value);
+
+	});
 
 	
 	function batch_update_orders(){
@@ -227,5 +238,47 @@ $(document).on("click",".order-create",function(){
 	
 	function batch_update_warning(){
 		
+	}
+	
+	function update_crop_failure(my_id,my_value){
+		console.log(my_value);
+		form_data = {
+				id: my_id,
+				value: my_value
+		};
+		$.ajax({
+			type:"post",
+			url: base_url + "order/update_crop_failure",
+			data: form_data,
+			success: function(data){
+				console.log(data);
+				if(my_value == 1){
+					$("#order_"+ my_id).addClass("crop-failure");
+				}else{
+					$("#order_"+ my_id).removeClass("crop-failure");
+				}
+			}
+		});
+	}
+	
+	function sellouts(){
+		my_table = "table.list";
+		my_list = [0,3,4,5,6,7];
+		for(i=0; i < my_list.length; i++){
+			hide_column(my_table,my_list[i]);
+		}
+		
+	}
+	
+	function hide_column(my_table, my_index){
+		my_index = Number(my_index);
+		$(my_table + ".top-row").hide();
+		my_column = my_table + ' td:nth-child(' + my_index + ')';
+		console.log(my_column);
+		$(my_column).hide();
+		my_column = my_table + ' th:nth-child(' + my_index + ')';
+
+		$(my_column).hide();
+
 	}
  

@@ -6,7 +6,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 if ($orders)
 :
 	?>
-<!-- views/order/inventor.php -->
+<!-- order/inventory -->
 <h2 class="column-instructions">
 	Click on a header label to hide a column [<a href="#"
 		class=" reset-columns">Reset</a>]
@@ -38,6 +38,7 @@ if ($orders)
 			<th>Year</th>
 		<? endif;?>
 			<th>Grower</th>
+			<!--<th>Crop Failure</th> -->
 			<th>Cat&#35;</th>
 		<? if($show_names):?>
 			<th>Genus</th>
@@ -135,6 +136,8 @@ if ($orders)
 			<? endif;?>
 			<td tabindex=-1 class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
+			<!-- <td class="order-crop_failure"><input type="checkbox" class="crop_failure-checkbox" name="crop_failure" id="crop-failure_<?php echo $order->id;?>" value="1" <?php echo $order->crop_failure==1?"checked":"";?>/>
+</td> -->
 			<td tabindex=-1 class="order-catalog_number field">
 				<!-- if there is no catalog number, show the first letter of the category -->
 			    <?=edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>

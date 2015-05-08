@@ -2,6 +2,7 @@
 $sale_year = get_cookie("sale_year");
 // totals.php Chris Dart Apr 21, 2014 2:06:25 PM chrisdart@cerebratorium.com
 ?>
+<!-- order/flat-totals -->
 <table class="chart">
 <thead>
 <tr>

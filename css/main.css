@@ -774,6 +774,9 @@ textarea.save-field {
 	padding-right: 1em;
 	padding-bottom: 10px;
 }
+form .column{
+	padding-bottom: 0;
+}
 
 .column-odd, .column.odd {
 	padding-right: 5px;

@@ -81,6 +81,11 @@ Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_
 <label for="show_fields">Show Inventory Fields</label>
 </div>
 <div class="field-set">
+
+<input type="checkbox" name="is_sellouts" id="is_sellouts" value=1 <?=$refine && get_cookie("is_sellouts")?"checked":"";?> />
+<label for="show_fields">Show Printable Sellout Chart</label>
+</div>
+<div class="field-set">
 <input type="checkbox" value="1" name="show_last_only" <?=$refine && get_cookie("show_last_only")?"checked":"";?>/>
 <label for="show_last_only">Hide plants that already have an order for the next plant sale</label>
 </div>

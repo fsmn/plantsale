@@ -468,6 +468,8 @@ $(document).ready(function(){
 });
 
 
+
+
 function omit_row(me,target){
 	var my_id = me.id.split("_")[1];
 	console.log(target + my_id);

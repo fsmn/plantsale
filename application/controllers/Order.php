@@ -100,9 +100,22 @@ class Order extends MY_Controller
 
             if ($is_inventory = $this->input->get("is_inventory")) {
                 bake_cookie("is_inventory", $is_inventory);
+                $data["is_inventory"] = TRUE;
                 $special_options["is_inventory"] = $is_inventory;
             } else {
+            	$data["is_inventory"] = FALSE;
                 burn_cookie("is_inventory");
+            }
+            
+            if($is_sellouts = $this->input->get("is_sellouts")){
+            	bake_cookie("is_sellouts",$is_sellouts);
+            	$data["is_sellouts"] = TRUE;
+            	 
+            	$special_options["is_sellouts"] = $is_sellouts;
+            }else{
+            	burn_cookie("is_sellouts");
+            	$data["is_sellouts"] = FALSE;
+            	 
             }
 
             if ($show_last_only = $this->input->get("show_last_only")) {
@@ -153,6 +166,11 @@ class Order extends MY_Controller
             $data["is_inventory"] = FALSE;
             if ($this->input->get("is_inventory") == 1) {
                 $data["is_inventory"] = TRUE;
+            }
+            
+            $data["is_sellouts"] = FALSE;
+            if($this->input->get("is_sellouts")==1){
+            	$data["is_sellouts"] = TRUE;
             }
 
             bake_cookie("sorting", implode(",", $sorting["fields"]));
@@ -219,16 +237,26 @@ class Order extends MY_Controller
     function update_value ()
     {
         $id = $this->input->post("id");
-
+        $value = urldecode($this->input->post("value"));
+        $field = $this->input->post("field");
+        if(!$value && $field == "crop_failure"){
+        	$value == NULL;
+        }
         $values = array(
-                $this->input->post("field") => $value = urldecode($this->input->post("value"))
-        );
+               $field  =>     $value    );
         $output = $this->order->update($id, $values);
 
         if ($this->input->post("format") == "currency") {
             $output = get_as_price($output);
         }
         echo $output;
+    }
+    
+    function update_crop_failure(){
+    	$id = $this->input->post("id");
+    	$value = $this->input->post("crop_failure");
+    	$this->order->update_crop_failure($id,$value);
+    	echo $this->db->last_query();
     }
 
     function catalog_update_selector ()

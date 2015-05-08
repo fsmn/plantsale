@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $sale_year = get_cookie("sale_year");
 
 ?>
+<!-- order/totals -->
 <table class="chart">
 	<thead>
 		<tr>

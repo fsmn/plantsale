@@ -117,6 +117,15 @@ class Order extends MY_Controller
             	$data["is_sellouts"] = FALSE;
             	 
             }
+            
+            if($is_tracking = $this->input->get("is_tracking")){
+            	bake_cookie("is_tracking", $is_tracking);
+            	$data["is_tracking"] = $is_tracking;
+            	$special_options["is_tracking"] = $is_tracking;
+            }else{
+            	burn_cookie("is_tracking");
+            	$data["is_tracking"] = FALSE;
+            }
 
             if ($show_last_only = $this->input->get("show_last_only")) {
                 bake_cookie("show_last_only", $show_last_only);

@@ -23,7 +23,7 @@ body {
 	clear: both;
 	   overflow:hidden;
 	page-break-inside: avoid;
-	page-break-after: always;
+	page-break-after: auto;
 }
 
 .header {

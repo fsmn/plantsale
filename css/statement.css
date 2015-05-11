@@ -32,7 +32,7 @@ height: 100%;
 
 .document.even {
 	/*page-break-inside: avoid;*/
-	page-break-after: always;
+	page-break-after: auto;
 	margin-top: .2in;
 }
 

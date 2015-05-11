@@ -22,7 +22,7 @@ body {
 	position: relative;
 	clear: both;
 	page-break-inside: avoid;
-	page-break-after: always;
+	page-break-after: auto;
 }
 
 .header {

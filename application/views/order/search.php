@@ -8,6 +8,11 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 });
 </script>
 <form name="order-search" id="order-search" method="get" action="<?php echo base_url("order/search");?>">
+<div class="field-set">
+<label for="output_format">Output Format</label>
+<?php echo form_dropdown("output_format",$output_formats,($refine ? get_cookie("output_format"): "standard"),'id="output_format"');?>
+
+</div>
 <div class="field-set label-break">
 <div class="column first">
 		<label for="category_id">Category: </label><?=form_dropdown("category_id",$categories,($refine ? get_cookie("category_id"):""),'id="category_id"');?>
@@ -75,16 +80,6 @@ Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_
 <div class="field-set" style="clear:both">
 <div class="field-set"><input type="checkbox" name="crop_failure" value="1" <?=$refine && get_cookie("crop_failure")?"checked":"";?>/>&nbsp;<label for="crop_failure">Show Only Crop Failures</label></div>
 
-<div class="field-set">
-
-<input type="checkbox" name="is_inventory" id="is_inventory" value=1 <?=$refine && get_cookie("is_inventory")?"checked":"";?> />
-<label for="show_fields">Show Inventory Fields</label>
-</div>
-<div class="field-set">
-
-<input type="checkbox" name="is_sellouts" id="is_sellouts" value=1 <?=$refine && get_cookie("is_sellouts")?"checked":"";?> />
-<label for="show_fields">Show Printable Sellout Chart</label>
-</div>
 <div class="field-set">
 <input type="checkbox" value="1" name="show_last_only" <?=$refine && get_cookie("show_last_only")?"checked":"";?>/>
 <label for="show_last_only">Hide plants that already have an order for the next plant sale</label>

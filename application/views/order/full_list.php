@@ -5,7 +5,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 ?>
 <!-- order/full_list -->
-<?php if(!$is_sellouts || $is_tracking):?>
+<?php if(!strstr($output_format,"printable")):?>
 <fieldset class="search-fieldset">
 	<legend title="click to show or hide the parameters">Search Parameters</legend>
 	<div class="search-parameters">
@@ -52,12 +52,14 @@ print create_button_bar($buttons);
 ?>
 <?php endif;?>
 
-<? if($is_inventory){
+<? if($output_format == "inventory"){
     $this->load->view("order/inventory");
-}elseif($is_sellouts){
+}elseif($output_format == "printable-sellouts"){
 	$this->load->view("order/sellouts");
-}elseif($is_tracking){
+}elseif($output_format == "printable-tracking"){
 	$this->load->view("order/tracking");
+}elseif($output_format == "printable-shelfchecking"){
+	$this->load->view("order/shelfchecking");
 }else{
     $this->load->view("order/catalog");
 } ?>

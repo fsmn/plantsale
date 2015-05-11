@@ -572,6 +572,7 @@ table.list {
 	padding-bottom: 5px;
 	padding-top: 5px;
 	border-collapse: collapse;
+	page-break-inside:auto;
 }
 
 table.list thead tr, table.list tr.header td {
@@ -592,6 +593,8 @@ table.list thead th, table.list tbody td {
 table.list tbody tr {
 	border-bottom: 1px solid #bbb;
 	border-right: 1px solid #bbb;
+	page-break-inside: avoid;
+	page-break-after: auto;
 }
 
 table.list thead tr.top-row {
@@ -1060,6 +1063,23 @@ ul.list  li a {
 
 .scroll {
 	overflow: scroll;
+}
+table.shelf-checking {
+	width: 10.5in;
+	margin-left: -.25in;
+}
+table.shelf-checking td.text-cell {
+	max-width: 30px;
+}
+
+.checkbox, .comment {
+	border: 1px solid #000 !important;
+	width: .25in;
+	height: .25in;
+}
+
+.comment {
+	width: 90%;
 }
 
 .mr-shmallow-image {

@@ -269,27 +269,6 @@ $(document).on("click","#edit-common-id #revert",function(){
 			$(this).removeClass("active");
 		});
 		
-		$(document).on("click",".search-varieties", function(event){
-			
-			event.preventDefault();
-			form_data = {
-					ajax: 1
-					};
-			if(($(this).hasClass("refine"))){
-				form_data = {
-						refine: 1,
-						ajax: 1
-				};
-			}
-			$.ajax({
-				type: "get",
-				url: base_url + "variety/search",
-				data: form_data,
-				success: function(data){
-					show_popup("Search Plants",data,"500px");
-				}
-			});
-		});
 		
 		$(document).on("click",".variety-delete", function(){
 			form_data = {

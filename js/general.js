@@ -23,6 +23,28 @@ $(document).ready(function(){
 		});
 	});
 	
+	$(document).on("click",".search.dialog",function(e){
+		e.preventDefault();
+		refine = 0;
+		if($(this).hasClass("refine")){
+			refine = 1;
+		}
+		url = $(this).attr("href");
+		form_data = {
+				refine: refine,
+				ajax: 1
+				
+		};
+		$.ajax({
+			type: "get",
+			data: form_data,
+			url: url,
+			success: function(data){
+				show_popup("Search",data, "auto");
+			}
+		});
+	});
+	
 	$("table.list.hideable-columns").on("click","th", function(){
 		$("table.list.hideable-columns .top-row").remove();
 

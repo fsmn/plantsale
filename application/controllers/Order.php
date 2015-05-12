@@ -24,36 +24,6 @@ class Order extends MY_Controller {
 	}
 	function search() {
 		if ($this->input->get ( "find" )) {
-			$this->load->model ( "menu_model", "menu" );
-			$this->load->model ( "category_model", "category" );
-			$this->load->model ( "subcategory_model", "subcategory" );
-			$categories = $this->category->get_pairs ();
-			$flags = $this->menu->get_pairs ( "flag", array (
-					"field" => "value" 
-			) );
-			$data ["flags"] = get_keyed_pairs ( $flags, array (
-					"key",
-					"value" 
-			), TRUE );
-			$pot_sizes = $this->order->get_pot_sizes ();
-			$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
-					"pot_size",
-					"pot_size" 
-			) );
-			$data ["categories"] = get_keyed_pairs ( $categories, array (
-					"key",
-					"value" 
-			), TRUE );
-			$subcategories = $this->subcategory->get_pairs ();
-			$data ["subcategories"] = get_keyed_pairs ( $subcategories, array (
-					"key",
-					"value" 
-			), TRUE );
-			$output_formats = $this->menu->get_pairs("orders_format");
-			$data["output_formats"] = get_keyed_pairs($output_formats,array("key","value"));
-			
-			$this->load->view ( "order/search", $data );
-		} else {
 			bake_cookie ( "order_search", $_SERVER ['QUERY_STRING'] );
 			$options = array ();
 			
@@ -231,8 +201,49 @@ class Order extends MY_Controller {
 				$data ["show_names"] = TRUE;
 				$this->load->view ( "page/index", $data );
 			}
+		}else{
+			$this->_search();
 		}
 	}
+	
+	function _search(){
+		$this->load->model ( "menu_model", "menu" );
+		$this->load->model ( "category_model", "category" );
+		$this->load->model ( "subcategory_model", "subcategory" );
+		$categories = $this->category->get_pairs ();
+		$flags = $this->menu->get_pairs ( "flag", array (
+				"field" => "value"
+		) );
+		$data ["flags"] = get_keyed_pairs ( $flags, array (
+				"key",
+				"value"
+		), TRUE );
+		$pot_sizes = $this->order->get_pot_sizes ();
+		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
+				"pot_size",
+				"pot_size"
+		) );
+		$data ["categories"] = get_keyed_pairs ( $categories, array (
+				"key",
+				"value"
+		), TRUE );
+		$subcategories = $this->subcategory->get_pairs ();
+		$data ["subcategories"] = get_keyed_pairs ( $subcategories, array (
+				"key",
+				"value"
+		), TRUE );
+		$output_formats = $this->menu->get_pairs("orders_format");
+		$data["output_formats"] = get_keyed_pairs($output_formats,array("key","value"));
+		$data["target"] = "order/search";
+		$data["title"] = "Searching Orders";
+		if($this->input->get("ajax")){
+			$this->load->view ( "order/search", $data );
+		}else{
+			$this->load->view("page/index",$data);
+		}
+	}
+	
+	
 	function show_sort() {
 		if ($ajax = $this->input->get ( "basic_sort" )) {
 			$data ["basic_sort"] = TRUE;

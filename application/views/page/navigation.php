@@ -23,9 +23,10 @@ $buttons[] = array(
         "class" => array(
                 "button",
         		"search",
+        		"dialog",
                 "search-common-names",
         ),
-        "type" => "span",
+		"href" => site_url("common/search"),
         "title" => "Search among the common names"
 );
 
@@ -35,9 +36,10 @@ $buttons[] = array(
         "class" => array(
                 "button",
         		"search",
+        		"dialog",
                 "search-varieties",
         ),
-        "href"=> site_url("variety/search?find=1"),
+        "href"=> site_url("variety/search"),
         "title" => "Search among the varieties"
 );
 
@@ -47,9 +49,10 @@ $buttons[] = array(
         "class" => array(
                 "button",
         		"search",
+        		"dialog",
                 "search-orders"
         ),
-        "href" => "#",
+        "href" => site_url("order/search/"),
         "title" => "Search Orders"
 );
 

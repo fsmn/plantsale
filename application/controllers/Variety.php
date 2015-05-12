@@ -97,157 +97,158 @@ class Variety extends MY_Controller
     function search ()
     {
         if ($this->input->get("find")) {
-            $this->find(); // eventually merge search and find functions.
-        } else {
-            $this->load->model("menu_model", "menu");
-            $this->load->model("category_model", "category");
-            $this->load->model("subcategory_model", "subcategory");
-            $categories = $this->category->get_pairs();
-            $data["categories"] = get_keyed_pairs($categories, array(
-                    "key",
-                    "value"
-            ), TRUE);
-            $subcategories = $this->subcategory->get_pairs();
-            $data["subcategories"] = get_keyed_pairs($subcategories, array(
-                    "key",
-                    "value"
-            ), TRUE);
-            $sunlight = $this->menu->get_pairs("sunlight", array(
-                    "field" => "value"
-            ));
-            $data["sunlight"] = $sunlight;
-            $plant_colors = $this->menu->get_pairs("plant_color",
-                    array(
-                            "field" => "value",
-                            "direction" => "ASC"
-                    ));
-            $data["plant_colors"] = get_keyed_pairs($plant_colors, array(
-                    "key",
-                    "value"
-            ), TRUE, FALSE, array(
-                    "name" => "NULL",
-                    "value" => "NULL--No Color Selected"
-            )); // include option to search for an empty color
-            $flags = $this->menu->get_pairs("flag", array(
-                    "field" => "value"
-            ));
-            $data["flags"] = get_keyed_pairs($flags, array(
-                    "key",
-                    "value"
-            ), TRUE);
-            $data["variety"] = NULL;
-            if ($this->input->get("ajax")) {
-                $this->load->view("variety/search", $data);
-            } else {
-                $data["title"] = "Variety Search";
-                $data["target"] = "variety/search";
-                $this->load->view("page/index", $data);
-            }
+        	$action = implode("", $this->input->get("action"));
+        	$variables = array(
+        			"name",
+        			"variety",
+        			"genus",
+        			"species",
+        			"category_id",
+        			"subcategory_id",
+        			"flag",
+        			"plant_color",
+        			"sunlight",
+        			"description",
+        			"year",
+        			"grower_id",
+        			"new_year",
+        			"omit",
+        			"web_description",
+        			"print_description",
+        			"needs_bag",
+        			"crop_failure",
+        			"catalog_number",
+        	);
+        	$options = array();
+        	for ($i = 0; $i < count($variables); $i ++) {
+        		$my_variable = $variables[$i];
+        		if ($my_value = $this->input->get($my_variable)) {
+        			switch ($my_variable) {
+        				case "category_id":
+        					$this->load->model("category_model", "category");
+        					$options["category"] = $this->category->get($my_value)->category;
+        					break;
+        				case "subcategory_id":
+        					$this->load->model("subcategory_model", "subcategory");
+        					$options["subcategory"] = $this->subcategory->get($my_value)->subcategory;
+        					break;
+        				case "sunlight":
+        					bake_cookie($my_variable, implode(",", $my_value));
+        					$options[$my_variable] = implode(",", $my_value);
+        					break;
+        	
+        				default:
+        					$options[$my_variable] = $my_value;
+        			}
+        			bake_cookie($my_variable, $my_value);
+        		} else {
+        			burn_cookie($my_variable);
+        		}
+        	}
+        	
+        	if ($not_flag = $this->input->get("not_flag")) {
+        		bake_cookie("not_flag", $not_flag);
+        	} else {
+        		burn_cookie("not_flag");
+        	}
+        	
+        	if ($sunlight_boolean = $this->input->get("sunlight-boolean")) {
+        		if (array_key_exists("sunlight", $options)) {
+        			$options["sunlight_boolean"] = $sunlight_boolean;
+        		}
+        		bake_cookie("sunlight-boolean", $sunlight_boolean);
+        	} else {
+        		burn_cookie("sunlight-boolean");
+        	}
+        	$sorting["fields"] = array(
+        			"catalog_number"
+        	);
+        	$sorting["direction"] = array(
+        			"ASC"
+        	);
+        	
+        	if ($this->input->get("sorting")) {
+        		$sorting["fields"] = $this->input->get("sorting");
+        		$sorting["direction"] = $this->input->get("direction");
+        	}
+        	$data["options"] = $options;
+        	bake_cookie("sorting", implode(",", $sorting["fields"]));
+        	bake_cookie("direction", implode(",", $sorting["direction"]));
+        	$data["plants"] = $this->variety->find($variables, $sorting);
+        	if ($no_image = $this->input->get('no_image')) {
+        		bake_cookie("no_image", $no_image);
+        	} else {
+        		burn_cookie("no_image");
+        	}
+        	$data["options"]["no_image"] = $no_image;
+        	$print_list = array();
+        	foreach ($data["plants"] as $plant) {
+        		$print_list[] = $plant->id;
+        		if ($action == "history") {
+        			$plant->orders = $this->order->get_for_variety($plant->id);
+        		} elseif ($action == "flags") {
+        			$plant->flags = $this->flag->get_for_variety($plant->id);
+        		}
+        	}
+        	$this->session->set_userdata("print_list", $print_list);
+        	$data["title"] = "List of Varieties";
+        	
+        	$data["target"] = "variety/list/$action";
+        	$data["full_list"] = TRUE;
+        	
+        	$this->load->view("page/index", $data);
+        }else {
+        $this->_search();
         }
     }
 
-    function find ()
+    function _search ()
     {
-        $action = implode("", $this->input->get("action"));
-        $variables = array(
-                "name",
-                "variety",
-                "genus",
-                "species",
-                "category_id",
-                "subcategory_id",
-                "flag",
-                "plant_color",
-                "sunlight",
-                "description",
-                "year",
-                "grower_id",
-                "new_year",
-                "omit",
-                "web_description",
-                "print_description",
-                "needs_bag",
-                "crop_failure",
-                "catalog_number",
-        );
-        $options = array();
-        for ($i = 0; $i < count($variables); $i ++) {
-            $my_variable = $variables[$i];
-            if ($my_value = $this->input->get($my_variable)) {
-                switch ($my_variable) {
-                    case "category_id":
-                        $this->load->model("category_model", "category");
-                        $options["category"] = $this->category->get($my_value)->category;
-                        break;
-                    case "subcategory_id":
-                        $this->load->model("subcategory_model", "subcategory");
-                        $options["subcategory"] = $this->subcategory->get($my_value)->subcategory;
-                        break;
-                    case "sunlight":
-                        bake_cookie($my_variable, implode(",", $my_value));
-                        $options[$my_variable] = implode(",", $my_value);
-                        break;
-
-                    default:
-                        $options[$my_variable] = $my_value;
-                }
-                bake_cookie($my_variable, $my_value);
-            } else {
-                burn_cookie($my_variable);
-            }
-        }
-
-        if ($not_flag = $this->input->get("not_flag")) {
-            bake_cookie("not_flag", $not_flag);
-        } else {
-            burn_cookie("not_flag");
-        }
-
-        if ($sunlight_boolean = $this->input->get("sunlight-boolean")) {
-            if (array_key_exists("sunlight", $options)) {
-                $options["sunlight_boolean"] = $sunlight_boolean;
-            }
-            bake_cookie("sunlight-boolean", $sunlight_boolean);
-        } else {
-            burn_cookie("sunlight-boolean");
-        }
-        $sorting["fields"] = array(
-                "catalog_number"
-        );
-        $sorting["direction"] = array(
-                "ASC"
-        );
-
-        if ($this->input->get("sorting")) {
-            $sorting["fields"] = $this->input->get("sorting");
-            $sorting["direction"] = $this->input->get("direction");
-        }
-        $data["options"] = $options;
-        bake_cookie("sorting", implode(",", $sorting["fields"]));
-        bake_cookie("direction", implode(",", $sorting["direction"]));
-        $data["plants"] = $this->variety->find($variables, $sorting);
-        if ($no_image = $this->input->get('no_image')) {
-            bake_cookie("no_image", $no_image);
-        } else {
-            burn_cookie("no_image");
-        }
-        $data["options"]["no_image"] = $no_image;
-        $print_list = array();
-        foreach ($data["plants"] as $plant) {
-            $print_list[] = $plant->id;
-            if ($action == "history") {
-                $plant->orders = $this->order->get_for_variety($plant->id);
-            } elseif ($action == "flags") {
-                $plant->flags = $this->flag->get_for_variety($plant->id);
-            }
-        }
-        $this->session->set_userdata("print_list", $print_list);
-        $data["title"] = "List of Varieties";
-
-        $data["target"] = "variety/list/$action";
-        $data["full_list"] = TRUE;
-
-        $this->load->view("page/index", $data);
+    	$this->load->model("menu_model", "menu");
+    	$this->load->model("category_model", "category");
+    	$this->load->model("subcategory_model", "subcategory");
+    	$categories = $this->category->get_pairs();
+    	$data["categories"] = get_keyed_pairs($categories, array(
+    			"key",
+    			"value"
+    	), TRUE);
+    	$subcategories = $this->subcategory->get_pairs();
+    	$data["subcategories"] = get_keyed_pairs($subcategories, array(
+    			"key",
+    			"value"
+    	), TRUE);
+    	$sunlight = $this->menu->get_pairs("sunlight", array(
+    			"field" => "value"
+    	));
+    	$data["sunlight"] = $sunlight;
+    	$plant_colors = $this->menu->get_pairs("plant_color",
+    			array(
+    					"field" => "value",
+    					"direction" => "ASC"
+    			));
+    	$data["plant_colors"] = get_keyed_pairs($plant_colors, array(
+    			"key",
+    			"value"
+    	), TRUE, FALSE, array(
+    			"name" => "NULL",
+    			"value" => "NULL--No Color Selected"
+    	)); // include option to search for an empty color
+    	$flags = $this->menu->get_pairs("flag", array(
+    			"field" => "value"
+    	));
+    	$data["flags"] = get_keyed_pairs($flags, array(
+    			"key",
+    			"value"
+    	), TRUE);
+    	$data["variety"] = NULL;
+    	$data["title"] = "Variety Search";
+    	$data["target"] = "variety/search";
+    	if ($this->input->get("ajax")) {
+    		$this->load->view("variety/search", $data);
+    	} else {
+    		 
+    		$this->load->view("page/index", $data);
+    	}
     }
 
     function search_by_name ()

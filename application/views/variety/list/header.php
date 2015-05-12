@@ -47,7 +47,7 @@
 <p>
 Found Count: <strong><?=count($plants);?> Varieties</strong>
 </p>
-<?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","search-varieties","refine"))));?>
+<?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","search","dialog","refine"),"href"=>site_url("variety/search"))));?>
 
 	</div>
 </fieldset>

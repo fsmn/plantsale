@@ -8,6 +8,7 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 });
 </script>
 <form name="order-search" id="order-search" method="get" action="<?php echo base_url("order/search");?>">
+<input type="hidden" value="1" name="find"/>
 <div class="field-set">
 <label for="output_format">Output Format</label>
 <?php echo form_dropdown("output_format",$output_formats,($refine ? get_cookie("output_format"): "catalog"),'id="output_format"');?>

@@ -38,7 +38,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <p>
 Found Count: <strong><?=count($orders);?> Orders</strong>
 </p>
-<?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","refine","search-orders"))));?>
+<?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","refine","search","dialog","search-orders"),"href"=>site_url("order/search"))));?>
 	
 	</div>
 </fieldset>

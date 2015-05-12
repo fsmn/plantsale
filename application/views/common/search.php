@@ -5,7 +5,8 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 ?>
 
 <form name="search-common" id="search-common"
-	action="<?=site_url("common/find"); ?>" method="GET">
+	action="<?=site_url("common/search"); ?>" method="GET">
+	<input type="hidden" name="find" value="1"/>
 	<p>
 		<?=create_input($common,"name","Name");?>
 	</p>

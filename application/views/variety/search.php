@@ -2,10 +2,10 @@
 $refine = $this->input->get("refine");
 $sunlight = create_checkbox("sunlight[]", $sunlight, $refine ? explode(",",get_cookie("sunlight")): array());
 ?>
-<div class="message">Enter "NULL" (with no spaces) in any field to find records with no entry in that field. Enter "NOT NULL" to find items where that field is not empty.</div>
+<div class="message" style="max-width: 500px;">Enter "NULL" (with no spaces) in any field to find records with no entry in that field. Enter "NOT NULL" to find items where that field is not empty.</div>
 <form name="search-variety" id="search-variety" class="search-form"
 		action="<?=site_url("variety/search"); ?>" method="GET">
-		<input type="hidden" name="find" id="find" value="1"/>
+		<input type="hidden" name="find" value="1"/>
 	<div class="field-set"><label for="action[]">List </label><input type="radio" name="action[]" value="full" checked/>&nbsp;
 <label for="action[]">Variety History</label><input type="radio" name="action[]" value="history"/>&nbsp;
 <label for="action[]">Flag Listing</label><input type="radio" name="action[]" value="flags"/>

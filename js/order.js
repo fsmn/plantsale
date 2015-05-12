@@ -69,24 +69,6 @@ $(document).on("click",".order-create",function(){
 		$("#search_list").hide().css({"top":0,"left":0});
 	})
 	
-	$(document).on("click",".search-orders",function(){
-		refine = 0;
-		if($(this).hasClass("refine")){
-			refine = 1;
-		}
-		form_data = {
-				refine: refine,
-				find: 1
-		};
-		$.ajax({
-			type: "get",
-			data: form_data,
-			url: base_url + "order/search",
-			success: function(data){
-				show_popup("Search Orders",data, "auto");
-			}
-		});
-	});
 	
 	$(document).on("click",".edit-order",function(){
 		my_id = this.id.split("_")[1];

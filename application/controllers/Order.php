@@ -3,18 +3,24 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 // order.php Chris Dart Feb 28, 2013 9:38:32 PM chrisdart@cerebratorium.com
 class Order extends MY_Controller {
-	function __construct() {
+
+	function __construct()
+	{
 		parent::__construct ();
 		$this->load->model ( "order_model", "order" );
 		$this->load->model ( "category_model", "category" );
 	}
-	function index() {
+
+	function index()
+	{
 		$data ["text"] = $this->order->test ()->token;
 		$data ["target"] = "order/quark/test";
 		$data ["title"] = "Barf";
 		$this->load->view ( "page/index", $data );
 	}
-	function view() {
+
+	function view()
+	{
 		$id = $this->uri->segment ( 3 );
 		$order = $this->order->get ( $id );
 		$data ["order"] = $order;
@@ -22,7 +28,9 @@ class Order extends MY_Controller {
 		$data ["title"] = "Viewing Order Details";
 		$this->load->view ( "page/index", $data );
 	}
-	function search() {
+
+	function search()
+	{
 		if ($this->input->get ( "find" )) {
 			bake_cookie ( "order_search", $_SERVER ['QUERY_STRING'] );
 			$options = array ();
@@ -201,56 +209,62 @@ class Order extends MY_Controller {
 				$data ["show_names"] = TRUE;
 				$this->load->view ( "page/index", $data );
 			}
-		}else{
-			$this->_search();
+		} else {
+			$this->_search ();
 		}
 	}
-	
-	function _search(){
+
+	function _search()
+	{
 		$this->load->model ( "menu_model", "menu" );
 		$this->load->model ( "category_model", "category" );
 		$this->load->model ( "subcategory_model", "subcategory" );
 		$categories = $this->category->get_pairs ();
 		$flags = $this->menu->get_pairs ( "flag", array (
-				"field" => "value"
+				"field" => "value" 
 		) );
 		$data ["flags"] = get_keyed_pairs ( $flags, array (
 				"key",
-				"value"
+				"value" 
 		), TRUE );
 		$pot_sizes = $this->order->get_pot_sizes ();
 		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
 				"pot_size",
-				"pot_size"
+				"pot_size" 
 		) );
 		$data ["categories"] = get_keyed_pairs ( $categories, array (
 				"key",
-				"value"
+				"value" 
 		), TRUE );
 		$subcategories = $this->subcategory->get_pairs ();
 		$data ["subcategories"] = get_keyed_pairs ( $subcategories, array (
 				"key",
-				"value"
+				"value" 
 		), TRUE );
-		$output_formats = $this->menu->get_pairs("orders_format");
-		$data["output_formats"] = get_keyed_pairs($output_formats,array("key","value"));
-		$data["target"] = "order/search";
-		$data["title"] = "Searching Orders";
-		if($this->input->get("ajax")){
+		$output_formats = $this->menu->get_pairs ( "orders_format" );
+		$data ["output_formats"] = get_keyed_pairs ( $output_formats, array (
+				"key",
+				"value" 
+		) );
+		$data ["target"] = "order/search";
+		$data ["title"] = "Searching Orders";
+		if ($this->input->get ( "ajax" )) {
 			$this->load->view ( "order/search", $data );
-		}else{
-			$this->load->view("page/index",$data);
+		} else {
+			$this->load->view ( "page/index", $data );
 		}
 	}
-	
-	
-	function show_sort() {
+
+	function show_sort()
+	{
 		if ($ajax = $this->input->get ( "basic_sort" )) {
 			$data ["basic_sort"] = TRUE;
 			$this->load->view ( "order/sort", $data );
 		}
 	}
-	function update_value() {
+
+	function update_value()
+	{
 		$id = $this->input->post ( "id" );
 		$value = urldecode ( $this->input->post ( "value" ) );
 		$field = $this->input->post ( "field" );
@@ -267,17 +281,23 @@ class Order extends MY_Controller {
 		}
 		echo $output;
 	}
-	function update_crop_failure() {
+
+	function update_crop_failure()
+	{
 		$id = $this->input->post ( "id" );
 		$value = $this->input->post ( "crop_failure" );
 		$this->order->update_crop_failure ( $id, $value );
-		echo $this->db->last_query ();
+		$this->session->set_flashdata("alert",$value);
 	}
-	function catalog_update_selector() {
+
+	function catalog_update_selector()
+	{
 		$data ["categories"] = $this->category->get_all ();
 		$this->load->view ( "order/catalog_categories", $data );
 	}
-	function set_catalog_numbers($year = NULL) {
+
+	function set_catalog_numbers($year = NULL)
+	{
 		if (! $year) {
 			$year = get_cookie ( "sale_year" );
 		}
@@ -320,12 +340,16 @@ class Order extends MY_Controller {
 		$this->session->set_flashdata ( "notice", sprintf ( "%s %s orders have had their catalog number updated", $count, $target_category ) );
 		redirect ( "index" );
 	}
-	function edit_cost() {
+
+	function edit_cost()
+	{
 		$id = $this->input->post ( "id" );
 		$data ["order"] = $this->order->get ( $id );
 		$this->load->view ( "order/edit_cost", $data );
 	}
-	function create() {
+
+	function create()
+	{
 		$data ["variety_id"] = $this->input->get ( "variety_id" );
 		$data ["order"] = $this->order->get_previous_year ( $data ["variety_id"], get_current_year () );
 		if (empty ( $data ["order"] )) {
@@ -344,7 +368,9 @@ class Order extends MY_Controller {
 		$data ['title'] = "Insert New Order";
 		$this->load->view ( $data ["target"], $data );
 	}
-	function edit($id) {
+
+	function edit($id)
+	{
 		$data ["order"] = $this->order->get ( $id );
 		$data ["variety_id"] = $data ["order"]->variety_id;
 		$pot_sizes = $this->order->get_pot_sizes ();
@@ -357,25 +383,30 @@ class Order extends MY_Controller {
 		$data ['title'] = "Update Order";
 		$this->load->view ( $data ["target"], $data );
 	}
-	function insert() {
+
+	function insert()
+	{
 		$order_id = $this->order->insert ();
 		// $variety_id = $this->input->post ( "variety_id" );
 		redirect ( $this->input->post ( "redirect_url" ) );
 	}
-	function update() {
+
+	function update()
+	{
 		$id = $this->input->post ( "id" );
 		$variety_id = $this->input->post ( "variety_id" );
 		$this->order->update ( $id );
 		// redirect ( "variety/view/$variety_id" );
 		redirect ( $this->input->post ( "redirect_url" ) );
 	}
-	
+
 	/**
 	 * this is one ugly function.
 	 * It should be more elegant if I were to use the update function, but it
 	 * isn't working correctly.
 	 */
-	function update_cost() {
+	function update_cost()
+	{
 		$id = $this->input->post ( "id" );
 		$plant_cost = $this->input->post ( "plant_cost" );
 		$flat_cost = $this->input->post ( "flat_cost" );
@@ -387,19 +418,25 @@ class Order extends MY_Controller {
 		) );
 		redirect ( $this->input->post ( "redirect_url" ) );
 	}
-	function delete() {
+
+	function delete()
+	{
 		if ($id = $this->input->post ( "id" )) {
 			echo $this->order->delete ( $id );
 		}
 	}
-	function get_pot_sizes() {
+
+	function get_pot_sizes()
+	{
 		$pot_sizes = $this->order->get_pot_sizes ();
 		foreach ( $pot_sizes as $pot_size ) {
 			$output [] = $pot_size->pot_size;
 		}
 		echo json_encode ( $output );
 	}
-	function batch_update() {
+
+	function batch_update()
+	{
 		if (IS_ADMIN) {
 			if ($this->input->post ( "action" ) == "edit") {
 				$data ["ids"] = $this->input->post ( "ids" );

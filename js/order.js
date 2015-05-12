@@ -187,7 +187,7 @@ $(document).on("click",".order-create",function(){
 	$(document).on("click",".order-crop_failure .crop_failure-checkbox",function(){
 		is_checked = $(this).attr("checked");
 		my_id = this.id.split("_")[1];
-		if(is_checked == "checked"){
+		if(is_checked){
 			my_value = 1;
 		}else{
 			my_value = 0;
@@ -223,17 +223,15 @@ $(document).on("click",".order-create",function(){
 	}
 	
 	function update_crop_failure(my_id,my_value){
-		console.log(my_value);
 		form_data = {
 				id: my_id,
-				value: my_value
+				crop_failure: my_value
 		};
 		$.ajax({
 			type:"post",
 			url: base_url + "order/update_crop_failure",
 			data: form_data,
 			success: function(data){
-				console.log(data);
 				if(my_value == 1){
 					$("#order_"+ my_id).addClass("crop-failure");
 				}else{

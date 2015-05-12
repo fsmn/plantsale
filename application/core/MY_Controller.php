@@ -12,7 +12,7 @@ class MY_Controller extends CI_Controller
             define("IS_EDITOR", 0);
             define("IS_ADMIN", 0);
             $uri = $_SERVER["REQUEST_URI"];
-            if ($uri != "/auth") {
+            if ($uri != "/auth" && !strstr($uri,"ajax")) {
                 bake_cookie("uri", $uri);
             }
             redirect("auth/login");

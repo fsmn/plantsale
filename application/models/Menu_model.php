@@ -91,27 +91,28 @@ class Menu_Model extends MY_Model
         return $result;
     }
 
-    function get_pairs ($category, $order = array())
+    function get_pairs ($category, $order_by = array())
     {
+    	
         $this->db->where('category', $category);
         $this->db->select('key');
         $this->db->select('value');
         $direction = "ASC";
-        $order_field = "value";
-
-        if (! empty($order)) {
-            if (in_array("direction", $order)) {
-                $direction = $order['direction'];
+        $order_field = "key";
+        
+        if (!empty($order_by)) {
+            if (array_key_exists("direction", $order_by)) {
+                $direction = $order_by['direction'];
             }
-            if (in_array("field", $order)) {
-                $order_field = $order['field'];
+            if (array_key_exists("field", $order_by)) {
+                $order_field = $order_by['field'];
             }
         }
-
+        
         $this->db->order_by($order_field, $direction);
         $this->db->from('menu');
         $result = $this->db->get()->result();
-        return $result;
+        return $result;        
     }
 
     function get_value ($category, $key)

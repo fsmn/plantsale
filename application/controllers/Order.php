@@ -49,8 +49,7 @@ class Order extends MY_Controller {
 					"key",
 					"value" 
 			), TRUE );
-			
-			$output_formats = $this->menu->get_pairs("orders_format",array("field"=>"value"));
+			$output_formats = $this->menu->get_pairs("orders_format");
 			$data["output_formats"] = get_keyed_pairs($output_formats,array("key","value"));
 			
 			$this->load->view ( "order/search", $data );

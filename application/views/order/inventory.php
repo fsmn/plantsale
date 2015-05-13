@@ -202,7 +202,7 @@ if ($orders)
 			 <td tabindex=-1 class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td> 
 			<!--<td tabindex=-1 class="re-order field">
-				<?php echo create_button(array("text"=>"Re-order","id"=>"oc_$order->variety_id","class"=>array("button","new","reorder","order-create"),"tabindex"=>"-1"));?>
+				<?php echo create_button(array("text"=>"Re-order","href"=>site_url("order/create?variety_id=$order->variety_id"),"id"=>"oc_$order->variety_id","class"=>array("button","new","create","dialog","reorder","order-create"),"tabindex"=>"-1"));?>
 			</td>-->
 		</tr>
 		<? endforeach;?>

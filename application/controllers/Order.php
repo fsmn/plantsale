@@ -366,7 +366,11 @@ class Order extends MY_Controller {
 		$data ["action"] = "insert";
 		$data ["target"] = "order/edit";
 		$data ['title'] = "Insert New Order";
+		if($this->input->get("ajax")==1){
 		$this->load->view ( $data ["target"], $data );
+		}else{
+			$this->load->view ( "page/index",$data);
+		}
 	}
 
 	function edit($id)

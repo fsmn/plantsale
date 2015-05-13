@@ -143,8 +143,8 @@ $data ["orders"] = $orders;
 $order_buttons [] = array (
 		"selection" => "order",
 		"text" => "New Order",
-		"type" => "span",
-		"class" => "button new order-create",
+		"href" => site_url("order/create/?variety_id=$variety->id"),
+		"class" => "button new create dialog order-create",
 		"id" => "oc_$variety->id"
 );
 echo create_button_bar ( $order_buttons);

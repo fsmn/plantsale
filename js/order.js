@@ -1,25 +1,6 @@
 $(document).ready(function(){
 
 });
-
-$(document).on("click",".order-create",function(){
-		my_id = this.id.split("_")[1];
-		redirect_url = $(location).attr("href");
-		form_data = {
-				variety_id: my_id,
-				
-		};
-		$.ajax({
-			type: "get",
-			data: form_data,
-			url: base_url + "order/create",
-			success: function(data){
-				show_popup("New Order",data, "auto");
-				$("#redirect_url").val(redirect_url);
-			}
-		});
-		
-	});
 	
 	$(document).on("change","#order-edit input[name='flat_size'],#order-edit input[name='flat_cost'],#order-edit input[name='plant_cost']",function(){
 		flat_size = $("input[name='flat_size']").val();
@@ -69,26 +50,6 @@ $(document).on("click",".order-create",function(){
 		$("#search_list").hide().css({"top":0,"left":0});
 	})
 	
-	
-	$(document).on("click",".edit-order",function(){
-//		my_id = this.id.split("_")[1];
-//		redirect_url = $(location).attr("href");
-//		console.log(redirect_url);
-//		form_data = {
-//				id: my_id,
-//				ajax: 1
-//		};
-//		$.ajax({
-//			type:"get",
-//			data: form_data,
-//			url: base_url + "order/edit/" + my_id,
-//			success: function(data){
-//				show_popup("Editing an Order",data,"auto");
-//				
-//				$("#redirect_url").val(redirect_url);
-//			}
-//		});
-	});
 	
 	
 	$(document).on("click",".show-order-totals",function(){

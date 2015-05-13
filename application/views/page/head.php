@@ -44,4 +44,3 @@ $(document).ready(function(){
 
 <!-- admin scripts -->
 <script type="text/javascript" src="<?=base_url("js/password.js");?>"></script>
-<script type="text/javascript" src="<?=base_url("js/user.js");?>"></script>

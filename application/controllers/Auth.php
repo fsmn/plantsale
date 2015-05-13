@@ -377,8 +377,8 @@ class Auth extends CI_Controller {
 		$tables = $this->config->item ( 'tables', 'ion_auth' );
 
 		// validate form input
-		$this->form_validation->set_rules ( 'first_name', "First Name:", 'required|xss_clean' );
-		$this->form_validation->set_rules ( 'last_name', "Last Name:", 'required|xss_clean' );
+		//$this->form_validation->set_rules ( 'first_name', "First Name:", 'required|xss_clean' );
+		//$this->form_validation->set_rules ( 'last_name', "Last Name:", 'required|xss_clean' );
 		$this->form_validation->set_rules ( 'email', "Email:", 'required|valid_email|is_unique[' . $tables ['users'] . '.email]' );
 		$this->form_validation->set_rules ( 'password', "Password:", 'required|min_length[' . $this->config->item ( 'min_password_length', 'ion_auth' ) . ']|max_length[' . $this->config->item ( 'max_password_length', 'ion_auth' ) . ']|matches[password_confirm]' );
 		$this->form_validation->set_rules ( 'password_confirm', "Password Confirmation:", 'required' );
@@ -461,7 +461,7 @@ class Auth extends CI_Controller {
 		// validate form input
 		$this->form_validation->set_rules ( 'first_name', "First Name", 'required|xss_clean' );
 		$this->form_validation->set_rules ( 'last_name', "Last Name", 'required|xss_clean' );
-		$this->form_validation->set_rules ( 'groups', $this->lang->line ( 'edit_user_validation_groups_label' ), 'xss_clean' );
+		$this->form_validation->set_rules ( 'groups', $this->lang->line ( 'edit_user_validation_groups_label','xss_clean' ) );
 
 		if (isset ( $_POST ) && ! empty ( $_POST )) {
 			// do we have a valid request?
@@ -653,7 +653,11 @@ class Auth extends CI_Controller {
 				'value' => $this->form_validation->set_value ( 'group_description', $group->description )
 		);
 		$this->data ['target'] = 'auth/edit_group';
+		if($this->input->get("ajax")==1){
+			$this->_render_page($this->data["target"],$this->data);
+		}else{
 		$this->_render_page ( 'page/index', $this->data );
+		}
 
 	}
 

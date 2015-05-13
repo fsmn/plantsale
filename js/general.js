@@ -45,6 +45,24 @@ $(document).ready(function(){
 		});
 	});
 	
+	$(document).on("click",".create.dialog, .edit.dialog",function(e){
+		e.preventDefault();
+		url = $(this).attr("href");
+		form_data = {
+				ajax: 1
+		};
+		$.ajax({
+			type: "get",
+			data: form_data,
+			url: url,
+			success: function(data){
+				show_popup("*",data,"auto");
+			}
+		});
+	});
+	
+	
+	
 	$("table.list.hideable-columns").on("click","th", function(){
 		$("table.list.hideable-columns .top-row").remove();
 

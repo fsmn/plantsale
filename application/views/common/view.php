@@ -16,10 +16,11 @@ if (IS_EDITOR) {
             "class" => array(
                     "button",
                     "edit",
+            		"dialog",
                     "common-edit"
             ),
             "id" => "ec_$common->id",
-            "type" => "span",
+            "href" => site_url("common/edit/$common->id"),
             "title" => "Edit this record"
     );
 
@@ -29,10 +30,12 @@ if (IS_EDITOR) {
             "class" => array(
                     "button",
                     "new",
+            		"create",
+            		"dialog",
                     "variety-create"
             ),
             "id" => sprintf("common-id_%s", $common->id),
-            "type" => "span",
+            "href" => site_url("variety/create?common_id=$common->id"),
             "title" => "add a new variety"
     );
     if (empty($varieties)) {

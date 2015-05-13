@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-$action_buttons[] = array("text"=>"New Common Name/Genus","class"=>array("button","new","common-create"), "selection"=>"common","type"=>"span");
+$action_buttons[] = array("text"=>"New Common Name/Genus","class"=>array("button","new","create","dialog","common-create"), "selection"=>"common","href"=>site_url("common/create"));
 $action_buttons[] = array("text"=>"New Grower","class"=>array("button","new","grower-create"),"selection"=>"grower","type"=>"span");
 if($orphan_count > 0){
     $verb = $orphan_count == 1?"is":"are";

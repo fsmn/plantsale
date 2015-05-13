@@ -82,7 +82,7 @@ if ($orders) :
 			<span class="omit-row omit button" id="omit-order_<?=$order->id;?>">Omit</span>
 			<? endif;?>
 			<? if(IS_EDITOR):?>
-			<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-order"),"id"=>sprintf("edit-order_%s",$order->id)));?>
+			<?php echo create_button(array("text"=>"Edit","href"=>site_url("order/edit/$order->id"),"class"=>array("button","edit","dialog","edit-order"),"id"=>sprintf("edit-order_%s",$order->id)));?>
 
 				<? else: ?>
 				<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("order/view/$order->id")));?>

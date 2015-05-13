@@ -71,23 +71,23 @@ $(document).on("click",".order-create",function(){
 	
 	
 	$(document).on("click",".edit-order",function(){
-		my_id = this.id.split("_")[1];
-		redirect_url = $(location).attr("href");
-		console.log(redirect_url);
-		form_data = {
-				id: my_id,
-				ajax: 1
-		};
-		$.ajax({
-			type:"get",
-			data: form_data,
-			url: base_url + "order/edit/" + my_id,
-			success: function(data){
-				show_popup("Editing an Order",data,"auto");
-				
-				$("#redirect_url").val(redirect_url);
-			}
-		});
+//		my_id = this.id.split("_")[1];
+//		redirect_url = $(location).attr("href");
+//		console.log(redirect_url);
+//		form_data = {
+//				id: my_id,
+//				ajax: 1
+//		};
+//		$.ajax({
+//			type:"get",
+//			data: form_data,
+//			url: base_url + "order/edit/" + my_id,
+//			success: function(data){
+//				show_popup("Editing an Order",data,"auto");
+//				
+//				$("#redirect_url").val(redirect_url);
+//			}
+//		});
 	});
 	
 	

@@ -122,7 +122,7 @@ if ($orders)
 
 			<? endif;?>
 			<? if(IS_EDITOR):?>
-			<?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-order"),"id"=>"edit-order_$order->id","tabindex"=>"-1'"));?>
+			<?php echo create_button(array("text"=>"Edit","href"=>site_url("order/edit/$order->id"),"class"=>array("button","edit","dialog","edit-order"),"id"=>"edit-order_$order->id","tabindex"=>"-1'"));?>
 
 				<? else: ?>
 				<?php echo create_button(array("text"=>"Details","class"=>array("button","details","view-order"),"href"=>site_url("order/view/$order->id")));?>

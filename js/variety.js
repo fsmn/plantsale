@@ -80,60 +80,31 @@ $(document).on("click","#edit-common-id #revert",function(){
 	$("#common_id").focus().val(original_id);
 });
 
-	$(document).on("click",".variety-create", function() {
-				my_id = this.id.split("_")[1];
-				form_data = {
-					common_id : my_id,
-					ajax : 1
-				};
-				$.ajax({
-					type : "get",
-					url : base_url + "variety/create",
-					data : form_data,
-					success : function(data) {
-						show_popup("Add a new variety", data, "auto");
-					}
-				});
-			});
+
 			
-			$(document).on("click",".variety-insert",function(){
-				if($("#add_order").attr("checked")){
-					$.ajax({
-						type: "post",
-						url: base_url + "variety/insert",
-						data: $("#variety-editor").serializeArray(),
-						success: function(data) {
-							$("#ui-dialog-title-popup").html("New Order");
-							$("#popup").html(data);
-						}
-					});
-					return false;
-				}
-			
-			});
+$(document).on("click",".variety-insert",function(){
+	if($("#add_order").attr("checked")){
+		$.ajax({
+			type: "post",
+			url: base_url + "variety/insert",
+			data: $("#variety-editor").serializeArray(),
+			success: function(data) {
+				$("#ui-dialog-title-popup").html("New Order");
+				$("#popup").html(data);
+			}
+		});
+		return false;
+	}
+
+});
 			
 			$(document).ready(function(){
 				$(".button-box").on("click",".variety-edit",function(){
 					return false;
 				});
-				
-				$(".button-box").on("click",".variety-print-options",function(){
-//					my_id = this.id.split("_")[1];
-//					form_data = {
-//							ajax: 1,
-//					};
-//					$.ajax({
-//						type:"get",
-//						url: base_url + "variety/print_options/" + my_id,
-//						data: form_data,
-//						success: function(data){
-//							show_popup("Print Options",data,"auto");
-//						}
-//					});
-//					
-//					return false;
-				});
 			});
+				
+				
 
 		$(document).on("click",".flag-add", function() {
 			my_id = this.id.split("_")[1];
@@ -427,13 +398,17 @@ $(document).on("click","#edit-common-id #revert",function(){
 					ids: id_array,
 					format: "select"
 			};
+
 			$.ajax({
 				type: "post",
 				data: form_data,
 				url: base_url + "variety/print_result",
 				success: function(data){
 					show_popup("Select Format",data,"auto");
-				}
+				},
+			error: function(data){
+				console.log(data);
+			}
 			});
 		}
 		
@@ -446,7 +421,7 @@ $(document).on("click","#edit-common-id #revert",function(){
 			      value: 0,
 			      max: 100
 			    });
-			
+		
 			function progress(){
 				var val = progressbar.progressbar("value") || 0;
 				progressbar.progressbar("value", val + .25);

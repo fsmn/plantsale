@@ -47,6 +47,8 @@ $(document).ready(function(){
 	
 	$(document).on("click",".create.dialog, .edit.dialog",function(e){
 		e.preventDefault();
+		redirect_url = $(location).attr("href");
+
 		url = $(this).attr("href");
 		form_data = {
 				ajax: 1
@@ -57,6 +59,7 @@ $(document).ready(function(){
 			url: url,
 			success: function(data){
 				show_popup("*",data,"auto");
+				$("#redirect_url").val(redirect_url);
 			}
 		});
 	});

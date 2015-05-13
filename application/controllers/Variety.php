@@ -443,10 +443,12 @@ class Variety extends MY_Controller
 
     function print_result ($format = FALSE)
     {
+    	
         $plants = $this->input->post("ids");
         if (! $format) {
             $format = $this->input->post("format");
         }
+       
         $data["format"] = $format;
 
         if ($format == "select") {

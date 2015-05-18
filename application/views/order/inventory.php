@@ -162,7 +162,7 @@ if ($orders)
 			<?=live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td  class="order-sellout_friday field">
-			<?=live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
 			</td>
 			<td tabindex=-1 class="order-count_midsale field">
 			<?=edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
@@ -174,7 +174,7 @@ if ($orders)
 			<?=live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-sellout_saturday field">
-			<?=live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
 			</td>
 			<td class="order-remainder_sunday field">
 			<?=live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span"));?>

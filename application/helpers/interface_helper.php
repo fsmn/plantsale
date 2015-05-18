@@ -238,15 +238,15 @@ function live_field ( $field_name, $value, $table, $id, $options = array() )
 {
 	if(IS_ADMIN){
 	$size = 14;
-	if (in_array ( "size", $options )) {
+	if (array_key_exists ( "size", $options )) {
 		$size = $options ["size"];
 	}
 	$envelope = "div";
-	if (in_array ( "envelope", $options )) {
+	if (array_key_exists ( "envelope", $options )) {
 		$envelope = $options ["envelope"];
 	}
 	$label = "";
-	if (in_array ( "label", $options )) {
+	if (array_key_exists ( "label", $options )) {
 		$label = sprintf ( "<label>%s</label>", $options ["label"] );
 	}
 	$output = sprintf ( "<%s class='field-envelope' id='%s__%s__%s'>%s

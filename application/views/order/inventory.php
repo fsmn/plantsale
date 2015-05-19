@@ -47,12 +47,12 @@ if ($orders)
 			<th>Variety</th>
 		<? endif;?>
 
-			<th>Ordered</th>
+			<th>Ord'd</th>
 			<th>Rec'd</th>
 			<th>Rem</th>
 			<th>Sellout</th>
 
-			<th>Ordered</th>
+			<th>Ord'd</th>
 			<th>Rec'd</th>
 			<th>Rem</th>
 			<th>Sellout</th>
@@ -159,7 +159,7 @@ if ($orders)
 			<?=live_field("received_presale",$order->received_presale,"order",$order->id,array("envelope"=>"span")); ?>
 			</td>
 			<td class="order-remainder_friday field">
-			<?=live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
 			</td>
 			<td  class="order-sellout_friday field">
 			<?=live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
@@ -171,7 +171,7 @@ if ($orders)
 			<?=live_field("received_midsale",$order->received_midsale,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-remainder_saturday field">
-			<?=live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span"));?>
+			<?=live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
 			</td>
 			<td class="order-sellout_saturday field">
 			<?=live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array("envelope"=>"span","size"=>31));?>

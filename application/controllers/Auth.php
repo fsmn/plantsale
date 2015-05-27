@@ -457,10 +457,13 @@ class Auth extends CI_Controller {
 		$user = $this->ion_auth->user ( $id )->row ();
 		$groups = $this->ion_auth->groups ()->result_array ();
 		$currentGroups = $this->ion_auth->get_users_groups ( $id )->result ();
-
+		$tables = $this->config->item ( 'tables', 'ion_auth' );
+		
 		// validate form input
 		$this->form_validation->set_rules ( 'first_name', "First Name", 'required|xss_clean' );
 		$this->form_validation->set_rules ( 'last_name', "Last Name", 'required|xss_clean' );
+		$this->form_validation->set_rules ( 'email', "Email:", 'required|valid_email|is_unique_to_row[' . $tables ['users'] . '.email.' . $id . ']' );
+		
 		$this->form_validation->set_rules ( 'groups', $this->lang->line ( 'edit_user_validation_groups_label','xss_clean' ) );
 
 		if (isset ( $_POST ) && ! empty ( $_POST )) {
@@ -471,7 +474,8 @@ class Auth extends CI_Controller {
 
 			$data = array (
 					'first_name' => $this->input->post ( 'first_name' ),
-					'last_name' => $this->input->post ( 'last_name' )
+					'last_name' => $this->input->post ( 'last_name' ),
+					'email' => $this->input->post ( 'email' )
 			);
 
 			// Only allow updating groups if user is admin
@@ -533,6 +537,12 @@ class Auth extends CI_Controller {
 				'id' => 'last_name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value ( 'last_name', $user->last_name )
+		);
+		$this->data ['email'] = array (
+				'name' => 'email',
+				'id' => 'email',
+				'type' => 'email',
+				'value' => $this->form_validation->set_value ( 'email', $user->email )
 		);
 		$this->data ['password'] = array (
 				'name' => 'password',

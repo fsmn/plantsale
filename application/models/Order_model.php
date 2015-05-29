@@ -275,6 +275,22 @@ class Order_Model extends MY_Model {
 		$output = $this->db->get ()->row ();
 		return $output->$field;
 	}
+	
+	function get_by_cat($cat){
+		$this->db->where("catalog_number",trim($cat));
+		$this->db->where("year",get_current_year());
+		$this->db->from("order");
+		$this->db->join("variety","variety.id=order.variety_id");
+		$this->db->join("common","common.id=variety.common_id");
+		$this->db->join("image","order.variety_id=image.variety_id");
+		$this->db->select("order.*");
+		$this->db->select("variety.variety,variety.species");
+		$this->db->select("common.name,common.genus");
+		$this->db->select("image.image_name, image.image_path");
+		$this->db->limit(1);
+		$result = $this->db->get()->row();
+		return $result;
+	}
 
 	function get_pot_sizes()
 	{

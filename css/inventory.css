@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+#catalog-number {
+	font-size: 6em;
+	height: auto;
+}
+
+h1, h2, h3, h4 {
+	text-align: center;
+}
+
+img.small {
+	max-height: 265px;
+	display: block;
+	margin: 0 auto;
+	padding: 1em 0;
+}
+
+@media ( max-width:758px) {
+	label.control-label {
+		width: 35%;
+		float: left !important;
+		text-align: right;
+	}
+	.field-wrapper {
+		width: 50%;
+		float: left !important;
+	}
+}

@@ -44,4 +44,9 @@ class MY_Controller extends CI_Controller
          $this->set_option($options, $key);
         }
     }
+    
+    function _log($string,$target="notice"){
+    	$this->session->set_flashdata ( $target,$string);
+    	 
+    }
 }

@@ -1094,6 +1094,7 @@ table.shelf-checking td.text-cell {
 
 .list.inventory td.field input.persistent {
 	display: block;
+	background-color: transparent;
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.48) inset;
 	border: none;
 	height: 98%;

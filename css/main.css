@@ -1093,10 +1093,10 @@ table.shelf-checking td.text-cell {
 }
 
 .list.inventory td.field input.persistent {
-	font-size: 1em;
 	display: block;
-	box-shadow: 0px 0px 3px rgb(103, 103, 0) inset;
-	border: none; height : 98%;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.48) inset;
+	border: none;
+	height: 98%;
 	width: 88% !important;
 	height: 98%;
 }

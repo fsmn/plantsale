@@ -28,16 +28,13 @@ body {
 	display: none;
 }
 /* general notices */
-
 .message {
-    padding: .5em;
-    border-radius: 4px; 
-    margin: 3px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-        cursor: pointer;
-    
+	padding: .5em;
+	border-radius: 4px;
+	margin: 3px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	cursor: pointer;
 }
-
 
 .not-logged-in #main {
 	width: 960px;
@@ -154,8 +151,6 @@ div.login-title {
 	width: 300px;
 }
 
-
-
 #new_popup {
 	display: none;
 	visibility: block;
@@ -187,8 +182,7 @@ div.login-title {
 	width: 70%;
 }
 
- h2, h3, h4, h5, input[type="submit"],
-	#navigation input[type="text"] {
+h2, h3, h4, h5, input[type="submit"], #navigation input[type="text"] {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -209,7 +203,7 @@ div.login-title {
 	font-weight: normal;
 	white-space: nowrap;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-	display:inline-block;
+	display: inline-block;
 }
 
 .button:hover {
@@ -286,10 +280,12 @@ ul.button-list li .button {
 
 ul.button-list li .button.delete {
 	/*margin-top: -5px;*/
+	
 }
 
 .delete {
-    /*float: right;*/
+	/*float: right;*/
+	
 }
 
 .mini-buttons ul.button-list li .button {
@@ -308,8 +304,6 @@ ul.button-list li .button.delete {
 textarea {
 	font-size: 1em;
 }
-
-
 
 label {
 	font-weight: bold;
@@ -523,7 +517,6 @@ label {
 	visibility: hidden;
 }
 
-
 a.button {
 	text-decoration: none;
 }
@@ -572,7 +565,7 @@ table.list {
 	padding-bottom: 5px;
 	padding-top: 5px;
 	border-collapse: collapse;
-	page-break-inside:auto;
+	page-break-inside: auto;
 }
 
 table.list thead tr, table.list tr.header td {
@@ -772,12 +765,13 @@ textarea.save-field {
 
 .column {
 	width: 45%;
-	vertical-align:top;
+	vertical-align: top;
 	display: inline-block;
 	padding-right: 1em;
 	padding-bottom: 10px;
 }
-form .column{
+
+form .column {
 	padding-bottom: 0;
 }
 
@@ -835,14 +829,16 @@ fieldset.field-group {
 .field-group .field-set label, .search-form .field-set .column label {
 	display: block;
 }
+
 .search-form .field-set.box {
 	border: 1px solid #999;
-	padding-left:5px;
+	padding-left: 5px;
 	padding-right: 5px;
 	border-radius: 3px;
 	box-shadow: 2px 2px 3px #aaa;
 	background-color: #f1f1f1;
 }
+
 .field-group .field-set input {
 	width: 3em;
 }
@@ -924,12 +920,14 @@ div.plant-info {
 	width: 100%;
 }
 
-#plant-details .description .field-envelope, #plant-details .web_description  .field-envelope, #plant-details .print_description   .field-envelope{
+#plant-details .description .field-envelope, #plant-details .web_description  .field-envelope,
+	#plant-details .print_description   .field-envelope {
 	float: left;
 	width: 30%;
-	margin:.5em;
+	margin: .5em;
 }
-#plant-details .flag-list .flag-row{
+
+#plant-details .flag-list .flag-row {
 	display: inline;
 }
 
@@ -1053,6 +1051,7 @@ ul.list  li a {
 .front-page-widget {
 	display: none;
 }
+
 #category-selector {
 	display: none;
 }
@@ -1064,10 +1063,12 @@ ul.list  li a {
 .scroll {
 	overflow: scroll;
 }
+
 table.shelf-checking {
 	width: 10.5in;
 	margin-left: -.25in;
 }
+
 table.shelf-checking td.text-cell {
 	max-width: 30px;
 }
@@ -1080,6 +1081,24 @@ table.shelf-checking td.text-cell {
 
 .comment {
 	width: 90%;
+}
+
+.list.inventory tbody td {
+	padding: 0 !important;
+}
+
+.list.inventory tbody td .field-envelope {
+	display: inline-block;
+	height: 2em;
+}
+
+.list.inventory td.field input.persistent {
+	font-size: 1em;
+	display: block;
+	box-shadow: 0px 0px 3px rgb(103, 103, 0) inset;
+	border: none; height : 98%;
+	width: 88% !important;
+	height: 98%;
 }
 
 .mr-shmallow-image {

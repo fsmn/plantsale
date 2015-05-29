@@ -158,11 +158,11 @@ if ($orders)
 			<td class="order-received_presale field">
 			<?=live_field("received_presale",$order->received_presale,"order",$order->id,array("envelope"=>"span")); ?>
 			</td>
-			<td class="order-remainder_friday field">
-			<?=live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
+			<td class="order-remainder_friday field"  style="width:31px;">
+			<?=live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
-			<td  class="order-sellout_friday field">
-			<?=live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
+			<td  class="order-sellout_friday field"  style="width:31px;">
+			<?=live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td tabindex=-1 class="order-count_midsale field">
 			<?=edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
@@ -170,17 +170,17 @@ if ($orders)
 			<td class="order-received_midsale field">
 			<?=live_field("received_midsale",$order->received_midsale,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-remainder_saturday field">
-			<?=live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
+			<td class="order-remainder_saturday field" style="width:31px;">
+			<?=live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
-			<td class="order-sellout_saturday field">
-			<?=live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
+			<td class="order-sellout_saturday field" style="width:31px;">
+			<?=live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
-			<td class="order-remainder_sunday field">
-			<?=live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-remainder_sunday field"style="width:31px;">
+			<?=live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
-			<td class="order-count_dead field">
-			<?=live_field("count_dead",$order->count_dead,"order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-count_dead field" style="width:31px;">
+			<?=live_field("count_dead",$order->count_dead,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-total_plants field">
 			<?=$order->count_midsale + $order->count_presale;?>

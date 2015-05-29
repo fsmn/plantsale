@@ -209,18 +209,7 @@ if ($orders)
 	</tbody>
 	<tfoot>
 		<tr>
-			<td></td>
-		<? if(!$show_names):?>
-			<td></td>
-		<? endif;?>
-			<td></td>
-			<td></td>
-		<? if($show_names):?>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		<? endif;?>
+			<td colspan=<?php echo $show_names?8:4;?>></td>
 			<td><?php echo number_format($presale_total);?></td>
 			<td colspan=3></td>
 			<td><?php echo number_format($midsale_total);?></td>

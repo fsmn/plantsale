@@ -126,6 +126,7 @@ class Order extends MY_Controller {
 			
 			if ($this->input->get ( "export_type" ) == "grower") {
 				$sorting ["fields"] = array (
+						"catalog_number",
 						"grower_id",
 						"grower_code",
 						"genus",
@@ -195,7 +196,6 @@ class Order extends MY_Controller {
 			if ($this->input->get ( "export" )) {
 				$data ["export_type"] = "standard";
 				$data ["filename"] = "order_export.csv";
-				
 				if ($export_type = $this->input->get ( "export_type" )) {
 					if ($this->input->get ( "grower_id" )) {
 						$data ["filename"] = $this->input->get ( "grower_id" ) . "-export.csv";
@@ -287,7 +287,7 @@ class Order extends MY_Controller {
 		$id = $this->input->post ( "id" );
 		$value = $this->input->post ( "crop_failure" );
 		$this->order->update_crop_failure ( $id, $value );
-		$this->session->set_flashdata("alert",$value);
+		$this->session->set_flashdata ( "alert", $value );
 	}
 
 	function catalog_update_selector()
@@ -366,10 +366,10 @@ class Order extends MY_Controller {
 		$data ["action"] = "insert";
 		$data ["target"] = "order/edit";
 		$data ['title'] = "Insert New Order";
-		if($this->input->get("ajax")==1){
-		$this->load->view ( $data ["target"], $data );
-		}else{
-			$this->load->view ( "page/index",$data);
+		if ($this->input->get ( "ajax" ) == 1) {
+			$this->load->view ( $data ["target"], $data );
+		} else {
+			$this->load->view ( "page/index", $data );
 		}
 	}
 

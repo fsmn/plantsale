@@ -135,26 +135,28 @@ class Order extends MY_Controller
 					bake_cookie ( "sorting_direction", serialize ( $sorting ["direction"] ) );
 				}
 				
-				if ($this->input->get ( "export_type" ) == "grower") {
-					$sorting ["fields"] = array (
-							"grower_id",
-							"grower_code",
-							"genus",
-							"common.name",
-							"variety",
-							"species" 
-					);
-					$sorting ["direction"] = array (
-							"ASC",
-							"ASC",
-							"ASC",
-							"ASC",
-							"ASC",
-							"ASC" 
-					);
-					bake_cookie ( "sorting_fields", serialize ( $sorting ["fields"] ) );
-					bake_cookie ( "sorting_direction", serialize ( $sorting ["direction"] ) );
-				}
+// 				if ($this->input->get ( "export_type" ) == "grower") {
+// 					$sorting ["fields"] = array (
+// 							"catalog_number",
+// 							"grower_id",
+// 							"grower_code",
+// 							"genus",
+// 							"common.name",
+// 							"variety",
+// 							"species" 
+// 					);
+// 					$sorting ["direction"] = array (
+// 							"ASC",
+// 							"ASC",
+// 							"ASC",
+// 							"ASC",
+// 							"ASC",
+// 							"ASC",
+// 							"ASC"
+// 					);
+// 					bake_cookie ( "sorting_fields", serialize ( $sorting ["fields"] ) );
+// 					bake_cookie ( "sorting_direction", serialize ( $sorting ["direction"] ) );
+// 				}
 				
 				if ($this->input->get ( "show_names" ) == 1) {
 					$data ["show_names"] = TRUE;

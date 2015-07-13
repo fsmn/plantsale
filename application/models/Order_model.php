@@ -284,7 +284,6 @@ class Order_Model extends MY_Model {
 		$query = sprintf ( $query, "WHERE " . implode ( " AND ", $where ), "ORDER BY " . implode ( " AND ", $order ) );
 		
 		$result = $this->db->query ( $query )->result ();
-		$this->_log ();
 		return $result;
 	}
 

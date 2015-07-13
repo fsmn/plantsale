@@ -62,7 +62,7 @@ Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_
 </div>
 <div class="field-set label-break">
 <div class="column first">
-<label for="year">Year</label><input type="number" id="year" name="year" style="width:4em" value="<?php echo get_cookie("sale_year");?>"/>
+<label for="year">Year</label><input type="number" id="year" name="year" style="width:4em" value="<?php echo $refine?get_cookie("sale_year"):get_cookie("sale_year");?>"/>
 </div>
 <div class="column last">
 <label for="new_year">First Year at Sale</label><input type="number" name="new_year" title="(enter current year for all new items)" style="width:4em" value="<?=$refine?get_cookie("new_year"):"";?>"/>

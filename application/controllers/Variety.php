@@ -275,6 +275,10 @@ class Variety extends MY_Controller
 			}
 			$this->load->view ( $target, $data );
 		}
+		
+		function get_crop_failures(){
+			$failures = $this->variety->get_crop_failures();
+		}
 
 		function edit ()
 		{

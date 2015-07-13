@@ -198,7 +198,7 @@ class Order_Model extends MY_Model {
 		$this->db->select ( "category.category,subcategory.subcategory" );
 		$this->db->group_by ( "order.id" );
 		$result = $this->db->get ()->result ();
-		 //$this->_log ( "alert" );
+		// $this->_log ( "alert" );
 		return $result;
 	}
 
@@ -224,6 +224,67 @@ class Order_Model extends MY_Model {
 		$this->db->group_by ( "year" );
 		$this->db->limit ( 1 );
 		$result = $this->db->get ()->row ();
+		return $result;
+	}
+
+	/**
+	 * Get all crop failures for plants ordered only once and then forgotten.
+	 */
+	function get_crop_failures($options = array(), $order_by = array())
+	{
+		$query = "SELECT * from
+			(SELECT v.id , c.name, c.genus, v.variety, v.species,  o.year, COUNT(v.id) c, o.crop_failure, o.received_presale, o.count_presale, o.pot_size, o.flat_size, o.flat_cost, cat.category, subcat.subcategory
+			FROM    variety v
+			LEFT JOIN 
+				 `order` o
+				ON o.variety_id = v.id
+			LEFT JOIN
+				`common` c
+				ON c.id = v.common_id
+			LEFT JOIN
+				category cat
+				on cat.id = c.category_id
+			LEFT JOIN
+				subcategory subcat
+				ON subcat.id = c.subcategory_id
+				%s
+			GROUP BY  v.id)
+			AS `w` where `w`.`c` = 1 and (w.received_presale = 0 or w.crop_failure = 1) %s";
+		foreach ( $options as $key => $value ) {
+			switch ($key) {
+				case "category_id" :
+					$where [] = sprintf ( "`c`.`%s` = '%s'", $key, $value );
+					break;
+				default :
+					$where [] = sprintf ( "`%s` = '%s'", $key, $value );
+			}
+		}
+		for($i = 0; $i < count ( $order_by ["fields"] ); $i ++) {
+			$order_field = "year";
+			if (array_key_exists ( "fields", $order_by ) && ! empty ( $order_by ["fields"] [$i] )) {
+				
+				$order_field = $order_by ["fields"] [$i];
+			}
+			
+			$order_direction = "ASC";
+			if (array_key_exists ( "direction", $order_by ) && ! empty ( $order_by ["direction"] [$i] )) {
+				$order_direction = $order_by ["direction"] [$i];
+			}
+			
+			// if the $order_field is a price field or integer, sort as number.
+			if ($order_field == "flat_size") {
+				$order [] = ("CAST(`$order_field` as DECIMAL) $order_direction");
+			} elseif ($order_field == "subcategory") {
+				$this->load->helper ( "export" );
+				$order [] = ("(" . subcategory_order () . ")");
+			} else {
+				$order [] = ("$order_field $order_direction");
+			}
+		}
+		$query = sprintf ( $query, "WHERE " . implode ( " AND ", $where ), "ORDER BY " . implode ( " AND ", $order ) );
+		
+		$result = $this->db->query ( $query )->result ();
+		$this->_log ();
 		return $result;
 	}
 
@@ -275,20 +336,21 @@ class Order_Model extends MY_Model {
 		$output = $this->db->get ()->row ();
 		return $output->$field;
 	}
-	
-	function get_by_cat($cat){
-		$this->db->where("catalog_number",trim($cat));
-		$this->db->where("year",get_current_year());
-		$this->db->from("order");
-		$this->db->join("variety","variety.id=order.variety_id");
-		$this->db->join("common","common.id=variety.common_id");
-		$this->db->join("image","order.variety_id=image.variety_id");
-		$this->db->select("order.*");
-		$this->db->select("variety.variety,variety.species");
-		$this->db->select("common.name,common.genus");
-		$this->db->select("image.image_name, image.image_path");
-		$this->db->limit(1);
-		$result = $this->db->get()->row();
+
+	function get_by_cat($cat)
+	{
+		$this->db->where ( "catalog_number", trim ( $cat ) );
+		$this->db->where ( "year", get_current_year () );
+		$this->db->from ( "order" );
+		$this->db->join ( "variety", "variety.id=order.variety_id" );
+		$this->db->join ( "common", "common.id=variety.common_id" );
+		$this->db->join ( "image", "order.variety_id=image.variety_id" );
+		$this->db->select ( "order.*" );
+		$this->db->select ( "variety.variety,variety.species" );
+		$this->db->select ( "common.name,common.genus" );
+		$this->db->select ( "image.image_name, image.image_path" );
+		$this->db->limit ( 1 );
+		$result = $this->db->get ()->row ();
 		return $result;
 	}
 

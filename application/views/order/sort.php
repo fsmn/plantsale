@@ -15,6 +15,7 @@ $sorting = array(
         "pot_size" => "Pot Size",
         "common.name" => "Common Name",
         "price"=>"Sale Price",
+		"year"=>"Year",
 );
 $direction = array(
         "ASC" => "Ascending",

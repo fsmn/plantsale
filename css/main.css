@@ -674,6 +674,13 @@ table.list tfoot td {
 	border-right: 1px solid #bbb;
 }
 
+div.table {
+	
+}
+div.table .table-row .cell {
+	display: inline-block;
+}
+
 a.link, input.link {
 	text-decoration: underline;
 }

@@ -233,7 +233,7 @@ class Order_Model extends MY_Model {
 	function get_crop_failures($options = array(), $order_by = array())
 	{
 		$query = "SELECT * from
-			(SELECT v.id , c.name, c.genus, v.variety, v.species,  o.year, COUNT(v.id) c, o.crop_failure, o.received_presale, o.count_presale, o.pot_size, o.flat_size, o.flat_cost, cat.category, subcat.subcategory
+			(SELECT v.id , c.name, c.genus, v.variety, v.species,  o.year, COUNT(v.id) c, o.crop_failure, o.received_presale, o.count_presale, o.pot_size, o.flat_size, o.flat_cost, cat.category, subcat.subcategory,o.variety_id
 			FROM    variety v
 			LEFT JOIN 
 				 `order` o

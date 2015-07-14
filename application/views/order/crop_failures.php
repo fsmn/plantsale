@@ -20,7 +20,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 	<?php foreach ($orders as $order):?>
 	<tr class="table-row">
 			<td class="cell"><a href="<?php echo site_url("variety/view/$order->id");?>" target="_blank" title="View variety details"><?php echo $order->variety;?></a></td>
-			<td class="cell"><?php echo $order->name;?></td>
+			<td class="cell"><a href="<?php echo site_url("common/view/$order->common_id");?>" target="_blank" title="View common details"><?php echo $order->name;?></a></td>
 			<td class="cell"><?php echo format_latin_name($order->genus, $order->species);?></td>
 			<td class="cell"><?php echo $order->year;?></td>
 			<td class="cell"><?php echo $order->count_presale;?></td>

@@ -81,7 +81,7 @@
 
 	function delete_common(me,id){
 		console.log(my_id);
-		question = confirm("Common entries common entries can only be deleted if they have no varieties. This cannot be undone. Are you sure you want to continue?");
+		question = confirm("Common entries can only be deleted if they have no varieties. This cannot be undone. Are you sure you want to continue?");
 		if(question){
 		form_data = {
 				id: my_id

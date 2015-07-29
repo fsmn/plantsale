@@ -10,8 +10,9 @@ if ($orders) :
             NULL,
             NULL,
             NULL,
+    		NULL,
             array(
-                    "colspan" => 2,
+                    "colspan" => 3,
                     "label" => "Sizes"
             ),
             array(
@@ -34,7 +35,6 @@ if ($orders) :
                     "colspan" => 3,
                     "label" => "Remainder"
             ),
-            NULL
     );
     $main_row = array(
             NULL,
@@ -44,6 +44,7 @@ if ($orders) :
             "Pot Size",
             "Flat Size",
             "Flat Cost",
+    		"Flat Area<br/>(Sq Ft)",
             "Plant Cost",
             "Price",
             "Ordered",

@@ -66,6 +66,7 @@ class Order extends MY_Controller {
 					"grower_code",
 					"flat_cost",
 					"plant_cost",
+					"flat_area",
 					"price",
 					"flag" 
 			);

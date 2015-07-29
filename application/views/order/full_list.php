@@ -91,6 +91,8 @@ if ($output_format == "inventory") {
 	$this->load->view ( "order/tracking" );
 } elseif ($output_format == "printable-shelfchecking") {
 	$this->load->view ( "order/shelfchecking" );
+}elseif($output_format == "profitability"){
+	$this->load->view("order/profitability");
 } else {
 	$this->load->view ( "order/catalog");
 } ?>

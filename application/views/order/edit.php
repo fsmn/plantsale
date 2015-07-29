@@ -97,6 +97,10 @@
 		<label for="count_dead">Dead Count:&nbsp;</label> <input type="text"
 			name="count_dead" value="<?=get_value($order,"count_dead");?>" size="3"  />
 	</div>
+		<div class="order-flat_area field">
+		<label for="flat_area">Flat Area (Sq Ft):&nbsp;</label> <input type="text"
+			name="flat_area" value="<?=get_value($order,"flat_area");?>" size="10"  />
+	</div>
 	</div>
 	</div>
 		<?php endif;?>

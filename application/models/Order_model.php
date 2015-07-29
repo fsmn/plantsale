@@ -22,6 +22,7 @@ class Order_Model extends MY_Model {
 	var $remainder_sunday;
 	var $grower_code;
 	var $crop_failure;
+	var $flat_area;
 	var $omit;
 	var $rec_modified;
 	var $rec_modifier;
@@ -53,6 +54,7 @@ class Order_Model extends MY_Model {
 				"remainder_friday",
 				"remainder_saturday",
 				"remainder_sunday",
+				"flat_area",
 				"grower_code",
 				"crop_failure",
 				"omit" 

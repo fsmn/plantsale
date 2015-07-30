@@ -7,6 +7,8 @@ class Order_Model extends MY_Model {
 	var $year;
 	var $flat_size;
 	var $flat_cost;
+	var $flat_area;
+	var $tiers;
 	var $pot_size;
 	var $plant_cost;
 	var $price;
@@ -22,7 +24,6 @@ class Order_Model extends MY_Model {
 	var $remainder_sunday;
 	var $grower_code;
 	var $crop_failure;
-	var $flat_area;
 	var $omit;
 	var $rec_modified;
 	var $rec_modifier;
@@ -55,6 +56,7 @@ class Order_Model extends MY_Model {
 				"remainder_saturday",
 				"remainder_sunday",
 				"flat_area",
+				"tiers",
 				"grower_code",
 				"crop_failure",
 				"omit" 

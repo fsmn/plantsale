@@ -12,11 +12,20 @@ if ($orders) :
 	]
 </h2>
 
-<table class="list inventory hideable-columns">
+<table class="list profitability hideable-columns">
 	<thead>
+		<tr class="top-row">
+			<th colspan='7'></th>
+			<th colspan='5'></th>
+			<th colspan='2'>Area (sq ft)</th>
+			<td></td>
+			<th colspan='3'>
+				Protential<br />Profit
+			</th>
+		</tr>
 		<tr>
 			<th></th>
-			<th>Year</th>			
+			<th>Year</th>
 			<th>Cat&#35;</th>
 			<th>Name</th>
 			<th>Ord'd</th>
@@ -26,8 +35,17 @@ if ($orders) :
 			<th>Flat Size</th>
 			<th>Flat Cost</th>
 			<th>Plant Cost</th>
-			<th>Flat Area<br/>(sq ft)</th>
 			<th>Price</th>
+			<th class="no-wrap">
+				Flat
+			</th>
+			<th>
+			Total
+			</th>
+			<th>Tiers</th>
+			<th>Gross Profit</th>
+			<th>Net Profit</th>
+			<th>Adjusted Profit</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -82,7 +100,7 @@ if ($orders) :
 
 				<? endif; ?>
 				</td>
-				<td tabindex=-1 class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
+			<td tabindex=-1 class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
 				</td>
 			<td tabindex=-1 class="order-catalog_number field">
 				<!-- if there is no catalog number, show the first letter of the category -->
@@ -91,12 +109,13 @@ if ($orders) :
 			<td>
 				<a tabindex=-1 href="<?=site_url(sprintf("common/find?genus=%s",$order->genus));?>" title="View all <?=$order->genus;?>">
 				<?=$order->genus;?>
-				</a> 
+				</a>
 				<a tabindex=-1 href="<?=site_url("common/view/$order->common_id");?>" title="View the details for <?=$order->name;?>">
 				<?=$order->name;?>
 				</a>
 				<a tabindex=-1 style="font-weight: bold" href="<?=site_url("variety/view/$order->variety_id");?>"
-					title="View the details for <?=$order->variety;?>">
+					title="View the details for <?=$order->variety;?>"
+				>
 				<?=$order->variety;?>
 				</a>
 			</td>
@@ -104,10 +123,11 @@ if ($orders) :
 			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-total_plants field">
-			<?=$order->count_midsale + $order->count_presale;?>
+			<? $flat_total = $order->count_midsale + $order->count_presale;
+			echo $flat_total;?>
 			</td>
 			<td class="order-remainder_sunday field" style="width: 31px;">
-			<?=live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?=live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
 			</td>
 			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
 			</td>
@@ -122,12 +142,29 @@ if ($orders) :
 				$
 				<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->plant_cost,2);?></span>
 			</td>
-			<td class="order-flat_area field">
-			<?=edit_field("flat_area",$order->flat_area,"","order",$order->id,array("envelope"=>"span"));?>
-			</td>
 			<td tabindex=-1 class="no-wrap order-price field">
 			$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
+			<td class="order-flat_area field">
+			<?=edit_field("flat_area",$order->flat_area,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<td>
+			<?php echo $order->flat_area * $flat_total;?>
+			</td>
+			<td class="order-tiers field">
+			<?=edit_field("tiers",$order->tiers,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<?php
+		$plant_count = ($flat_total) * $order->flat_size;
+		$gross = $order->price * $plant_count;
+		$net_price = $order->price - $order->plant_cost;
+		$net = $net_price * $plant_count;
+		$less_remainder =   $order->remainder_sunday * $order->flat_size * $net_price;
+		$adjusted_net = $net - $less_remainder;
+		?>
+			<td><?php echo get_as_price( $gross );?></td>
+			<td><?php echo get_as_price($net );?></td>
+			<td><?php echo get_as_price($adjusted_net);?></td>
 		</tr>
 		<? endforeach;?>
 	</tbody>

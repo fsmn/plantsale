@@ -618,6 +618,10 @@ table.list.inventory thead th, table.list.inventory tbody td {
 	padding: 2px;
 }
 
+table.list.profitability td input.persistent {
+	width: 90%;
+}
+
 table.files {
 	border-spacing: 5px;
 }

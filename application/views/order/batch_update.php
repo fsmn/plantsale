@@ -37,6 +37,14 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"
 			value="" autocomplete="off"/>
 	</div>
+		<div class="order-flat_area field">
+		<label for="flat_area">Flat Area:&nbsp;</label> <input type="text" name="flat_area"
+			value="" autocomplete="off"/>
+	</div>
+			<div class="order-tiers field">
+		<label for="tiers">Tiers:&nbsp;</label> <input type="text" name="tiers"
+			value="" autocomplete="off"/>
+	</div>
 	<input type="submit" class="button" class="button warning"/>
 </form>
 

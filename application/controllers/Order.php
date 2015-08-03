@@ -457,7 +457,9 @@ class Order extends MY_Controller {
 						"count_presale",
 						"count_midsale",
 						"pot_size",
-						"price" 
+						"price",
+						"flat_area",
+						"tiers",
 				);
 				$values = array ();
 				foreach ( $fields as $field ) {
@@ -469,6 +471,8 @@ class Order extends MY_Controller {
 							case "flat_cost" :
 							case "plant_cost" :
 							case "price" :
+							case "flat_area":
+							case "tiers":
 								$values [$field] = preg_replace ( "/[^0-9,.]/", "", $my_value );
 								break;
 							default :

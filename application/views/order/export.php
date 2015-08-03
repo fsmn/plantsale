@@ -31,6 +31,8 @@ $fields = array(
         "flat_cost" => "Flat Cost",
         "plant_cost" => "Plant Cost",
         "price" => "Sale Price",
+		"flat_area" => "Flat Area",
+		"tiers" => "Tiers",
         "grower_code" => "Grower Code"
 );
 

@@ -4,6 +4,11 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 // variety_order.php Chris Dart Mar 4, 2013 8:44:25 PM
 // chrisdart@cerebratorium.com
 if ($orders) :
+	
+	$total_gross = 0;
+	$total_net = 0;
+	$total_adjusted_net = 0;
+	$total_flat_area = 0;
 	?>
 <!-- order/inventory -->
 <h2 class="column-instructions">
@@ -36,12 +41,8 @@ if ($orders) :
 			<th>Flat Cost</th>
 			<th>Plant Cost</th>
 			<th>Price</th>
-			<th class="no-wrap">
-				Flat
-			</th>
-			<th>
-			Total
-			</th>
+			<th class="no-wrap">Flat</th>
+			<th>Total</th>
 			<th>Tiers</th>
 			<th>Gross Profit</th>
 			<th>Net Profit</th>
@@ -123,8 +124,11 @@ if ($orders) :
 			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-total_plants field">
-			<? $flat_total = $order->count_midsale + $order->count_presale;
-			echo $flat_total;?>
+			<?
+		
+$flat_total = $order->count_midsale + $order->count_presale;
+		echo $flat_total;
+		?>
 			</td>
 			<td class="order-remainder_sunday field" style="width: 31px;">
 			<?=live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
@@ -150,6 +154,7 @@ if ($orders) :
 			</td>
 			<td>
 			<?php echo $order->flat_area * $flat_total;?>
+			<?php $total_flat_area += $order->flat_area * $flat_total; ?>
 			</td>
 			<td class="order-tiers field">
 			<?=edit_field("tiers",$order->tiers,"","order",$order->id,array("envelope"=>"span"));?>
@@ -157,10 +162,13 @@ if ($orders) :
 			<?php
 		$plant_count = ($flat_total) * $order->flat_size;
 		$gross = $order->price * $plant_count;
+		$total_gross += $gross;
 		$net_price = $order->price - $order->plant_cost;
 		$net = $net_price * $plant_count;
-		$less_remainder =   $order->remainder_sunday * $order->flat_size * $net_price;
+		$total_net += $net;
+		$less_remainder = $order->remainder_sunday * $order->flat_size * $net_price;
 		$adjusted_net = $net - $less_remainder;
+		$total_adjusted_net += $adjusted_net;
 		?>
 			<td><?php echo get_as_price( $gross );?></td>
 			<td><?php echo get_as_price($net );?></td>
@@ -170,22 +178,22 @@ if ($orders) :
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan=<?php echo $show_names?8:4;?>></td>
+			<td colspan=4></td>
 			<td><?php echo number_format($presale_total);?></td>
-			<td colspan=3></td>
-			<td><?php echo number_format($midsale_total);?></td>
-			<td colspan=5></td>
 			<td><?php echo number_format($presale_total+ $midsale_total);?></td>
-			<td></td>
-			<td></td>
+			<td colspan=3></td>
 			<td><?php echo get_as_price($flat_cost_total);?></td>
+			<td colspan=3></td>
+			<td><?php echo number_format($total_flat_area); ?></td>
 			<td></td>
-			<td></td>
-			<!-- <td></td> 
-			<td></td>-->
+			<td><?php echo get_as_price($total_gross);?></td>
+			<td><?php echo get_as_price($total_net);?></td>
+			<td><?php echo get_as_price($total_adjusted_net);?></td>
+
 		</tr>
 	</tfoot>
 </table>
+
 
 
 <? endif;

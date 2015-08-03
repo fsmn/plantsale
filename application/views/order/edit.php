@@ -99,7 +99,11 @@
 	</div>
 		<div class="order-flat_area field">
 		<label for="flat_area">Flat Area (Sq Ft):&nbsp;</label> <input type="text"
-			name="flat_area" value="<?=get_value($order,"flat_area");?>" size="10"  />
+			name="flat_area" value="<?=get_value($order,"flat_area",2);?>" size="10"  />
+	</div>
+	<div class="order-tiers field">
+		<label for="tiers">Tiers:&nbsp;</label> <input type="text"
+			name="tiers" value="<?=get_value($order,"tiers",3);?>" size="10"  />
 	</div>
 	</div>
 	</div>

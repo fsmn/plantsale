@@ -33,7 +33,7 @@ if ($orders) :
 			<th>Year</th>
 			<th>Cat&#35;</th>
 			<th>Name</th>
-			<th>Ord'd</th>
+			<th>Rec'd</th>
 			<th>Total</th>
 			<th>Rem</th>
 			<th>Pot Size</th>
@@ -79,9 +79,9 @@ if ($orders) :
 			$row_classes [] = "crop-failure";
 		}
 		
-		$presale_total += $order->count_presale;
-		$midsale_total += $order->count_midsale;
-		$flat_cost_total += $order->flat_cost * ($order->count_presale + $order->count_midsale);
+		$presale_total += $order->received_presale;
+		$midsale_total += $order->received_midsale;
+		$flat_cost_total += $order->flat_cost * ($order->received_presale + $order->received_midsale);
 		$row_classes [] = has_price_discrepancy ( $order );
 		
 		?>
@@ -120,13 +120,13 @@ if ($orders) :
 				<?=$order->variety;?>
 				</a>
 			</td>
-			<td tabindex=-1 class="order-count_presale field">
-			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
+			<td tabindex=-1 class="order-received_presale field">
+			<?=edit_field("received_presale",$order->received_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-total_plants field">
 			<?
 		
-$flat_total = $order->count_midsale + $order->count_presale;
+$flat_total = $order->received_midsale + $order->received_presale;
 		echo $flat_total;
 		?>
 			</td>

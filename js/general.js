@@ -504,7 +504,8 @@ $(document).ready(function(){
 			omit_row(this,"#plant-info_");
 			}
 
-		}else if($(this).hasClass("order-info")){
+		//}else if($(this).hasClass("order-info")){
+		}else{
 			omit_row(this,"#order_");
 		}
 	});

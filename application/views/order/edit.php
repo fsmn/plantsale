@@ -15,7 +15,7 @@
 	<div class="column first">
 	<? endif;?>
 	<div class="order-year field">
-		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_value($order,"year",get_cookie("sale_year"));?>" required />
+		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?=get_value($order,"year");?>" required />
 	</div>
 
 	<div class="order-grower field">

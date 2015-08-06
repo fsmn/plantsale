@@ -52,7 +52,7 @@ function create_input ($object, $name, $label, $id = NULL, $default_value = FALS
 
 function get_current_year ()
 {
-    if (date("m") > 8) { // after August
+    if (date("m") > 7) { // after August
         $year = date("Y") + 1;
     } else {
         $year = date("Y");

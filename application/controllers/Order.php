@@ -353,6 +353,10 @@ class Order extends MY_Controller {
 			$order = new stdClass ();
 			$order->variety = $this->variety->get ( $data ["variety_id"] )->variety;
 			$data ["order"] = $order;
+			
+		}
+		if($this->input->get('reorder')){
+			$data["order"]->year = get_current_year();
 		}
 		$pot_sizes = $this->order->get_pot_sizes ();
 		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (

@@ -62,6 +62,15 @@
 		<label for="grower_code">Grower Code:&nbsp;</label> <input type="text"
 			name="grower_code" value="<?=get_value($order,"grower_code");?>" />
 	</div>
+		</div>
+		<div class="order-flat_area field">
+		<label for="flat_area">Flat Area (Sq Ft):&nbsp;</label> <input type="text"
+			name="flat_area" value="<?=get_value($order,"flat_area",2);?>" size="10"  />
+	</div>
+	<div class="order-tiers field">
+		<label for="tiers">Tiers:&nbsp;</label> <input type="text"
+			name="tiers" value="<?=get_value($order,"tiers",3);?>" size="10"  />
+	</div>
 	</div>
 	<div class="column last">
 	<?php if($action == "update"):?>
@@ -96,15 +105,7 @@
 	<div class="order-count_dead field">
 		<label for="count_dead">Dead Count:&nbsp;</label> <input type="text"
 			name="count_dead" value="<?=get_value($order,"count_dead");?>" size="3"  />
-	</div>
-		<div class="order-flat_area field">
-		<label for="flat_area">Flat Area (Sq Ft):&nbsp;</label> <input type="text"
-			name="flat_area" value="<?=get_value($order,"flat_area",2);?>" size="10"  />
-	</div>
-	<div class="order-tiers field">
-		<label for="tiers">Tiers:&nbsp;</label> <input type="text"
-			name="tiers" value="<?=get_value($order,"tiers",3);?>" size="10"  />
-	</div>
+
 	</div>
 	</div>
 		<?php endif;?>
@@ -117,7 +118,7 @@
 		<? endif;?>
 	</div>
 </form>
-<script type"text/javascript">
+<script type="text/javascript">
 $("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));
 
 $("#order-edit").on("change","#crop_failure",function(){

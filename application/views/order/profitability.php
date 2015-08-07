@@ -35,7 +35,7 @@ if ($orders) :
 			<th>Name</th>
 			<th>Ord'd</th>
 			<th>Total</th>
-			<th>Rem</th>
+			<th>Rem Sat</th>
 			<th>Pot Size</th>
 			<th>Flat Size</th>
 			<th>Flat Cost</th>
@@ -130,8 +130,8 @@ if ($orders) :
 		echo $flat_total;
 		?>
 			</td>
-			<td class="order-remainder_sunday field" style="width: 31px;">
-			<?=live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
+			<td class="order-remainder_saturday field" style="width: 31px;">
+			<?=live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
 			</td>
 			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
 			</td>
@@ -166,7 +166,7 @@ if ($orders) :
 		$net_price = $order->price - $order->plant_cost;
 		$net = $net_price * $plant_count;
 		$total_net += $net;
-		$less_remainder = $order->remainder_sunday * $order->flat_size * $net_price;
+		$less_remainder = $order->remainder_saturday * $order->flat_size * $net_price;
 		$adjusted_net = $net - $less_remainder;
 		$total_adjusted_net += $adjusted_net;
 		?>

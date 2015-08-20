@@ -5,14 +5,14 @@ $extension = "csv";
 // common.php Chris Dart Feb 17, 2015 4:22:01 PM chrisdart@cerebratorium.com
 $filename = "common_web_" . date("Y-m-d_H-i-s") . "." . $extension;
 $header = array(
-        "__kp_Primary_Key",
+        "common_id",
         "Common Name",
         "Category",
         "Genus",
         "Description",
-        "Sun~Full Sun",
-        "Sun~PartSunPartShade",
-        "Sun~Shade"
+        "sunlight_full",
+        "sunlight_partial",
+        "sunlight_shade"
 );
 
 if ($extension == "csv") {
@@ -29,9 +29,9 @@ foreach ($commons as $common) {
                 $common->subcategory && ! strstr($common->subcategory, "General") ? sprintf("%s - %s", $common->category, $common->subcategory) : $common->category,
                 $common->genus,
                 str_replace("\"","&quot;",$common->description),
-                strstr($common->sunlight, "full") ? "+++" : "",
-                strstr($common->sunlight, "part") ? "%%%" : "",
-                strstr($common->sunlight, "shade") ? "///" : ""
+                strstr($common->sunlight, "full") ? "1" : "",
+                strstr($common->sunlight, "part") ? "1" : "",
+                strstr($common->sunlight, "shade") ? "1" : ""
         );
         if ($extension == "csv") {
             $output[] = "\"" . implode("\",\"", $line) . "\"";

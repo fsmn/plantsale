@@ -11,7 +11,7 @@
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
 	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
 	<? if($action == "update"):?>
-	<div class="field-set">
+<!-- 	<div class="field-set"> -->
 	<div class="column first">
 	<? endif;?>
 	<div class="order-year field">
@@ -62,7 +62,6 @@
 		<label for="grower_code">Grower Code:&nbsp;</label> <input type="text"
 			name="grower_code" value="<?=get_value($order,"grower_code");?>" />
 	</div>
-		</div>
 		<div class="order-flat_area field">
 		<label for="flat_area">Flat Area (Sq Ft):&nbsp;</label> <input type="text"
 			name="flat_area" value="<?=get_value($order,"flat_area",2);?>" size="10"  />

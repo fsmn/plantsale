@@ -108,11 +108,11 @@ class Order extends MY_Controller {
 				$data ["is_tracking"] = FALSE;
 			}
 			
-			if ($show_last_only = $this->input->get ( "show_last_only" )) {
-				bake_cookie ( "show_last_only", $show_last_only );
-			} else {
-				burn_cookie ( "show_last_only" );
-			}
+// 			if ($show_last_only = $this->input->get ( "show_last_only" )) {
+// 				bake_cookie ( "show_last_only", $show_last_only );
+// 			} else {
+// 				burn_cookie ( "show_last_only" );
+// 			}
 			
 			$sorting ["fields"] = array (
 					"catalog_number" 
@@ -155,6 +155,11 @@ class Order extends MY_Controller {
 			if ($show_last_only = $this->input->get ( "show_last_only" )) {
 				bake_cookie ( "show_last_only", $show_last_only );
 				$options ["Hiding Plants with Reorders Next Sale"] = "Yes";
+			}
+			if($this->input->get("show-non-reorders")){
+				foreach($orders as $order){
+					$order->has_reorder = $this->order->get_for_variety($order->variety_id, $sale_year + 1);
+				}
 			}
 			$title_category = array ();
 			if (array_key_exists ( "category_id", $options )) {

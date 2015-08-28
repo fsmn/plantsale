@@ -57,14 +57,16 @@ if ($orders) :
                 "grouping"
         );
         $latest_year = get_value($order, "latest_year", TRUE);
-        if (! $order->latest_order) {
-            $row_classes[] = "disabled";
-            if($this->input->get("show_last_only"))
-            {
-                $row_classes[] = "hidden";
-            }
-        }
-
+//         if (! $order->latest_order) {
+//             $row_classes[] = "disabled";
+//             if($this->input->get("show_last_only"))
+//             {
+//                 $row_classes[] = "hidden";
+//             }
+//         }
+if($order->has_reorder){
+	$row_classes[] = "hidden";
+}
         if($order->crop_failure){
 			$row_classes[] = "crop-failure";
 		}

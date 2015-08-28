@@ -86,6 +86,11 @@ Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_
 </div>
 <div class="field-set" style="clear:both">
 <div class="field-set"><input type="checkbox" name="crop_failure" value="1" <?=$refine && get_cookie("crop_failure")?"checked":"";?>/>&nbsp;<label for="crop_failure">Show Only Crop Failures</label></div>
+
+<!-- <div class="field-set">
+<input type="checkbox" value="1" name="show_last_only" <?=$refine && get_cookie("show_last_only")?"checked":"";?>/>
+<label for="show_last_only">Hide plants that already have an order for the next plant sale</label>
+ </div> -->
 <div class="field-set">
 <input type="checkbox" value="1" name="show-non-reorders" <?=$refine && get_cookie("show-non-reorders")?"checked":"";?>/>
 <label for="show-non-reorders">Show only plants that were not reordered for <span id='non-reorder-year'><?=get_cookie("sale_year")+1;?></span></label>

@@ -45,10 +45,22 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 <div class="field-set label-break">
 <div class="column first">
 <label for="pot_size">Pot Size</label><input type="text" name="pot_size" id="pot_size" value="<?=get_cookie("pot_size");?>" class='pot-size-menu'/>
+
 </div>
 <div class="column last">
+
+</div>
+</div>
+<div class="field-set label-break">
+<div class="column triptych first">
 <label for="flat_size">Flat Size</label><input type="number" name="flat_size" style="width:3em;" value="<?=$refine?get_cookie("flat_size"):"";?>"/>
+</div>
+<div class="column triptych">
 <label for="flat_area">Flat Area</label><input type="number" name="flat_area" style="width:3em;" value="<?=$refine?get_cookie("flat_area"):"";?>"/>
+
+</div>
+<div class="column triptych last">
+<label for="tiers">Tiers:</label><input type="number" name="tiers" style="width: 3em;" value="<?=$refine?get_cookie("tiers"):"";?>"/>
 
 </div>
 </div>
@@ -56,13 +68,13 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_operators">Help</a>
 </div>
 <div class="field-set label-break">
-<div class="column tryptych first">
+<div class="column triptych first">
 <label for="flat_cost">Flat Cost&nbsp;</label>$<input type="text" name="flat_cost" id="flat_cost" style="width:4em;" value="<?=get_cookie("flat_cost");?>"/>
 </div>
-<div class="column tryptych">
+<div class="column triptych">
 <label for="plant_cost">Plant Cost&nbsp;</label>$<input type="text" name="plant_cost" id="plant_cost" style="width:4em;"value="<?=get_cookie("plant_cost");?>"/>
 </div>
-<div class="column tryptych last">
+<div class="column triptych last">
 <label for="price">Sale Price&nbsp;</label>$<input type="text" name="price" style="width:4em;" value="<?=$refine?get_cookie("price"):"";?>"/>
 </div>
 </div>

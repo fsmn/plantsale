@@ -68,6 +68,7 @@ class Order extends MY_Controller {
 					"plant_cost",
 					"flat_area",
 					"price",
+					"tiers",
 					"flag" 
 			);
 			
@@ -108,11 +109,11 @@ class Order extends MY_Controller {
 				$data ["is_tracking"] = FALSE;
 			}
 			
-// 			if ($show_last_only = $this->input->get ( "show_last_only" )) {
-// 				bake_cookie ( "show_last_only", $show_last_only );
-// 			} else {
-// 				burn_cookie ( "show_last_only" );
-// 			}
+			// if ($show_last_only = $this->input->get ( "show_last_only" )) {
+			// bake_cookie ( "show_last_only", $show_last_only );
+			// } else {
+			// burn_cookie ( "show_last_only" );
+			// }
 			
 			$sorting ["fields"] = array (
 					"catalog_number" 
@@ -156,9 +157,9 @@ class Order extends MY_Controller {
 				bake_cookie ( "show_last_only", $show_last_only );
 				$options ["Hiding Plants with Reorders Next Sale"] = "Yes";
 			}
-			if($this->input->get("show-non-reorders")){
-				foreach($orders as $order){
-					$order->has_reorder = $this->order->get_for_variety($order->variety_id, $sale_year + 1);
+			if ($this->input->get ( "show-non-reorders" )) {
+				foreach ( $orders as $order ) {
+					$order->has_reorder = $this->order->get_for_variety ( $order->variety_id, $sale_year + 1 );
 				}
 			}
 			$title_category = array ();
@@ -358,10 +359,9 @@ class Order extends MY_Controller {
 			$order = new stdClass ();
 			$order->variety = $this->variety->get ( $data ["variety_id"] )->variety;
 			$data ["order"] = $order;
-			
 		}
-		if($this->input->get('reorder')){
-			$data["order"]->year = get_current_year();
+		if ($this->input->get ( 'reorder' )) {
+			$data ["order"]->year = get_current_year ();
 		}
 		$pot_sizes = $this->order->get_pot_sizes ();
 		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
@@ -468,7 +468,7 @@ class Order extends MY_Controller {
 						"pot_size",
 						"price",
 						"flat_area",
-						"tiers",
+						"tiers" 
 				);
 				$values = array ();
 				foreach ( $fields as $field ) {
@@ -480,8 +480,8 @@ class Order extends MY_Controller {
 							case "flat_cost" :
 							case "plant_cost" :
 							case "price" :
-							case "flat_area":
-							case "tiers":
+							case "flat_area" :
+							case "tiers" :
 								$values [$field] = preg_replace ( "/[^0-9,.]/", "", $my_value );
 								break;
 							default :

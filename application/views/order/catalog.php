@@ -64,7 +64,7 @@ if ($orders) :
 //                 $row_classes[] = "hidden";
 //             }
 //         }
-if($order->has_reorder){
+if(get_value($order,"has_reorder") && $order->has_reorder){
 	$row_classes[] = "hidden";
 }
         if($order->crop_failure){

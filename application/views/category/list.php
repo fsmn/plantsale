@@ -8,8 +8,8 @@ echo create_button_bar($buttons);
 <ul class="field-list list">
 <?php foreach($categories as $category): ?>
 	<li class="list-item">
-	<?php echo live_field("category",$category->category,"category", $category->id,array("size"=>"200")); ?>
-	<?php echo create_button(array("text"=>"Add Subcategory","class"=>"new dialog create small","href"=>site_url("subcategory/create/$category->id")));?>
+	<?php echo live_field("category",$category->category,"category", $category->id,array("size"=>"200","envelope"=>"span")); ?>
+	<?php echo create_button(array("text"=>"Add Subcategory","class"=>"new button dialog create small","href"=>site_url("subcategory/create/$category->id")));?>
 	<?php if(!empty($category->subcategories)): ?>
 		<ul class="field-list list child">
 		<?php foreach($category->subcategories as $subcategory):?>

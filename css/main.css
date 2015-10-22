@@ -1059,6 +1059,18 @@ ul.list  li a {
 	display: block;
 }
 
+ul.list.field-list {
+	padding-left: 1em;
+}
+
+ul.list.field-list li.list-item {
+	list-style: none;
+	margin: .5em 0 .25em 0;
+}
+
+ul.list.field-list li.list-item a {
+	display: inline-block; 
+}
 .front-page-widget {
 	display: none;
 }

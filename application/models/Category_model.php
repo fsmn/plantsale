@@ -13,6 +13,7 @@ class Category_Model extends MY_Model
 			parent::__construct ();
 		
 		}
+		
 
 		function get($id)
 		{
@@ -30,6 +31,13 @@ class Category_Model extends MY_Model
 			$result = $this->db->get ()->result ();
 			return $result;
 		
+		}
+		
+		function exists($category){
+			$this->db->from('category');
+			$this->db->where('category',trim($category));
+			$result = $this->db->get()->row();
+			return $result;
 		}
 
 		/**
@@ -55,5 +63,14 @@ class Category_Model extends MY_Model
 			$result = $this->db->get ()->row ()->id;
 			return $result;
 		
+		}
+		
+		function update($id, $values = FALSE){
+			return $this->_update("category", $id, $values);
+		}
+		
+		function insert($category){
+			$this->category = $category;
+			$this->_insert("category");
 		}
 	}

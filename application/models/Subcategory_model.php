@@ -38,4 +38,23 @@ class Subcategory_Model extends MY_Model
         $result = $this->db->get()->result();
         return $result;
     }
+    
+    function exists($category_id, $subcategory){
+    	$this->db->from("subcategory");
+    	$this->db->where('category_id',$category_id);
+    	$this->db->where('subcategory',trim($subcategory));
+    	$result = $this->db->get()->row();
+    	return $result;
+    }
+    
+    function insert($category_id, $subcategory,$web_label = FALSE){
+    	$this->category_id = $category_id;
+    	$this->subcategory = $subcategory;
+    	$this->web_label = $web_label;
+    	return $this->_insert("subcategory");
+    }
+    
+    function update($id,$values = array()){
+    	return $this->_update("subcategory",$id,$values);
+    }
 }

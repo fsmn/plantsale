@@ -21,10 +21,11 @@ class Index extends MY_Controller
 			$this->variety->update_needs_bag ();
 			/* Find any orphan growers--ones entered in orders, but do not have a grower record in the database */
 			$this->load->model ( "grower_model", "grower" );
+			$data ["orphan_count"] = count ( $this->grower->get_orphans () );
 			/* end maintenance on varieties and growers */
 			$data ["title"] = "Plant Sale Database";
 			$data ["target"] = "welcome";
-			$data ["orphan_count"] = count ( $this->grower->get_orphans () );
+			$data["is_front"] = TRUE;
 			
 			$this->load->view ( "page/index", $data );
 		}

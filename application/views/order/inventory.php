@@ -17,6 +17,7 @@ if ($orders)
 		<tr class="top-row">
 			<th></th>
 			<th></th>
+			<th></th>
 		<? if(!$show_names):?>
 			<th></th>
 		<? endif;?>
@@ -100,11 +101,25 @@ if ($orders)
 // 				$row_classes [] = "hidden";
 // 			}
 // 		}
-
+		$row_title = "";
+						
 		if ($order->crop_failure)
 		{
 			$row_classes [] = "crop-failure";
+			$row_title = "This plant has a crop failure";
 		}
+		if(!empty($order->sellout_saturday)){
+			$row_classes[] = "complete-sellout";
+			$row_title = "Complete sellout";
+		}elseif(!empty($order->sellout_friday) && empty($order->count_midsale)){
+			$row_classes[] = "complete-sellout";
+			$row_title = "Complete sellout";
+		}elseif(!empty($order->sellout_friday) &&  !empty($order->count_midsale)){
+			$row_classes[] = "temporary-sellout";
+			$row_title = "Temporary sellout";
+		}
+		
+		
 
 		$presale_total += $order->count_presale;
 		$midsale_total += $order->count_midsale;
@@ -113,7 +128,7 @@ if ($orders)
 
 		?>
 		<tr class="<?=implode(" ",$row_classes);?>"
-			id="order_<?=$order->id;?>">
+			id="order_<?=$order->id;?>" title="<?=$row_title;?>">
 
 
 			<td class="no-wrap" >

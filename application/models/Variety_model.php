@@ -89,8 +89,8 @@ class Variety_Model extends MY_Model {
 		return $this->get_for_common ( $common_id );
 		/*
 		 * $query = "SELECT `v`.*, `o`.`year` FROM `variety` v LEFT JOIN (SELECT
-		 * n.variety_id, MAX(n.year) AS max_year FROM `order` n GROUP BY
-		 * n.variety_id) y ON y.variety_id = v.id JOIN `order` o ON
+		 * n.variety_id, MAX(n.year) AS max_year FROM `orders` n GROUP BY
+		 * n.variety_id) y ON y.variety_id = v.id JOIN `orders` o ON
 		 * `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year` WHERE
 		 * `v`.`common_id` = $common_id ORDER BY `o`.`year` DESC,
 		 * `v`.`variety`"; $result = $this->db->query($query)->result();
@@ -104,9 +104,9 @@ class Variety_Model extends MY_Model {
 		$this->db->where ( "common_id", $common_id );
 		$this->db->order_by ( "variety.variety" );
 		$result = $this->db->get ()->result ();
-		$this->load->model ( "order_model", "order" );
+		$this->load->model ( "order_model", "orders" );
 		foreach ( $result as $variety ) {
-			$year = $this->db->query ( sprintf ( "SELECT `year` FROM `order` `o` WHERE `o`.`variety_id` = '$variety->id' ORDER BY `o`.`year` DESC LIMIT 1" ) )->row ();
+			$year = $this->db->query ( sprintf ( "SELECT `year` FROM `orders` `o` WHERE `o`.`variety_id` = '$variety->id' ORDER BY `o`.`year` DESC LIMIT 1" ) )->row ();
 			if ($year) {
 				$variety->year = $year->year;
 			} else {
@@ -119,14 +119,14 @@ class Variety_Model extends MY_Model {
 	function get_for_quark($common_id, $year)
 	{
 		$this->db->from ( "variety" );
-		$this->db->join ( "order", "variety.id = order.variety_id" );
+		$this->db->join ( "orders", "variety.id = orders.variety_id" );
 		$this->db->where ( "common_id", $common_id );
 		$this->db->where ( "year", $year );
 		$this->db->select ( "variety.*" );
-		$this->db->select ( "order.year, order.pot_size,order.price,order.catalog_number,order.count_midsale" );
-		$this->db->order_by ( "order.catalog_number" );
-		$this->db->order_by ( "CAST(order.price as DECIMAL)" );
-		$this->db->order_by ( "order.pot_size" );
+		$this->db->select ( "orders.year, orders.pot_size,orders.price,orders.catalog_number,orders.count_midsale" );
+		$this->db->order_by ( "orders.catalog_number" );
+		$this->db->order_by ( "CAST(orders.price as DECIMAL)" );
+		$this->db->order_by ( "orders.pot_size" );
 		$this->db->order_by ( "variety" );
 		$result = $this->db->get ()->result ();
 		return $result;
@@ -169,7 +169,7 @@ class Variety_Model extends MY_Model {
 		if (! $year) {
 			$year = get_cookie ( "sale_year" );
 		}
-		$query = sprintf ( "select * from `order`,variety where `order`.`variety_id` = %s and variety.id = `order`.variety_id  and  not exists(select `year` from `order` where `year` < %s and variety_id = %s)  having `order`.`year` = %s", $id, $year, $id, $year );
+		$query = sprintf ( "select * from `orders`,variety where `orders`.`variety_id` = %s and variety.id = `orders`.variety_id  and  not exists(select `year` from `orders` where `year` < %s and variety_id = %s)  having `orders`.`year` = %s", $id, $year, $id, $year );
 		$result = $this->db->query ( $query )->num_rows ();
 		return $result;
 	}
@@ -183,7 +183,7 @@ class Variety_Model extends MY_Model {
 			// $this->db->where("new_year IS NULL", NULL, false);
 			$varieties = $this->db->get ()->result ();
 			foreach ( $varieties as $variety ) {
-				$query = sprintf ( "SELECT `order`.`year` FROM `order`,`variety` WHERE `order`.`variety_id` = %s AND variety.id = `order`.variety_id  AND NOT EXISTS(SELECT `year` FROM `order` WHERE `year` < %s AND variety_id = %s)  HAVING `order`.`year` = %s;", $variety->id, $year, $variety->id, $year );
+				$query = sprintf ( "SELECT `orders`.`year` FROM `orders`,`variety` WHERE `orders`.`variety_id` = %s AND variety.id = `orders`.variety_id  AND NOT EXISTS(SELECT `year` FROM `orders` WHERE `year` < %s AND variety_id = %s)  HAVING `orders`.`year` = %s;", $variety->id, $year, $variety->id, $year );
 				$new_year = $this->db->query ( $query )->row ();
 				if ($new_year) {
 					$this->update_status ( $variety->id, $year );
@@ -206,9 +206,9 @@ class Variety_Model extends MY_Model {
 	function get_varieties_for_year($year, $only_new = FALSE)
 	{
 		$this->db->from ( "variety" );
-		$this->db->join ( "order", "variety.id=order.variety_id" );
+		$this->db->join ( "orders", "variety.id=orders.variety_id" );
 		$this->db->join ( "common", "common.id = variety.common_id" );
-		$this->db->where ( "order.year", $year );
+		$this->db->where ( "orders.year", $year );
 		if ($only_new) {
 			$this->db->where ( "variety.new_year", $year );
 		}
@@ -231,7 +231,7 @@ class Variety_Model extends MY_Model {
 	function get_reorders($year)
 	{
 		$this->db->from ( "variety as v" );
-		$this->db->from ( "order as o" );
+		$this->db->from ( "orders as o" );
 		$this->db->join ( "common as c", "v.common_id = c.id" );
 		$this->db->join ( "category", "c.category_id = category.id", "LEFT" );
 		$this->db->join ( "subcategory", "c.subcategory_id = subcategory.id", "LEFT" );
@@ -249,14 +249,14 @@ class Variety_Model extends MY_Model {
 	function get_category_totals($year)
 	{
 		$this->db->from ( "variety" );
-		$this->db->join ( "order", "variety.id=order.variety_id" );
+		$this->db->join ( "orders", "variety.id=orders.variety_id" );
 		$this->db->join ( "common", "common.id=variety.common_id" );
 		$this->db->join ( "category", "common.category_id = category.id", "LEFT" );
 		$this->db->join ( "subcategory", "common.subcategory_id = subcategory.id", "LEFT" );
-		$this->db->where ( "order.year", $year );
+		$this->db->where ( "orders.year", $year );
 		/*
 		 * //exclude bare root perennials $this->db->where("NOT
-		 * (`order`.`pot_size` LIKE '%bare%' AND `category`.`id` =
+		 * (`orders`.`pot_size` LIKE '%bare%' AND `category`.`id` =
 		 * 7)",NULL,FALSE); $this->db->where("subcategory_id !=", 3); // no
 		 * hanging baskets $this->db->where("subcategory_id !=", 4); // no
 		 * indoor annuals $this->db->where("subcategory_id !=", 8); // no
@@ -273,12 +273,12 @@ class Variety_Model extends MY_Model {
 	function get_flat_totals($year)
 	{
 		$this->db->from ( "variety" );
-		$this->db->join ( "order", "variety.id=order.variety_id" );
+		$this->db->join ( "orders", "variety.id=orders.variety_id" );
 		$this->db->join ( "common", "common.id=variety.common_id" );
 		$this->db->join ( "category", "common.category_id = category.id", "LEFT" );
-		$this->db->where ( "order.year", $year );
+		$this->db->where ( "orders.year", $year );
 		// exclude bare root perennials
-		$this->db->where ( "NOT (`order`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE );
+		$this->db->where ( "NOT (`orders`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE );
 		// $this->db->where("subcategory_id !=", 3); // no hanging baskets
 		// $this->db->where("subcategory_id !=", 4); // no indoor annuals
 		// $this->db->where("subcategory_id !=", 8); // no perennial water
@@ -286,10 +286,10 @@ class Variety_Model extends MY_Model {
 		
 		$this->db->group_by ( "common.category_id" );
 		$this->db->order_by ( "category.category" );
-		// $this->db->select("sum(`order`.`count_presale` +
-		// `order`.`count_midsale`) as count");
-		$this->db->select ( "sum(`order`.`count_presale`) as presale_count" );
-		$this->db->select ( "sum(`order`.`count_midsale`) as midsale_count" );
+		// $this->db->select("sum(`orders`.`count_presale` +
+		// `orders`.`count_midsale`) as count");
+		$this->db->select ( "sum(`orders`.`count_presale`) as presale_count" );
+		$this->db->select ( "sum(`orders`.`count_midsale`) as midsale_count" );
 		$this->db->select ( "category.category,category.id as category_id" );
 		$result = $this->db->get ()->result ();
 		// $this->_log("alert");
@@ -306,10 +306,10 @@ class Variety_Model extends MY_Model {
 	{
 		$query = sprintf ( "update `variety` SET needs_bag = 0;" );
 		$this->db->query ( $query );
-		$query = sprintf ( "update `variety`, `order` SET `needs_bag` = 1 WHERE `order`.`year` = '%s' AND `variety`.`id` = `order`.`variety_id` and (`order`.`pot_size` LIKE '%s' OR
-`order`.`pot_size` LIKE '%s'  OR
-`order`.`pot_size` LIKE '%s' OR
-`order`.`pot_size` LIKE '%s')", get_current_year (), "%bareroot%", "%bulb%", "%bulb%", "%pound%" );
+		$query = sprintf ( "update `variety`, `orders` SET `needs_bag` = 1 WHERE `orders`.`year` = '%s' AND `variety`.`id` = `orders`.`variety_id` and (`orders`.`pot_size` LIKE '%s' OR
+`orders`.`pot_size` LIKE '%s'  OR
+`orders`.`pot_size` LIKE '%s' OR
+`orders`.`pot_size` LIKE '%s')", get_current_year (), "%bareroot%", "%bulb%", "%bulb%", "%pound%" );
 		$this->db->query ( $query );
 		// $this->_log("alert");
 	}
@@ -358,7 +358,7 @@ class Variety_Model extends MY_Model {
 		$this->db->join ( "category", "common.category_id = category.id", "LEFT" );
 		$this->db->join ( "subcategory", "common.subcategory_id = subcategory.id", "LEFT" );
 		$this->db->join ( "flag", "variety.id = flag.variety_id", "LEFT" );
-		$this->db->join ( "order", "variety.id = order.variety_id", "RIGHT" );
+		$this->db->join ( "orders", "variety.id = orders.variety_id", "RIGHT" );
 		if ($this->input->get ( "no_image" )) {
 			$this->db->join ( "image", "variety.id = image.variety_id", "LEFT" );
 			$this->db->where ( "image.id IS NULL", NULL, FALSE );
@@ -388,7 +388,7 @@ class Variety_Model extends MY_Model {
 					$this->db->where ( "flag.name", urldecode ( $parameter->value ) );
 				}
 			} elseif ($parameter->key == "year") {
-				$this->db->where ( "order.year", $parameter->value );
+				$this->db->where ( "orders.year", $parameter->value );
 			} elseif (in_array ( $parameter->key, array (
 					"variety",
 					"genus",
@@ -399,7 +399,7 @@ class Variety_Model extends MY_Model {
 			) )) {
 				$this->db->like ( $parameter->key, $parameter->value );
 			} elseif ($parameter->key == "omit") {
-				$this->db->where ( "(order.omit is NULL OR order.omit != 1)", NULL, FALSE );
+				$this->db->where ( "(orders.omit is NULL OR orders.omit != 1)", NULL, FALSE );
 			} elseif ($parameter->key == "not_flag") {
 				// no action taken
 			} elseif ($parameter->key == "category_id") {
@@ -413,8 +413,8 @@ class Variety_Model extends MY_Model {
 		// include all variety fields (maybe change this).
 		$this->db->select ( "variety.*" );
 		
-		// select order fields
-		$this->db->select ( "order.id as order_id,year,flat_size,flat_cost,plant_cost,pot_size,price,count_presale,count_midsale,count_dead,omit" );
+		// select orders fields
+		$this->db->select ( "orders.id as order_id,year,flat_size,flat_cost,plant_cost,pot_size,price,count_presale,count_midsale,count_dead,omit" );
 		$this->db->select ( "sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number" );
 		$this->db->group_by ( "variety.id" );
 		$result = $this->db->get ()->result ();
@@ -426,14 +426,14 @@ class Variety_Model extends MY_Model {
 	{
 		$this->db->from ( "variety" );
 		$this->db->join ( "common", "variety.common_id = common.id" );
-		$this->db->join ( "order", "variety.id = order.variety_id" );
+		$this->db->join ( "orders", "variety.id = orders.variety_id" );
 		$this->db->join ( "category", "common.category_id=category.id", "LEFT" );
 		$this->db->join ( "subcategory", "common.subcategory_id=subcategory.id", "LEFT" );
-		$this->db->where ( "order.year", $year );
+		$this->db->where ( "orders.year", $year );
 		$this->db->select ( "variety.id, variety.web_id, variety.common_id, variety.plant_color,variety.variety,variety.species, variety.min_height,variety.max_height,variety.height_unit,variety.min_width,variety.max_width,
         variety.width_unit,variety.new_year,variety.print_description,variety.web_description" );
 		$this->db->select ( "common.other_names" );
-		$this->db->select ( "order.catalog_number,order.year, order.price,order.pot_size,order.count_midsale" );
+		$this->db->select ( "orders.catalog_number,orders.year, orders.price,orders.pot_size,orders.count_midsale" );
 		$this->db->select ( "category.category" );
 		$this->db->select ( "subcategory.web_label,subcategory.subcategory" );
 		$result = $this->db->get ()->result ();
@@ -443,7 +443,7 @@ class Variety_Model extends MY_Model {
 
 	function get_last_web_id()
 	{
-		$query = "select web_id from variety order by web_id DESC LIMIT 1";
+		$query = "select web_id from variety orders by web_id DESC LIMIT 1";
 		$web_id = $this->db->query ( $query )->row ()->web_id + 1;
 		
 		return $web_id;
@@ -474,7 +474,7 @@ class Variety_Model extends MY_Model {
 			$this->db->delete ( "variety", array (
 					'id' => $id 
 			) );
-			$this->db->delete ( "order", array (
+			$this->db->delete ( "orders", array (
 					'variety_id' => $id 
 			) );
 			$this->db->delete ( "flag", array (

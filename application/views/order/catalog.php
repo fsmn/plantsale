@@ -93,14 +93,14 @@ if(get_value($order,"has_reorder") && $order->has_reorder){
 
 				</td>
 			<? if(!$show_names):?>
-				<td class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
+				<td class="order-year field"><?=edit_field("year",$order->year,"","orders",$order->id,array("envelope"=>"span"));?>
 				</td>
 			<? endif;?>
-			<td class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-catalog_number field">
 			<!-- if there is no catalog number, show the first letter of the category -->
-		<?=edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>
+		<?=edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<? if($show_names):?>
 			<td><a
@@ -115,43 +115,43 @@ if(get_value($order,"has_reorder") && $order->has_reorder){
 				title="View the details for <?=$order->variety;?>"><?=$order->variety;?></a></td>
 			<? endif;?>
 			<td class="order-count_presale field">
-			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("count_presale",$order->count_presale,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<?php if($is_inventory):?>
 			<td class="order-received_presale field">
-			<?=edit_field("received_presale",$order->received_presale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("received_presale",$order->received_presale,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-remainder_friday field">
-			<?=edit_field("remainder_friday",$order->remainder_friday,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("remainder_friday",$order->remainder_friday,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-sellout_friday field">
-			<?=edit_field("sellout_friday",$order->sellout_friday,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("sellout_friday",$order->sellout_friday,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<?php endif;?>
 			<td class="order-count_midsale field">
-			<?=edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("count_midsale",$order->count_midsale,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<?php if($is_inventory):?>
 			<td class="order-received_midsale field">
-			<?=edit_field("received_midsale",$order->received_midsale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("received_midsale",$order->received_midsale,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-remainder_saturday field">
-			<?=edit_field("remainder_saturday",$order->remainder_saturday,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("remainder_saturday",$order->remainder_saturday,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-sellout_saturday field">
-			<?=edit_field("sellout_saturday",$order->sellout_saturday,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("sellout_saturday",$order->sellout_saturday,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-remainder_sunday field">
-			<?=edit_field("remainder_sunday",$order->remainder_sunday,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("remainder_sunday",$order->remainder_sunday,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-count_dead field">
-			<?=edit_field("count_dead",$order->count_dead,"","order",$order->id,array("envelope"=>"span"));?>
+			<?=edit_field("count_dead",$order->count_dead,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<?php endif;?>
 			<td class="order-total_plants field">
 			<?=$order->count_midsale + $order->count_presale;?>
 			</td>
-			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
+			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","orders",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
 			</td>
 			<td class="order-flat_size field cost-field" id="flat_size"><span id="edit-flat-size_<?=$order->id;?>" class="edit-cost"><?=$order->flat_size;?></span>
 
@@ -162,9 +162,9 @@ if(get_value($order,"has_reorder") && $order->has_reorder){
 			</td>
 			<td class="order-order_total field order_total no-wrap">$<?=round($order->flat_cost * ($order->count_presale + $order->count_midsale),2);?>
 			</td>
-			<td class="order-price field price-field no-wrap">$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-price field price-field no-wrap">$<?=edit_field("price",$order->price,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
+			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="re-order field">
 			<?php echo create_button(array("text"=>"Re-order","href"=>site_url("order/create?variety_id=$order->variety_id&reorder=1"),"id"=>"oc_$order->variety_id","class"=>array("button","new","create","dialog","order-create")));?>

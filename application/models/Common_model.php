@@ -146,8 +146,8 @@ class Common_model extends MY_Model
 
         if ($year = $this->input->get("year")) {
             $this->db->join("variety", "common.id=variety.common_id");
-            $this->db->join("order", "variety.id=order.variety_id");
-            $this->db->select("order.year");
+            $this->db->join("orders", "variety.id=orders.variety_id");
+            $this->db->select("orders.year");
             $this->db->where("year",$year);
             $this->db->group_by("common.id");
         }
@@ -165,8 +165,8 @@ class Common_model extends MY_Model
     	$this->db->join("category","common.category_id=category.id","LEFT");
     	$this->db->join("subcategory","common.subcategory_id=subcategory.id","LEFT");
     	$this->db->join("variety","common.id = variety.common_id","LEFT");
-    	$this->db->join("order","variety.id = order.variety_id","LEFT");
-    	$this->db->where("order.year",$year);
+    	$this->db->join("orders","variety.id = orders.variety_id","LEFT");
+    	$this->db->where("orders.year",$year);
     	if($category_id){
     		$this->db->where("common.category_id",$category_id);
     		if($subcategory_id){
@@ -177,7 +177,7 @@ class Common_model extends MY_Model
     	$this->db->select("common.*");
     	$this->db->select("category.category");
     	$this->db->select("subcategory.subcategory, subcategory.web_label");
-    	$this->db->order_by("order.catalog_number");
+    	$this->db->order_by("orders.catalog_number");
     	$this->db->order_by("category.category");
     	$this->load->helper("export");
     	$this->db->order_by("(" . subcategory_order() . ")");

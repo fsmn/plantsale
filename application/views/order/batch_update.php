@@ -9,39 +9,39 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <h2>DANGER: Updating <?=count($ids);?> Records</h2>
 <p class="notice">Changes you submit here cannot be undone!</p>
 
-	<div class="order-flat_size field">
+	<div class="orders-flat_size field">
 		<label for="flat_size">Flat Size:&nbsp;</label> <input type="text"
 			name="flat_size" value="" autocomplete="off"/>
 	</div>
-	<div class="order-flat_cost field">
+	<div class="orders-flat_cost field">
 		<label for="flat_cost">Flat Cost:&nbsp;</label> <input type="text"
 			name="flat_cost" value=""  autocomplete="off" />
 	</div>
-	<div class="order-plant_cost field">
+	<div class="orders-plant_cost field">
 		<label for="plant_cost">Plant Cost:&nbsp;</label> <input type="text"
 			name="plant_cost" value="" autocomplete="off"  />
 	</div>
-	<div class="order-count_presale field">
+	<div class="orders-count_presale field">
 		<label for="count_presale">Presale Count:&nbsp;</label> <input type="number"
 			name="count_presale" value="" autocomplete="off" />
 	</div>
-	<div class="order-count_midsale field">
+	<div class="orders-count_midsale field">
 		<label for="count_midsale">Midsale Count:&nbsp;</label> <input type="number"
 			name="count_midsale" value="" autocomplete="off"/>
 	</div>
-		<div class="order-pot_size field">
+		<div class="orders-pot_size field">
 		<label for="pot_size">Pot Size:&nbsp;</label>
 		<?=form_dropdown("pot_size",$pot_sizes);?>
 	</div>
-	<div class="order-price field">
+	<div class="orders-price field">
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"
 			value="" autocomplete="off"/>
 	</div>
-		<div class="order-flat_area field">
+		<div class="orders-flat_area field">
 		<label for="flat_area">Flat Area:&nbsp;</label> <input type="text" name="flat_area"
 			value="" autocomplete="off"/>
 	</div>
-			<div class="order-tiers field">
+			<div class="orders-tiers field">
 		<label for="tiers">Tiers:&nbsp;</label> <input type="text" name="tiers"
 			value="" autocomplete="off"/>
 	</div>

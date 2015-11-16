@@ -222,7 +222,20 @@ class Order_Model extends MY_Model {
 		$this->db->where ( "variety_id", $variety_id );
 		$this->db->where ( "year <", $current_year );
 		$this->db->join ( "variety", "orders.variety_id=variety.id" );
-		$this->db->select ( "orders.*" );
+		$this->db->select ( "orders.id,
+				orders.grower_id, 
+				orders.year,
+				orders.flat_size,
+				orders.flat_cost,
+				orders.flat_area,
+				orders.tiers,
+				orders.plant_cost,
+				orders.pot_size,
+				orders.price,
+				orders.count_presale,
+				orders.count_midsale,
+				orders.grower_code" );
+		
 		$this->db->select ( "variety.variety" );
 		$this->db->order_by ( "year", "DESC" );
 		$this->db->group_by ( "year" );

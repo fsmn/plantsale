@@ -75,7 +75,7 @@ function create_button ( $data )
 			}
 			else {
 				$data ["class"] = array (
-						"button","btn","btn-default", 
+						"button","btn","btn-primary", 
 				);
 			}
 			$text = $text . add_fa_icon ( $data ["class"] );
@@ -383,7 +383,7 @@ function get_button_style($style)
 			$class [] = "btn-info";
 			break;
 		case "small" :
-			$class [] = "btn-sm";
+			$class [] = "btn-xs";
 			break;
 
 		case "insert" :
@@ -396,7 +396,7 @@ function get_button_style($style)
 			break;
 
 		default :
-			$class [] = "btn-default";
+			$class [] = "btn-primary";
 	}
 	return $class;
 }

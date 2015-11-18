@@ -2,7 +2,7 @@
 $sale_year = get_cookie("sale_year");
 // totals.php Chris Dart Apr 21, 2014 2:06:25 PM chrisdart@cerebratorium.com
 ?>
-<table class="chart">
+<table class="chart table table-bordered">
 <thead>
 <tr>
 <td>

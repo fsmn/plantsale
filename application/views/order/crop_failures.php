@@ -2,7 +2,7 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 ?>
-<table class="list">
+<table class="list table table-bordered">
 	<thead>
 		<tr>
 			<th class="cell">Variety</th>

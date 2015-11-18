@@ -5,7 +5,7 @@ $sale_year = get_cookie("sale_year");
 
 ?>
 <!-- order/totals -->
-<table class="chart">
+<table class="chart table table-compressed table-bordered">
 	<thead>
 		<tr>
 			<td></td>

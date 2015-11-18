@@ -3,7 +3,7 @@
 // inline_list.php Chris Dart April 25, 2013 11:07:53 AM chrisdart@cerebratorium.com
 ?>
 
-<table id="common-name-list" class="list compressed">
+<table id="common-name-list" class="table table-compressed table-bordered list compressed">
 	<?if($full_list):?>
 		<thead>
 			<tr>

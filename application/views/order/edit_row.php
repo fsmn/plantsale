@@ -5,7 +5,7 @@
 <!-- views/order/edit_row.php -->
 <form name="order-row" action="<?=site_url("order/$action");?>" method="post">
 <input type="hidden" name="variety_id" value="<?=$variety_id;?>"/>
-<table>
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<th>Year</th>

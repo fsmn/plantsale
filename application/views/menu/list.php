@@ -5,7 +5,7 @@
 <h2><?=$title;?></h2>
 <? $this->load->view("menu/categories");?>
 <?=create_button_bar(array(array("text"=>"Add New Item","class"=>array("button","new","create-menu-item"),"href"=>site_url("menu/create"))));?>
-<table class="list">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>Category</th>

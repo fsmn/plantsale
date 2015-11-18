@@ -13,7 +13,7 @@ $buttons[] = array("text"=>"Show $orphan_count Orphan Grower$plural <span class=
 
 print create_button_bar($buttons);
 ?>
-<table class="list">
+<table class="list table table-bordered">
 <thead>
 <tr>
 <th>

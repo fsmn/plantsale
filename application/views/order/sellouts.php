@@ -7,7 +7,7 @@ if ($orders)
 :
 	?>
 <!-- order/sellouts -->
-<table class="list sellouts small">
+<table class="table table-bordered table-compressed list sellouts small">
 	<thead>
 		<tr class="top-row">
 			<th></th>

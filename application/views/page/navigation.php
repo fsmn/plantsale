@@ -15,7 +15,7 @@ $buttons[] = array(
 $buttons[] = array(
         "selection" => "variety",
         "type" => "pass-through",
-        "text" => "<input type='text' name='variety-search' id='variety-search-body' class='search-field variety-search' value='' placeholder='Quickly find plants here'/>"
+        "text" => "<form class='form-inline'><span class='form-group'><input type='text' name='variety-search' id='variety-search-body' class='search-field form-control variety-search' value='' placeholder='Quickly find plants here'/></span></span>"
 );
 
 $buttons[] = array(

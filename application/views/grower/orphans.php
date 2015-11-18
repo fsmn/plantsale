@@ -7,7 +7,7 @@ $sale_year = get_cookie ( "sale_year" );
 <h3><?=$title;?></h3>
 <p><?=$message;?></p>
 <? if($orphans): ?>
-<table class="list">
+<table class="list table table-bordered">
 	<thead>
 		<tr>
 			<th>Grower ID</th>

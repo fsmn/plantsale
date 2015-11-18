@@ -17,7 +17,7 @@ if ($orders) :
 	]
 </h2>
 
-<table class="list profitability hideable-columns">
+<table class="table table-bordered list profitability hideable-columns">
 	<thead>
 		<tr class="top-row">
 			<th colspan='7'></th>

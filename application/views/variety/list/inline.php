@@ -4,7 +4,7 @@
 ?>
 <div style="overflow: scroll;max-height: 25em">
 
-<table id="variety-name-list" class="list compressed">
+<table id="variety-name-list" class="table table-bordered table-compressed list compressed">
 	<?if($full_list):?>
 		<thead>
 			<tr>

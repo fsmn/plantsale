@@ -13,7 +13,7 @@ Your Name: <input type="text" style="padding: .5em;width:25em;" value="" name="y
 Start time: <input type="text" name="your_start_time" value="" style="padding: .5em; width:10em;"/>&nbsp;
 End Time: <input type="text" name="your_end_time" value="" style="padding: .5em; width: 10em;"/>
 </div>
-<table class="list tracking small">
+<table class="table table-compressed table-bordered list tracking small">
 	<thead>
 		<tr>
 			<th>Cat&#35;</th>

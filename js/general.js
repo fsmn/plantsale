@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$(".message.notice, .message.alert").click(function(e){
+	$(".alert").click(function(e){
 		$(this).fadeOut();
 	});
 	

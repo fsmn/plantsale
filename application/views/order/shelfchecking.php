@@ -8,7 +8,7 @@ if ($orders)
 	?>
 <!-- order/shelfchecking -->
 
-<table class="list shelf-checking small">
+<table class="table table-compressed table-bordered shelf-checking small">
 	<thead>
 		<tr>
 			<th>Grw</th>

@@ -9,7 +9,7 @@ if ($orders) :
 
     <!-- views/order/catalog.php -->
     <h5 class="column-instructions">Click on a header to hide the column [<a href="#" class=" reset-columns">Reset</a>]</h5>
-<table class="list catalog hideable-columns">
+<table class="list table table-bordered table-condensed catalog hideable-columns">
 	<thead>
 
 		<tr>
@@ -81,13 +81,13 @@ if(get_value($order,"has_reorder") && $order->has_reorder){
 			id="order_<?=$order->id;?>">
 			<td class="no-wrap">
 			<? if(IS_ADMIN):?>
-			<span class="omit-row omit button" id="omit-order_<?=$order->id;?>">Omit</span>
+			<span class="omit-row omit button btn btn-xs btn-warning" id="omit-order_<?=$order->id;?>">Omit</span>
 			<? endif;?>
 			<? if(IS_EDITOR):?>
-			<?php echo create_button(array("text"=>"Edit","href"=>site_url("order/edit/$order->id"),"class"=>array("button","edit","dialog","edit-order"),"id"=>sprintf("edit-order_%s",$order->id)));?>
+			<?php echo create_button(array("text"=>"Edit","href"=>site_url("order/edit/$order->id"),"class"=>array("button","edit","dialog","edit-order","btn-xs"),"id"=>sprintf("edit-order_%s",$order->id)));?>
 
 				<? else: ?>
-				<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("order/view/$order->id")));?>
+				<?php echo create_button(array("text"=>"Details","class"=>array("button","details","btn-sm"),"style"=>"small","href"=>site_url("order/view/$order->id")));?>
 
 				<? endif; ?>
 
@@ -167,7 +167,7 @@ if(get_value($order,"has_reorder") && $order->has_reorder){
 			<td class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","orders",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="re-order field">
-			<?php echo create_button(array("text"=>"Re-order","href"=>site_url("order/create?variety_id=$order->variety_id&reorder=1"),"id"=>"oc_$order->variety_id","class"=>array("button","new","create","dialog","order-create")));?>
+			<?php echo create_button(array("text"=>"Re-order","href"=>site_url("order/create?variety_id=$order->variety_id&reorder=1"),"id"=>"oc_$order->variety_id","class"=>array("button","new","create","dialog","order-create","btn-sm")));?>
 			</td>
 		</tr>
 		<? endforeach;?>

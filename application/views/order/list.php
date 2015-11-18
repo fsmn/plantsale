@@ -60,7 +60,7 @@ if ($orders) :
     );
     ?>
     <!-- order/list -->
-<table class="list compressed">
+<table class="table table-compressed table-bordered list compressed">
 	<thead>
 		<tr class="top-row">
 		<? foreach($top_row as $top_label): ?>

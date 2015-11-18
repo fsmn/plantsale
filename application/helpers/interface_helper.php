@@ -160,7 +160,7 @@ function create_button_bar ( $buttons, $options = NULL )
 	
 	$contents = implode ( "</li><li>", $button_list );
 	$template = "<ul class='button-list'><li>$contents</li></ul>";
-	$output = "<div class='button-box $class'  $id>$template</div>";
+	$output = "<div class='button-box btn-group $class'  $id>$template</div>";
 	return $output;
 }
 

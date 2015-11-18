@@ -4,11 +4,11 @@
 //$grand_total = 0;
 ?>
 <h1>Grower Totals</h1>
-<? $buttons[] = array("text"=>"Export<span class='fa fa-download'></span>","class"=>array("button","export"),"title"=>"Export as Spreadsheet","href"=>$_SERVER['REQUEST_URI']. "?export=true");?>
+<? $buttons[] = array("text"=>"Export<span class='fa fa-download'></span>","class"=>array("button","export"),"style"=>"export","title"=>"Export as Spreadsheet","href"=>$_SERVER['REQUEST_URI']. "?export=true");?>
 <?if($orphan_count > 0){
     $verb = $orphan_count == 1?"is":"are";
     $plural = $orphan_count > 1?"s":"";
-$buttons[] = array("text"=>"Show $orphan_count Orphan Grower$plural <span class='badge'>$orphan_count</span>","title"=>"There $verb $orphan_count grower$plural with no grower record. Click here to fix this.","class"=>array("button"),"href"=>site_url("grower/show_orphans"));
+$buttons[] = array("text"=>"Show $orphan_count Orphan Grower$plural <span class='badge'>$orphan_count</span>","title"=>"There $verb $orphan_count grower$plural with no grower record. Click here to fix this.","class"=>array("button"),"style"=>"default","href"=>site_url("grower/show_orphans"));
 }
 
 print create_button_bar($buttons);

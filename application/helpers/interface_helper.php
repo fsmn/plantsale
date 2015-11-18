@@ -55,7 +55,7 @@ function create_button ( $data )
 				$href = "href='#'";
 			}
 		}
-		
+
 		if (array_key_exists ( "target", $data )) {
 			$target = "target='" . $data ["target"] . "'";
 		}
@@ -68,7 +68,6 @@ function create_button ( $data )
 					
 		}
 		if ($type != "pass-through") {
-			
 			if (array_key_exists ( "class", $data )) {
 				if (! is_array ( $data ["class"] )) {
 					$data ["class"] = explode ( " ", $data ["class"] );
@@ -76,7 +75,7 @@ function create_button ( $data )
 			}
 			else {
 				$data ["class"] = array (
-						"button" 
+						"button","btn","btn-default", 
 				);
 			}
 			$text = $text . add_fa_icon ( $data ["class"] );
@@ -84,6 +83,12 @@ function create_button ( $data )
 			if (array_key_exists ( "selection", $data ) && preg_match ( "/" . str_replace ( "/", "\/", $data ["selection"] ) . "/", $_SERVER ['REQUEST_URI'] )) {
 				$data ["class"] [] = "active";
 			}
+			if(array_key_exists("style",$data)){
+				$data['class'] = array_merge($data['class'],get_button_style($data['style']));
+			}else{
+				$data['class'] =  array_merge($data['class'],get_button_style('default'));
+			}
+			
 			$class = sprintf ( "class='%s'", implode ( " ", $data ["class"] ) );
 			
 			$id = "";
@@ -362,15 +367,36 @@ function add_fa_icon ( $class = array() )
 	return $output;
 }
 
-/**
- * $field_name string
- * $source_object stdObj
- * $parent string
- * $wrapper string
- * $extras multidimensional array required wrapper and envelope
+function get_button_style($style)
+{
+	$class = array (
+			"btn"
+	);
+	switch ($style) {
+		case "delete" :
+			$class [] = "btn-danger";
+			break;
+		case "link" :
+			$class [] = "btn-link";
+			break;
+		case "notice" :
+			$class [] = "btn-info";
+			break;
+		case "small" :
+			$class [] = "btn-sm";
+			break;
 
-function wrapped_field($field_name,$value,$table,$id, $wrapper = "span",$extra = array("envelope"=>"span")){
-   // return $source_object->$field_name;
-    $output = sprintf("<%s class='field %s-%s'>%s</%s>",$wrapper, $table,$field_name,edit_field($field_name,$value,"",$table,$id,$extra),$wrapper);
-    return $output;
-} */
+		case "insert" :
+		case "new" :
+			 $class[] = "btn-warning";
+			 break;
+		case "update" :
+		case "edit" :
+			 $class[] = "btn-success";
+			break;
+
+		default :
+			$class [] = "btn-default";
+	}
+	return $class;
+}

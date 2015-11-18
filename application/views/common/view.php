@@ -19,6 +19,7 @@ if (IS_EDITOR) {
             		"dialog",
                     "common-edit"
             ),
+    		"style"=>"edit",
             "id" => "ec_$common->id",
             "href" => site_url("common/edit/$common->id"),
             "title" => "Edit this record"
@@ -34,6 +35,7 @@ if (IS_EDITOR) {
             		"dialog",
                     "variety-create"
             ),
+    		"style"=>"new",
             "id" => sprintf("common-id_%s", $common->id),
             "href" => site_url("variety/create?common_id=$common->id"),
             "title" => "add a new variety"
@@ -47,6 +49,7 @@ if (IS_EDITOR) {
                         "delete",
                         "delete-common"
                 ),
+        		"style"=>"delete",
                 "id" => "delete-common_$common->id",
                 "type" => "span",
                 "title" => "Delete this Common"

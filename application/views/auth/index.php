@@ -1,7 +1,7 @@
 <?php defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
-$buttons[] = array("text"=>"Create User","class"=>array("button create  dialog new"),"href"=>site_url("auth/create_user"));
-$buttons[] = array("text"=>"Create Group","class"=>array("button create dialog new"),"href"=>site_url("auth/create_group"));
+$buttons[] = array("text"=>"Create User","class"=>array("button","create","dialog","new"),"href"=>site_url("auth/create_user"),"style"=>"new");
+$buttons[] = array("text"=>"Create Group","class"=>array("button","create","dialog","new"),"href"=>site_url("auth/create_group"),"style"=>"new");
 
 ?> <h2>Users</h2>
 

@@ -10,6 +10,7 @@ $buttons [] = array (
 		"class" => array (
 				"button edit set-current-year"
 		),
+		"style"=>"edit",
 		"title" => "Set the current working year of the plant sale"
 );
 $buttons [] = array (
@@ -19,6 +20,7 @@ $buttons [] = array (
 				"edit_user",
 				"button","auth"
 		),
+		"style"=>"auth",
 		"href" => site_url ( "auth/edit_user/" . $user->id )
 );
 if (IS_ADMIN) {
@@ -29,6 +31,7 @@ if (IS_ADMIN) {
 					"button",
 					"auth"
 			),
+			"style"=>"auth",
 			"href" => site_url ( "auth" ),
 			"title" => "Edit the site users"
 	);
@@ -36,7 +39,7 @@ if (IS_ADMIN) {
 
 $buttons [] = array (
 		"selection" => "index",
-		"text" => "Log Out",
+		"text" => "Log Out&nbsp;<i class='fa fa-sign-out'></i>",
 		"class" => array (
 				"button","auth"
 		),

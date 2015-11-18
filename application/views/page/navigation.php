@@ -7,6 +7,7 @@ $buttons[] = array(
         "class" => array(
                 "button"
         ),
+		"style"=>"default",
         "href" => site_url(""),
         "title" => "Home"
 );
@@ -26,6 +27,7 @@ $buttons[] = array(
         		"dialog",
                 "search-common-names",
         ),
+		"style"=>"default",
 		"href" => site_url("common/search"),
         "title" => "Search among the common names"
 );
@@ -39,6 +41,7 @@ $buttons[] = array(
         		"dialog",
                 "search-varieties",
         ),
+		"style"=>"search",
         "href"=> site_url("variety/search"),
         "title" => "Search among the varieties"
 );
@@ -52,6 +55,7 @@ $buttons[] = array(
         		"dialog",
                 "search-orders"
         ),
+		"style"=>"search",
         "href" => site_url("order/search/"),
         "title" => "Search Orders"
 );
@@ -62,19 +66,8 @@ $buttons[] = array(
         "class"=> array("button","grower-totals"),
         "href"=>base_url("grower/totals"),
         "title" => "Get Dollar Totals for All Growers for the current year",
+		"style"=>"search",
 );
-
-// $buttons[] = array(
-// 	"selection"=>"all",
-//         "text"=>"Try This Out!",
-//         "class"=>array(
-// 	"button",
-//                 "mr-shmallow",
-//                 ),
-//         "href" =>"#",
-//         "title" =>"More Experiments",
-// );
-
 
 
 print create_button_bar($buttons, array(

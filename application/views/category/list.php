@@ -1,5 +1,5 @@
 <?php 
-$buttons[] = array("text"=>"New Category","class"=>"new button dialog create","href"=>site_url("category/create"));
+$buttons[] = array("text"=>"New Category","class"=>array("new","button","dialog","create"),"style"=>"new","href"=>site_url("category/create"));
 echo create_button_bar($buttons);
 
 ?>

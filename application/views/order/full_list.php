@@ -44,37 +44,40 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 </fieldset>
 
 <?
-	if($output_format != "crop-failure"){
-$buttons [] = array (
-			"text" => "Full Export",
-			"title" => "Export all the fields using the current sort",
-			"class" => array (
-					"button",
-					"export" 
-			),
-			"href" => $_SERVER ['REQUEST_URI'] . "&export=true" 
-	);
-	$buttons [] = array (
-			"text" => "Grower Export",
-			"title" => "Export grower fields using a special grower export",
-			"class" => array (
-					"button",
-					"export" 
-			),
-			"href" => $_SERVER ['REQUEST_URI'] . "&export=true&export_type=grower" 
-	);
-	if (IS_ADMIN) {
+	if ($output_format != "crop-failure") {
 		$buttons [] = array (
-				"text" => "Batch Update",
-				"title" => "Batch Update values for all the listed orders.",
+				"text" => "Full Export",
+				"title" => "Export all the fields using the current sort",
 				"class" => array (
 						"button",
-						"batch-update-orders",
-						"edit" 
-				) 
+						"export" 
+				),
+				"style" => "export",
+				"href" => $_SERVER ['REQUEST_URI'] . "&export=true" 
 		);
-	}
-	print create_button_bar ( $buttons );
+		$buttons [] = array (
+				"text" => "Grower Export",
+				"title" => "Export grower fields using a special grower export",
+				"class" => array (
+						"button",
+						"export" 
+				),
+				"style" => "export",
+				"href" => $_SERVER ['REQUEST_URI'] . "&export=true&export_type=grower" 
+		);
+		if (IS_ADMIN) {
+			$buttons [] = array (
+					"text" => "Batch Update",
+					"title" => "Batch Update values for all the listed orders.",
+					"class" => array (
+							"button",
+							"batch-update-orders",
+							"edit" 
+					),
+					"style" => "edit" 
+			);
+		}
+		print create_button_bar ( $buttons );
 	}
 	?>
 <?php endif;?>
@@ -91,9 +94,10 @@ if ($output_format == "inventory") {
 	$this->load->view ( "order/tracking" );
 } elseif ($output_format == "printable-shelfchecking") {
 	$this->load->view ( "order/shelfchecking" );
-}elseif($output_format == "profitability"){
-	$this->load->view("order/profitability");
+} elseif ($output_format == "profitability") {
+	$this->load->view ( "order/profitability" );
 } else {
-	$this->load->view ( "order/catalog");
-} ?>
+	$this->load->view ( "order/catalog" );
+}
+?>
 

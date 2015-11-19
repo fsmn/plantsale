@@ -14,7 +14,29 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+
+$allowed_domains = array('plantsale', 'db.friendsschoolplantsale.com');
+$default_domain  = 'db.friendsschoolplantsale.com';
+
+
+if (in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE))
+{
+        $domain = $_SERVER['HTTP_HOST'];
+}
+else
+{
+        $domain = $default_domain;
+}
+
+if ( $_SERVER['SERVER_PORT'] == 443)
+{
+        $config['base_url'] = 'https://'.$domain;
+}
+else
+{
+        $config['base_url'] = 'http://'.$domain;
+}
+
 
 /*
 |--------------------------------------------------------------------------

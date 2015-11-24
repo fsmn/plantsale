@@ -16,7 +16,7 @@
 			url: myUrl,
 			data: form_data,
 			success: function(data){
-			show_popup("Change Password", data, "auto");
+			show_popup_old("Change Password", data, "auto");
 		}
 		});
 	}); // end password_edit

@@ -37,7 +37,7 @@ $(document).ready(function(){
 				data: form_data,
 				url: base_url + "variety/edit_common_id",
 				success: function(data){
-					show_popup("Change Common ID", data, "auto");
+					show_popup_old("Change Common ID", data, "auto");
 				}
 			});
 		}
@@ -361,7 +361,7 @@ $(document).on("click",".variety-insert",function(){
 				url: base_url + "variety/new_image",
 				data: form_data,
 				success: function(data){
-					show_popup("Add an Image",data, "auto");
+					show_popup_old("Add an Image",data, "auto");
 				}
 			});
 			return false;
@@ -404,7 +404,7 @@ $(document).on("click",".variety-insert",function(){
 				data: form_data,
 				url: base_url + "variety/print_result",
 				success: function(data){
-					show_popup("Select Format",data,"auto");
+					show_popup_old("Select Format",data,"auto");
 				},
 			error: function(data){
 				console.log(data);
@@ -415,7 +415,7 @@ $(document).on("click",".variety-insert",function(){
 		function batch_print_varieties(me,format){
 		
 			url = $(me).attr('href');
-			show_popup("Preparing","Preparing Printout. Please wait <div id='progressbar'></div>","auto");
+			show_popup_old("Preparing","Preparing Printout. Please wait <div id='progressbar'></div>","auto");
 			var progressbar = $( "#progressbar" )
 			progressbar.progressbar({
 			      value: 0,
@@ -479,7 +479,7 @@ $(document).on("click",".variety-insert",function(){
 				data: form_data,
 				url: base_url + "variety/batch_update_flags",
 				success: function(data){
-					show_popup("Batch Updater",data,"auto");
+					show_popup_old("Batch Updater",data,"auto");
 				}
 				
 			});

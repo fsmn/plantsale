@@ -1,3 +1,10 @@
+/*$(document).on("click",".create.dialog,.edit.dialog",function(e){
+	e.preventDefault();
+	redirect_url = $(location).attr("href");
+	show_popup(this);
+	$("#redirect_url").val(redirect_url);
+});*/
+
 $(document).ready(function(){
 	
 	$(".alert").click(function(e){
@@ -18,7 +25,7 @@ $(document).ready(function(){
 			data: form_data,
 			url:base_url + "index/show_set_year",
 			success:function(data){
-				show_popup("Set Sale Year",data,"auto");
+				show_popup_old("Set Sale Year",data,"auto");
 			}
 		});
 	});
@@ -40,7 +47,7 @@ $(document).ready(function(){
 			data: form_data,
 			url: url,
 			success: function(data){
-				show_popup("Search",data, "auto");
+				show_popup_old("Search",data, "auto");
 			}
 		});
 	});
@@ -58,7 +65,7 @@ $(document).ready(function(){
 			data: form_data,
 			url: url,
 			success: function(data){
-				show_popup("*",data,"auto");
+				show_popup_old("*",data,"auto");
 				$("#redirect_url").val(redirect_url);
 			}
 		});
@@ -279,7 +286,7 @@ $(document).on("click",".autocomplete-on",function(){
 //download the quark files show a progress bar for entertainment purposes. 
 $(document).on("click","#category-selector a.export",function(event){
 	event.preventDefault();
-	show_popup("Downloading","Please wait <div id='progressbar'></div>","auto");
+	show_popup_old("Downloading","Please wait <div id='progressbar'></div>","auto");
 	var progressbar = $( "#progressbar" )
 	progressbar.progressbar({
 	      value: 0,
@@ -368,7 +375,7 @@ $(document).on("click",".help",function(event){
 				data: form_data,
 				success: function(data){
 					var title="Help with "+ my_topic + "->"+ my_subtopic;
-					show_popup(title, data, "300px");
+					show_popup_old(title, data, "300px");
 				}
 			});
 	});//end function(event)
@@ -401,7 +408,34 @@ $(document).on('click',".mr-shmallow-image",function(){
 	
 });
 
-function show_popup(my_title,data,popup_width,x,y){
+
+function show_popup(me){
+	target = $(me).attr("href");
+	redirect_url = $(location).attr("href");
+	console.log(redirect_url);
+	form_data = {
+			ajax: 1,
+			redirect_url: redirect_url
+	};
+	window_width = $(window).width();
+	$.ajax({
+		type: "get",
+		data: form_data,
+		url: target,
+		success: function(data){
+			$("#popup").html(data);
+			$("#my_dialog").modal("show");
+			//on larger screens, shrink the dialog to a more friendly size
+//			if(window_width > 768){
+//				my_content = $(".modal-body form").css("max-width");
+//				$(".modal-dialog").css("width",my_content);
+//			}
+			
+		}
+	});
+}
+
+function show_popup_old(my_title,data,popup_width,x,y){
 	if(!popup_width){
 		popup_width=300;
 	}
@@ -421,6 +455,7 @@ function show_popup(my_title,data,popup_width,x,y){
 
 	return false;
 }
+
 
 function update_field(me,my_type){
 	my_parent = $(me).parents(".field-envelope").attr("id");

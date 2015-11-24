@@ -91,6 +91,7 @@ class Common extends MY_Controller
 			) );
 			$data ["sunlight"] = $sunlight;
 			$data ["common"] = NULL;
+			$data["title"] = "Common Search Results";
 			$data ["target"] = "common/search";
 			if ($this->input->get ( "ajax" )) {
 				$this->load->view ( "common/search", $data );

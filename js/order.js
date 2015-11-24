@@ -182,7 +182,7 @@ $(document).ready(function(){
 			data: form_data,
 			url: base_url + "order/batch_update",
 			success: function(data){
-				show_popup("Batch Updater",data,"auto");
+				show_popup_old("Batch Updater",data,"auto");
 			}
 			
 		});

@@ -48,7 +48,11 @@ if ($orders) :
         $plant_cost = $order->plant_cost;
         if ($order->flat_cost && ! $order->plant_cost) {
             $flat_cost = $order->flat_cost;
+            if($order->flat_cost !=0){
             $plant_cost = $order->flat_size / $order->flat_cost;
+            }else{
+            	$plant_cost = 0;
+            }
         } elseif ($order->plant_cost && ! $order->flat_cost) {
             $plant_cost = $order->plant_cost;
             $flat_cost = $order->flat_size * $order->plant_cost;

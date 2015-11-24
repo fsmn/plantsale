@@ -48,6 +48,7 @@ $("#non-reorder-year").html(Number($("#year").val()) + 1);
 
 </div>
 <div class="column last">
+<label for="needs_bag">Needs Bag</label><input type="checkbox" name="needs_bag" id="needs_bag" value="1" <?=$refine?get_cookie("neds_bag")==1?"checked":"":"";?>/>
 
 </div>
 </div>

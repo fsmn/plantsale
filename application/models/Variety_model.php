@@ -245,7 +245,9 @@ class Variety_Model extends MY_Model {
 		$result = $this->db->get ()->result ();
 		return $result;
 	}
-
+	
+	
+	//@TODO this should be moved to orders model
 	function get_category_totals($year)
 	{
 		$this->db->from ( "variety" );
@@ -269,7 +271,8 @@ class Variety_Model extends MY_Model {
 		// $this->_log("alert");
 		return $result;
 	}
-
+	
+	//@TODO this should be moved to orders model
 	function get_flat_totals($year)
 	{
 		$this->db->from ( "variety" );
@@ -277,22 +280,22 @@ class Variety_Model extends MY_Model {
 		$this->db->join ( "common", "common.id=variety.common_id" );
 		$this->db->join ( "category", "common.category_id = category.id", "LEFT" );
 		$this->db->where ( "orders.year", $year );
-		// exclude bare root perennials
+		// exclude bare root and bulb perennials
 		$this->db->where ( "NOT (`orders`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE );
-		// $this->db->where("subcategory_id !=", 3); // no hanging baskets
-		// $this->db->where("subcategory_id !=", 4); // no indoor annuals
-		// $this->db->where("subcategory_id !=", 8); // no perennial water
-		$this->db->where ( "(`common`.`subcategory_id` != 3 AND `common`.`subcategory_id` !=4 AND `common`.`subcategory_id` !=8 OR `common`.`subcategory_id` IS NULL)", NULL, FALSE ); // plants
+		$this->db->where ( "NOT (`orders`.`pot_size` LIKE '%bulb%' AND `category_id` = 7 )", NULL, FALSE );
+		
+		//subcategory3 = no hanging baskets
+		//subcategory 4 =  no indoor annuals
+		//subcategory 8 = no perennial water plants
+		$this->db->where ( "((`common`.`subcategory_id` != 3 AND `common`.`subcategory_id` !=4 AND `common`.`subcategory_id` !=8 AND common.name NOT LIKE '%Peony%') OR `common`.`subcategory_id` IS NULL)", NULL, FALSE ); // plants
 		
 		$this->db->group_by ( "common.category_id" );
 		$this->db->order_by ( "category.category" );
-		// $this->db->select("sum(`orders`.`count_presale` +
-		// `orders`.`count_midsale`) as count");
 		$this->db->select ( "sum(`orders`.`count_presale`) as presale_count" );
 		$this->db->select ( "sum(`orders`.`count_midsale`) as midsale_count" );
 		$this->db->select ( "category.category,category.id as category_id" );
 		$result = $this->db->get ()->result ();
-		// $this->_log("alert");
+		 $this->_log();
 		return $result;
 	}
 
@@ -311,7 +314,7 @@ class Variety_Model extends MY_Model {
 `orders`.`pot_size` LIKE '%s' OR
 `orders`.`pot_size` LIKE '%s')", get_current_year (), "%bareroot%", "%bulb%", "%bulb%", "%pound%" );
 		$this->db->query ( $query );
-		// $this->_log("alert");
+		$this->_log();
 	}
 
 	function find($variables, $order_by)

@@ -314,7 +314,6 @@ class Variety_Model extends MY_Model {
 `orders`.`pot_size` LIKE '%s' OR
 `orders`.`pot_size` LIKE '%s')", get_current_year (), "%bareroot%", "%bulb%", "%bulb%", "%pound%" );
 		$this->db->query ( $query );
-		$this->_log();
 	}
 
 	function find($variables, $order_by)

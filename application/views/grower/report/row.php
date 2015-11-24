@@ -17,7 +17,7 @@ if($grower->fax){
 $year = get_cookie("sale_year");
 
 ?>
-<tr class="row grower total">
+<tr class="grower total">
 <td class="field"><a href="<?=base_url("grower/view/$grower->id");?>" title="view and edit the grower record"><?=$grower->id;?></a></td>
 	<td class="field"><a href="<?=base_url("grower/view/$grower->id");?>" title="View and edit the grower record"><?=$grower->grower_name;?></a></td>
 	<td class="field">

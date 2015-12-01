@@ -85,12 +85,8 @@ class Inventory extends MY_Controller
 					if ($value = $this->input->post ( $variable )) {
 						$values [$variable] = $this->input->post ( $variable );
 					}
-					else {
-						$values [$variable] = 0;
-					}
 					burn_cookie ( $variable );
 				}
-				
 				$this->order->update ( $this->input->post ( "id" ), $values );
 				$this->_log ( "This item has been updated" );
 				redirect ( "inventory/index" );

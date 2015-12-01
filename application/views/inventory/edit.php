@@ -18,7 +18,7 @@ $edit_fields = array (
 		"remainder_friday"=>array("label"=>"Remainder Friday","type"=>"text","day"=>"Friday"),
 		"received_midsale"=> array("label"=>"Received Saturday","type"=>"text","day"=>"Saturday"),
 		"sellout_saturday"=>array("label"=>"Sellout Saturday","type"=>"time","day"=>"Saturday"),
-		"remainder_sunday"=>array("label"=>"Remainder Sundat","type"=>"text","day"=>"Sunday"),
+		"remainder_sunday"=>array("label"=>"Remainder Sunday","type"=>"text","day"=>"Sunday"),
 		"count_dead"=>array("label"=>"Dead Count","type"=>"text","day"=>"Sunday"),
 );
 

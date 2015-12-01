@@ -32,7 +32,7 @@ $edit_fields = array (
 <input type="hidden" name="catalog_number" value="<?php echo $item->catalog_number;?>"/>
 <?php foreach ($edit_fields as $field=>$key):?>
 <?php $today = date('l');?>
-<?php if($key['day'] == $today || IS_EDITOR):?>
+<?php if(in_array($today,array("Monday","Tuesday","Wednesday","Thursday")) || $key['day'] == $today || IS_EDITOR):?>
 <?php echo form_group($field, $step==1?$item->$field:get_cookie($field), $key['label'] ,$key['type']);?>
 <?php endif;?>
 <?php endforeach;?>

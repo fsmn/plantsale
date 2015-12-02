@@ -13,13 +13,13 @@ function form_group($field_name, $field_value, $label, $field_type = "text", $cl
 }
 
 $edit_fields = array (
-		"received_presale" => array("label"=>"Received Thursday","type"=>"text","day"=>"Thursday"),
+		//"received_presale" => array("label"=>"Received Thursday","type"=>"text","day"=>"Thursday"),
 		"sellout_friday" => array("label"=>"Sellout Time Friday","type"=>"time","day"=>"Friday"),
-		"remainder_friday"=>array("label"=>"Remainder Friday","type"=>"text","day"=>"Friday"),
-		"received_midsale"=> array("label"=>"Received Saturday","type"=>"text","day"=>"Saturday"),
+		//"remainder_friday"=>array("label"=>"Remainder Friday","type"=>"text","day"=>"Friday"),
+		//"received_midsale"=> array("label"=>"Received Saturday","type"=>"text","day"=>"Saturday"),
 		"sellout_saturday"=>array("label"=>"Sellout Saturday","type"=>"time","day"=>"Saturday"),
-		"remainder_sunday"=>array("label"=>"Remainder Sunday","type"=>"text","day"=>"Sunday"),
-		"count_dead"=>array("label"=>"Dead Count","type"=>"text","day"=>"Sunday"),
+		//"remainder_sunday"=>array("label"=>"Remainder Sunday","type"=>"text","day"=>"Sunday"),
+		//"count_dead"=>array("label"=>"Dead Count","type"=>"text","day"=>"Sunday"),
 );
 
 

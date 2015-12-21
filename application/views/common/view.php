@@ -127,7 +127,7 @@ Add/Remove
 </div>
 <div class="column last">
 <h3>Defined Relatives</h3>
-<img src="<?php echo base_url("images/tumbleweed.gif");?>" style="width: 100%"/>
+<img src="<?php echo base_url("images/tumbleweed.gif");?>" class="message" style="width: 100%"/>
 </div>
 </div>
 

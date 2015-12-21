@@ -452,7 +452,6 @@ class Variety_Model extends MY_Model {
 	{
 		$query = "select web_id from variety orders by web_id DESC LIMIT 1";
 		$web_id = $this->db->query ( $query )->row ()->web_id + 1;
-		
 		return $web_id;
 	}
 

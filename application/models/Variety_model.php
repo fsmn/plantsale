@@ -15,6 +15,7 @@ class Variety_Model extends MY_Model {
 	var $web_description;
 	var $new_year;
 	var $needs_bag;
+	var $needs_copy_review;
 	var $rec_modifier;
 	var $rec_modified;
 
@@ -37,6 +38,7 @@ class Variety_Model extends MY_Model {
 				"print_description",
 				"web_description",
 				"new_year",
+				"needs_copy_review",
 				"needs_bag",
 				"common_id" 
 		);

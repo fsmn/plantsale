@@ -106,6 +106,11 @@
 		<p class="sunlight">
 			<label>Sunlight: </label> <span class="field"><?=$variety->sunlight;?></span>
 		</p>
+		<fieldset><legend>Descriptions</legend>
+		<p>
+		
+		<?php echo edit_field("needs_copy_review",$variety->needs_copy_review,"Needs Copy Review","variety",$variety->id,  array("class"=>"dropdown","attributes"=>"menu='boolean'","envelope"=>"div"));?>
+		</p>
 		<p class="description">
 						 <?=edit_field("description", $variety->description, "General Description (from Common)","common",$variety->common_id, array("class"=>"textarea","envelope"=>"div"));?>
 
@@ -118,6 +123,7 @@
 
 			 <?=edit_field("web_description", $variety->web_description, "Variety Web Description","variety",$variety->id, array("class"=>"textarea","envelope"=>"div"));?>
 		</p>
+		</fieldset>
 		<div class="block" id="image">
 	<? $this->load->view("image/view"); ?>
 

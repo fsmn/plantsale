@@ -1,8 +1,17 @@
 @CHARSET "UTF-8";
+#page {
+	max-width: 320px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	padding: 1em;
+}
 
 #catalog-number {
 	font-size: 6em;
 	height: auto;
+	width: 100%;
+	margin-bottom: .1em;
 }
 
 h1, h2, h3, h4 {
@@ -16,14 +25,6 @@ img.small {
 	padding: 1em 0;
 }
 
-@media ( max-width:758px) {
-	label.control-label {
-		width: 35%;
-		float: left !important;
-		text-align: right;
-	}
-	.field-wrapper {
-		width: 50%;
-		float: left !important;
-	}
+.form-control{
+	width: auto;
 }

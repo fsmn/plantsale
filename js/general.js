@@ -7,7 +7,7 @@
 
 $(document).ready(function(){
 	
-	$(".alert").click(function(e){
+	$(".message").click(function(e){
 		$(this).fadeOut();
 	});
 	

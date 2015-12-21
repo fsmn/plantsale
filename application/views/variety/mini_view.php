@@ -132,6 +132,15 @@
 			<? $flag_buttons[] = array("selection"=>"flag","text"=>"New Flag","type"=>"span","class"=>"button new small flag-add","id"=>"fa_$variety->id");?>
 			<?=create_button_bar($flag_buttons);?>
 	<?endif;?>
+	<div class="field-envelope" id="variety__needs_copy_review__<?php echo $variety->id;?>">
+	<label>Needs Review:</label>
+		<span class="dropdown live-field text" menu="measure_unit" name="width_unit">
+<?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),get_value($variety,"needs_copy_review"),"class='live-field'");?>
+
+</span>
+	
+	</div>
+
 
 		<div class="description" style="clear: both;">
 			<div class="field-envelope" id="common__description__<?=$variety->common_id;?>">

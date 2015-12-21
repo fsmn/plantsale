@@ -103,6 +103,19 @@ class Common_model extends MY_Model
             return FALSE;
         }
     }
+    
+    function get_relatives($id, $genus){
+    	$this->db->from("common");
+    	$this->db->where("common.id!=",$id);
+    	$this->db->where("genus",$genus);
+    	$this->db->join("category","common.category_id = category.id","LEFT");
+    	$this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
+    	$this->db->select("common.*");
+    	$this->db->select("subcategory.subcategory,category.category");
+    	$this->db->order_by("name","ASC");
+    	$result =  $this->db->get()->result();
+    	return $result;
+    }
 
     function find ()
     {

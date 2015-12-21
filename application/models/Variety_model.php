@@ -15,6 +15,7 @@ class Variety_Model extends MY_Model {
 	var $web_description;
 	var $new_year;
 	var $needs_bag;
+	var $needs_copy_review;
 	var $rec_modifier;
 	var $rec_modified;
 
@@ -37,6 +38,7 @@ class Variety_Model extends MY_Model {
 				"print_description",
 				"web_description",
 				"new_year",
+				"needs_copy_review",
 				"needs_bag",
 				"common_id" 
 		);
@@ -400,6 +402,9 @@ class Variety_Model extends MY_Model {
 					"web_description" 
 			) )) {
 				$this->db->like ( $parameter->key, $parameter->value );
+				}elseif($parameter->key=="descriptions"){
+					$this->db->where("(`common`.`description` LIKE '%$parameter->value%' OR `variety`.`web_description` LIKE '%$parameter->value%' OR `variety`.`print_description` LIKE '%$parameter->value%')",NULL,FALSE);
+				
 			} elseif ($parameter->key == "omit") {
 				$this->db->where ( "(orders.omit is NULL OR orders.omit != 1)", NULL, FALSE );
 			} elseif ($parameter->key == "not_flag") {
@@ -420,7 +425,7 @@ class Variety_Model extends MY_Model {
 		$this->db->select ( "sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number" );
 		$this->db->group_by ( "variety.id" );
 		$result = $this->db->get ()->result ();
-		// $this->_log("alert");
+	 $this->_log("alert");
 		return $result;
 	}
 
@@ -447,7 +452,6 @@ class Variety_Model extends MY_Model {
 	{
 		$query = "select web_id from variety orders by web_id DESC LIMIT 1";
 		$web_id = $this->db->query ( $query )->row ()->web_id + 1;
-		
 		return $web_id;
 	}
 

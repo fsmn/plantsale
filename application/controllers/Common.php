@@ -121,6 +121,7 @@ class Common extends MY_Controller
 			$common = $this->common->get ( $id );
 			if ($common) {
 				$data ["varieties"] = $this->variety->get_for_common ( $id );
+				$data["relatives"] = $this->common->get_relatives($id, $common->genus);
 				$data ["common"] = $common;
 				$data ["title"] = sprintf ( "Viewing Common Name: %s", $common->name );
 				$data ["target"] = "common/view";

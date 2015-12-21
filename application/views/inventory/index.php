@@ -15,11 +15,13 @@
 
 </head>
 <body>
+<div id="page">
 <a href="<?php echo site_url("auth/logout");?>" class="btn btn-link">Log Out</a>
 <?php if($this->session->flashdata("warning")):?>
 <div class="alert alert-warning" role="alert"><?php echo $this->session->flashdata("warning");?></div>
 <?php endif; ?>
 <h3 class="title"><?php echo $title;?></h3>
 <?php $this->load->view($target);?>
+</div>
 </body>
 </html>

@@ -122,7 +122,8 @@ class Variety extends MY_Controller
 						"print_description",
 						"needs_bag",
 						"crop_failure",
-						"catalog_number" 
+						"catalog_number" ,
+						"descriptions",
 				);
 				$options = array ();
 				for($i = 0; $i < count ( $variables ); $i ++) {

@@ -196,11 +196,12 @@ class Variety extends MY_Controller {
 			$this->session->set_userdata ( "print_list", $print_list );
 			if ($this->input->get ( "export" )) {
 				$data ["export_type"] = "standard";
-				$data ["filename"] = "variety_export.csv";
+				$date_string = date("Y-m-d-h-j");
+				$data ["filename"] = sprintf("variety-export_%s.csv",$date_string);
 				
 				if ($export_type = $this->input->get ( "export_type" )) {
 					$data ["export_type"] = $export_type;
-					$data ['filename'] = $export_type . ".csv";
+					$data ['filename'] = sprintf("%s_%s.csv", $export_type,$date_string);
 				}
 				$this->load->helper ( "download" );
 				$this->load->view ( "variety/list/export", $data );

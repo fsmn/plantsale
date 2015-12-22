@@ -24,7 +24,8 @@ $fields = array (
 		"max_width" => "Max Width",
 		"width_unit" => "Width Unit",
 		"new_year" => "New",
-		"grower_id" => "Grower ID" 
+		"grower_id" => "Grower ID" ,
+		"null1"=>"Link",
 )
 ;
 
@@ -42,7 +43,9 @@ if ($export_type == "copy_edits") {
 			"null2" => "Coordinatory",
 			"null3" => "Copy in DB",
 			"null4" => "Copy Received",
-			"null5" => "Notes" 
+			"null5" => "Notes" ,
+			"null1"=>"Link",
+				
 	);
 }
 
@@ -55,6 +58,7 @@ $output = array (
 );
 foreach ( $plants as $plant ) {
 	$current_year = $plant->year;
+	
 	foreach ( array_keys ( $fields ) as $key ) {
 		if ($key == "new_year") {
 			if ($plant->$key == $current_year) {
@@ -68,6 +72,8 @@ foreach ( $plants as $plant ) {
 			$line [] = $plant->$key;
 		}
 	}
+	$line[] = sprintf("http://db.friendsschoolplantsale.com/variety/view/%s",$plant->id);
+	
 	$output [] = "\"" . implode ( "\",\"", $line ) . "\"";
 	$line = NULL;
 }

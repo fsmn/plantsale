@@ -5,6 +5,7 @@ $buttons[] = array("text"=>"Print Posters","class"=>array("button","print","prin
 if(IS_ADMIN){
 $buttons[] = array("text"=>"Batch Flag Update","title"=>"Batch update flags for the listed items", "class"=>array("button","batch-update-flags","edit"),"style"=>"print","href"=>$_SERVER['REQUEST_URI']);
 }
+$buttons[] = array("text"=>"Export Copy Edit List", "title"=>"Export selected records for copy editing workflow","class"=>array("button","export","export-copy-edit-list"),"href"=>$_SERVER['REQUEST_URI'] . "&export=true&export_type=copy_edits"  );
 print create_button_bar($buttons);
 ?>
 

@@ -416,7 +416,7 @@ class Variety_Model extends MY_Model {
 			}
 		}
 		// select common fields
-		$this->db->select ( "common.name,common.genus, common.sunlight, category.category, subcategory.subcategory" );
+		$this->db->select ( "common.name,common.genus, common.sunlight, category.category, subcategory.subcategory,common.description" );
 		// include all variety fields (maybe change this).
 		$this->db->select ( "variety.*" );
 		

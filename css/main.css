@@ -13,7 +13,11 @@ body {
 	padding-top: 0px;
 	height: 100%;
 }
-
+p {
+	margin-top: .5em;
+	margin-bottom: .5em;
+	
+}
 #page {
 	margin-left: auto;
 	margin-right: auto;

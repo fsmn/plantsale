@@ -15,10 +15,10 @@
 	<? $this->load->view("image/view"); ?>
 
 </div>
-		<div class='field-set' tabindex=1>
+		<p tabindex=1>
 			<?=edit_field("variety", $variety->variety, "Variety","variety",$variety->id, array("envelope"=>"span"));?>
 			<?php echo create_button(array("text"=>"Edit","class"=>"button edit small variety-edit","id"=>"edit-variety_$variety->id","href"=>site_url("variety/view/$variety->id"),"selection"=>"home"));?>
-		</div>
+		</p>
 		<p>
 			<?=edit_field("new_year",$variety->new_year,"First Year at Sale","variety",$variety->id, array("envelope"=>"span"));?>
 			<? if( $is_new):?>
@@ -32,6 +32,8 @@
 				<label for="genus">Genus:&nbsp;</label>
 				<span class='field'><?=$variety->genus;?></span>
 			</span>
+			</p>
+			<p>
 			<span class='field-set'>
 			<?=edit_field("species", $variety->species, "Species","variety",$variety->id, array("envelope"=>"span"));?>
 		</span>
@@ -117,6 +119,8 @@
 			<label>Category: </label>
 			<span class="field"><?=$variety->category; ?>
 			</span>
+			</p>
+			<p class="subcategory">
 			<label>Subcategory: </label>
 			<span class="field"><?=$variety->subcategory; ?>
 			</span>
@@ -134,7 +138,7 @@
 	<?endif;?>
 	<div class="field-envelope" id="variety__needs_copy_review__<?php echo $variety->id;?>">
 	<label>Needs Review:</label>
-		<span class="dropdown live-field text" menu="measure_unit" name="width_unit">
+		<span class="dropdown live-field text" menu="boolean" name="boolean">
 <?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),get_value($variety,"needs_copy_review"),"class='live-field'");?>
 
 </span>

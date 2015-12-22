@@ -25,7 +25,7 @@ $fields = array (
 		"width_unit" => "Width Unit",
 		"new_year" => "New",
 		"grower_id" => "Grower ID" ,
-		"null1"=>"Link",
+		"null_link"=>"Link",
 )
 ;
 
@@ -39,12 +39,12 @@ if ($export_type == "copy_edits") {
 			"subcategory" => "Subcategory",
 			"grower_id" => "Grower ID",
 			"new_year" => "New",
-			"null1" => "Writer",
-			"null2" => "Coordinatory",
-			"null3" => "Copy in DB",
-			"null4" => "Copy Received",
-			"null5" => "Notes" ,
-			"null1"=>"Link",
+			"null_writer" => "Writer",
+			"null_coordinator" => "Coordinator",
+			"null_copy_in" => "Copy in DB",
+			"null_copy_recd" => "Copy Received",
+			"null_notes" => "Notes" ,
+			"null_link"=>"Link",
 				
 	);
 }

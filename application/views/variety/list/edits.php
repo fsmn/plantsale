@@ -29,7 +29,7 @@ $this->load->view("variety/list/header");
 <?php echo $plant->name;?>
 </td>
 			<td>
-			<a href="<?php base_url("variety/view/$plant->id");?>"/>
+			<a href="<?php echo base_url("variety/view/$plant->id");?>"/>
 <?php echo $plant->variety;?>
 </a>
 </td>

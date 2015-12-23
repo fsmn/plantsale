@@ -74,7 +74,9 @@ $this->load->view("variety/list/header");
 	</div>
 </td>
 <td>
-<?php echo live_field("edit_notes",$plant->edit_notes,"variety",$plant->id,array("envelope"=>"span","size"=>"180"));?>
+<div class='field-set'>
+			<?=edit_field("edit_notes", $plant->edit_notes, "","variety",$plant->id, array("envelope"=>"div","size"=>"180"));?>
+		</div>
 
 </td>
 </tr>

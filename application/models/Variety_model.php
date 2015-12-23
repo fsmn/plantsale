@@ -490,4 +490,6 @@ class Variety_Model extends MY_Model {
 			return FALSE;
 		}
 	}
+	
+	
 }

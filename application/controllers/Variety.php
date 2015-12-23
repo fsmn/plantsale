@@ -191,6 +191,10 @@ class Variety extends MY_Controller {
 					$plant->orders = $this->order->get_for_variety ( $plant->id );
 				} elseif ($action == "flags") {
 					$plant->flags = $this->flag->get_for_variety ( $plant->id );
+				}elseif($action == "edits"){
+					$this->load->model("user_model","user");
+					$users = $this->user->get_user_pairs();
+					$data["users"] = get_keyed_pairs($users,array("first_name","first_name"),TRUE);
 				}
 			}
 			$this->session->set_userdata ( "print_list", $print_list );

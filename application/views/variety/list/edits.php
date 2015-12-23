@@ -55,7 +55,8 @@ $this->load->view("variety/list/header");
 	</div>
 </td>
 <td>
-<?php echo edit_field("copywriter",$plant->copywriter,"","variety",$plant->id,array("envelope"=>"div"));?>
+<?php echo live_field("copywriter",$plant->copywriter,"variety",$plant->id,array("envelope"=>"span","size"=>"63"));?>
+
 </td>
 <td>
 <div class="field-envelope" id="variety__copy_received__<?php echo $plant->id;?>">

@@ -16,6 +16,7 @@ $this->load->view("variety/list/header");
 			<th>Copywriter</th>
 			<th>Copy Received</th>
 			<th>News Copy Review</th>
+			<th>Notes</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -71,6 +72,10 @@ $this->load->view("variety/list/header");
 <?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),get_value($plant,"needs_copy_review"),"class='live-field'");?>
 </span>
 	</div>
+</td>
+<td>
+<?php echo live_field("edit_notes",$plant->edit_notes,"variety",$plant->id,array("envelope"=>"span","size"=>"180"));?>
+
 </td>
 </tr>
 <?php endforeach; ?>

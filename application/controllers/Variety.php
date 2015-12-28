@@ -97,8 +97,15 @@ class Variety extends MY_Controller {
 
 	function search()
 	{
-		if ($this->input->get ( "find" )) {
+		if(is_array($this->input->get("action"))){
 			$action = implode ( "", $this->input->get ( "action" ) );
+		
+		}else{
+			$action = $this->input->get("action");
+		}
+		if ($this->input->get ( "find" )) {
+			
+			
 			$variables = array (
 					"name",
 					"variety",
@@ -218,12 +225,13 @@ class Variety extends MY_Controller {
 				$this->load->view ( "page/index", $data );
 			}
 		} else {
-			$this->_search ();
+			$this->_search ($action);
 		}
 	}
 
-	function _search()
+	function _search($action)
 	{
+		
 		$this->load->model ( "menu_model", "menu" );
 		$this->load->model ( "category_model", "category" );
 		$this->load->model ( "subcategory_model", "subcategory" );
@@ -262,8 +270,11 @@ class Variety extends MY_Controller {
 		$data ["variety"] = NULL;
 		$data ["title"] = "Variety Search";
 		$data ["target"] = "variety/search";
+		if($action == "edits"){
+			$data['target'] = "variety/edits_search";
+		}
 		if ($this->input->get ( "ajax" )) {
-			$this->load->view ( "variety/search", $data );
+			$this->load->view ( $data['target'], $data );
 		} else {
 			
 			$this->load->view ( "page/index", $data );

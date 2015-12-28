@@ -47,7 +47,15 @@
 <p>
 Found Count: <strong><?=count($plants);?> Varieties</strong>
 </p>
-<?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","search","dialog","refine"),"href"=>site_url("variety/search"))));?>
+<?php 
+/*This $action value allows the same interface to toggle
+ *  between generic variety searches and the specialized copyedits search interface with less code. 
+ */
+$action = FALSE;
+if($this->input->get("action")=="edits"){
+	$action = "edits";
+}
+echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","search","dialog","refine"),"href"=>site_url("variety/search?action=$action"))));?>
 
 	</div>
 </fieldset>

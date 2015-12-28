@@ -32,20 +32,27 @@ $refine = $this->input->get ( "refine" );
 	</div>
 	<div class="field-set block">
 		<div class="column first">
-			<label>Needs Copy Review</label>
-<?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),$refine ? get_cookie("needs_copy_review"):"");?>
+						<?=create_input($variety, "descriptions","Search All Descriptions");?>
+					<?=create_input($variety, "description","General Description");?>
+			
 </div>
-		<div class="column last">
-			<?=create_input($variety, "descriptions","Search All Descriptions");?>
-			</div>
-	</div>
-	<div class="field-set block">
-		<div class="column first">
-		<?=create_input($variety, "description","General Description");?>
-	</div>
 		<div class="column last">
 		<?=create_input($variety, "print_description","Variety Description","print_description",$refine);?>
 		<?=create_input($variety, "web_description","Web Description","web_description",$refine);?>
+	</div>
+	</div>
+	<div class="field-set block">
+		<div class="column first">
+		<label>Needs Copy Review</label>
+<?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),$refine ? get_cookie("needs_copy_review"):"");?>
+		<label for="editor">Coordinator</label>
+		<?php echo form_dropdown("editor",$users,$refine? get_cookie("editor"):"");?>
+		<?php echo create_input($variety,"copywriter","Copywriter","copywriter",$refine);?>
+	</div>
+		<div class="column last">
+		<label for="copy_received">Copy Received?</label>
+<?php echo form_dropdown("copy_received",array("0"=>"","no"=>"No","yes"=>"Yes"),$refine ? get_cookie("copy_received"):"");?>
+		<?=create_input($variety, "edit_notes","Notes","edit_notes",$refine);?>
 	</div>
 	</div>
 	<div id="sort-block">

@@ -87,7 +87,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /*Images directory */
 define("IMAGE_PATH", $_SERVER['DOCUMENT_ROOT'] . "/images");
-define('APP_VERSION', "4.8");
+define('APP_VERSION', "4.9");
 
 
 /* End of file constants.php */

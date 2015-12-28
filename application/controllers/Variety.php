@@ -127,7 +127,11 @@ class Variety extends MY_Controller {
 					"crop_failure",
 					"catalog_number",
 					"descriptions",
-					"needs_copy_review" 
+					"editor",
+					"copywriter",
+					"copy_received",
+					"edit_notes",
+					"needs_copy_review",
 			);
 			$options = array ();
 			for($i = 0; $i < count ( $variables ); $i ++) {
@@ -235,6 +239,11 @@ class Variety extends MY_Controller {
 		$this->load->model ( "menu_model", "menu" );
 		$this->load->model ( "category_model", "category" );
 		$this->load->model ( "subcategory_model", "subcategory" );
+		if($action == "edits"){
+			$this->load->model("user_model","user");
+			$users = $this->user->get_user_pairs();
+			$data["users"] = get_keyed_pairs($users,array("first_name","first_name"),TRUE);
+		}
 		$categories = $this->category->get_pairs ();
 		$data ["categories"] = get_keyed_pairs ( $categories, array (
 				"key",

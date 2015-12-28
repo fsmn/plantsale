@@ -5,7 +5,8 @@
  <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/main.css")?>" />
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/color.css")?>"/>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" media="screen"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" media="screen"> 		
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" media="screen"> 	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" media="screen">	
 
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/popup.css")?>" />
 <? if(IS_EDITOR): ?>

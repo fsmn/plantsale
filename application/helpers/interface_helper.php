@@ -394,7 +394,9 @@ function get_button_style($style)
 		case "edit" :
 			 $class[] = "btn-success";
 			break;
-
+		case "auth":
+			$class[] = "btn-default";
+			break;
 		default :
 			$class [] = "btn-primary";
 	}

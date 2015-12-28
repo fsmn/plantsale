@@ -15,8 +15,6 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<input type="radio" name="action[]" value="history" />
 		&nbsp; <label for="action[]">Flag Listing</label>
 		<input type="radio" name="action[]" value="flags" />
-			&nbsp; <label for="action[]">Editing</label>
-		<input type="radio" name="action[]" value="edits" />
 	</div>
 	<div class="field-set block">
 		<label for="year">Year: </label>

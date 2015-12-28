@@ -129,6 +129,7 @@ if($("body").hasClass("editor")){
 	my_attr = my_parent.split("__");
 	my_type = "text";
 	my_category = me.attr('menu');
+	
 	my_name = me.attr("name");
 		if(me.hasClass("dropdown")){
 			my_type = "dropdown";
@@ -146,6 +147,9 @@ if($("body").hasClass("editor")){
 		}else if(me.hasClass("subcategory-dropdown")){
 			my_type = "subcategory-dropdown";
 			my_category = "subcategory";
+		}else if(me.hasClass("user-dropdown")){
+			my_type="user-dropdown";
+			my_category="user";
 		}
 		form_data = {
 				table: my_attr[0],
@@ -155,12 +159,12 @@ if($("body").hasClass("editor")){
 				category: my_category,
 				value: me.html()
 		};
-console.log(form_data);
 		$.ajax({
 			type:"get",
 			url: base_url +  "menu/edit_value",
 			data: form_data,
 			success: function(data){
+				console.log(data);
 				$("#" + my_parent + " .edit-field").html(data);
 				$("#" + my_parent + " .edit-field").removeClass("edit-field").removeClass("field").addClass("live-field").addClass("text");
 				$("#" + my_parent + " .live-field input").focus();

@@ -399,7 +399,8 @@ class Variety_Model extends MY_Model {
 					"species",
 					"description",
 					"print_description",
-					"web_description" 
+					"web_description" ,
+					"edit_notes",
 			) )) {
 				$this->db->like ( $parameter->key, $parameter->value );
 				}elseif($parameter->key=="descriptions"){
@@ -416,7 +417,7 @@ class Variety_Model extends MY_Model {
 			}
 		}
 		// select common fields
-		$this->db->select ( "common.name,common.genus, common.sunlight, category.category, subcategory.subcategory" );
+		$this->db->select ( "common.name,common.genus, common.sunlight, category.category, subcategory.subcategory,common.description" );
 		// include all variety fields (maybe change this).
 		$this->db->select ( "variety.*" );
 		
@@ -425,7 +426,7 @@ class Variety_Model extends MY_Model {
 		$this->db->select ( "sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number" );
 		$this->db->group_by ( "variety.id" );
 		$result = $this->db->get ()->result ();
-	 $this->_log("alert");
+		//$this->_log();
 		return $result;
 	}
 
@@ -490,4 +491,6 @@ class Variety_Model extends MY_Model {
 			return FALSE;
 		}
 	}
+	
+	
 }

@@ -68,7 +68,19 @@ $buttons[] = array(
         "title" => "Get Dollar Totals for All Growers for the current year",
 		"style"=>"search",
 );
-
+$buttons[] = array(
+		"selection" => "all",
+		"text" => "Copy Edits",
+		"class" => array(
+				"button",
+				"search",
+				"dialog",
+				"search-varieties",
+		),
+		"style"=>"search",
+		"href"=> site_url("variety/search?action=edits"),
+		"title" => "Search among the varieties"
+);
 
 
 print create_button_bar($buttons, array(

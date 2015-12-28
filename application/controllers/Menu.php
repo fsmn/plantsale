@@ -140,6 +140,9 @@ class Menu extends MY_Controller
 				case "dropdown" :
 					$output = $this->_get_dropdown ( $data ["category"], $data ["value"], $data ["name"] );
 					break;
+				case "user-dropdown":
+					$output = $this->_get_user_dropdown($data["category"],$data["value"],$data["name"]);
+					break;
 				case "category-dropdown" :
 					$this->load->model ( "common_model", "common" );
 					$common = $this->common->get ( $data ["id"] );
@@ -198,6 +201,13 @@ class Menu extends MY_Controller
 					}
 					// array_unshift($categories,(object)array("key"=>0,"value"=>""));
 					
+					break;
+				case "user":
+					$categories = $this->ion_auth->users();
+					print_r( $categories);
+					die();
+					$field = "user_id";
+					$value = "username";
 					break;
 				default :
 					
@@ -328,6 +338,13 @@ class Menu extends MY_Controller
 					"value" 
 			), TRUE );
 			return form_dropdown ( $field, $pairs, $value, "class='live-field'" );
+		}
+		
+		function _get_user_dropdown($category,$value,$field){
+			$this->load->model("user_model","user");
+			$users = $this->user->get_user_pairs();
+			$pairs = get_keyed_pairs($users,array("first_name","first_name"),TRUE);
+			return form_dropdown($field,$pairs,$value,"class='live-field'");
 		}
 
 		function _get_multiselect ( $category, $value, $field )

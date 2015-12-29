@@ -37,6 +37,8 @@ Found Count: <strong><?=count($names);?> Records</strong>
 	<?if($full_list):?>
 	<thead>
 		<tr>
+					<th></th>
+		
 			<th>Name</th>
 
 			<th>Genus</th>
@@ -49,13 +51,16 @@ Found Count: <strong><?=count($names);?> Records</strong>
 
 			<th>Description</th>
 
-			<th></th>
 		</tr>
 	</thead>
 	<? endif; ?>
 	<tbody>
 		<? foreach($names as $name): ?>
 		<tr>
+		<td>
+			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$name->id")));?>
+
+			</td>
 			<td><?=edit_field("name", $name->name, "","common",$name->id,array("envelope"=>"span"));?>
 			</td>
 			<td>
@@ -76,10 +81,7 @@ Found Count: <strong><?=count($names);?> Records</strong>
 
 			</td>
 
-			<td>
-			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$name->id")));?>
-
-			</td>
+			
 		</tr>
 		<? endforeach; ?>
 	</tbody>

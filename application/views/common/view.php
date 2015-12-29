@@ -74,20 +74,8 @@ if (IS_EDITOR) {
 
 </div>
 
-<div class="column-right column last common-varieties">
-<?
-if (IS_EDITOR) {
-    print create_button_bar(array(
-            $buttons["add_variety"]
-    ));
-}
-
-?>
-<? $this->load->view("variety/list/list");?>
-</div>
-<div class="common-related">
-<div class="column first">
-<h3>Potential Relatives</h3>
+<div class="column-right column last">
+<!-- <h3>Potential Relatives</h3>
 <table class="table list">
 <thead>
 <tr>
@@ -124,10 +112,23 @@ Add/Remove
 <? endforeach; ?>
 </tbody>
 </table>
+ -->
+</div>
+<div class="column first  common-varieties">
+<?
+if (IS_EDITOR) {
+    print create_button_bar(array(
+            $buttons["add_variety"]
+    ));
+}
+
+?>
+<? $this->load->view("variety/list/list");?>
 </div>
 <div class="column last">
+<!-- 
 <h3>Defined Relatives</h3>
-<img src="<?php echo base_url("images/tumbleweed.gif");?>" class="message" style="width: 100%"/>
 </div>
+ -->
 </div>
 

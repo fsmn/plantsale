@@ -8,4 +8,4 @@
 <?="App Version: " . APP_VERSION; ?>
 </div>
 
-<?endif;
+<?endif;?>

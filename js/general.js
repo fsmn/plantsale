@@ -32,6 +32,8 @@ $(document).ready(function(){
 	
 	$(document).on("click",".search.dialog",function(e){
 		e.preventDefault();
+		show_popup(this);
+		return;
 		refine = 0;
 		if($(this).hasClass("refine")){
 			refine = 1;
@@ -54,6 +56,8 @@ $(document).ready(function(){
 	
 	$(document).on("click",".create.dialog, .edit.dialog",function(e){
 		e.preventDefault();
+		show_popup(this);
+		return;
 		redirect_url = $(location).attr("href");
 
 		url = $(this).attr("href");
@@ -428,7 +432,7 @@ function show_popup(me){
 		url: target,
 		success: function(data){
 			$("#popup").html(data);
-			$("#my_dialog").modal("show");
+			$("#popup").modal("show");
 			//on larger screens, shrink the dialog to a more friendly size
 //			if(window_width > 768){
 //				my_content = $(".modal-body form").css("max-width");

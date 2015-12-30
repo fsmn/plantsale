@@ -17,11 +17,12 @@
 <script type="text/javascript">
 var base_url = '<?=base_url("index.php") . "/";?>';
 </script>
-
+<!-- 
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <script>

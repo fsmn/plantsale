@@ -9,14 +9,13 @@
 			<th>Height</th>
 			<th>Width</th>
 			<th>Year</th>
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<? foreach($varieties as $variety): ?>
 		<tr id="variety-row_<?=$variety->id;?>" class="variety-row">
-			<td><?=$variety->species;?></td>
-			<td class="variety-variety edit"><?=$variety->variety;?></td>
+			<td><a href="<?php echo base_url("variety/view/$variety->id");?>"><?=$variety->species;?></a></td>
+			<td class="variety-variety edit"><a href="<?php echo base_url("variety/view/$variety->id");?>"><?=$variety->variety;?></a></td>
 			<?
 			$height = "";
 			if($variety->min_height){
@@ -43,10 +42,6 @@
 			</td>
 			<td class="variety-width edit"><?=$width;?></td>
 			<td class="variety-year edit"><?=$variety->year;?></td>
-			<td class="variety-view edit">
-						<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"id"=>"id_$variety->id","href"=>site_url("variety/view/$variety->id")));?>
-			
-			</td>
 		</tr>
 
 		<? endforeach; ?>

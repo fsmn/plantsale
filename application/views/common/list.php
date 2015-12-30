@@ -1,35 +1,35 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-print $this->input->post("year");
+<?php
+
+defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+print $this->input->post ( "year" );
 // list.php Chris Dart Feb 27, 2013 11:07:53 AM chrisdart@cerebratorium.com
 ?>
 <fieldset class="search-fieldset">
 	<legend title="click to show or hide the parameters">Search Parameters</legend>
 	<div class="search-parameters">
 	<?
-	if(!empty($params)){
-
-		$keys = array_keys($params);
-		$values = array_values($params);
+	if (! empty ( $params )) {
+		
+		$keys = array_keys ( $params );
+		$values = array_values ( $params );
 		echo "<ul>";
-		for($i = 0; $i < count($params); $i++){
-			echo "<li>" . ucfirst($keys[$i]) .": <strong>";
-			if(is_array($values[$i])){
-				echo implode(", ", $values[$i]);
-			}else{
-				echo $values[$i];
+		for($i = 0; $i < count ( $params ); $i ++) {
+			echo "<li>" . ucfirst ( $keys [$i] ) . ": <strong>";
+			if (is_array ( $values [$i] )) {
+				echo implode ( ", ", $values [$i] );
+			} else {
+				echo $values [$i];
 			}
 			echo "</strong></li>";
 		}
 		echo "</ul>";
-
-	}else{
+	} else {
 		echo "<p>Showing All Common Names</p>";
-
 	}
 	?>
 <p>
-Found Count: <strong><?=count($names);?> Records</strong>
-</p>
+			Found Count: <strong><?=count($names);?> Records</strong>
+		</p>
 <?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","refine","search","dialog","search-common-names"),"href"=>site_url("common/search"))));?>
 	</div>
 </fieldset>
@@ -37,6 +37,7 @@ Found Count: <strong><?=count($names);?> Records</strong>
 	<?if($full_list):?>
 	<thead>
 		<tr>
+			<th></th>
 			<th>Name</th>
 
 			<th>Genus</th>
@@ -49,13 +50,16 @@ Found Count: <strong><?=count($names);?> Records</strong>
 
 			<th>Description</th>
 
-			<th></th>
 		</tr>
 	</thead>
 	<? endif; ?>
 	<tbody>
 		<? foreach($names as $name): ?>
 		<tr>
+			<td>
+			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$name->id")));?>
+
+			</td>
 			<td><?=edit_field("name", $name->name, "","common",$name->id,array("envelope"=>"span"));?>
 			</td>
 			<td>
@@ -76,10 +80,7 @@ Found Count: <strong><?=count($names);?> Records</strong>
 
 			</td>
 
-			<td>
-			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$name->id")));?>
 
-			</td>
 		</tr>
 		<? endforeach; ?>
 	</tbody>

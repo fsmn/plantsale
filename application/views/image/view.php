@@ -17,8 +17,10 @@ echo create_button ( array (
 	 );
 	?>
 			<? else: ?>
-<img src="<?=site_url("files/$variety->image_name");?>" />
+			<div class="center">
+<img src="<?=site_url("files/$variety->image_name");?>"/>
 <? if(IS_EDITOR): ?>
 	<?php echo create_button(array("text"=>"Delete Image","class"=>array("button","delete","delete-image"),"id"=>"delete-image_$variety->image_id"));?>
 	<? endif;?>
+	</div>
 <? endif;?>

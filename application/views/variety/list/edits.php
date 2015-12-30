@@ -1,5 +1,5 @@
 <?php
-$this->load->view("variety/list/header");
+$this->load->view ( "variety/list/header" );
 ?>
 <table class="table list">
 	<thead>
@@ -29,57 +29,55 @@ $this->load->view("variety/list/header");
 <?php echo $plant->name;?>
 </td>
 			<td>
-			<a href="<?php echo base_url("variety/view/$plant->id");?>"/>
-<?php echo $plant->variety;?>
-</a>
-</td>
+				<a href="<?php echo base_url("variety/view/$plant->id");?>" /><?php echo $plant->variety;?></a>
+			</td>
 			<td>
 <?php echo format_latin_name($plant->genus, $plant->species);?>
 </td>
-<td>
+			<td>
 <?php echo $plant->category; ?>
 </td>
-<td>
+			<td>
 <?php echo $plant->subcategory;?>
 </td>
-<td>
+			<td>
 <?php echo $plant->grower_id;?>
 </td>
-<td>
+			<td>
 <?php echo $plant->year == $plant->new_year?"New":"";?>
 </td>
-<td>
-<div class="field-envelope" id="variety__editor__<?php echo $plant->id;?>">
-		<span class="user-dropdown live-field text" menu="boolean" name="boolean">
+			<td>
+				<div class="field-envelope" id="variety__editor__<?php echo $plant->id;?>">
+					<span class="user-dropdown live-field text" menu="boolean" name="boolean">
 <?php echo form_dropdown("editor",$users,get_value($plant,"editor"),"class='live-field'");?>
 </span>
-	</div>
-</td>
-<td>
+				</div>
+			</td>
+			<td>
 <?php echo live_field("copywriter",$plant->copywriter,"variety",$plant->id,array("envelope"=>"span","size"=>"63"));?>
 
 </td>
-<td>
-<div class="field-envelope" id="variety__copy_received__<?php echo $plant->id;?>">
-		<span class="dropdown live-field text" menu="boolean" name="boolean">
+			<td>
+				<div class="field-envelope" id="variety__copy_received__<?php echo $plant->id;?>">
+					<span class="dropdown live-field text" menu="boolean" name="boolean">
 <?php echo form_dropdown("copy_received",array("0"=>"","no"=>"No","yes"=>"Yes"),get_value($plant,"copy_received"),"class='live-field'");?>
 </span>
-	</div>
-</td>
-<td>
-<div class="field-envelope" id="variety__needs_copy_review__<?php echo $plant->id;?>">
-		<span class="dropdown live-field text" menu="boolean" name="boolean">
+				</div>
+			</td>
+			<td>
+				<div class="field-envelope" id="variety__needs_copy_review__<?php echo $plant->id;?>">
+					<span class="dropdown live-field text" menu="boolean" name="boolean">
 <?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),get_value($plant,"needs_copy_review"),"class='live-field'");?>
 </span>
-	</div>
-</td>
-<td>
-<div class='field-set'>
+				</div>
+			</td>
+			<td>
+				<div class='field-set'>
 			<?=edit_field("edit_notes", $plant->edit_notes, "","variety",$plant->id, array("envelope"=>"div","size"=>"180"));?>
 		</div>
 
-</td>
-</tr>
+			</td>
+		</tr>
 <?php endforeach; ?>
 </tbody>
 </table>

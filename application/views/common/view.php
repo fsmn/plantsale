@@ -126,9 +126,5 @@ if (IS_EDITOR) {
 <? $this->load->view("variety/list/list");?>
 </div>
 <div class="column last">
-<!-- 
-<h3>Defined Relatives</h3>
-</div>
- -->
 </div>
 

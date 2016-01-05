@@ -43,7 +43,7 @@ $refine = $this->input->get ( "refine" );
 	</div>
 	<div class="field-set block">
 		<div class="column first">
-		<label>Needs Copy Review</label>
+		<label>Needs Copy</label>
 <?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),$refine ? get_cookie("needs_copy_review"):"");?>
 		<label for="editor">Coordinator</label>
 		<?php echo form_dropdown("editor",$users,$refine? get_cookie("editor"):"");?>

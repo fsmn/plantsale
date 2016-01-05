@@ -81,7 +81,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 	</div>
 	<div class="field-set block">
 		<div class="column first">
-			<label>Needs Copy Review</label>
+			<label>Needs Copy</label>
 <?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),$refine ? get_cookie("needs_copy_review"):"");?>
 </div>
 		<div class="column last">

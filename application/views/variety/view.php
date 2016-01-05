@@ -134,7 +134,7 @@ echo create_button ( array (
 </p>
 			<p>
 		
-		<?php echo edit_field("needs_copy_review",$variety->needs_copy_review,"Needs Copy Review","variety",$variety->id,  array("class"=>"dropdown","attributes"=>"menu='boolean'","envelope"=>"span"));?>
+		<?php echo edit_field("needs_copy_review",$variety->needs_copy_review,"Needs Copy","variety",$variety->id,  array("class"=>"dropdown","attributes"=>"menu='boolean'","envelope"=>"span"));?>
 				<?php echo edit_field("copy_received",$variety->copy_received,"Copy Received","variety",$variety->id,  array("class"=>"dropdown","attributes"=>"menu='boolean'","envelope"=>"span"));?>
 		
 		</p>

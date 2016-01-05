@@ -15,7 +15,7 @@ $this->load->view ( "variety/list/header" );
 			<th>Coordinator</th>
 			<th>Copywriter</th>
 			<th>Copy Received</th>
-			<th>News Copy Review</th>
+			<th>News Copy</th>
 			<th>Notes</th>
 		</tr>
 	</thead>

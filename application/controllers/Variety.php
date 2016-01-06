@@ -574,6 +574,7 @@ class Variety extends MY_Controller {
 	function show_copy_text()
 	{
 		$data ["varieties"] = $this->variety->get_varieties_for_year ( get_current_year (), TRUE );
+		$data["year"] = get_current_year();
 		$data ["title"] = "Wasting Trees";
 		$data ["target"] = "variety/print/paper_waste";
 		$data ["format"] = "print";

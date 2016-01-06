@@ -2,7 +2,9 @@
 
 // paper_waste.php Chris Dart Feb 10, 2015 1:48:29 PM chrisdart@cerebratorium.com
 
-
+?>
+<h2>Copy Edits for <?php echo $year;?></h2>
+<?php 
 foreach($varieties as $variety):
 ?>
 <div class="variety-info">

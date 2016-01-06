@@ -338,7 +338,7 @@ function add_fa_icon ( $class = array() )
 		$output = "&nbsp;<i class='fa fa-shopping-cart'></i>";
 	}
 	elseif (in_array ( "export", $class )) {
-		$output = "&nbsp;<i class='fa fa-cloud-download'></i>";
+		$output = "&nbsp;<i class='fa fa-download'></i>";
 	}
 	elseif (in_array ( "edit", $class )) {
 		$output = "&nbsp;<i class='fa fa-pencil-square-o'></i>";

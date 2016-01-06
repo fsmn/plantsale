@@ -573,6 +573,7 @@ class Variety extends MY_Controller {
 
 	function show_copy_text()
 	{
+	    //@TODO merge this function with the search function. 
 		$data ["varieties"] = $this->variety->get_varieties_for_year ( get_current_year (), TRUE );
 		$data["year"] = get_current_year();
 		$data ["title"] = "Wasting Trees";

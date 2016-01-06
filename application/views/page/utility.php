@@ -35,6 +35,14 @@ if (IS_ADMIN) {
 			"href" => site_url ( "auth" ),
 			"title" => "Edit the site users"
 	);
+	$buttons [] = array(
+			"selection"=>"auth",
+			"text"=>"Download DB <i class='fa fa-download'></i>",
+			"title"=>"Dowload a copy of the database",
+			"style"=>"auth",
+			"href"=>site_url("backup"),
+			"class"=>array("button","auth"),
+	);
 }
 
 $buttons [] = array (

@@ -1,6 +1,9 @@
 <?php
 $this->load->view ( "variety/list/header" );
 ?>
+<p>
+<a href="<?php echo site_url("variety/show_copy_text");?>">Show printable list of copy for <?php echo get_current_year();?></a>
+</p>
 <table class="table list">
 	<thead>
 		<tr>

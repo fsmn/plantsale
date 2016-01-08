@@ -1172,8 +1172,9 @@ table.shelf-checking td.text-cell {
 	font-family: "Monaco", serif;
 }
 
-@media (max-width:600px){
+@media (max-width:768px){
 	body.not-logged-in {
+	font-size: 18px;
 	padding: 0;
 	margin: 0;
 	transition: 1s ease all;
@@ -1201,6 +1202,15 @@ table.shelf-checking td.text-cell {
 	.not-logged-in .login h2 {
 	box-shadow: none;
 	background: none;
+	}
+	
+}
+
+@media (max-width: 768px){
+	.login {
+	width: 90%;
+	padding: 0;
+	margin: 0;
 	}
 	
 }

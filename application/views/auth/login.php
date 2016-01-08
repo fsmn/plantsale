@@ -1,9 +1,9 @@
 <div class="login">
 <h2>Friends School Plantsale Database</h2>
 <p><?php echo lang('login_subheading');?></p>
-
-<div id="infoMessage"><?php echo $message;?></div>
-
+<?php if(isset($message)):?>
+<div class="message alert"><?php echo $message;?></div>
+<?php endif;?>
 <?php echo form_open("auth/login");?>
 
   <p>

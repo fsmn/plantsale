@@ -1,5 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title><?=$title;?></title>
 <meta http-equiv="refresh" content = "14400; url=<?php echo site_url("auth/logout");?>">

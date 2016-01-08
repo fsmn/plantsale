@@ -27,7 +27,6 @@ $body_class = implode(" ",$body_classes);
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-10646">
 <? $this->load->view('page/head');?>
 </head>
 <body class="browser <?=$body_class;?>">

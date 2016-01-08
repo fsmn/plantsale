@@ -20,8 +20,6 @@ p {
 	
 }
 #page {
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .highlight {
@@ -42,7 +40,7 @@ p {
 }
 
 .not-logged-in #main {
-	width: 960px;
+	width: auto;
 	position: relative;
 	display: block;
 }
@@ -106,6 +104,8 @@ div.login-inputs {
 .login-inputs input[type="text"] {
 	font-size: 1.2em;
 }
+
+
 
 div.error {
 	text-align: left;
@@ -1162,4 +1162,32 @@ table.shelf-checking td.text-cell {
 
 .mr-shmallow.on, #page.on {
 	font-family: "Monaco", serif;
+}
+
+@media (max-width:600px){
+	body{
+	padding: 0;
+	margin: 0;
+	}
+	#header{
+	height: auto;
+	}
+	
+	#page-title {
+	float: none;
+	}
+	.login{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    
+	}
+	
+	.login h2 {
+	box-shadow: none;
+	background: none;
+	}
+	
 }

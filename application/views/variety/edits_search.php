@@ -15,6 +15,10 @@ $refine = $this->input->get ( "refine" );
 			id="new_year"
 		/>
 	</div>
+	<div class="field-set">
+	<label for="name">Common Name</label>
+	<input type="text" name="name" id="common_name" value ="<?php echo $refine ? get_cookie("name"):"";?>"/>
+	</div>
 	<div class="field-set" style="font-size: .9em">
 		<input type="checkbox" name="no_image" id="no_image" <?= $refine && get_cookie("needs_bag")== 1?"checked":"";?> value="1" />
 		<label for="no_image">Missing Image</label> &nbsp;

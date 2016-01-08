@@ -45,6 +45,14 @@ p {
 	display: block;
 }
 
+.not-logged-in #page-wrapper {
+	padding-top: 6em;
+}
+
+.not-logged-in #header {
+	display:  none;
+}
+
 .editForm {
 	width: 100%;
 	padding-top: 1%;
@@ -1165,18 +1173,23 @@ table.shelf-checking td.text-cell {
 }
 
 @media (max-width:600px){
-	body{
+	body.not-logged-in {
 	padding: 0;
 	margin: 0;
+	transition: 1s ease all;
 	}
-	#header{
+	.not-logged-in #header{
 	height: auto;
 	}
 	
-	#page-title {
+	.not-logged-in #page-wrapper {
+	padding-top: 2em;
+	}
+	
+	.not-logged-in #page-title {
 	float: none;
 	}
-	.login{
+	.not-logged-in .login{
 	padding: 0;
 	margin: 0;
 	width: 100%;
@@ -1185,7 +1198,7 @@ table.shelf-checking td.text-cell {
     
 	}
 	
-	.login h2 {
+	.not-logged-in .login h2 {
 	box-shadow: none;
 	background: none;
 	}

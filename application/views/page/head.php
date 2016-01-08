@@ -2,6 +2,7 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title><?=$title;?></title>
+<meta http-equiv="refresh" content = "14400; url=<?php echo site_url("auth/logout");?>">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" media="screen"> -->		
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/main.css")?>" />
 <link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/color.css")?>"/>

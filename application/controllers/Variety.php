@@ -205,7 +205,7 @@ class Variety extends MY_Controller {
 				}elseif($action == "edits"){
 					$this->load->model("user_model","user");
 					$users = $this->user->get_user_pairs();
-					$data["users"] = get_keyed_pairs($users,array("first_name","first_name"),TRUE);
+					$data["users"] = get_keyed_pairs($users,array("id","name"),TRUE);
 				}
 			}
 			$this->session->set_userdata ( "print_list", $print_list );
@@ -242,7 +242,7 @@ class Variety extends MY_Controller {
 		if($action == "edits"){
 			$this->load->model("user_model","user");
 			$users = $this->user->get_user_pairs();
-			$data["users"] = get_keyed_pairs($users,array("first_name","first_name"),TRUE);
+			$data["users"] = get_keyed_pairs($users,array("id","name"),TRUE);
 		}
 		$categories = $this->category->get_pairs ();
 		$data ["categories"] = get_keyed_pairs ( $categories, array (
@@ -405,13 +405,23 @@ class Variety extends MY_Controller {
 	{
 		$id = $this->input->post ( "id" );
 		$value = $this->input->post ( "value" );
+		$field = $this->input->post("field");
 		if (is_array ( $value )) {
 			$value = implode ( ",", $value );
 		}
 		$values = array (
-				$this->input->post ( "field" ) => $value 
+				$field => $value 
 		);
 		$this->variety->update ( $id, $values );
+		if ($field == "editor") {
+			if($value){
+			$this->load->model ( "user_model", "user" );
+			$user = $this->user->get_user ( $value );
+			$value = sprintf ( "%s %s", $user->first_name, $user->last_name );
+			}else{
+				$value = "&nbsp;";
+			}
+		}
 		echo $value;
 	}
 

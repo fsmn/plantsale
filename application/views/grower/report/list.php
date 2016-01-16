@@ -29,6 +29,9 @@ Email/Phone
 Address
 </th>
 <th>
+Our Contact
+</th>
+<th>
 Totals for <?=$year;?>
 </th>
 <th class="no-print">

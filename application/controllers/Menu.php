@@ -343,7 +343,10 @@ class Menu extends MY_Controller
 		function _get_user_dropdown($category,$value,$field){
 			$this->load->model("user_model","user");
 			$users = $this->user->get_user_pairs();
-			$pairs = get_keyed_pairs($users,array("first_name","first_name"),TRUE);
+			$pairs = get_keyed_pairs($users,array("id","name"),TRUE);
+			if($value){
+			$value = $this->user->get_by_name($value);
+			}
 			return form_dropdown($field,$pairs,$value,"class='live-field'");
 		}
 

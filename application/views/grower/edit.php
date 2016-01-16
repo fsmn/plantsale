@@ -38,6 +38,9 @@ if(array_key_exists("type",$field) && $field["type"] == "dropdown"){
 			id="grower-id"
 			value="<?=get_value($grower,"id");?>" /><span id="unique-id"></span>
 	</p>
+	<p><label for="user_id">Our Contact</label>
+	<?php echo form_dropdown("user_id",$users);?>
+	</p>
 <? echo implode("\r",$output);?>
 <p>
 		<input

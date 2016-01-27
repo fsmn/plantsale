@@ -13,7 +13,8 @@ $sorting = array(
         "count_presale" => "Presale Count",
         "count_midsale" => "Midsale Count",
         "pot_size" => "Pot Size",
-        "common.name" => "Common Name",
+		"grower_id"=>"Grower ID",
+		
         "price"=>"Sale Price",
 		"year"=>"Year",
 );

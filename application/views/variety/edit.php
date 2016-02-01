@@ -39,6 +39,8 @@ $plant_colors = form_multiselect("plant_color[]",$plant_colors, $colors );
 
 <div class="field-group"><label for="add_order">Add a New Order for this variety:</label><input type="checkbox" id="add_order" name="add_order" checked value="true"/>
 </div>
+<div class="field-group"><label for="needs_copy_review">Needs Copy Review:</label><input type="checkbox" id="needs_copy_review" name="needs_copy_review" <?php echo $action=="insert"?"checked":""?> value="yes"/>
+</div>
 <div class="button-box">
 <input type="submit" name="submit" class="variety-<?=$action;?> button <?php echo $action;?>" value="<?=ucfirst($action);?>"/>
 </div>

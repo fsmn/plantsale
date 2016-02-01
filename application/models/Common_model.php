@@ -189,7 +189,7 @@ class Common_model extends MY_Model
 
     	$this->db->select("common.*");
     	$this->db->select("category.category");
-    	$this->db->select("subcategory.subcategory, subcategory.web_label");
+    	$this->db->select("subcategory.subcategory");
     	$this->db->order_by("orders.catalog_number");
     	$this->db->order_by("category.category");
     	$this->load->helper("export");

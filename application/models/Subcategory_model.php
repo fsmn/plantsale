@@ -47,10 +47,9 @@ class Subcategory_Model extends MY_Model
     	return $result;
     }
     
-    function insert($category_id, $subcategory,$web_label = FALSE){
+    function insert($category_id, $subcategory){
     	$this->category_id = $category_id;
     	$this->subcategory = $subcategory;
-    	$this->web_label = $web_label;
     	return $this->_insert("subcategory");
     }
     

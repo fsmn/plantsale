@@ -443,7 +443,7 @@ class Variety_Model extends MY_Model {
 		$this->db->select ( "common.other_names" );
 		$this->db->select ( "orders.catalog_number,orders.year, orders.price,orders.pot_size,orders.count_midsale" );
 		$this->db->select ( "category.category" );
-		$this->db->select ( "subcategory.web_label,subcategory.subcategory" );
+		$this->db->select ( "subcategory.subcategory" );
 		$result = $this->db->get ()->result ();
 		// $this->_log("alert");
 		return $result;

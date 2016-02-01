@@ -54,7 +54,7 @@ foreach ($varieties as $variety) {
                 $variety->species,
                 str_replace(",", "\r", $variety->plant_color),
                 $variety->other_names,
-                $variety->subcategory ? $variety->web_label : $variety->category,
+                $variety->subcategory ? $variety->subcategory : $variety->category,
                 str_replace("'", "&rsquo;", str_replace("\"", "&quot;", $variety->print_description)),
                 str_replace("'", "&rsquo;", str_replace("\"", "&quot;", $variety->web_description)),
                 $variety->price,

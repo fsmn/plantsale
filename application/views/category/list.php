@@ -15,9 +15,6 @@ echo create_button_bar($buttons);
 		<?php foreach($category->subcategories as $subcategory):?>
 		<li class="list-item">
 			<?php echo live_field("subcategory",$subcategory->subcategory,"subcategory", $subcategory->id,array("size"=>"auto","envelope"=>"span")); ?>
-		&nbsp;
-					<?php echo live_field("web_label",$subcategory->web_label ,"subcategory", $subcategory->id,array("size"=>"200","envelope"=>"span")); ?>
-		
 		</li>
 		<?php endforeach;?>
 		</ul>

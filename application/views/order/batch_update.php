@@ -45,6 +45,10 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 		<label for="tiers">Tiers:&nbsp;</label> <input type="text" name="tiers"
 			value="" autocomplete="off"/>
 	</div>
+				<div class="grower-code field">
+		<label for="grower_code">Grower Code:&nbsp;</label> <input type="text" name="grower_code"
+			value="" autocomplete="off"/>
+	</div>
 	<input type="submit" class="button" class="button warning"/>
 </form>
 

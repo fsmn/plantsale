@@ -469,7 +469,8 @@ class Order extends MY_Controller {
 						"pot_size",
 						"price",
 						"flat_area",
-						"tiers" 
+						"tiers",
+						"grower_code",
 				);
 				$values = array ();
 				foreach ( $fields as $field ) {
@@ -493,9 +494,13 @@ class Order extends MY_Controller {
 				if ($values) {
 					$result = $this->order->batch_update ( $ids, $values );
 				} else {
-					$result = array (
-							"No Changes Made" 
-					);
+					$result = FALSE;
+				}
+				if($result){
+					$ids = str_replace(",",", ", $ids);
+					$this->session->set_flashdata ( "notice", "The following orders have been updated: $ids" );
+				}else{
+					$this->session->set_flashdata("notice","No changes were made");
 				}
 				$order_search = get_cookie ( "order_search" );
 				redirect ( "order/search?$order_search" );

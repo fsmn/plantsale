@@ -415,7 +415,9 @@ class Order_Model extends MY_Model {
 			$this->db->where_in ( "id", explode ( ",", $ids ) );
 			$this->db->set ( $values );
 			$this->db->update ();
-			$this->session->set_flashdata ( "notice", "The following orders have been updated: $ids" );
+			return TRUE;
+		}else{
+			return FALSE;
 		}
 	}
 

@@ -6,6 +6,7 @@ $sorting = array(
         "catalog_number" => "Catalog Number",
         "category" => "Category",
         "subcategory" => "Subcategory",
+		"name"=>"Common Name",
         "genus" => "Genus",
         "species" => "Species",
         "variety" => "Variety",

@@ -143,6 +143,8 @@ if($("body").hasClass("editor")){
 		}else if(me.hasClass("user-dropdown")){
 			my_type="user-dropdown";
 			my_category="user";
+		}else if(me.hasClass("pot-size")){
+			my_type="pot-size";
 		}
 		form_data = {
 				table: my_attr[0],

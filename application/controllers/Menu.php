@@ -153,6 +153,14 @@ class Menu extends MY_Controller
 					$common = $this->common->get ( $data ["id"] );
 					$output = $this->_get_dropdown ( $data ["category"], $common->subcategory_id, $data ["name"], $common->category_id );
 					break;
+				case "pot-size":
+					$this->load->model("order_model","orders");
+					$pot_sizes = get_keyed_pairs ($this->orders->get_pot_sizes(),array (
+				"pot_size",
+				"pot_size" 
+		));
+					$output = form_dropdown('pot_size',$pot_sizes,urlencode($data['value']));
+					break;
 				case "multiselect" :
 					$output = $this->_get_multiselect ( $data ["category"], $data ["value"], $data ["name"] );
 					break;

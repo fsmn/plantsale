@@ -40,7 +40,7 @@ $row_classes = implode(" ",$row_classes);
 			</td>
 	<td class="order-catalog_number field"><?=edit_field("catalog_number",$order->catalog_number,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-	<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
+	<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size"));?>
 </td>
 	<td
 		class="order-flat_size field cost-field"

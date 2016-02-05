@@ -200,7 +200,7 @@ if ($orders)
 			<td class="order-total_plants field">
 			<?=$order->count_midsale + $order->count_presale;?>
 			</td>
-			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size-menu"));?>
+			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size"));?>
 			</td>
 			<td class="order-flat_size field">
 			<?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>

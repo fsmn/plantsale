@@ -1,13 +1,14 @@
 <?php
 $fields = array (
-		"name",
+		"Common",
 		"Latin",
-		"variety",
-		"description",
-		"web_description",
-		"print_description",
-		"note_from_archive",
-		"extended_description_from_archive" 
+		"Variety",
+		"Description",
+		"Web Description",
+		"Print Description",
+		"ARCIVED Description",
+		"ARCHIVED Variety Note",
+		"ARCHIVED Extended Description" 
 );
 
 ?>
@@ -15,7 +16,7 @@ $fields = array (
 <thead>
 <tr>
 <?php foreach($fields as $field):?>
-<th><?php echo humanize($field,"_"); ?>
+<th><?php echo $field; ?>
 <?php endforeach;?>
 </tr>
 </thead>
@@ -44,6 +45,9 @@ $fields = array (
 					<textarea name="print_description" cols="40" rows="10" id="print-description_<?=$plant->variety_id;?>" size="5" type="textarea" category=""><?=get_value($plant,"print_description");?></textarea>
 				</span>
 			</span>
+</td>
+<td>
+<?php echo $plant->old_description; ?>
 </td>
 <td>
 <?php echo $plant->note;?>

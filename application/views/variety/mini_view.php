@@ -166,7 +166,7 @@
 			<div class="field-envelope" id="variety__web_description__<?=$variety->id?>">
 				<label>Variety Web Description:&nbsp;</label>
 				<span class="textarea live-field text" name="web_description">
-					<textarea name="web_description" cols="40" rows="10" id="print-description_<?=$variety->id;?>" size="5" type="textarea" category=""><?=get_value($variety,"web_description");?></textarea>
+					<textarea name="web_description" cols="40" rows="10" id="web-description_<?=$variety->id;?>" size="5" type="textarea" category=""><?=get_value($variety,"web_description");?></textarea>
 				</span>
 			</div>
 		</div>

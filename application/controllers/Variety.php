@@ -570,6 +570,22 @@ class Variety extends MY_Controller {
 	{
 		print_r ( $this->variety->update_all ( $sale_year ) );
 	}
+	
+	function old_copy($year){
+		$this->load->helper("inflector");
+		$query = "select common.id as common_id, variety.id as variety_id, variety.web_description, variety.print_description, common.name, common.genus, 
+				variety.variety, variety.species, variety_note.note , common.description , common_note.description, common_note.extended_description from variety
+				join variety_note on variety.id = variety_note.variety_id 
+				join orders on orders.variety_id = variety.id
+				join common on common.id = variety.common_id  
+				join common_note on common.id = common_note.common_id
+				where variety_note.note !='' and common.description != common_note.description and orders.year = $year";
+		$data['plants'] = $this->db->query($query)->result();
+		$data['title'] = "Copy Comparison";
+		$data['target'] = "variety/list/copy_compare";
+		$this->load->view("page/index",$data);
+		
+	}
 
 	function quark()
 	{

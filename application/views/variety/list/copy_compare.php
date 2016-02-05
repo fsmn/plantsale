@@ -6,7 +6,7 @@ $fields = array (
 		"Description",
 		"Web Description",
 		"Print Description",
-		"ARCIVED Description",
+		"ARCHIVED Description",
 		"ARCHIVED Variety Note",
 		"ARCHIVED Extended Description" 
 );

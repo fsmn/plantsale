@@ -581,7 +581,7 @@ class Variety extends MY_Controller {
 				join orders on orders.variety_id = variety.id
 				join common on common.id = variety.common_id  
 				join common_archive on common.id = common_archive.common_id
-				where variety_archive.print_description is NOT NULL and variety.print_description is NULL and orders.year = $year";
+				where variety_archive.print_description is NOT NULL and variety.print_description is NULL and new_year = $year";
 		$data['plants'] = $this->db->query($query)->result();
 		$this->session->set_flashdata('notice',$this->db->last_query());
 		$data['title'] = "Copy Comparison";

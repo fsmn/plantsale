@@ -578,7 +578,6 @@ class Variety extends MY_Controller {
 		$query = "select common.id as common_id, variety.id as variety_id, variety.web_description, variety.print_description, common.name, common.genus, 
 				variety.variety, variety.species, variety_archive.print_description as old_print_description, common.description ,  common_archive.old_description ,common_archive.extended_description from variety
 				join variety_archive on variety.id = variety_archive.variety_id 
-				join orders on orders.variety_id = variety.id
 				join common on common.id = variety.common_id  
 				join common_archive on common.id = common_archive.common_id
 				where variety_archive.print_description is NOT NULL and variety.print_description is NULL and new_year = $year";

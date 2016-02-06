@@ -12,6 +12,7 @@ $fields = array (
 );
 
 ?>
+<h1>Total Count: <?php echo count($plants); ?></h1>
 <table class="list table">
 <thead>
 <tr>

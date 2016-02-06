@@ -4,9 +4,9 @@ $fields = array (
 		"Latin",
 		"Variety",
 		"Description",
+		"ARCHIVED Description",
 		"Web Description",
 		"Variety Description",
-		"ARCHIVED Description",
 		"ARCHIVED Variety Description",
 		"ARCHIVED Extended Description" 
 );
@@ -33,12 +33,18 @@ $fields = array (
 				</span>
 			</span>
 			</td>
+			<td>
+<?php echo $plant->old_description; ?>
+</td>
 			<td><span class="field-envelope" id="variety__web_description__<?=$plant->variety_id?>">
 				<span class="textarea live-field text" name="web_description">
 					<textarea name="web_description" cols="40" rows="10" id="web-description_<?=$plant->variety_id;?>" size="5" type="textarea" category=""><?=get_value($plant,"web_description");?></textarea>
 				</span>
 			</span>
 			</td>
+			<td>
+<?php echo $plant->old_print_description;?>
+</td>
 <td>
 <span class="field-envelope" id="variety__print_description__<?=$plant->variety_id?>">
 				<span class="textarea live-field text" name="print_description">
@@ -46,12 +52,8 @@ $fields = array (
 				</span>
 			</span>
 </td>
-<td>
-<?php echo $plant->old_description; ?>
-</td>
-<td>
-<?php echo $plant->old_print_description;?>
-</td>
+
+
 <td>
 <?php echo $plant->extended_description;?>
 </td>

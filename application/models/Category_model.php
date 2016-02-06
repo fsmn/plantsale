@@ -6,6 +6,8 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Category_Model extends MY_Model
 	{
 		var $category;
+		var $rec_modifier;
+		var $rec_modified;
 
 		function __construct()
 		{

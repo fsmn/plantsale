@@ -8,7 +8,9 @@ class Subcategory_Model extends MY_Model
 {
     var $subcategory;
     var $category_id;
-
+    var $rec_modifier;
+    var $rec_modified;
+    
     function __construct ()
     {
         parent::__construct();

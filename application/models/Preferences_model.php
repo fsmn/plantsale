@@ -8,6 +8,8 @@ class Preferences_model extends MY_Model
 {
     var $user_id;
     var $preference_id;
+    var $rec_modifier;
+    var $rec_modified;
 
     function __construct ()
     {

@@ -16,7 +16,8 @@ class grower_model extends MY_Model
     var $website;
     var $user_id;
     var $shipping_notes;
-  
+    var $rec_modifier;
+    var $rec_modified;
 
     function __construct ()
     {

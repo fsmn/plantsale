@@ -45,6 +45,8 @@ class MY_Model extends CI_Model
 
     function _update ($db, $id, $values)
     {
+    	$this->rec_modified = mysql_timestamp ();
+		$this->rec_modifier = $this->session->userdata ( 'user_id' );
         if (IS_EDITOR) {
             $this->db->where("id", $id);
             if (empty($values)) {

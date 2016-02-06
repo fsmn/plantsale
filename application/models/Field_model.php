@@ -7,7 +7,9 @@ class Field_model extends MY_Model
     var $field;
     var $human_name;
     var $table;
-
+    var $rec_modifier;
+    var $rec_modified;
+    
     function __construct ()
     {
         parent::__construct();

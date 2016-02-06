@@ -158,7 +158,7 @@ class Menu extends MY_Controller
 					$pot_sizes = get_keyed_pairs ($this->orders->get_pot_sizes(),array (
 				"pot_size",
 				"pot_size" 
-		));
+		),FALSE,TRUE);
 					$output = form_dropdown('pot_size',$pot_sizes,urlencode($data['value']));
 					break;
 				case "multiselect" :

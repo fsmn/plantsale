@@ -231,7 +231,12 @@ $(document).on("blur",".field-envelope .live-field.subcategory-dropdown select",
 
 
 $(document).on("blur",".field-envelope .live-field select",function(){
-	update_field(this, "select");
+	if($(this).val() == "other"){
+		my_name = $(this).parents('.field-envelope').attr("id").split("_")[1];
+		$(this).parents(".live-field").html("<input type='text' name='" + my_name + "' value='' id=''/>");
+	}else{
+		update_field(this, "select");
+	}
 });
 
 //*/

@@ -5,9 +5,9 @@ $fields = array (
 		"Variety",
 		"Description",
 		"Web Description",
-		"Print Description",
+		"Variety Description",
 		"ARCHIVED Description",
-		"ARCHIVED Variety Note",
+		"ARCHIVED Variety Description",
 		"ARCHIVED Extended Description" 
 );
 
@@ -50,7 +50,7 @@ $fields = array (
 <?php echo $plant->old_description; ?>
 </td>
 <td>
-<?php echo $plant->note;?>
+<?php echo $plant->old_print_description;?>
 </td>
 <td>
 <?php echo $plant->extended_description;?>

@@ -24,7 +24,7 @@ class Index extends MY_Controller
 			$data ["orphan_count"] = count ( $this->grower->get_orphans () );
 			/* end maintenance on varieties and growers */
 			$data ["title"] = "Plant Sale Database";
-			$data ["target"] = "welcome";
+			$data ["target"] = "home";
 			$data["is_front"] = TRUE;
 			
 			$this->load->view ( "page/index", $data );

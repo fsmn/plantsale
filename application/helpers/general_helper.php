@@ -159,8 +159,21 @@ function clean_string ($string)
     return preg_replace("/[^a-zA-Z0-9\"\.\<\>\=]+/", " ", $string);
 }
 
+/**
+ * If a decimal value is equal to its integer value, just return the integer without the decimal points.
+ * @param unknown $value
+ */
+function clean_decimal($value){
+	if(round($value) == $value){
+		$value = round($value);
+	}
+	return $value;
+}
+
 function format_dimensions ($min = FALSE, $max = FALSE, $unit = "Inches", $direction = NULL)
 {
+	$min = clean_decimal($min);
+	$max = clean_decimal($max);
     $output = "";
     if (! $min && ! $max) {
         $output = "";

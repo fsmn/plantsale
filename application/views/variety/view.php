@@ -23,10 +23,10 @@
 			</legend>
 
 			<div class="field-set">
-				<?=edit_field("min_height", $variety->min_height,"Min","variety",$variety->id, array("envelope"=>"span"));?>
+				<?=edit_field("min_height", clean_decimal($variety->min_height),"Min","variety",$variety->id, array("envelope"=>"span"));?>
 			</div>
 			<div class="field-set">
-				<?=edit_field("max_height", $variety->max_height, "Max", "variety",$variety->id, array("envelope"=>"span"));?>
+				<?=edit_field("max_height", clean_decimal($variety->max_height), "Max", "variety",$variety->id, array("envelope"=>"span"));?>
 			</div>
 			<div class="field-set">
 				<?=edit_field("height_unit", $variety->height_unit, "Measure", "variety",$variety->id, array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"span"));?>
@@ -38,10 +38,10 @@
 			</legend>
 
 			<div class="field-set">
-				<?=edit_field("min_width", $variety->min_width, "Min","variety",$variety->id, array("envelope"=>"span"));?>
+				<?=edit_field("min_width", clean_decimal($variety->min_width), "Min","variety",$variety->id, array("envelope"=>"span"));?>
 			</div>
 			<div class="field-set">
-				<?=edit_field("max_width", $variety->max_width, "Max","variety",$variety->id, array("envelope"=>"span"));?>
+				<?=edit_field("max_width",clean_decimal( $variety->max_width), "Max","variety",$variety->id, array("envelope"=>"span"));?>
 			</div>
 			<div class="field-set">
 				<?=edit_field("width_unit", $variety->width_unit, "Measure","variety",$variety->id,  array("class"=>"dropdown","attributes"=>"menu='measure_unit'","envelope"=>"span"));?>

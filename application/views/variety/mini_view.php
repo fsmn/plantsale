@@ -77,7 +77,7 @@
 				<div class="field-envelope" id="variety__min_width__<?=$variety->id;?>">
 					<label>Min:&nbsp;</label>
 					<span class="live-field text" name="min_width">
-						<input type="text" name="min_width" value="<?=clean_decimal($variety->min_width);?>" id="min-width_<?=$variety->id;?>" size="5" category="">
+						<input type="text" name="min_width" value="<?=clean_decimal($variety->min_width);?>" id="min-width_<?=$variety->id;?>" size="5">
 					</span>
 				</div>
 			</div>
@@ -85,7 +85,7 @@
 				<div class="field-envelope" id="variety__max_width__<?=$variety->id;?>">
 					<label>Max:&nbsp;</label>
 					<span class="live-field text" name="max_width">
-						<input type="text" name="max_width" value="<?=clean_decimal($variety->max_width);?>" id="max-width_<?=$variety->id;?>" size="5" category="">
+						<input type="text" name="max_width" value="<?=clean_decimal($variety->max_width);?>" id="max-width_<?=$variety->id;?>" size="5" >
 					</span>
 				</div>
 			</div>

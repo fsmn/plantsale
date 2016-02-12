@@ -191,6 +191,7 @@ class Order_Model extends MY_Model {
 			} elseif ($order_field == "subcategory") {
 				$this->load->helper ( "export" );
 				$this->db->order_by ( "(" . subcategory_order () . ")" );
+				$this->db->order_by("subcategory.subcategory");
 			} else {
 				$this->db->order_by ( $order_field, $order_direction );
 			}
@@ -294,6 +295,7 @@ class Order_Model extends MY_Model {
 			} elseif ($order_field == "subcategory") {
 				$this->load->helper ( "export" );
 				$order [] = ("(" . subcategory_order () . ")");
+				$order[] = "subcategory.subcategory";
 			} else {
 				$order [] = ("$order_field $order_direction");
 			}

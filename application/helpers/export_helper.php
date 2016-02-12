@@ -221,10 +221,10 @@ function subcategory_order ($categories = array())
     if (! $categories) {
         $categories = array(
                 "Indoor Plants",
-                "Miniature Gardens",
+        		"Hanging Baskets",
                 "Succulents",
                 "General Annuals",
-                "Hanging Baskets",
+                "General Perennials",
                 "Water Plants"
         );
     }

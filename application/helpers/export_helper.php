@@ -266,7 +266,7 @@ function quark_multiple ($common)
     foreach ($common->varieties as $variety) {
         $price = FALSE;
         $pot_size = FALSE;
-        if ($base_price != $variety->price && $base_size != $variety->pot_size) {
+        if ($base_price != $variety->price || $base_size != $variety->pot_size) {
             $price = $variety->price;
             $pot_size = $variety->pot_size;
             $base_price = $price;

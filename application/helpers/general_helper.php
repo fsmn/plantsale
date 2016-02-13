@@ -135,20 +135,20 @@ function format_latin_name ($object)
     return implode(" ", $output);
 }
 
-function quark_latin_name($object,$multiple=FALSE){
+function quark_latin_name($genus,$species,$multiple=FALSE){
 	if($multiple){
-		if($object->species){
-			$output[] = ucfirst(substr($object->genus,1));
-			$output[] = strtolower($object->species);
+		if($species){
+			$output[] = ucfirst(substr($genus,1));
+			$output[] = strtolower($species);
 		}else{
 			$output[] = NULL;
 		}
 	}else{
-		if($object->species){
-			$output[] = ucfirst($object->genus);
-			$output [] = strtolower($object->species);
-		}else if(!$object->species){
-			$output[] = ucfirst($object->genus);
+		if($species){
+			$output[] = ucfirst($genus);
+			$output [] = strtolower($species);
+		}else if(!$species){
+			$output[] = ucfirst($genus);
 		}
 	}
 	return implode(" ", $output);

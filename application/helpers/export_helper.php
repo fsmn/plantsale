@@ -245,8 +245,7 @@ function quark_single ($common)
     $output[] = sprintf("@Common Name:<@Number In-text>%s<@\$p> %s ", $variety->catalog_number, $common->name);
     $output[] = $variety->count_midsale > 0 ? format_saturday("quark") : "";
     $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
-    $variety->genus = $common->genus;
-    $output[] = sprintf("<p>@Latin Name:%s ", quark_latin_name($variety));
+    $output[] = sprintf("<p>@Latin Name:%s ", quark_latin_name($common->genus, $variety->species);
     $output[] = sprintf("<f\"GoudySansITCbyBT-Medium\"> %s<f$>", $variety->variety);
     $output[] = sprintf("<p>@Copy:%s ", format_description($common->description, $variety, "quark"));
     $output[] = format_quark_dimensions($variety);
@@ -279,7 +278,7 @@ function quark_multiple ($common)
         }
         $output[] = sprintf("<p>@Copy After Copy:<@Number In-text>%s<t><\_>", $variety->catalog_number);
         $output[] = sprintf("<@In text Goudy Sans Bold>%s<@\$p> <I>%s</I> ", $variety->variety,
-                quark_latin_name($variety,TRUE));
+                quark_latin_name($variety->genus,$variety->species,TRUE));
         $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
         $output[] = (get_value($variety, "count_midsale") > 0) ? " " . format_saturday("quark") : "";
         $output[] = sprintf("--%s %s %s", $variety->print_description, format_quark_dimensions($variety), format_flags($variety->flags, "quark"));

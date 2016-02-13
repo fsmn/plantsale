@@ -191,11 +191,11 @@ function format_saturday ($format = "quark")
 function format_quark_dimensions ($object)
 {
     $output = array();
-    if ($object->min_height || $object->max_height) {
+    if (($object->min_height && $object->min_height > 0) || ($object->max_height && $object->max_height > 0 )) {
         $output["height"] = format_dimensions($object->min_height, $object->max_height,
                 $object->height_unit == "Inches" || $object->height_unit == NULL ? "”" : "’", "h");
     }
-    if ($object->min_width || $object->max_width) {
+    if (($object->min_width && $object->min_height > 0) || ($object->max_width && $object->max_width > 0)) {
         $output["width"] = format_dimensions($object->min_width, $object->max_width, $object->width_unit == "Inches" || $object->width_unit == NULL ? "”" : "’",
                 "w");
     }
@@ -266,12 +266,10 @@ function quark_multiple ($common)
     foreach ($common->varieties as $variety) {
         $price = FALSE;
         $pot_size = FALSE;
-        if ($base_price != $variety->price) {
+        if ($base_price != $variety->price && $base_size != $variety->pot_size) {
             $price = $variety->price;
-            $base_price = $price;
-        }
-        if ($base_size != $pot_size) {
             $pot_size = $variety->pot_size;
+            $base_price = $price;
             $base_size = $pot_size;
         }
         //if either the pot size or price have changed, then print them out.

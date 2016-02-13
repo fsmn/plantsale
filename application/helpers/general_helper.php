@@ -127,7 +127,7 @@ function get_user_name ($user)
 
 function format_latin_name ($genus, $species = NULL)
 {
-    $output[] = ucfirst($genus);
+    $output[] = ucfirst($genus . ".");
 
     if ($species) {
         $output[] = strtolower($species);

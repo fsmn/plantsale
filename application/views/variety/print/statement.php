@@ -47,7 +47,7 @@ if($length > 27){
 		<?endif;?>
 </div>
 <? endif;?>
-<div class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></div>
+<div class="latin-name"><?=format_latin_name($variety);?></div>
 	</div>
 	<div class="description-group">
 	<? if($has_image):?>

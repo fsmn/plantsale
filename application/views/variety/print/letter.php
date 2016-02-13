@@ -21,7 +21,7 @@ $saturday_delivery = $order->count_midsale?1:0;
 		<?=format_saturday("poster"); ?>
 		</span>
 		<?endif;?>
-	<span class="latin-name<?=$saturday_delivery?' saturday':'';?>"><?=format_latin_name($variety->genus,$variety->species);?></span>
+	<span class="latin-name<?=$saturday_delivery?' saturday':'';?>"><?=format_latin_name($variety);?></span>
 	<div class="variety-name">
 	<? if($variety->new_year == get_cookie("sale_year")):?>
 <span class="is-new">

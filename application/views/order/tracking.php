@@ -40,7 +40,7 @@ End Time: <input type="text" name="your_end_time" value="" style="padding: .5em;
 		<td class="big"></td>
 		<td class="big"></td>
 		<td class="no-wrap"><?=$order->name;?></td>
-		<td class="no-wrap"><?=format_latin_name($order->genus,$order->species);?></td>
+		<td class="no-wrap"><?=format_latin_name($order);?></td>
 		<td class="no-wrap"><?=$order->variety;?></td>
 		<td class="no-wrap"><?=$order->pot_size;?></td>
 		<td><?=$order->grower_id;?></td>

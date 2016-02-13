@@ -2,7 +2,7 @@
 
 ?>
 <h4>
-<?php printf("Is %s: %s %s (%s) Correct?",$item->catalog_number, $item->name,$item->variety, format_latin_name($item->genus, $item->species));?></h4>
+<?php printf("Is %s: %s %s (%s) Correct?",$item->catalog_number, $item->name,$item->variety, format_latin_name($item));?></h4>
 
 <img class="small" src="<?php echo base_url($item->image_path);?>"/>
 <p>

@@ -48,7 +48,7 @@ class Inventory extends MY_Controller
 			if ($item) {
 				$data ['step'] = $step;
 				$data ["item"] = $item;
-				$data ["title"] = sprintf ( "Inventory for %s: %s %s (%s)", $item->catalog_number, $item->name, $item->variety, format_latin_name ( $item->genus, $item->species ) );
+				$data ["title"] = sprintf ( "Inventory for %s: %s %s (%s)", $item->catalog_number, $item->name, $item->variety, format_latin_name ( $item ) );
 				$data ["target"] = "inventory/edit";
 				$this->load->view ( "inventory/index", $data );
 			}

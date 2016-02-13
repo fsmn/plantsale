@@ -35,7 +35,7 @@ $this->load->view ( "variety/list/header" );
 				<a href="<?php echo base_url("variety/view/$plant->id");?>" /><?php echo $plant->variety;?></a>
 			</td>
 			<td>
-<?php echo format_latin_name($plant->genus, $plant->species);?>
+<?php echo format_latin_name($plant);?>
 </td>
 			<td>
 <?php echo $plant->category; ?>

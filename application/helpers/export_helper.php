@@ -245,7 +245,8 @@ function quark_single ($common)
     $output[] = sprintf("@Common Name:<@Number In-text>%s<@\$p> %s ", $variety->catalog_number, $common->name);
     $output[] = $variety->count_midsale > 0 ? format_saturday("quark") : "";
     $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
-    $output[] = sprintf("<p>@Latin Name:%s ", format_latin_name($common->genus, $variety->species));
+    $variety->genus = $common->genus;
+    $output[] = sprintf("<p>@Latin Name:%s ", format_latin_name($variety));
     $output[] = sprintf("<f\"GoudySansITCbyBT-Medium\"> %s<f$>", $variety->variety);
     $output[] = sprintf("<p>@Copy:%s ", format_description($common->description, $variety, "quark"));
     $output[] = format_quark_dimensions($variety);

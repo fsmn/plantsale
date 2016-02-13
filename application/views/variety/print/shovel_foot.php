@@ -45,7 +45,7 @@ if($length > 25){
 </div>
 <? endif;?>
 	<span class="variety"><a href="<?=site_url("variety/view/$variety->id");?>" target="_blank"><?=$variety->variety;?></a></span>
-	<span class="latin-name"><?=format_latin_name($variety->genus,$variety->species);?></span>
+	<span class="latin-name"><?=format_latin_name($variety);?></span>
 	</div>
 	<div class="description-group">
 	<? if($has_image):?>

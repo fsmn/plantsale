@@ -25,7 +25,7 @@ $fields = array (
 <?php foreach($plants as $plant):?>
 <tr>
 <td><a href="<?php echo base_url("common/view/$plant->common_id");?>"><?php echo $plant->name;?></a></td>
-<td><?php echo format_latin_name($plant->genus,$plant->species);?></td>
+<td><?php echo format_latin_name($plant);?></td>
 <td><a href="<?php echo base_url("variety/view/$plant->variety_id");?>"><?php echo $plant->variety;?></a></td>
 <td>
 <span class="field-envelope" id="common__description__<?=$plant->common_id;?>">

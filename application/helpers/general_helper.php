@@ -125,14 +125,18 @@ function get_user_name ($user)
     return sprintf("%s %s", $user->first_name, $user->last_name);
 }
 
-function format_latin_name ($genus, $species = NULL)
+function format_latin_name ($object,$single = FALSE)
 {
-    $output[] = ucfirst($genus . ".");
+    $output[] = ucfirst($object->genus);
 
-    if ($species) {
-        $output[] = strtolower($species);
+    if ($object->species) {
+        $output[] = strtolower($object->species);
     }
     return implode(" ", $output);
+}
+
+function quark_latin_name($object,$single=FALSE){
+	
 }
 
 function format_catalog ($order_id, $category)

@@ -35,7 +35,7 @@ print create_button_bar($buttons);
 			<td class="field omit-plant">
 			<?=form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant from printing","id"=>"omit-plant_$plant->id","checked"=>$checked,"class"=>"omit-row omit plant-info"));?></td>
 			<td class="field year"><?=$plant->year;?></td>
-			<td class="field latin-name"><?=format_latin_name($plant->genus,$plant->species);?></td>
+			<td class="field latin-name"><?=format_latin_name($plant);?></td>
 			<td class="field common-name"><?=$plant->name;?></td>
 			<td class="field variety"><?=$plant->variety;?></td>
 			<!-- <td class="field pot-size"><?=$plant->pot_size;?></td> -->

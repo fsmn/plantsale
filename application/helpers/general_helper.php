@@ -138,7 +138,7 @@ function format_latin_name ($object)
 function quark_latin_name($genus,$species,$multiple=FALSE){
 	if($multiple){
 		if($species){
-			$output[] = ucfirst(substr($genus,0,1));
+			$output[] = ucfirst(substr($genus,0,1)) . ".";
 			$output[] = strtolower($species);
 		}else{
 			$output[] = NULL;

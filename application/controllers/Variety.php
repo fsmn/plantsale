@@ -628,7 +628,7 @@ class Variety extends MY_Controller {
 	{
 		$config ['upload_path'] = './files';
 		$this->load->helper ( 'directory' );
-		$config ['allowed_types'] = 'jpg';
+		$config ['allowed_types'] = 'jpg,jpeg';
 		$config ['max_size'] = '2048';
 		$config ['max_width'] = '0';
 		$config ['max_height'] = '0';

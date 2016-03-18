@@ -402,6 +402,7 @@ class Variety_Model extends MY_Model {
 					"print_description",
 					"web_description" ,
 					"edit_notes",
+					"pot_size",
 			) )) {
 				$this->db->like ( $parameter->key, $parameter->value );
 				}elseif($parameter->key=="descriptions"){

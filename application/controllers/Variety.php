@@ -151,7 +151,10 @@ class Variety extends MY_Controller {
 							bake_cookie ( $my_variable, implode ( ",", $my_value ) );
 							$options [$my_variable] = implode ( ",", $my_value );
 							break;
-						
+// 						case "pot_size":
+// 							bake_cookie($my_variable,$my_value);
+// 							$options [$my_variable] = urldecode($my_value);
+// 							break;
 						default :
 							$options [$my_variable] = $my_value;
 					}
@@ -160,6 +163,7 @@ class Variety extends MY_Controller {
 					burn_cookie ( $my_variable );
 				}
 			}
+
 			
 			if ($not_flag = $this->input->get ( "not_flag" )) {
 				bake_cookie ( "not_flag", $not_flag );
@@ -240,6 +244,13 @@ class Variety extends MY_Controller {
 		$this->load->model ( "menu_model", "menu" );
 		$this->load->model ( "category_model", "category" );
 		$this->load->model ( "subcategory_model", "subcategory" );
+		$this->load->model ( "order_model", "order" );
+		
+		$pot_sizes = $this->order->get_pot_sizes ();
+		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
+				"pot_size",
+				"pot_size"
+		), NULL, TRUE );
 		if($action == "edits"){
 			$this->load->model("user_model","user");
 			$users = $this->user->get_user_pairs();

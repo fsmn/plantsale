@@ -74,6 +74,9 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<?=form_dropdown("plant_color",$plant_colors,array($refine ? get_cookie("plant_color") : ""),"id='plant_colors'");?>
 	</div>
 	</div>
+	<div class="field-set">
+	<?php echo create_input($variety,"pot_size","Pot Size","pot_size",$refine); ?>
+	</div>
 	<div class="field-set block box">
 		<label for="sunlight-boolean">Sunlight Options</label>
 &nbsp;<?=$sunlight;?>	&nbsp;	<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),$refine ? get_cookie("sunlight-boolean"):"and","id='sunlight-boolean'");?>

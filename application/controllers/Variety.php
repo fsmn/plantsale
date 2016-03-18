@@ -132,6 +132,7 @@ class Variety extends MY_Controller {
 					"copy_received",
 					"edit_notes",
 					"needs_copy_review",
+					"pot_size",
 			);
 			$options = array ();
 			for($i = 0; $i < count ( $variables ); $i ++) {

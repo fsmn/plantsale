@@ -189,7 +189,7 @@ function clean_decimal($value){
 	return $value;
 }
 
-function format_dimensions ($min = FALSE, $max = FALSE, $unit = "Inches", $direction = NULL)
+function format_dimensions ($min = FALSE, $max = FALSE, $unit = "Inches", $direction = FALSE)
 {
 	$min = clean_decimal($min);
 	$max = clean_decimal($max);

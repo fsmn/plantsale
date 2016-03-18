@@ -1,0 +1,225 @@
+@CHARSET "UTF-8";
+
+@import
+	url(https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
+	;
+
+@font-face{
+    font-family: plant-icons;
+    src: url(fonts/Plant-Icons-7.otf)
+}
+body {
+	height: 8.5in;
+	width: 11in;
+	position: relative;
+	font-family: 'Merriweather Sans', sans-serif;
+}
+
+.document {
+	height: 6.5in;
+	width: 4.25in;
+	position: relative;
+	clear: both;
+	   overflow:hidden;
+	page-break-inside: avoid;
+	page-break-after: auto;
+	padding: .25em;
+	border: 1px solid rgb(125,125,125);
+}
+
+.document.odd {
+	display: inline-block;
+	float: left;
+	margin-right: 220px;
+}
+
+.document.even {
+	display: inline-block;
+}
+
+#header {
+clear: both;
+}
+
+.header.left{
+	float: left;	
+	padding-right: 2em;
+}
+
+.header.right {
+	float: left;
+}
+
+.catalog-number {
+	font-size: 24px;
+}
+
+.common-name {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+
+.latin-name {
+font-style: italic;
+font-size: 18px;
+}
+
+.variety {
+font-size: 18px;
+font-weight: bold;
+}
+
+.image img.photo{
+width: 3in;
+}
+
+
+
+.saturday-delivery,.is-new {
+}
+
+.saturday-delivery img, .is-new img {
+}
+.is-new img {
+	
+}
+
+.image .saturday-delivery img {
+	
+}
+
+.variety-name{
+}
+
+.details {
+	
+}
+
+.copy {
+	clear:both;
+	margin-bottom: 6px;
+}
+
+.description {
+}
+
+.print_description {
+	padding-top: 6px;
+}
+
+.details-group {
+	
+}
+
+.icons {
+	
+}
+
+ul.icons {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul.sunlight {
+}
+
+ul.icons li {
+	display: inline-block;
+	font-size: 14px;
+}
+
+ul.icons li img {
+}
+
+.dimensions {
+float: right;
+}
+
+.dimensions .width,.dimensions .height {
+	
+}
+
+.dimensions label {
+	
+}
+
+.dimensions .text {
+	
+}
+
+.flags.icons {
+	float: left;
+	
+}
+
+
+.sunlight {
+}
+
+.sunlight img {
+}
+
+.full_sun {
+	
+}
+
+.part-sun {
+	
+}
+
+.shade {
+	
+}
+.flags li {
+}
+
+
+.flags li,.sunlight li,.is-new, .saturday-delivery {
+	font-family: plant-icons, "FSM Plant Sale Icons";
+}
+
+.flags li.minnesota-native {
+}
+
+.flags li.poisonous {
+}
+
+
+
+.flags img {
+	
+}
+
+.price-group {
+	float: right;
+}
+
+
+
+
+.pot-size, .pot-size_field input {
+	display: inline;
+	font-style: italic;
+	font-size: 18px;
+}
+
+.price, .price_field input {
+	display: inline;
+	font-size: 24px;
+}
+
+.footer-group {
+}
+
+.grower-name {
+	font-size: 8px;
+	float: left;
+}
+
+#crop-failure {
+}
+
+#is-new {
+}

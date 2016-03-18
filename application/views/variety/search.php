@@ -4,6 +4,17 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 $refine = $this->input->get ( "refine" );
 $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", get_cookie ( "sunlight" ) ) : array () );
 ?>
+<script>
+  $(function() {
+    var availableTags = [
+     <?php printf("'%s'", implode("','",$pot_sizes));?>
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
+
 <div class="message" style="max-width: 500px;">Enter "NULL" (with no spaces) in any field to find records with no entry in that field. Enter
 	"NOT NULL" to find items where that field is not empty.</div>
 <form name="search-variety" id="search-variety" class="search-form" action="<?=site_url("variety/search"); ?>" method="GET">
@@ -74,8 +85,8 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<?=form_dropdown("plant_color",$plant_colors,array($refine ? get_cookie("plant_color") : ""),"id='plant_colors'");?>
 	</div>
 	</div>
-	<div class="field-set">
-	<?php echo create_input($variety,"pot_size","Pot Size Contains","pot_size",$refine); ?>
+	<div class="field-set ui-widget">
+	<?php echo create_input($variety,"pot_size","Pot Size Contains","tags",$refine); ?>
 	</div>
 	<div class="field-set block box">
 		<label for="sunlight-boolean">Sunlight Options</label>

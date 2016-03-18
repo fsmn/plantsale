@@ -75,7 +75,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 	</div>
 	</div>
 	<div class="field-set">
-	<?php echo create_input($variety,"pot_size","Pot Size","pot_size",$refine); ?>
+	<?php echo create_input($variety,"pot_size","Pot Size Contains","pot_size",$refine); ?>
 	</div>
 	<div class="field-set block box">
 		<label for="sunlight-boolean">Sunlight Options</label>

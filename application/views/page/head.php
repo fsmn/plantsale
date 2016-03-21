@@ -6,14 +6,14 @@
 <title><?=$title;?></title>
 <meta http-equiv="refresh" content = "14400; url=<?php echo site_url("auth/logout");?>">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" media="screen"> -->		
-<link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/main.css")?>" />
-<link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/color.css")?>"/>
+<link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/main.css?") . date("U");?>" />
+<link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/color.css?") . date("U");?>"/>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" media="screen"/>
-<link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/popup.css")?>" />
+<link type="text/css" rel="stylesheet" media="all" href="<?=base_url("css/popup.css?") . date("U")?>" />
 <? if(IS_EDITOR): ?>
-<link type="text/css" rel="stylesheet" media="screen" href="<?=base_url("css/edit.css");?>"/>
+<link type="text/css" rel="stylesheet" media="screen" href="<?=base_url("css/edit.css?")  . date("U");?>"/>
 <? endif;?>
-<link type="text/css" rel="stylesheet" media="print" href="<?=base_url("css/print.css")?>" />
+<link type="text/css" rel="stylesheet" media="print" href="<?=base_url("css/print.css?")  . date("U");?>" />
 <!-- jquery scripts -->
 <script type="text/javascript">
 var base_url = '<?=base_url("index.php") . "/";?>';
@@ -22,7 +22,6 @@ var base_url = '<?=base_url("index.php") . "/";?>';
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.8/clipboard.min.js"></script>
 <script>
 (function($) {
     $(document).ready(function() {

@@ -3,7 +3,7 @@
 	type="text/css"
 	rel="stylesheet"
 	media="all"
-	href="<?=base_url("css/$format.css")?>" />
+	href="<?php echo base_url("css/$format.css?")  . date("U");?>" />
 <style type="text/css">
 @media print {
 	.no-print {
@@ -26,4 +26,4 @@ a:hover {
 }
 </style>
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="<?=base_url("js/signs.js");?>"></script>
+<script src="<?php echo base_url("js/signs.js");?>"></script>

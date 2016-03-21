@@ -4,10 +4,11 @@
 	url(https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
 	;
 
-@font-face{
-    font-family: plant-icons;
-    src: url(fonts/Plant-Icons-7.otf)
+@font-face {
+	font-family: plant-icons;
+	src: url(fonts/Plant-Icons-7.otf)
 }
+
 body {
 	height: 8.5in;
 	width: 11in;
@@ -20,11 +21,11 @@ body {
 	width: 4.25in;
 	position: relative;
 	clear: both;
-	   overflow:hidden;
+	overflow: hidden;
 	page-break-inside: avoid;
 	page-break-after: auto;
-	padding: .25em;
-	border: 1px solid rgb(125,125,125);
+	padding: .25in;
+	border: 1px solid #818181;
 }
 
 .document.odd {
@@ -38,11 +39,12 @@ body {
 }
 
 #header {
-clear: both;
+	overflow: hidden;
+	clear: both;
 }
 
-.header.left{
-	float: left;	
+.header.left {
+	float: left;
 	padding-right: 2em;
 }
 
@@ -59,28 +61,28 @@ clear: both;
 	font-weight: bold;
 }
 
-
 .latin-name {
-font-style: italic;
-font-size: 18px;
+	font-style: italic;
+	font-size: 18px;
 }
 
 .variety {
-font-size: 18px;
-font-weight: bold;
+	font-size: 18px;
+	font-style: italic;
 }
 
-.image img.photo{
-width: 3in;
+.image img.photo {
+	width: 3in;
 }
 
-
-
-.saturday-delivery,.is-new {
+.saturday-delivery, .is-new {
+	
 }
 
 .saturday-delivery img, .is-new img {
+	
 }
+
 .is-new img {
 	
 }
@@ -89,7 +91,8 @@ width: 3in;
 	
 }
 
-.variety-name{
+.variety-name {
+	font-weight: normal;
 }
 
 .details {
@@ -97,11 +100,14 @@ width: 3in;
 }
 
 .copy {
-	clear:both;
-	margin-bottom: 6px;
+	clear: both;
+	margin: 6px 0;
+	font-size: 14px;
+	line-height: 16px;
 }
 
 .description {
+	
 }
 
 .print_description {
@@ -123,6 +129,7 @@ ul.icons {
 }
 
 ul.sunlight {
+	
 }
 
 ul.icons li {
@@ -131,13 +138,14 @@ ul.icons li {
 }
 
 ul.icons li img {
+	
 }
 
 .dimensions {
-float: right;
+	float: right;
 }
 
-.dimensions .width,.dimensions .height {
+.dimensions .width, .dimensions .height {
 	
 }
 
@@ -151,14 +159,14 @@ float: right;
 
 .flags.icons {
 	float: left;
+}
+
+.sunlight {
 	
 }
 
-
-.sunlight {
-}
-
 .sunlight img {
+	
 }
 
 .full_sun {
@@ -172,21 +180,22 @@ float: right;
 .shade {
 	
 }
+
 .flags li {
+	
 }
 
-
-.flags li,.sunlight li,.is-new, .saturday-delivery {
+.flags li, .sunlight li, .is-new, .saturday-delivery {
 	font-family: plant-icons, "FSM Plant Sale Icons";
 }
 
 .flags li.minnesota-native {
+	
 }
 
 .flags li.poisonous {
+	
 }
-
-
 
 .flags img {
 	
@@ -196,13 +205,14 @@ float: right;
 	float: right;
 }
 
-
-
-
 .pot-size, .pot-size_field input {
 	display: inline;
 	font-style: italic;
 	font-size: 18px;
+}
+
+.price {
+	font-weight: bold;
 }
 
 .price, .price_field input {
@@ -211,6 +221,7 @@ float: right;
 }
 
 .footer-group {
+	
 }
 
 .grower-name {
@@ -219,7 +230,9 @@ float: right;
 }
 
 #crop-failure {
+	
 }
 
 #is-new {
+	
 }

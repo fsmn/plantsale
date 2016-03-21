@@ -17,15 +17,16 @@ if(isset($row_class)){
 	</div>
 	<div class="header right">
 	<div class="common-name"><?=$variety->common_name;?></div>
-	<div class="latin-name<?=format_latin_name($variety);?></div>
+	<div class="latin-name"><?=format_latin_name($variety);?></div>
 	<div class="variety-name">
-	<? if($variety->new_year == get_cookie("sale_year")):?>
+
+	<span class="variety"><a href="<?=site_url("variety/view/$variety->id");?>" target="_blank"><?=$variety->variety;?></a></span>
+		<? if($variety->new_year == get_cookie("sale_year")):?>
 		<span class="is-new">
 		<!-- <img src="<?=base_url("images/new-icon.png");?>"/> -->
 		<?=format_new("poster"); ?>
 		</span>
 		<?endif;?>
-	<span class="variety"><a href="<?=site_url("variety/view/$variety->id");?>" target="_blank"><?=$variety->variety;?></a></span>
 	</div>
 	
 	<ul class="flags icons">

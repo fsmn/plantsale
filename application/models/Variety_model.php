@@ -162,7 +162,10 @@ class Variety_Model extends MY_Model {
 		$this->db->where ( "new_year", $year );
 		$this->db->from ( "variety" );
 		$this->db->select ( "new_year" );
+		$this->db->join("orders","orders.variety_id = variety.id","RIGHT");
+		$this->db->where("orders.year",$year);
 		$result = $this->db->get ()->num_rows ();
+		$this->_log();
 		return $result;
 	}
 

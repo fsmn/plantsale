@@ -22,6 +22,7 @@ var base_url = '<?=base_url("index.php") . "/";?>';
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.8/clipboard.min.js"></script>
 <script>
 (function($) {
     $(document).ready(function() {

@@ -2,7 +2,7 @@
 Friends School Plant Sale Back Office
 ###################
 
-Built in `CodeIgniter 3.0.x <http://www.codeigniter.com/docs>`_, this tool is designed to help with managing orders, text copy, and plant varieties for a large plant sale fundraiser. While customized for a particular plant sale, the logic in use and organization of the site may be helpful for others seeking to do something similar.
+Built in `CodeIgniter 3.0.x <http://www.codeigniter.com/docs>`_, this tool is designed to help with managing orders, text copy, and plant varieties for a large plant sale fundraiser. While customized for a particular plant sale, the logic in use and organization of the application may be helpful for others seeking to do something similar.
 
 
 *******************

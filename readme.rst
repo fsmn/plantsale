@@ -16,7 +16,7 @@ PHP version 5.4 or newer is recommended.
 Installation
 ************
 
-You will need to contact the developer `FSMN <https://github.com/fsmn/>`_ or `General Ludd <https://github.com/generalludd/>`_.
+You will need to contact the developer `FSMN <https://github.com/fsmn/>`_ or `General Ludd <https://github.com/generalludd/>`_. You must rename the database-template.php file to database.php and fill out the database info to install this system. A schema file "schema.sql" is available for base installation. You will need to add an admin user to the users table to get started. 
 
 *******
 License

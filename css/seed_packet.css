@@ -104,7 +104,6 @@ body {
 	margin: 12px 0;
 	font-size: 14px;
 	line-height: 16px;
-	font-style: italic;
 }
 
 .description {
@@ -113,6 +112,8 @@ body {
 
 .print_description {
 	padding-top: 6px;
+	font-style: italic;
+	
 }
 
 .details-group {

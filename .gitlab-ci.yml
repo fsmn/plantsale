@@ -14,9 +14,9 @@ job_live_deploy:
     # get into the right place
     - "cd ~/plantsale/backoffice"
     # first make a backup of the database and label it with current commit
-    # - "drush sql-dump | gzip -9 > ~/plantsale/db-backups/build-$CI_BUILD_ID-$CI_BUILD_REF-$CI_BUILD_REF_NAME-db_plantsale-db.sql.gz"
-    - "git reset --hard"
+    #- "drush sql-dump | gzip -9 > ~/plantsale/db-backups/build-$CI_BUILD_ID-$CI_BUILD_REF-$CI_BUILD_REF_NAME-db_plantsale-db.sql.gz"
     # master pull
+    - "git reset --hard"
     - "git clean -f -d"
     - "git checkout master"
     - "git pull origin master"

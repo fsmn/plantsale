@@ -153,19 +153,7 @@ $(document).ready(function(){
 			my_parent.children("input").focus();
 		}
 	})
-    
-	$(document).on("click",".order-crop_failure .crop_failure-checkbox",function(){
-		is_checked = $(this).attr("checked");
-		my_id = this.id.split("_")[1];
-		if(is_checked){
-			my_value = 1;
-		}else{
-			my_value = 0;
-		}
-		update_crop_failure(my_id,my_value);
-
-	});
-
+   
 	
 	function batch_update_orders(){
 		var id_array = $.map($(".edit-order"),function(n,i){
@@ -192,24 +180,7 @@ $(document).ready(function(){
 		
 	}
 	
-	function update_crop_failure(my_id,my_value){
-		form_data = {
-				id: my_id,
-				crop_failure: my_value
-		};
-		$.ajax({
-			type:"post",
-			url: base_url + "order/update_crop_failure",
-			data: form_data,
-			success: function(data){
-				if(my_value == 1){
-					$("#order_"+ my_id).addClass("crop-failure");
-				}else{
-					$("#order_"+ my_id).removeClass("crop-failure");
-				}
-			}
-		});
-	}
+	
 	
 	function sellouts(){
 		my_table = "table.list";

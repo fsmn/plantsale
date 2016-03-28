@@ -23,7 +23,6 @@ class Order_Model extends MY_Model {
 	var $remainder_saturday;
 	var $remainder_sunday;
 	var $grower_code;
-	var $crop_failure;
 	var $omit;
 	var $rec_modified;
 	var $rec_modifier;
@@ -58,7 +57,6 @@ class Order_Model extends MY_Model {
 				"flat_area",
 				"tiers",
 				"grower_code",
-				"crop_failure",
 				"omit" 
 		);
 		
@@ -251,7 +249,7 @@ class Order_Model extends MY_Model {
 	{
 		$where =array();
 		$query = "SELECT * from
-			(SELECT v.id , c.name, c.genus, v.variety, v.species, v.common_id, o.year, COUNT(v.id) c, o.crop_failure, o.received_presale, o.count_presale, o.pot_size, o.flat_size, o.flat_cost, cat.category, subcat.subcategory,o.variety_id
+			(SELECT v.id , c.name, c.genus, v.variety, v.species, v.common_id, o.year, COUNT(v.id) c, o.received_presale, o.count_presale, o.pot_size, o.flat_size, o.flat_cost, cat.category, subcat.subcategory,o.variety_id
 			FROM    variety v
 			LEFT JOIN 
 				 `orders` o
@@ -448,15 +446,15 @@ class Order_Model extends MY_Model {
 
 	function update_crop_failure($id, $value)
 	{
-		if (IS_EDITOR) {
-			if (! $value) {
-				$query = sprintf ( "UPDATE `orders` SET `crop_failure` = NULL WHERE `orders`.`id` = %s", $id );
-			} else {
-				$query = sprintf ( "UPDATE `orders` SET `crop_failure` = 1 WHERE `orders`.`id` = %s", $id );
-			}
-			$this->db->query ( $query );
-			// $this->_log();
-		}
+// 		if (IS_EDITOR) {
+// 			if (! $value) {
+// 				$query = sprintf ( "UPDATE `orders` SET `crop_failure` = NULL WHERE `orders`.`id` = %s", $id );
+// 			} else {
+// 				$query = sprintf ( "UPDATE `orders` SET `crop_failure` = 1 WHERE `orders`.`id` = %s", $id );
+// 			}
+// 			$this->db->query ( $query );
+// 			// $this->_log();
+// 		}
 	}
 
 	function test()

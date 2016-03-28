@@ -57,7 +57,7 @@ class MY_Model extends CI_Model
 					$values ['rec_modifier'] = mysql_timestamp ();
 					$values ['rec_modifier'] = $this->session->userdata ( 'user_id' );
 					$this->db->update ( $db, $values );
-					
+					$this->_log();
 					if (count ( $original_values ) == 1) {
 						$keys = array_keys ( $original_values );
 						return $this->get_value ( $id, $keys [0] );

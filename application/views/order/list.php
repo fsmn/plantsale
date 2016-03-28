@@ -16,7 +16,7 @@ if ($orders) :
                     "label" => "Sizes"
             ),
             array(
-                    "colspan" => 3,
+                    "colspan" => 2,
                     "label" => "Prices"
             ),
             array(
@@ -32,7 +32,7 @@ if ($orders) :
                     "label" => "Sellout"
             ),
             array(
-                    "colspan" => 3,
+                    "colspan" => 4,
                     "label" => "Remainder"
             ),
     );

@@ -274,9 +274,15 @@ class Order extends MY_Controller {
 		if (! $value && $field == "crop_failure") {
 			$value == NULL;
 		}
+
 		$values = array (
 				$field => $value 
 		);
+		if($field == "received_presale" && $value == "0"){
+				$values["crop_failure"] = 1;
+		}elseif($field == "received_presale" && $value !=0){
+			$values['crop_failure'] = 0;
+		}
 		$output = $this->order->update ( $id, $values );
 		
 		if ($this->input->post ( "format" ) == "currency") {

@@ -85,7 +85,6 @@ class Order_Model extends MY_Model {
 	function update($id, $values = array())
 	{
 		$output = $this->_update ( "orders", $id, $values );
-		$this->_log ( "alert" );
 		return $output;
 	}
 
@@ -203,7 +202,7 @@ class Order_Model extends MY_Model {
 		$this->db->select ( "category.category,subcategory.subcategory" );
 		$this->db->group_by ( "orders.id" );
 		$result = $this->db->get ()->result ();
-		 $this->_log ( "alert" );
+		 //$this->_log ( "alert" );
 		return $result;
 	}
 
@@ -250,6 +249,7 @@ class Order_Model extends MY_Model {
 	 */
 	function get_crop_failures($options = array(), $order_by = array())
 	{
+		$where =array();
 		$query = "SELECT * from
 			(SELECT v.id , c.name, c.genus, v.variety, v.species, v.common_id, o.year, COUNT(v.id) c, o.crop_failure, o.received_presale, o.count_presale, o.pot_size, o.flat_size, o.flat_cost, cat.category, subcat.subcategory,o.variety_id
 			FROM    variety v
@@ -267,11 +267,11 @@ class Order_Model extends MY_Model {
 				ON subcat.id = c.subcategory_id
 				%s
 			GROUP BY  v.id)
-			AS `w` where `w`.`c` = 1 and (w.received_presale = 0 or w.crop_failure = 1) %s";
+			AS `w` where `w`.`c` = 1 and (w.received_presale = 0) %s";
 		foreach ( $options as $key => $value ) {
 			switch ($key) {
 				case "category_id" :
-					$where [] = sprintf ( "`c`.`%s` = '%s'", $key, $value );
+					$where [] = sprintf ( "`co`.`%s` = '%s'", $key, $value );
 					break;
 				default :
 					$where [] = sprintf ( "`%s` = '%s'", $key, $value );
@@ -300,7 +300,11 @@ class Order_Model extends MY_Model {
 				$order [] = ("$order_field $order_direction");
 			}
 		}
-		$query = sprintf ( $query, "WHERE " . implode ( " AND ", $where ), "ORDER BY " . implode ( " AND ", $order ) );
+		$where_string = "";
+		if(!empty($where)){
+			$where_string = sprintf("WHERE %s", implode ( " AND ", $where));
+		}
+		$query = sprintf ( $query, $where_string, "ORDER BY " . implode ( " AND ", $order ) );
 		
 		$result = $this->db->query ( $query )->result ();
 		return $result;

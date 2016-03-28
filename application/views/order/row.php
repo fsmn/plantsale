@@ -15,7 +15,8 @@ if ($order->flat_cost && ! $order->plant_cost) {
 $row_classes = array();
 $row_classes[] = has_price_discrepancy($order);
 
-if($order->crop_failure == 1){
+if($order->received_presale == "0.000"){
+	
 	$row_classes[] = "crop-failure";
 }
 $row_classes = implode(" ",$row_classes);
@@ -30,7 +31,7 @@ $row_classes = implode(" ",$row_classes);
 				<? else: ?>
 				<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("order/view/$order->id")));?>
 				<? endif; ?>
-				<?php if($order->crop_failure):?>
+				<?php if($order->received_presale == "0.000"):?>
 				&nbsp;CROP FAILURE&nbsp;
 				<?php endif;?>
 				</td>

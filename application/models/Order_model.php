@@ -267,7 +267,7 @@ class Order_Model extends MY_Model {
 				ON subcat.id = c.subcategory_id
 				%s
 			GROUP BY  v.id)
-			AS `w` where `w`.`c` = 1 and (w.received_presale = 0) %s";
+			AS `w` where `w`.`c` = 1 and (w.received_presale = 0.000) %s";
 		foreach ( $options as $key => $value ) {
 			switch ($key) {
 				case "category_id" :
@@ -307,6 +307,7 @@ class Order_Model extends MY_Model {
 		$query = sprintf ( $query, $where_string, "ORDER BY " . implode ( " AND ", $order ) );
 		
 		$result = $this->db->query ( $query )->result ();
+		$this->_log("alert");
 		return $result;
 	}
 

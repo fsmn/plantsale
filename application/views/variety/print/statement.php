@@ -106,7 +106,7 @@ if($length > 27){
 	</div>
 </div>
 <!--  <div id="crop-failure">
-<? if(isset($order) && get_value($order,"crop_failure") == 1):?>
-CROP FAILURE
+<? if(isset($order) && get_value($order,"received_presale") == "0.000"):?>
+<!-- CROP FAILURE -->
 <? endif;?>
 </div>-->

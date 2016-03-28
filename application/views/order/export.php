@@ -26,7 +26,6 @@ $fields = array(
         "remainder_saturday" => "Remainder Saturday",
         "remainder_sunday" => "Remainder Sunday",
         "count_dead" => "Count of Dead Plants",
-        "crop_failure" => "Crop Failure",
         "flat_size" => "Flat Size",
         "flat_cost" => "Flat Cost",
         "plant_cost" => "Plant Cost",

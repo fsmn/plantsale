@@ -75,7 +75,7 @@ if ($orders) :
 // 			}
 // 		}
 		
-		if ($order->crop_failure) {
+		if ($order->received_presale == "0.000") {
 			$row_classes [] = "crop-failure";
 		}
 		

@@ -1,12 +1,14 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
+$crop_failure = FALSE;
 ?>
 <h4><?=get_value($order,"variety","New Variety");?></h4>
 
 <form name="order-edit" id="order-edit" action="<?=site_url("order/$action");?>"
 	method="post">
-	<?php if(get_value($order,"crop_failure",0)== 1):?>
-<div class='alert'>CROP FAILURE</div>
+	<?php if(get_value($order,"received_presale")== "0.000"):?>
+	<?php $crop_failure = TRUE;?>
+<div class='message alert'>CROP FAILURE</div>
 <?php endif;?>
 	<input type="hidden" name="id" value="<?=get_value($order,"id");?>"/>
 	<input type="hidden" name="variety_id" value="<?=$variety_id;?>" />
@@ -25,10 +27,6 @@
 	<div class="order-catalog_number field">
 	<label for="catalog_number">Catalog Number</label>
 	<input type="text" name="catalog_number" value="<?=get_value($order,"catalog_number");?>"/>
-	</div>
-	<div class="order-crop_failure field">
-	<label for="crop_failure">Crop Failure:</label>
-	<input type="checkbox" name="crop_failure" id="crop_failure" value=1 <?php if(get_value($order,"crop_failure",0) == 1){ echo "checked";}?>/>
 	</div>
 	<div class="order-flat_size field">
 		<label for="flat_size">Flat Size:&nbsp;</label> <input type="text"
@@ -74,7 +72,7 @@
 	<div class="column last">
 	<?php if($action == "update"):?>
 		<div class="order-received_presale field">
-		<label for="received_presale">Presale Received:&nbsp;</label> <input type="text"
+		<label for="received_presale">Presale Received:&nbsp;</label> <input type="text" style="<?php echo $crop_failure?"background-color:#FFB3B3":"";?>"
 			name="received_presale" value="<?=get_value($order,"received_presale");?>" autocomplete="off" />
 	</div>
 	<div class="order-received_midsale field">
@@ -120,11 +118,11 @@
 <script type="text/javascript">
 $("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));
 
-$("#order-edit").on("change","#crop_failure",function(){
-	if($("#crop_failure").prop("checked")){
-	    $("#order-edit .alert").fadeIn().html("CROP FAILURE");
-	}else{
-		$("#order-edit .alert").fadeOut().html("");
-	}
-});
+// $("#order-edit").on("change","#crop_failure",function(){
+// 	if($("#crop_failure").prop("checked")){
+// 	    $("#order-edit .alert").fadeIn().html("CROP FAILURE");
+// 	}else{
+// 		$("#order-edit .alert").fadeOut().html("");
+// 	}
+// });
 </script>

@@ -61,9 +61,9 @@ class Order extends MY_Controller {
 					"grower_id",
 					"pot_size",
 					"flat_size",
-					"crop_failure",
 					"show-non-reorders",
 					"grower_code",
+					"received_presale",
 					"flat_cost",
 					"plant_cost",
 					"flat_area",
@@ -109,6 +109,8 @@ class Order extends MY_Controller {
 				burn_cookie ( "is_tracking" );
 				$data ["is_tracking"] = FALSE;
 			}
+			
+	
 			
 			// if ($show_last_only = $this->input->get ( "show_last_only" )) {
 			// bake_cookie ( "show_last_only", $show_last_only );

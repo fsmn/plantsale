@@ -23,7 +23,7 @@ $(document).ready(function(){
 	//crop failures should not include a year in the search. This messes up the results. 
 	$(document).on("change","#output_format",function(){
 		if($(this).val()=="crop-failure"){
-			$("#year").val("").attr("readonly","readonly");
+			$("#year").val("");
 		}else{
 			$("#year").attr("readonly",false);
 		}

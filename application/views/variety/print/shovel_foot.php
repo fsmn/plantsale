@@ -100,8 +100,8 @@ foreach($sunlight as $light){
 		<div class="grower-name"><?=get_value($order,"grower_name");?></div>
 	</div>
 </div>
-<div id="crop-failure">
-<? if(isset($order) && get_value($order,"crop_failure") == 1):?>
-CROP FAILURE
-<? endif;?>
-</div>
+<!-- <div id="crop-failure"> -->
+ <? if(isset($order) && get_value($order,"received_presale") == "0.000"):?>
+<!-- CROP FAILURE -->
+ <? endif;?>
+<!-- </div> -->

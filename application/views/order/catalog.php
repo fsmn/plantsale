@@ -71,7 +71,7 @@ if ($orders) :
 if(get_value($order,"has_reorder") && $order->has_reorder){
 	$row_classes[] = "hidden";
 }
-        if($order->crop_failure){
+        if($order->received_presale == "0.000"){
 			$row_classes[] = "crop-failure";
 		}
 

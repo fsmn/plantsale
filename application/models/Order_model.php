@@ -444,18 +444,7 @@ class Order_Model extends MY_Model {
 		}
 	}
 
-	function update_crop_failure($id, $value)
-	{
-// 		if (IS_EDITOR) {
-// 			if (! $value) {
-// 				$query = sprintf ( "UPDATE `orders` SET `crop_failure` = NULL WHERE `orders`.`id` = %s", $id );
-// 			} else {
-// 				$query = sprintf ( "UPDATE `orders` SET `crop_failure` = 1 WHERE `orders`.`id` = %s", $id );
-// 			}
-// 			$this->db->query ( $query );
-// 			// $this->_log();
-// 		}
-	}
+	
 
 	function test()
 	{

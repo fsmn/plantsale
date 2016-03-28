@@ -293,14 +293,7 @@ class Order extends MY_Controller {
 		echo $output;
 	}
 
-	function update_crop_failure()
-	{
-// 		$id = $this->input->post ( "id" );
-// 		$value = $this->input->post ( "crop_failure" );
-// 		$this->order->update_crop_failure ( $id, $value );
-// 		$this->session->set_flashdata ( "alert", $value );
-	}
-
+	
 	function catalog_update_selector()
 	{
 		$data ["categories"] = $this->category->get_all ();

@@ -31,7 +31,7 @@ body {
 .document.odd {
 	display: inline-block;
 	float: left;
-	margin-right: 220px;
+
 }
 
 .document.even {

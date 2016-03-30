@@ -235,8 +235,8 @@ class Order extends MY_Controller {
 		$pot_sizes = $this->order->get_pot_sizes ();
 		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
 				"pot_size",
-				"pot_size" 
-		) );
+				"pot_size"
+		), NULL, TRUE );
 		$data ["categories"] = get_keyed_pairs ( $categories, array (
 				"key",
 				"value" 

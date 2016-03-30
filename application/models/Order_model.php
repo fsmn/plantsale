@@ -305,7 +305,7 @@ class Order_Model extends MY_Model {
 		$query = sprintf ( $query, $where_string, "ORDER BY " . implode ( " AND ", $order ) );
 		
 		$result = $this->db->query ( $query )->result ();
-		$this->_log("alert");
+		//$this->_log("alert");
 		return $result;
 	}
 

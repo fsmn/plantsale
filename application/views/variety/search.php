@@ -88,7 +88,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 	<div class="field-set ui-widget">
 	<?php $pot_size = $refine ? cookie("pot_size"):"";?>
 	<label for="pot_size">Pot Size Contains</label>
-	<input type="text" name="pot_size" value="<?php echo $pot_size;?>" id="tags"/>
+	<input type="text" name="pot_size" id="tags" value="<?php echo $pot_size;?>" />
 	</div>
 	<div class="field-set block box">
 		<label for="sunlight-boolean">Sunlight Options</label>

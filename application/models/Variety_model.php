@@ -89,15 +89,6 @@ class Variety_Model extends MY_Model {
 	function get_by_common($common_id)
 	{
 		return $this->get_for_common ( $common_id );
-		/*
-		 * $query = "SELECT `v`.*, `o`.`year` FROM `variety` v LEFT JOIN (SELECT
-		 * n.variety_id, MAX(n.year) AS max_year FROM `orders` n GROUP BY
-		 * n.variety_id) y ON y.variety_id = v.id JOIN `orders` o ON
-		 * `o`.`variety_id` = `v`.`id` AND `o`.`year`=`y`.`max_year` WHERE
-		 * `v`.`common_id` = $common_id ORDER BY `o`.`year` DESC,
-		 * `v`.`variety`"; $result = $this->db->query($query)->result();
-		 * $this->_log("alert"); return $result;
-		 */
 	}
 
 	function get_for_common($common_id)
@@ -165,7 +156,7 @@ class Variety_Model extends MY_Model {
 		$this->db->join("orders","orders.variety_id = variety.id","RIGHT");
 		$this->db->where("orders.year",$year);
 		$result = $this->db->get ()->num_rows ();
-		$this->_log();
+// 		$this->_log();
 		return $result;
 	}
 
@@ -300,7 +291,7 @@ class Variety_Model extends MY_Model {
 		$this->db->select ( "sum(`orders`.`count_midsale`) as midsale_count" );
 		$this->db->select ( "category.category,category.id as category_id" );
 		$result = $this->db->get ()->result ();
-		 $this->_log();
+// 		 $this->_log();
 		return $result;
 	}
 
@@ -431,7 +422,7 @@ class Variety_Model extends MY_Model {
 		$this->db->select ( "sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number" );
 		$this->db->group_by ( "variety.id" );
 		$result = $this->db->get ()->result ();
-		$this->_log();
+// 		$this->_log();
 		return $result;
 	}
 

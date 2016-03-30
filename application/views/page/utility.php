@@ -6,7 +6,7 @@ $user = $this->ion_auth->user ()->row ();
 // @TODO create functions for managing current year
 $buttons [] = array (
 		"selection" => "index",
-		"text" => sprintf ( "Current Year: %s", get_cookie ( "sale_year" ) ),
+		"text" => sprintf ( "Current Year: %s", $this->session->userdata ( "sale_year" ) ),
 		"class" => array (
 				"button edit set-current-year"
 		),

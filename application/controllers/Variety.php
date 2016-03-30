@@ -151,10 +151,10 @@ class Variety extends MY_Controller {
 							bake_cookie ( $my_variable, implode ( ",", $my_value ) );
 							$options [$my_variable] = implode ( ",", $my_value );
 							break;
-// 						case "pot_size":
-// 							bake_cookie($my_variable,$my_value);
-// 							$options [$my_variable] = urldecode($my_value);
-// 							break;
+ 						case "pot_size":
+ 							bake_cookie($my_variable,$my_value);
+ 							$options [$my_variable] = urldecode($my_value);
+ 							break;
 						default :
 							$options [$my_variable] = $my_value;
 					}
@@ -556,10 +556,10 @@ class Variety extends MY_Controller {
 		$data ["format"] = $format;
 		$data ['variety'] = $this->variety->get ( $id );
 		$this->resize_image ( $id, $format );
-		$data ['order'] = $this->order->get_for_variety ( $id, get_cookie ( "sale_year" ) );
+		$data ['order'] = $this->order->get_for_variety ( $id, cookie ( "sale_year" ) );
 		if ($data ['order']) {
 			$data ['flags'] = $this->flag->get_for_variety ( $id );
-			// if ($data ['variety']->new_year == get_cookie ( "sale_year" )) {
+			// if ($data ['variety']->new_year == cookie ( "sale_year" )) {
 			// $new = array (
 			// "thumbnail" => "new-icon.png"
 			// );
@@ -574,7 +574,7 @@ class Variety extends MY_Controller {
 			}
 			$this->load->view ( "variety/print/index", $data );
 		} else {
-			show_error ( sprintf ( "%s has no orders in %s", $data ['variety']->variety, get_cookie ( "sale_year" ) ) );
+			show_error ( sprintf ( "%s has no orders in %s", $data ['variety']->variety, cookie ( "sale_year" ) ) );
 		}
 	}
 

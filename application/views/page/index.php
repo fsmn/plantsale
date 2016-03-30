@@ -67,9 +67,5 @@ $this->load->view ( $target );
 		</div>
 	</div>
 	<div id="footer"><?$this->load->view('page/footer');?></div>
-
-	<div class='mr-shmallow-image'>
-		<img src='/images/MrShmallow.png' />
-	</div>
 </body>
 </html>

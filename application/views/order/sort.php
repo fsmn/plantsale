@@ -30,10 +30,10 @@ $button = create_button(array(
         "type" => "span",
         "class" => "button add-order-sort small"
 ));
-$saved_sort = get_cookie("sorting_fields");
+$saved_sort = cookie("sorting_fields");
 if ($saved_sort && $basic_sort == FALSE) {
     $saved_sort = unserialize($saved_sort);
-    $saved_direction = unserialize(get_cookie("sorting_direction"));
+    $saved_direction = unserialize(cookie("sorting_direction"));
     for ($i = 0; $i < count($saved_sort); $i ++) {
         $output[] = "<p>";
         $output[] = form_dropdown("sorting[]", $sorting, $saved_sort[$i]);

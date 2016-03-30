@@ -31,7 +31,7 @@ $edit_fields = array (
 <?php foreach ($edit_fields as $field=>$key):?>
 <?php $today = date('l');?>
 <?php if(in_array($today,array("Monday","Tuesday","Wednesday","Thursday")) || $key['day'] == $today || IS_EDITOR):?>
-<?php echo form_group($field, $step==1?$item->$field:get_cookie($field), $key['label'] ,$key['type']);?>
+<?php echo form_group($field, $step==1?$item->$field:cookie($field), $key['label'] ,$key['type']);?>
 <?php endif;?>
 <?php endforeach;?>
 <div class="field-wrapper col-sm-5 col-md-2">

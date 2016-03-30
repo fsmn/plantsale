@@ -10,8 +10,9 @@ function bake_cookie ($name, $value)
     if (is_array($value)) {
         $value = implode(",", $value);
     }
+
     set_cookie(array(
-            "name" => $name,
+            "name" => $name . "_session",
             "value" => $value,
             "expire" => 0
     ));
@@ -20,10 +21,15 @@ function bake_cookie ($name, $value)
 function burn_cookie ($name)
 {
     set_cookie(array(
-            "name" => $name,
+            "name" => $name . "_session",
             "value" => "",
             "expire" => NULL
     ));
+}
+
+function cookie($name, $xss_clean = NULL){
+	$name = $name . "_session";
+	return get_cookie($name,$xss_clean);
 }
 
 function create_input ($object, $name, $label, $id = NULL, $default_value = FALSE, $required = FALSE, $classes = array())

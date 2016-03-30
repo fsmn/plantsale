@@ -46,7 +46,7 @@ class Auth extends CI_Controller {
 
 	// log the user in
 	function login() {
-
+		$_COOKIE = array();
 		$this->data ['title'] = "Login";
 
 		// validate form input

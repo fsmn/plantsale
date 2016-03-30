@@ -503,7 +503,7 @@ class Order extends MY_Controller {
 				}else{
 					$this->session->set_flashdata("notice","No changes were made");
 				}
-				$order_search = get_cookie ( "order_search" );
+				$order_search = cookie ( "order_search" );
 				redirect ( "order/search?$order_search" );
 			}
 		}

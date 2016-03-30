@@ -17,7 +17,7 @@ job_live_deploy:
     #- "drush sql-dump | gzip -9 > ~/plantsale/db-backups/build-$CI_BUILD_ID-$CI_BUILD_REF-$CI_BUILD_REF_NAME-db_plantsale-db.sql.gz"
     # master pull
     - "git reset --hard"
-    - "git clean -f -d"
+    - "git clean -f"
     - "git checkout master"
     - "git pull origin master"
     # make sure the right htaccess file is enabled

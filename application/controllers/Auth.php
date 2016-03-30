@@ -92,7 +92,7 @@ class Auth extends CI_Controller {
 			$this->data ['target'] = 'auth/login';
 
 			$this->_render_page ( 'page/index', $this->data );
-			bake_cookie("sale_year", get_current_year());
+			$this->session->set_userdata("sale_year",get_current_year());
 		}
 
 	}

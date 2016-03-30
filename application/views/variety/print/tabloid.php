@@ -17,7 +17,7 @@ $saturday_delivery = $order->count_midsale?1:0;
 	<div class="common-name"><?=$variety->common_name;?></div>
 	</div>
 <div class="subheader">
-<? if($saturday_delivery || $variety->new_year == get_cookie("sale_year")):?>
+<? if($saturday_delivery || $variety->new_year == $this->session->userdata("sale_year")):?>
 <div class="special-icons">
 	<? if($order->count_midsale > 0): ?>
 
@@ -27,7 +27,7 @@ $saturday_delivery = $order->count_midsale?1:0;
 		</div>
 
 	<? endif;?>
-	<? if($variety->new_year == get_cookie("sale_year")):?>
+	<? if($variety->new_year == $this->session->userdata("sale_year")):?>
 <div class="icon is-new">
 		<!-- <img src="<?=base_url("images/new-icon.png");?>"/> -->
 		<?=format_new("poster"); ?>

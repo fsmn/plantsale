@@ -39,10 +39,10 @@ class Order extends MY_Controller {
 			$options = array ();
 			
 			if (! $sale_year = $this->input->get ( "year" )) {
-				$sale_year = get_cookie ( "sale_year" );
+				$sale_year = $this->session->userdata("sale_year");
 			} else {
 				$options ['year'] = $sale_year;
-				// bake_cookie ( "sale_year", $sale_year );
+				// $this->session->set_userdata("sale_year", $sale_year);
 			}
 			
 			if ($new_year = $this->input->get ( "new_year" )) {
@@ -303,7 +303,7 @@ class Order extends MY_Controller {
 	function set_catalog_numbers($year = NULL)
 	{
 		if (! $year) {
-			$year = get_cookie ( "sale_year" );
+			$year = $this->session->userdata("sale_year");
 		}
 		$target_category = "";
 		if ($category_id = $this->input->get ( "category_id" )) {

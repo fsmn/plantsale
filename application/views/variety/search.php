@@ -29,7 +29,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 	</div>
 	<div class="field-set block">
 		<label for="year">Year: </label>
-		<input type="number" name="year" style="width: 5em" value="<?=get_cookie("sale_year");?>" />
+		<input type="number" name="year" style="width: 5em" value="<?=$this->session->userdata("sale_year");;?>" />
 		&nbsp; <label for="new_year">First Year at Sale:&nbsp;</label>
 		<input type="number" style="width: 5em" value="<?=get_value($variety,"new_year",($refine ? get_cookie("new_year"):''));?>" name="new_year"
 			id="new_year"

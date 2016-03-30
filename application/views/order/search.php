@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $refine = $this->input->get("refine");
-$sale_year = get_cookie("sale_year");
+$sale_year = $this->session->userdata("sale_year");;
 if(get_cookie("output_format")=="crop-failure" && $refine){
 	$sale_year = "";
 }
@@ -106,7 +106,7 @@ Use numeric operators like &gt;, &lt;, =, != <a href="#" class="help" id="order_
  </div> -->
 <div class="field-set">
 <input type="checkbox" value="1" name="show-non-reorders" <?=$refine && get_cookie("show-non-reorders")?"checked":"";?>/>
-<label for="show-non-reorders">Show only plants that were not reordered for <span id='non-reorder-year'><?=get_cookie("sale_year")+1;?></span></label>
+<label for="show-non-reorders">Show only plants that were not reordered for <span id='non-reorder-year'><?=$this->session->userdata("sale_year");+1;?></span></label>
 </div>
 </div>
 <div id="sort-block">

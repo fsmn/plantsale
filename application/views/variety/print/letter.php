@@ -23,7 +23,7 @@ $saturday_delivery = $order->count_midsale?1:0;
 		<?endif;?>
 	<span class="latin-name<?=$saturday_delivery?' saturday':'';?>"><?=format_latin_name($variety);?></span>
 	<div class="variety-name">
-	<? if($variety->new_year == get_cookie("sale_year")):?>
+	<? if($variety->new_year == $this->session->userdata("sale_year")):?>
 <span class="is-new">
 		<!-- <img src="<?=base_url("images/new-icon.png");?>"/> -->
 		<?=format_new("poster"); ?>

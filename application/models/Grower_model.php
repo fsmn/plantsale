@@ -81,7 +81,7 @@ class grower_model extends MY_Model
         $this->db->join("grower", "orders.grower_id = grower.id", "LEFT");
         $this->db->where("grower.id IS NULL", NULL, FALSE);
         $this->db->where("orders.grower_id !=", "");
-        $this->db->where("orders.year",get_cookie("sale_year"));
+        $this->db->where("orders.year",$this->session->userdata("sale_year"));
         $this->db->group_by("grower_id");
         $result = $this->db->get()->result();
         return $result;

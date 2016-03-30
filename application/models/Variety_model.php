@@ -172,7 +172,7 @@ class Variety_Model extends MY_Model {
 	function is_new($id, $year = NULL)
 	{
 		if (! $year) {
-			$year = get_cookie ( "sale_year" );
+			$year = $this->session->userdata("sale_year");
 		}
 		$query = sprintf ( "select * from `orders`,variety where `orders`.`variety_id` = %s and variety.id = `orders`.variety_id  and  not exists(select `year` from `orders` where `year` < %s and variety_id = %s)  having `orders`.`year` = %s", $id, $year, $id, $year );
 		$result = $this->db->query ( $query )->num_rows ();

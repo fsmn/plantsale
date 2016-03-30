@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$sale_year = get_cookie("sale_year");
+$sale_year = $this->session->userdata("sale_year");;
 
 ?>
 <!-- order/totals -->
@@ -41,7 +41,7 @@ $sale_year = get_cookie("sale_year");
 <tr>
 <td>Reordered Plants</td>
 <td><a
-		href="<?=site_url("variety/show_reorders/" . get_cookie("sale_year"));?>"
+		href="<?=site_url("variety/show_reorders/" . $this->session->userdata("sale_year"));?>"
 		title="Show all reodrered plants (no new plants)"><?=number_format(count($totals->varieties["current"])-$totals->new_varieties["current"]);?></a>
 </td>
 <td>

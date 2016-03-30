@@ -2,7 +2,7 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 // orphans.php Chris Dart Jan 12, 2015 3:47:05 PM chrisdart@cerebratorium.com
-$sale_year = get_cookie ( "sale_year" );
+$sale_year = $this->session->userdata("sale_year");
 ?>
 <h3><?=$title;?></h3>
 <p><?=$message;?></p>

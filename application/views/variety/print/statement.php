@@ -29,7 +29,7 @@ if($length > 27){
 	<div class="common-name"  <?=$common_size;?>><?=$variety->common_name;?></div>
 	</div>
 <div class="subheader">
-<? if($saturday_delivery || $variety->new_year == get_cookie("sale_year")):?>
+<? if($saturday_delivery || $variety->new_year == $this->session->userdata("sale_year")):?>
 <div class="special-icons">
 	<? if($order->count_midsale > 0): ?>
 
@@ -39,7 +39,7 @@ if($length > 27){
 		</span>
 
 	<? endif;?>
-	<? if($variety->new_year == get_cookie("sale_year")):?>
+	<? if($variety->new_year == $this->session->userdata("sale_year")):?>
 <span class="icon is-new">
 		<!-- <img src="<?=base_url("images/new-icon.png");?>"/> -->
 		<?=format_new("poster"); ?>

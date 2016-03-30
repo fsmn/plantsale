@@ -14,7 +14,7 @@ if($grower->fax){
     $email_phone[] = $grower->fax;
 }
 
-$year = get_cookie("sale_year");
+$year = $this->session->userdata("sale_year");
 
 ?>
 <tr class="row grower total">

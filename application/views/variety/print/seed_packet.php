@@ -21,7 +21,7 @@ if(isset($row_class)){
 	<div class="variety-name">
 
 	<span class="variety"><a href="<?=site_url("variety/view/$variety->id");?>" target="_blank"><?=$variety->variety;?></a></span>
-		<? if($variety->new_year == get_cookie("sale_year")):?>
+		<? if($variety->new_year == $this->session->userdata("sale_year")):?>
 		<span class="is-new">
 		<!-- <img src="<?=base_url("images/new-icon.png");?>"/> -->
 		<?=format_new("poster"); ?>

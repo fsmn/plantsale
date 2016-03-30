@@ -58,16 +58,18 @@ class Index extends MY_Controller
 		function set_year ()
 		{
 			$year = $this->input->get ( "sale_year" );
+			$this->session->set_userdata("sale_year",$year);
 			bake_cookie ( "sale_year", $year );
 			redirect ( $this->input->get ( "uri" ) );
 		}
 
 		function get_order_totals ()
 		{
-			$sale_year = get_cookie ( "sale_year" );
+			$sale_year = $this->session->userdata("sale_year");
 			if (! $sale_year) {
 				$sale_year = get_current_year ();
-				bake_cookie ( "sale_year", $sale_year );
+				$this->session->set_userdata("sale_year",$year);
+				$this->session->set_userdata("sale_year", $sale_year);
 			}
 			$totals = new stdClass ();
 			$this->load->model ( "order_model", "order" );
@@ -90,10 +92,10 @@ class Index extends MY_Controller
 		function get_categories ()
 		{
 			$this->load->model ( "variety_model", "variety" );
-			$sale_year = get_cookie ( "sale_year" );
+			$sale_year = $this->session->userdata("sale_year");
 			if (! $sale_year) {
 				$sale_year = get_current_year ();
-				bake_cookie ( "sale_year", $sale_year );
+				$this->session->set_userdata("sale_year", $sale_year);
 			}
 			$categories ["current"] = $this->variety->get_category_totals ( $sale_year );
 			$categories ["previous"] = $this->variety->get_category_totals ( $sale_year - 1 );
@@ -104,7 +106,7 @@ class Index extends MY_Controller
 		function get_flats ()
 		{
 			$this->load->model ( "variety_model", "variety" );
-			$sale_year = get_cookie ( "sale_year" );
+			$sale_year = $this->session->userdata("sale_year");
 			if (! $sale_year) {
 				$sale_year = get_current_year ();
 			}
@@ -175,7 +177,7 @@ class Index extends MY_Controller
 		{
 			$this->load->helper ( "download" );
 			if ($type == "variety") {
-				// $year = get_cookie("sale_year");
+				// $year = $this->session->userdata("sale_year");;
 				$this->load->model ( "variety_model", "variety" );
 				$this->load->model ( "flag_model", "flag" );
 				

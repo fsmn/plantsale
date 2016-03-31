@@ -68,12 +68,6 @@ if ($orders) :
 				"grouping" 
 		);
 		$latest_year = get_value ( $order, "latest_year", TRUE );
-// 		if (! $order->latest_order) {
-// 			$row_classes [] = "disabled";
-// 			if ($this->input->get ( "show_last_only" )) {
-// 				$row_classes [] = "hidden";
-// 			}
-// 		}
 		
 		if ($order->received_presale == "0.000") {
 			$row_classes [] = "crop-failure";
@@ -193,6 +187,7 @@ if ($orders) :
 		</tr>
 	</tfoot>
 </table>
+
 
 
 

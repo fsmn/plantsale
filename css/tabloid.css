@@ -16,9 +16,6 @@ body {
 	font-family: 'Merriweather Sans', sans-serif;
 }
 
-.document:first-child{
-	.page-break: before;
-}
 .document {
 	height: 17in;
 	width: 11in;
@@ -28,6 +25,11 @@ body {
 	page-break-after: auto;
 }
 
+.multiple .document.first{
+	margin-top: -1em;
+	padding: 0;
+	
+}
 .header {
 	font-size: 64px;
 	width: 100%;

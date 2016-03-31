@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $classes = array("document");
 
 if(isset($row_class)){
-    $classes[] = $row_class;
+	$classes[] = implode(" ", $row_class);
 }
 $has_image = TRUE;
 if(!$variety->image_name){

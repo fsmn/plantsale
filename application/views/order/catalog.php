@@ -1,14 +1,18 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-//$show_names = TRUE;
+defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+// $show_names = TRUE;
 // variety_order.php Chris Dart Mar 4, 2013 8:44:25 PM
 // chrisdart@cerebratorium.com
 
 if ($orders) :
-    ?>
+	?>
 
-    <!-- views/order/catalog.php -->
-    <h5 class="column-instructions">Click on a header to hide the column [<a href="#" class=" reset-columns">Reset</a>]</h5>
+<!-- views/order/catalog.php -->
+<h5 class="column-instructions">
+	Click on a header to hide the column [
+	<a href="#" class=" reset-columns">Reset</a>
+	]
+</h5>
 <table class="list catalog hideable-columns">
 	<thead>
 
@@ -18,71 +22,63 @@ if ($orders) :
 			<th class="hide-column">Year</th>
 		<? endif;?>
 			<th class="hide-column">Grower</th>
-			<th  class="hide-column">Cat&#35;</th>
+			<th class="hide-column">Cat&#35;</th>
 		<? if($show_names):?>
-			<th  class="hide-column">Genus</th>
-			<th  class="hide-column">Species</th>
-			<th  class="hide-column">Common</th>
-			<th  class="hide-column">Variety</th>
+			<th class="hide-column">Genus</th>
+			<th class="hide-column">Species</th>
+			<th class="hide-column">Common</th>
+			<th class="hide-column">Variety</th>
 		<? endif;?>
-			<th  class="hide-column">Presale Order</th>
-			<th  class="hide-column">Midsale Order</th>
-			<th class="hide-column" >Total</th>
+			<th class="hide-column">Presale Order</th>
+			<th class="hide-column">Midsale Order</th>
+			<th class="hide-column">Total</th>
 			<th class="hide-column">Pot Size</th>
 			<th class="hide-column">Flat Size</th>
 			<th class="hide-column">Flat Cost</th>
 			<th class="hide-column">Plant Cost</th>
 			<th class="hide-column">Order Total</th>
 			<th class="hide-column">Price</th>
-			<th class="hide-column" >Grower Code</th>
+			<th class="hide-column">Grower Code</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<?
-		$presale_total = 0;
-		$midsale_total = 0;
-		$flat_cost_total = 0;
-    foreach ($orders as $order) :
-        $flat_cost = $order->flat_cost;
-        $plant_cost = $order->plant_cost;
-        if ($order->flat_cost && ! $order->plant_cost) {
-            $flat_cost = $order->flat_cost;
-            if($order->flat_cost !=0){
-            $plant_cost = $order->flat_size / $order->flat_cost;
-            }else{
-            	$plant_cost = 0;
-            }
-        } elseif ($order->plant_cost && ! $order->flat_cost) {
-            $plant_cost = $order->plant_cost;
-            $flat_cost = $order->flat_size * $order->plant_cost;
-        }
-        $row_classes = array(
-                "grouping"
-        );
-        $latest_year = get_value($order, "latest_year", TRUE);
-//         if (! $order->latest_order) {
-//             $row_classes[] = "disabled";
-//             if($this->input->get("show_last_only"))
-//             {
-//                 $row_classes[] = "hidden";
-//             }
-//         }
-if(get_value($order,"has_reorder") && $order->has_reorder){
-	$row_classes[] = "hidden";
-}
-        if($order->received_presale == "0.000"){
-			$row_classes[] = "crop-failure";
+	$presale_total = 0;
+	$midsale_total = 0;
+	$flat_cost_total = 0;
+	foreach ( $orders as $order ) :
+		$flat_cost = $order->flat_cost;
+		$plant_cost = $order->plant_cost;
+		if ($order->flat_cost && ! $order->plant_cost) {
+			$flat_cost = $order->flat_cost;
+			if ($order->flat_cost != 0) {
+				$plant_cost = $order->flat_size / $order->flat_cost;
+			} else {
+				$plant_cost = 0;
+			}
+		} elseif ($order->plant_cost && ! $order->flat_cost) {
+			$plant_cost = $order->plant_cost;
+			$flat_cost = $order->flat_size * $order->plant_cost;
 		}
-
-        $presale_total += $order->count_presale;
-        $midsale_total += $order->count_midsale;
-        $flat_cost_total += $order->flat_cost * ($order->count_presale + $order->count_midsale);
-        $row_classes[] = has_price_discrepancy($order);
-        ?>
-		<tr
-			class="<?=implode(" ",$row_classes);?>"
-			id="order_<?=$order->id;?>">
+		$row_classes = array (
+				"grouping" 
+		);
+		$latest_year = get_value ( $order, "latest_year", TRUE );
+		
+		if (get_value ( $order, "has_reorder" ) && $order->has_reorder) {
+			$row_classes [] = "hidden";
+		}
+		if ($order->received_presale == "0.000") {
+			$row_classes [] = "crop-failure";
+		}
+		
+		$presale_total += $order->count_presale;
+		$midsale_total += $order->count_midsale;
+		$flat_cost_total += $order->flat_cost * ($order->count_presale + $order->count_midsale);
+		$row_classes [] = has_price_discrepancy ( $order );
+		?>
+		<tr class="<?=implode(" ",$row_classes);?>" id="order_<?=$order->id;?>">
 			<td class="no-wrap">
 			<? if(IS_ADMIN):?>
 			<span class="omit-row omit button" id="omit-order_<?=$order->id;?>">Omit</span>
@@ -103,20 +99,20 @@ if(get_value($order,"has_reorder") && $order->has_reorder){
 			<td class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-catalog_number field">
-			<!-- if there is no catalog number, show the first letter of the category -->
+				<!-- if there is no catalog number, show the first letter of the category -->
 		<?=edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<? if($show_names):?>
-			<td><a
-				href="<?=site_url(sprintf("common/find?genus=%s",$order->genus));?>"
-				title="View all <?=$order->genus;?>"><?=$order->genus;?></a></td>
+			<td>
+				<a href="<?=site_url(sprintf("common/find?genus=%s",$order->genus));?>" title="View all <?=$order->genus;?>"><?=$order->genus;?></a>
+			</td>
 			<td><?=$order->species;?></td>
-			<td><a
-				href="<?=site_url("common/view/$order->common_id");?>"
-				title="View the details for <?=$order->name;?>"><?=$order->name;?></a></td>
-			<td><a style="font-weight: bold"
-				href="<?=site_url("variety/view/$order->variety_id");?>"
-				title="View the details for <?=$order->variety;?>"><?=$order->variety;?></a></td>
+			<td>
+				<a href="<?=site_url("common/view/$order->common_id");?>" title="View the details for <?=$order->name;?>"><?=$order->name;?></a>
+			</td>
+			<td>
+				<a style="font-weight: bold" href="<?=site_url("variety/view/$order->variety_id");?>" title="View the details for <?=$order->variety;?>"><?=$order->variety;?></a>
+			</td>
 			<? endif;?>
 			<td class="order-count_presale field">
 			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
@@ -157,12 +153,17 @@ if(get_value($order,"has_reorder") && $order->has_reorder){
 			</td>
 			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size"));?>
 			</td>
-			<td class="order-flat_size field cost-field" id="flat_size"><span id="edit-flat-size_<?=$order->id;?>" class="edit-cost"><?=$order->flat_size;?></span>
+			<td class="order-flat_size field cost-field" id="flat_size">
+				<span id="edit-flat-size_<?=$order->id;?>" class="edit-cost"><?=$order->flat_size;?></span>
 
 			</td>
-			<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">$<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->flat_cost,2);?></span>
+			<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">
+				$
+				<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->flat_cost,2);?></span>
 			</td>
-			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->plant_cost,2);?></span>
+			<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">
+				$
+				<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->plant_cost,2);?></span>
 			</td>
 			<td class="order-order_total field order_total no-wrap">$<?=round($order->flat_cost * ($order->count_presale + $order->count_midsale),2);?>
 			</td>

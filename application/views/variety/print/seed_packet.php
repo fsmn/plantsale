@@ -7,7 +7,7 @@ if(!$variety->image_name){
     $has_image = FALSE;
 }
 if(isset($row_class)){
-	$classes[] = $row_class;
+	$classes[] = implode(" ", $row_class);
 }
 ?>
 <div class="<?php echo implode(" ",$classes);?>">

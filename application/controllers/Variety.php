@@ -533,7 +533,7 @@ class Variety extends MY_Controller {
 					}
 				}
 				
-				$data ["classes"] = "";
+				$data ["classes"] = "multiple";
 				$count = count ( $plants );
 				$data ["title"] = sprintf ( "%s-Size List-%s Pages", ucfirst ( $format ), $count );
 				$data ["target"] = "variety/print/multiple";
@@ -559,15 +559,9 @@ class Variety extends MY_Controller {
 		$data ['order'] = $this->order->get_for_variety ( $id, $this->session->userdata ( "sale_year" ) );
 		if ($data ['order']) {
 			$data ['flags'] = $this->flag->get_for_variety ( $id );
-			// if ($data ['variety']->new_year == cookie ( "sale_year" )) {
-			// $new = array (
-			// "thumbnail" => "new-icon.png"
-			// );
-			// $data ['flags'] [] = ( object ) $new;
-			// }
 			$data ['title'] = sprintf ( "%s-size Printout for %s %s", ucfirst ( $format ), $data ['variety']->common_name, $data ['variety']->variety );
 			$data ["target"] = "variety/print/$format";
-			$data ["classes"] = "";
+			$data ["classes"] = "single";
 			if (get_value ( $data ["order"], "crop_failure" ) == 1) {
 				$data ["classes"] = "crop-failure";
 			}
@@ -581,25 +575,7 @@ class Variety extends MY_Controller {
 	{
 		print_r ( $this->variety->update_all ( $sale_year ) );
 	}
-	/**
-	 * temporary function. TO BE DELETED after March 2016
-	 * @param unknown $year
-	 */
-	function old_copy($year){
-		$query = "select common.id as common_id, variety.id as variety_id, variety.web_description, variety.print_description, common.name, common.genus, 
-				variety.variety, variety.species, variety_archive.print_description as old_print_description, common.description ,  common_archive.old_description ,common_archive.extended_description from variety
-				join variety_archive on variety.id = variety_archive.variety_id 
-				join common on common.id = variety.common_id  
-				join common_archive on common.id = common_archive.common_id
-				where variety_archive.print_description is NOT NULL and variety.print_description is NULL and new_year = $year";
-		$data['plants'] = $this->db->query($query)->result();
-		$this->session->set_flashdata('notice',$this->db->last_query());
-		$data['title'] = "Copy Comparison";
-		$data['target'] = "variety/list/copy_compare";
-		$this->load->view("page/index",$data);
-		
-	}
-
+	
 	function quark()
 	{
 		$plants = $this->session->userdata ( "print_list" );

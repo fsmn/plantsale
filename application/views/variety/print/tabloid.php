@@ -8,6 +8,9 @@ if(!$variety->image_name){
     $classes[] = "no-image";
     $has_image = FALSE;
 }
+if(isset($row_class)){
+	$classes[] = implode(" ", $row_class);
+}
 $saturday_delivery = $order->count_midsale?1:0;
 ?>
 <div class="<?=implode(" ",$classes);?>">

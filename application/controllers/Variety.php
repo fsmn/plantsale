@@ -556,7 +556,7 @@ class Variety extends MY_Controller {
 		$data ["format"] = $format;
 		$data ['variety'] = $this->variety->get ( $id );
 		$this->resize_image ( $id, $format );
-		$data ['order'] = $this->order->get_for_variety ( $id, cookie ( "sale_year" ) );
+		$data ['order'] = $this->order->get_for_variety ( $id, $this->session->userdata ( "sale_year" ) );
 		if ($data ['order']) {
 			$data ['flags'] = $this->flag->get_for_variety ( $id );
 			// if ($data ['variety']->new_year == cookie ( "sale_year" )) {
@@ -568,7 +568,6 @@ class Variety extends MY_Controller {
 			$data ['title'] = sprintf ( "%s-size Printout for %s %s", ucfirst ( $format ), $data ['variety']->common_name, $data ['variety']->variety );
 			$data ["target"] = "variety/print/$format";
 			$data ["classes"] = "";
-			
 			if (get_value ( $data ["order"], "crop_failure" ) == 1) {
 				$data ["classes"] = "crop-failure";
 			}

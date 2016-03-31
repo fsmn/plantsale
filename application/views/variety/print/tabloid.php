@@ -2,7 +2,6 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 // tabloid.php Chris Dart May 20, 2014 7:58:21 PM chrisdart@cerebratorium.com
-if(isset($order) && is_object($order)):
 $classes = array("document");
 $has_image = TRUE;
 if(!$variety->image_name){
@@ -97,4 +96,3 @@ foreach($sunlight as $light){
 <!-- CROP FAILURE -->
 <? endif;?>
 </div>-->
-<?php endif;

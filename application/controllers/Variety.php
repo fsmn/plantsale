@@ -529,7 +529,7 @@ class Variety extends MY_Controller {
 					$data ['plants'] [$plant] ['order'] = $this->order->get_for_variety ( $plant, get_current_year () );
 					$data ['plants'] [$plant] ['flags'] = $this->flag->get_for_variety ( $plant );
 					if ($format) {
-					$alerts [] = $this->resize_image ( $plant, $format, TRUE );
+						//$alerts [] = $this->resize_image ( $plant, $format, TRUE );
 					}
 				}
 				
@@ -675,7 +675,7 @@ class Variety extends MY_Controller {
 				"shovel_foot",
 				"thumbnail" 
 		) )) {
-			
+			$config = array();
 			$this->load->helper ( "file" );
 			$source_image = "./files/$image_name.jpg";
 			$new_image = "./files/$format/$image_name.jpg";

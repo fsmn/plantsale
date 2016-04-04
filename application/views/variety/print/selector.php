@@ -8,7 +8,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $formats = array(
         "tabloid" => "Tabloid (12 x 18)",
         "statement" => "Statement (5.5 x 8.5)",
-        "letter" => "Letter (8.5 x 5.5)",
+        "letter" => "Letter (8.5 x 11)",
         "shovel_foot" => "Shovel Foot (7 x 11)",
 		"seed_packet" => "Seed Packet (6.5 x 4.5)",
 )

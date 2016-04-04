@@ -7,6 +7,9 @@ if(!$variety->image_name){
     $has_image = FALSE;
 }
 $saturday_delivery = $order->count_midsale?1:0;
+if(isset($row_class)){
+	$classes[] = implode(" ", $row_class);
+}
 ?>
 <div class="<?php echo implode(" ",$classes);?>">
 	<div class="header">

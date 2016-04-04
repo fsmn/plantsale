@@ -328,8 +328,6 @@ $(document).on("click",".variety-insert",function(){
 		$(document).on("click",".delete-image",function(){
 			question = confirm("Are you sure you want to delete this image? This cannot be undone!");
 			if(question){
-				query = confirm("Really, it cannot be undone in a special undoable way! Go ahead?");
-				if(query){
 					my_id = this.id.split("_")[1];
 					form_data = {
 							ajax: 1,
@@ -346,7 +344,6 @@ $(document).on("click",".variety-insert",function(){
 							$("#image").html(data);
 						}
 					});
-				}
 			}
 		});
 		

@@ -25,7 +25,11 @@ body {
 	page-break-inside: avoid;
 	page-break-after: auto;
 }
-
+.multiple .document.first{
+	margin-top: -1em;
+	padding: 0;
+	
+}
 .header {
 	font-size: 47px;
 	width: 100%;

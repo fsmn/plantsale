@@ -26,6 +26,12 @@ body {
 	page-break-after: auto;
 }
 
+.multiple .document.first{
+	margin-top: -1em;
+	padding: 0;
+	
+}
+
 .header {
 	font-size: 42pt;
 	width: 100%;

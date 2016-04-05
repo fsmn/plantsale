@@ -185,9 +185,17 @@ div.login-title {
 }
 
 /*form elements*/
-.label {
+.label ,label{
 	font-size: 1em;
-	font-weight: bold
+	font-weight: bold;
+}
+
+.label-break label {
+	display: block;
+}
+
+label.inline {
+	display: inline !important;
 }
 
 /* form dimensions mainly defined here */
@@ -321,10 +329,6 @@ ul.button-list li .button.delete {
 }
 textarea {
 	font-size: 1em;
-}
-
-label {
-	font-weight: bold;
 }
 
 legend {
@@ -505,9 +509,6 @@ img:hover {
 	cursor: pointer;
 }
 
-label {
-	font-weight: bold;
-}
 
 .spacer {
 	width: 25em;
@@ -842,9 +843,7 @@ form .column {
 	padding: 5px 0;
 }
 
-.label-break label {
-	display: block;
-}
+
 
 .search-form .field-set {
 	clear: both;

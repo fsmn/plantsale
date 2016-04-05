@@ -77,7 +77,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 			<input type="checkbox" name="not_flag" style="width: auto;" value=1 id="not_flag" <?=cookie("not_flag") ? "checked":"";?>
 				title="Check here if you want to find everything that is not the flag value"
 			>
-			<strong>Negate</strong>
+			<label class='inline'>Negate</label>
 
 		</div>
 		<div class="column last">

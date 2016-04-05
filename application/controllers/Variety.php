@@ -97,14 +97,12 @@ class Variety extends MY_Controller {
 
 	function search()
 	{
-		if(is_array($this->input->get("action"))){
+		if (is_array ( $this->input->get ( "action" ) )) {
 			$action = implode ( "", $this->input->get ( "action" ) );
-		
-		}else{
-			$action = $this->input->get("action");
+		} else {
+			$action = $this->input->get ( "action" );
 		}
 		if ($this->input->get ( "find" )) {
-			
 			
 			$variables = array (
 					"name",
@@ -132,7 +130,7 @@ class Variety extends MY_Controller {
 					"copy_received",
 					"edit_notes",
 					"needs_copy_review",
-					"pot_size",
+					"pot_size" 
 			);
 			$options = array ();
 			for($i = 0; $i < count ( $variables ); $i ++) {
@@ -151,10 +149,10 @@ class Variety extends MY_Controller {
 							bake_cookie ( $my_variable, implode ( ",", $my_value ) );
 							$options [$my_variable] = implode ( ",", $my_value );
 							break;
- 						case "pot_size":
- 							bake_cookie($my_variable,$my_value);
- 							$options [$my_variable] = urldecode($my_value);
- 							break;
+						case "pot_size" :
+							bake_cookie ( $my_variable, $my_value );
+							$options [$my_variable] = urldecode ( $my_value );
+							break;
 						default :
 							$options [$my_variable] = $my_value;
 					}
@@ -163,7 +161,6 @@ class Variety extends MY_Controller {
 					burn_cookie ( $my_variable );
 				}
 			}
-
 			
 			if ($not_flag = $this->input->get ( "not_flag" )) {
 				bake_cookie ( "not_flag", $not_flag );
@@ -207,21 +204,24 @@ class Variety extends MY_Controller {
 					$plant->orders = $this->order->get_for_variety ( $plant->id );
 				} elseif ($action == "flags") {
 					$plant->flags = $this->flag->get_for_variety ( $plant->id );
-				}elseif($action == "edits"){
-					$this->load->model("user_model","user");
-					$users = $this->user->get_user_pairs();
-					$data["users"] = get_keyed_pairs($users,array("id","name"),TRUE);
+				} elseif ($action == "edits") {
+					$this->load->model ( "user_model", "user" );
+					$users = $this->user->get_user_pairs ();
+					$data ["users"] = get_keyed_pairs ( $users, array (
+							"id",
+							"name" 
+					), TRUE );
 				}
 			}
 			$this->session->set_userdata ( "print_list", $print_list );
 			if ($this->input->get ( "export" )) {
 				$data ["export_type"] = "standard";
-				$date_string = date("Y-m-d-h-j");
-				$data ["filename"] = sprintf("variety-export_%s.csv",$date_string);
+				$date_string = date ( "Y-m-d-h-j" );
+				$data ["filename"] = sprintf ( "variety-export_%s.csv", $date_string );
 				
 				if ($export_type = $this->input->get ( "export_type" )) {
 					$data ["export_type"] = $export_type;
-					$data ['filename'] = sprintf("%s_%s.csv", $export_type,$date_string);
+					$data ['filename'] = sprintf ( "%s_%s.csv", $export_type, $date_string );
 				}
 				$this->load->helper ( "download" );
 				$this->load->view ( "variety/list/export", $data );
@@ -234,13 +234,12 @@ class Variety extends MY_Controller {
 				$this->load->view ( "page/index", $data );
 			}
 		} else {
-			$this->_search ($action);
+			$this->_search ( $action );
 		}
 	}
 
 	function _search($action)
 	{
-		
 		$this->load->model ( "menu_model", "menu" );
 		$this->load->model ( "category_model", "category" );
 		$this->load->model ( "subcategory_model", "subcategory" );
@@ -249,12 +248,15 @@ class Variety extends MY_Controller {
 		$pot_sizes = $this->order->get_pot_sizes ();
 		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
 				"pot_size",
-				"pot_size"
+				"pot_size" 
 		), NULL, TRUE );
-		if($action == "edits"){
-			$this->load->model("user_model","user");
-			$users = $this->user->get_user_pairs();
-			$data["users"] = get_keyed_pairs($users,array("id","name"),TRUE);
+		if ($action == "edits") {
+			$this->load->model ( "user_model", "user" );
+			$users = $this->user->get_user_pairs ();
+			$data ["users"] = get_keyed_pairs ( $users, array (
+					"id",
+					"name" 
+			), TRUE );
 		}
 		$categories = $this->category->get_pairs ();
 		$data ["categories"] = get_keyed_pairs ( $categories, array (
@@ -291,11 +293,11 @@ class Variety extends MY_Controller {
 		$data ["variety"] = NULL;
 		$data ["title"] = "Variety Search";
 		$data ["target"] = "variety/search";
-		if($action == "edits"){
-			$data['target'] = "variety/edits_search";
+		if ($action == "edits") {
+			$data ['target'] = "variety/edits_search";
 		}
 		if ($this->input->get ( "ajax" )) {
-			$this->load->view ( $data['target'], $data );
+			$this->load->view ( $data ['target'], $data );
 		} else {
 			
 			$this->load->view ( "page/index", $data );
@@ -417,7 +419,7 @@ class Variety extends MY_Controller {
 	{
 		$id = $this->input->post ( "id" );
 		$value = $this->input->post ( "value" );
-		$field = $this->input->post("field");
+		$field = $this->input->post ( "field" );
 		if (is_array ( $value )) {
 			$value = implode ( ",", $value );
 		}
@@ -426,11 +428,11 @@ class Variety extends MY_Controller {
 		);
 		$this->variety->update ( $id, $values );
 		if ($field == "editor") {
-			if($value){
-			$this->load->model ( "user_model", "user" );
-			$user = $this->user->get_user ( $value );
-			$value = sprintf ( "%s %s", $user->first_name, $user->last_name );
-			}else{
+			if ($value) {
+				$this->load->model ( "user_model", "user" );
+				$user = $this->user->get_user ( $value );
+				$value = sprintf ( "%s %s", $user->first_name, $user->last_name );
+			} else {
 				$value = "&nbsp;";
 			}
 		}
@@ -529,7 +531,7 @@ class Variety extends MY_Controller {
 					$data ['plants'] [$plant] ['order'] = $this->order->get_for_variety ( $plant, get_current_year () );
 					$data ['plants'] [$plant] ['flags'] = $this->flag->get_for_variety ( $plant );
 					if ($format) {
-						//$alerts [] = $this->resize_image ( $plant, $format, TRUE );
+						// $alerts [] = $this->resize_image ( $plant, $format, TRUE );
 					}
 				}
 				
@@ -575,7 +577,7 @@ class Variety extends MY_Controller {
 	{
 		print_r ( $this->variety->update_all ( $sale_year ) );
 	}
-	
+
 	function quark()
 	{
 		$plants = $this->session->userdata ( "print_list" );
@@ -588,9 +590,9 @@ class Variety extends MY_Controller {
 
 	function show_copy_text()
 	{
-	    //@TODO merge this function with the search function. 
+		// @TODO merge this function with the search function.
 		$data ["varieties"] = $this->variety->get_varieties_for_year ( get_current_year (), TRUE );
-		$data["year"] = get_current_year();
+		$data ["year"] = get_current_year ();
 		$data ["title"] = "Wasting Trees";
 		$data ["target"] = "variety/print/paper_waste";
 		$data ["format"] = "print";
@@ -675,7 +677,7 @@ class Variety extends MY_Controller {
 				"shovel_foot",
 				"thumbnail" 
 		) )) {
-			$config = array();
+			$config = array ();
 			$this->load->helper ( "file" );
 			$source_image = "./files/$image_name.jpg";
 			$new_image = "./files/$format/$image_name.jpg";

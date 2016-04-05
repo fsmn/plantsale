@@ -74,7 +74,11 @@ class Grower extends MY_Controller {
 		$data ["action"] = "insert";
 		$data ["target"] = "grower/edit";
 		$data ["title"] = "Add New Grower";
-		$this->load->view ( "page/index", $data );
+		if($this->input->get("ajax")==1){
+			$this->load->view("page/modal",$data);
+		}else{
+			$this->load->view ( "page/index", $data );
+		}
 	}
 
 	function insert()

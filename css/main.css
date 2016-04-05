@@ -6,6 +6,7 @@
 
 body {
 	font-size: 13px;
+	font-weight: 300;
 	font-family: "Helvetica Neue", Tahoma, Verdana, sans-serif;
 	margin: 10px;
 	padding: 10px;
@@ -213,7 +214,7 @@ h2, h3, h4, h5, input[type="submit"], #navigation input[type="text"] {
 	border: 1px solid black;
 	cursor: pointer;
 	font-size: 1em;
-	font-weight: normal;
+	font-weight: 300;
 	white-space: nowrap;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	display: inline-block;
@@ -388,10 +389,7 @@ legend:hover {
 }
 
 #navigation .button-box {
-	float: left;
-	top: 2px;
-	position: absolute;
-	width: 100%;
+	
 }
 
 #utility {

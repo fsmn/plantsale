@@ -29,7 +29,7 @@ $edit_fields = array (
 <input type="hidden" name="step" value="<?php echo $step;?>"/>
 <input type="hidden" name="catalog_number" value="<?php echo $item->catalog_number;?>"/>
 <div class="row">
-<div class="col-xs-3 col-xs-offset-3">
+<div class="col-xs-8" style="position: relative;">
 <?php foreach ($edit_fields as $field=>$key):?>
 <?php $today = date('l');?>
 <?php if(in_array($today,array("Monday","Tuesday","Wednesday","Thursday")) || $key['day'] == $today || IS_EDITOR):?>
@@ -42,7 +42,7 @@ $edit_fields = array (
 <div class="col-xs-1 col-xs-offset-3">
 <button type="submit" class="btn btn-lg btn-success" id="submit" name="submit">Submit</button>
 </div>
-<div class="col-xs-1 col-xs-offset-1">
+<div class="col-xs-1 col-xs-offset-2">
 <a href="<?php echo site_url("inventory/index");?>" class="btn btn-danger btn-lg">Cancel</a>
 </div>
 </div>

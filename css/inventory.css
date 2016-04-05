@@ -37,6 +37,8 @@ input[type='time']{
 	font-size: 3em;
 	height: auto;
 }
+input{
+	max-width: 290px;}
 
 @media (max-width:320px ){
 	img.small {
@@ -46,5 +48,12 @@ input[type='time']{
 	
 	h1,h2,h3,h4 {
 	padding: 0;
+	}
+	
+}
+
+@media (min-width: 768px){
+	input{
+	max-width: 100%;
 	}
 }

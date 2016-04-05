@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+#header {
+	height: 134px;
+}
+#main {
+	padding: 1em;
+}
+
+#navigation .menu-button{
+	display: block;
+}
+
+#navigation .button-box {
+	display: none;
+	background-color:#fff;
+	z-index: 10;
+
+    float:none;
+    top: 24px;
+    width: auto;
+}
+
+#navigation .button-box ul {
+	 display: block;
+    background-color: #fff;
+    z-index: 10;
+    min-width: 294px;
+        box-shadow: 1px 1px 15px #666;
+    
+}
+
+#navigation .button-box ul li, #navigation li:first-child {
+	display: block;
+	padding: .35em 0 .35em .25em;
+	
+}
+#navigation .button-box ul li .button {
+	
+	padding: 0;
+	margin: 0;
+	display: inline;
+	    color: #62c462;
+    text-shadow: none;
+    background-color: inherit;
+    background-image: none;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+table.list {
+	width: 100%;
+	overflow: scroll;	
+	overflow-x: auto;
+	display: block;
+}

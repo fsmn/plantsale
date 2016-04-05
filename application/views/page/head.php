@@ -15,6 +15,8 @@
 <link type="text/css" rel="stylesheet" media="screen" href="<?=base_url("css/edit.css?")  . date("U");?>"/>
 <? endif;?>
 <link type="text/css" rel="stylesheet" media="print" href="<?=base_url("css/print.css?")  . date("U");?>" />
+<link type="text/css" rel="stylesheet" media="(max-width:736px)" href="<?echo base_url("css/mobile.css");?>"/>
+
 <!-- jquery scripts -->
 <script type="text/javascript">
 var base_url = '<?=base_url("index.php") . "/";?>';

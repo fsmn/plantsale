@@ -42,7 +42,7 @@ $body_class = implode ( " ", $body_classes );
 <?php endif;?>
 <?php if($this->ion_auth->logged_in()):?>
 <div id='utility'><?php $this->load->view('page/utility');?></div>
-				<div id='navigation'>
+<div id='navigation'><div><a href="" class="menu-button"><i class="fa fa-bars"></i>&nbsp;Menu</a></div>
 <?php  $this->load->view('page/navigation'); ?>
 </div>
 <?php endif;?>

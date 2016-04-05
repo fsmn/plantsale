@@ -1,4 +1,9 @@
 $(document).ready(function(){
+	$("#navigation .menu-button").click(function(e){
+		e.preventDefault();
+		$("#navigation .button-box").toggle();
+	});
+	
 	
 	$(".message").click(function(e){
 		$(this).fadeOut();

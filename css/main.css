@@ -247,6 +247,10 @@ span.edit, span.new, span.delete, button.edit, button.new, button.delete,
 	visibility: visible;
 }
 
+#navigation .menu-button{
+	display: none;
+	width: 150px;
+}
 #navigation input[type="text"] {
 	height: 30px;
 	width: 250px;

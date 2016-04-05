@@ -53,3 +53,6 @@ table.list {
 	overflow-x: auto;
 	display: block;
 }
+.button.export ,.button.print {
+	display: none;
+}

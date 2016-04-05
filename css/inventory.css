@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 #page {
-	max-width: 320px;
+	max-width: 1024px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
@@ -14,12 +14,16 @@
 	margin-bottom: .1em;
 }
 
+
+
 h1, h2, h3, h4 {
 	text-align: center;
+	padding: 2em 0;
+	font-size: 2em;
 }
 
 img.small {
-	max-height: 265px;
+	max-width: 100%;
 	display: block;
 	margin: 0 auto;
 	padding: 1em 0;
@@ -27,4 +31,20 @@ img.small {
 
 .form-control{
 	width: auto;
+}
+
+input[type='time']{
+	font-size: 3em;
+	height: auto;
+}
+
+@media (max-width:320px ){
+	img.small {
+	max-height: 265px;
+	max-width: 100%;
+	}
+	
+	h1,h2,h3,h4 {
+	padding: 0;
+	}
 }

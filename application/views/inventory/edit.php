@@ -28,12 +28,22 @@ $edit_fields = array (
 <input type="hidden" name="id" value="<?php echo $item->id;?>"/>
 <input type="hidden" name="step" value="<?php echo $step;?>"/>
 <input type="hidden" name="catalog_number" value="<?php echo $item->catalog_number;?>"/>
+<div class="row">
+<div class="col-xs-3 col-xs-offset-3">
 <?php foreach ($edit_fields as $field=>$key):?>
 <?php $today = date('l');?>
 <?php if(in_array($today,array("Monday","Tuesday","Wednesday","Thursday")) || $key['day'] == $today || IS_EDITOR):?>
 <?php echo form_group($field, $step==1?$item->$field:cookie($field), $key['label'] ,$key['type']);?>
 <?php endif;?>
 <?php endforeach;?>
-<div class="field-wrapper col-sm-5 col-md-2">
-<input type="submit" class="form-control number btn btn-success" id="submit" name="submit" value="Submit"></div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-1 col-xs-offset-3">
+<button type="submit" class="btn btn-lg btn-success" id="submit" name="submit">Submit</button>
+</div>
+<div class="col-xs-1 col-xs-offset-1">
+<a href="<?php echo site_url("inventory/index");?>" class="btn btn-danger btn-lg">Cancel</a>
+</div>
+</div>
 </form>

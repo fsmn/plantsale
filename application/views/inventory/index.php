@@ -11,7 +11,7 @@
 
 <!-- Bootstrap theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" media="screen">
-<link rel="stylesheet" href="<?php echo base_url("css/inventory.css");?>" media="screen">
+<link rel="stylesheet" href="<?php echo base_url("css/inventory.css?") . date("U");?>" media="screen">
 
 </head>
 <body>

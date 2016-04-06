@@ -39,10 +39,10 @@ $edit_fields = array (
 </div>
 </div>
 <div class="row">
-<div class="col-xs-1 col-xs-offset-3">
+<div class="col-xs-3 col-xs-offset-1">
 <button type="submit" class="btn btn-lg btn-success" id="submit" name="submit">Submit</button>
 </div>
-<div class="col-xs-1 col-xs-offset-2">
+<div class="col-xs-3 col-xs-offset-2">
 <a href="<?php echo site_url("inventory/index");?>" class="btn btn-danger btn-lg">Cancel</a>
 </div>
 </div>

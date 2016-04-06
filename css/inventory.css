@@ -38,7 +38,9 @@ input[type='time']{
 	height: auto;
 }
 input{
-	max-width: 290px;}
+	max-width: 156% !important;
+	
+	}
 
 @media (max-width:320px ){
 	img.small {

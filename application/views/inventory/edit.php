@@ -29,7 +29,7 @@ $edit_fields = array (
 <input type="hidden" name="step" value="<?php echo $step;?>"/>
 <input type="hidden" name="catalog_number" value="<?php echo $item->catalog_number;?>"/>
 <div class="row">
-<div class="col-xs-8" style="position: relative;">
+<div class="col-xs-6 col-xs-offset-2" style="position: relative;">
 <?php foreach ($edit_fields as $field=>$key):?>
 <?php $today = date('l');?>
 <?php if(in_array($today,array("Monday","Tuesday","Wednesday","Thursday")) || $key['day'] == $today || IS_EDITOR):?>

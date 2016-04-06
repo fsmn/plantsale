@@ -87,7 +87,7 @@ p {
 	font-size: 1.1em;
 }
 
-.login input[type="text"], .login input[type="password"] {
+.login input[type="text"], .login input[type="email"], .login input[type="password"] {
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;

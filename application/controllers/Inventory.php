@@ -88,7 +88,7 @@ class Inventory extends MY_Controller
 					burn_cookie ( $variable );
 				}
 				$this->order->update ( $this->input->post ( "id" ), $values );
-				$this->_log ( "This item has been updated" );
+				$this->_log ( "This item has been updated" .  implode(",",$values) );
 				redirect ( "inventory/index" );
 			}
 		}

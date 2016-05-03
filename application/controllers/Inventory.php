@@ -81,14 +81,16 @@ class Inventory extends MY_Controller
 			else {
 				
 				$values = array ();
+				$message = array();
 				foreach ( $variables as $variable ) {
 					if ($value = $this->input->post ( $variable )) {
 						$values [$variable] = $this->input->post ( $variable );
+						$message[] = sprintf("%s: %s",$variable,$this->input->post($variable));
 					}
 					burn_cookie ( $variable );
 				}
-				$this->order->update ( $this->input->post ( "id" ), $values );
-				$this->_log ( "This item has been updated" .  implode(",",$values) );
+				$this->order->sellout ( $this->input->post ( "id" ), $values );
+				$this->_log ( "This item has been updated with the following values " .  implode(",",$message) );
 				redirect ( "inventory/index" );
 			}
 		}

@@ -86,6 +86,12 @@ class Order_Model extends MY_Model {
 		$this->_log();
 		return $output;
 	}
+	
+	function sellout($id, $values){
+		$this->db->where("id",$id);
+		$this->db->update("orders",$values);
+		return TRUE;
+	}
 
 	function delete($id)
 	{

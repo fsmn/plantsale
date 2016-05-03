@@ -47,7 +47,7 @@ class MY_Model extends CI_Model
 		function _update ( $db, $id, $values )
 		{
 			$original_values = $values;
-			//if (IS_EDITOR) {
+			if (IS_EDITOR) {
 				$this->db->where ( "id", $id );
 				if (empty ( $values )) {
 					$this->prepare_variables ();
@@ -64,9 +64,9 @@ class MY_Model extends CI_Model
 					}
 				}
 			}
-			//else {
-				//return FALSE;
-			//}
+			else {
+				return FALSE;
+			}
 		}
 
 		function _delete ( $db, $id )

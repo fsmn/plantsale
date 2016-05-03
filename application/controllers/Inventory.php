@@ -57,13 +57,13 @@ class Inventory extends MY_Controller
 		function check ()
 		{
 			$variables = array (
-					"received_presale",
+					//"received_presale",
 					"sellout_friday",
-					"remainder_friday",
-					"received_midsale",
+					//"remainder_friday",
+					//"received_midsale",
 					"sellout_saturday",
-					"remainder_sunday",
-					"count_dead" 
+					//"remainder_sunday",
+					//"count_dead" 
 			);
 			if ($this->input->post ( "step" ) == 1) {
 				if ($catalog_number = $this->input->post ( "catalog_number" )) {

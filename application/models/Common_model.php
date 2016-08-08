@@ -150,6 +150,10 @@ class Common_model extends MY_Model
                 }
             }
         }
+        
+        if($this->description){
+        	$this->db->like("description",$this->description);
+        }
         $this->db->join("category","common.category_id = category.id","LEFT");
         $this->db->join("subcategory","common.subcategory_id = subcategory.id","LEFT");
         $this->db->select("common.id,common.category_id,common.subcategory_id,name,genus,description,other_names,sunlight");
@@ -164,6 +168,7 @@ class Common_model extends MY_Model
         }
 
         $result = $this->db->get()->result();
+        $this->_log();
         return $result;
     }
 

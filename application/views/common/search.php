@@ -3,15 +3,15 @@ $refine = $this->input->get("refine");
 $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 
 ?>
-
 <form name="search-common" id="search-common"
 	action="<?=site_url("common/search"); ?>" method="GET">
 	<input type="hidden" name="find" value="1"/>
 	<p>
-		<?=create_input($common,"name","Name");?>
+	<label for="name">Name: </label><input type="text" name="name" id="name" value="<?php echo $refine?cookie("name"):'';?>" class="">
 	</p>
 	<p>
-		<?=create_input($common, "genus","Genus");?>
+		<label for="genus">Genus: </label><input type="text" name="genus" id="genus" value="<?php echo $refine?cookie("genus"):'';?>" class="">
+	
 	</p>
 <p><label for="category_id">Category: </label><?=form_dropdown("category_id",$categories,$refine?cookie("category_id"):"",'id="category_id"');?></p>
 	<p ><label for="subcategory_id">Subcategory: </label><span id="subcategory-envelope"><?=form_dropdown("subcategory_id",$subcategories,$refine?cookie("subcategory_id"):"", 'id="subcategory_id"');?></span></p>
@@ -23,11 +23,11 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	</p>
 	<p>
 		<label for="description">Description:</label><br />
-		<textarea name="description" id="description"></textarea>
+		<textarea name="description" id="description"><?php echo $refine?cookie("description"):'';?></textarea>
 	</p>
 	<p>
 		<label for="year">Year: </label><input type="text" name="year"
-			value="<?=get_current_year();?>" />
+			value="<?php echo $refine?cookie("year"):get_current_year();?>" />
 	</p>
 	<p>
 		<input type="submit" value="Find" class="button" />

@@ -164,7 +164,6 @@ class Common_model extends MY_Model
         }
 
         $result = $this->db->get()->result();
-        $this->_log();
         return $result;
     }
 

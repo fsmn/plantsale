@@ -55,7 +55,7 @@ $action = FALSE;
 if($this->input->get("action")=="edits"){
 	$action = "edits";
 }
-echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","search","dialog","refine"),"href"=>site_url("variety/search?action=$action"))));?>
+echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","search","dialog","refine"),"href"=>site_url("variety/search?action=$action&refine=1"))));?>
 
 	</div>
 </fieldset>

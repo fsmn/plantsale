@@ -58,7 +58,7 @@ function create_input ($object, $name, $label, $id = NULL, $default_value = FALS
 
 function get_current_year ()
 {
-    if (date("m") > 6) { // after August
+    if (date("m") > 6) { // after June
         $year = date("Y") + 1;
     } else {
         $year = date("Y");

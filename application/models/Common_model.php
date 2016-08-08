@@ -121,13 +121,11 @@ class Common_model extends MY_Model
     {
         $this->prepare_variables("get");
         $this->db->from("common");
-        if ($this->name && ! $this->genus) {
-            $this->db->where("`name` LIKE '%$this->name%' OR `genus` LIKE '%$this->name%'");
-        } elseif ($this->name && $this->genus) {
-            $this->db->like("name", "$this->name");
-            $this->db->like("genus", "$this->genus");
-        } elseif (! $this->name && $this->genus) {
-            $this->db->where("`name` LIKE '%$this->genus%' OR `genus` LIKE '%$this->genus%'");
+        if ( $this->genus) {
+            $this->db->like("genus",$this->genus);
+        }
+        if ($this->name ) {
+            $this->db->like("name",$this->name); 
         }
 
         if($this->category_id){
@@ -166,6 +164,7 @@ class Common_model extends MY_Model
         }
 
         $result = $this->db->get()->result();
+        $this->_log();
         return $result;
     }
 

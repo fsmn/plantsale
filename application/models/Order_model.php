@@ -161,6 +161,9 @@ class Order_Model extends MY_Model {
 				case "flag" :
 					$this->db->where ( "flag.name", $value );
 					break;
+				case "received_presale":
+					$this->db->where("received_presale",$value);
+					break;
 				case "name" :
 					$this->db->like ( "common.name", $value );
 					break;
@@ -207,7 +210,7 @@ class Order_Model extends MY_Model {
 		$this->db->select ( "category.category,subcategory.subcategory" );
 		$this->db->group_by ( "orders.id" );
 		$result = $this->db->get ()->result ();
-		 //$this->_log ( "alert" );
+		$this->_log (  );
 		return $result;
 	}
 
@@ -256,7 +259,7 @@ class Order_Model extends MY_Model {
 	{
 		$where =array();
 		$query = "SELECT * from
-			(SELECT v.id , c.name, c.genus, v.variety, v.species, v.common_id, o.year, COUNT(v.id) c, o.received_presale, o.count_presale, o.pot_size, o.flat_size, o.flat_cost, cat.category, subcat.subcategory,o.variety_id
+			(SELECT v.id , c.name, c.genus, v.variety, v.species, v.common_id, o.year, COUNT(v.id) c, o.received_presale, o.catalog_number, o.count_presale, o.pot_size, o.flat_size, o.flat_cost, cat.category, subcat.subcategory,o.variety_id
 			FROM    variety v
 			LEFT JOIN 
 				 `orders` o

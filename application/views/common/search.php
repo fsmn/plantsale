@@ -27,7 +27,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 	</p>
 	<p>
 		<label for="year">Year: </label><input type="text" name="year"
-			value="<?php echo $refine?cookie("year"):get_current_year();?>" />
+			value="<?php echo $refine?cookie("year"):"";?>" />
 	</p>
 	<p>
 		<input type="submit" value="Find" class="button" />

@@ -3,8 +3,8 @@
 // report.php Chris Dart Jan 8, 2015 2:58:21 PM chrisdart@cerebratorium.com
 //$grand_total = 0;
 ?>
-<h1>Grower Totals</h1>
-<? $buttons[] = array("text"=>"Export<span class='fa fa-download'></span>","class"=>array("button","export"),"style"=>"export","title"=>"Export as Spreadsheet","href"=>$_SERVER['REQUEST_URI']. "?export=true");?>
+<h1>Grower Totals, <?php echo $year; ?></h1>
+<? $buttons[] = array("text"=>"Export","class"=>array("button","export"),"style"=>"export","title"=>"Export as Spreadsheet","href"=>$_SERVER['REQUEST_URI']. "?export=true");?>
 <?if($orphan_count > 0){
     $verb = $orphan_count == 1?"is":"are";
     $plural = $orphan_count > 1?"s":"";

@@ -122,8 +122,9 @@ class Grower extends MY_Controller {
 	function totals($year = NULL)
 	{
 		if (! $year) {
-			$year = get_current_year ();
+			$year = cookie("sale_year");
 		}
+		$data['year'] = $year;
 		$data ["orphan_count"] = count ( $this->grower->get_orphans () );
 		$ids = $this->grower->get_ids ( $year );
 		$growers = array ();

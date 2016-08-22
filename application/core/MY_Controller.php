@@ -31,6 +31,7 @@ class MY_Controller extends CI_Controller
 				define ( "IS_INVENTORY", $this->ion_auth->in_group ( array (
 						4 
 				) ) );
+				bake_cookie("sale_year", get_current_year());
 			}
 		}
 

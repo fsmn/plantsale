@@ -16,6 +16,7 @@ class Variety_Model extends MY_Model {
 	var $new_year;
 	var $needs_bag;
 	var $needs_copy_review;
+	var $churn_value;
 	var $rec_modifier;
 	var $rec_modified;
 
@@ -40,6 +41,7 @@ class Variety_Model extends MY_Model {
 				"new_year",
 				"needs_copy_review",
 				"needs_bag",
+				"churn_value",
 				"common_id" 
 		);
 		

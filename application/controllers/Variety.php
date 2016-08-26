@@ -130,6 +130,7 @@ class Variety extends MY_Controller {
 					"copy_received",
 					"edit_notes",
 					"needs_copy_review",
+					"churn_value",
 					"pot_size" 
 			);
 			$options = array ();

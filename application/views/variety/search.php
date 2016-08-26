@@ -34,6 +34,10 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<input type="number" style="width: 5em" value="<?=get_value($variety,"new_year",($refine ? cookie("new_year"):''));?>" name="new_year"
 			id="new_year"
 		/>
+			
+	<label for="churn_value">Churn Value</label>
+	<?php echo form_dropdown("churn_value",array(0=>"",2=>2, 3=>3));?>
+
 	</div>
 	<div class="field-set box" style="font-size: .9em">
 		<input type="checkbox" name="crop_failure" value="1" />

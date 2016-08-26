@@ -13,6 +13,11 @@ $buttons [] = array (
 		"style"=>"edit",
 		"title" => "Set the current working year of the plant sale"
 );
+$buttons[] = array(
+		"selection"=>"auth",
+		"text"=>"test",
+		"href"=>site_url(),
+);
 $buttons [] = array (
 		"selection" => "auth",
 		"text" => get_user_name ( $user ),

@@ -101,6 +101,9 @@
 			</div>
 
 		</fieldset>
+		<div>
+		<?php echo edit_field("churn_value",clean_decimal($variety->churn_value), "Churn Value","variety",$variety->id,array("class"=>"dropdown","attributes"=>"menu='churn_value'"));?>
+		</div>
 		<div><?=edit_field("plant_color",$variety->plant_color, "Plant Color(s)","variety",$variety->id,array("class"=>"multiselect","attributes"=>"menu='plant_color'","class"=>"multiselect", "format"=>"multiselect"));?></div>
 		<p>
 			<span>

@@ -410,6 +410,8 @@ class Variety_Model extends MY_Model {
 				// no action taken
 			} elseif ($parameter->key == "category_id") {
 				$this->db->where ( "common.category_id", $parameter->value );
+			}elseif($parameter->key == "crop_failure"){
+				$this->db->where("orders.received_presale",0);
 			} else {
 				$this->db->where ( $parameter->key, $parameter->value );
 			}

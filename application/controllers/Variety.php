@@ -102,6 +102,9 @@ class Variety extends MY_Controller {
 		} else {
 			$action = $this->input->get ( "action" );
 		}
+		if($action == "reorders"){
+			redirect("variety/show_reorders/" . $this->input->get("year"));
+		}
 		if ($this->input->get ( "find" )) {
 			
 			$variables = array (

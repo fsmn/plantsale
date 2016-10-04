@@ -36,7 +36,7 @@ print create_button_bar($buttons);
 			<td class="field omit-plant">
 			<?=form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant from printing","id"=>"omit-plant_$plant->id","checked"=>$checked,"class"=>"omit-row omit plant-info"));?></td>
 			<td class="field year"><?=$plant->year;?></td>
-			<td><?php echo $plant->catalog_number;?></td>
+			<td><?php echo get_value($plant,"catalog_number");?></td>
 			<td class="field latin-name"><?=format_latin_name($plant);?></td>
 			<td class="field common-name"><?=$plant->name;?></td>
 			<td class="field variety"><?=$plant->variety;?></td>

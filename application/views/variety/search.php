@@ -13,6 +13,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
       source: availableTags
     });
   });
+  $("span[title]").tooltip();
   </script>
 
 <div class="message" style="max-width: 500px;">Enter "NULL" (with no spaces) in any field to find records with no entry in that field. Enter
@@ -26,6 +27,9 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<input type="radio" name="action[]" value="history" />
 		&nbsp; <label for="action[]">Flag Listing</label>
 		<input type="radio" name="action[]" value="flags" />
+		<span title="Search for plants whose last reorder was in the entered year. Only the &quot;Year&quot; value is recognized.">
+		&nbsp; <label for="action[]">Reorders Search</label>
+		<input type="radio" name="action[]" value="reorders" /></span>
 	</div>
 	<div class="field-set block">
 		<label for="year">Year: </label>

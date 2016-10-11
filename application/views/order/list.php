@@ -35,6 +35,7 @@ if ($orders) :
                     "colspan" => 4,
                     "label" => "Remainder"
             ),
+    		NULL
     );
     $main_row = array(
             NULL,
@@ -56,7 +57,8 @@ if ($orders) :
             "Fri",
             "Sat",
             "Sun",
-            "Dead"
+            "Dead",
+    		NULL
     );
     ?>
     <!-- order/list -->

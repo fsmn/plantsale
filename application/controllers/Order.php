@@ -39,7 +39,7 @@ class Order extends MY_Controller {
 			$options = array ();
 			
 			if (! $sale_year = $this->input->get ( "year" )) {
-				$sale_year = $this->session->userdata("sale_year");
+				$sale_year = $this->session->userdata ( "sale_year" );
 			} else {
 				$options ['year'] = $sale_year;
 				// $this->session->set_userdata("sale_year", $sale_year);
@@ -70,7 +70,7 @@ class Order extends MY_Controller {
 					"price",
 					"tiers",
 					"flag",
-					"needs_bag",
+					"needs_bag" 
 			);
 			
 			$this->set_options ( $options, $keys );
@@ -109,8 +109,6 @@ class Order extends MY_Controller {
 				burn_cookie ( "is_tracking" );
 				$data ["is_tracking"] = FALSE;
 			}
-			
-	
 			
 			// if ($show_last_only = $this->input->get ( "show_last_only" )) {
 			// bake_cookie ( "show_last_only", $show_last_only );
@@ -235,7 +233,7 @@ class Order extends MY_Controller {
 		$pot_sizes = $this->order->get_pot_sizes ();
 		$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
 				"pot_size",
-				"pot_size"
+				"pot_size" 
 		), NULL, TRUE );
 		$data ["categories"] = get_keyed_pairs ( $categories, array (
 				"key",
@@ -273,7 +271,7 @@ class Order extends MY_Controller {
 		$id = $this->input->post ( "id" );
 		$value = urldecode ( $this->input->post ( "value" ) );
 		$field = $this->input->post ( "field" );
-		if($field == "received_presale" && $value == "f"){
+		if ($field == "received_presale" && $value == "f") {
 			$value = 0;
 		}
 		$values = array (
@@ -288,7 +286,31 @@ class Order extends MY_Controller {
 		echo $output;
 	}
 
-	
+	/**
+	 * move the order to a new variety *
+	 */
+	function move($id = NULL)
+	{
+		if ($this->input->get ( "start" )) {
+			$data ['order'] = $this->order->get ( $id );
+			$data ['target'] = "order/move";
+			$data ['title'] = "Move an order to a new variety";
+			if($this->input->get("ajax")){
+				$this->load->view($data['target'],$data);
+			}else{
+				$this->load->view("page/index",$data);
+			}
+		} else {
+			$variety_id = $this->input->post ( "variety_id" );
+			// @TODO need a way to verify that this is a valid ID first?
+			$this->order->update ( $id, array (
+					"variety_id"=>
+					$variety_id 
+			) );
+			redirect ( "variety/view/$variety_id" );
+		}
+	}
+
 	function catalog_update_selector()
 	{
 		$data ["categories"] = $this->category->get_all ();
@@ -298,7 +320,7 @@ class Order extends MY_Controller {
 	function set_catalog_numbers($year = NULL)
 	{
 		if (! $year) {
-			$year = $this->session->userdata("sale_year");
+			$year = $this->session->userdata ( "sale_year" );
 		}
 		$target_category = "";
 		if ($category_id = $this->input->get ( "category_id" )) {
@@ -466,7 +488,7 @@ class Order extends MY_Controller {
 						"price",
 						"flat_area",
 						"tiers",
-						"grower_code",
+						"grower_code" 
 				);
 				$values = array ();
 				foreach ( $fields as $field ) {
@@ -492,11 +514,11 @@ class Order extends MY_Controller {
 				} else {
 					$result = FALSE;
 				}
-				if($result){
-					$ids = str_replace(",",", ", $ids);
+				if ($result) {
+					$ids = str_replace ( ",", ", ", $ids );
 					$this->session->set_flashdata ( "notice", "The following orders have been updated: $ids" );
-				}else{
-					$this->session->set_flashdata("notice","No changes were made");
+				} else {
+					$this->session->set_flashdata ( "notice", "No changes were made" );
 				}
 				$order_search = cookie ( "order_search" );
 				redirect ( "order/search?$order_search" );

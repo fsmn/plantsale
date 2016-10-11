@@ -28,6 +28,7 @@ $row_classes = implode(" ",$row_classes);
 	<td>
 <? if(IS_EDITOR):?>
 			<?php echo create_button(array("text"=>"Edit","href"=>site_url("order/edit/$order->id"),"class"=>array("button","edit","dialog","edit-order"),"id"=>sprintf("edit-order_%s",$order->id)));?>
+			
 				<? else: ?>
 				<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("order/view/$order->id")));?>
 				<? endif; ?>
@@ -102,5 +103,11 @@ $row_classes = implode(" ",$row_classes);
 	<td class="order-count_dead field">
 			<?=edit_field("count_dead",$order->count_dead,"","order",$order->id,array("envelope"=>"span"));?>
 
+			</td>
+			<td>
+			<?php if(IS_EDITOR):?>
+			<?php echo create_button(array("text"=>"Move","href"=>base_url("order/move/$order->id?ajax=1&start=1"),"class"=>array("button","edit","dialog"), "title"=>"Move this order to a new variety"));?>
+			
+			<?php endif;?>
 			</td>
 </tr>

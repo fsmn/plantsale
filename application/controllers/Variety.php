@@ -329,6 +329,12 @@ class Variety extends MY_Controller {
 	function edit()
 	{
 	}
+	
+	function get($id){
+		$variety = json_encode($this->variety->get($id));
+		echo $variety;
+		
+	}
 
 	function update()
 	{
@@ -418,6 +424,8 @@ class Variety extends MY_Controller {
 		
 		echo $output;
 	}
+	
+
 
 	function update_value()
 	{

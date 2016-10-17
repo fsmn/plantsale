@@ -13,7 +13,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, $lights );
 <input type="hidden" name="id" id="common_id" value="<?=get_value($common,"id");?>"/>
 <p><?=create_input($common,"name","Name","name",NULL,TRUE);?></p>
 
-<p><?=create_input($common, "genus","Genus");?></p>
+<p><?=create_input($common, "genus","Genus",NULL,NULL,TRUE);?></p>
 <p>
 <label for="category_id">Category: </label>
 <?=form_dropdown("category_id",$categories,FALSE,'id="category_id" required');?>

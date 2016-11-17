@@ -15,15 +15,20 @@ $refine = $this->input->get ( "refine" );
 			id="new_year"
 		/>
 	</div>
-	<div class="field-set">
-	<label for="name">Common Name</label>
-	<input type="text" name="name" id="common_name" value ="<?php echo $refine ? cookie("name"):"";?>"/>
+	<div class="field-set block">
+		<div class="column first">
+			<label for="name">Common Name</label>
+			<input type="text" name="name" id="common_name" value ="<?php echo $refine ? cookie("name"):"";?>"/>
+		</div>
+	<div class="column last">
+		<?=create_input($variety,"genus","Genus","genus",$refine);?>
 	</div>
+</div>
 	<div class="field-set" style="font-size: .9em">
 		<input type="checkbox" name="no_image" id="no_image" <?= $refine && cookie("needs_bag")== 1?"checked":"";?> value="1" />
 		<label for="no_image">Missing Image</label> &nbsp;
 	</div>
-	
+
 	<div class="field-set block">
 		<div class="column first">
 			<label for="category_id">Category: </label><?=form_dropdown("category_id",$categories,($refine ? cookie("category_id"):""),'id="category_id"');?>
@@ -38,12 +43,17 @@ $refine = $this->input->get ( "refine" );
 		<div class="column first">
 						<?=create_input($variety, "descriptions","Search All Descriptions");?>
 					<?=create_input($variety, "description","General Description");?>
-			
+
 </div>
 		<div class="column last">
 		<?=create_input($variety, "print_description","Variety Description","print_description",$refine);?>
 		<?=create_input($variety, "web_description","Web Description","web_description",$refine);?>
 	</div>
+	</div>
+	<div class="field-set ui-widget">
+	<?php $pot_size = $refine ? cookie("pot_size"):"";?>
+	<label for="pot_size">Pot Size Contains</label>
+	<input type="text" name="pot_size" id="tags" value="<?php echo $pot_size;?>" />
 	</div>
 	<div class="field-set block">
 		<div class="column first">
@@ -69,7 +79,7 @@ $this->load->view ( "order/sort", $data );
 
 $buttons [] = array (
 		"type" => "pass-through",
-		"text" => "<input type='submit' value='Find' class='button'/>" 
+		"text" => "<input type='submit' value='Find' class='button'/>"
 );
 $buttons [] = array (
 		"type" => "pass-through",

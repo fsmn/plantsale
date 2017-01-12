@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	$(".plant-info").on("click","input[type='checkbox']",function(){
 		my_id = this.id.split("_")[1];
 		if($(this).attr("checked")){

@@ -68,9 +68,10 @@ $buttons[] = array(
         "title" => "Get Dollar Totals for All Growers for the current year",
 		"style"=>"search",
 );
+
 $buttons[] = array(
 		"selection" => "all",
-		"text" => "Copy Edits",
+		"text" => "Copy Edit Tracking",
 		"class" => array(
 				"button",
 				"search",

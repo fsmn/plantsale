@@ -97,11 +97,7 @@ class Variety extends MY_Controller {
 
 	function search()
 	{
-		if (is_array ( $this->input->get ( "action" ) )) {
-			$action = implode ( "", $this->input->get ( "action" ) );
-		} else {
-			$action = $this->input->get ( "action" );
-		}
+		$action = $this->input->get ( "action" );
 		if($action == "reorders"){
 			redirect("variety/show_reorders/" . $this->input->get("year"));
 		}
@@ -134,9 +130,11 @@ class Variety extends MY_Controller {
 					"edit_notes",
 					"needs_copy_review",
 					"churn_value",
-					"pot_size" 
+					"pot_size",
 			);
 			$options = array ();
+			$options['action'] = $action;
+			bake_cookie('action', $this->input->get("action"));
 			for($i = 0; $i < count ( $variables ); $i ++) {
 				$my_variable = $variables [$i];
 				if ($my_value = $this->input->get ( $my_variable )) {
@@ -254,14 +252,14 @@ class Variety extends MY_Controller {
 				"pot_size",
 				"pot_size" 
 		), NULL, TRUE );
-		if ($action == "edits") {
+		//if ($action == "edits") {
 			$this->load->model ( "user_model", "user" );
 			$users = $this->user->get_user_pairs ();
 			$data ["users"] = get_keyed_pairs ( $users, array (
 					"id",
 					"name" 
 			), TRUE );
-		}
+		//}
 		$categories = $this->category->get_pairs ();
 		$data ["categories"] = get_keyed_pairs ( $categories, array (
 				"key",
@@ -366,6 +364,7 @@ class Variety extends MY_Controller {
 		foreach ( $data ['plants'] as $plant ) {
 			$plant->omit = 0;
 		}
+		$data['options'] = array("action"=>"Reorders");
 		$data ['target'] = "variety/list/full";
 		$data ['title'] = "List of reordered plants for $year";
 		$this->load->view ( "page/index", $data );

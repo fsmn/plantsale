@@ -3,6 +3,9 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 $refine = $this->input->get ( "refine" );
 $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", cookie ( "sunlight" ) ) : array () );
+
+$actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Listing","reorders"=>"Reorders Search","edits"=>"Copy Edits");
+
 ?>
 <script>
   $(function() {
@@ -15,35 +18,28 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
   });
   $("span[title]").tooltip();
   </script>
-
-<div class="message" style="max-width: 500px;">Enter "NULL" (with no spaces) in any field to find records with no entry in that field. Enter
+  <?php echo cookie("action");?>
+<div class="message standard" style="max-width: 500px;">Enter "NULL" (with no spaces) in any field to find records with no entry in that field. Enter
 	"NOT NULL" to find items where that field is not empty.</div>
 <form name="search-variety" id="search-variety" class="search-form" action="<?=site_url("variety/search"); ?>" method="GET">
 	<input type="hidden" name="find" value="1" />
 	<div class="field-set">
-		<label for="action[]">List </label>
-		<input type="radio" name="action[]" value="full" checked />
-		&nbsp; <label for="action[]">Variety History</label>
-		<input type="radio" name="action[]" value="history" />
-		&nbsp; <label for="action[]">Flag Listing</label>
-		<input type="radio" name="action[]" value="flags" />
-		<span title="Search for plants whose last reorder was in the entered year. Only the &quot;Year&quot; value is recognized.">
-		&nbsp; <label for="action[]">Reorders Search</label>
-		<input type="radio" name="action[]" value="reorders" /></span>
+	<label for="action">Search Type: </label>
+	<?php echo form_dropdown("action",$actions,$refine?cookie("action"):'',"id='action'");?>
 	</div>
 	<div class="field-set block">
-		<label for="year">Year: </label>
-		<input type="number" name="year" style="width: 5em" value="<?=$this->session->userdata("sale_year");;?>" />
-		&nbsp; <label for="new_year">First Year at Sale:&nbsp;</label>
-		<input type="number" style="width: 5em" value="<?=get_value($variety,"new_year",($refine ? cookie("new_year"):''));?>" name="new_year"
+		<label for="year" class="reorders">Year: </label>
+		<input type="number" name="year" class="reorders" style="width: 5em" value="<?=$this->session->userdata("sale_year");;?>" />
+		&nbsp; <label for="new_year" class="standard">First Year at Sale:&nbsp;</label>
+		<input type="number" class="standard" style="width: 5em" value="<?=get_value($variety,"new_year",($refine ? cookie("new_year"):''));?>" name="new_year"
 			id="new_year"
 		/>
 			
-	<label for="churn_value">Churn Value</label>
-	<?php echo form_dropdown("churn_value",array(0=>"",2=>2, 3=>3));?>
+	<label for="churn_value" class="standard">Churn Value</label>
+	<?php echo form_dropdown("churn_value",array(0=>"",2=>2, 3=>3),"","class='standard'");?>
 
 	</div>
-	<div class="field-set box" style="font-size: .9em">
+	<div class="field-set box standard" style="font-size: .9em">
 		<input type="checkbox" name="crop_failure" value="1" />
 		<label for="crop_failure">Show Only Crop Failures</label> &nbsp;
 		<input type="checkbox" name="no_image" id="no_image" <?= $refine && cookie("needs_bag")== 1?"checked":"";?> value="1" />
@@ -51,7 +47,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<input type="checkbox" name="needs_bag" id="needs_bag" <?=$refine && cookie("needs_bag") == 1 ?"checked":"";?> value="1" />
 		<label for="no_image">Needs Bag</label>
 	</div>
-	<div class="field-set">
+	<div class="field-set standard">
 		<div class="column first">
 		<?=create_input($variety,"name","Common Name","name", $refine);?>
 	</div>
@@ -59,7 +55,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<?=create_input($variety,"variety","Variety","variety",$refine);?>
 	</div>
 	</div>
-	<div class="field-set">
+	<div class="field-set standard">
 		<div class="column first">
 		<?=create_input($variety,"genus","Genus","genus",$refine);?>
 	</div>
@@ -67,7 +63,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<?=create_input($variety, "species","Species","species",$refine);?>
 	</div>
 	</div>
-	<div class="field-set block">
+	<div class="field-set block standard">
 		<div class="column first">
 			<label for="category_id">Category: </label><?=form_dropdown("category_id",$categories,($refine ? cookie("category_id"):""),'id="category_id"');?>
 		</div>
@@ -77,7 +73,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 
 		</div>
 	</div>
-	<div class="field-set">
+	<div class="field-set standard">
 		<div class="column first">
 			<label for="flag">Flag: </label>
 		<?=form_dropdown("flag",$flags,array($refine ? cookie("flag"):''),"id='flag'");?>
@@ -93,17 +89,17 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<?=form_dropdown("plant_color",$plant_colors,array($refine ? cookie("plant_color") : ""),"id='plant_colors'");?>
 	</div>
 	</div>
-	<div class="field-set ui-widget">
+	<div class="field-set ui-widget standard">
 	<?php $pot_size = $refine ? cookie("pot_size"):"";?>
 	<label for="pot_size">Pot Size Contains</label>
 	<input type="text" name="pot_size" id="tags" value="<?php echo $pot_size;?>" />
 	</div>
-	<div class="field-set block box">
+	<div class="field-set block box standard">
 		<label for="sunlight-boolean">Sunlight Options</label>
 &nbsp;<?=$sunlight;?>	&nbsp;	<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),$refine ? cookie("sunlight-boolean"):"and","id='sunlight-boolean'");?>
 
 	</div>
-	<div class="field-set block">
+	<div class="field-set block standard">
 		<div class="column first">
 			<label>Needs Copy</label>
 <?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),$refine ? cookie("needs_copy_review"):"");?>
@@ -112,7 +108,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 			<?=create_input($variety, "descriptions","Search All Descriptions");?>
 			</div>
 	</div>
-	<div class="field-set block">
+	<div class="field-set block standard">
 		<div class="column first">
 		<?=create_input($variety, "description","General Description");?>
 	</div>
@@ -121,7 +117,7 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 		<?=create_input($variety, "web_description","Web Description","web_description",$refine);?>
 	</div>
 	</div>
-	<div class="field-set block">
+	<div class="field-set block standard" >
 		<div class="column first">
 	<?=create_input($variety,"grower_id","Grower ID","grower_id",$refine);?>
 	</div>
@@ -131,7 +127,19 @@ $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", 
 	</div>
 	</div>
 	<div></div>
-	<div id="sort-block">
+	<div class="field-set block box standard copy-edits" id="copy-edit-section" style="display: none;">
+		<div class="column first">
+			<label for="editor">Coordinator</label>
+			<?php echo form_dropdown("editor",$users,$refine? cookie("editor"):"");?>
+			<?php echo create_input($variety,"copywriter","Copywriter","copywriter",$refine);?>
+		</div>
+		<div class="column last">
+		<label for="copy_received">Copy Received?</label>
+			<?php echo form_dropdown("copy_received",array("0"=>"","no"=>"No","yes"=>"Yes"),$refine ? cookie("copy_received"):"");?>
+			<?php echo create_input($variety, "edit_notes","Notes","edit_notes",$refine);?>
+		</div>
+	</div>
+	<div id="sort-block" class="standard">
 <?
 $data ["basic_sort"] = TRUE;
 $this->load->view ( "order/sort", $data );
@@ -149,3 +157,18 @@ $buttons [] = array (
  print create_button_bar($buttons); ?>
 
 </form>
+<script type="text/javascript">
+	$(document).on("change","#search-variety #action", this,function(event){
+		if($(this).val() == "edits"){
+			$(".standard").show();
+			$("#copy-edit-section").show();
+		}else if($(this).val() == "reorders"){
+			$(".standard").hide();
+			$("#copy-edit-section").hide();
+		}else{
+			$(".standard").show();
+			$("#copy-edit-section").hide();
+		}
+	});
+
+</script>

@@ -26,8 +26,7 @@ $fields = array (
 		"new_year" => "New",
 		"grower_id" => "Grower ID" ,
 		"null_link"=>"Link",
-)
-;
+);
 
 if ($export_type == "copy_edits") {
 	$fields = array (
@@ -44,8 +43,10 @@ if ($export_type == "copy_edits") {
 			"null_copy_in" => "Copy in DB",
 			"null_copy_recd" => "Copy Received",
 			"null_notes" => "Notes" ,
+			"description" => "Description",
+			"print_description" => "Print Description",
+			"web_description" => "Web Description",
 			"null_link"=>"Link",
-				
 	);
 }
 

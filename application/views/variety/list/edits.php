@@ -1,9 +1,9 @@
 <?php
 $this->load->view ( "variety/list/header" );
+$buttons[] = array("text"=>"Printable Copy for ". get_current_year(), "class"=>array("button"), "href"=>site_url("variety/show_copy_text"));
+$buttons[] = array("text"=>"Export Copy Edit List", "title"=>"Export selected records for copy editing workflow","class"=>array("button","export","export-copy-edit-list"),"href"=>$_SERVER['REQUEST_URI'] . "&export=true&export_type=copy_edits&action=full"  );
+print create_button_bar($buttons);
 ?>
-<p>
-<a href="<?php echo site_url("variety/show_copy_text");?>">Show printable list of copy for <?php echo get_current_year();?></a>
-</p>
 <table class="table list">
 	<thead>
 		<tr>
@@ -32,7 +32,7 @@ $this->load->view ( "variety/list/header" );
 <?php echo $plant->name;?>
 </td>
 			<td>
-				<a href="<?php echo base_url("variety/view/$plant->id");?>" /><?php echo $plant->variety;?></a>
+				<a href="<?php echo base_url("variety/view/$plant->id");?>"><?php echo $plant->variety;?></a>
 			</td>
 			<td>
 <?php echo format_latin_name($plant);?>

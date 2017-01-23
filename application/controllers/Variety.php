@@ -115,6 +115,7 @@ class Variety extends MY_Controller {
 					"sunlight",
 					"description",
 					"year",
+					"flat_size",
 					"grower_id",
 					"new_year",
 					"omit",

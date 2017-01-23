@@ -18,7 +18,6 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
   });
   $("span[title]").tooltip();
   </script>
-  <?php echo cookie("action");?>
 <div class="message standard" style="max-width: 500px;">Enter "NULL" (with no spaces) in any field to find records with no entry in that field. Enter
 	"NOT NULL" to find items where that field is not empty.</div>
 <form name="search-variety" id="search-variety" class="search-form" action="<?=site_url("variety/search"); ?>" method="GET">
@@ -90,9 +89,15 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
 	</div>
 	</div>
 	<div class="field-set ui-widget standard">
+	<div class="column first">
 	<?php $pot_size = $refine ? cookie("pot_size"):"";?>
 	<label for="pot_size">Pot Size Contains</label>
 	<input type="text" name="pot_size" id="tags" value="<?php echo $pot_size;?>" />
+	</div>
+	<div class="column second">
+		<label for="flat_size">Flat Size</label>
+		<input type="text" name="flat_size" id="flat_size" value="<?php echo $refine?cookie("flat_size"):""; ?>"/>
+	</div>
 	</div>
 	<div class="field-set block box standard">
 		<label for="sunlight-boolean">Sunlight Options</label>

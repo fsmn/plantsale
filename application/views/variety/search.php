@@ -164,16 +164,20 @@ $buttons [] = array (
 </form>
 <script type="text/javascript">
 	$(document).on("change","#search-variety #action", this,function(event){
-		if($(this).val() == "edits"){
+adjust_form($(this));
+	});
+adjust_form($("#search-variety #action"));
+
+ function adjust_form(me){
+		if(me.val() == "edits"){
 			$(".standard").show();
 			$("#copy-edit-section").show();
-		}else if($(this).val() == "reorders"){
+		}else if($(me).val() == "reorders"){
 			$(".standard").hide();
 			$("#copy-edit-section").hide();
 		}else{
 			$(".standard").show();
 			$("#copy-edit-section").hide();
 		}
-	});
-
+ }
 </script>

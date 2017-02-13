@@ -611,6 +611,19 @@ class Variety extends MY_Controller {
 		$data ["classes"] = "";
 		$this->load->view ( "variety/print/index", $data );
 	}
+	
+	/**
+	 * This is a temporary function to help users migrate to the new edits search under varieties. 
+	 */
+	function edits_search(){
+		$data['title'] = "Copy Edits Message";
+		$data['target']= "variety/edits_message";
+		if($this->input->get("ajax") == 1){
+		$this->load->view($data['target'],$data);
+		}else{
+			$this->load->view("page/index",$data);
+		}
+	}
 
 	/**
 	 * * FILE MANAGEMENT **

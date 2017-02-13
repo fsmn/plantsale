@@ -79,7 +79,7 @@ $buttons[] = array(
 				"search-varieties",
 		),
 		"style"=>"search",
-		"href"=> site_url("variety/search"),
+		"href"=> site_url("variety/edits_search"),
 		"title" => "Search among the varieties"
 );
 

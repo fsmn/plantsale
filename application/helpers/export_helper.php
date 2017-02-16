@@ -276,7 +276,7 @@ function quark_multiple ($common)
         if ($price || $pot_size) {
             $output[] = sprintf("<p>@Pot and Price:%s--%s:", get_as_price($price), $pot_size);
         }
-        $output[] = sprintf("<p>@Copy After Copy:<@Number In-text>%s<t><\_>", $variety->catalog_number);
+        $output[] = sprintf("<p>@Copy After Copy:<@Number In-text>%s ", $variety->catalog_number);
         $output[] = sprintf("<@In text Goudy Sans Bold>%s<@\$p> <I>%s</I> ", $variety->variety, quark_latin_name($common->genus,$variety->species,TRUE));
         $output[] = $variety->new_year == get_current_year() ? format_new("quark") : "";
         $output[] = (get_value($variety, "count_midsale") > 0) ? " " . format_saturday("quark") : "";

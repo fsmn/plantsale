@@ -6,5 +6,5 @@ application/config/database.php
 application/config/email.php
 user_guide/*
 /files/*
-!/downloads/
 /downloads/*.txt
+!/downloads/

@@ -433,7 +433,7 @@ class Variety extends MY_Controller {
 		$value = $this->input->post ( "value" );
 		$field = $this->input->post ( "field" );
 		if(strpos($field, "height")  || strpos($field,"width")){
-			$value = preg_replace("/[^0-9]/","",$value);
+			$value = preg_replace("/[^0-9.]/","",$value);
 		}
 		if (is_array ( $value )) {
 			$value = implode ( ",", $value );

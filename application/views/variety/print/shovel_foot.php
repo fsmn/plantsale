@@ -85,18 +85,18 @@ foreach($sunlight as $light){
 		</ul>
 	</div>
 	<div class="dimensions">
-	<?if($variety->min_width):?>
-		<div class="width">
-			<label>Width</label>
-			<div class="text"><?=format_dimensions($variety->min_width, $variety->max_width, abbr_unit($variety->width_unit));?></div>
-		</div>
-		<?endif;?>
-		<? if($variety->min_height):?>
+			<? if($variety->min_height || $variety->max_height):?>
 		<div class="height">
 			<label>Height</label>
 			<div class="text"><?=format_dimensions($variety->min_height, $variety->max_height, abbr_unit($variety->height_unit));?></div>
 		</div>
-		<?endif;?>
+	<?endif;?>
+	<?if($variety->min_width || $variety->max_width):?>
+		<div class="width">
+			<label>Width</label>
+			<div class="text"><?=format_dimensions($variety->min_width, $variety->max_width, abbr_unit($variety->width_unit));?></div>
+		</div>
+	<?endif;?>
 	</div>
 </div>
 	<div class="footer-group">

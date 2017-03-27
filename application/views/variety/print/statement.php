@@ -58,8 +58,10 @@ if($length > 27){
 <? endif;?>
 <div class="description-text">
 <div class="variety"><a href="<?=site_url("variety/view/$variety->id");?>" target="_blank"><?=$variety->variety;?></a></div>
-	<div class="description"><?=$variety->description;?></div>
+<?php if($variety->print_description):?>
 	<div class="print_description"><?=$variety->print_description;?></div>
+	<?php endif;?>
+	<div class="description"><?=$variety->description;?></div>
 </div>
 </div>
 <div class="details-group">

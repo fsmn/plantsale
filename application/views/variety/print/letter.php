@@ -60,21 +60,6 @@ if(isset($row_class)){
 				echo sprintf("<li class='%s'>%s</li>",css_classify($light),format_sunlight($light,"poster"));
 			}
 			?>
-			<? //$sunlight = explode(",",$variety->sunlight);
-// 			foreach($sunlight as $light){
-// 				switch($light){
-// 				case "full":
-// 					echo sprintf("<li><img src='%s'/></li>", base_url("images/sun-icon.png"));
-// 					break;
-// 				case "part":
-// 					echo sprintf("<li><img src='%s'/></li>", base_url("images/part-icon.png"));
-// 					break;
-// 				case "shade":
-// 					echo sprintf("<li><img src='%s'/></li>",base_url("images/shade-icon.png"));
-// 					break;
-// 				}
-// 			}
-// 			?>
 		</ul>
 <div class="dimensions">
 	<? if($variety->min_height || $variety->max_height):?>
@@ -97,8 +82,10 @@ if(isset($row_class)){
 
 	</div>
 	<div class="copy">
-	<div class="description"><?=$variety->description;?></div>
+	<?php if($variety->print_description):?>
 	<div class="print_description"><?=$variety->print_description;?></div>
+	<?php endif;?>
+	<div class="description"><?=$variety->description;?></div>
 	</div>
 
 </div>

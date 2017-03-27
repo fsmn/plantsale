@@ -48,8 +48,10 @@ $saturday_delivery = $order->count_midsale?1:0;
 </div>
 <? endif;?>
 <div class="description-text">
-	<div class="description"><?=$variety->description;?></div>
+<?php if($variety->print_description):?>
 	<div class="print_description"><?=$variety->print_description;?></div>
+	<?php endif;?>
+	<div class="description"><?=$variety->description;?></div>
 </div>
 </div>
 <div class="details-group">

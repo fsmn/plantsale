@@ -121,8 +121,11 @@ height: 100%;
 }
 
 .print_description {
-	padding-top: .125in;
 	font-style: italic;
+	padding-top: .125in;
+}
+.description {
+	padding-top: .125in;
 }
 
 .web_description {

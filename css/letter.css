@@ -114,11 +114,13 @@ vertical-align: top;
 
 .description-group {
 	text-align: left;
-	padding-top:.25in
+	padding-top:.25in;
+	font-size:1.3em;
 }
 
 .description {
 	margin-top: 8px;
+	padding-top:.25in;
 }
 
 .print_description {

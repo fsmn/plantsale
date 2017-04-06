@@ -10,10 +10,17 @@
 }
 
 body {
-	height: 8.5in;
-	width: 11in;
-	position: relative;
-	font-family: 'Merriweather Sans', sans-serif;
+
+    height: 8.5in;
+
+    width: 11in;
+    position: relative;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.packet-row {
+	display: flex;
+    justify-content: space-between;
 }
 
 .document {
@@ -26,16 +33,26 @@ body {
 	page-break-after: auto;
 	padding: .25in;
 	border: 1px solid #818181;
+	margin-bottom: .30in;
 }
 
 .document.odd {
-	display: inline-block;
-	float: left;
 
 }
 
 .document.even {
-	display: inline-block;
+}
+
+.document.break-before {
+	page-break-before: always;
+}
+
+.document.break-after {
+	page-break-after: always;
+}
+
+.document.break-before.first {
+	page-break-before: auto;
 }
 
 #header {

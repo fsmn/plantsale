@@ -16,7 +16,6 @@ body {
 	padding: 0;
 	position: relative;
 	font-family: 'Merriweather Sans', sans-serif;
-	
 }
 
 .document {
@@ -37,41 +36,48 @@ body {
 }
 
 .header {
-	
+display: flex;	
 }
 
 .catalog-number {
-	display: inline-block;
 	font-weight: normal;
 	font-size: 40pt;
 	padding-right: .125in;
 }
 
 .common-name {
-	display: inline-block;
 	font-weight: 800;
 	font-size: 42pt;
 }
 
+.common-name.medium {
+	font-size: 35pt;
+}
+
+.common-name.large {
+	font-size: 27pt;
+}
+
 .subheader {
-	
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
 .special-icons {
-	display: inline-block;
+	display: flex;
 }
 
 .special-icons li.icon {
 	display: inline-block;
 }
 
-.saturday-delivery img,.is-new img {
+.saturday-delivery img, .is-new img {
 	max-height: .7in;
 }
 
 .is-new {
-	display: inline-block;
-	vertical-align: top;
+	padding-right: .5em;
 }
 
 .is-new img {
@@ -79,11 +85,25 @@ body {
 	padding-right: .125in;
 }
 
+.saturday-delivery {
+	padding-right: .5em;
+}
+
 .latin-name {
 	font-size: 24pt;
 	font-style: italic;
-	display: inline-block;
 	vertical-align: top;
+}
+.has-new-icon .latin-name {
+	flex: 8;
+}
+
+.has-saturday-delivery .latin-name {
+	flex: 8;
+}
+
+.has-saturday-delivery.has-new-icon .latin-name {
+	flex: 8;
 }
 
 .variety {
@@ -93,15 +113,16 @@ body {
 
 .description-group {
 	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
 .image {
 	position: relative;
+	flex: 1;
 	width: 240px;
 	height: 240px;
 	overflow: hidden;
-	display: inline-block;
-	padding-right: .125in;
 }
 
 .image img.photo {
@@ -111,8 +132,7 @@ body {
 }
 
 .description-text {
-	width: 65%;
-	display: inline-block;
+	flex: 2;
 	vertical-align: top;
 }
 
@@ -124,6 +144,7 @@ body {
 	font-style: italic;
 	padding-top: .125in;
 }
+
 .description {
 	padding-top: .125in;
 }
@@ -134,29 +155,30 @@ body {
 
 .details-group {
 	width: 100%;
-	display: inline-block;
+	display: flex;
+	justify-content: space-between;
 	clear: both;
 }
 
 .icons {
 	clear: both;
+	display: flex;
 }
 
 .icons ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	display: flex;
+	justify-content: flex-start;
 }
 
 .icons ul.sunlight {
-	display: block;
-	float: left;
-	padding-right: .25in;
+	padding-right: .5in;
 }
 
 .icons ul li {
 	display: inline-block;
-	float: left;
 }
 
 .icons ul li img {
@@ -183,7 +205,7 @@ body {
 	
 }
 
-.flags li,.sunlight li,.icon.is-new,.icon.saturday-delivery {
+.flags li, .sunlight li, .icon.is-new, .icon.saturday-delivery {
 	font-family: plant-icons, "FSM Plant Sale Icons";
 	font-size: 46px;
 }
@@ -196,8 +218,7 @@ body {
 	
 }
 
-.price-group  {
-	float: right;
+.price-group {
 	text-align: right;
 }
 
@@ -212,11 +233,11 @@ body {
 }
 
 .dimensions {
-	float: left;
+	display: flex;
+	justify-content: space-between;
 }
 
-.dimensions .width,.dimensions .height {
-	display: inline-block;
+.dimensions .width, .dimensions .height {
 	padding-right: 16px;
 }
 

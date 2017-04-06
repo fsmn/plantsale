@@ -12,21 +12,31 @@ if(!$variety->image_name){
     $classes[] = "no-image";
     $has_image = FALSE;
 }
-$saturday_delivery = $order->count_midsale?1:0;
-$common_size = "";
+$saturday_delivery = $order->count_midsale>0?1:0;
+$is_new = $variety->new_year == $this->session->userdata("sale_year");
+if($saturday_delivery){
+	$classes[] = "has-saturday-delivery";
+}
+if($is_new){
+	$classes[] = "has-new-icon";
+}
+
+$common_classes[] = "common-name";
 $length = strlen($variety->common_name);
 
 if($length > 27){
-    $common_size = "style='font-size:28pt'";
-}elseif($length > 20){
-    $common_size = "style='font-size:35pt'";
+    $common_classes[] = "large";
+}elseif($length > 18){
+    $common_classes[] = "medium";
+    		
 }
+$common_class = implode(" ", $common_classes);
 
 ?>
 <div class="<? echo implode(" ",$classes);?>">
 	<div class="header">
 	<div class="catalog-number"><?=$order->catalog_number;?></div>
-	<div class="common-name"  <?=$common_size;?>><?=$variety->common_name;?></div>
+	<div class="<?php print $common_class;?>"><?php print $variety->common_name;?></div>
 	</div>
 <div class="subheader">
 <? if($saturday_delivery || $variety->new_year == $this->session->userdata("sale_year")):?>
@@ -83,7 +93,12 @@ if($length > 27){
 		<div class="pot-size"><?=get_value($order,"pot_size");?></div>
 		<div class="price"><?=get_as_price(get_value($order,"price"));?></div>
 	</div>
-	<div class="icons">
+	
+
+</div>
+
+</div>
+<div class="icons">
 		<ul class="sunlight">
 			<?
 			$sunlight = explode(",",$variety->sunlight);
@@ -100,10 +115,7 @@ if($length > 27){
 
 		</ul>
 	</div>
-
-</div>
 	<div class="footer-group">
 		<div class="grower-name"><?=get_value($order,"grower_name");?></div>
 	</div>
-</div>
 </div>

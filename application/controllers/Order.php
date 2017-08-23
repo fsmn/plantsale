@@ -150,7 +150,9 @@ class Order extends MY_Controller {
 				$orders = $this->order->get_crop_failures ( $options, $sorting );
 			} else {
 				$orders = $this->order->get_totals ( $sale_year, $options, $sorting );
+				print($this->db->last_query());
 			}
+
 			foreach ( $orders as $order ) {
 				$order->latest_order = $this->order->is_latest ( $order->variety_id, $order->year );
 			}
@@ -185,6 +187,7 @@ class Order extends MY_Controller {
 			
 			$data ["options"] = $options;
 			$data ["orders"] = $orders;
+
 			if (! empty ( $title_category )) {
 				$category = implode ( " ", $title_category );
 			} else {

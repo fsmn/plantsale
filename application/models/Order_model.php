@@ -156,10 +156,14 @@ class Order_Model extends MY_Model {
 				case "plant_cost" :
 				case "price" :
 				case "flat_cost" :
+				
 					$this->where_operator ( $key, $value );
 					break;
 				case "flag" :
 					$this->db->where ( "flag.name", $value );
+					break;
+				case "needs_bag":
+					$this->db->where("(pot_size LIKE '%bulb%' OR pot_size LIKE '%bag' OR pot_size LIKE '%bareroot%' OR pot_size LIKE '%pound%')", NULL, FALSE);
 					break;
 				case "received_presale":
 					$this->db->where("received_presale",$value);

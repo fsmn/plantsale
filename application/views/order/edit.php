@@ -91,10 +91,6 @@ $crop_failure = FALSE;
 		<label for="remainder_saturday">Remainder Saturday:&nbsp;</label> <input type="text"
 			name="remainder_saturday" value="<?=get_value($order,"remainder_saturday");?>" size="3"/>
 	</div>
-		<div class="order-remainder_saturday field">
-		<label for="remainder_saturday">Remainder Saturday:&nbsp;</label> <input type="text"
-			name="remainder_saturday" value="<?=get_value($order,"remainder_saturday");?>"  size="3" />
-	</div>
 	<div class="order-remainder_sunday field">
 		<label for="remainder_sunday">Remainder Sunday:&nbsp;</label> <input type="text"
 			name="remainder_sunday" value="<?=get_value($order,"remainder_sunday");?>" size="3" />

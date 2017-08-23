@@ -41,7 +41,7 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
 	<div class="field-set box standard" style="font-size: .9em">
 		<input type="checkbox" name="crop_failure" value="1" />
 		<label for="crop_failure">Show Only Crop Failures</label> &nbsp;
-		<input type="checkbox" name="no_image" id="no_image" <?= $refine && cookie("needs_bag")== 1?"checked":"";?> value="1" />
+		<input type="checkbox" name="no_image" id="no_image" <?= $refine && cookie("no_image")== 1?"checked":"";?> value="1" />
 		<label for="no_image">Missing Image</label> &nbsp;
 		<input type="checkbox" name="needs_bag" id="needs_bag" <?=$refine && cookie("needs_bag") == 1 ?"checked":"";?> value="1" />
 		<label for="no_image">Needs Bag</label>

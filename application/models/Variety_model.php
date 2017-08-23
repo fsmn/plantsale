@@ -14,7 +14,6 @@ class Variety_Model extends MY_Model {
 	var $print_description;
 	var $web_description;
 	var $new_year;
-	var $needs_bag;
 	var $needs_copy_review;
 	var $churn_value;
 	var $rec_modifier;
@@ -40,7 +39,6 @@ class Variety_Model extends MY_Model {
 				"web_description",
 				"new_year",
 				"needs_copy_review",
-				"needs_bag",
 				"churn_value",
 				"common_id" 
 		);
@@ -412,6 +410,9 @@ class Variety_Model extends MY_Model {
 				$this->db->where ( "common.category_id", $parameter->value );
 			}elseif($parameter->key == "crop_failure"){
 				$this->db->where("orders.received_presale",0);
+			}elseif($parameter->key == "needs_bag"){
+				$this->db->where("(pot_size LIKE '%bulb%' OR pot_size LIKE '%bag' OR pot_size LIKE '%bareroot%' OR pot_size LIKE '%pound%')", NULL, FALSE);
+				
 			} else {
 				$this->db->where ( $parameter->key, $parameter->value );
 			}
@@ -426,7 +427,7 @@ class Variety_Model extends MY_Model {
 		$this->db->select ( "sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number" );
 		$this->db->group_by ( "variety.id" );
 		$result = $this->db->get ()->result ();
-	//$this->_log();
+	$this->_log();
 		return $result;
 	}
 

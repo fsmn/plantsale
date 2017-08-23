@@ -301,6 +301,7 @@ class Variety_Model extends MY_Model {
 	 * This can be run at any time, but is generally run when the variety find
 	 * function is run
 	 */
+	/**
 	function update_needs_bag()
 	{
 		$query = sprintf ( "update `variety` SET needs_bag = 0;" );
@@ -311,10 +312,11 @@ class Variety_Model extends MY_Model {
 `orders`.`pot_size` LIKE '%s')", get_current_year (), "%bareroot%", "%bulb%", "%bulb%", "%pound%" );
 		$this->db->query ( $query );
 	}
+	*/
 
 	function find($variables, $order_by)
 	{
-		$this->update_needs_bag ();
+		//$this->update_needs_bag ();
 		$my_parameters = ( object ) array ();
 		for($i = 0; $i < count ( $variables ); $i ++) {
 			$my_variable = $variables [$i];

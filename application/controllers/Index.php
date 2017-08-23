@@ -18,7 +18,7 @@ class Index extends MY_Controller
 			
 			/* A little maintenance for variety bag information */
 			$this->load->model ( "variety_model", "variety" );
-			$this->variety->update_needs_bag ();
+			//$this->variety->update_needs_bag ();
 			/* Find any orphan growers--ones entered in orders, but do not have a grower record in the database */
 			$this->load->model ( "grower_model", "grower" );
 			$data ["orphan_count"] = count ( $this->grower->get_orphans () );

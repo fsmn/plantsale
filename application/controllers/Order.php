@@ -150,7 +150,6 @@ class Order extends MY_Controller {
 				$orders = $this->order->get_crop_failures ( $options, $sorting );
 			} else {
 				$orders = $this->order->get_totals ( $sale_year, $options, $sorting );
-				print($this->db->last_query());
 			}
 
 			foreach ( $orders as $order ) {

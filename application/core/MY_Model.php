@@ -43,11 +43,17 @@ class MY_Model extends CI_Model
 				return FALSE;
 			}
 		}
-
-		function _update ( $db, $id, $values )
+/**
+ * 
+ * @param string $db
+ * @param integer $id
+ * @param array $values
+ * @param string $override
+ */
+		function _update ( $db, $id, $values, $override = FALSE )
 		{
 			$original_values = $values;
-			if (IS_EDITOR) {
+			if (IS_EDITOR || $override) {
 				$this->db->where ( "id", $id );
 				if (empty ( $values )) {
 					$this->prepare_variables ();

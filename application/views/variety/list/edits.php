@@ -57,7 +57,7 @@ print create_button_bar($buttons);
 				</div>
 			</td>
 			<td>
-<?php echo live_field("copywriter",$plant->copywriter,"variety",$plant->id,array("envelope"=>"span","size"=>"63"));?>
+<?php echo live_field("copywriter",$plant->copywriter,"variety",$plant->id,array("envelope"=>"span","size"=>"63", "override"=>TRUE));?>
 
 </td>
 			<td>

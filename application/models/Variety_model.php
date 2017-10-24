@@ -64,9 +64,9 @@ class Variety_Model extends MY_Model {
 		return $this->_insert ( "variety" );
 	}
 
-	function update($id, $values = array())
+	function update($id, $values = array(), $override = FALSE)
 	{
-		return $this->_update ( "variety", $id, $values );
+		return $this->_update ( "variety", $id, $values, $override );
 	}
 
 	function get($id)

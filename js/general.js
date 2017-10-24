@@ -462,29 +462,32 @@ function update_field(me,my_type){
 	}
 	
 	is_persistent = $(me).hasClass("persistent");
-	
+
 	//don't do anything if the value is empty and it is a persistent field 
 	if(is_persistent && my_value == ""){
 		return false;
 	}
+	
+	override = $(me).hasClass("override");
 	
 	form_data = {
 			table: my_attr[0],
 			field: my_attr[1],
 			id: my_attr[2],
 			value: my_value,
+			override: override,
 			category: my_category
 	};
-	console.log(form_data);
 
 	$.ajax({
 		type:"post",
 		url: base_url + my_attr[0] + "/update_value",
 		data: form_data,
 		success: function(data){
+			console.log(data);
 			if(!is_persistent){
-			$("#" + my_parent + " .live-field").html(data);
-			$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
+				$("#" + my_parent + " .live-field").html(data);
+				$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
 			}
 		}
 	});

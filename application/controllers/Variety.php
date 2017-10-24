@@ -441,7 +441,12 @@ class Variety extends MY_Controller {
 		$values = array (
 				$field => $value 
 		);
-		$this->variety->update ( $id, $values );
+		$override = FALSE;
+		if($field == "copywriter"){
+			$override = TRUE;
+		}
+		$this->variety->update ( $id, $values, $override );
+		echo $override;
 		if ($field == "editor") {
 			if ($value) {
 				$this->load->model ( "user_model", "user" );
@@ -451,7 +456,7 @@ class Variety extends MY_Controller {
 				$value = "&nbsp;";
 			}
 		}
-		echo $value;
+		//echo $value;
 	}
 
 	function update_new_status($year)

@@ -324,6 +324,7 @@ function css_classify($string)
 
 function needs_bag($order = NULL)
 {
+	$output = FALSE;
 	if ($order) {
 		if (is_array ( $order )) {
 			$order = $order[0]; //get just the first order. 
@@ -336,8 +337,6 @@ function needs_bag($order = NULL)
 			case strpos($needs_pot, "pound"): 
 				$output = TRUE;
 				break;
-			default: 
-				$output = FALSE;
 		}
 	}
 	return $output;

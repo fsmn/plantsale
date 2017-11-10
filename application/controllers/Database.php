@@ -22,7 +22,7 @@ class Database extends MY_Controller {
 			}
 		}
 		$precount = $this->db->count_all ( 'user_sessions' );
-		if ($this->db->query ( "DELETE from user_sessions where `timestamp` < unix_timestamp(now()) - 2000" )) {
+		if ($this->db->query ( "DELETE from user_sessions where `timestamp` < unix_timestamp(now()) - 168000" )) {
 			$postcount = $this->db->count_all ( 'user_sessions' );
 			$output [] = sprintf ( "%s old records removed from `user_sessions` table", $precount - $postcount );
 		} else {

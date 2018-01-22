@@ -17,16 +17,16 @@ $formats = array(
 <form
 	id="print_posters"
 	name="print_posters"
-	action="<?=site_url("variety/print_result");?>"
+	action="<?php echo site_url("variety/print_result");?>"
 	method="post">
 	<input
 		type="hidden"
 		name="ids"
 		id="ids"
-		value="<?=$ids;?>" />
+		value="<?php echo $ids;?>" />
 <p>
 		<label for="format">Format</label>
-		<?=form_dropdown("format",$formats);?>
+		<?php echo form_dropdown("format",$formats);?>
 		</p>
 		<p>
 		<input type="submit" class="button" value="Create"/>

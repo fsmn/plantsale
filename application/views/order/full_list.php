@@ -9,41 +9,41 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <fieldset class="search-fieldset">
 	<legend title="click to show or hide the parameters">Search Parameters</legend>
 	<div class="search-parameters">
-	<? if (isset ( $options )) : ?>
+	<?php if (isset ( $options )) : ?>
 
-		<? $keys = array_keys ( $options ); ?>
-		<? $values = array_values ( $options ); ?>
+		<?php $keys = array_keys ( $options ); ?>
+		<?php $values = array_values ( $options ); ?>
 
 		<ul>
 
-		<? for($i = 0; $i < count ( $options ); $i ++):?>
+		<?php for($i = 0; $i < count ( $options ); $i ++):?>
        	<li>
-       	<?=ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?=clean_string($values [$i]); ?></strong>
+       	<?php echo ucwords(clean_string($keys [$i])); ?>:&nbsp;<strong><?php echo clean_string($values [$i]); ?></strong>
 			</li>
-		<? endfor;?>
+		<?php endfor;?>
 		</ul>
-	<?  else : ?>
+	<?php else : ?>
 		<p>Showing All Orders for $sale_year</p>
-	<? endif; ?>
+	<?php endif; ?>
 <p>
 			<strong>Sort Order</strong>
 		</p>
-<? $sorting = $this->input->get("sorting"); ?>
-<? $direction = $this->input->get("direction");?>
+<?php $sorting = $this->input->get("sorting"); ?>
+<?php $direction = $this->input->get("direction");?>
 <ul>
-<? for($i = 0; $i < count($sorting); $i++):?>
-<li><? printf("%s, %s", clean_string(ucwords($sorting[$i])), $direction[$i]); ?></li>
-<? endfor; ?>
+<?php for($i = 0; $i < count($sorting); $i++):?>
+<li><?php printf("%s, %s", clean_string(ucwords($sorting[$i])), $direction[$i]); ?></li>
+<?php endfor; ?>
 </ul>
 		<p>
-			Found Count: <strong><?=count($orders);?> Orders</strong>
+			Found Count: <strong><?php echo count($orders);?> Orders</strong>
 		</p>
 <?php echo create_button_bar(array(array("text"=>"Refine Search","class"=>array("button","refine","search","dialog","search-orders"),"href"=>site_url("order/search"))));?>
 	
 	</div>
 </fieldset>
 
-<?
+<?php
 	if ($output_format != "crop-failure") {
 		$buttons [] = array (
 				"text" => "Full Export",
@@ -82,7 +82,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 	?>
 <?php endif;?>
 
-<?
+<?php
 
 if ($output_format == "inventory") {
 	$this->load->view ( "order/inventory" );

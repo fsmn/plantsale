@@ -17,14 +17,14 @@ if ($orders) :
 		<tr class="top-row">
 			<th></th>
 			<th></th>
-		<? if(!$show_names):?>
+		<?php if(!$show_names):?>
 			<th></th>
-		<? endif;?>
+		<?php endif;?>
 			<th colspan=2></th>
-		<? if($show_names):?>
+		<?php if($show_names):?>
 			<th colspan=3></th>
 
-		<? endif;?>
+		<?php endif;?>
 			<th colspan=4>Presale</th>
 
 			<th colspan=4>Midsale</th>
@@ -34,17 +34,17 @@ if ($orders) :
 		</tr>
 		<tr>
 			<th></th>
-		<? if(!$show_names):?>
+		<?php if(!$show_names):?>
 			<th>Year</th>
-		<? endif;?>
+		<?php endif;?>
 			<th>Grower</th>
 			<th>Cat&#35;</th>
-		<? if($show_names):?>
+		<?php if($show_names):?>
 			<th>Genus</th>
 			<th>Species</th>
 			<th>Common</th>
 			<th>Variety</th>
-		<? endif;?>
+		<?php endif;?>
 
 			<th>Ord'd</th>
 			<th>Rec'd</th>
@@ -70,7 +70,7 @@ if ($orders) :
 		</tr>
 	</thead>
 	<tbody>
-		<?
+		<?php
 	$presale_total = 0;
 	$midsale_total = 0;
 	$flat_cost_total = 0;
@@ -112,102 +112,102 @@ if ($orders) :
 		$row_classes [] = has_price_discrepancy ( $order );
 		
 		?>
-		<tr class="<?=implode(" ",$row_classes);?>" id="order_<?=$order->id;?>" title="<?=$row_title;?>">
+		<tr class="<?php echo implode(" ",$row_classes);?>" id="order_<?php echo $order->id;?>" title="<?php echo $row_title;?>">
 
 
 			<td class="no-wrap">
-			<? if(IS_ADMIN):?>
-				<span tabindex=-1 class="omit-row omit button" id="omit-order_<?=$order->id;?>">Omit</span>
+			<?php if(IS_ADMIN):?>
+				<span tabindex=-1 class="omit-row omit button" id="omit-order_<?php echo $order->id;?>">Omit</span>
 
-			<? endif;?>
-			<? if(IS_EDITOR):?>
+			<?php endif;?>
+			<?php if(IS_EDITOR):?>
 			<?php echo create_button(array("text"=>"Edit","href"=>site_url("order/edit/$order->id"),"class"=>array("button","edit","dialog","edit-order"),"id"=>"edit-order_$order->id","tabindex"=>"-1'"));?>
 
-				<? else: ?>
+				<?php else: ?>
 				<?php echo create_button(array("text"=>"Details","class"=>array("button","details","view-order"),"href"=>site_url("order/view/$order->id")));?>
 
-				<? endif; ?>
+				<?php endif; ?>
 				</td>
-			<? if(!$show_names):?>
-				<td tabindex=-1 class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php if(!$show_names):?>
+				<td tabindex=-1 class="order-year field"><?php echo edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
 				</td>
-			<? endif;?>
-			<td tabindex=-1 class="order-grower_id field"><?=edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php endif;?>
+			<td tabindex=-1 class="order-grower_id field"><?php echo edit_field("grower_id",$order->grower_id,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td tabindex=-1 class="order-catalog_number field">
 				<!-- if there is no catalog number, show the first letter of the category -->
-			    <?=edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>
+			    <?php echo edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<? if($show_names):?>
+			<?php if($show_names):?>
 			<td>
-				<a tabindex=-1 href="<?=site_url(sprintf("common/find?genus=%s",$order->genus));?>" title="View all <?=$order->genus;?>"><?=$order->genus;?></a>
+				<a tabindex=-1 href="<?php echo site_url(sprintf("common/find?genus=%s",$order->genus));?>" title="View all <?php echo $order->genus;?>"><?php echo $order->genus;?></a>
 			</td>
-			<td tabindex=-1><?=$order->species;?></td>
+			<td tabindex=-1><?php echo $order->species;?></td>
 			<td>
-				<a tabindex=-1 href="<?=site_url("common/view/$order->common_id");?>" title="View the details for <?=$order->name;?>"><?=$order->name;?></a>
+				<a tabindex=-1 href="<?php echo site_url("common/view/$order->common_id");?>" title="View the details for <?php echo $order->name;?>"><?php echo $order->name;?></a>
 			</td>
 			<td>
-				<a tabindex=-1 style="font-weight: bold" href="<?=site_url("variety/view/$order->variety_id");?>"
-					title="View the details for <?=$order->variety;?>"
-				><?=$order->variety;?></a>
+				<a tabindex=-1 style="font-weight: bold" href="<?php echo site_url("variety/view/$order->variety_id");?>"
+					title="View the details for <?php echo $order->variety;?>"
+				><?php echo $order->variety;?></a>
 			</td>
-			<? endif;?>
+			<?php endif;?>
 			<td tabindex=-1 class="order-count_presale field">
-			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php echo edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-received_presale field">
-			<?=live_field("received_presale",$order->received_presale,"order",$order->id,array("envelope"=>"span")); ?>
+			<?php echo live_field("received_presale",$order->received_presale,"order",$order->id,array("envelope"=>"span")); ?>
 			</td>
 			<td class="order-remainder_friday field" style="width: 31px;">
-			<?=live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-sellout_friday field" style="width: 31px;">
-			<?=live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td tabindex=-1 class="order-count_midsale field">
-			<?=edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php echo edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-received_midsale field">
-			<?=live_field("received_midsale",$order->received_midsale,"order",$order->id,array("envelope"=>"span"));?>
+			<?php echo live_field("received_midsale",$order->received_midsale,"order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-remainder_saturday field" style="width: 31px;">
-			<?=live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-sellout_saturday field" style="width: 31px;">
-			<?=live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-remainder_sunday field" style="width: 31px;">
-			<?=live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-count_dead field" style="width: 31px;">
-			<?=live_field("count_dead",$order->count_dead,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("count_dead",$order->count_dead,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-total_plants field">
-			<?=$order->count_midsale + $order->count_presale;?>
+			<?php echo $order->count_midsale + $order->count_presale;?>
 			</td>
-			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size"));?>
+			<td class="order-pot_size field no-wrap"><?php echo edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size"));?>
 			</td>
 			<td class="order-flat_size field">
-			<?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php echo edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">
 				$
-				<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->flat_cost,2);?></span>
+				<span id="edit-flat-cost_<?php echo $order->id;?>" class="edit-cost"><?php echo number_format($order->flat_cost,2);?></span>
 			</td>
 			<td tabindex=-1 class="no-wrap order-plant_cost field cost-field no-wrap" id="plant_cost">
 				$
-				<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->plant_cost,2);?></span>
+				<span id="edit-plant-cost_<?php echo $order->id;?>" class="edit-cost"><?php echo number_format($order->plant_cost,2);?></span>
 			</td>
 			<td tabindex=-1 class="no-wrap order-price field">
-			$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
+			$<?php echo edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
-			<td tabindex=-1 class="order-grower_code field"><?=edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
+			<td tabindex=-1 class="order-grower_code field"><?php echo edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<!--<td tabindex=-1 class="re-order field">
 				<?php echo create_button(array("text"=>"Re-order","href"=>site_url("order/create?variety_id=$order->variety_id"),"id"=>"oc_$order->variety_id","class"=>array("button","new","create","dialog","reorder","order-create"),"tabindex"=>"-1"));?>
 			</td>-->
 		</tr>
-		<? endforeach;?>
+		<?php endforeach;?>
 	</tbody>
 	<tfoot>
 		<tr>
@@ -229,4 +229,4 @@ if ($orders) :
 </table>
 
 
-<? endif;
+<?php endif;

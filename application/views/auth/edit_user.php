@@ -1,7 +1,7 @@
-<? if(!$ajax): ?>
+<?php if(!$ajax): ?>
 <h1><?php echo lang('edit_user_heading');?></h1>
 <p><?php echo lang('edit_user_subheading');?></p>
-<? endif;?>
+<?php endif;?>
 <div id="infoMessage"><?php echo $message;?></div>
 
 <?php echo form_open(uri_string());?>

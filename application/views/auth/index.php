@@ -5,7 +5,7 @@ $buttons[] = array("text"=>"Create Group","class"=>array("button","create","dial
 
 ?> <h2>Users</h2>
 
-<?=create_button_bar($buttons); ?>
+<?php echo create_button_bar($buttons); ?>
 <table class="list">
 	<tr>
 		<th>First Name</th>

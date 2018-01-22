@@ -27,14 +27,14 @@ if ($orders)
 	</thead>
 	<tbody>
 	<?php foreach($orders as $order):?>
-		<tr id="order_<?=$order->id;?>">
-		<td><?=$order->grower_id;?></td>
-		<td><?=$order->year;?></td>	
-		<td><?=$order->catalog_number;?></td>
-		<td><?=$order->name;?></td>
-		<td class="no-wrap"><?=$order->pot_size;?></td>
-		<td><?=$order->variety;?></td>
-		<td><?=$order->count_presale;?></td>
+		<tr id="order_<?php echo $order->id;?>">
+		<td><?php echo $order->grower_id;?></td>
+		<td><?php echo $order->year;?></td>	
+		<td><?php echo $order->catalog_number;?></td>
+		<td><?php echo $order->name;?></td>
+		<td class="no-wrap"><?php echo $order->pot_size;?></td>
+		<td><?php echo $order->variety;?></td>
+		<td><?php echo $order->count_presale;?></td>
 		<td class="checkbox">&nbsp;</td>
 		<td class="checkbox">&nbsp;</td>
 		<td class="checkbox">&nbsp;</td>
@@ -42,9 +42,9 @@ if ($orders)
 		<td class="comment">&nbsp;</td>
 		
 </tr>
-		<? endforeach;?>
+		<?php endforeach;?>
 	</tbody>
 </table>
 
 
-<? endif;
+<?php endif;

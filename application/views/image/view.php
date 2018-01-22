@@ -16,11 +16,11 @@ echo create_button ( array (
 	)
 	 );
 	?>
-			<? else: ?>
+			<?php else: ?>
 			<div class="center">
-<img src="<?=site_url("files/$variety->image_name?" . date("U"));?>"/>
-<? if(IS_EDITOR): ?>
+<img src="<?php echo site_url("files/$variety->image_name?" . date("U"));?>"/>
+<?php if(IS_EDITOR): ?>
 	<?php echo create_button(array("text"=>"Delete Image","class"=>array("button","delete","delete-image"),"id"=>"delete-image_$variety->image_id"));?>
-	<? endif;?>
+	<?php endif;?>
 	</div>
-<? endif;?>
+<?php endif;?>

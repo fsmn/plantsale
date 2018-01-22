@@ -25,5 +25,5 @@ write_file("./downloads/$filename",$quark);
 //force_download($filename, $quark);?>
 
 <p>You can download the file here:</p>
-<p><a href="<?=base_url("/downloads/$filename");?>"><?=$filename;?></a></p>
+<p><a href="<?php echo base_url("/downloads/$filename");?>"><?php echo $filename;?></a></p>
 

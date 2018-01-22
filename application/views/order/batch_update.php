@@ -1,12 +1,12 @@
-<?
+<?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 ?>
 
-<form id="batch-update" name="batch-update" method="post" action="<?=base_url("order/batch_update");?>">
-<input type="hidden" id="ids" name="ids" value="<?=implode(",",$ids);?>"/>
+<form id="batch-update" name="batch-update" method="post" action="<?php echo base_url("order/batch_update");?>">
+<input type="hidden" id="ids" name="ids" value="<?php echo implode(",",$ids);?>"/>
 <input type="hidden" id="action" name="action" value="update"/>
-<h2>DANGER: Updating <?=count($ids);?> Records</h2>
+<h2>DANGER: Updating <?php echo count($ids);?> Records</h2>
 <p class="notice">Changes you submit here cannot be undone!</p>
 
 	<div class="orders-flat_size field">
@@ -31,7 +31,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 	</div>
 		<div class="orders-pot_size field">
 		<label for="pot_size">Pot Size:&nbsp;</label>
-		<?=form_dropdown("pot_size",$pot_sizes);?>
+		<?php echo form_dropdown("pot_size",$pot_sizes);?>
 	</div>
 	<div class="orders-price field">
 		<label for="price">Price:&nbsp;</label> <input type="text" name="price"

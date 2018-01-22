@@ -28,7 +28,7 @@ if(array_key_exists("type",$field) && $field["type"] == "dropdown"){
 <form
 	name="edit-grower"
 	id="edit-grower"
-	action="<?=base_url("grower/$action");?>"
+	action="<?php echo base_url("grower/$action");?>"
 	method="post">
 	<p>
 		<label for="id">Unique Grower ID: </label><input
@@ -36,17 +36,17 @@ if(array_key_exists("type",$field) && $field["type"] == "dropdown"){
 			size="3"
 			name="id"
 			id="grower-id"
-			value="<?=get_value($grower,"id");?>" /><span id="unique-id"></span>
+			value="<?php echo get_value($grower,"id");?>" /><span id="unique-id"></span>
 	</p>
 	<p><label for="user_id">Our Contact</label>
 	<?php echo form_dropdown("user_id",$users);?>
 	</p>
-<? echo implode("\r",$output);?>
+<?php echo implode("\r",$output);?>
 <p>
 		<input
 			type="submit"
 			class="button <?php echo $action;?>"
-			value="<?=ucfirst($action);?>" />
+			value="<?php echo ucfirst($action);?>" />
 	</p>
 </form>
 <p class="highlight">More features to come!</p>

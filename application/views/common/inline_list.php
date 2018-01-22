@@ -4,7 +4,7 @@
 ?>
 
 <table id="common-name-list" class="list compressed">
-	<?if($full_list):?>
+	<?php if($full_list):?>
 		<thead>
 			<tr>
 				<th>Name</th>
@@ -20,25 +20,25 @@
 				<th></th>
 			</tr>
 		</thead>
-	<? endif; ?>
+	<?php endif; ?>
 	<tbody>
-		<? foreach($names as $name){ ?>
+		<?php foreach($names as $name): ?>
 		<tr>
 			<td><span class="common-name common-edit-row"
-				id="cnid_<?=$name->id;?>"><?=$name->name;?> </span>
+				id="cnid_<?php echo $name->id;?>"><?php echo $name->name;?> </span>
 			</td>
 			<td><span class="common-genus common-edit-row"
-				id="cgid_<?=$name->id;?>"><?=$name->genus;?> </span>
+				id="cgid_<?php echo $name->id;?>"><?php echo $name->genus;?> </span>
 			</td>
 			<td><span class="common-category common-edit-row"
-				id="ccid_<?=$name->id;?>"><?=$name->category;?> </span>
+				id="ccid_<?php echo $name->id;?>"><?php echo $name->category;?> </span>
 			</td>
 			<td>
 			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"href"=>site_url("common/view/$name->id")));?>
-			<a class="button" id="id_<?=$name->id;?>"
-				href="<?=site_url("common/view/$name->id");?>">Details <?php echo add_fa_icon(array("details"));?></a>
+			<a class="button" id="id_<?php echo $name->id;?>"
+				href="<?php echo site_url("common/view/$name->id");?>">Details <?php echo add_fa_icon(array("details"));?></a>
 			</td>
 		</tr>
-		<? } ?>
+		<?php endforeach; ?>
 	</tbody>
 </table>

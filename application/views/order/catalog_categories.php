@@ -5,16 +5,16 @@
 ?>
 <div class="categories-list">
 <h5>Click on a category to update catalog numbers for the specific category.</h5>
-<?=create_button(array("text"=>"Hide","class"=>"button hide-quark-export small","href"=>"#"));?>
+<?php echo create_button(array("text"=>"Hide","class"=>"button hide-quark-export small","href"=>"#"));?>
 
 	<ul class="categories list">
-	<li class="category item"><a class="edit set-catalog-numbers" href="<?=site_url("order/set_catalog_numbers");?>">All Categories</a></li>
-<? foreach($categories as $category): ?>
+	<li class="category item"><a class="edit set-catalog-numbers" href="<?php echo site_url("order/set_catalog_numbers");?>">All Categories</a></li>
+<?php foreach($categories as $category): ?>
 <li class="category item"><a class="edit set-catalog-numbers"
-			href="<?=site_url("order/set_catalog_numbers?category_id=$category->id");?>"
-			title="Update Catalog numbers for <?=$category->category;?>">
-<?=$category->category;?>
+			href="<?php echo site_url("order/set_catalog_numbers?category_id=$category->id");?>"
+			title="Update Catalog numbers for <?php echo $category->category;?>">
+<?php echo $category->category;?>
 </a></li>
-<?endforeach; ?>
+<?php endforeach; ?>
 </ul>
 </div>

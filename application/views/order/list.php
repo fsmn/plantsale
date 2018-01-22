@@ -65,23 +65,23 @@ if ($orders) :
 <table class="list compressed">
 	<thead>
 		<tr class="top-row">
-		<? foreach($top_row as $top_label): ?>
-		<? if($top_label == NULL):?>
+		<?php foreach($top_row as $top_label): ?>
+		<?php if($top_label == NULL):?>
 		<th></th>
-		<? else:?>
-		<th colspan=<?= $top_label["colspan"];?>><?=$top_label["label"];?></th>
-		<? endif;?>
-		<? endforeach;?>
+		<?php else:?>
+		<th colspan=<?php echo  $top_label["colspan"];?>><?php echo $top_label["label"];?></th>
+		<?php endif;?>
+		<?php endforeach;?>
 		</tr>
 		<tr>
-		<? foreach($main_row as $label):?>
-		<th><?=$label;?></th>
+		<?php foreach($main_row as $label):?>
+		<th><?php echo $label;?></th>
 
-			<? endforeach;?>
+			<?php endforeach;?>
 		</tr>
 	</thead>
 	<tbody>
-		<?
+		<?php
     foreach ($orders as $order) :
         $this->load->view("order/row", array(
                 "order" => $order
@@ -92,4 +92,4 @@ if ($orders) :
 	</tbody>
 </table>
 
-<? endif;
+<?php endif;

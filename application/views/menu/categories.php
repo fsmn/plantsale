@@ -4,7 +4,7 @@
 
 ?>
 <ul>
-<? foreach($categories as $category):?>
-<li><a href="<?=site_url("menu/show_all/$category->category");?>"><?=$category->category;?></a></li>
-<? endforeach;?>
+<?php foreach($categories as $category):?>
+<li><a href="<?php echo site_url("menu/show_all/$category->category");?>"><?php echo $category->category;?></a></li>
+<?php endforeach;?>
 </ul>

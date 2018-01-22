@@ -20,7 +20,7 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
   </script>
 <div class="message standard" style="max-width: 500px;">Enter "NULL" (with no spaces) in any field to find records with no entry in that field. Enter
 	"NOT NULL" to find items where that field is not empty.</div>
-<form name="search-variety" id="search-variety" class="search-form" action="<?=site_url("variety/search"); ?>" method="GET">
+<form name="search-variety" id="search-variety" class="search-form" action="<?php echo site_url("variety/search"); ?>" method="GET">
 	<input type="hidden" name="find" value="1" />
 	<div class="field-set">
 	<label for="action">Search Type: </label>
@@ -28,9 +28,9 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
 	</div>
 	<div class="field-set block">
 		<label for="year" class="reorders">Year: </label>
-		<input type="number" name="year" class="reorders" style="width: 5em" value="<?=$this->session->userdata("sale_year");;?>" />
+		<input type="number" name="year" class="reorders" style="width: 5em" value="<?php echo $this->session->userdata("sale_year");;?>" />
 		&nbsp; <label for="new_year" class="standard">First Year at Sale:&nbsp;</label>
-		<input type="number" class="standard" style="width: 5em" value="<?=get_value($variety,"new_year",($refine ? cookie("new_year"):''));?>" name="new_year"
+		<input type="number" class="standard" style="width: 5em" value="<?php echo get_value($variety,"new_year",($refine ? cookie("new_year"):''));?>" name="new_year"
 			id="new_year"
 		/>
 			
@@ -41,43 +41,43 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
 	<div class="field-set box standard" style="font-size: .9em">
 		<input type="checkbox" name="crop_failure" value="1" />
 		<label for="crop_failure">Show Only Crop Failures</label> &nbsp;
-		<input type="checkbox" name="no_image" id="no_image" <?= $refine && cookie("no_image")== 1?"checked":"";?> value="1" />
+		<input type="checkbox" name="no_image" id="no_image" <?php echo  $refine && cookie("no_image")== 1?"checked":"";?> value="1" />
 		<label for="no_image">Missing Image</label> &nbsp;
-		<input type="checkbox" name="needs_bag" id="needs_bag" <?=$refine && cookie("needs_bag") == 1 ?"checked":"";?> value="1" />
+		<input type="checkbox" name="needs_bag" id="needs_bag" <?php echo $refine && cookie("needs_bag") == 1 ?"checked":"";?> value="1" />
 		<label for="no_image">Needs Bag</label>
 	</div>
 	<div class="field-set standard">
 		<div class="column first">
-		<?=create_input($variety,"name","Common Name","name", $refine);?>
+		<?php echo create_input($variety,"name","Common Name","name", $refine);?>
 	</div>
 		<div class="column last">
-		<?=create_input($variety,"variety","Variety","variety",$refine);?>
+		<?php echo create_input($variety,"variety","Variety","variety",$refine);?>
 	</div>
 	</div>
 	<div class="field-set standard">
 		<div class="column first">
-		<?=create_input($variety,"genus","Genus","genus",$refine);?>
+		<?php echo create_input($variety,"genus","Genus","genus",$refine);?>
 	</div>
 		<div class="column last">
-		<?=create_input($variety, "species","Species","species",$refine);?>
+		<?php echo create_input($variety, "species","Species","species",$refine);?>
 	</div>
 	</div>
 	<div class="field-set block standard">
 		<div class="column first">
-			<label for="category_id">Category: </label><?=form_dropdown("category_id",$categories,($refine ? cookie("category_id"):""),'id="category_id"');?>
+			<label for="category_id">Category: </label><?php echo form_dropdown("category_id",$categories,($refine ? cookie("category_id"):""),'id="category_id"');?>
 		</div>
 		<div class="column last">
 			<label for="subcategory_id">Subcategory: </label>
-			<span id="subcategory-envelope"><?=form_dropdown("subcategory_id",$subcategories,($refine ? cookie("subcategory_id"):""),'id="subcategory_id"');?></span>
+			<span id="subcategory-envelope"><?php echo form_dropdown("subcategory_id",$subcategories,($refine ? cookie("subcategory_id"):""),'id="subcategory_id"');?></span>
 
 		</div>
 	</div>
 	<div class="field-set standard">
 		<div class="column first">
 			<label for="flag">Flag: </label>
-		<?=form_dropdown("flag",$flags,array($refine ? cookie("flag"):''),"id='flag'");?>
+		<?php echo form_dropdown("flag",$flags,array($refine ? cookie("flag"):''),"id='flag'");?>
 		<br />
-			<input type="checkbox" name="not_flag" style="width: auto;" value=1 id="not_flag" <?=cookie("not_flag") ? "checked":"";?>
+			<input type="checkbox" name="not_flag" style="width: auto;" value=1 id="not_flag" <?php echo cookie("not_flag") ? "checked":"";?>
 				title="Check here if you want to find everything that is not the flag value"
 			>
 			<label class='inline'>Negate</label>
@@ -85,7 +85,7 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
 		</div>
 		<div class="column last">
 			<label for="plant_color">Plant Color: </label>
-		<?=form_dropdown("plant_color",$plant_colors,array($refine ? cookie("plant_color") : ""),"id='plant_colors'");?>
+		<?php echo form_dropdown("plant_color",$plant_colors,array($refine ? cookie("plant_color") : ""),"id='plant_colors'");?>
 	</div>
 	</div>
 	<div class="field-set ui-widget standard">
@@ -101,7 +101,7 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
 	</div>
 	<div class="field-set block box standard">
 		<label for="sunlight-boolean">Sunlight Options</label>
-&nbsp;<?=$sunlight;?>	&nbsp;	<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),$refine ? cookie("sunlight-boolean"):"and","id='sunlight-boolean'");?>
+&nbsp;<?php echo $sunlight;?>	&nbsp;	<?php echo form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),$refine ? cookie("sunlight-boolean"):"and","id='sunlight-boolean'");?>
 
 	</div>
 	<div class="field-set block standard">
@@ -110,24 +110,24 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
 <?php echo form_dropdown("needs_copy_review",array("0"=>"","no"=>"No","yes"=>"Yes"),$refine ? cookie("needs_copy_review"):"");?>
 </div>
 		<div class="column last">
-			<?=create_input($variety, "descriptions","Search All Descriptions");?>
+			<?php echo create_input($variety, "descriptions","Search All Descriptions");?>
 			</div>
 	</div>
 	<div class="field-set block standard">
 		<div class="column first">
-		<?=create_input($variety, "description","General Description");?>
+		<?php echo create_input($variety, "description","General Description");?>
 	</div>
 		<div class="column last">
-		<?=create_input($variety, "print_description","Variety Description","print_description",$refine);?>
-		<?=create_input($variety, "web_description","Web Description","web_description",$refine);?>
+		<?php echo create_input($variety, "print_description","Variety Description","print_description",$refine);?>
+		<?php echo create_input($variety, "web_description","Web Description","web_description",$refine);?>
 	</div>
 	</div>
 	<div class="field-set block standard" >
 		<div class="column first">
-	<?=create_input($variety,"grower_id","Grower ID","grower_id",$refine);?>
+	<?php echo create_input($variety,"grower_id","Grower ID","grower_id",$refine);?>
 	</div>
 		<div class="column last">
-		<?=create_input($variety,"catalog_number","Catalog Number","catalog_number",$refine);?>
+		<?php echo create_input($variety,"catalog_number","Catalog Number","catalog_number",$refine);?>
 
 	</div>
 	</div>
@@ -145,12 +145,12 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
 		</div>
 	</div>
 	<div id="sort-block" class="standard">
-<?
+<?php
 $data ["basic_sort"] = TRUE;
 $this->load->view ( "order/sort", $data );
 ?>
 </div>
-<?
+<?php
 
 $buttons [] = array (
 		"type" => "pass-through",

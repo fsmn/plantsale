@@ -50,7 +50,7 @@ if ($orders) :
 		</tr>
 	</thead>
 	<tbody>
-		<?
+		<?php
 	$presale_total = 0;
 	$midsale_total = 0;
 	$flat_cost_total = 0;
@@ -79,79 +79,79 @@ if ($orders) :
 		$row_classes [] = has_price_discrepancy ( $order );
 		
 		?>
-		<tr class="<?=implode(" ",$row_classes);?>" id="order_<?=$order->id;?>">
+		<tr class="<?php echo implode(" ",$row_classes);?>" id="order_<?php echo $order->id;?>">
 
 
 			<td class="no-wrap">
-			<? if(IS_ADMIN):?>
-				<span tabindex=-1 class="omit-row omit button" id="omit-order_<?=$order->id;?>">Omit</span>
+			<?php if(IS_ADMIN):?>
+				<span tabindex=-1 class="omit-row omit button" id="omit-order_<?php echo $order->id;?>">Omit</span>
 
-			<? endif;?>
-			<? if(IS_EDITOR):?>
+			<?php endif;?>
+			<?php if(IS_EDITOR):?>
 			<?php echo create_button(array("text"=>"Edit","href"=>site_url("order/edit/$order->id"),"class"=>array("button","edit","dialog","edit-order"),"id"=>"edit-order_$order->id","tabindex"=>"-1'"));?>
 
-				<? else: ?>
+				<?php else: ?>
 				<?php echo create_button(array("text"=>"Details","class"=>array("button","details","view-order"),"href"=>site_url("order/view/$order->id")));?>
 
-				<? endif; ?>
+				<?php endif; ?>
 				</td>
-			<td tabindex=-1 class="order-year field"><?=edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
+			<td tabindex=-1 class="order-year field"><?php echo edit_field("year",$order->year,"","order",$order->id,array("envelope"=>"span"));?>
 				</td>
 			<td tabindex=-1 class="order-catalog_number field">
 				<!-- if there is no catalog number, show the first letter of the category -->
-			    <?=edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>
+			    <?php echo edit_field("catalog_number",$order->catalog_number?$order->catalog_number:ucfirst(substr($order->category,0,1)),"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td>
-				<a tabindex=-1 href="<?=site_url(sprintf("common/find?genus=%s",$order->genus));?>" title="View all <?=$order->genus;?>">
-				<?=$order->genus;?>
+				<a tabindex=-1 href="<?php echo site_url(sprintf("common/find?genus=%s",$order->genus));?>" title="View all <?php echo $order->genus;?>">
+				<?php echo $order->genus;?>
 				</a>
-				<a tabindex=-1 href="<?=site_url("common/view/$order->common_id");?>" title="View the details for <?=$order->name;?>">
-				<?=$order->name;?>
+				<a tabindex=-1 href="<?php echo site_url("common/view/$order->common_id");?>" title="View the details for <?php echo $order->name;?>">
+				<?php echo $order->name;?>
 				</a>
-				<a tabindex=-1 style="font-weight: bold" href="<?=site_url("variety/view/$order->variety_id");?>"
-					title="View the details for <?=$order->variety;?>"
+				<a tabindex=-1 style="font-weight: bold" href="<?php echo site_url("variety/view/$order->variety_id");?>"
+					title="View the details for <?php echo $order->variety;?>"
 				>
-				<?=$order->variety;?>
+				<?php echo $order->variety;?>
 				</a>
 			</td>
 			<td tabindex=-1 class="order-count_presale field">
-			<?=edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php echo edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-total_plants field">
-			<?
+			<?php
 		
 		$flat_total = $order->count_midsale + $order->count_presale;
 		echo $flat_total;
 		?>
 			</td>
 			<td class="order-remainder_saturday field" style="width: 31px;">
-			<?=live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
+			<?php echo live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span","size"=>31));?>
 			</td>
-			<td class="order-pot_size field no-wrap"><?=edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size"));?>
+			<td class="order-pot_size field no-wrap"><?php echo edit_field("pot_size",$order->pot_size,"","order",$order->id,array("envelope"=>"span","class"=>"pot-size"));?>
 			</td>
 			<td class="order-flat_size field">
-			<?=edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php echo edit_field("flat_size",$order->flat_size,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">
 				$
-				<span id="edit-flat-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->flat_cost,2);?></span>
+				<span id="edit-flat-cost_<?php echo $order->id;?>" class="edit-cost"><?php echo number_format($order->flat_cost,2);?></span>
 			</td>
 			<td tabindex=-1 class="no-wrap order-plant_cost field cost-field no-wrap" id="plant_cost">
 				$
-				<span id="edit-plant-cost_<?=$order->id;?>" class="edit-cost"><?=number_format($order->plant_cost,2);?></span>
+				<span id="edit-plant-cost_<?php echo $order->id;?>" class="edit-cost"><?php echo number_format($order->plant_cost,2);?></span>
 			</td>
 			<td tabindex=-1 class="no-wrap order-price field">
-			$<?=edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
+			$<?php echo edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-flat_area field">
-			<?=edit_field("flat_area",$order->flat_area,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php echo edit_field("flat_area",$order->flat_area,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td>
 			<?php echo $order->flat_area * $flat_total;?>
 			<?php $total_flat_area += $order->flat_area * $flat_total; ?>
 			</td>
 			<td class="order-tiers field">
-			<?=edit_field("tiers",$order->tiers,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php echo edit_field("tiers",$order->tiers,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<?php
 		$plant_count = ($flat_total) * $order->flat_size;
@@ -168,7 +168,7 @@ if ($orders) :
 			<td><?php echo get_as_price($net );?></td>
 			<td><?php echo get_as_price($adjusted_net);?></td>
 		</tr>
-		<? endforeach;?>
+		<?php endforeach;?>
 	</tbody>
 	<tfoot>
 		<tr>
@@ -192,4 +192,4 @@ if ($orders) :
 
 
 
-<? endif;
+<?php endif;

@@ -5,25 +5,25 @@
 ?>
 <h2>Copy Edits for <?php echo $year;?></h2>
 <?php 
-foreach($varieties as $variety):
+foreach($plants as $variety):
 ?>
 <div class="variety-info">
-<h3><?=$variety->name;?> (ID=<?=$variety->common_id;?>), <?=$variety->variety;?> (ID=<?=$variety->id;?>)</h3>
+<h3><?php echo $variety->name;?> (ID=<?php echo $variety->common_id;?>), <?php echo $variety->variety;?> (ID=<?php echo $variety->id;?>)</h3>
 <p>
 <strong>Common (General) Description</strong><br/>
-<?=$variety->description;?></p>
-<? if($variety->print_description):?>
+<?php echo $variety->description;?></p>
+<?php if($variety->print_description):?>
 <p>
 <strong>Variety Descriptionn</strong><br/>
-<?=$variety->print_description;?>
+<?php echo $variety->print_description;?>
 </p>
-<? endif; ?>
+<?php endif; ?>
 
-<? if($variety->web_description):?>
+<?php if($variety->web_description):?>
 <p>
 <strong>Variety Web Descriptionn</strong><br/>
-<?=$variety->web_description;?>
+<?php echo $variety->web_description;?>
 </p>
-<? endif; ?>
+<?php endif; ?>
 </div>
-<? endforeach;
+<?php endforeach;

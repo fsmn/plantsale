@@ -25,25 +25,25 @@ print create_button_bar($buttons);
 	</tr>
 	</thead>
 	<tbody>
-	<?foreach($plants as $plant): ?>
-		<? $checked = "";?>
-		<? $class = "print"; ?>
-		<? if($plant->omit ==1 ):?>
-			<? $checked = "checked";?>
-			<? $class = "omitted"; ?>
-		<? endif;?>
-		<tr class="plant-row plant-info inline-list <?=$class; ?>" tabindex=<?=$i;?> id="plant-info_<?=$plant->id;?>" >
+	<?php foreach($plants as $plant): ?>
+		<?php $checked = "";?>
+		<?php $class = "print"; ?>
+		<?php if($plant->omit ==1 ):?>
+			<?php $checked = "checked";?>
+			<?php $class = "omitted"; ?>
+		<?php endif;?>
+		<tr class="plant-row plant-info inline-list <?php echo $class; ?>" tabindex=<?php echo $i;?> id="plant-info_<?php echo $plant->id;?>" >
 			<td class="field omit-plant">
-			<?=form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant from printing","id"=>"omit-plant_$plant->id","checked"=>$checked,"class"=>"omit-row omit plant-info"));?></td>
-			<td class="field year"><?=$plant->year;?></td>
+			<?php echo form_checkbox(array("name"=>"omit","value"=>1, "title"=>"Omit this plant from printing","id"=>"omit-plant_$plant->id","checked"=>$checked,"class"=>"omit-row omit plant-info"));?></td>
+			<td class="field year"><?php echo $plant->year;?></td>
 			<td><?php echo get_value($plant,"catalog_number");?></td>
-			<td class="field latin-name"><?=format_latin_name($plant);?></td>
-			<td class="field common-name"><?=$plant->name;?></td>
-			<td class="field variety"><?=$plant->variety;?></td>
-			<!-- <td class="field pot-size"><?=$plant->pot_size;?></td> -->
+			<td class="field latin-name"><?php echo format_latin_name($plant);?></td>
+			<td class="field common-name"><?php echo $plant->name;?></td>
+			<td class="field variety"><?php echo $plant->variety;?></td>
+			<!-- <td class="field pot-size"><?php echo $plant->pot_size;?></td> -->
 		</tr>
-		<? $i++;?>
-	<? endforeach;?>
+		<?php $i++;?>
+	<?php endforeach;?>
 	</tbody>
 	</table>
 </div>

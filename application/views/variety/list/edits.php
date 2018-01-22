@@ -76,7 +76,7 @@ print create_button_bar($buttons);
 			</td>
 			<td>
 				<div class='field-set'>
-			<?=edit_field("edit_notes", $plant->edit_notes, "","variety",$plant->id, array("envelope"=>"div","size"=>"180"));?>
+			<?php echo edit_field("edit_notes", $plant->edit_notes, "","variety",$plant->id, array("envelope"=>"div","size"=>"180"));?>
 		</div>
 
 			</td>

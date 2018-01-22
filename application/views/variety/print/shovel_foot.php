@@ -23,55 +23,55 @@ if($length > 25){
     $common_size = "style='font-size:29pt'";
 }
 ?>
-<div class="<?=implode(" ",$classes);?>">
+<div class="<?php echo implode(" ",$classes);?>">
 	<div class="header">
-	<div class="catalog-number"><?=$order->catalog_number;?></div>
-	<div class="common-name" <?=$common_size;?>><?=$variety->common_name;?></div>
+	<div class="catalog-number"><?php echo $order->catalog_number;?></div>
+	<div class="common-name" <?php echo $common_size;?>><?php echo $variety->common_name;?></div>
 	</div>
 <div class="subheader">
-<? if($saturday_delivery || $variety->new_year == $this->session->userdata("sale_year")):?>
+<?php if($saturday_delivery || $variety->new_year == $this->session->userdata("sale_year")):?>
 <div class="special-icons">
-	<? if($order->count_midsale > 0): ?>
+	<?php if($order->count_midsale > 0): ?>
 
 		<div class="icon saturday-delivery">
-		<!-- <img src="<?=base_url("images/truck-icon.png");?>"/> -->
-		<?=format_saturday("poster"); ?>
+		<!-- <img src="<?php echo base_url("images/truck-icon.png");?>"/> -->
+		<?php echo format_saturday("poster"); ?>
 		</div>
 
-	<? endif;?>
-	<? if($variety->new_year == $this->session->userdata("sale_year")):?>
+	<?php endif;?>
+	<?php if($variety->new_year == $this->session->userdata("sale_year")):?>
 <div class="icon is-new">
-		<!-- <img src="<?=base_url("images/new-icon.png");?>"/> -->
-		<?=format_new("poster"); ?>
+		<!-- <img src="<?php echo base_url("images/new-icon.png");?>"/> -->
+		<?php echo format_new("poster"); ?>
 		</div>
-		<?endif;?>
+		<?php endif;?>
 </div>
-<? endif;?>
-	<span class="variety"><a href="<?=site_url("variety/view/$variety->id");?>" target="_blank"><?=$variety->variety;?></a></span>
-	<span class="latin-name"><?=format_latin_name($variety);?></span>
+<?php endif;?>
+	<span class="variety"><a href="<?php echo site_url("variety/view/$variety->id");?>" target="_blank"><?php echo $variety->variety;?></a></span>
+	<span class="latin-name"><?php echo format_latin_name($variety);?></span>
 	</div>
 	<div class="description-group">
-	<? if($has_image):?>
+	<?php if($has_image):?>
 	<div class="image">
-		<img src="<?=site_url("files/$variety->image_name?" .date("U"));?>" class="photo" />
+		<img src="<?php echo site_url("files/$variety->image_name?" .date("U"));?>" class="photo" />
 
 </div>
-<? endif;?>
+<?php endif;?>
 <div class="description-text">
 <?php if($variety->print_description):?>
-	<div class="print_description"><?=$variety->print_description;?></div>
+	<div class="print_description"><?php echo $variety->print_description;?></div>
 	<?php endif;?>
-	<div class="description"><?=$variety->description;?></div>
+	<div class="description"><?php echo $variety->description;?></div>
 </div>
 </div>
 <div class="details-group">
 	<div class="price-group">
-		<div class="pot-size"><?=get_value($order,"pot_size");?></div>
-		<div class="price"><?=get_as_price(get_value($order,"price"));?></div>
+		<div class="pot-size"><?php echo get_value($order,"pot_size");?></div>
+		<div class="price"><?php echo get_as_price(get_value($order,"price"));?></div>
 	</div>
 	<div class="icons">
 		<ul class="sunlight">
-			<?
+			<?php
 			$sunlight = explode(",",$variety->sunlight);
 foreach($sunlight as $light){
 			echo sprintf("<li class='%s'>%s</li>",css_classify($light),format_sunlight($light,"poster"));
@@ -79,7 +79,7 @@ foreach($sunlight as $light){
 			?>
 		</ul>
 		<ul class="flags">
-			<? foreach($flags as $flag){
+			<?php foreach($flags as $flag){
 			    echo sprintf("<li class='%s'>%s</li>",css_classify($flag->name),format_flags(array($flag),"poster"));
 				//echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
 			}?>
@@ -87,26 +87,26 @@ foreach($sunlight as $light){
 		</ul>
 	</div>
 	<div class="dimensions">
-			<? if($variety->min_height || $variety->max_height):?>
+			<?php if($variety->min_height || $variety->max_height):?>
 		<div class="height">
 			<label>Height</label>
-			<div class="text"><?=format_dimensions($variety->min_height, $variety->max_height, abbr_unit($variety->height_unit));?></div>
+			<div class="text"><?php echo format_dimensions($variety->min_height, $variety->max_height, abbr_unit($variety->height_unit));?></div>
 		</div>
-	<?endif;?>
-	<?if($variety->min_width || $variety->max_width):?>
+	<?php endif;?>
+	<?php if($variety->min_width || $variety->max_width):?>
 		<div class="width">
 			<label>Width</label>
-			<div class="text"><?=format_dimensions($variety->min_width, $variety->max_width, abbr_unit($variety->width_unit));?></div>
+			<div class="text"><?php echo format_dimensions($variety->min_width, $variety->max_width, abbr_unit($variety->width_unit));?></div>
 		</div>
-	<?endif;?>
+	<?php endif;?>
 	</div>
 </div>
 	<div class="footer-group">
-		<div class="grower-name"><?=get_value($order,"grower_name");?></div>
+		<div class="grower-name"><?php echo get_value($order,"grower_name");?></div>
 	</div>
 </div>
 <!-- <div id="crop-failure"> -->
- <? if(isset($order) && get_value($order,"received_presale") == "0.000"):?>
+ <?php if(isset($order) && get_value($order,"received_presale") == "0.000"):?>
 <!-- CROP FAILURE -->
- <? endif;?>
+ <?php endif;?>
 <!-- </div> -->

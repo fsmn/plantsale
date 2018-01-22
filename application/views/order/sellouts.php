@@ -32,23 +32,23 @@ if ($orders)
 	</thead>
 	<tbody>
 	<?php foreach($orders as $order):?>
-		<tr id="order_<?=$order->id;?>">
-		<td><?=$order->catalog_number;?></td>
-		<td><?=$order->count_presale;?></td>
-		<td><?=$order->flat_size;?></td>
-		<td><?=$order->received_presale;?></td>
+		<tr id="order_<?php echo $order->id;?>">
+		<td><?php echo $order->catalog_number;?></td>
+		<td><?php echo $order->count_presale;?></td>
+		<td><?php echo $order->flat_size;?></td>
+		<td><?php echo $order->received_presale;?></td>
 		<td class="big"></td>
 		<td class="big"></td>
-		<td class="no-wrap"><?=$order->name;?></td>
-		<td class="no-wrap"><?=format_latin_name($order);?></td>
-		<td class="no-wrap"><?=$order->variety;?></td>
-		<td class="no-wrap"><?=$order->pot_size;?></td>
-		<td><?=$order->grower_id;?></td>
-		<td><?=$order->category;?></td>
+		<td class="no-wrap"><?php echo $order->name;?></td>
+		<td class="no-wrap"><?php echo format_latin_name($order);?></td>
+		<td class="no-wrap"><?php echo $order->variety;?></td>
+		<td class="no-wrap"><?php echo $order->pot_size;?></td>
+		<td><?php echo $order->grower_id;?></td>
+		<td><?php echo $order->category;?></td>
 </tr>
-		<? endforeach;?>
+		<?php endforeach;?>
 	</tbody>
 </table>
 
 
-<? endif;
+<?php endif;

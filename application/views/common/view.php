@@ -1,13 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <h2>
-	<?=edit_field("name", $common->name, "","common",$common->id,array("envelope"=>"span"));?>
+	<?php echo edit_field("name", $common->name, "","common",$common->id,array("envelope"=>"span"));?>
 
 </h2>
 <div
 	class="grouping column first"
 	style="min-width: 400px;"
 	id="common">
-<?
+<?php
 
 if (IS_EDITOR) {
     $buttons["edit_common"] = array(
@@ -63,59 +63,21 @@ if (IS_EDITOR) {
 		type="hidden"
 		name="id"
 		id="id"
-		value="<?=$common->id;?>" />
+		value="<?php echo $common->id;?>" />
 
-	<?=edit_field("genus", $common->genus, "Genus","common",$common->id);?>
-	<?=edit_field("category_id", $common->category, "Category","common",$common->id, array("envelope"=>"p","class"=>"category-dropdown"));?>
-	<?=edit_field("subcategory_id", $common->subcategory, "Subcategory","common",$common->id,array("envelope"=>"p","class"=>"subcategory-dropdown"));?>
-	<?=edit_field("description", $common->description, "Description","common",$common->id, array("class"=>"textarea","envelope"=>"div","field-wrapper"=>"div"));?>
-	<?=edit_field("other_names",$common->other_names, "Other Names","common",$common->id);?>
-	<?=edit_field("sunlight",$common->sunlight, "Sunlight Requirements","common",$common->id,array("class"=>"multiselect","attributes"=>"menu='sunlight'","format"=>"multiselect"));?>
+	<?php echo edit_field("genus", $common->genus, "Genus","common",$common->id);?>
+	<?php echo edit_field("category_id", $common->category, "Category","common",$common->id, array("envelope"=>"p","class"=>"category-dropdown"));?>
+	<?php echo edit_field("subcategory_id", $common->subcategory, "Subcategory","common",$common->id,array("envelope"=>"p","class"=>"subcategory-dropdown"));?>
+	<?php echo edit_field("description", $common->description, "Description","common",$common->id, array("class"=>"textarea","envelope"=>"div","field-wrapper"=>"div"));?>
+	<?php echo edit_field("other_names",$common->other_names, "Other Names","common",$common->id);?>
+	<?php echo edit_field("sunlight",$common->sunlight, "Sunlight Requirements","common",$common->id,array("class"=>"multiselect","attributes"=>"menu='sunlight'","format"=>"multiselect"));?>
 
 </div>
 
 <div class="column-right column last">
-<!-- <h3>Potential Relatives</h3>
-<table class="table list">
-<thead>
-<tr>
-<th>
-Name
-</th>
-<th>
-Category
-</th>
-<th>
-Subcategory
-</th>
-<th>
-Add/Remove
-</th>
-</tr>
-</thead>
-<tbody>
-<?php foreach($relatives as $relative): ?>
-<tr>
-<td>
-<?php echo $relative->name;?>
-</td>
-<td>
-<?php echo $relative->category;?>
-</td>
-<td>
-<?php echo $relative->subcategory;?>
-</td>
-<td>
-<?php echo "";?>
-</td>
-</tr>
-<? endforeach; ?>
-</tbody>
-</table>
- -->
 </div>
 <div class="column first  common-varieties">
-<?
+<?php
 if (IS_EDITOR) {
     print create_button_bar(array(
             $buttons["add_variety"]
@@ -123,7 +85,7 @@ if (IS_EDITOR) {
 }
 
 ?>
-<? $this->load->view("variety/list/list");?>
+<?php $this->load->view("variety/list/list");?>
 </div>
 <div class="column last">
 </div>

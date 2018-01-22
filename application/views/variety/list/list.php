@@ -12,11 +12,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		<? foreach($varieties as $variety): ?>
-		<tr id="variety-row_<?=$variety->id;?>" class="variety-row">
-			<td><a href="<?php echo base_url("variety/view/$variety->id");?>"><?=$variety->species;?></a></td>
-			<td class="variety-variety edit"><a href="<?php echo base_url("variety/view/$variety->id");?>"><?=$variety->variety;?></a></td>
-			<?
+		<?php foreach($varieties as $variety): ?>
+		<tr id="variety-row_<?php echo $variety->id;?>" class="variety-row">
+			<td><a href="<?php echo base_url("variety/view/$variety->id");?>"><?php echo $variety->species;?></a></td>
+			<td class="variety-variety edit"><a href="<?php echo base_url("variety/view/$variety->id");?>"><?php echo $variety->variety;?></a></td>
+			<?php
 			$height = "";
 			if($variety->min_height){
 				$height = $variety->min_height;
@@ -38,12 +38,12 @@
 				}
 			}
 			?>
-			<td class="variety-height edit"><?=$height;?>
+			<td class="variety-height edit"><?php echo $height;?>
 			</td>
-			<td class="variety-width edit"><?=$width;?></td>
-			<td class="variety-year edit"><?=$variety->year;?></td>
+			<td class="variety-width edit"><?php echo $width;?></td>
+			<td class="variety-year edit"><?php echo $variety->year;?></td>
 		</tr>
 
-		<? endforeach; ?>
+		<?php endforeach; ?>
 	</tbody>
 </table>

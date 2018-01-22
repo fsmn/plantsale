@@ -4,7 +4,7 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 
 ?>
 <form name="search-common" id="search-common"
-	action="<?=site_url("common/search"); ?>" method="GET">
+	action="<?php echo site_url("common/search"); ?>" method="GET">
 	<input type="hidden" name="find" value="1"/>
 	<p>
 	<label for="name">Name: </label><input type="text" name="name" id="name" value="<?php echo $refine?cookie("name"):'';?>" class="">
@@ -13,13 +13,13 @@ $sunlight = create_checkbox("sunlight[]", $sunlight, array());
 		<label for="genus">Genus: </label><input type="text" name="genus" id="genus" value="<?php echo $refine?cookie("genus"):'';?>" class="">
 	
 	</p>
-<p><label for="category_id">Category: </label><?=form_dropdown("category_id",$categories,$refine?cookie("category_id"):"",'id="category_id"');?></p>
-	<p ><label for="subcategory_id">Subcategory: </label><span id="subcategory-envelope"><?=form_dropdown("subcategory_id",$subcategories,$refine?cookie("subcategory_id"):"", 'id="subcategory_id"');?></span></p>
+<p><label for="category_id">Category: </label><?php echo form_dropdown("category_id",$categories,$refine?cookie("category_id"):"",'id="category_id"');?></p>
+	<p ><label for="subcategory_id">Subcategory: </label><span id="subcategory-envelope"><?php echo form_dropdown("subcategory_id",$subcategories,$refine?cookie("subcategory_id"):"", 'id="subcategory_id"');?></span></p>
 
 	<p>
-		<?=$sunlight;?>
+		<?php echo $sunlight;?>
 		<br />
-		<?=form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),"and","id='sunlight-boolean'");?>
+		<?php echo form_dropdown("sunlight-boolean",array("and"=>"and","or"=>"or","only"=>"only"),"and","id='sunlight-boolean'");?>
 	</p>
 	<p>
 		<label for="description">Description:</label><br />

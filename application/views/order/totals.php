@@ -10,10 +10,10 @@ $sale_year = $this->session->userdata("sale_year");;
 		<tr>
 			<td></td>
 			<td>
-<?=$sale_year;?>
+<?php echo $sale_year;?>
 </td>
 			<td>
-<?=$sale_year -1;?>
+<?php echo $sale_year -1;?>
 </td>
 		</tr>
 	</thead>
@@ -21,40 +21,40 @@ $sale_year = $this->session->userdata("sale_year");;
 		<tr>
 			<td>Total Plants</td>
 			<td>
-<?=number_format($totals->total["current"]);?>
+<?php echo number_format($totals->total["current"]);?>
 </td>
 			<td>
-<?=number_format($totals->total["previous"]);?>
+<?php echo number_format($totals->total["previous"]);?>
 </td>
 </tr>
 <tr>
 <td>New varieties</td>
 <td>
 <a
-		href="<?=site_url("variety/search?find=1&action%5B%5D=full&year=$sale_year&new_year=$sale_year&sorting%5B%5D=genus&direction%5B%5D=ASC");?>"
-		title="Show a list of all varieties ordered new this year (or after a long hiatus)"><?=$totals->new_varieties["current"];?></a>
+		href="<?php echo site_url("variety/search?find=1&action%5B%5D=full&year=$sale_year&new_year=$sale_year&sorting%5B%5D=genus&direction%5B%5D=ASC");?>"
+		title="Show a list of all varieties ordered new this year (or after a long hiatus)"><?php echo $totals->new_varieties["current"];?></a>
 </td>
 <td>
-<?=number_format($totals->new_varieties["previous"]);?>
+<?php echo number_format($totals->new_varieties["previous"]);?>
 </td>
 </tr>
 <tr>
 <td>Reordered Plants</td>
 <td><a
-		href="<?=site_url("variety/show_reorders/" . $this->session->userdata("sale_year"));?>"
-		title="Show all reodrered plants (no new plants)"><?=number_format(count($totals->varieties["current"])-$totals->new_varieties["current"]);?></a>
+		href="<?php echo site_url("variety/show_reorders/" . $this->session->userdata("sale_year"));?>"
+		title="Show all reodrered plants (no new plants)"><?php echo number_format(count($totals->varieties["current"])-$totals->new_varieties["current"]);?></a>
 </td>
 <td>
-<?=number_format(count($totals->varieties["previous"]) - $totals->new_varieties["previous"]);?>
+<?php echo number_format(count($totals->varieties["previous"]) - $totals->new_varieties["previous"]);?>
 </td>
 </tr>
 		<tr>
 			<td>Total varieties</td>
 			<td>
-<?=number_format(count($totals->varieties["current"]));?>
+<?php echo number_format(count($totals->varieties["current"]));?>
 </td>
 			<td>
-<?=number_format(count($totals->varieties["previous"]));?>
+<?php echo number_format(count($totals->varieties["previous"]));?>
 </td>
 		</tr>
 	</tbody>

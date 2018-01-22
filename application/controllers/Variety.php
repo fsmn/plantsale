@@ -12,12 +12,12 @@ class Variety extends MY_Controller {
 		$this->load->model ( "common_model", "common" );
 		$this->load->model ( "order_model", "order" );
 		$this->load->model ( "flag_model", "flag" );
-		$this->load->library ( "field" );
+		// $this->load->library ( "field" );
 	}
 
 	function index()
 	{
-		//$this->variety->update_needs_bag ();
+		// $this->variety->update_needs_bag ();
 	}
 
 	function create()
@@ -98,8 +98,8 @@ class Variety extends MY_Controller {
 	function search()
 	{
 		$action = $this->input->get ( "action" );
-		if($action == "reorders"){
-			redirect("variety/show_reorders/" . $this->input->get("year"));
+		if ($action == "reorders") {
+			redirect ( "variety/show_reorders/" . $this->input->get ( "year" ) );
 		}
 		if ($this->input->get ( "find" )) {
 			
@@ -131,11 +131,11 @@ class Variety extends MY_Controller {
 					"edit_notes",
 					"needs_copy_review",
 					"churn_value",
-					"pot_size",
+					"pot_size" 
 			);
 			$options = array ();
-			$options['action'] = $action;
-			bake_cookie('action', $this->input->get("action"));
+			$options ['action'] = $action;
+			bake_cookie ( 'action', $this->input->get ( "action" ) );
 			for($i = 0; $i < count ( $variables ); $i ++) {
 				$my_variable = $variables [$i];
 				if ($my_value = $this->input->get ( $my_variable )) {
@@ -228,6 +228,13 @@ class Variety extends MY_Controller {
 				}
 				$this->load->helper ( "download" );
 				$this->load->view ( "variety/list/export", $data );
+			} elseif ($action == "printable-copy") {
+				$data["year"] = $this->input->get("year");
+				$data ["title"] = "Wasting Trees";
+				$data ["target"] = "variety/print/paper_waste";
+				$data ["format"] = "print";
+				$data ["classes"] = "";
+				$this->load->view ( "variety/print/index", $data );
 			} else {
 				$data ["title"] = "List of Varieties";
 				
@@ -253,14 +260,14 @@ class Variety extends MY_Controller {
 				"pot_size",
 				"pot_size" 
 		), NULL, TRUE );
-		//if ($action == "edits") {
-			$this->load->model ( "user_model", "user" );
-			$users = $this->user->get_user_pairs ();
-			$data ["users"] = get_keyed_pairs ( $users, array (
-					"id",
-					"name" 
-			), TRUE );
-		//}
+		// if ($action == "edits") {
+		$this->load->model ( "user_model", "user" );
+		$users = $this->user->get_user_pairs ();
+		$data ["users"] = get_keyed_pairs ( $users, array (
+				"id",
+				"name" 
+		), TRUE );
+		// }
 		$categories = $this->category->get_pairs ();
 		$data ["categories"] = get_keyed_pairs ( $categories, array (
 				"key",
@@ -299,6 +306,7 @@ class Variety extends MY_Controller {
 		if ($action == "edits") {
 			$data ['target'] = "variety/edits_search";
 		}
+		
 		if ($this->input->get ( "ajax" )) {
 			$this->load->view ( $data ['target'], $data );
 		} else {
@@ -328,11 +336,11 @@ class Variety extends MY_Controller {
 	function edit()
 	{
 	}
-	
-	function get($id){
-		$variety = json_encode($this->variety->get($id));
+
+	function get($id)
+	{
+		$variety = json_encode ( $this->variety->get ( $id ) );
 		echo $variety;
-		
 	}
 
 	function update()
@@ -365,7 +373,9 @@ class Variety extends MY_Controller {
 		foreach ( $data ['plants'] as $plant ) {
 			$plant->omit = 0;
 		}
-		$data['options'] = array("action"=>"Reorders");
+		$data ['options'] = array (
+				"action" => "Reorders" 
+		);
 		$data ['target'] = "variety/list/full";
 		$data ['title'] = "List of reordered plants for $year";
 		$this->load->view ( "page/index", $data );
@@ -424,16 +434,14 @@ class Variety extends MY_Controller {
 		
 		echo $output;
 	}
-	
-
 
 	function update_value()
 	{
 		$id = $this->input->post ( "id" );
 		$value = $this->input->post ( "value" );
 		$field = $this->input->post ( "field" );
-		if(strpos($field, "height")  || strpos($field,"width")){
-			$value = preg_replace("/[^0-9.]/","",$value);
+		if (strpos ( $field, "height" ) || strpos ( $field, "width" )) {
+			$value = preg_replace ( "/[^0-9.]/", "", $value );
 		}
 		if (is_array ( $value )) {
 			$value = implode ( ",", $value );
@@ -442,7 +450,7 @@ class Variety extends MY_Controller {
 				$field => $value 
 		);
 		$override = FALSE;
-		if($field == "copywriter"){
+		if ($field == "copywriter") {
 			$override = TRUE;
 		}
 		$this->variety->update ( $id, $values, $override );
@@ -456,7 +464,7 @@ class Variety extends MY_Controller {
 				$value = "&nbsp;";
 			}
 		}
-		//echo $value;
+		// echo $value;
 	}
 
 	function update_new_status($year)
@@ -619,17 +627,18 @@ class Variety extends MY_Controller {
 		$data ["classes"] = "";
 		$this->load->view ( "variety/print/index", $data );
 	}
-	
+
 	/**
-	 * This is a temporary function to help users migrate to the new edits search under varieties. 
+	 * This is a temporary function to help users migrate to the new edits search under varieties.
 	 */
-	function edits_search(){
-		$data['title'] = "Copy Edits Message";
-		$data['target']= "variety/edits_message";
-		if($this->input->get("ajax") == 1){
-		$this->load->view($data['target'],$data);
-		}else{
-			$this->load->view("page/index",$data);
+	function edits_search()
+	{
+		$data ['title'] = "Copy Edits Message";
+		$data ['target'] = "variety/edits_message";
+		if ($this->input->get ( "ajax" ) == 1) {
+			$this->load->view ( $data ['target'], $data );
+		} else {
+			$this->load->view ( "page/index", $data );
 		}
 	}
 

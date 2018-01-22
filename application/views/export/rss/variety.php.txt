@@ -14,7 +14,7 @@ http://db.friendsschoolplantsale.com/variety/rss
 <item>
 <title><?php echo $variety->variety;?></title>
 <guid><?php echo $variety->id;?></guid> <image><?php echo base_url("files/$variety->id.jpg");?></image>
-<link><?=site_url("variety/view/$variety->id");?></link>
+<link><?php echo site_url("variety/view/$variety->id");?></link>
 <common_id><?php echo $variety->common_id;?></common_id> <catalog_number><?php echo $variety->catalog_number;?></catalog_number>
 <variety><?php echo $variety->variety;?></variety> <species><?php echo $variety->species;?></species>
 <plant_color><?php echo str_replace(",", "\r", $variety->plant_color);?></plant_color>

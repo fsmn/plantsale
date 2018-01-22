@@ -4,6 +4,6 @@
 
 ?>
 
-<h1><?=$title;?></h1>
-<p><?=$message;?></p>
-<p><a href="<?=site_url();?>">Go to the home page</a></p>
+<h1><?php echo $title;?></h1>
+<p><?php echo $message;?></p>
+<p><a href="<?php echo site_url();?>">Go to the home page</a></p>

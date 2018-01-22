@@ -1,17 +1,17 @@
-<?
+<?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 ?>
 
-<form id="batch-update" name="batch-update" method="post" action="<?=base_url("variety/batch_update_flags");?>">
-<input type="hidden" id="ids" name="ids" value="<?=implode(",",$ids);?>"/>
+<form id="batch-update" name="batch-update" method="post" action="<?php echo base_url("variety/batch_update_flags");?>">
+<input type="hidden" id="ids" name="ids" value="<?php echo implode(",",$ids);?>"/>
 <input type="hidden" id="action" name="action" value="update"/>
-<input type="hidden" id="target" name="target" value="<?=$target; ?>"/>
-<h2>DANGER: Updating <?=count($ids);?> Records</h2>
+<input type="hidden" id="target" name="target" value="<?php echo $target; ?>"/>
+<h2>DANGER: Updating <?php echo count($ids);?> Records</h2>
 <p class="notice">Changes you submit here cannot be undone!</p>
 <p>
 	<label for="flag">
-	<?=form_dropdown("flag",$flags); ?>
+	<?php echo form_dropdown("flag",$flags); ?>
 	</label>
 	</p>
 	<p>

@@ -25,8 +25,8 @@ $main_row = array(
 
     <tr>
     <td></td>
-    <? foreach($main_row as $item): ?>
-<td><?=$order->$item;?></td>
+    <?php foreach($main_row as $item): ?>
+<td><?php echo $order->$item;?></td>
 
-    <? endforeach;?>
+    <?php endforeach;?>
     </tr>

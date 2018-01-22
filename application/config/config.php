@@ -376,8 +376,7 @@ $config['compress_output'] = FALSE;
 |
 */
 $config['time_reference'] = 'local';
-
-
+ini_set('date.timezone','America/Chicago');
 /*
 |--------------------------------------------------------------------------
 | Rewrite PHP Short Tags

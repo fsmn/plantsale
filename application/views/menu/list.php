@@ -2,9 +2,9 @@
 
 // list.php Chris Dart Jan 26, 2015 3:56:07 PM chrisdart@cerebratorium.com
 ?>
-<h2><?=$title;?></h2>
-<? $this->load->view("menu/categories");?>
-<?=create_button_bar(array(array("text"=>"Add New Item","class"=>array("button","new","create-menu-item"),"href"=>site_url("menu/create"))));?>
+<h2><?php echo $title;?></h2>
+<?php $this->load->view("menu/categories");?>
+<?php echo create_button_bar(array(array("text"=>"Add New Item","class"=>array("button","new","create-menu-item"),"href"=>site_url("menu/create"))));?>
 <table class="list">
 <thead>
 <tr>
@@ -15,14 +15,14 @@
 </tr>
 </thead>
 <tbody>
-<? foreach($items as $item): ?>
+<?php foreach($items as $item): ?>
 <tr>
-<td><?=$item->category;?></td>
-<td><?=$item->key;?></td>
-<td><?=$item->value;?></td>
+<td><?php echo $item->category;?></td>
+<td><?php echo $item->key;?></td>
+<td><?php echo $item->value;?></td>
 <td>
 <?php echo create_button(array("text"=>"Edit","class"=>array("button","edit","edit-menu-item"),"id"=>"edit-menu-item_$item->id","href"=>site_url("menu/edit/$item->id")));?>
 </tr>
-<? endforeach;?>
+<?php endforeach;?>
 </tbody>
 </table>

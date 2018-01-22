@@ -50,7 +50,6 @@ $body_class = implode ( " ", $body_classes );
 <?php endif; ?>
 
 <!-- main -->
-
 			<div id="main">
 				<!-- content -->
 				<div id="content">
@@ -66,6 +65,6 @@ $this->load->view ( $target );
 			<div id='autocomplete'></div>
 		</div>
 	</div>
-	<div id="footer"><?$this->load->view('page/footer');?></div>
+	<div id="footer"><?php $this->load->view('page/footer');?></div>
 </body>
 </html>

@@ -5,5 +5,5 @@
 ?>
 
 <div class="flag-row field-set">
-<?=form_dropdown("name",$flags,"","id='name' class='flag-insert'");?>
+<?php echo form_dropdown("name",$flags,"","id='name' class='flag-insert'");?>
 </div>

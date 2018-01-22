@@ -5,7 +5,7 @@
 <div style="overflow: scroll;max-height: 25em">
 
 <table id="variety-name-list" class="list compressed">
-	<?if($full_list):?>
+	<?php if($full_list):?>
 		<thead>
 			<tr>
 				<th>variety</th>
@@ -25,23 +25,23 @@
 				<th></th>
 			</tr>
 		</thead>
-	<? endif; ?>
+	<?php endif; ?>
 	<tbody>
-		<? foreach($names as $name){ ?>
+		<?php foreach($names as $name){ ?>
 		<tr>
 			<td><span class="variety-variety variety-edit-row"
-				id="variety-variety_<?=$name->id;?>"><?=$name->variety;?> </span>
+				id="variety-variety_<?php echo $name->id;?>"><?php echo $name->variety;?> </span>
 			</td>
 			<td><span class="variety-species variety-edit-row"
-				id="variety-species_<?=$name->id;?>"><?=$name->species;?> </span>
+				id="variety-species_<?php echo $name->id;?>"><?php echo $name->species;?> </span>
 			</td>
 			<td><span class="variety-common-name variety-edit-row"
-				id="variety-common-name_<?=$name->id;?>"><a href="<?=base_url("common/view/$name->common_id");?>"><?=$name->common_name;?></a></span>
+				id="variety-common-name_<?php echo $name->id;?>"><a href="<?php echo base_url("common/view/$name->common_id");?>"><?php echo $name->common_name;?></a></span>
 			</td>
 			<td><span class="variety-species variety-edit-row"
-				id="variety-genus_<?=$name->id;?>"><?=$name->genus;?> </span>
+				id="variety-genus_<?php echo $name->id;?>"><?php echo $name->genus;?> </span>
 			</td>
-			<?
+			<?php
 			$height = "";
 			if($name->min_height){
 				$height = $name->min_height;
@@ -64,16 +64,16 @@
 			}
 			?>
 			<td><span class="variety-height variety-edit-row"
-				id="variety-height_<?=$name->id;?>"><?=$height;?> </span>
+				id="variety-height_<?php echo $name->id;?>"><?php echo $height;?> </span>
 			</td>
 				<td><span class="variety-width variety-edit-row"
-				id="variety-width_<?=$name->id;?>"><?=$width;?> </span>
+				id="variety-width_<?php echo $name->id;?>"><?php echo $width;?> </span>
 			</td>
 			<td>
 			<?php echo create_button(array("text"=>"Details","class"=>array("button","details"),"id"=>"id_$name->id","href"=>site_url("variety/view/$name->id")));?>
 			</td>
 		</tr>
-		<? } ?>
+		<?php } ?>
 	</tbody>
 </table>
 </div>

@@ -6,7 +6,7 @@
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title><?=$title;?></title>
+		<title><?php echo $title;?></title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" media="screen">
 
 <!-- Bootstrap theme -->

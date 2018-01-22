@@ -21,25 +21,25 @@ $action_buttons[] = array("selection"=>"index","text"=>"Export for Quark","href"
 <p>Click on any of the buttons below to get totals overviews. Use the search field above to quickly find plants by common name, genus, variety name or species.</p>
 
 <p>
-<?=create_button_bar($action_buttons);?>
+<?php echo create_button_bar($action_buttons);?>
 <div id="category-selector" style="width: 250px;position:absolute; max-height: 500px;">
 </div>
 <h3>Totals</h3>
 
 <div style="width:250px;margin:0 auto; float: left;">
-<?=create_button_bar(array(array("selection"=>"order","text"=>"Show Order Totals","href"=>"#order-totals-end","class"=>"button show-order-totals")));?>
+<?php echo create_button_bar(array(array("selection"=>"order","text"=>"Show Order Totals","href"=>"#order-totals-end","class"=>"button show-order-totals")));?>
 <div id="order-totals" class="front-page-widget">
 </div>
 <div id="order-totals-end"></div>
 </div>
 <div style="float:left; width: 250px;">
-<?=create_button_bar(array(array("selection"=>"variety","text"=>"Show Category Totals","href"=>"#category-totals-end", "class"=>"button show-category-totals")));?>
+<?php echo create_button_bar(array(array("selection"=>"variety","text"=>"Show Category Totals","href"=>"#category-totals-end", "class"=>"button show-category-totals")));?>
 <div id="category-totals"  class="front-page-widget">
 </div>
 <div id="category-totals-end"></div>
 </div>
 <div style="float:left; width: 250px">
-<?=create_button_bar(array(array("selection"=>"variety","text"=>"Show Flat Totals","href"=>"#flat-totals-end", "class"=>"button show-flat-totals")));?>
+<?php echo create_button_bar(array(array("selection"=>"variety","text"=>"Show Flat Totals","href"=>"#flat-totals-end", "class"=>"button show-flat-totals")));?>
 <div id="flat-totals"  class="front-page-widget">
 </div>
 <div id="flat-totals-end"></div>

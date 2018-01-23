@@ -4,7 +4,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 $refine = $this->input->get ( "refine" );
 $sunlight = create_checkbox ( "sunlight[]", $sunlight, $refine ? explode ( ",", cookie ( "sunlight" ) ) : array () );
 
-$actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Listing","reorders"=>"Reorders Search","edits"=>"Copy Edits");
+$actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Listing","reorders"=>"Reorders Search","edits"=>"Copy Edits","printable-copy"=>"Printable Copy");
 
 ?>
 <script>

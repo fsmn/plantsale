@@ -7,13 +7,13 @@ class Backup extends MY_Controller{
 	}
 	
 	function index(){
-		ini_set('memory_limit', '2048M');
+		ini_set('memory_limit', '4096M');
 		
 		// Load the DB utility class
 		$this->load->dbutil();
-		$dbs = $this->dbutil->list_databases();
+	//	$dbs = $this->dbutil->list_databases();
 		// Backup your entire database and assign it to a variable
-		$backup =& $this->dbutil->backup();
+		$backup = $this->dbutil->backup();
 		$filename = sprintf("backup-%s.sql.gz",date("Y-m-d-H-i-s"));
 		$path = sprintf("/tmp/");
 		$temp_file = $path . $filename;

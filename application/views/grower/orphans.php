@@ -31,4 +31,4 @@ $sale_year = $this->session->userdata("sale_year");
 <?php endforeach;?>
 </tbody>
 </table>
-<?php endif;Ω
+<?php endif;

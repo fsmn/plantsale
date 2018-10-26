@@ -309,6 +309,10 @@ ul.button-list li .button.delete {
 	
 }
 
+.button-box.vertical-list ul.button-list li{
+	display: block;
+}
+
 .delete {
 	/*float: right;*/
 	

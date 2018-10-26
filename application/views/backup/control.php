@@ -1,0 +1,54 @@
+<?php ?>
+
+<h2><?php echo $title;?></h2>
+<p>Click each button to download the data table. The critical tables for catastrophic recovery are common, contact, flag, grower, orders, variety, and user</p>
+
+
+<?php
+$exclude = array (
+		'login_attempts',
+		'menu',
+		'order',
+		'parent',
+		'user_log',
+		'user_sessions',
+		'user_groups',
+		'groups',
+		'copy_edits',
+		'common_archive',
+		'flag_token',
+		'help',
+		'icon',
+		'user_preferences' 
+);
+$critical = array (
+		'common',
+		'category',
+		'flag',
+		'grower',
+		'orders',
+		'variety',
+		'image',
+		'user',
+		'subcategory' 
+);
+foreach ( $tables as $table ) :
+	if (! in_array ( $table, $exclude )) {
+		$class = array (
+				'button',
+				'btn',
+				'export' 
+		);
+		$title = in_array ( $table, $critical ) ? '(CRITICAL)':'';
+		
+$buttons[] = array('selection' => 'all',
+        'text' => sprintf('%s %s', ucfirst($table), $title),
+        'class' => $class,
+		'style'=>'default',
+		'href' => site_url("backup/backup_table/$table"),
+        'title' => 'Create a downloadable backup of the $table table');
+	
+}
+ endforeach;
+ 
+ echo create_button_bar($buttons, array('class'=>'vertical-list'));

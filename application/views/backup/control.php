@@ -8,13 +8,9 @@
 $exclude = array (
 		'login_attempts',
 		'menu',
-		'order',
-		'parent',
 		'user_log',
 		'user_sessions',
-		'user_groups',
 		'groups',
-		'copy_edits',
 		'common_archive',
 		'flag_token',
 		'help',

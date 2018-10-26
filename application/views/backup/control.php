@@ -6,16 +6,9 @@
 
 <?php
 $exclude = array (
-		'login_attempts',
 		'menu',
 		'user_log',
 		'user_sessions',
-		'groups',
-		'common_archive',
-		'flag_token',
-		'help',
-		'icon',
-		'user_preferences' 
 );
 $critical = array (
 		'common',

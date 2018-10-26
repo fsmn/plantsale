@@ -6,7 +6,6 @@
 
 <?php
 $exclude = array (
-		'menu',
 		'user_log',
 		'user_sessions',
 );

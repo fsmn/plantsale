@@ -20,6 +20,13 @@ $critical = array (
 		'user',
 		'subcategory' 
 );
+$buttons[] = array('selection'=>'all',
+    'text'=>'Backup All Critical Databases',
+    'class'=>array('button','btn','export'),
+    'style'=>'default',
+    'href'=> site_url('backup/critical/'),
+    'title'=>'Create a download of all critical tables',
+    );
 foreach ( $tables as $table ) :
 	if (! in_array ( $table, $exclude )) {
 		$class = array (

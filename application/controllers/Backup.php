@@ -31,13 +31,15 @@ class Backup extends MY_Controller {
 			$this->load->dbutil ();
 			// $dbs = $this->dbutil->list_databases();
 			// Backup your entire database and assign it to a variable
+            if(!is_array($table)){
+                $table = array($table);
+            }
 			$prefs = array (
-					'tables' => array (
-							$table 
-					) 
+					'tables' => $table,
 			);
 			$backup = $this->dbutil->backup ( $prefs );
-			$filename = sprintf ( "%s-backup-%s.sql.gz", $table, date ( "Y-m-d-H-i-s" ) );
+
+			$filename = sprintf ( "%s-backup-%s.sql.gz", join("_",$table), date ( "Y-m-d-H-i-s" ) );
 			$path = sprintf ( "/tmp/" );
 			$temp_file = $path . $filename;
 			// Load the file helper and write the file to your server
@@ -70,4 +72,8 @@ class Backup extends MY_Controller {
 		$this->load->helper ( 'download' );
 		force_download ( $filename, $backup );
 	}
+
+	function critical(){
+	    $this->backup_table(array('category','common','flag','grower','image','orders','subcategory','users','variety'));
+    }
 }

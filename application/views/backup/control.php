@@ -21,7 +21,7 @@ $critical = array (
 		'subcategory' 
 );
 $buttons[] = array('selection'=>'all',
-    'text'=>'Backup All Critical Databases',
+    'text'=>'Download All Critical Databases',
     'class'=>array('button','btn','export'),
     'style'=>'default',
     'href'=> site_url('backup/critical/'),
@@ -37,7 +37,7 @@ foreach ( $tables as $table ) :
 		$title = in_array ( $table, $critical ) ? '(CRITICAL)':'';
 		
 $buttons[] = array('selection' => 'all',
-        'text' => sprintf('%s %s', ucfirst($table), $title),
+        'text' => sprintf('Download %s %s', ucfirst($table), $title),
         'class' => $class,
 		'style'=>'default',
 		'href' => site_url("backup/backup_table/$table"),

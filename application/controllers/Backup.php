@@ -29,7 +29,6 @@ class Backup extends MY_Controller {
 			
 			// Load the DB utility class
 			$this->load->dbutil ();
-			// $dbs = $this->dbutil->list_databases();
 			// Backup your entire database and assign it to a variable
             if(!is_array($table)){
                 $table = array($table);
@@ -71,7 +70,8 @@ class Backup extends MY_Controller {
 		write_file ( $temp_file, $backup );
 		$this->load->helper ( 'download' );
 		force_download ( $filename, $backup );
-	}
+        redirect ( "/" );
+    }
 
 	function critical(){
 	    $this->backup_table(array('category','common','flag','grower','image','orders','subcategory','users','variety'));

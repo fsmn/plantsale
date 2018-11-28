@@ -29,14 +29,19 @@ class Backup extends MY_Controller {
 			
 			// Load the DB utility class
 			$this->load->dbutil ();
-			// Backup your entire database and assign it to a variable
+            if($table == "user_sessions"){
+                $this->db->query("DELETE FROM `user_sessions` WHERE timestamp < UNIX_TIMESTAMP() - 2457000");
+            }
+
             if(!is_array($table)){
                 $table = array($table);
             }
 			$prefs = array (
 					'tables' => $table,
 			);
-			$backup = $this->dbutil->backup ( $prefs );
+            // Backup your entire database and assign it to a variable
+
+            $backup = $this->dbutil->backup ( $prefs );
 
 			$filename = sprintf ( "%s-backup-%s.sql.gz", join("_",$table), date ( "Y-m-d-H-i-s" ) );
 			$path = sprintf ( "/tmp/" );

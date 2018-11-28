@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$allowed_domains = array('plantsale', 'db.friendsschoolplantsale.com', "docker.dev");
+$allowed_domains = array('plantsale', 'db.friendsschoolplantsale.com', "docker.test");
 $default_domain  = 'db.friendsschoolplantsale.com';
 
 

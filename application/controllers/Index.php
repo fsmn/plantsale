@@ -204,4 +204,13 @@ class Index extends MY_Controller
 				$this->load->view ( "export/web/common", $data );
 			}
 		}
+
+		function maintenance(){
+		    if($this->ion_auth->get_user_id() == 1 ){
+		        $this->db->query('DROP TABLE IF EXISTS `login_attempts`');
+                $this->db->query('DROP TABLE IF EXISTS `parent`');
+
+                echo $this->db->last_query();
+            }
+        }
 	}

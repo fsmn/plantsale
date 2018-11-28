@@ -206,7 +206,7 @@ class Index extends MY_Controller
 		}
 
 		function maintenance(){
-		    if($this->ion_auth->get_user_id() == 2){
+		    if($this->ion_auth->get_user_id() == 1){
 		        $this->db->query('TRUNCATE TABLE user_log');
 		        //clear out user sessions table
                 $this->db->query("DELETE FROM `user_sessions` WHERE timestamp < UNIX_TIMESTAMP() - 5000");

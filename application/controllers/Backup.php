@@ -58,6 +58,28 @@ class Backup extends MY_Controller {
 		redirect ( "/" );
 	}
 
+	function full_backup(){
+        ini_set('memory_limit', '4096M');
+        $this->db->query("DELETE FROM `user_sessions` WHERE timestamp < UNIX_TIMESTAMP() - 5000");
+        // Load the DB utility class
+        //ignore certain tables
+        $this->load->dbutil();
+        $settings = array('ignore'=> array('user_log', 'login_attempts'));
+        // Backup your entire database and assign it to a variable
+        $backup = $this->dbutil->backup($settings);
+        $filename = sprintf("backup-%s.sql.gz",date("Y-m-d-H-i-s"));
+        $path = sprintf("/tmp/");
+        $temp_file = $path . $filename;
+        // Load the file helper and write the file to your server
+        $this->load->helper('file');
+        write_file($temp_file, $backup);
+        // Load the download helper and send the file to your desktop
+        $this->load->helper('download');
+        force_download($filename, $backup);
+        //*/
+        redirect("/");
+    }
+
 	function _backup_csv($table)
 	{
 		$this->load->dbutil ();

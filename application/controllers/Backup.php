@@ -30,7 +30,7 @@ class Backup extends MY_Controller {
 			// Load the DB utility class
 			$this->load->dbutil ();
             if($table == "user_sessions"){
-                $this->db->query("DELETE FROM `user_sessions` WHERE timestamp < UNIX_TIMESTAMP() - 1000000");
+                $this->db->query("DELETE FROM `user_sessions` WHERE timestamp < UNIX_TIMESTAMP() - 5000");
             }
 
             if(!is_array($table)){

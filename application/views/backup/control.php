@@ -7,7 +7,7 @@
 
 <?php
 $exclude = array(
-    'user_log',
+    //'user_log',
 );
 $critical = array(
     'common',

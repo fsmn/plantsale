@@ -206,11 +206,15 @@ class Index extends MY_Controller
 		}
 
 		function maintenance(){
-		    if($this->ion_auth->get_user_id() == 1 ){
-		        $this->db->query('DROP TABLE IF EXISTS `login_attempts`');
-                $this->db->query('DROP TABLE IF EXISTS `parent`');
-
-                echo $this->db->last_query();
+		    if($this->ion_auth->get_user_id() == 2){
+		        $this->db->query('TRUNCATE TABLE user_log');
+		        //clear out user sessions table
+                $this->db->query("DELETE FROM `user_sessions` WHERE timestamp < UNIX_TIMESTAMP() - 5000");
+                $this->session->set_flashdata('notice', $this->db->last_query());
+            }else{
+		        $this->session->set_flashdata('alert','You do not have permission to run this utility.');
             }
+            redirect("/");
+
         }
 	}

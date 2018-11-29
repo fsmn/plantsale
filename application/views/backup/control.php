@@ -3,6 +3,7 @@
     <h2><?php echo $title; ?></h2>
     <p>Click each button to download the data table. The critical tables for catastrophic recovery are common, contact,
         flag, grower, orders, variety, and user</p>
+<p>Please note: running the complete backup may log some users out. It will not log out users who are currently making changes to the database. </p>
 
 
 <?php

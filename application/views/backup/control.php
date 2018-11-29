@@ -46,7 +46,7 @@ foreach ($tables as $table) :
         $title = in_array($table, $critical) ? '(CRITICAL)' : '';
 
         $buttons[] = array('selection' => 'all',
-            'text' => sprintf('Download`%s %s', $table, $title),
+            'text' => sprintf('Download %s %s', $table, $title),
             'class' => $class,
             'style' => 'default',
             'href' => site_url("backup/backup_table/$table"),

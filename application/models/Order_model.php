@@ -145,7 +145,7 @@ class Order_Model extends MY_Model {
 			$value = $option_values [$i];
 			switch ($key) {
 				case "show-non-reorders" :
-					//$this->db->where ( sprintf ( "NOT EXISTS (SELECT `year` from `orders` as `o` WHERE `o`.`variety_id` = `orders`.`variety_id` and `year` = '%s') ", $sale_year + 1 ), NULL, FALSE );
+					$this->db->where ( sprintf ( "NOT EXISTS (SELECT `year` from `orders` as `o` WHERE `o`.`variety_id` = `orders`.`variety_id` and `year` = '%s') ", $sale_year + 1 ), NULL, FALSE );
 					break;
 				case "category_id" :
 					$this->db->where ( "common.category_id", $value );
@@ -214,6 +214,7 @@ class Order_Model extends MY_Model {
 		$this->db->select ( "category.category,subcategory.subcategory" );
 		$this->db->group_by ( "orders.id" );
 		$result = $this->db->get ()->result ();
+		$this->_log();
 		return $result;
 	}
 

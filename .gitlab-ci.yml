@@ -1,53 +1,51 @@
-#
-#
-# Deploy and build all the things!
-#
-#
 stages:
   - deploy
 
-job_live_deploy:
+job_iph_deploy:
   tags:
     - live
   stage: deploy
   script:
-    # get into the right place
-    - "cd ~/plantsale/backoffice"
-    # first make a backup of the database and label it with current commit
-    #- "drush sql-dump | gzip -9 > ~/plantsale/db-backups/build-$CI_BUILD_ID-$CI_BUILD_REF-$CI_BUILD_REF_NAME-db_plantsale-db.sql.gz"
-    # master pull
-    - "git reset --hard"
-    - "git clean -f"
-    - "git checkout master"
-    - "git pull origin master"
-    # make sure the right htaccess file is enabled
-    #- "rm -f .htaccess"
-    #- "ln -s .htaccess.prod .htaccess"
-    # behat testing
-    #- "~/live/behat/bin/behat"
+    - 'rm /virtual/sites/plantsale_chroot/plantsale/backoffice/application/logs/log-*.php'
+    - 'mkdir -p -m 766 /virtual/sites/plantsale_chroot/plantsale/site-backups/builds/'
+    - 'find /virtual/sites/plantsale_chroot/plantsale/site-backups/builds -name "backoffice_*.tar.gz" -mtime +7 -exec rm -f {} \;'
+    - 'tar --exclude=".git" --exclude="files" --exclude="logs" --directory="/virtual/sites/plantsale_chroot/plantsale" -czf /virtual/sites/plantsale_chroot/plantsale/site-backups/builds/backoffice_`date +%Y%m%d%H%M%S`.tar.gz backoffice'
+    - 'rsync -avh --exclude=.git ~/$CI_PROJECT_DIR/src/ /virtual/sites/plantsale_chroot/plantsale/backoffice'
+#    - "cd ~/plantsale/backoffice"
+#    - "git reset --hard"
+#    - "git clean -f"
+#    - "git checkout master"
+#    - "git pull origin master"
   only:
     - master
   allow_failure: false
 
-#
-#
-#
-#
-#
-#  7777777777777777777777777777777777777777777777777777777777777777777777777
-#  77                                                77777777777777777777777
-#  77   777777777777  77777777777  777777    7777    7777              77777
-#  77   777777777777  77777777777  7777777   7777    7777              77777
-#  77       7777      7777         77777777  7777    777777777777     777777
-#  77       7777      7777777777   777777777 7777    77777777777     777777
-#  77       7777      7777777777   7777 777777777    7777777777     777777
-#  77       7777      7777         7777  77777777    777777777     777777
-#  77       7777      77777777777  7777   7777777    77777777     777777
-#  77       7777      77777777777  7777    777777    7777777     777777
-#  77                                                77777777777777777
-#  777777777777777777777777777777777777777777777777777777777777777777
-#
-#
-#
-#
-#
+job_test_deploy:
+  tags:
+    - k8s
+  stage: deploy
+  script:
+    - "ansible-galaxy install -fr ansible/requirements.yml --ignore-errors"
+    - "ansible-playbook -i ansible/inventories/all.ini ansible/test.yml"
+  only:
+    - preview
+
+job_stage_deploy:
+  tags:
+    - k8s
+  stage: deploy
+  script:
+    - "ansible-galaxy install -fr ansible/requirements.yml --ignore-errors"
+    - "ansible-playbook -i ansible/inventories/all.ini ansible/stage.yml"
+  only:
+    - develop
+
+job_live_deploy:
+  tags:
+    - k8s
+  stage: deploy
+  script:
+    - "ansible-galaxy install -fr ansible/requirements.yml --ignore-errors"
+    - "ansible-playbook -i ansible/inventories/all.ini ansible/live.yml"
+  only:
+    - master

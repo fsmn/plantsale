@@ -1,3 +1,17 @@
+# Require BasicAuth on protected environments
+SetEnvIf Host \.ten7\.com$ T7PREVIEW
+SetEnvIf Host \.t7live.io$ T7PREVIEW
+SetEnvIf Host \.t7stage\.io$ T7PREVIEW
+SetEnvIf Host \.t7test\.io$ T7PREVIEW
+AuthUserFile /home/backoffice/.htpasswd
+AuthName "Restricted Area"
+AuthType Basic
+AuthGroupFile /
+Require valid-user
+Order Allow,Deny
+Allow from all
+Deny from env=T7PREVIEW
+Satisfy any
 
 # Protect files and directories from prying eyes.
 <FilesMatch "\.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)$|^(\..*|Entries.*|Repository|Root|Tag|Template)$">
@@ -62,6 +76,11 @@ DirectoryIndex index.php index.html index.htm
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
+
+	#
+	# Rewrite the files URLs on k8s. This is updated by the CI.
+	#
+	# ANSIBLE_K8S_ASSETS_REWRITE
 
     #Removes access to the system folder by users.
     #Additionally this will allow you to create a System.php controller,

@@ -1,0 +1,62 @@
+---
+- hosts: docker
+  tasks:
+    - name: Ensure site directories exist.
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ drupal_dir_owner }}"
+        group: "{{ drupal_dir_group }}"
+        mode: "u=rwx,g=rwx,o="
+      loop:
+        - "{{ web_dir }}"
+        - "{{ files_dir }}"
+        - "{{ logs_dir }}"
+    - name: Symlink files directory.
+      file:
+        state: link
+        src: "{{ files_dir }}"
+        dest: "{{ web_dir }}/files"
+    - name: Delete the logs directory in the docroot
+      file:
+        state: absent
+        path: "{{ web_dir }}/application/logs"
+    - name: Symlink logs directory.
+      file:
+        state: link
+        src: "{{ logs_dir }}"
+        dest: "{{ web_dir }}/application/logs"
+    - name: Ensure site has proper permissions.
+      file:
+        path: "{{ web_dir }}"
+        state: directory
+        recurse: yes
+        owner: "{{ drupal_dir_owner }}"
+        group: "{{ drupal_dir_group }}"
+    - name: Update .htaccess location
+      lineinfile:
+        dest: "{{ web_dir }}/.htaccess"
+        regexp: "^AuthUserFile "
+        line: "AuthUserFile {{ htpasswd_path }}"
+    - name: Add logins to .htpasswd
+      htpasswd:
+        path: "{{ htpasswd_path }}"
+        state: present
+        name: "{{ item.user }}"
+        password: "{{ item.pass }}"
+      loop:
+        - user: "ten7live"
+          pass: "ten7live"
+        - user: "ten7release"
+          pass: "ten7release"
+        - user: "ten7preview"
+          pass: "ten7preview"
+
+  handlers:
+    - name: clear apk cache
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "/tmp/*"
+        - "/var/cache/apk/*"

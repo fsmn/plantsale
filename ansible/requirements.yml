@@ -1,0 +1,4 @@
+---
+- src: ten7.flightdeck_base
+- src: ten7.digitalocean_kubeconfig
+- src: ten7.flightdeck_cluster

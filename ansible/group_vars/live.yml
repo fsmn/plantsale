@@ -1,0 +1,155 @@
+---
+git_dir: "~/{{ lookup('env', 'CI_PROJECT_DIR') }}"
+digitalocean_api_token: "{{ lookup('env', 'DIGITALOCEAN_API_TOKEN') }}"
+cluster_name: "cc02"
+t7_env: "live"
+
+docker_registry: "t7build.io:443"
+docker_registry_user: "{{ lookup('env', 'REGISTRY_USER') }}"
+docker_registry_pass: "{{ lookup('env', 'REGISTRY_PASS') }}"
+docker_registry_image: "db.friendsschoolplantsale.com"
+docker_registry_version: "{{ lookup('env', 'CI_COMMIT_SHA')[0:10] | default('latest', true) }}"
+
+docker_web_image: "{{ docker_registry }}/{{ docker_registry_image }}:{{ docker_registry_version }}"
+
+# s3 settings
+s3fs_bucket: "t7-live-fsmn"
+s3fs_region: "nyc3"
+s3fs_cname_url: "t7-live-fsmn.nyc3.cdn.digitaloceanspaces.com"
+s3fs_hostname: "https://nyc3.digitaloceanspaces.com"
+s3fs_use_https: yes
+s3fs_use_s3_for_public: yes
+s3fs_no_rewrite_cssjs: no
+s3fs_use_s3_for_private: yes
+s3fs_root_folder: "db.friendsschoolplantsale.com"
+s3fs_public_folder: "files"
+s3fs_private_folder: "private"
+
+flightdeck_cluster:
+  namespace: "db-friendsschoolplantsale-com"
+  configMaps:
+    - name: "varnish"
+      files:
+        - name: "flight-deck-varnish.yml"
+          content: |
+            flightdeck_varnish:
+              secretFile: "/config/varnish-secret/secret"
+              memSize: "256m"
+  secrets:
+    - name: "web"
+      files:
+        - name: "flight-deck-web.yml"
+          content: |
+            s3fs_bucket: "{{ s3fs_bucket }}"
+            s3fs_region: "{{ s3fs_region }}"
+            s3fs_cname_url: "{{ s3fs_cname_url }}"
+            s3fs_hostname: "{{ s3fs_hostname }}"
+            s3fs_use_https: "{{ s3fs_use_https }}"
+            s3fs_use_s3_for_public: {{ s3fs_use_s3_for_public | bool }}
+            s3fs_no_rewrite_cssjs: {{ s3fs_no_rewrite_cssjs| bool  }}
+            s3fs_use_s3_for_private: {{ s3fs_use_s3_for_private| bool  }}
+            s3fs_root_folder: "{{ s3fs_root_folder }}"
+            s3fs_public_folder: "{{ s3fs_public_folder }}"
+            s3fs_private_folder: "{{ s3fs_private_folder }}"
+            backoffice_mysql_user: "{{ lookup('env', 'LIVE_BACK_MYSQL_USER') }}"
+            backoffice_mysql_pass: "{{ lookup('env', 'LIVE_BACK_MYSQL_PASS') }}"
+            backoffice_mysql_name: "{{ lookup('env', 'LIVE_BACK_MYSQL_NAME') }}"
+            backoffice_mysql_host: "{{ lookup('env', 'LIVE_BACK_MYSQL_HOST') | default('mysql.database.svc.cluster.local', true) }}"
+            backoffice_mysql_port: "{{ lookup('env', 'LIVE_BACK_MYSQL_PORT') | default('3306', true) }}"
+            backoffice_s3_key: "{{ lookup('env', 'LIVE_BACK_S3_KEY') }}"
+            backoffice_s3_secret: "{{ lookup('env', 'LIVE_BACK_S3_SECRET') }}"
+            flightdeck_web:
+              vhosts:
+                - name: "db.friendsschoolplantsale.com"
+                  aliases:
+                    - "docker.test"
+                  env:
+                    - name: "T7_SITE_ENVIRONMENT"
+                      value: "live"
+                  extraLines:
+                    - |
+                        <IfModule mod_proxy.c>
+                          ProxyRequests Off
+                          SSLProxyEngine on
+                          <Proxy *>
+                              Order deny,allow
+                              Allow from all
+                          </Proxy>
+
+                          <location /s3fs-css/>
+                            ProxyPass https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/
+                            ProxyPassReverse https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/
+                          </location>
+
+                          <location /s3fs-js/>
+                            ProxyPass https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/
+                            ProxyPassReverse https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/
+                          </location>
+                         </IfModule>
+              php:
+                upload_max_filesize: "128M"
+                post_max_size: "128M"
+                max_execution_time: "300"
+    - name: "registry"
+      type: "kubernetes.io/dockerconfigjson"
+      data:
+        - name: ".dockerconfigjson"
+          value: >
+            {{ ' ' }}
+            {
+              "auths": {
+                "{{ docker_registry }}": {
+                  "auth": "{{ (docker_registry_user + ':' + docker_registry_pass) | b64encode }}",
+                  "email": null
+                }
+              }
+            }
+    - name: "varnish-secret"
+      data:
+        - name: "secret"
+          value: "{{ lookup('env', 'LIVE_BACK_VARNISH_SECRET') }}"
+  ingress:
+    name: "ingress"
+#    tlsIssuer: "lets-encrypt-ops-at-ten7-com"
+#    tls:
+#      - secret: "lets-encrypt-ops-at-ten7-com"
+#        hosts:
+#          - "db.friendsschoolplantsale.org"
+    rules:
+      - host: "backoffice.t7live.io"
+        paths:
+          - path: "/"
+            backend: "web"
+            port: "6081"
+          - path: "/s3fs-css/"
+            backend: "web"
+            port: "80"
+          - path: "/s3fs-js/"
+            backend: "web"
+            port: "80"
+      - host: "db.friendsschoolplantsale.com"
+        paths:
+          - path: "/"
+            backend: "web"
+            port: "6081"
+          - path: "/s3fs-css/"
+            backend: "web"
+            port: "80"
+          - path: "/s3fs-js/"
+            backend: "web"
+            port: "80"
+  web:
+    image: "{{ docker_web_image }}"
+    replicas: 3
+    wait: true
+    imagePullSecrets:
+      - "registry"
+    nodeSelector:
+      key: "doks.digitalocean.com/node-pool"
+      value: "web-pool"
+    secrets:
+      - name: "web"
+        path: "/secrets"
+    varnish:
+      memory: "256M"
+      storage: "1024M"

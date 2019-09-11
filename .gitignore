@@ -1,12 +1,1 @@
-.DS_Store
-.settings
-.settings/*
-.project
-.buildpath
-application/config/database.php
-application/config/email.php
-application/logs/*
-user_guide/*
-/files/*
-/downloads/*.txt
-!/downloads/
+.idea

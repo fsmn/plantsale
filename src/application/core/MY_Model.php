@@ -8,6 +8,9 @@ class MY_Model extends CI_Model
 		function __construct ()
 		{
 			parent::__construct ();
+			if($_SERVER['HTTP_HOST'] !=  'db.friendsschoolplantsale.com'){
+				$this->output->enable_profiler(TRUE);
+			}
 		}
 
 		function _get_value ( $db, $id, $field )
@@ -43,13 +46,15 @@ class MY_Model extends CI_Model
 				return FALSE;
 			}
 		}
-/**
- * 
- * @param string $db
- * @param integer $id
- * @param array $values
- * @param string $override
- */
+
+	/**
+	 *
+	 * @param string $db
+	 * @param integer $id
+	 * @param array $values
+	 * @param string $override
+	 * @return bool
+	 */
 		function _update ( $db, $id, $values, $override = FALSE )
 		{
 			$original_values = $values;

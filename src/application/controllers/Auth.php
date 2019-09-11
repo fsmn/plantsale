@@ -1,4 +1,6 @@
 <?php defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+
+
 class Auth extends CI_Controller {
 
 	function __construct() {
@@ -16,6 +18,9 @@ class Auth extends CI_Controller {
 		$this->load->helper ( 'language' );
 		define("IS_EDITOR",0);
 		define("IS_ADMIN",0);
+		if($_SERVER['HTTP_HOST'] !=  'db.friendsschoolplantsale.com'){
+			$this->output->enable_profiler(TRUE);
+		}
 	}
 
 	// redirect if needed, otherwise display the user list

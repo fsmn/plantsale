@@ -19,3 +19,33 @@ job_iph_deploy:
   only:
     - master
   allow_failure: false
+
+job_test_deploy:
+  tags:
+    - k8s
+  stage: deploy
+  script:
+    - "ansible-galaxy install -fr ansible/requirements.yml --ignore-errors"
+    - "ansible-playbook -i ansible/inventories/all.ini ansible/test.yml"
+  only:
+    - preview
+
+job_stage_deploy:
+  tags:
+    - k8s
+  stage: deploy
+  script:
+    - "ansible-galaxy install -fr ansible/requirements.yml --ignore-errors"
+    - "ansible-playbook -i ansible/inventories/all.ini ansible/stage.yml"
+  only:
+    - develop
+
+job_live_deploy:
+  tags:
+    - k8s
+  stage: deploy
+  script:
+    - "ansible-galaxy install -fr ansible/requirements.yml --ignore-errors"
+    - "ansible-playbook -i ansible/inventories/all.ini ansible/live.yml"
+  only:
+    - master

@@ -1,0 +1,12 @@
+---
+git_dir: "/build"
+base_dir: "/var/www"
+web_dir: "{{ base_dir }}/html"
+files_dir: "{{ base_dir }}/files"
+logs_dir: "{{ base_dir }}/logs"
+t7_env: "{{ lookup('env', 'T7_SITE_ENVIRONMENT') | default('none', true) }}"
+drupal_dir_owner: "apache"
+drupal_dir_group: "apache"
+htpasswd_path: "{{ base_dir }}/.htpasswd"
+
+flightdeck_debug: no

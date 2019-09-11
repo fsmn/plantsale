@@ -1,0 +1,44 @@
+---
+- hosts: docker
+  roles:
+    - flight-deck-web-run
+  tasks:
+    - name: Template the database settings
+      copy:
+        dest: "{{ web_dir}}/application/config/database.php"
+        content: |
+          <?php
+          defined('BASEPATH') OR exit('No direct script access allowed');
+
+          $active_group = 'default';
+          $query_builder = TRUE;
+
+          $db['default'] = array(
+              'dsn'	=> '',
+              'hostname' => "{{ backoffice_mysql_host | default('mysql.database.svc.cluster.local', true) }}",
+              'username' => '{{ backoffice_mysql_user }}',
+              'password' => '{{ backoffice_mysql_pass }}',
+              'database' => '{{ backoffice_mysql_name }}',
+              'dbdriver' => 'mysqli',
+              'dbprefix' => '',
+              'pconnect' => FALSE,
+              'db_debug' => TRUE,
+              'cache_on' => FALSE,
+              'cachedir' => '',
+              'char_set' => 'utf8',
+              'dbcollat' => 'utf8_general_ci',
+              'swap_pre' => '',
+              'encrypt' => FALSE,
+              'compress' => TRUE,
+              'stricton' => TRUE,
+              'failover' => array(),
+              'save_queries' => TRUE
+          );
+    - name: Add assets rewrite to .htaccess
+      lineinfile:
+        dest: "{{ web_dir }}/.htaccess"
+        regexp: "^\\s*# ANSIBLE_K8S_ASSETS_REWRITE"
+        line: |
+          RewriteCond %{HTTP_HOST} t7live\.io$ [NC,OR]
+          RewriteCond %{HTTP_HOST} db.friendsschoolplantsale\.com$ [NC]
+          RewriteRule ^/?files(.*) https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/$1 [L,R=302,NE]

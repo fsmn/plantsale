@@ -1,0 +1,101 @@
+---
+- hosts: live
+  tasks:
+    - name: Create a temp directory to store files needed by the run
+      tempfile:
+        state: directory
+        prefix: "ansible-deploy-{{ cluster_name }}"
+      register: _run_temp_dir
+      notify:
+        - delete temp items
+
+    - name: Generate the kubeconfig file path
+      set_fact:
+        _kubeconfig_path: "{{ _run_temp_dir.path }}/kubectl.yaml"
+    - name: Get the kubeconfig file.
+      import_role:
+        name: ten7.digitalocean_kubeconfig
+      vars:
+        digitalocean_kubeconfig:
+          cluster: "{{ cluster_name }}"
+          kubeconfig: "{{ _kubeconfig_path }}"
+
+    - name: Template the Dockerfile
+      template:
+        src: Dockerfile.j2
+        dest: "{{ _run_temp_dir.path }}/Dockerfile"
+    - name: Create the Docker build context
+      file:
+        path: "{{ _run_temp_dir.path }}/root/{{ item }}"
+        state: directory
+      loop:
+        - "ansible"
+        - "var/www/html"
+    - name: Copy files needed to build the image
+      synchronize:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        archive: yes
+        delete: yes
+        rsync_opts: "{{ item.opts | default(omit) }}"
+      loop:
+        - src: "{{ git_dir }}/ansible/"
+          dest: "{{ _run_temp_dir.path }}/root/ansible/"
+        - src: "{{ git_dir }}/ansible.cfg"
+          dest: "{{ _run_temp_dir.path }}/root/ansible/ansible.cfg"
+        - src: "{{ git_dir }}/src/"
+          dest: "{{ _run_temp_dir.path }}/root/var/www/html/"
+          opts:
+            - "--exclude=.git"
+
+    - name: Log into the registry
+      docker_login:
+        registry: "{{ docker_registry }}"
+        username: "{{ docker_registry_user }}"
+        password: "{{ docker_registry_pass }}"
+        reauthorize: yes
+      notify:
+        - docker logout
+
+    - name: Build the version tagged image
+      docker_image:
+        path: "{{ _run_temp_dir.path }}"
+        name: "{{ docker_registry_image }}"
+        tag: "{{ docker_registry_version }}"
+        state: present
+        repository: "{{ docker_registry }}/{{ docker_registry_image }}"
+        push: yes
+        rm: yes
+        force: yes
+        nocache: yes
+      environment:
+        DOCKER_CLIENT_TIMEOUT: 300
+        COMPOSE_HTTP_TIMEOUT: 300
+
+    - name: Deploy the cluster definitions
+      include_role:
+        name: "ten7.flightdeck_cluster"
+      vars:
+        flightdeck_cluster_kubeconfig: "{{ _run_temp_dir.path }}/kubectl.yaml"
+
+    - name: Wait for the deployment to complete.
+      shell: >
+        kubectl
+        --kubeconfig="{{ _run_temp_dir.path }}/kubectl.yaml"
+        --namespace="{{ flightdeck_cluster.namespace }}"
+        rollout status
+        --watch=true
+        --timeout=3m
+        deployment/web
+      register: _deploy_status
+
+  handlers:
+    - name: delete temp items
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "{{ _run_temp_dir.path }}"
+    - name: docker logout
+      docker_login:
+        state: absent

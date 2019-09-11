@@ -1,0 +1,27 @@
+FROM ten7/flight-deck-web:develop-drupal7
+MAINTAINER tess@ten7.com
+
+# Switch to root for the build.
+USER root
+
+# Copy the files needed by the site.
+#
+# The build context is set up in k8s.yml. This way we minimize layers and
+# file modifications done in one layer, avoiding silent failures.
+COPY --chown=apache:apache root /
+
+# Build the site.
+#
+# We need to reinvoke setcap to ensure HTTPD can run as non-root.
+RUN setcap cap_net_bind_service=+ep /usr/sbin/httpd && \
+    ansible-galaxy install -fr /ansible/requirements.yml && \
+    ansible-playbook -i /ansible/inventories/all.ini /ansible/build.yml
+
+# Switch back to apache for runtime.
+USER apache
+
+# Set the environment.
+ENV T7_SITE_ENVIRONMENT {{ t7_env | default('docker') }}
+
+# Only expose 80, as HTTPS is terminiated in the ingress.
+EXPOSE 80

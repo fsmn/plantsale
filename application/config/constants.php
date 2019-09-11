@@ -86,7 +86,13 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 /*Images directory */
-define("IMAGE_PATH", $_SERVER['DOCUMENT_ROOT'] . "/images");
+define('IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/images');
+define('FILE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/db.friendsschoolplantsale.com/files');
+// S3 configuration
+
+define('S3_BUCKET_NAME','https://nyc3.digitaloceanspaces.com');
+define('S3_BUCKET_URL', 'https://t7-live-fsmn.nyc3.cdn.digitaloceanspaces.com');
+
 define('APP_VERSION', "4.9");
 
 

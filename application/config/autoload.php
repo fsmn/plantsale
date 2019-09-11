@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','session','email','ion_auth');
+$autoload['libraries'] = array('database','session','email','ion_auth','s3','s3_upload');
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('form','url','file','date', 'general', 'auth', 'inte
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = 's3';
 
 
 /*

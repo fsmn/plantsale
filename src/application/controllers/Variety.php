@@ -688,19 +688,24 @@ class Variety extends MY_Controller {
 		}
 	}
 
+	/**
+	 *
+	 */
 	function delete_image()
 	{
-		$id = $this->input->post ( "id" );
-		$this->load->model ( "image_model" );
-		$variety_id = $this->image_model->get ( $id )->variety_id;
-		$this->s3_client->deleteFile($variety_id . '/.jpg');
-		$this->image_model->delete ( $id );
-		if ($this->input->post ( "ajax" ) == 1) {
-			$data ["variety"] = NULL;
-			$data ["variety_id"] = $variety_id;
-			$this->load->view ( "image/view", $data );
-		} else {
-			redirect ( "variety/view/$variety_id" );
+		if($_SERVER['HTTP_HOST'] == 'db.friendsschoolplantsale.com') {
+			$id = $this->input->post("id");
+			$this->load->model("image_model");
+			$variety_id = $this->image_model->get($id)->variety_id;
+			$this->s3_client->deleteFile($variety_id . '/.jpg');
+			$this->image_model->delete($id);
+			if ($this->input->post("ajax") == 1) {
+				$data ["variety"] = NULL;
+				$data ["variety_id"] = $variety_id;
+				$this->load->view("image/view", $data);
+			} else {
+				redirect("variety/view/$variety_id");
+			}
 		}
 	}
 
@@ -709,12 +714,12 @@ class Variety extends MY_Controller {
 	 * none exist.
 	 * The $force_update option can be used to forceably update all files.
 	 *
-	 * @param unknown $image_name
-	 * @param unknown $format
-	 * @param string $force_update
+	 * @param string $image_name
+	 * @param string $format
+	 * @param bool $force_update
 	 * @return string
 	 */
-	function resize_image($image_name, $format, $force_update = FALSE)
+	function resize_image(string $image_name, string $format, $force_update = FALSE)
 	{
 		if (in_array ( $format, array (
 			"statement",

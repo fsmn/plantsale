@@ -80,7 +80,7 @@ class Auth extends CI_Controller {
 		} else {
 			// the user is not logging in so display the login page
 			// set the flash data error message if there is one
-			$this->data ['message'] = (validation_errors ()) ? validation_errors () : $this->session->flashdata ( 'message' );
+			$this->data ['message'] = $this->ion_auth->errors();
 
 			$this->data ['identity'] = array (
 					'name' => 'identity',

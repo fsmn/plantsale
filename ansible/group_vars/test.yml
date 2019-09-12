@@ -111,17 +111,17 @@ flightdeck_cluster:
 
   ingress:
     name: "ingress"
-    tlsIssuer: "lets-encrypt-ops-at-ten7-com"
-    tls:
-      - secret: "lets-encrypt-ops-at-ten7-com"
-        hosts:
-          - "backoffice.t7test.io"
+#    tlsIssuer: "lets-encrypt-ops-at-ten7-com"
+#    tls:
+#      - secret: "lets-encrypt-ops-at-ten7-com"
+#        hosts:
+#          - "backoffice.t7test.io"
     rules:
       - host: "backoffice.t7test.io"
         paths:
           - path: "/"
             backend: "web"
-            port: "6081"
+            port: "80"
           - path: "/s3fs-css/"
             backend: "web"
             port: "80"

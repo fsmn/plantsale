@@ -120,7 +120,7 @@ flightdeck_cluster:
         paths:
           - path: "/"
             backend: "web"
-            port: "6081"
+            port: "80"
           - path: "/s3fs-css/"
             backend: "web"
             port: "80"
@@ -131,7 +131,7 @@ flightdeck_cluster:
         paths:
           - path: "/"
             backend: "web"
-            port: "6081"
+            port: "80"
           - path: "/s3fs-css/"
             backend: "web"
             port: "80"

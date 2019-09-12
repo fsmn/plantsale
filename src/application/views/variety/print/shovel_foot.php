@@ -53,8 +53,7 @@ if($length > 25){
 	<div class="description-group">
 	<?php if($has_image):?>
 	<div class="image">
-		<img src="<?php echo site_url("files/$variety->image_name?" .date("U"));?>" class="photo" />
-
+		<img src="https://nyc3.digitaloceanspaces.com/t7-live-fsmn/db.friendsschoolplantsale.com/files/<?php print $variety->id;?>.jpg" class="photo" alt="image of <?php print $variety->common_name; ?> "/>
 </div>
 <?php endif;?>
 <div class="description-text">

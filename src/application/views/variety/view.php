@@ -167,7 +167,7 @@ echo create_button ( array (
 </div>
 <div class="all-orders block">
 
-<?php if(needs_bag($orders)): // if(get_value($variety,"needs_bag",0)):?>
+<?php if(needs_bag($orders)):?>
 			<p>
 		<span class="message">Based on the pot size, this variety will require a bag for packaging.</span>
 	</p>

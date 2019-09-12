@@ -34,10 +34,3 @@ services:
     image: mailhog/mailhog
     ports:
       - "8002:8025"
-  varnish:
-    image: ten7/flight-deck-varnish:6.1
-    depends_on:
-      - web
-    ports:
-      - "8004:6081" # HTTP Proxy
-      - "8005:6082" # Control terminal

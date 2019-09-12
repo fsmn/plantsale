@@ -38,8 +38,7 @@ if(isset($row_class)){
 	<div class="description-group">
 	<?php if($has_image):?>
 	<div class="image">
-		<img src="<?php echo site_url("files/$variety->image_name?" .date("U"));?>" class="photo" />
-				<ul class="flags icons">
+		<img src="https://nyc3.digitaloceanspaces.com/t7-live-fsmn/db.friendsschoolplantsale.com/files/<?php print $variety->id;?>.jpg" class="photo" alt="image of <?php print $variety->common_name; ?> "/>				<ul class="flags icons">
 			<?php foreach($flags as $flag){
 			    echo sprintf("<li class='%s'>%s</li>",css_classify($flag->name),format_flags(array($flag),"poster"));
 				//echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));

@@ -8,9 +8,6 @@ class MY_Controller extends CI_Controller
 		function __construct ()
 		{
 			parent::__construct ();
-			if($_SERVER['HTTP_HOST'] !=  'db.friendsschoolplantsale.com'){
-				$this->output->enable_profiler(TRUE);
-			}
 			if (! $this->ion_auth->logged_in ()) {
 				define ( "IS_EDITOR", 0 );
 				define ( "IS_ADMIN", 0 );

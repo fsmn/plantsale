@@ -2,6 +2,7 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Variety extends MY_Controller {
 
+
 	function __construct()
 	{
 		parent::__construct ();
@@ -657,7 +658,7 @@ class Variety extends MY_Controller {
 
 	function attach_image()
 	{
-		$config ['upload_path'] = './files';
+		$config ['upload_path'] = '/tmp';
 		$this->load->helper ( 'directory' );
 		$config ['allowed_types'] = 'jpg|jpeg';
 		$config ['max_size'] = '2048';
@@ -675,11 +676,13 @@ class Variety extends MY_Controller {
 		} else {
 
 			$file_data = $this->upload->data ();
+			$this->load->library('S3_client');
+			$this->s3_client->putFile($file_data['file_name'],$file_data);
 			$data ['image_display_name'] = $file_data ['file_name'];
 			$data ['image_source'] = $this->input->post ( 'image_source' );
 			$this->load->model ( "image_model" );
 			$variety_id = $this->input->post ( "variety_id" );
-			$id = $this->image_model->insert ( $variety_id, $file_data );
+			$this->image_model->insert ( $variety_id, $file_data );
 			$this->resize_image ( $variety_id, "statement" );
 			redirect ( "variety/view/$variety_id" );
 		}
@@ -690,7 +693,7 @@ class Variety extends MY_Controller {
 		$id = $this->input->post ( "id" );
 		$this->load->model ( "image_model" );
 		$variety_id = $this->image_model->get ( $id )->variety_id;
-		unlink ( "./files/$variety_id.jpg" );
+		$this->s3_client->deleteFile($variety_id . '/.jpg');
 		$this->image_model->delete ( $id );
 		if ($this->input->post ( "ajax" ) == 1) {
 			$data ["variety"] = NULL;
@@ -709,6 +712,7 @@ class Variety extends MY_Controller {
 	 * @param unknown $image_name
 	 * @param unknown $format
 	 * @param string $force_update
+	 * @return string
 	 */
 	function resize_image($image_name, $format, $force_update = FALSE)
 	{

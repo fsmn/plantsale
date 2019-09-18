@@ -2026,9 +2026,11 @@ class Ion_auth_model extends CI_Model
 	 *
 	 * Set the message delimiters
 	 *
-	 * @return void
+	 * @param $start_delimiter
+	 * @param $end_delimiter
+	 * @return bool
 	 * @author Ben Edmunds
-	 **/
+	 */
 	public function set_message_delimiters($start_delimiter, $end_delimiter)
 	{
 		$this->message_start_delimiter = $start_delimiter;
@@ -2042,9 +2044,11 @@ class Ion_auth_model extends CI_Model
 	 *
 	 * Set the error delimiters
 	 *
-	 * @return void
+	 * @param $start_delimiter
+	 * @param $end_delimiter
+	 * @return void|string
 	 * @author Ben Edmunds
-	 **/
+	 */
 	public function set_error_delimiters($start_delimiter, $end_delimiter)
 	{
 		$this->error_start_delimiter = $start_delimiter;
@@ -2073,7 +2077,7 @@ class Ion_auth_model extends CI_Model
 	 *
 	 * Get the messages
 	 *
-	 * @return void
+	 * @return void|string
 	 * @author Ben Edmunds
 	 **/
 	public function messages()
@@ -2134,7 +2138,7 @@ class Ion_auth_model extends CI_Model
 	 *
 	 * Get the error message
 	 *
-	 * @return void
+	 * @return void|string
 	 * @author Ben Edmunds
 	 **/
 	public function errors()

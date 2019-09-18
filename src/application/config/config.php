@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -15,25 +15,19 @@
 |
 */
 $allowed_domains = array('plantsale', 'db.friendsschoolplantsale.com', 'backoffice.t7live.io', 'backoffice.t7stage.io', 'backoffice.t7test.io', "docker.test");
-$default_domain  = 'db.friendsschoolplantsale.com';
+$default_domain = 'db.friendsschoolplantsale.com';
 
 
-if (in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE))
-{
-        $domain = $_SERVER['HTTP_HOST'];
-}
-else
-{
-        $domain = $default_domain;
+if (in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE)) {
+	$domain = $_SERVER['HTTP_HOST'];
+} else {
+	$domain = $default_domain;
 }
 
-if ( $_SERVER['SERVER_PORT'] == 443)
-{
-        $config['base_url'] = 'https://'.$domain;
-}
-else
-{
-        $config['base_url'] = 'http://'.$domain;
+if ($_SERVER['SERVER_PORT'] == 443) {
+	$config['base_url'] = 'https://' . $domain;
+} else {
+	$config['base_url'] = 'http://' . $domain;
 }
 
 
@@ -66,7 +60,7 @@ $config['index_page'] = '';
 | 'ORIG_PATH_INFO'	Uses the ORIG_PATH_INFO
 |
 */
-$config['uri_protocol']	= 'AUTO';
+$config['uri_protocol'] = 'AUTO';
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +85,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language'] = 'english';
 
 /*
 |--------------------------------------------------------------------------
@@ -197,11 +191,11 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 | use segment based URLs.
 |
 */
-$config['allow_get_array']		= TRUE;
+$config['allow_get_array'] = TRUE;
 $config['enable_query_strings'] = FALSE;
-$config['controller_trigger']	= 'c';
-$config['function_trigger']		= 'm';
-$config['directory_trigger']	= 'd'; // experimental not currently in use
+$config['controller_trigger'] = 'c';
+$config['function_trigger'] = 'm';
+$config['directory_trigger'] = 'd'; // experimental not currently in use
 
 /*
 |--------------------------------------------------------------------------
@@ -223,7 +217,19 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 4;
+
+switch ($_SERVER['HTTP_HOST']) {
+	case 'docker.test':
+		$config['log_threshold'] = 3;
+		break;
+	case 'backoffice.t7test.io':
+	case 'backoffice.t7stage.io':
+		$config['log_threshold'] = 2;
+		break;
+	default:
+		$config['log_threshold'] = 1;
+		break;
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -339,10 +345,10 @@ $config['sess_regenerate_destroy'] = FALSE;
 | 'cookie_secure' =  Cookies will only be set if a secure HTTPS connection exists.
 |
 */
-$config['cookie_prefix']	= "";
-$config['cookie_domain']	= "";
-$config['cookie_path']		= "/";
-$config['cookie_secure']	= FALSE;
+$config['cookie_prefix'] = "";
+$config['cookie_domain'] = "";
+$config['cookie_path'] = "/";
+$config['cookie_secure'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -407,7 +413,7 @@ $config['compress_output'] = FALSE;
 |
 */
 $config['time_reference'] = 'local';
-ini_set('date.timezone','America/Chicago');
+ini_set('date.timezone', 'America/Chicago');
 /*
 |--------------------------------------------------------------------------
 | Rewrite PHP Short Tags
@@ -433,7 +439,7 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['proxy_ips'] = '';
-ini_set( 'default_charset', 'UTF-8' );
+ini_set('default_charset', 'UTF-8');
 
 /*
  |--------------------------------------------------------------------------

@@ -9,4 +9,3 @@ user_guide/*
 /files/*
 /downloads/*.txt
 !/downloads/
-../docker-compose.override.yml

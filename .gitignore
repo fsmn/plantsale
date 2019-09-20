@@ -2,5 +2,3 @@
 db-backups
 
 docker-compose.override.yml
-
-src/docker-compose.override.yml

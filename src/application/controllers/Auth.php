@@ -90,7 +90,7 @@ class Auth extends CI_Controller {
 		else {
 			// the user is not logging in so display the login page
 			// set the flash data error message if there is one
-			$this->data ['message'] = $this->ion_auth->errors();
+			$this->data ['message'] = $this->session->flashdata('message');
 
 			$this->data ['identity'] = [
 				'name' => 'identity',
@@ -244,7 +244,9 @@ class Auth extends CI_Controller {
 
 			if ($forgotten) {
 				// if there were no errors
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
+
+				$this->session->set_flashdata('message' , 'Please check your email including spam box for the reset instructions');
+
 				redirect("auth/login", 'refresh'); // we should display a confirmation page here instead of the login page
 			}
 			else {

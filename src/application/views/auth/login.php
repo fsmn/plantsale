@@ -1,7 +1,7 @@
 <div class="login">
 <h2>Friends School Plantsale Database</h2>
 <p><a style="font-weight:bold;" href="forgot_password">Forgot your password?</a></p>
-<?php if(isset($message)):?>
+<?php  if(isset($message) && $message != ''):?>
 <div class="message alert"><?php echo $message;?></div>
 <?php endif;?>
 <?php echo form_open("auth/login");?>

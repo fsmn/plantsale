@@ -34,10 +34,14 @@
               'failover' => array(),
               'save_queries' => TRUE
           );
-    - name: Template the email file
+    - name: Template the email config file
       template:
         src: "{{ web_dir }}/application/config/email.php"
         dest: "{{ web_dir }}/application/config/email.php"
+    - name: Template the s3 config file
+      template:
+        src: "{{ web_dir }}/application/config/s3.php"
+        dest: "{{ web_dir }}/application/config/s3.php"
     - name: Add assets rewrite to .htaccess
       lineinfile:
         dest: "{{ web_dir }}/.htaccess"

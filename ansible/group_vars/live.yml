@@ -58,6 +58,7 @@ flightdeck_cluster:
             backoffice_mysql_port: "{{ lookup('env', 'LIVE_BACK_MYSQL_PORT') | default('3306', true) }}"
             backoffice_s3_key: "{{ lookup('env', 'LIVE_BACK_S3_KEY') }}"
             backoffice_s3_secret: "{{ lookup('env', 'LIVE_BACK_S3_SECRET') }}"
+            backoffice_s3_prefix: "db.friendsschoolplantsale.com/files"
             backoffice_smtp_user: "{{ lookup('env','LIVE_FSMN_SMTP_USER') }}"
             backoffice_smtp_pass: "{{ lookup('env','LIVE_FSMN_SMTP_PASS') }}"
             flightdeck_web:

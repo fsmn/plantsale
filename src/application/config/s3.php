@@ -33,7 +33,7 @@ $config['verify_peer'] = TRUE;
 |
 */
 
-$config['access_key'] = 'BC7MM24CZG766GSH4UKJ';
+$config['access_key'] = '{{ backoffice_s3_key }}';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ $config['access_key'] = 'BC7MM24CZG766GSH4UKJ';
 |
 */
 
-$config['secret_key'] = 'NGx7KAzfP8bfw/wDEopDcJKfW6vSBNjn6QGy0iRpiS8';
+$config['secret_key'] = '{{ backoffice_s3_secret }}';
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +66,7 @@ $config['bucket_name'] = 't7-live-fsmn';
 |
 */
 
-$config['folder_name'] = 'db.friendsschoolplantsale.com/files';
+$config['folder_name'] = '{{ backoffice_s3_prefix }}';
 
 /*
 |--------------------------------------------------------------------------

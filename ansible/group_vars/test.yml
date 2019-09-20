@@ -58,6 +58,8 @@ flightdeck_cluster:
             backoffice_mysql_port: "{{ lookup('env', 'TEST_BACK_MYSQL_PORT') | default('3306', true) }}"
             backoffice_s3_key: "{{ lookup('env', 'TEST_BACK_S3_KEY') }}"
             backoffice_s3_secret: "{{ lookup('env', 'TEST_BACK_S3_SECRET') }}"
+            TEST_FSMN_SMTP_USER: "{{ lookup('env','TEST_FSMN_SMTP_USER') }}"
+            TEST_FSMN_SMTP_PASS: "{{ lookup('env','TEST_FSMN_SMTP_PASS') }}"
             flightdeck_web:
               vhosts:
                 - name: "backoffice.t7test.io"

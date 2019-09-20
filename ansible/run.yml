@@ -5,7 +5,7 @@
   tasks:
     - name: Template the database settings
       copy:
-        dest: "{{ web_dir}}/application/config/database.php"
+        dest: "{{ web_dir }}/application/config/database.php"
         content: |
           <?php
           defined('BASEPATH') OR exit('No direct script access allowed');
@@ -34,6 +34,10 @@
               'failover' => array(),
               'save_queries' => TRUE
           );
+    - name: Template the email file
+      template:
+        src: "{{ web_dir }}/application/config/email.php"
+        dest: "{{ web_dir }}/application/config/email.php"
     - name: Add assets rewrite to .htaccess
       lineinfile:
         dest: "{{ web_dir }}/.htaccess"

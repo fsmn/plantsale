@@ -58,8 +58,8 @@ flightdeck_cluster:
             backoffice_mysql_port: "{{ lookup('env', 'STAGE_BACK_MYSQL_PORT') | default('3306', true) }}"
             backoffice_s3_key: "{{ lookup('env', 'STAGE_BACK_S3_KEY') }}"
             backoffice_s3_secret: "{{ lookup('env', 'STAGE_BACK_S3_SECRET') }}"
-            STAGE_FSMN_SMTP_USER: "{{ lookup('env','STAGE_FSMN_SMTP_USER') }}"
-            STAGE_FSMN_SMTP_PASS: "{{ lookup('env','STAGE_FSMN_SMTP_PASS') }}"
+            backoffice_smtp_user: "{{ lookup('env','STAGE_FSMN_SMTP_USER') }}"
+            backoffice_smtp_pass: "{{ lookup('env','STAGE_FSMN_SMTP_PASS') }}"
             flightdeck_web:
               vhosts:
                 - name: "backoffice.t7stage.io"

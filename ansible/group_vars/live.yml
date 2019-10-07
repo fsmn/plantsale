@@ -113,11 +113,11 @@ flightdeck_cluster:
           value: "{{ lookup('env', 'LIVE_BACK_VARNISH_SECRET') }}"
   ingress:
     name: "ingress"
-#    tlsIssuer: "lets-encrypt-ops-at-ten7-com"
-#    tls:
-#      - secret: "lets-encrypt-ops-at-ten7-com"
-#        hosts:
-#          - "db.friendsschoolplantsale.org"
+    tlsIssuer: "lets-encrypt-ops-at-ten7-com"
+    tls:
+      - secret: "lets-encrypt-ops-at-ten7-com"
+        hosts:
+          - "db.friendsschoolplantsale.org"
     rules:
       - host: "backoffice.t7live.io"
         paths:

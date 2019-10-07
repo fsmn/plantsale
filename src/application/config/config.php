@@ -30,7 +30,7 @@ if($domain != 'docker.test' && $domain != $default_domain){
 	}
 }
 
-if ($_SERVER['HTTPS'] == 'on') {
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
 	$config['base_url'] = 'https://' . $domain;
 } else {
 	$config['base_url'] = 'http://' . $domain;

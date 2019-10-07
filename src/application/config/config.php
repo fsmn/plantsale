@@ -24,7 +24,7 @@ if (in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE)) {
 	$domain = $default_domain;
 }
 
-if($domain != 'docker.test'){
+if($domain != 'docker.test' && $domain != $default_domain){
 	if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== FALSE){
 		$_SERVER['HTTPS'] = 'on';
 	}

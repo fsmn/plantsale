@@ -24,13 +24,13 @@ if (in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE)) {
 	$domain = $default_domain;
 }
 
-if($domain == 'backoffice.t7test.io'){
+if($domain != 'docker.test'){
 	if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== FALSE){
 		$_SERVER['HTTPS'] = 'on';
 	}
 }
 
-if ($_SERVER['SERVER_PORT'] == 443) {
+if ($_SERVER['HTTPS'] == 'on') {
 	$config['base_url'] = 'https://' . $domain;
 } else {
 	$config['base_url'] = 'http://' . $domain;

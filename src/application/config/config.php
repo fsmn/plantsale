@@ -24,13 +24,7 @@ if (in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE)) {
 	$domain = $default_domain;
 }
 
-if($domain != 'docker.test' && $domain != $default_domain){
-	if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== FALSE){
-		$_SERVER['HTTPS'] = 'on';
-	}
-}
-
-if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+if ($_SERVER['SERVER_PORT'] == 443) {
 	$config['base_url'] = 'https://' . $domain;
 } else {
 	$config['base_url'] = 'http://' . $domain;

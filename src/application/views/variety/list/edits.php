@@ -15,7 +15,6 @@ print create_button_bar($buttons);
 			<th>Subcategory</th>
 			<th>Grower</th>
 			<th>Is New</th>
-			<th>Coordinator</th>
 			<th>Copywriter</th>
 			<th>Copy Received</th>
 			<th>Needs Copy</th>
@@ -50,15 +49,7 @@ print create_button_bar($buttons);
 <?php echo $plant->year == $plant->new_year?"New":"";?>
 </td>
 			<td>
-				<div class="field-envelope" id="variety__editor__<?php echo $plant->id;?>">
-					<span class="user-dropdown live-field text" menu="boolean" name="boolean">
-<?php echo form_dropdown("editor",$users,get_value($plant,"editor"),"class='live-field'");?>
-</span>
-				</div>
-			</td>
-			<td>
 <?php echo live_field("copywriter",$plant->copywriter,"variety",$plant->id,array("envelope"=>"span","size"=>"63", "override"=>TRUE));?>
-
 </td>
 			<td>
 				<div class="field-envelope" id="variety__copy_received__<?php echo $plant->id;?>">

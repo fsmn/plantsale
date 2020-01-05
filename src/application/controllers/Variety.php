@@ -620,28 +620,15 @@ class Variety extends MY_Controller {
 	function show_copy_text()
 	{
 		// @TODO merge this function with the search function.
-		$data ["varieties"] = $this->variety->get_varieties_for_year ( get_current_year (), TRUE );
+		$data ["plants"] = $this->variety->get_varieties_for_year ( get_current_year (), TRUE );
 		$data ["year"] = get_current_year ();
-		$data ["title"] = "Wasting Trees";
+		$data ["title"] = "Printable List";
 		$data ["target"] = "variety/print/paper_waste";
 		$data ["format"] = "print";
 		$data ["classes"] = "";
 		$this->load->view ( "variety/print/index", $data );
 	}
 
-	/**
-	 * This is a temporary function to help users migrate to the new edits search under varieties.
-	 */
-	function edits_search()
-	{
-		$data ['title'] = "Copy Edits Message";
-		$data ['target'] = "variety/edits_message";
-		if ($this->input->get ( "ajax" ) == 1) {
-			$this->load->view ( $data ['target'], $data );
-		} else {
-			$this->load->view ( "page/index", $data );
-		}
-	}
 
 	/**
 	 * * FILE MANAGEMENT **

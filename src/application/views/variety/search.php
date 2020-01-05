@@ -134,8 +134,7 @@ $actions = array("full"=>"List","history"=> "Variety History","flags"=>"Flag Lis
 	<div></div>
 	<div class="field-set block box standard copy-edits" id="copy-edit-section" style="display: none;">
 		<div class="column first">
-			<label for="editor">Coordinator</label>
-			<?php echo form_dropdown("editor",$users,$refine? cookie("editor"):"");?>
+
 			<?php echo create_input($variety,"copywriter","Copywriter","copywriter",$refine);?>
 		</div>
 		<div class="column last">

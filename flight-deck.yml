@@ -46,6 +46,7 @@ flightdeck_web:
   php:
     upload_max_filesize: "128M"
     post_max_size: "128M"
+    opcache_revalidate_freq: "1"
 flightdeck_varnish:
   secret: "secret"
   hostPort: "6081"

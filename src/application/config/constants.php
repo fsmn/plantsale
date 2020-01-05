@@ -93,7 +93,7 @@ define('FILE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/db.friendsschoolplantsale.com/
 define('S3_BUCKET_NAME','https://nyc3.digitaloceanspaces.com');
 define('S3_BUCKET_URL', 'https://t7-live-fsmn.nyc3.cdn.digitaloceanspaces.com');
 
-define('APP_VERSION', "4.9");
+define('APP_VERSION', "5.0");
 
 
 /* End of file constants.php */

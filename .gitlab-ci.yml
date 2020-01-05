@@ -1,25 +1,6 @@
 stages:
   - deploy
 
-job_iph_deploy:
-  tags:
-    - live
-  stage: deploy
-  script:
-    - 'rm /virtual/sites/plantsale_chroot/plantsale/backoffice/application/logs/log-*.php'
-    - 'mkdir -p -m 766 /virtual/sites/plantsale_chroot/plantsale/site-backups/builds/'
-    - 'find /virtual/sites/plantsale_chroot/plantsale/site-backups/builds -name "backoffice_*.tar.gz" -mtime +7 -exec rm -f {} \;'
-    - 'tar --exclude=".git" --exclude="files" --exclude="logs" --directory="/virtual/sites/plantsale_chroot/plantsale" -czf /virtual/sites/plantsale_chroot/plantsale/site-backups/builds/backoffice_`date +%Y%m%d%H%M%S`.tar.gz backoffice'
-    - 'rsync -avh --exclude=.git ~/$CI_PROJECT_DIR/src/ /virtual/sites/plantsale_chroot/plantsale/backoffice'
-#    - "cd ~/plantsale/backoffice"
-#    - "git reset --hard"
-#    - "git clean -f"
-#    - "git checkout master"
-#    - "git pull origin master"
-  only:
-    - master
-  allow_failure: false
-
 job_test_deploy:
   tags:
     - k8s

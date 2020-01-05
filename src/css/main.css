@@ -1,25 +1,22 @@
 @import "ui.theme.css";
 
-.handle { /*cursor:move*/
-	
-}
 
 body {
 	font-size: 13px;
 	font-weight: 300;
 	font-family: "Helvetica Neue", Tahoma, Verdana, sans-serif;
 	margin: 10px;
-	padding: 10px;
-	padding-right: 15px;
-	padding-top: 0px;
+	padding: 0 15px 10px 10px;
 	height: 100%;
 }
+
 p {
 	margin-top: .5em;
 	margin-bottom: .5em;
 	padding: 0 10px;
-	
+
 }
+
 #page {
 }
 
@@ -31,6 +28,7 @@ p {
 .hidden {
 	display: none;
 }
+
 /* general notices */
 .message {
 	padding: .5em;
@@ -51,7 +49,7 @@ p {
 }
 
 .not-logged-in #header {
-	display:  none;
+	display: none;
 }
 
 .editForm {
@@ -113,7 +111,6 @@ div.login-inputs {
 .login-inputs input[type="text"] {
 	font-size: 1.2em;
 }
-
 
 
 div.error {
@@ -185,7 +182,7 @@ div.login-title {
 }
 
 /*form elements*/
-.label ,label{
+.label, label {
 	font-size: 1em;
 	font-weight: bold;
 }
@@ -238,28 +235,24 @@ td .button, .row .button, .button.small {
 }
 
 .grower.total.row {
-	font-size: normal;
+	font-size: initial;
 	border-bottom: 1px solid #000;
 }
 
 .button:hover {
 	text-shadow: none;
 }
-/*hide all editing functions from non-editors */
-span.edit, span.new, span.delete, button.edit, button.new, button.delete,
-	a.edit, a.new, a.delete {
-	/*visibility: hidden;*/
-	
-}
 
 .editor .edit, .editor .new, .editor .delete {
 	visibility: visible;
 }
 
-#navigation .menu-button{
+#navigation .menu-button {
 	display: none;
 	width: 150px;
 }
+
+
 #navigation input[type="text"] {
 	height: 30px;
 	width: 250px;
@@ -291,13 +284,13 @@ span.edit, span.new, span.delete, button.edit, button.new, button.delete,
 
 ul.button-list {
 	list-style: none;
-	padding-left: 0px;
+	padding-left: 0;
 	margin: 0;
 }
 
 ul.button-list li {
 	display: inline;
-	padding: .35em 0 .35em .25em
+	padding: .35em 0 .35em .25em;
 }
 
 ul.button-list li .button {
@@ -306,31 +299,24 @@ ul.button-list li .button {
 
 ul.button-list li .button.delete {
 	/*margin-top: -5px;*/
-	
+
 }
 
-.button-box.vertical-list ul.button-list li{
+
+
+.button-box.vertical-list ul.button-list li {
 	display: block;
-}
-
-.delete {
-	/*float: right;*/
-	
 }
 
 .mini-buttons ul.button-list li .button {
 	margin: 0 1px;
 }
 
-.help {
-	
-}
-
 #utility .button-box {
 	*font-size: .8em;
 }
 
-}
+
 textarea {
 	font-size: 1em;
 }
@@ -378,11 +364,10 @@ legend:hover {
 
 #navigation li {
 	display: inline;
-	margin-left: 0.25em;
 	margin-top: 0.5em;
 	margin-left: 0.25em;
 	/*border-left-width:0.1em;
-    border-left-style:solid;*/
+	border-left-style:solid;*/
 }
 
 #navigation li:first-child {
@@ -397,7 +382,7 @@ legend:hover {
 }
 
 #navigation .button-box {
-	
+
 }
 
 #utility {
@@ -406,7 +391,7 @@ legend:hover {
 }
 
 #utility p {
-	margin: 0em;
+	margin: 0;
 }
 
 /* end header page layout elements */ /*main div layout elements */
@@ -420,9 +405,6 @@ legend:hover {
 	padding: 0;
 }
 
-#content {
-	
-}
 
 #footer {
 	font-size: .8em;
@@ -443,7 +425,7 @@ legend:hover {
 .search li {
 	display: inline;
 	padding-left: 1em;
-	margin-left: 0em;
+	margin-left: 0;
 }
 
 h1 {
@@ -493,8 +475,7 @@ h5 {
 h3, h4, h5, .support-view legend {
 	margin-top: 4px;
 	margin-bottom: 4px;
-	padding: 5px;
-	padding-left: 10px;
+	padding: 5px 5px 5px 10px;
 }
 
 .field {
@@ -551,7 +532,7 @@ a.button {
 }
 
 .button-box .delete {
-	
+
 }
 
 .button-bar {
@@ -566,7 +547,6 @@ a.button {
 	display: none;
 	z-index: 1000;
 	padding: 10px;
-	*padding-top: 0px;
 	-moz-box-shadow: 3px 3px 4px #666;
 	-webkit-box-shadow: 3px 3px 4px #666;
 	box-shadow: 3px 3px 4px #666;
@@ -576,7 +556,7 @@ a.button {
 
 table.list td {
 	padding: 5px;
-	border-width: 0px;
+	border-width: 0;
 	vertical-align: top;
 }
 
@@ -611,7 +591,7 @@ table.list tbody tr {
 }
 
 table.list thead tr.top-row {
-	border-bottom-width: 0px;
+	border-bottom-width: 0;
 }
 
 table.list thead tr.top-row th {
@@ -647,11 +627,11 @@ table.files {
 }
 
 table.files th {
-	
+
 }
 
 table.files td {
-	
+
 }
 
 table.files td.file-name {
@@ -699,8 +679,9 @@ table.list tfoot td {
 }
 
 div.table {
-	
+
 }
+
 div.table .table-row .cell {
 	display: inline-block;
 }
@@ -720,9 +701,8 @@ a.link:hover, input.link:hover {
 }
 
 .center {
-	width: auto;
 	width: 200px;
-	position:relative;
+	position: relative;
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
@@ -788,7 +768,7 @@ ul.buttons li {
 }
 
 .color-info, .order-info {
-	
+
 }
 
 fieldset.block label {
@@ -796,7 +776,7 @@ fieldset.block label {
 }
 
 .field {
-	padding: 0px 15px;
+	padding: 0 15px;
 }
 
 
@@ -846,7 +826,6 @@ form .column {
 .field-set {
 	padding: 5px 0;
 }
-
 
 
 .search-form .field-set {
@@ -919,8 +898,7 @@ fieldset.field-group {
 
 ul.inline-list {
 	padding: .5em 0;
-	margin: 0;
-	margin-left: 10px;
+	margin: 0 0 0 10px;
 	list-style: none;
 	display: block;
 	clear: both;
@@ -950,7 +928,7 @@ div.plant-info {
 	display: none;
 	box-shadow: 2px 2px 4px #ccc;
 	padding: 1em;
-	left-margin: 50%;
+	margin-left: 50%;
 	overflow: scroll;
 	max-height: 500px;
 	background-color: #fefefe !important;
@@ -961,8 +939,8 @@ div.plant-info {
 	width: 100%;
 }
 
-#plant-details .description .field-envelope, #plant-details .web_description  .field-envelope,
-	#plant-details .print_description   .field-envelope {
+#plant-details .description .field-envelope, #plant-details .web_description .field-envelope,
+#plant-details .print_description .field-envelope {
 	float: left;
 	width: 30%;
 	margin: .5em;
@@ -973,7 +951,6 @@ div.plant-info {
 }
 
 .plant-info .field {
-	/*width: 15ex;*/
 	padding: 0 .25em;
 }
 
@@ -982,19 +959,19 @@ div.plant-info {
 }
 
 .plant-info .field.year {
-	
+
 }
 
 .plant-info .field.species {
-	
+
 }
 
 .plant-info .field.genus {
-	
+
 }
 
 .plant-info .field.variety, .plant-info .field.common-name {
-	
+
 }
 
 #variety-editor #new_year {
@@ -1068,7 +1045,7 @@ span.fa {
 	float: right;
 }
 
-.variety-mini-view  #image .button {
+.variety-mini-view #image .button {
 	position: relative;
 }
 
@@ -1080,11 +1057,11 @@ ul.list {
 	padding: 0;
 }
 
-ul.list  li {
+ul.list li {
 	list-style: none;
 }
 
-ul.list  li a {
+ul.list li a {
 	padding: .25em 0;
 	display: block;
 }
@@ -1099,8 +1076,9 @@ ul.list.field-list li.list-item {
 }
 
 ul.list.field-list li.list-item a {
-	display: inline-block; 
+	display: inline-block;
 }
+
 .front-page-widget {
 	display: none;
 }
@@ -1152,70 +1130,56 @@ table.shelf-checking td.text-cell {
 	border: none;
 	height: 98%;
 	width: 88% !important;
-	height: 98%;
 }
 
 .well {
-	
-    padding: 19px 0;
-  
-}
-.mr-shmallow-image {
-	
+
+	padding: 19px 0;
+
 }
 
-.mr-shmallow-image img {
-	display: none;
-	position: absolute;
-	top: 8%;
-	left: 23%;
-	width: auto;
-	height: auto;
-}
 
-.mr-shmallow.on, #page.on {
-	font-family: "Monaco", serif;
-}
-
-@media (max-width:768px){
+@media (max-width: 768px) {
 	body.not-logged-in {
-	font-size: 18px;
-	padding: 0;
-	margin: 0;
-	transition: 1s ease all;
+		font-size: 18px;
+		padding: 0;
+		margin: 0;
+		transition: 1s ease all;
 	}
-	.not-logged-in #header{
-	height: auto;
+
+	.not-logged-in #header {
+		height: auto;
 	}
-	
+
 	.not-logged-in #page-wrapper {
-	padding-top: 2em;
+		padding-top: 2em;
 	}
-	
+
 	.not-logged-in #page-title {
-	float: none;
+		float: none;
 	}
-	.not-logged-in .login{
-	padding: 0;
-	margin: 0;
-	width: 100%;
-    box-shadow: none;
-    border-radius: 0;
-    
+
+	.not-logged-in .login {
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		box-shadow: none;
+		border-radius: 0;
+
 	}
-	
+
 	.not-logged-in .login h2 {
-	box-shadow: none;
-	background: none;
+		box-shadow: none;
+		background: none;
 	}
-	
+
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
 	.login {
-	width: 90%;
-	padding: 0;
-	margin: 0;
+		width: 90%;
+		padding: 0;
+		margin: 0;
 	}
-	
+
 }

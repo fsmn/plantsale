@@ -69,19 +69,6 @@ $buttons[] = array(
 		"style"=>"search",
 );
 
-$buttons[] = array(
-		"selection" => "all",
-		"text" => "Copy Edit Tracking",
-		"class" => array(
-				"button",
-				"search",
-				"dialog",
-				"search-varieties",
-		),
-		"style"=>"search",
-		"href"=> site_url("variety/edits_search"),
-		"title" => "Search among the varieties"
-);
 
 
 print create_button_bar($buttons, array(

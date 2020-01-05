@@ -928,7 +928,6 @@ div.plant-info {
 	display: none;
 	box-shadow: 2px 2px 4px #ccc;
 	padding: 1em;
-	margin-left: 50%;
 	overflow: scroll;
 	max-height: 500px;
 	background-color: #fefefe !important;

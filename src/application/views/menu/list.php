@@ -1,8 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-// list.php Chris Dart Jan 26, 2015 3:56:07 PM chrisdart@cerebratorium.com
 ?>
+<?php if (IS_ADMIN) :?>
 <h2><?php echo $title;?></h2>
+<h3>
+	Editing menu items is a risky task. Use with great care!
+</h3>
 <?php $this->load->view("menu/categories");?>
 <?php echo create_button_bar(array(array("text"=>"Add New Item","class"=>array("button","new","create-menu-item"),"href"=>site_url("menu/create"))));?>
 <table class="list">
@@ -26,3 +29,6 @@
 <?php endforeach;?>
 </tbody>
 </table>
+<?php else:?>
+<h2>You do not have permission to access this page</h2>
+<?php endif;

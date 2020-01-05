@@ -117,7 +117,7 @@ flightdeck_cluster:
     tls:
       - secret: "lets-encrypt-ops-at-ten7-com"
         hosts:
-          - "db.friendsschoolplantsale.org"
+          - "db.friendsschoolplantsale.com"
     rules:
       - host: "backoffice.t7live.io"
         paths:

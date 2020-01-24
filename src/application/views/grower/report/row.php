@@ -14,7 +14,6 @@ if($grower->fax){
     $email_phone[] = $grower->fax;
 }
 
-$year = $this->session->userdata("sale_year");
 
 ?>
 <tr class="row grower total">
@@ -30,5 +29,5 @@ $year = $this->session->userdata("sale_year");
 	?></td><td>
 	<?php echo $grower->first_name . " " . $grower->last_name; ?>
 		<td class="field" style="text-align: right;"><?php echo get_as_price($grower->total);?></td>
-		<td class="field no-print"><a href="<?php echo base_url("order/search?find=true&grower_id=$grower->id&year=$year&sorting%5B%5D=genus&direction%5B%5D=ASC");?>" title="View current orders for this grower">Current Orders</a></td>
+		<td class="field no-print"><a href="<?php echo base_url("order/search?find=true&grower_id=$grower->id&year=$year&sorting%5B%5D=genus&direction%5B%5D=ASC");?>" title="View current orders for this grower"><?php echo $year; ?> Orders</a></td>
 </tr>

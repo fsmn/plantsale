@@ -80,7 +80,7 @@ function get_keyed_pairs($list, $pairs, $initialBlank = NULL, $other = NULL, $al
 	if (! empty ( $alternate )) {
 		$output [$alternate ['name']] = $alternate ['value'];
 	}
-	
+	asort($list);
 	foreach ( $list as $item ) {
 		$key_name = $pairs [0];
 		$key_value = $pairs [1];

@@ -282,7 +282,7 @@ class Variety_Model extends MY_Model {
 		$this->db->where("NOT (`orders`.`pot_size` LIKE '%bareroot%' AND `category_id` = 7 )", NULL, FALSE);
 		$this->db->where("NOT (`orders`.`pot_size` LIKE '%bulb%' AND `category_id` = 7 )", NULL, FALSE);
 		// #74 don't include any tubers of any kind
-		$this->db->where('NOT (`orders`.`post_size` LIKE "%tuber%")', NULL, FALSE);
+		$this->db->where('NOT (`orders`.`pot_size` LIKE "%tuber%")', NULL, FALSE);
 		$this->db->where("((`common`.`subcategory_id` != 3 AND `common`.`subcategory_id` !=4 AND `common`.`subcategory_id` !=8 AND common.name NOT LIKE '%Peony%') OR `common`.`subcategory_id` IS NULL)", NULL, FALSE); // plants
 
 		$this->db->group_by("common.category_id");

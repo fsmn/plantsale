@@ -45,4 +45,14 @@ $sale_year = $this->session->userdata("sale_year");;
 	</tr>
 <?php endforeach; ?>
 </tbody>
+	<tfoot>
+	<tr>
+		<td colspan="7">
+			<div class="message">
+				Excluded from these results are: bulb and bareroot perennials, tubers, and peonies.
+			</div>
+		</td>
+	</tr>
+	</tfoot>
 </table>
+

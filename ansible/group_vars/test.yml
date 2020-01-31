@@ -51,6 +51,7 @@ flightdeck_cluster:
             s3fs_root_folder: "{{ s3fs_root_folder }}"
             s3fs_public_folder: "{{ s3fs_public_folder }}"
             s3fs_private_folder: "{{ s3fs_private_folder }}"
+            t7_env: "{{ t7_env }}"
             backoffice_mysql_user: "{{ lookup('env', 'TEST_BACK_MYSQL_USER') }}"
             backoffice_mysql_pass: "{{ lookup('env', 'TEST_BACK_MYSQL_PASS') }}"
             backoffice_mysql_name: "{{ lookup('env', 'TEST_BACK_MYSQL_NAME') }}"

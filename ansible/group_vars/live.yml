@@ -7,8 +7,8 @@ t7_env: "live"
 docker_registry: "t7build.io:443"
 docker_registry_user: "{{ lookup('env', 'REGISTRY_USER') }}"
 docker_registry_pass: "{{ lookup('env', 'REGISTRY_PASS') }}"
-docker_registry_image: "db.friendsschoolplantsale.com"
-docker_registry_version: "{{ lookup('env', 'CI_COMMIT_SHA')[0:10] | default('latest', true) }}"
+docker_registry_image: "{{ lookup('env', 'CI_PROJECT_NAME') }}"
+docker_registry_version: "{{ lookup('env', 'CI_COMMIT_SHA') | default('latest', true) }}"
 
 docker_web_image: "{{ docker_registry }}/{{ docker_registry_image }}:{{ docker_registry_version }}"
 
@@ -51,6 +51,7 @@ flightdeck_cluster:
             s3fs_root_folder: "{{ s3fs_root_folder }}"
             s3fs_public_folder: "{{ s3fs_public_folder }}"
             s3fs_private_folder: "{{ s3fs_private_folder }}"
+            t7_env: "{{ t7_env }}"
             backoffice_mysql_user: "{{ lookup('env', 'LIVE_BACK_MYSQL_USER') }}"
             backoffice_mysql_pass: "{{ lookup('env', 'LIVE_BACK_MYSQL_PASS') }}"
             backoffice_mysql_name: "{{ lookup('env', 'LIVE_BACK_MYSQL_NAME') }}"

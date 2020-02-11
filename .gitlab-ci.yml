@@ -10,8 +10,8 @@ container_live:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
-    - echo "{\"auths\":{\"t7build.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination t7build.io:443/$CI_PROJECT_NAME:$CI_COMMIT_SHA
+    - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:$CI_COMMIT_SHA
   only:
     - master
 
@@ -23,8 +23,8 @@ container_stage:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
-    - echo "{\"auths\":{\"t7build.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination t7build.io:443/$CI_PROJECT_NAME:latest
+    - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:latest
   only:
     - develop
 
@@ -36,8 +36,8 @@ container_test:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
-    - echo "{\"auths\":{\"t7build.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination t7build.io:443/$CI_PROJECT_NAME:test
+    - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:test
   only:
     - preview
 

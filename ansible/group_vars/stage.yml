@@ -4,7 +4,7 @@ digitalocean_api_token: "{{ lookup('env', 'DIGITALOCEAN_API_TOKEN') }}"
 cluster_name: "cc02"
 t7_env: "stage"
 
-docker_registry: "t7build.io:443"
+docker_registry: "registry.t7develop.io:443"
 docker_registry_user: "{{ lookup('env', 'REGISTRY_USER') }}"
 docker_registry_pass: "{{ lookup('env', 'REGISTRY_PASS') }}"
 docker_registry_image: "{{ lookup('env', 'CI_PROJECT_NAME') }}"

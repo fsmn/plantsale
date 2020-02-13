@@ -1,0 +1,11 @@
+# Ignore the .git directory
+/.git
+
+# Ignore developer files
+/db-backups
+/site-backups
+.idea
+.idea/*
+.DS_Store
+.sass-cache
+.sass-cache/*

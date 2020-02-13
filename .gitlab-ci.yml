@@ -1,32 +1,75 @@
 stages:
+  - build
   - deploy
 
-job_test_deploy:
+container_live:
+  stage: build
   tags:
-    - k8s
-  stage: deploy
+    - cc02
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   script:
-    - "ansible-galaxy install -fr ansible/requirements.yml --ignore-errors"
-    - "ansible-playbook -i ansible/inventories/all.ini ansible/test.yml"
+    - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:$CI_COMMIT_SHA
   only:
-    - preview
+    - master
 
-job_stage_deploy:
+container_stage:
+  stage: build
   tags:
-    - k8s
-  stage: deploy
+    - cc02
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   script:
-    - "ansible-galaxy install -fr ansible/requirements.yml --ignore-errors"
-    - "ansible-playbook -i ansible/inventories/all.ini ansible/stage.yml"
+    - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:latest
   only:
     - develop
 
-job_live_deploy:
+container_test:
+  stage: build
   tags:
-    - k8s
-  stage: deploy
+    - cc02
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   script:
-    - "ansible-galaxy install -fr ansible/requirements.yml --ignore-errors"
-    - "ansible-playbook -i ansible/inventories/all.ini ansible/live.yml"
+    - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:test
+  only:
+    - preview
+
+k8s_live:
+  stage: deploy
+  tags:
+    - cc02
+  image: ten7/flight-deck-util:latest
+  script:
+    - "ansible-galaxy install -r $CI_PROJECT_DIR/ansible/requirements.yml"
+    - "ansible-playbook -i $CI_PROJECT_DIR/ansible/inventories/all.ini $CI_PROJECT_DIR/ansible/live.yml"
   only:
     - master
+
+k8s_stage:
+  stage: deploy
+  tags:
+    - cc02
+  image: ten7/flight-deck-util:latest
+  script:
+    - "ansible-galaxy install -r $CI_PROJECT_DIR/ansible/requirements.yml"
+    - "ansible-playbook -i $CI_PROJECT_DIR/ansible/inventories/all.ini $CI_PROJECT_DIR/ansible/stage.yml"
+  only:
+    - develop
+
+k8s_test:
+  stage: deploy
+  tags:
+    - cc02
+  image: ten7/flight-deck-util:latest
+  script:
+    - "ansible-galaxy install -r $CI_PROJECT_DIR/ansible/requirements.yml"
+    - "ansible-playbook -i $CI_PROJECT_DIR/ansible/inventories/all.ini $CI_PROJECT_DIR/ansible/test.yml"
+  only:
+    - preview

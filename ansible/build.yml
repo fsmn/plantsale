@@ -51,12 +51,3 @@
           pass: "ten7release"
         - user: "ten7preview"
           pass: "ten7preview"
-
-  handlers:
-    - name: clear apk cache
-      file:
-        path: "{{ item }}"
-        state: absent
-      loop:
-        - "/tmp/*"
-        - "/var/cache/apk/*"

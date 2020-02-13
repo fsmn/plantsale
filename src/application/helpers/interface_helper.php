@@ -17,7 +17,7 @@ if (! defined ( 'BASEPATH' ))
  *         "class" defaults to "button" but can be replaced by any other classes as defined in the css or javascript
  *         "id" is completely optional
  *         "enclosure" is an option array with type class and id keys. This is used if the particular button needs an added container (for AJAX manipulation)
- *        
+ *         "data_values" should be an array of key=> value pairs indicating a data-attribute=value in the button.
  *         EXAMPLES
  *         A button that provides a standard url (type and class are defaults "a" and "button");
  *         $data = array( "text" => "View Record", "href" => "/index.php/record/view/2352");
@@ -42,6 +42,7 @@ function create_button($data)
 		$target = "";
 		$tabindex = "";
 		$text = $data ["text"];
+		$data_values = [];
 		if (array_key_exists ( "type", $data )) {
 			if (isset ( $data ["type"] )) {
 				$type = $data ["type"];
@@ -93,8 +94,15 @@ function create_button($data)
 			if (array_key_exists ( "id", $data )) {
 				$id = "id='" . $data ["id"] . "'";
 			}
+
+			if(array_key_exists('data_values',$data) && is_array($data['data_values'])){
+				foreach($data['data_values'] as $key=>$value){
+					$data_values[] = 'data-' . $key . '="' . $value . '"';
+				}
+			}
+			$data_values = implode(' ', $data_values);
 			
-			$button = "<$type $href $id $class $tabindex $target $title>$text</$type>";
+			$button = "<$type $href $id $class $tabindex $target $title $data_values>$text</$type>";
 			
 			if (array_key_exists ( "enclosure", $data )) {
 				if (array_key_exists ( "type", $data ["enclosure"] )) {

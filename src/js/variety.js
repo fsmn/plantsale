@@ -327,10 +327,11 @@ $(document).on("click",".variety-insert",function(){
 		});
 
 		$(document).on("click",".delete-image",function(){
-			question = confirm("Are you sure you want to delete this image? This cannot be undone!");
+			let question = confirm("Are you sure you want to delete this image? This cannot be undone!");
 			if(question){
-					my_id = this.id.split("_")[1];
-					form_data = {
+					let my_id = $(this).data('id');
+					console.log(my_id);
+					let form_data = {
 							ajax: 1,
 							id: my_id
 					};
@@ -342,7 +343,7 @@ $(document).on("click",".variety-insert",function(){
 							$("#image").html(data);
 						},
 						error: function(data){
-							$("#image").html(data);
+							console.log(data);
 						}
 					});
 			}
@@ -482,5 +483,4 @@ $(document).on("click",".variety-insert",function(){
 				
 			});
 		}
-		
 		

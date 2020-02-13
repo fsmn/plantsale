@@ -684,15 +684,19 @@ class Variety extends MY_Controller {
 			$id = $this->input->post("id");
 			$this->load->model("image_model");
 			$variety_id = $this->image_model->get($id)->variety_id;
-			$this->s3_client->deleteFile($variety_id . '/.jpg');
+			$variety = $this->variety->get($variety_id);
+			$this->s3_client->deleteFile($variety_id . '.jpg');
 			$this->image_model->delete($id);
 			if ($this->input->post("ajax") == 1) {
-				$data ["variety"] = NULL;
+				$data ["variety"] = $variety;
 				$data ["variety_id"] = $variety_id;
 				$this->load->view("image/view", $data);
 			} else {
 				redirect("variety/view/$variety_id");
 			}
+		}
+		else {
+			echo 'Deleting images is not allowed on development environments';
 		}
 	}
 

@@ -4,11 +4,13 @@ MAINTAINER tess@ten7.com
 # Switch to root for the build.
 USER root
 
+# Override some Ansible defaults.
+ENV ANSIBLE_ROLES_PATH /ansible/roles
+ENV ANSIBLE_NOCOWS 1
+
 # Copy the files needed by the site.
-#
-# The build context is set up in k8s.yml. This way we minimize layers and
-# file modifications done in one layer, avoiding silent failures.
-COPY --chown=apache:apache root /
+COPY --chown=apache:apache ansible /ansible
+COPY --chown=apache:apache src /var/www/html
 
 # Build the site.
 #
@@ -19,9 +21,6 @@ RUN setcap cap_net_bind_service=+ep /usr/sbin/httpd && \
 
 # Switch back to apache for runtime.
 USER apache
-
-# Set the environment.
-ENV T7_SITE_ENVIRONMENT {{ t7_env | default('docker') }}
 
 # Only expose 80, as HTTPS is terminiated in the ingress.
 EXPOSE 80

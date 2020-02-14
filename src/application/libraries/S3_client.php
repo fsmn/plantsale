@@ -1,18 +1,18 @@
 <?php
 require 'vendor/autoload.php';
+
 use \Aws\S3\S3Client;
 
 /**
  * Class S3_client
  */
-class S3_client
-{
+class S3_client {
 
 	private $client;
 
-	function __construct(){
+	function __construct() {
 		$variables = [
-			'version'=>'latest',
+			'version' => 'latest',
 			'region' => 'nyc3',
 			'endpoint' => 'https://nyc3.digitaloceanspaces.com',
 			'credentials' => [
@@ -21,17 +21,16 @@ class S3_client
 			],
 		];
 		$this->client = new S3Client($variables);
-		var_dump($this->listBuckets());
 	}
 
 
 	/**
 	 * @return array
 	 */
-	function listBuckets(){
+	function listBuckets() {
 		$spaces = $this->client->listBuckets();
 		$output = [];
-		foreach ($spaces['Buckets'] as $space){
+		foreach ($spaces['Buckets'] as $space) {
 			$output[] = $space['Name'];
 		}
 		return $output;
@@ -40,14 +39,15 @@ class S3_client
 	/**
 	 * @param $file_name
 	 * @param $file
+	 *
 	 * @return mixed
 	 */
-	public function putFile($file_name, $file){
+	public function putFile($file_name, $file, $type = 'image/jpg') {
 		$variables = [
 			'Bucket' => 't7-live-fsmn',
 			'Key' => 'db.friendsschoolplantsale.com/files/' . $file_name,
 			'SourceFile' => $file['full_path'],
-			'ContentType' => 'image/jpg',
+			'ContentType' => $type,
 			'StorageClass' => 'STANDARD',
 			'ACL' => 'public-read',
 		];
@@ -56,13 +56,26 @@ class S3_client
 		return $insert['ObjectURL'];
 	}
 
-public function deleteFile($file_name){
-		$variables =[
+	public function deleteFile($file_name) {
+		$variables = [
 			'Bucket' => 't7-live-fsmn',
 			'Key' => 'db.friendsschoolplantsale.com/files/' . $file_name,
 		];
 		$delete = $this->client->deleteObject($variables);
 		return $delete;
-}
+	}
+
+	public function getBucket() {
+		return (object) [
+			'Bucket' => 't7-live-fsmn',
+			'Key' => 'db.friendsschoolplantsale.com/files/',
+			'EndPoint' => 'https://nyc3.digitaloceanspaces.com',
+		];
+	}
+
+	public function getPath() {
+		$bucket = $this->getBucket();
+		return $bucket->EndPoint . '/' . $bucket->Bucket . '/' . $bucket->Key;
+	}
 
 }

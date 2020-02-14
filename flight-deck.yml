@@ -47,6 +47,11 @@ flightdeck_web:
     upload_max_filesize: "128M"
     post_max_size: "128M"
     opcache_revalidate_freq: "1"
+    xdebug:
+      enabled: "{{ lookup('env', 'PHP_XDEBUG_ENABLED') | default(false, true) }}"
+      autostart: yes
+      remoteHost: 10.254.254.254
+
 flightdeck_varnish:
   secret: "secret"
   hostPort: "6081"

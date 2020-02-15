@@ -294,33 +294,33 @@ $(document).on("click",".autocomplete-on",function(){
 
 //download the quark files show a progress bar for entertainment purposes. 
 $(document).on("click","#category-selector a.export",function(event){
-	event.preventDefault();
-	show_popup("Downloading","Please wait <div id='progressbar'></div>","auto");
-	var progressbar = $( "#progressbar" )
-	progressbar.progressbar({
-	      value: 0,
-	      max: 100
-	    });
-	
-	function progress(){
-		var val = progressbar.progressbar("value") || 0;
-		progressbar.progressbar("value", val + .1);
-		if(val < 99){
-			setTimeout(progress, 100);
-		}
-	}
-	setTimeout(progress,3000);
-	
-	url = $(this).attr("href");
-	console.log(url);
-	$.ajax({
-		type: "get",
-		url: url,
-		success: function(data){
-			$(".ui-dialog-content").html(data);
-			$("#progressbar").remove();
-		}
-	});
+	// event.preventDefault();
+	// show_popup("Downloading","Please wait <div id='progressbar'></div>","auto");
+	// var progressbar = $( "#progressbar" )
+	// progressbar.progressbar({
+	//       value: 0,
+	//       max: 100
+	//     });
+	//
+	// function progress(){
+	// 	var val = progressbar.progressbar("value") || 0;
+	// 	progressbar.progressbar("value", val + .1);
+	// 	if(val < 99){
+	// 		setTimeout(progress, 100);
+	// 	}
+	// }
+	// setTimeout(progress,3000);
+	//
+	// url = $(this).attr("href");
+	// console.log(url);
+	// $.ajax({
+	// 	type: "get",
+	// 	url: url,
+	// 	success: function(data){
+	// 		$(".ui-dialog-content").html(data);
+	// 		$("#progressbar").remove();
+	// 	}
+	// });
 });
 
 $(document).on("click",".export-for-web",function(event){

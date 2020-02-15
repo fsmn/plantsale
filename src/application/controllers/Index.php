@@ -177,15 +177,19 @@ class Index extends MY_Controller {
 		$this->load->library('S3_client');
 		$source_path = '/tmp/' . $filename;
 		write_file($source_path, $quark);
-		$quark_path = 'quark/' . $filename;
+/*		$quark_path = 'quark/' . $filename;
 		$this->s3_client->putFile($quark_path, ['full_path' => $source_path], 'txt/plain');
 		$s3_path = $this->s3_client->getPath();
 		$data = [
 			's3_path' => $s3_path,
 			'quark_path' => $quark_path,
 			'filename' => $filename,
-		];
-		$this->load->view("export/quark/index", $data);
+		];*/
+		$this->load->helper('download');
+
+		force_download($source_path, $quark);
+
+	//	$this->load->view("export/quark/index", $data);
 	}
 
 	function web_selector() {

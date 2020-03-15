@@ -1,4 +1,7 @@
 <?php
+
+use Plantsale\S3;
+
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Variety extends MY_Controller {
 
@@ -21,78 +24,86 @@ class Variety extends MY_Controller {
 		// $this->variety->update_needs_bag ();
 	}
 
+	function test(){
+		$this->load->library('s3');
+		// List your buckets:
+		$this->s3->putBucket(getenv('S3_BUCKET', 't7-live-fsmn'), 'public-read');
+	}
+
 	function create()
 	{
-		$this->load->model ( "menu_model", "menu" );
-		$data ["target"] = "variety/edit";
-		$data ["variety"] = "";
-		$data ["common_id"] = $this->input->get ( "common_id" );
-		$measure_units = $this->menu->get_pairs ( "measure_unit" );
-		$data ["measure_units"] = get_keyed_pairs ( $measure_units, array (
-			"key",
-			"value"
+		$this->load->model ( 'menu_model', 'menu' );
+		$data ['target'] = 'variety/edit';
+		$data ['variety'] = '';
+		$data ['common_id'] = $this->input->get ( 'common_id' );
+		$measure_units = $this->menu->get_pairs ( 'measure_unit' );
+		$data ['measure_units'] = get_keyed_pairs ( $measure_units, array (
+			'key',
+			'value'
 		), TRUE );
-		$plant_colors = $this->menu->get_pairs ( "plant_color", array (
-			"field" => "value",
-			"direction" => "ASC"
+		$plant_colors = $this->menu->get_pairs ( 'plant_color', array (
+			'field' => 'value',
+			'direction' => 'ASC'
 		) );
-		$data ["plant_colors"] = get_keyed_pairs ( $plant_colors, array (
-			"key",
-			"value"
+		$data ['plant_colors'] = get_keyed_pairs ( $plant_colors, array (
+			'key',
+			'value'
 		) );
-		$data ["action"] = "insert";
-		$data ["title"] = "Add a new variety";
-		$this->load->view ( $data ["target"], $data );
+		$data ['action'] = 'insert';
+		$data ['title'] = 'Add a new variety';
+		$this->load->view ( $data ['target'], $data );
 	}
 
 	function insert()
 	{
 		$id = $this->variety->insert ();
-		if ($this->input->post ( "add_order" )) {
-			$data ["variety_id"] = $id;
-			$data ["order"] = $this->order->get_previous_year ( $data ["variety_id"], get_current_year () );
+		if ($this->input->post ( 'add_order' )) {
+			$data ['variety_id'] = $id;
+			$data ['order'] = $this->order->get_previous_year ( $data ['variety_id'], get_current_year () );
 			$pot_sizes = $this->order->get_pot_sizes ();
-			$data ["pot_sizes"] = get_keyed_pairs ( $pot_sizes, array (
-				"pot_size",
-				"pot_size"
+			$data ['pot_sizes'] = get_keyed_pairs ( $pot_sizes, array (
+				'pot_size',
+				'pot_size'
 			) );
-			$data ["action"] = "insert";
-			$this->load->view ( "order/edit", $data );
+			$data ['action'] = 'insert';
+			$this->load->view ( 'order/edit', $data );
 		} else {
-			redirect ( "variety/view/$id" );
+			redirect ( 'variety/view/' . $id );
 		}
 	}
 
 	function view()
 	{
+		$this->load->library('s3_client');
 		// $this->output->enable_profiler(TRUE);
 		$id = $this->uri->segment ( 3 );
-		$formats = array (
-			"statement",
-			"tabloid",
-			"letter",
-			"shovel_foot",
-			"thumbnail"
-		);
+//		$formats = array (
+//			'statement',
+//			'tabloid',
+//			'letter',
+//			'shovel_foot',
+//			'thumbnail'
+//		);
 		// foreach ($formats as $format) {
-		$this->resize_image ( $id, "statement", TRUE );
+		//$this->resize_image ( $id, 'statement', TRUE );
 		// }
 
 		$variety = $this->variety->get ( $id );
 		$current_order = $this->order->get_for_variety ( $id, get_current_year () );
-		$data ["current_order"] = $current_order;
-		$data ["orders"] = $this->order->get_for_variety ( $id );
-		$data ["flags"] = $this->flag->get_for_variety ( $id );
-		$data ["is_new"] = $variety->new_year == get_current_year ();
-		$data ["variety"] = $variety;
-		$data ["target"] = "variety/view";
-		$data ["title"] = sprintf ( "Viewing Info for %s (variety)", $variety->variety );
-		$data ["variety_id"] = $id;
-		if ($data ["mini_view"] = $this->input->get ( "ajax" ) == 1) {
-			$this->load->view ( "variety/mini_view", $data );
+		$data ['current_order'] = $current_order;
+		$data ['file_path'] = $this->s3_client->getPath();
+		$data ['orders'] = $this->order->get_for_variety ( $id );
+		$data ['flags'] = $this->flag->get_for_variety ( $id );
+		$data ['is_new'] = $variety->new_year == get_current_year ();
+		$data ['variety'] = $variety;
+		$data ['target'] = 'variety/view';
+		$data ['title'] = sprintf ( 'Viewing Info for %s (variety)', $variety->variety );
+		$data ['variety_id'] = $id;
+		if ($data ['mini_view'] = $this->input->get ( 'ajax' ) == 1) {
+			$this->load->view ( 'variety/mini_view', $data );
 		} else {
-			$data ["mini_view"] = FALSE;
-			$this->load->view ( "page/index", $data );
+			$data ['mini_view'] = FALSE;
+			$this->load->view ( 'page/index', $data );
 		}
 	}
 
@@ -586,7 +597,7 @@ class Variety extends MY_Controller {
 		$this->load->helper ( "export" );
 		$data ["format"] = $format;
 		$data ['variety'] = $this->variety->get ( $id );
-		$this->resize_image ( $id, $format );
+		//$this->resize_image ( $id, $format );
 		$data ['order'] = $this->order->get_for_variety ( $id, $this->session->userdata ( "sale_year" ) );
 		if ($data ['order']) {
 			$data ['flags'] = $this->flag->get_for_variety ( $id );
@@ -653,14 +664,14 @@ class Variety extends MY_Controller {
 
 	function attach_image()
 	{
+		$variety_id = $this->input->post('variety_id');
 		$config ['upload_path'] = '/tmp';
 		$this->load->helper ( 'directory' );
 		$config ['allowed_types'] = 'jpg|jpeg';
 		$config ['max_size'] = '2048';
 		$config ['max_width'] = '0';
 		$config ['max_height'] = '0';
-		$config ['file_name'] = $this->input->get ( "variety_id" ) . ".jpg";
-
+		$config ['file_name'] = $variety_id . '.jpg';
 		$this->load->library ( 'upload', $config );
 
 		if (! $this->upload->do_upload ()) {
@@ -672,14 +683,12 @@ class Variety extends MY_Controller {
 
 			$file_data = $this->upload->data ();
 			$this->load->library('S3_client');
-			$this->s3_client->putFile($file_data['file_name'],$file_data);
+			$this->s3_client->putFile($variety_id . '.jpg',$file_data);
 			$data ['image_display_name'] = $file_data ['file_name'];
 			$data ['image_source'] = $this->input->post ( 'image_source' );
-			$this->load->model ( "image_model" );
-			$variety_id = $this->input->post ( "variety_id" );
+			$this->load->model ( 'image_model' );
 			$this->image_model->insert ( $variety_id, $file_data );
-			$this->resize_image ( $variety_id, "statement" );
-			redirect ( "variety/view/$variety_id" );
+			redirect ( 'variety/view/' . $variety_id );
 		}
 	}
 
@@ -688,30 +697,26 @@ class Variety extends MY_Controller {
 	 */
 	function delete_image()
 	{
-		if($_SERVER['HTTP_HOST'] == 'db.friendsschoolplantsale.com') {
-			$id = $this->input->post("id");
+		//if($_SERVER['HTTP_HOST'] == 'db.friendsschoolplantsale.com') {
+			$id = $this->input->post('id');
 			$this->load->library('s3_client');
-			$this->load->model("image_model");
+			$this->load->model('image_model');
 			$variety_id = $this->image_model->get($id)->variety_id;
-			$variety = $this->variety->get($variety_id);
-			try {
-				$this->s3_client->deleteFile($variety_id . '.jpg');
-			}
-			catch (\Exception $e){
-			}
 			$this->s3_client->deleteFile($variety_id . '.jpg');
 			$this->image_model->delete($id);
-			if ($this->input->post("ajax") == 1) {
-				$data ["variety"] = $variety;
-				$data ["variety_id"] = $variety_id;
-				$this->load->view("image/view", $data);
+			$variety = $this->variety->get($variety_id);
+		if ($this->input->post('ajax') == 1) {
+				$data ['variety'] = $variety;
+				$data ['variety_id'] = $variety_id;
+				$data['file_path'] = $this->s3_client->getPath();
+				$this->load->view('image/view', $data);
 			} else {
-				redirect("variety/view/$variety_id");
+				redirect('variety/view/' . $variety_id);
 			}
-		}
+		/*}
 		else {
 			echo 'Deleting images is not allowed on development environments';
-		}
+		}*/
 	}
 
 	/**

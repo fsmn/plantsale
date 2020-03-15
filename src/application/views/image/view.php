@@ -12,17 +12,14 @@ if (isset($variety)):
 					'add-image',
 				],
 				'id' => 'add-image_$id',
-				'data_values' => [
-					'variety_id' => $variety->id,
-				],
-				'href' => base_url('variety/new_image/' . $variety->id),
+				'href' => base_url('variety/new_image/'. $variety->id),
 			]
 		);
 		?>
 	<?php else: ?>
 		<div class="center">
 			<img
-				src="https://nyc3.digitaloceanspaces.com/t7-live-fsmn/db.friendsschoolplantsale.com/files/<?php print $variety->id; ?>.jpg"
+				src="<?php print $file_path  . '/'. $variety->id; ?>.jpg"
 				class="photo" alt="image of <?php print $variety->common_name; ?> "/>
 			<?php if (IS_EDITOR): ?>
 				<?php echo create_button([

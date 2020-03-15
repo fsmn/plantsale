@@ -682,6 +682,7 @@ class Variety extends MY_Controller {
 	{
 		if($_SERVER['HTTP_HOST'] == 'db.friendsschoolplantsale.com') {
 			$id = $this->input->post("id");
+			$this->load->library('s3_client');
 			$this->load->model("image_model");
 			$variety_id = $this->image_model->get($id)->variety_id;
 			$variety = $this->variety->get($variety_id);

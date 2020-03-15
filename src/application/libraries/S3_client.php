@@ -60,6 +60,7 @@ class S3_client {
 		$variables = [
 			'Bucket' => 't7-live-fsmn',
 			'Key' => 'db.friendsschoolplantsale.com/files/' . $file_name,
+			'EndPoint' => 'https://nyc3.digitaloceanspaces.com',
 		];
 		$delete = $this->client->deleteObject($variables);
 		return $delete;

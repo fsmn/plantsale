@@ -702,7 +702,7 @@ class Variety extends MY_Controller {
 			$this->load->library('s3_client');
 			$this->load->model('image_model');
 			$variety_id = $this->image_model->get($id)->variety_id;
-			$this->s3_client->deleteFile($variety_id . '.jpg');
+			//$this->s3_client->deleteFile($variety_id . '.jpg');
 			$this->image_model->delete($id);
 			$variety = $this->variety->get($variety_id);
 		if ($this->input->post('ajax') == 1) {

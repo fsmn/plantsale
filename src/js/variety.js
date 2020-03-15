@@ -349,15 +349,14 @@ $(document).on("click",".variety-insert",function(){
 			}
 		});
 		
-		$(document).on("click",".add-image",function(){
-			my_id = this.id.split("_")[1];
+		$(document).on("click",".add-image",function(e){
+			e.preventDefault;
 			form_data = {
 					ajax: 1,
-					variety_id: my_id
 			};
 			$.ajax({
 				type: "get",
-				url: base_url + "variety/new_image",
+				url: base_url + $(this).attr('href'),
 				data: form_data,
 				success: function(data){
 					show_popup("Add an Image",data, "auto");

@@ -633,14 +633,22 @@ class Variety extends MY_Controller {
 	/**
 	 * * FILE MANAGEMENT **
 	 */
-	function new_image()
+	function new_image($variety_id)
 	{
-		if ($this->input->get ( 'variety_id' )) {
-			$data ['variety_id'] = $this->input->get ( 'variety_id' );
-			$data ['error'] = '';
-			$data ['image'] = null;
-			$this->load->view ( 'variety/image', $data );
-		}
+		$variety = $this->variety->get($variety_id);
+			$data = [
+				'variety_id' => $variety_id,
+				'error' => NULL,
+				'image' => NULL,
+				'target' => 'variety/image',
+				'title' => 'Add Image to ' . $variety->variety,
+			];
+			if($this->input->get('ajax')){
+				$this->load->view ( 'page/modal', $data );
+			}
+			else {
+				$this->load->view('page/index', $data);
+			}
 	}
 
 	function attach_image()
@@ -651,7 +659,7 @@ class Variety extends MY_Controller {
 		$config ['max_size'] = '2048';
 		$config ['max_width'] = '0';
 		$config ['max_height'] = '0';
-		$config ['file_name'] = $this->input->post ( "variety_id" ) . ".jpg";
+		$config ['file_name'] = $this->input->get ( "variety_id" ) . ".jpg";
 
 		$this->load->library ( 'upload', $config );
 
@@ -686,6 +694,11 @@ class Variety extends MY_Controller {
 			$this->load->model("image_model");
 			$variety_id = $this->image_model->get($id)->variety_id;
 			$variety = $this->variety->get($variety_id);
+			try {
+				$this->s3_client->deleteFile($variety_id . '.jpg');
+			}
+			catch (\Exception $e){
+			}
 			$this->s3_client->deleteFile($variety_id . '.jpg');
 			$this->image_model->delete($id);
 			if ($this->input->post("ajax") == 1) {

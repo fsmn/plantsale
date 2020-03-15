@@ -10,11 +10,6 @@ services:
       - ./src:/var/www/html:cached
       - ./db-backups:/var/www/db-backups:cached
       - ./flight-deck.yml:/secrets/flight-deck-web.yml
-    environment:
-      S3_KEY: 'db.friendsschoolplantsale.com/files'
-      S3_BUCKET: 't7-live-fsmn'
-      S3_ENDPOINT: 'nyc3.digitaloceanspaces.com'
-
   db:
     image: ten7/flight-deck-db:develop
     ports:

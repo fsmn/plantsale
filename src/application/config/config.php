@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$allowed_domains = array('plantsale', 'db.friendsschoolplantsale.com', 'backoffice.t7live.io', 'backoffice.t7stage.io', 'backoffice.t7test.io', "docker.test");
+$allowed_domains = array('plantsale.test', 'db.friendsschoolplantsale.com', 'backoffice.t7live.io', 'backoffice.t7stage.io', 'backoffice.t7test.io', "docker.test");
 $default_domain = 'db.friendsschoolplantsale.com';
 
 

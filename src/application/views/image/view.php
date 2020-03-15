@@ -12,7 +12,10 @@ if (isset($variety)):
 					'add-image',
 				],
 				'id' => 'add-image_$id',
-				'href' => base_url('variety/new_image/?variety_id=' . $variety->id),
+				'data_values' => [
+					'variety_id' => $variety->id,
+				],
+				'href' => base_url('variety/new_image/' . $variety->id),
 			]
 		);
 		?>

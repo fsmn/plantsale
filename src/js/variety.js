@@ -351,12 +351,13 @@ $(document).on("click",".variety-insert",function(){
 		
 		$(document).on("click",".add-image",function(e){
 			e.preventDefault;
+
 			form_data = {
 					ajax: 1,
 			};
 			$.ajax({
 				type: "get",
-				url: base_url + $(this).attr('href'),
+				url: $(this).attr('href'),
 				data: form_data,
 				success: function(data){
 					show_popup("Add an Image",data, "auto");

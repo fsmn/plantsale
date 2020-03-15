@@ -1,7 +1,7 @@
 <?php
 
 ?>
-<form method="post" enctype="multipart/form-data" name="variety-image-editor" id="variety-image-editor" action="<?php echo site_url("variety/attach_image");?>">
+<form method="post" enctype="multipart/form-data" name="variety-image-editor" id="variety-image-editor" action="<?php echo site_url('variety/attach_image');?>">
 <input type="hidden" name="variety_id" id="variety_id" value="<?php echo $variety_id;?>"/>
 <input type="hidden" name="id" id="id" value="<?php echo get_value($image,'id');?>"/>
 

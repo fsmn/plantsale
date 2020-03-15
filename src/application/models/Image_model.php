@@ -21,8 +21,8 @@ class Image_Model extends MY_Model
     function prepare_variables ($image_data)
     {
         $variables = array(
-                "variety_id",
-                "image_source"
+                'variety_id',
+                'image_source'
         );
         for ($i = 0; $i < count($variables); $i ++) {
             $my_variable = $variables[$i];
@@ -83,10 +83,6 @@ class Image_Model extends MY_Model
     {
         if(IS_EDITOR){
         $image = $this->get($id);
-        $filename = $_SERVER['DOCUMENT_ROOT'] . "files/" . $image->image_name;
-        if (file_exists($filename)) {
-            unlink($filename);
-        }
         $id_array = array(
                 'id' => $id
         );

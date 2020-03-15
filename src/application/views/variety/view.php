@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php if(isset($variety)):?>
+<?php if (isset($variety)): ?>
 	<input type="hidden" id="id" name="id" value="<?php echo $variety->id; ?>"/>
 	<input type="hidden" id="order_id" name="order_id"
 				 value="<?php echo get_value($current_order, 'id'); ?>"/>
@@ -7,7 +7,7 @@
 		<?php echo $variety->common_name . ': ' . $variety->variety; ?>
 	</h2>
 
-<?php $this->load->view('variety/menu'); ?>
+	<?php $this->load->view('variety/menu'); ?>
 	<div class="grouping block variety-info" id="variety">
 		<div class="triptych">
 			<h4>Basic Variety Info</h4>
@@ -145,10 +145,14 @@
 				<span class="field"><?php echo $variety->sunlight; ?></span>
 			</p>
 
-			<div class="well block" id="image">
+			<div class="well block">
 				<h4>Image</h4>
-				<?php $this->load->view("image/view"); ?>
-
+				<div id="image">
+				<?php $this->load->view('image/view', [
+					'variety' => $variety,
+					'file_path' => $file_path,
+				]); ?>
+				</div>
 			</div>
 		</div>
 		<div class='description-info triptych'>
@@ -224,19 +228,19 @@
 		<?php
 		$data = [
 			'orders' => $orders,
-			'show_names' => FALSE
+			'show_names' => FALSE,
 		];
 		$this->load->view('order/list', $data);
 		?>
 
 	</div>
-<?php
-$order_buttons [] = [
-	'selection' => 'order',
-	'text' => 'New Order',
-	'href' => site_url('order/create/?variety_id=' . $variety->id),
-	'class' => 'button new create dialog order-create',
-	'id' => 'oc_' . $variety->id,
-];
-echo create_button_bar($order_buttons);
+	<?php
+	$order_buttons [] = [
+		'selection' => 'order',
+		'text' => 'New Order',
+		'href' => site_url('order/create/?variety_id=' . $variety->id),
+		'class' => 'button new create dialog order-create',
+		'id' => 'oc_' . $variety->id,
+	];
+	echo create_button_bar($order_buttons);
 endif;

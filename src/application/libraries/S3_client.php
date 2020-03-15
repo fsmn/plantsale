@@ -6,20 +6,32 @@ use \Aws\S3\S3Client;
 /**
  * Class S3_client
  */
-class S3_client {
+class S3_client  {
 
 	private $client;
+
+	private $bucket = 't7-live-fsmn';
+
+	private $endpoint = 'nyc3.digitaloceanspaces.com';
+
+	private $key;
 
 	function __construct() {
 		$variables = [
 			'version' => 'latest',
 			'region' => 'nyc3',
-			'endpoint' => 'https://nyc3.digitaloceanspaces.com',
+			'endpoint' =>  'https://' . $this->endpoint,
 			'credentials' => [
 				'key' => getenv('T7_S3_KEY'),
 				'secret' => getenv('T7_S3_SECRET'),
 			],
 		];
+		if ($_SERVER['HTTP_HOST'] == 'db.friendsschoolplantsale.com') {
+			$this->key =  'db.friendsschoolplantsale.com/files';
+		}
+		else {
+			$this->key =  'db.friendsschoolplantsale.com/dev-files';
+		}
 		$this->client = new S3Client($variables);
 	}
 
@@ -44,8 +56,9 @@ class S3_client {
 	 */
 	public function putFile($file_name, $file, $type = 'image/jpg') {
 		$variables = [
-			'Bucket' => 't7-live-fsmn',
-			'Key' => 'db.friendsschoolplantsale.com/files/' . $file_name,
+			'Bucket' => $this->bucket,
+			'Key' => $this->key .'/'. $file_name,
+			'EndPoint' =>  $this->endpoint,
 			'SourceFile' => $file['full_path'],
 			'ContentType' => $type,
 			'StorageClass' => 'STANDARD',
@@ -58,25 +71,16 @@ class S3_client {
 
 	public function deleteFile($file_name) {
 		$variables = [
-			'Bucket' => 't7-live-fsmn',
-			'Key' => 'db.friendsschoolplantsale.com/files/' . $file_name,
-			'EndPoint' => 'https://nyc3.digitaloceanspaces.com',
+			'Bucket' => $this->bucket,
+			'Key' => $this->key . '/' . $file_name,
+			'EndPoint' =>  $this->endpoint,
 		];
 		$delete = $this->client->deleteObject($variables);
 		return $delete;
 	}
 
-	public function getBucket() {
-		return (object) [
-			'Bucket' => 't7-live-fsmn',
-			'Key' => 'db.friendsschoolplantsale.com/files/',
-			'EndPoint' => 'https://nyc3.digitaloceanspaces.com',
-		];
-	}
-
 	public function getPath() {
-		$bucket = $this->getBucket();
-		return $bucket->EndPoint . '/' . $bucket->Bucket . '/' . $bucket->Key;
+		return 'https://' . $this->bucket . '.'. $this->endpoint . '/' . $this->key;
 	}
 
 }

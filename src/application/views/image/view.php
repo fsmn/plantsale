@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit ('No direct script access allowed');
 if (isset($variety)):
 	if (isset($message)): ?>
-		<div class="warning"><?php print $message; ?></div>
+		<div class="message alert"><?php print $message; ?></div>
 	<?php endif; ?>
 	<?php if (!get_value($variety, 'image_id', FALSE) && IS_EDITOR):
 	print create_button([

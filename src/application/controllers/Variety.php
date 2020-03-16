@@ -682,7 +682,7 @@ class Variety extends MY_Controller {
 			try {
 				$this->s3_client->putFile($variety_id . '.jpg', $file_data);
 			} catch (Exception $e) {
-				$this->session->set_flashdata('warning', 'The file was not uploaded correctly');
+				$this->session->set_flashdata('alert', 'The file was not uploaded correctly. Please email the file and the url of this page to the site developer.');
 			}
 			redirect('variety/view/' . $variety_id);
 		}
@@ -701,7 +701,7 @@ class Variety extends MY_Controller {
 			$this->s3_client->deleteFile($variety_id . '.jpg');
 		} catch (Exception $e) {
 			$this->session->set_flashdata('warning', 'The file could not be deleted.');
-			$data['notice'] = 'The file was not successfully deleted from the S3 container, but the file record was deleted from the database. Please see the site developer for help with this';
+			$data['message'] = 'The file was not successfully deleted from the S3 container, but the file record was deleted from the database. Please see the site developer for help with this.';
 		}
 		$variety = $this->variety->get($variety_id);
 		if ($this->input->post('ajax') == 1) {

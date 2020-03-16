@@ -702,12 +702,16 @@ class Variety extends MY_Controller {
 	 */
 	function delete_image()
 	{
-		//if($_SERVER['HTTP_HOST'] == 'db.friendsschoolplantsale.com') {
 			$id = $this->input->post('id');
 			$this->load->library('s3_client');
 			$this->load->model('image_model');
 			$variety_id = $this->image_model->get($id)->variety_id;
-			$this->s3_client->deleteFile($variety_id . '.jpg');
+			try {
+				$this->s3_client->deleteFile($variety_id . '.jpg');
+			}
+			catch(Exception $e){
+			$this->session->set_flashdata('warning', 'The file could not be deleted.');
+			}
 			$this->image_model->delete($id);
 			$variety = $this->variety->get($variety_id);
 		if ($this->input->post('ajax') == 1) {
@@ -718,10 +722,6 @@ class Variety extends MY_Controller {
 			} else {
 				redirect('variety/view/' . $variety_id);
 			}
-		/*}
-		else {
-			echo 'Deleting images is not allowed on development environments';
-		}*/
 	}
 
 	/**

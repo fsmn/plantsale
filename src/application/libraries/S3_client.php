@@ -30,7 +30,7 @@ class S3_client  {
 			$this->key =  'db.friendsschoolplantsale.com/files';
 		}
 		else {
-			$this->key =  'db.friendsschoolplantsale.com/files';
+			$this->key =  'db.friendsschoolplantsale.com/dev-files';
 		}
 		$this->client = new S3Client($variables);
 	}

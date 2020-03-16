@@ -682,12 +682,17 @@ class Variety extends MY_Controller {
 		} else {
 
 			$file_data = $this->upload->data ();
-			$this->load->library('S3_client');
-			$this->s3_client->putFile($variety_id . '.jpg',$file_data);
 			$data ['image_display_name'] = $file_data ['file_name'];
 			$data ['image_source'] = $this->input->post ( 'image_source' );
 			$this->load->model ( 'image_model' );
 			$this->image_model->insert ( $variety_id, $file_data );
+			$this->load->library('S3_client');
+			try {
+				$this->s3_client->putFile($variety_id . '.jpg', $file_data);
+			}
+			catch(Exception $e){
+				$this->session->set_flashdata('notice','The file was not uploaded correctly');
+			}
 			redirect ( 'variety/view/' . $variety_id );
 		}
 	}
@@ -702,7 +707,7 @@ class Variety extends MY_Controller {
 			$this->load->library('s3_client');
 			$this->load->model('image_model');
 			$variety_id = $this->image_model->get($id)->variety_id;
-			//$this->s3_client->deleteFile($variety_id . '.jpg');
+			$this->s3_client->deleteFile($variety_id . '.jpg');
 			$this->image_model->delete($id);
 			$variety = $this->variety->get($variety_id);
 		if ($this->input->post('ajax') == 1) {

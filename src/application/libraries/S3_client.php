@@ -30,7 +30,7 @@ class S3_client  {
 			$this->key =  'db.friendsschoolplantsale.com/files';
 		}
 		else {
-			$this->key =  'db.friendsschoolplantsale.com/dev-files';
+			$this->key =  'db.friendsschoolplantsale.com/files';
 		}
 		$this->client = new S3Client($variables);
 	}
@@ -62,7 +62,7 @@ class S3_client  {
 			'SourceFile' => $file['full_path'],
 			'ContentType' => $type,
 			'StorageClass' => 'STANDARD',
-			'ACL' => 'public-read',
+			'ACL' => 'public-read-write',
 		];
 
 		$insert = $this->client->putObject($variables);

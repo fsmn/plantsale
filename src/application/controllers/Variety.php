@@ -701,7 +701,7 @@ class Variety extends MY_Controller {
 			$this->s3_client->deleteFile($variety_id . '.jpg');
 		} catch (Exception $e) {
 			$this->session->set_flashdata('warning', 'The file could not be deleted.');
-			redirect('variety/view/' . $variety_id);
+			$data['notice'] = 'The file was not successfully deleted from the S3 container, but the file record was deleted from the database. Please see the site developer for help with this';
 		}
 		$variety = $this->variety->get($variety_id);
 		if ($this->input->post('ajax') == 1) {

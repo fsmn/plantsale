@@ -62,7 +62,7 @@ class S3_client  {
 			'SourceFile' => $file['full_path'],
 			'ContentType' => $type,
 			'StorageClass' => 'STANDARD',
-			'ACL' => 'public-read',
+			'ACL' => 'public-read-write',
 		];
 
 		$insert = $this->client->putObject($variables);

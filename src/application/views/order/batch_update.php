@@ -8,7 +8,10 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <input type="hidden" id="action" name="action" value="update"/>
 <h2>DANGER: Updating <?php echo count($ids);?> Records</h2>
 <p class="notice">Changes you submit here cannot be undone!</p>
-
+	<div class="orders-flat_size field">
+		<label for="year">Year (Be very careful here):&nbsp;</label>
+		<input type="text" name="year" value="" autocomplete="off"/>
+	</div>
 	<div class="orders-flat_size field">
 		<label for="flat_size">Flat Size:&nbsp;</label> <input type="text"
 			name="flat_size" value="" autocomplete="off"/>

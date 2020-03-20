@@ -6,6 +6,7 @@ defined('BASEPATH') or exit ('No direct script access allowed');
 
 class Variety extends MY_Controller {
 
+	public $s3_vars;
 
 	function __construct() {
 		parent::__construct();
@@ -16,17 +17,15 @@ class Variety extends MY_Controller {
 		$this->load->model("common_model", "common");
 		$this->load->model("order_model", "order");
 		$this->load->model("flag_model", "flag");
+		$this->s3_vars = [
+			'key'=> $this->config->item('access_key'),
+			'secret' => $this->config->item('secret_key'),
+		];
 		// $this->load->library ( "field" );
 	}
 
 	function index() {
 		// $this->variety->update_needs_bag ();
-	}
-
-	function test() {
-		$this->load->library('s3');
-		// List your buckets:
-		$this->s3->putBucket(getenv('S3_BUCKET', 't7-live-fsmn'), 'public-read');
 	}
 
 	function create() {
@@ -71,20 +70,8 @@ class Variety extends MY_Controller {
 	}
 
 	function view() {
-		$this->load->library('s3_client');
-		// $this->output->enable_profiler(TRUE);
+		$this->load->library('s3_client',$this->s3_vars);
 		$id = $this->uri->segment(3);
-		//		$formats = array (
-		//			'statement',
-		//			'tabloid',
-		//			'letter',
-		//			'shovel_foot',
-		//			'thumbnail'
-		//		);
-		// foreach ($formats as $format) {
-		//$this->resize_image ( $id, 'statement', TRUE );
-		// }
-
 		$variety = $this->variety->get($id);
 		$current_order = $this->order->get_for_variety($id, get_current_year());
 		$data ['current_order'] = $current_order;
@@ -678,7 +665,7 @@ class Variety extends MY_Controller {
 			$data ['image_source'] = $this->input->post('image_source');
 			$this->load->model('image_model');
 			$this->image_model->insert($variety_id, $file_data);
-			$this->load->library('S3_client');
+			$this->load->library('S3_client',$this->s3_vars);
 			try {
 				$this->s3_client->putFile($variety_id . '.jpg', $file_data);
 			} catch (Exception $e) {
@@ -693,7 +680,7 @@ class Variety extends MY_Controller {
 	 */
 	function delete_image() {
 		$id = $this->input->post('id');
-		$this->load->library('s3_client');
+		$this->load->library('s3_client', $this->s3_vars);
 		$this->load->model('image_model');
 		$variety_id = $this->image_model->get($id)->variety_id;
 		$this->image_model->delete($id);

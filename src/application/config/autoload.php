@@ -80,7 +80,7 @@ $autoload['helper'] = array('form','url','file','date', 'general', 'auth', 'inte
 |
 */
 
-$autoload['config'] = [];
+$autoload['config'] = ['s3'];
 
 
 /*

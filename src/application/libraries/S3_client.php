@@ -16,14 +16,14 @@ class S3_client  {
 
 	private $key;
 
-	function __construct() {
+	function __construct($vars) {
 		$variables = [
 			'version' => 'latest',
 			'region' => 'nyc3',
 			'endpoint' =>  'https://' . $this->endpoint,
 			'credentials' => [
-				'key' => '{{ LIVE_BACK_S3_KEY }}',
-				'secret' => '{{ LIVE_BACK_S3_SECRET }}',
+				'key' => $vars['key'],
+				'secret' => $vars['secret'],
 			],
 		];
 		if ($_SERVER['HTTP_HOST'] == 'db.friendsschoolplantsale.com') {

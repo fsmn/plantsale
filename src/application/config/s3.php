@@ -45,7 +45,6 @@ $config['access_key'] = '{{ backoffice_s3_key }}';
 */
 
 $config['secret_key'] = '{{ backoffice_s3_secret }}';
-
 /*
 |--------------------------------------------------------------------------
 | Bucket Name
@@ -88,8 +87,12 @@ $config['s3_url'] = 'https://t7-live-fsmn.nyc3.cdn.digitaloceanspaces.com';
 | Used as best-practice on Heroku
 |
 */
-
-$config['get_from_enviroment'] = FALSE;
+if($_SERVER['HTTP_HOST'] == 'plantsale.test'){
+	$config['get_from_enviroment'] = TRUE;
+}
+else {
+	$config['get_from_enviroment'] = FALSE;
+}
 
 /*
 |--------------------------------------------------------------------------

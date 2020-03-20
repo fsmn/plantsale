@@ -45,48 +45,14 @@ $config['access_key'] = '{{ backoffice_s3_key }}';
 */
 
 $config['secret_key'] = '{{ backoffice_s3_secret }}';
-/*
-|--------------------------------------------------------------------------
-| Bucket Name
-|--------------------------------------------------------------------------
-|
-| Your Amazon Bucket Name.
-|
-*/
 
 $config['bucket_name'] = 't7-live-fsmn';
 
-/*
-|--------------------------------------------------------------------------
-| Bucket Folder Name
-|--------------------------------------------------------------------------
-|
-| Your Amazon Bucket Folder Name.
-|
-*/
-
 $config['folder_name'] = '{{ backoffice_s3_prefix }}';
-
-/*
-|--------------------------------------------------------------------------
-| Bucket Folder Name
-|--------------------------------------------------------------------------
-|
-| Your Amazon Bucket Folder Name.
-|
-*/
 
 $config['s3_url'] = 'https://t7-live-fsmn.nyc3.cdn.digitaloceanspaces.com';
 
-/*
-|--------------------------------------------------------------------------
-| Use Enviroment?
-|--------------------------------------------------------------------------
-|
-| Get Settings from enviroment instead of this file? 
-| Used as best-practice on Heroku
-|
-*/
+
 if($_SERVER['HTTP_HOST'] == 'plantsale.test'){
 	$config['get_from_enviroment'] = TRUE;
 }
@@ -94,26 +60,13 @@ else {
 	$config['get_from_enviroment'] = FALSE;
 }
 
-/*
-|--------------------------------------------------------------------------
-| Access Key Name
-|--------------------------------------------------------------------------
-|
-| Name for access key in enviroment
-|
-*/
+/* local environment variables */
+
 $config['access_key_envname'] = 'S3_KEY';
 
-/*
-|--------------------------------------------------------------------------
-| Access Key Name
-|--------------------------------------------------------------------------
-|
-| Name for access key in enviroment
-|
-*/
 $config['secret_key_envname'] = 'S3_SECRET';
 
+$config['folder_name_envname'] = 'S3_FOLDER_NAME';
 /*
 |--------------------------------------------------------------------------
 | If get from enviroment, do so and overwrite fixed vars above
@@ -124,5 +77,6 @@ $config['secret_key_envname'] = 'S3_SECRET';
 if ($config['get_from_enviroment']){
 	$config['access_key'] = getenv($config['access_key_envname']);
 	$config['secret_key'] = getenv($config['secret_key_envname']);
+	$config['folder_name'] = getenv($config['folder_name_envname']);
 
 }

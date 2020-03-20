@@ -14,7 +14,7 @@ class S3_client  {
 
 	private $endpoint = 'nyc3.digitaloceanspaces.com';
 
-	private $key;
+	private $folder_name;
 
 	function __construct($vars) {
 		$variables = [
@@ -26,11 +26,11 @@ class S3_client  {
 				'secret' => $vars['secret'],
 			],
 		];
-		if ($_SERVER['HTTP_HOST'] == 'db.friendsschoolplantsale.com') {
-			$this->key =  'db.friendsschoolplantsale.com/files';
+		if(array_key_exists('folder_name', $vars)){
+			$this->folder_name =  $vars['folder_name'];
 		}
-		else {
-			$this->key =  'db.friendsschoolplantsale.com/dev-files';
+		if(array_key_exists('bucket', $vars)){
+			$this->bucket = $vars['bucket'];
 		}
 		$this->client = new S3Client($variables);
 	}
@@ -57,7 +57,7 @@ class S3_client  {
 	public function putFile($file_name, $file, $type = 'image/jpg') {
 		$variables = [
 			'Bucket' => $this->bucket,
-			'Key' => $this->key .'/'. $file_name,
+			'Key' => $this->folder_name .'/'. $file_name,
 			'EndPoint' =>  $this->endpoint,
 			'SourceFile' => $file['full_path'],
 			'ContentType' => $type,
@@ -72,7 +72,7 @@ class S3_client  {
 	public function deleteFile($file_name) {
 		$variables = [
 			'Bucket' => $this->bucket,
-			'Key' => $this->key . '/' . $file_name,
+			'Key' => $this->folder_name . '/' . $file_name,
 			'EndPoint' =>  $this->endpoint,
 		];
 		$delete = $this->client->deleteObject($variables);
@@ -80,7 +80,6 @@ class S3_client  {
 	}
 
 	public function getPath() {
-		return 'https://' . $this->bucket . '.'. $this->endpoint . '/' . $this->key;
+		return 'https://' . $this->bucket . '.'. $this->endpoint . '/' . $this->folder_name;
 	}
-
 }

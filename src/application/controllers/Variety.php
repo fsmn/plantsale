@@ -8,6 +8,7 @@ class Variety extends MY_Controller {
 
 	public $s3_vars;
 
+
 	function __construct() {
 		parent::__construct();
 		if (IS_INVENTORY) {
@@ -18,8 +19,14 @@ class Variety extends MY_Controller {
 		$this->load->model("order_model", "order");
 		$this->load->model("flag_model", "flag");
 		$this->s3_vars = [
+			'folder_name' => $this->config->item('folder_name'),
+			'bucket' => $this->config->item('bucket_name'),
 			'key'=> $this->config->item('access_key'),
 			'secret' => $this->config->item('secret_key'),
+			's3_url' => $this->config->item('s3_url'),
+			'region' => $this->config->item('s3fs_region'),
+			'cname_url' => $this->config->item('cname_url'),
+			'hostname' => $this->config->item('hostname'),
 		];
 		// $this->load->library ( "field" );
 	}

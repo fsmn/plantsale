@@ -22,8 +22,8 @@ class S3_client  {
 			'region' => 'nyc3',
 			'endpoint' =>  'https://' . $this->endpoint,
 			'credentials' => [
-				'key' => getenv('LIVE_BACK_S3_KEY'),
-				'secret' => getenv('LIVE_BACK_S3_SECRET'),
+				'key' => '{{ LIVE_BACK_S3_KEY }}',
+				'secret' => '{{ LIVE_BACK_S3_SECRET }}',
 			],
 		];
 		if ($_SERVER['HTTP_HOST'] == 'db.friendsschoolplantsale.com') {

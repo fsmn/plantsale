@@ -165,7 +165,6 @@ class Variety_Model extends MY_Model {
 		$this->db->join("orders", "orders.variety_id = variety.id", "RIGHT");
 		$this->db->where("orders.year", $year);
 		$result = $this->db->get()->num_rows();
-		// 		$this->_log();
 		return $result;
 	}
 
@@ -291,7 +290,6 @@ class Variety_Model extends MY_Model {
 		$this->db->select("sum(`orders`.`count_midsale`) as midsale_count");
 		$this->db->select("category.category,category.id as category_id");
 		$result = $this->db->get()->result();
-		// 		 $this->_log();
 		return $result;
 	}
 
@@ -448,7 +446,6 @@ class Variety_Model extends MY_Model {
 		$this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
 		$this->db->group_by("variety.id");
 		$result = $this->db->get()->result();
-		$this->_log();
 		return $result;
 	}
 

@@ -133,7 +133,7 @@ class Grower extends MY_Controller {
 	function totals() {
 		$year = $this->input->get('year');
 		if (!$year) {
-			$year = cookie("sale_year");
+			$year = $this->session->userdata("sale_year");
 		}
 		$data['year'] = $year;
 		$data ["orphan_count"] = count($this->grower->get_orphans());

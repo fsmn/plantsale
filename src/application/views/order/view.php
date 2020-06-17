@@ -3,7 +3,7 @@
 ?>
 <div class="block">
 <h3>Order Info for 
-<?php echo $order->variety;?>, <?php echo get_current_year();?>
+<?php echo $order->variety;?>, <?php echo $this->get_sale_year();?>
 </h3>
 
 <p>

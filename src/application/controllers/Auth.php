@@ -57,7 +57,6 @@ class Auth extends CI_Controller {
 	function login() {
 		$_COOKIE = [];
 		$this->data ['title'] = "Login";
-
 		// validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -106,7 +105,6 @@ class Auth extends CI_Controller {
 			$this->data ['target'] = 'auth/login';
 
 			$this->_render_page('page/index', $this->data);
-			$this->session->set_userdata("sale_year", get_current_year());
 		}
 
 	}
@@ -122,7 +120,6 @@ class Auth extends CI_Controller {
 		$logout = $this->ion_auth->logout();
 
 		// redirect them to the login page
-		$this->session->set_flashdata('message', $this->ion_auth->messages());
 		redirect('auth/login', 'refresh');
 
 	}

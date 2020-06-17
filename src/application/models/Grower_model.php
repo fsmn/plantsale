@@ -115,7 +115,6 @@ class grower_model extends MY_Model
         $this->db->order_by("grower.id", "ASC");
         $this->db->group_by("grower.id");
         $result = $this->db->get()->result();
-       // $this->_log("alert");
         return $result;
     }
 
@@ -130,7 +129,6 @@ class grower_model extends MY_Model
         		LEFT JOIN `users` AS `users` ON `grower`.`user_id` = `users`.`id`
                 GROUP BY `o`.`grower_id`",$year, $id);
         $result = $this->db->query($query)->row();
-        $this->_log("alert");
         return $result;
     }
 }

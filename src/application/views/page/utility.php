@@ -8,9 +8,10 @@ $buttons [] = [
 	"selection" => "index",
 	"text" => sprintf("Current Year: %s", $this->session->userdata("sale_year")),
 	"class" => [
-		"button edit set-current-year",
+		"button edit dialog",
 	],
 	"style" => "edit",
+	"href" => base_url('index/show_set_year'),
 	"title" => "Set the current working year of the plant sale",
 ];
 

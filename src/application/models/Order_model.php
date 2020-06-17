@@ -83,7 +83,6 @@ class Order_Model extends MY_Model {
 	function update($id, $values = array())
 	{
 		$output = $this->_update ( "orders", $id, $values );
-		$this->_log();
 		return $output;
 	}
 	
@@ -214,7 +213,6 @@ class Order_Model extends MY_Model {
 		$this->db->select ( "category.category,subcategory.subcategory" );
 		$this->db->group_by ( "orders.id" );
 		$result = $this->db->get ()->result ();
-		$this->_log();
 		return $result;
 	}
 

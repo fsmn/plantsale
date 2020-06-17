@@ -56,7 +56,7 @@ class Variety extends MY_Controller {
 		$id = $this->variety->insert();
 		if ($this->input->post('add_order')) {
 			$data ['variety_id'] = $id;
-			$data ['order'] = $this->order->get_previous_year($data ['variety_id'], get_current_year());
+			$data ['order'] = $this->order->get_previous_year($data ['variety_id'], $this->get_sale_year());
 			$pot_sizes = $this->order->get_pot_sizes();
 			$data ['pot_sizes'] = get_keyed_pairs($pot_sizes, [
 				'pot_size',
@@ -86,12 +86,12 @@ class Variety extends MY_Controller {
 		// }
 
 		$variety = $this->variety->get($id);
-		$current_order = $this->order->get_for_variety($id, get_current_year());
+		$current_order = $this->order->get_for_variety($id, $this->get_sale_year());
 		$data ['current_order'] = $current_order;
 		$data ['file_path'] = $this->s3_client->getPath();
 		$data ['orders'] = $this->order->get_for_variety($id);
 		$data ['flags'] = $this->flag->get_for_variety($id);
-		$data ['is_new'] = $variety->new_year == get_current_year();
+		$data ['is_new'] = $variety->new_year == $this->get_sale_year();
 		$data ['variety'] = $variety;
 		$data ['target'] = 'variety/view';
 		$data ['title'] = sprintf('Viewing Info for %s (variety)', $variety->variety);
@@ -565,7 +565,7 @@ class Variety extends MY_Controller {
 			if ($plants) {
 				foreach ($plants as $plant) {
 					$data ['plants'] [$plant] ['variety'] = $this->variety->get($plant);
-					$data ['plants'] [$plant] ['order'] = $this->order->get_for_variety($plant, get_current_year());
+					$data ['plants'] [$plant] ['order'] = $this->order->get_for_variety($plant, $this->get_sale_year());
 					$data ['plants'] [$plant] ['flags'] = $this->flag->get_for_variety($plant);
 					if ($format) {
 						// $alerts [] = $this->resize_image ( $plant, $format, TRUE );
@@ -617,15 +617,15 @@ class Variety extends MY_Controller {
 		$plants = $this->session->userdata("print_list");
 		foreach ($plants as $plant) {
 			$data ['plants'] [$plant] ['variety'] = $this->variety->get($plant);
-			$data ['plants'] [$plant] ['order'] = $this->order->get_for_variety($plant, get_current_year());
+			$data ['plants'] [$plant] ['order'] = $this->order->get_for_variety($plant, $this->get_sale_year());
 			$data ['plants'] [$plant] ['flags'] = $this->flag->get_for_variety($plant);
 		}
 	}
 
 	function show_copy_text() {
 		// @TODO merge this function with the search function.
-		$data ["plants"] = $this->variety->get_varieties_for_year(get_current_year(), TRUE);
-		$data ["year"] = get_current_year();
+		$data ["plants"] = $this->variety->get_varieties_for_year($this->get_sale_year(), TRUE);
+		$data ["year"] = $this->get_sale_year();
 		$data ["title"] = "Printable List";
 		$data ["target"] = "variety/print/paper_waste";
 		$data ["format"] = "print";

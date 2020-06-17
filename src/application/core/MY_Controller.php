@@ -30,7 +30,8 @@ class MY_Controller extends CI_Controller
 				define ( "IS_INVENTORY", $this->ion_auth->in_group ( array (
 						4 
 				) ) );
-				bake_cookie("sale_year", get_current_year());
+				bake_cookie("sale_year", $this->get_sale_year());
+				$this->session->set_userdata('sale_year', $this->get_sale_year());
 			}
 		}
 
@@ -55,5 +56,19 @@ class MY_Controller extends CI_Controller
 		function _log ( $string, $target = "notice" )
 		{
 			$this->session->set_flashdata ( $target, $string );
+		}
+
+		function get_sale_year(){
+			$this->load->model('Settings_model','settings');
+			$sale_year = $this->settings->get('sale_year');
+			if(!$sale_year){
+				$sale_year = $this->settings->set(['name'=>'sale_year','label'=>'Sale Year','value'=>get_current_year()]);
+			}
+			return $sale_year->value;
+		}
+
+		function set_sale_year($year){
+			$this->load->model('Settings_model','settings');
+			$this->settings->set('sale_year', $year);
 		}
 	}

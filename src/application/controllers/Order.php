@@ -377,7 +377,7 @@ class Order extends MY_Controller {
 
 	function create() {
 		$data ["variety_id"] = $this->input->get("variety_id");
-		$data ["order"] = $this->order->get_previous_year($data ["variety_id"], get_current_year());
+		$data ["order"] = $this->order->get_previous_year($data ["variety_id"], $this->get_sale_year());
 		if (empty ($data ["order"])) {
 			$this->load->model("variety_model", "variety");
 			$order = new stdClass ();
@@ -385,7 +385,7 @@ class Order extends MY_Controller {
 			$data ["order"] = $order;
 		}
 		if ($this->input->get('reorder')) {
-			$data ["order"]->year = get_current_year();
+			$data ["order"]->year = $this->get_sale_year();
 		}
 		$pot_sizes = $this->order->get_pot_sizes();
 		$data ["pot_sizes"] = get_keyed_pairs($pot_sizes, [

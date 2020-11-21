@@ -51,11 +51,3 @@ flightdeck_web:
       enabled: "{{ lookup('env', 'PHP_XDEBUG_ENABLED') | default(false, true) }}"
       autostart: yes
       remoteHost: 10.254.254.254
-
-flightdeck_varnish:
-  secret: "secret"
-  hostPort: "6081"
-  controlPort: "6082"
-  memSize: "256m"
-  storageFile: "/var/lib/varnish/storage.bin"
-  storageSize: "1024m"

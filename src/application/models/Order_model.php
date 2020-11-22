@@ -209,7 +209,7 @@ class Order_Model extends MY_Model {
 			
 			// if the $order_field is a price field or integer, sort as number.
 			if ($order_field == 'flat_size') {
-				$this->db->order_by ( 'CAST(`$order_field` as DECIMAL)', $order_direction );
+				$this->db->order_by ( 'CAST(`' . $order_field. '` as DECIMAL)', $order_direction );
 			} elseif ($order_field == 'subcategory') {
 				$this->load->helper ( 'export' );
 				$this->db->order_by ( '(' . subcategory_order () . ')' );
@@ -314,13 +314,13 @@ class Order_Model extends MY_Model {
 			
 			// if the $order_field is a price field or integer, sort as number.
 			if ($order_field == 'flat_size') {
-				$order [] = ('CAST(`$order_field` as DECIMAL) $order_direction');
+				$order [] = ('CAST(`' . $order_field .'` as DECIMAL) ' . $order_direction);
 			} elseif ($order_field == 'subcategory') {
 				$this->load->helper ( 'export' );
 				$order [] = ('(' . subcategory_order () . ')');
 				$order[] = 'subcategory.subcategory';
 			} else {
-				$order [] = ('$order_field $order_direction');
+				$order [] = ($order_field .' ' . $order_direction);
 			}
 		}
 		$where_string = '';

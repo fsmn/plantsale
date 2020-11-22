@@ -112,12 +112,6 @@ class Order extends MY_Controller {
 				$data ["is_tracking"] = FALSE;
 			}
 
-			// if ($show_last_only = $this->input->get ( "show_last_only" )) {
-			// bake_cookie ( "show_last_only", $show_last_only );
-			// } else {
-			// burn_cookie ( "show_last_only" );
-			// }
-
 			$sorting ["fields"] = [
 				"catalog_number",
 			];
@@ -185,7 +179,6 @@ class Order extends MY_Controller {
 			foreach ($options as $key => $value) {
 				$where [] = sprintf("`%s` = '%s'", $key, $value);
 			}
-			// $this->session->set_flashdata ( "alert", sprintf ( "WHERE %s", implode ( " AND ", $where ) ) );
 
 			$data ["options"] = $options;
 			$data ["orders"] = $orders;

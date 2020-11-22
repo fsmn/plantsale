@@ -1,28 +1,46 @@
 <?php
+
 class Database extends MY_Controller {
 
-	function __construct()
-	{
-		parent::__construct ();
+	function __construct() {
+		parent::__construct();
 	}
 
-	function update_database(){
-		$fields = ['count_wednesday','count_thursday','count_friday','count_saturday','received_presale','received_wednesday','received_thursday','received_friday','received_saturday'];
+	function update_database() {
+		$this->db->query('ALTER TABLE `orders` CHANGE `count_midsale` `count_midsale` DECIMAL(10,2) NULL DEFAULT NULL;');
+		$this->db->query('ALTER TABLE `orders` CHANGE `count_presale` `count_presale` DECIMAL(10,2) NULL DEFAULT NULL;');
+		$this->db->query('ALTER TABLE `orders` CHANGE `received_midsale` `received_midsale` DECIMAL(10,2) NULL DEFAULT NULL;');
+		$this->db->query('ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;');
+		$this->db->query('ALTER TABLE `orders` CHANGE `count_dead` `count_dead` DECIMAL(10,2) NULL DEFAULT NULL;');
+
+		die();
+		$fields = [
+			'count_wednesday',
+			'count_thursday',
+			'count_friday',
+			'count_saturday',
+			'received_wednesday',
+			'received_thursday',
+			'received_friday',
+			'received_saturday',
+		];
 		$previous_field = 'received_presale';
 		$success = [];
 		$failure = [];
-		foreach($fields as $field) {
+		foreach ($fields as $field) {
 			try {
-				$this->db->query('ALTER TABLE `orders` ADD `' . $field . '` DECIMAL(10,2) NULL AFTER `'. $previous_field . '`;');
+				$this->db->query('ALTER TABLE `orders` ADD `' . $field . '` DECIMAL(10,2) 0.00 AFTER `' . $previous_field . '`;');
 				$success[] = $field;
+
+
 			} catch (Exception $exception) {
 				$failure[] = $field;
 			}
 			$previous_field = $field;
 		}
-		$message = sprintf('Succesful updates: %s<br/>Errors: %s', implode(', ', $success), implode(', ', $failure));
+		$message = sprintf('Successful updates: %s<br/>Errors: %s', implode(', ', $success), implode(', ', $failure));
 
-		$this->session->set_flashdata ( "notice", $message );
+		$this->session->set_flashdata("notice", $message);
 		redirect();
 
 	}

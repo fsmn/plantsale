@@ -1,9 +1,10 @@
 <?php defined('BASEPATH') or exit ('No direct script access allowed');
-
+if (empty($order)) {
+	return FALSE;
+}
 $flat_cost = $order->flat_cost;
 $plant_cost = $order->plant_cost;
-
-
+$is_covid_year = get_value($order, 'year') == 2021;
 if ($order->flat_cost && !$order->plant_cost) {
 	$flat_cost = $order->flat_cost;
 	$plant_cost = $order->flat_size / $order->flat_cost;
@@ -80,43 +81,38 @@ $row_classes = implode(" ", $row_classes);
 	<td class="order-price field">
 		$<?php echo edit_field("price", $order->price, "", "order", $order->id, ["envelope" => "span"]); ?>
 	</td>
-	<td class="order-count_presale field">
-		<?php echo edit_field("count_presale", $order->count_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-received_presale field">
-		<?php echo edit_field("received_presale", $order->received_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-count_wednesday field">
-		<?php echo edit_field("count_presale", $order->count_wednesday, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-received_wednesday field">
-		<?php echo edit_field("received_presale", $order->received_wednesday, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-count_thursday field">
-		<?php echo edit_field("count_presale", $order->count_thursday, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-received_thursday field">
-		<?php echo edit_field("received_presale", $order->received_thursday, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-count_friday field">
-		<?php echo edit_field("count_presale", $order->count_friday, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-received_friday field">
-		<?php echo edit_field("received_presale", $order->received_friday, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-count_saturday field">
-		<?php echo edit_field("count_presale", $order->count_saturday, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-received_saturday field">
-		<?php echo edit_field("received_presale", $order->received_saturday, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-count_midsale field">
-		<?php echo edit_field("count_midsale", $order->count_midsale, "", "order", $order->id, ["envelope" => "span"]); ?>
-	</td>
-	<td class="order-received_midsale field">
-		<?php echo edit_field("received_midsale", $order->received_midsale, "", "order", $order->id, ["envelope" => "span"]); ?>
+	<td class="order-count_presale field" title="Enter 'x' to clear value">
+		<?php echo edit_field('count_presale', $order->count_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
 
 	</td>
+	<td class="order-received_presale field" title="Enter 'x' to clear value">
+		<?php echo edit_field('received_presale', $order->received_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
+	</td>
+	<?php $field_list = [
+			'wednesday' => $is_covid_year,
+			'thursday' => $is_covid_year,
+			'friday' => $is_covid_year,
+			'saturday' => $is_covid_year,
+			'midsale' => !$is_covid_year,
+	]; ?>
+	<?php foreach ($field_list as $field => $value): ?>
+		<?php $field_name = 'count_' . $field; ?>
+		<td class="order-<?php print $field_name; ?> field"
+			title="Enter 'x' to clear value">
+			<?php if ($value): ?>
+				<?php echo edit_field($field_name, get_value($order, $field_name), NULL, 'order', $order->id, ['envelope' => 'span']); ?>
+			<?php endif; ?>
+		</td>
+		<?php $field_name = 'received_' . $field; ?>
+		<td class="order-<?php print $field_name; ?> field"
+			title="Enter 'x' to clear value">
+			<?php if ($value): ?>
+				<?php echo edit_field($field_name, get_value($order, $field_name), NULL, 'order', $order->id, ['envelope' => 'span']); ?>
+			<?php endif; ?>
+		</td>
+	<?php endforeach; ?>
+
+
 	<td class="order-sellout_friday field">
 		<?php echo edit_field("sellout_friday", get_as_time($order->sellout_friday), "", "order", $order->id, [
 				"envelope" => "span",

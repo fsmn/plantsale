@@ -281,14 +281,19 @@ class Order extends MY_Controller {
 		if ($field == "received_presale" && $value == "f") {
 			$value = 0;
 		}
-		$values = [
-			$field => $value,
-		];
+		if ($value === 'x') {
+		$output = 	$this->order->clear($id, $field);
+		}
+		else {
+			$values = [
+				$field => $value,
+			];
 
-		$output = $this->order->update($id, $values);
+			$output = $this->order->update($id, $values);
 
-		if ($this->input->post("format") == "currency") {
-			$output = get_as_price($output);
+			if ($this->input->post("format") == "currency") {
+				$output = get_as_price($output);
+			}
 		}
 		echo $output;
 	}
@@ -425,9 +430,7 @@ class Order extends MY_Controller {
 
 	function update() {
 		$id = $this->input->post("id");
-		$variety_id = $this->input->post("variety_id");
 		$this->order->update($id);
-		// redirect ( "variety/view/$variety_id" );
 		redirect($this->input->post("redirect_url"));
 	}
 

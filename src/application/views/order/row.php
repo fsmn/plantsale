@@ -89,7 +89,6 @@ $row_classes = implode(" ", $row_classes);
 		<?php echo edit_field('received_presale', $order->received_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
 	</td>
 	<?php $field_list = [
-			'wednesday' => $is_covid_year,
 			'thursday' => $is_covid_year,
 			'friday' => $is_covid_year,
 			'saturday' => $is_covid_year,

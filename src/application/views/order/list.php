@@ -25,10 +25,6 @@ if ($orders) :
 			],
 			[
 					'colspan' => 2,
-					'label' => 'Wednesday',
-			],
-			[
-					'colspan' => 2,
 					'label' => 'Thursday',
 			],
 			[
@@ -64,8 +60,6 @@ if ($orders) :
 			'Flat Area<br/>(Sq Ft)',
 			'Plant Cost',
 			'Price',
-			'Ord&rsquo;d',
-			'Rec&rsquo;d',
 			'Ord&rsquo;d',
 			'Rec&rsquo;d',
 			'Ord&rsquo;d',

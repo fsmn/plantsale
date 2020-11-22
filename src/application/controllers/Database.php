@@ -90,32 +90,24 @@ class Database extends MY_Controller {
 		return 'UPDATE `variety` set new_year = 2021 where new_year = 2020;';
 	}
 
-
 	/**
 	 * @return string
 	 */
 	function db_update_10(){
-		return 'ALTER TABLE `orders` ADD `count_wednesday` DECIMAL(10,2) NULL;';
-	}
-
-	/**
-	 * @return string
-	 */
-	function db_update_11(){
 		return 'ALTER TABLE `orders` ADD `count_thursday` DECIMAL(10,2) NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_12(){
+	function db_update_11(){
 		return 'ALTER TABLE `orders` ADD `count_friday` DECIMAL(10,2) NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_13(){
+	function db_update_12(){
 		return 'ALTER TABLE `orders` ADD `count_saturday` DECIMAL(10,2) NULL;';
 
 	}
@@ -123,30 +115,21 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_14(){
-		return 'ALTER TABLE `orders` ADD `received_wednesday` DECIMAL(10,2) NULL;';
-
-	}
-
-	/**
-	 * @return string
-	 */
-	function db_update_15(){
+	function db_update_13(){
 		return 'ALTER TABLE `orders` ADD `received_thursday` DECIMAL(10,2) NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_16(){
+	function db_update_14(){
 		return 'ALTER TABLE `orders` ADD `received_friday` DECIMAL(10,2) NULL;';
-
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_17(){
+	function db_update_15(){
 		return 'ALTER TABLE `orders` ADD `received_saturday` DECIMAL(10,2) NULL;';
 	}
 

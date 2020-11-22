@@ -7,7 +7,7 @@ if(empty($order)) {
 $days =['presale','midsale'];
 if(get_value($order,'year') == 2021){
 	$days = [
-			'presale','wednesday','thursday','friday','saturday',
+			'presale','thursday','friday','saturday',
 	];
 }
 ?>

@@ -500,6 +500,8 @@ class Auth extends CI_Controller {
 		}
 
 		$user = $this->ion_auth->user($id)->row();
+		$this->load->model('User_preferences_model','user_preferences');
+		$preferences = $this->user_preferences->get_all($id);
 		$groups = $this->ion_auth->groups()->result_array();
 		$currentGroups = $this->ion_auth->get_users_groups($id)->result();
 		$tables = $this->config->item('tables', 'ion_auth');
@@ -521,6 +523,7 @@ class Auth extends CI_Controller {
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name'),
 				'email' => $this->input->post('email'),
+
 			];
 
 			// Only allow updating groups if user is admin
@@ -600,6 +603,7 @@ class Auth extends CI_Controller {
 			'id' => 'password_confirm',
 			'type' => 'password',
 		];
+		$this->data['preferences'] = $preferences;
 		$this->data ['target'] = 'auth/edit_user';
 		$this->data['ajax'] = $this->input->get("ajax");
 		if ($this->data['ajax'] == 1) {

@@ -42,5 +42,6 @@ class User_Preferences_Model extends MY_Model
     	$this->db->where('preference_id', $preference_id);
     	$this->db->set('value',$value);
 		$this->db->update('user_preferences');
+		$this->_log();
 	}
 }

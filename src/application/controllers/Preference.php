@@ -26,9 +26,8 @@ class Preference extends MY_Controller{
 		$user_id = $this->input->post('user_id');
 		$preference_list = $this->user_preferences->get_all($user_id);
 		foreach($preference_list as $preference){
-			if(!empty($this->input->post($preference->id))){
 				$this->user_preferences->update($user_id, $preference->id, $this->input->post($preference->id));
-			}
 		}
+		redirect('preference/edit/' . $user_id);
 	}
 }

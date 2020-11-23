@@ -406,3 +406,8 @@ function get_button_style($style)
 	}
 	return $class;
 }
+
+
+function format_preference($preference){
+	$output = $preference;
+}

@@ -6,8 +6,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // chrisdart@cerebratorium.com
 class Preferences_model extends MY_Model
 {
-    var $user_id;
-    var $preference_id;
+    var $id;
+    var $name;
+    var $description;
+    var $format;
+    var $options;
+
     var $rec_modifier;
     var $rec_modified;
 
@@ -15,4 +19,14 @@ class Preferences_model extends MY_Model
     {
         parent::__construct();
     }
+
+    function get($id){
+    	$this->db->from('preferences');
+    	$this->db->where('id', $id);
+    	return $this->db->get()->row();
+	}
+
+
+
+
 }

@@ -236,10 +236,10 @@ class Index extends MY_Controller {
 		$this->load->model('Settings_model','settings');
 		$key = 'flat_total_exclude';
 		$settings = $this->settings->get_by_key($key);
-		$pot_sizes = get_keyed_pairs($this->order->get_pot_sizes(), [
-			"pot_size",
-			"pot_size",
-		], FALSE, TRUE);
+//		$pot_sizes = get_keyed_pairs($this->order->get_pot_sizes(), [
+//			"pot_size",
+//			"pot_size",
+//		], FALSE, TRUE);
 
 		$data = [
 			'action' => 'update/' . $key,
@@ -248,7 +248,6 @@ class Index extends MY_Controller {
 			'settings' => $settings,
 			'target' => 'settings/edit',
 			'key' => $key,
-			'pot_sizes' => $pot_sizes,
 		];
 		$this->load->view('page/index',$data);
 	}

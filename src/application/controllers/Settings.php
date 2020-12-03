@@ -13,6 +13,7 @@ class Settings extends MY_Controller
 	function update($key){
 		$values = $this->input->post($key);
 		$this->settings->update($key, $values);
+		redirect();
 	}
 
 

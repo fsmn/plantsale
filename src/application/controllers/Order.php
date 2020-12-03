@@ -490,6 +490,7 @@ class Order extends MY_Controller {
 					'flat_area',
 					'tiers',
 					'grower_code',
+					'flat_exclude',
 				];
 				$values = [];
 				foreach ($fields as $field) {

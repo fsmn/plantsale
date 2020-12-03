@@ -13,8 +13,12 @@ if (empty($action)) {
 <?php endif; ?>
 <form name="settings" method="post" action="<?php print base_url('settings/' . $action); ?>">
 	<?php foreach ($settings as $setting): ?>
-		<?php print form_dropdown(['name'=>$key . '[]'], $pot_sizes,$setting->value);?>
+	<div>
+		<?php print form_input(['name'=>$key . '[]'],$setting->value);?>
+	</div>
 	<?php endforeach; ?>
-	<?php print form_dropdown(['name'=>$key . '[]'], $pot_sizes,$setting->value);?>
+	<div>
+	<?php print form_input(['name'=>$key . '[]']);?>
+	</div>
 	<input type="submit" class="button" value="Save"/>
 </form>

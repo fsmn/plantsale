@@ -143,5 +143,9 @@ class Database extends MY_Controller {
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;';
 	}
 
+	function db_update_17(){
+		return 'ALTER TABLE `orders` ADD `flat_exclude` INT(1) NULL;';
+	}
+
 }
 

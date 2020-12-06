@@ -49,7 +49,7 @@ $sale_year = $this->session->userdata("sale_year");;
 	<tr>
 		<td colspan="7">
 			<div class="message">
-				Excluded from these results are: bulb and bareroot perennials, tubers, and peonies.
+				Excluded from these results are any orders marked with "Exclude from Flat Counts"
 			</div>
 		</td>
 	</tr>

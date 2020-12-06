@@ -39,6 +39,7 @@ if ($orders) :
 			<th class="hide-column">Order Total</th>
 			<th class="hide-column">Price</th>
 			<th class="hide-column">Grower Code</th>
+			<th class="hide-column">Hide from flat totals</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -170,6 +171,9 @@ if ($orders) :
 			<td class="order-price field price-field no-wrap">$<?php echo edit_field("price",$order->price,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-grower_code field"><?php echo edit_field("grower_code",$order->grower_code,"","order",$order->id,array("envelope"=>"span"));?>
+			</td>
+			<td class="order-flat_exclude field"><?php echo edit_field('flat_exclude', $order->flat_exclude,'','order',$order->id,array('envelope'=>'span'));?>
+
 			</td>
 			<td class="re-order field">
 			<?php echo create_button(array("text"=>"Re-order","href"=>site_url("order/create?variety_id=$order->variety_id&reorder=1"),"id"=>"oc_$order->variety_id","class"=>array("button","new","create","dialog","order-create")));?>

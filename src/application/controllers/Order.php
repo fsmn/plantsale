@@ -69,6 +69,7 @@ class Order extends MY_Controller {
 				"tiers",
 				"flag",
 				"needs_bag",
+				'flat_exclude',
 			];
 
 			$this->set_options($options, $keys);

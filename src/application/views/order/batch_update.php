@@ -69,8 +69,8 @@ defined('BASEPATH') or exit ('No direct script access allowed');
 																   autocomplete="off"/>
 	</div>
 	<div class="flat-exclude field">
-		<label for="flat_exclude">Exclude from flat totals:</label>
-		<input type="checkbox" value="1" name="flat_exclude" autocomplete="off"/>
+		<div class="label" for="flat_exclude">Exclude from flat totals:</div>
+		<?php print form_dropdown('flat_exclude',['No','Yes']);?>
 	</div>
 	<input type="submit" class="button" class="button warning"/>
 </form>

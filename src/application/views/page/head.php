@@ -47,6 +47,7 @@ var base_url = '<?php echo base_url("index.php") . "/";?>';
         }
     });
 });
+
 })(jQuery);
 
 </script>

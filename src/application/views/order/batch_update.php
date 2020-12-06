@@ -70,7 +70,7 @@ defined('BASEPATH') or exit ('No direct script access allowed');
 	</div>
 	<div class="flat-exclude field">
 		<div class="label" for="flat_exclude">Exclude from flat totals:</div>
-		<?php print form_dropdown('flat_exclude',['No','Yes']);?>
+		<?php print form_dropdown('flat_exclude',[0=>'','no'=>'No','yes'=>'Yes']);?>
 	</div>
 	<input type="submit" class="button" class="button warning"/>
 </form>

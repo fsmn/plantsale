@@ -98,7 +98,7 @@ if (cookie("output_format") == "crop-failure" && $refine) {
 
 		</div>
 		<div>
-		<label for="flat_exclude">Exclude from flat totals:</label> <?php print form_dropdown('flat_exclude',['No','Yes']);?>
+		<label for="flat_exclude">Exclude from flat totals:</label> <?php print form_dropdown('flat_exclude',[''=>'-',0=>'No',1=>'Yes']);?>
 		</div>
 	</div>
 	<div class="field-set" style="clear:both;">

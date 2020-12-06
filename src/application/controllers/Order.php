@@ -158,6 +158,7 @@ class Order extends MY_Controller {
 
 			foreach ($orders as $order) {
 				$order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
+				$order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
 			}
 			if ($show_last_only = $this->input->get("show_last_only")) {
 				bake_cookie("show_last_only", $show_last_only);
@@ -293,6 +294,8 @@ class Order extends MY_Controller {
 		}
 		echo $output;
 	}
+
+
 
 	/**
 	 * move the order to a new variety *
@@ -507,6 +510,9 @@ class Order extends MY_Controller {
 							case 'tiers' :
 								$values [$field] = preg_replace('/[^0-9,.]/', '', $my_value);
 								break;
+							case 'flat_exclude':
+								$values[$field] = $my_value == 'yes'?1:'0';
+								break;
 							default :
 								$values [$field] = $my_value;
 						}
@@ -526,9 +532,89 @@ class Order extends MY_Controller {
 					$this->session->set_flashdata('notice', 'No changes were made');
 				}
 				$order_search = cookie('order_search');
-				redirect('order/search?'.$order_search);
+				redirect('order/search?' . $order_search);
 			}
 		}
+	}
+
+	/**
+	 * Issue #82 create a toggle function
+	 */
+	function toggle() {
+		$id = $this->input->post('id');
+		$field = $this->input->post('field');
+		$value = $this->input->post('value');
+		$result = $this->order->toggle($id, $field, $value);
+		[$text, $title] = $this->get_toggle_text($field, $result);
+		print json_encode([
+			'text' => $text,
+			'title' => $title,
+			'value' => $result,
+		]);
+	}
+
+	/**
+	 * @param $id
+	 * @param $field
+	 * @param $value
+	 * Issue #82 create a toggle function
+	 * @return false|string
+	 */
+	function toggle_button($id, $field, $value) {
+		[$text, $title] = $this->get_toggle_text($field, $value);
+		return create_button([
+				'text' => $text,
+				'href' => site_url('order/toggle'),
+				'data_values' => [
+					'id' => $id,
+					'field' => $field,
+					'value' => $value,
+					'wrapper' => 'order-flat_exclude'
+				],
+				'callback' => 'order/toggle_button',
+				'class' => [
+					'button',
+					'inline',
+					'toggle-boolean',
+				],
+				'title' => $title,
+			]
+		);
+	}
+
+	/**
+	 * @param $field
+	 * @param $value
+	 *
+	 * @return \string[][]
+	 */
+	private function get_toggle_text($field, $value): array {
+		switch ($field) {
+			case 'flat_exclude':
+				$text = [
+					'Hide',
+					'Show',
+				];
+				$title = [
+					'Exclude this from flat totals',
+					'Include this in flat totals',
+				];
+				break;
+			default:
+				$text = [
+					'Turn Off',
+					'Turn On',
+				];
+				$title = [
+					'Turn Off',
+					'Turn On',
+				];
+		}
+		return [$text[$value], $title[$value]];
+	}
+
+	function flat_total_exclusions(){
+		return $this->order->get_flat_total_exclusions();
 	}
 
 }

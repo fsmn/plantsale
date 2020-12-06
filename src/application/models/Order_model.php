@@ -1,8 +1,14 @@
 <?php
 defined('BASEPATH') or exit ('No direct script access allowed');
 
+/**
+ * Class Order_Model
+ */
 class Order_Model extends MY_Model {
 
+	/**
+	 * @var
+	 */
 	var $variety_id;
 
 	var $grower_id;
@@ -474,6 +480,22 @@ class Order_Model extends MY_Model {
 			default :
 				$this->db->like($field, $value);
 		}
+	}
+
+	/**
+	 * @param $id
+	 * @param $field
+	 * @param $source_value
+	 * //Issue #82 create a toggle function
+	 * @return mixed
+	 */
+	function toggle($id, $field, $source_value){
+		//flip the source_value to the opposite (toggle)
+		$value = $source_value?0:1;
+		$this->db->set($field, $value);
+		$this->db->where('id',$id);
+		$this->db->update('orders');
+		return $this->get_value($id, $field);
 	}
 
 

@@ -35,14 +35,14 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_2() {
+	function db_update_1() {
 		return 'ALTER TABLE `orders` CHANGE `count_midsale` `count_midsale` DECIMAL(10,2) NULL DEFAULT NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_3() {
+	function db_update_2() {
 		return 'ALTER TABLE `orders` CHANGE `count_presale` `count_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
 
 	}
@@ -50,9 +50,16 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_4() {
+	function db_update_3() {
 		return 'ALTER TABLE `orders` CHANGE `received_midsale` `received_midsale` DECIMAL(10,2) NULL DEFAULT NULL;';
 
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_4() {
+		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
 	}
 
 	/**
@@ -73,41 +80,34 @@ class Database extends MY_Controller {
 	 * @return string
 	 */
 	function db_update_7() {
-		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
-	}
-
-	/**
-	 * @return string
-	 */
-	function db_update_8() {
 		return 'ALTER TABLE `orders` CHANGE `count_dead` `count_dead` DECIMAL(10,2) NULL DEFAULT NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_9() {
+	function db_update_8() {
 		return 'UPDATE `variety` set new_year = 2021 where new_year = 2020;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_10(){
+	function db_update_9(){
 		return 'ALTER TABLE `orders` ADD `count_thursday` DECIMAL(10,2) NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_11(){
+	function db_update_10(){
 		return 'ALTER TABLE `orders` ADD `count_friday` DECIMAL(10,2) NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_12(){
+	function db_update_11(){
 		return 'ALTER TABLE `orders` ADD `count_saturday` DECIMAL(10,2) NULL;';
 
 	}
@@ -115,36 +115,26 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_13(){
+	function db_update_12(){
 		return 'ALTER TABLE `orders` ADD `received_thursday` DECIMAL(10,2) NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_14(){
+	function db_update_13(){
 		return 'ALTER TABLE `orders` ADD `received_friday` DECIMAL(10,2) NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_15(){
+	function db_update_14(){
 		return 'ALTER TABLE `orders` ADD `received_saturday` DECIMAL(10,2) NULL;';
 	}
 
-	function db_update_16(){
-		return 'CREATE TABLE IF NOT EXISTS `settings` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) COLLATE latin1_general_ci NOT NULL DEFAULT \'\',
-  `value` varchar(255) COLLATE latin1_general_ci NOT NULL DEFAULT \'\',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `key` (`key`,`value`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;';
-	}
-
-	function db_update_17(){
-		return 'ALTER TABLE `orders` ADD `flat_exclude` INT(1) NULL;';
+	function db_update_15(){
+		return 'ALTER TABLE `orders` ADD `flat_exclude` BOOLEAN NOT NULL DEFAULT FALSE';
 	}
 
 }

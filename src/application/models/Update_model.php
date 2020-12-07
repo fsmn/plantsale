@@ -3,6 +3,7 @@
 
 class Update_model extends MY_Model {
 
+
 	function update_exists($id){
 		$this->db->from('update_tracker');
 		$this->db->where('id', $id);
@@ -26,7 +27,6 @@ class Update_model extends MY_Model {
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;');
-			$this->db->insert('update_tracker', ['id' => 1]);
 		}
 	}
 

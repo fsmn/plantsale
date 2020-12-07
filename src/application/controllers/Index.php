@@ -230,26 +230,13 @@ class Index extends MY_Controller {
 
 	}
 
-	function edit_flat_exclusions(){
-		$this->load->model("order_model", "order");
-
-		$this->load->model('Settings_model','settings');
-		$key = 'flat_total_exclude';
-		$settings = $this->settings->get_by_key($key);
-//		$pot_sizes = get_keyed_pairs($this->order->get_pot_sizes(), [
-//			"pot_size",
-//			"pot_size",
-//		], FALSE, TRUE);
-
-		$data = [
-			'action' => 'update/' . $key,
-			'title' => 'Edit pot sizes to be excluded in flat totals',
-			'description' => 'be as exact as you can without',
-			'settings' => $settings,
-			'target' => 'settings/edit',
-			'key' => $key,
-		];
-		$this->load->view('page/index',$data);
+	/**
+	 * call the db query to reset all flat exclusions to the bulbs, bareroots, tubers and peonies (excluding 2021).
+	 */
+	function reset_flat_exclusions(){
+		$this->load->model('order_model','order');
+		$this->order->reset_flat_exclusions();
+		redirect();
 	}
 
 }

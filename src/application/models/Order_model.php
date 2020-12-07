@@ -508,4 +508,19 @@ class Order_Model extends MY_Model {
 		return $this->db->get()->row();
 	}
 
+	function reset_flat_exclusions(){
+		$reset = "UPDATE `orders` SET flat_exclude=0";
+		$this->db->query($reset);
+		//exclude bulbs, bareroot and tubers from the sale years.
+		$query = "UPDATE `orders` SET flat_exclude=1  WHERE `pot_size` LIKE '%bareroot%' OR `pot_size` LIKE '%bulb%' OR `pot_size` LIKE '%tuber%'";
+		$this->db->query($query);
+		// exclude peonies from every year except the COVID-19-modified sale year 2021
+		$query = "UPDATE `orders`  JOIN `variety` ON `orders`.`variety_id` = `variety`.`id`
+    JOIN `common` ON `common`.`id`  = `variety`.`common_id` 
+    SET `orders`.`flat_exclude` = 1 
+			WHERE `common`.`genus` = 'Paeonia' AND `orders`.`year` != 2021";
+		$this->db->query($query);
+		$this->session->set_flashdata('notice','Flat exclusions have been reset.');
+	}
+
 }

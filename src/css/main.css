@@ -17,6 +17,7 @@ p {
 
 }
 
+
 #page {
 }
 
@@ -33,12 +34,14 @@ p {
 .message {
 	padding: .5em;
 	border-radius: 4px;
-	margin: 3px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	cursor: pointer;
 	width: 100%;
 }
-
+.message p {
+	margin: 0 0 .5rem 0;
+	padding: 0;
+}
 .not-logged-in #main {
 	width: auto;
 	position: relative;

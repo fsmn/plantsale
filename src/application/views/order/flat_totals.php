@@ -49,7 +49,13 @@ $sale_year = $this->session->userdata("sale_year");;
 	<tr>
 		<td colspan="7">
 			<div class="message">
-				Excluded from these results are: bulb and bareroot perennials, tubers, and peonies.
+				<p>Excluded from these results are any orders marked with "Hide from Flat Counts".
+					The default are orders for "bulbs", "bareroots" or "tubers" or (for all but 2021) any orders for the genus "Paeonia".
+				</p>
+				<?php if($this->session->userdata('user_id') == 1): ?>
+				<p>Numbers don't look right? <a href="<?php print site_url('index/reset_flat_exclusions'); ?>" title="Reset flat exclusions to defaults">Click here</a> to reset these
+				to orders for "bulbs", "bareroots" or "tubers" or (for all but 2021) any orders for the genus "Paeonia".</p>
+				<?php endif; ?>
 			</div>
 		</td>
 	</tr>

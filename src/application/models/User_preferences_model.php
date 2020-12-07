@@ -32,10 +32,16 @@ class User_Preferences_Model extends MY_Model
     {
         $this->db->from("preferences");
         $this->db->join("user_preferences", "preferences.id = user_preferences.preference_id AND user_id = $user_id","LEFT");
-//         $this->db->join("user", "user_id=user.id");
-//         $this->db->where("user_id", $user_id);
         $this->db->order_by("preferences.weight","ASC");
         $result = $this->db->get()->result();
         return $result;
     }
+
+    function update($user_id, $preference_id, $value){
+    	$this->db->where('user_id', $user_id);
+    	$this->db->where('preference_id', $preference_id);
+    	$this->db->set('value',$value);
+		$this->db->update('user_preferences');
+		$this->_log();
+	}
 }

@@ -230,4 +230,13 @@ class Index extends MY_Controller {
 
 	}
 
+	/**
+	 * call the db query to reset all flat exclusions to the bulbs, bareroots, tubers and peonies (excluding 2021).
+	 */
+	function reset_flat_exclusions(){
+		$this->load->model('order_model','order');
+		$this->order->reset_flat_exclusions();
+		redirect();
+	}
+
 }

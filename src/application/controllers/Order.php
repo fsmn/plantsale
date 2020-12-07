@@ -41,6 +41,7 @@ class Order extends MY_Controller {
 				$options ['year'] = $sale_year;
 				// $this->session->set_userdata("sale_year", $sale_year);
 			}
+			$data['year'] = $sale_year;
 
 			if ($new_year = $this->input->get("new_year")) {
 				$options ['new_year'] = $new_year;
@@ -69,6 +70,7 @@ class Order extends MY_Controller {
 				"tiers",
 				"flag",
 				"needs_bag",
+				'flat_exclude',
 			];
 
 			$this->set_options($options, $keys);
@@ -112,12 +114,6 @@ class Order extends MY_Controller {
 				$data ["is_tracking"] = FALSE;
 			}
 
-			// if ($show_last_only = $this->input->get ( "show_last_only" )) {
-			// bake_cookie ( "show_last_only", $show_last_only );
-			// } else {
-			// burn_cookie ( "show_last_only" );
-			// }
-
 			$sorting ["fields"] = [
 				"catalog_number",
 			];
@@ -157,6 +153,13 @@ class Order extends MY_Controller {
 
 			foreach ($orders as $order) {
 				$order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
+				if($this->session->userdata('user_id') == 1)
+				{
+					$order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
+				}else{
+					extract($this->get_toggle_text('flat_exclude',$order->flat_exclude));
+					$order->flat_exclude_button = $label;
+				}
 			}
 			if ($show_last_only = $this->input->get("show_last_only")) {
 				bake_cookie("show_last_only", $show_last_only);
@@ -185,7 +188,6 @@ class Order extends MY_Controller {
 			foreach ($options as $key => $value) {
 				$where [] = sprintf("`%s` = '%s'", $key, $value);
 			}
-			// $this->session->set_flashdata ( "alert", sprintf ( "WHERE %s", implode ( " AND ", $where ) ) );
 
 			$data ["options"] = $options;
 			$data ["orders"] = $orders;
@@ -281,20 +283,28 @@ class Order extends MY_Controller {
 		if ($field == "received_presale" && $value == "f") {
 			$value = 0;
 		}
-		$values = [
-			$field => $value,
-		];
+		if ($value === 'x') {
+		$output = 	$this->order->clear($id, $field);
+		}
+		else {
+			$values = [
+				$field => $value,
+			];
 
-		$output = $this->order->update($id, $values);
+			$output = $this->order->update($id, $values);
 
-		if ($this->input->post("format") == "currency") {
-			$output = get_as_price($output);
+			if ($this->input->post("format") == "currency") {
+				$output = get_as_price($output);
+			}
 		}
 		echo $output;
 	}
 
+
 	/**
 	 * move the order to a new variety *
+	 *
+	 * @param null $id
 	 */
 	function move($id = NULL) {
 		if ($this->input->get("start")) {
@@ -425,9 +435,7 @@ class Order extends MY_Controller {
 
 	function update() {
 		$id = $this->input->post("id");
-		$variety_id = $this->input->post("variety_id");
 		$this->order->update($id);
-		// redirect ( "variety/view/$variety_id" );
 		redirect($this->input->post("redirect_url"));
 	}
 
@@ -490,6 +498,7 @@ class Order extends MY_Controller {
 					'flat_area',
 					'tiers',
 					'grower_code',
+					'flat_exclude',
 				];
 				$values = [];
 				foreach ($fields as $field) {
@@ -504,6 +513,9 @@ class Order extends MY_Controller {
 							case 'flat_area' :
 							case 'tiers' :
 								$values [$field] = preg_replace('/[^0-9,.]/', '', $my_value);
+								break;
+							case 'flat_exclude':
+								$values[$field] = $my_value == 'yes'?1:'0';
 								break;
 							default :
 								$values [$field] = $my_value;
@@ -524,9 +536,94 @@ class Order extends MY_Controller {
 					$this->session->set_flashdata('notice', 'No changes were made');
 				}
 				$order_search = cookie('order_search');
-				redirect('order/search?'.$order_search);
+				redirect('order/search?' . $order_search);
 			}
 		}
+	}
+
+	/**
+	 * Issue #82 create a toggle function
+	 */
+	function toggle() {
+		$id = $this->input->post('id');
+		$field = $this->input->post('field');
+		$value = $this->input->post('value');
+		$result = $this->order->toggle($id, $field, $value);
+		$output = $this->get_toggle_text($field, $result);
+		$output['value'] = $result;
+		print json_encode($output);
+	}
+
+	/**
+	 * @param $id
+	 * @param $field
+	 * @param $value
+	 * Issue #82 create a toggle function
+	 * @return false|string
+	 */
+	function toggle_button($id, $field, $value) {
+		extract($this->get_toggle_text($field, $value));
+		return create_button([
+				'text' => $text,
+				'href' => site_url('order/toggle'),
+				'data_values' => [
+					'id' => $id,
+					'field' => $field,
+					'value' => $value,
+					'wrapper' => 'order-flat_exclude'
+				],
+				'callback' => 'order/toggle_button',
+				'class' => [
+					'button',
+					'inline',
+					'toggle-boolean',
+				],
+				'title' => $title,
+			]
+		);
+	}
+
+	/**
+	 * @param $field
+	 * @param $value
+	 *
+	 * @return \string[][]
+	 */
+	private function get_toggle_text($field, $value): array {
+		switch ($field) {
+			case 'flat_exclude':
+				$text = [
+					'Hide',
+					'Show',
+				];
+				$title = [
+					'Exclude this from flat totals',
+					'Include this in flat totals',
+				];
+				$label = [
+					'No',
+					'Yes',
+				];
+				break;
+			default:
+				$text = [
+					'Turn Off',
+					'Turn On',
+				];
+				$title = [
+					'Turn Off',
+					'Turn On',
+				];
+				$label = [
+					'On',
+					'Off',
+				];
+		}
+		return ['text'=>$text[$value],'title'=> $title[$value], 'label'=>$label[$value]];
+	}
+
+	function flat_total_exclusions(){
+		return $this->order->get_flat_total_exclusions();
 	}
 
 }

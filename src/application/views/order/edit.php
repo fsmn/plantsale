@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 // row.php Chris Dart Mar 4, 2013 9:25:12 PM chrisdart@cerebratorium.com
 $crop_failure = FALSE;
 if(empty($order)) {
@@ -11,7 +11,7 @@ if(get_value($order,'year') == 2021){
 	];
 }
 ?>
-<h4><?php echo get_value($order,"variety","New Variety");?></h4>
+<h4><?php echo get_value($order, "variety", "New Variety"); ?></h4>
 
 <form name="order-edit" id="order-edit" action="<?php echo site_url("order/$action");?>"
 	method="post">
@@ -25,10 +25,12 @@ if(get_value($order,'year') == 2021){
 <!-- 	<div class="field-set"> -->
 	<h3>Order details</h3>
 	<div class="column first">
-	<?php endif;?>
-	<div class="order-year field">
-		<label for="year">Year:&nbsp;</label><input type="text" name="year" value="<?php echo get_value($order,"year");?>" required />
-	</div>
+		<?php endif; ?>
+		<div class="order-year field">
+			<label for="year">Year:&nbsp;</label><input type="text" name="year"
+														value="<?php echo get_value($order, "year"); ?>"
+														required/>
+		</div>
 
 	<div class="order-grower field">
 		<label for="grower_id">Grower:&nbsp;</label><input type="text"
@@ -99,28 +101,45 @@ if(get_value($order,'year') == 2021){
 		<?php endforeach; ?>
 <?php if(get_value($order,'year') != 2020):?>
 		<div class="order-sellout_friday field">
-		<label for="sellout_friday">Sellout Friday:&nbsp;</label> <input type="text"
-			name="sellout_friday" value="<?php echo get_value($order,"sellout_friday");?>" size="6"/>
-	</div>
-			<div class="order-remainder_friday field">
-		<label for="remainder_friday">Remainder Friday:&nbsp;</label> <input type="text"
-			name="remainder_friday" value="<?php echo get_value($order,"remainder_friday");?>" size="3"/>
-	</div>
-	<div class="order-sellout_saturday field">
-		<label for="sellout_saturday">Sellout Saturday:&nbsp;</label> <input type="text"
-			name="sellout_saturday" value="<?php echo get_value($order,"sellout_saturday");?>"size="6" />
-	</div>
+			<label for="sellout_friday">Sellout Friday:&nbsp;</label> <input
+					type="text"
+					name="sellout_friday"
+					value="<?php echo get_value($order, "sellout_friday"); ?>"
+					size="6"/>
+		</div>
+		<div class="order-remainder_friday field">
+			<label for="remainder_friday">Remainder Friday:&nbsp;</label> <input
+					type="text"
+					name="remainder_friday"
+					value="<?php echo get_value($order, "remainder_friday"); ?>"
+					size="3"/>
+		</div>
+		<div class="order-sellout_saturday field">
+			<label for="sellout_saturday">Sellout Saturday:&nbsp;</label> <input
+					type="text"
+					name="sellout_saturday"
+					value="<?php echo get_value($order, "sellout_saturday"); ?>"
+					size="6"/>
+		</div>
 		<div class="order-remainder_saturday field">
-		<label for="remainder_saturday">Remainder Saturday:&nbsp;</label> <input type="text"
-			name="remainder_saturday" value="<?php echo get_value($order,"remainder_saturday");?>" size="3"/>
-	</div>
-	<div class="order-remainder_sunday field">
-		<label for="remainder_sunday">Remainder Sunday:&nbsp;</label> <input type="text"
-			name="remainder_sunday" value="<?php echo get_value($order,"remainder_sunday");?>" size="3" />
-	</div>
-	<div class="order-count_dead field">
-		<label for="count_dead">Dead Count:&nbsp;</label> <input type="text"
-			name="count_dead" value="<?php echo get_value($order,"count_dead");?>" size="3"  />
+			<label for="remainder_saturday">Remainder Saturday:&nbsp;</label>
+			<input type="text"
+				   name="remainder_saturday"
+				   value="<?php echo get_value($order, "remainder_saturday"); ?>"
+				   size="3"/>
+		</div>
+		<div class="order-remainder_sunday field">
+			<label for="remainder_sunday">Remainder Sunday:&nbsp;</label> <input
+					type="text"
+					name="remainder_sunday"
+					value="<?php echo get_value($order, "remainder_sunday"); ?>"
+					size="3"/>
+		</div>
+		<div class="order-count_dead field">
+			<label for="count_dead">Dead Count:&nbsp;</label> <input type="text"
+																	 name="count_dead"
+																	 value="<?php echo get_value($order, "count_dead"); ?>"
+																	 size="3"/>
 
 	</div>
 		<?php endif; ?>
@@ -129,20 +148,25 @@ if(get_value($order,'year') == 2021){
 	</div>
 	<input type="hidden" name="redirect_url" id="redirect_url"/>
 	<div style="clear:both">
-		<input type="submit" value="<?php echo ucfirst($action);?>" class="button <?php echo $action;?>" />
-		<?php if($action == "update"): ?>
-		<?php echo create_button(array("text"=>"Delete","class"=>array("button","delete","delete-order"),"id"=>"delete-order_$order->id"));?>
-		<?php endif;?>
+		<input type="submit" value="<?php echo ucfirst($action); ?>"
+			   class="button <?php echo $action; ?>"/>
+		<?php if ($action == "update"): ?>
+			<?php echo create_button([
+					"text" => "Delete",
+					"class" => ["button", "delete", "delete-order"],
+					"id" => "delete-order_$order->id",
+			]); ?>
+		<?php endif; ?>
 	</div>
 </form>
 <script type="text/javascript">
-$("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));
+	$("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));
 
-// $("#order-edit").on("change","#crop_failure",function(){
-// 	if($("#crop_failure").prop("checked")){
-// 	    $("#order-edit .alert").fadeIn().html("CROP FAILURE");
-// 	}else{
-// 		$("#order-edit .alert").fadeOut().html("");
-// 	}
-// });
+	// $("#order-edit").on("change","#crop_failure",function(){
+	// 	if($("#crop_failure").prop("checked")){
+	// 	    $("#order-edit .alert").fadeIn().html("CROP FAILURE");
+	// 	}else{
+	// 		$("#order-edit .alert").fadeOut().html("");
+	// 	}
+	// });
 </script>

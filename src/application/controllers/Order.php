@@ -158,7 +158,13 @@ class Order extends MY_Controller {
 
 			foreach ($orders as $order) {
 				$order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
-				$order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
+				if($this->session->userdata('user_id') == 1)
+				{
+					$order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
+				}else{
+					extract($this->get_toggle_text('flat_exclude',$order->flat_exclude));
+					$order->flat_exclude_button = $label;
+				}
 			}
 			if ($show_last_only = $this->input->get("show_last_only")) {
 				bake_cookie("show_last_only", $show_last_only);
@@ -296,9 +302,10 @@ class Order extends MY_Controller {
 	}
 
 
-
 	/**
 	 * move the order to a new variety *
+	 *
+	 * @param null $id
 	 */
 	function move($id = NULL) {
 		if ($this->input->get("start")) {
@@ -545,12 +552,9 @@ class Order extends MY_Controller {
 		$field = $this->input->post('field');
 		$value = $this->input->post('value');
 		$result = $this->order->toggle($id, $field, $value);
-		[$text, $title] = $this->get_toggle_text($field, $result);
-		print json_encode([
-			'text' => $text,
-			'title' => $title,
-			'value' => $result,
-		]);
+		$output = $this->get_toggle_text($field, $result);
+		$output['value'] = $result;
+		print json_encode($output);
 	}
 
 	/**
@@ -561,7 +565,7 @@ class Order extends MY_Controller {
 	 * @return false|string
 	 */
 	function toggle_button($id, $field, $value) {
-		[$text, $title] = $this->get_toggle_text($field, $value);
+		extract($this->get_toggle_text($field, $value));
 		return create_button([
 				'text' => $text,
 				'href' => site_url('order/toggle'),
@@ -599,6 +603,10 @@ class Order extends MY_Controller {
 					'Exclude this from flat totals',
 					'Include this in flat totals',
 				];
+				$label = [
+					'No',
+					'Yes',
+				];
 				break;
 			default:
 				$text = [
@@ -609,8 +617,12 @@ class Order extends MY_Controller {
 					'Turn Off',
 					'Turn On',
 				];
+				$label = [
+					'On',
+					'Off',
+				];
 		}
-		return [$text[$value], $title[$value]];
+		return ['text'=>$text[$value],'title'=> $title[$value], 'label'=>$label[$value]];
 	}
 
 	function flat_total_exclusions(){

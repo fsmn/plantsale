@@ -39,7 +39,7 @@ if ($orders) :
 			<th class="hide-column">Order Total</th>
 			<th class="hide-column">Price</th>
 			<th class="hide-column">Grower Code</th>
-			<th class="hide-column">Hide from flat totals</th>
+			<th class="hide-column" title="Include or exclude these items from the flat totals calculator on the home page">Excluded from flat totals</th>
 			<th></th>
 		</tr>
 		</thead>

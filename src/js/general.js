@@ -434,7 +434,6 @@
 				'url': $(this).attr('href'),
 				'data': form_data,
 				success: function (data) {
-					console.log(data);
 					me.html(data['text']);
 					me.prop('title',data['title']);
 					me.data('value',data['value']);

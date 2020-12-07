@@ -41,6 +41,7 @@ class Order extends MY_Controller {
 				$options ['year'] = $sale_year;
 				// $this->session->set_userdata("sale_year", $sale_year);
 			}
+			$data['year'] = $sale_year;
 
 			if ($new_year = $this->input->get("new_year")) {
 				$options ['new_year'] = $new_year;

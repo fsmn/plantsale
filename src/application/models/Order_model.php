@@ -432,12 +432,27 @@ class Order_Model extends MY_Model {
 		return $result;
 	}
 
-	function get_plant_total($year) {
-		// sum(flat_size * (count_presale + count_midsale))
-		$query = sprintf('SELECT sum((`count_presale` + `count_midsale`)) as `total` FROM `orders` where `year` = %s', $year);
-		$result = $this->db->query($query)->row();
-		return $result->total;
+	function get_plant_total($year): int {
+		$columns = [
+			'count_presale',
+			'count_midsale',
+			'count_friday',
+			'count_saturday',
+		];
+		$totals = 0;
+		foreach($columns as $column){
+			$totals+= $this->get_column_total($column, $year);
+		}
+		return $totals;
 	}
+
+	function get_column_total($column, $year){
+		$total_label = $column . '_total';
+		$this->db->from('orders');
+		$this->db->where('year', $year);
+		$this->db->select('SUM(`' . $column . '`) AS `'. $total_label . '`');
+		return $this->db->get()->row()->$total_label;
+}
 
 	function get_price_range($year = NULL) {
 		$this->db->from('orders');

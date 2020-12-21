@@ -75,11 +75,9 @@ class Order_Model extends MY_Model {
 			'plant_cost',
 			'price',
 			'count_presale',
-			'count_thursday',
 			'count_friday',
 			'count_saturday',
 			'received_presale',
-			'received_thursday',
 			'received_friday',
 			'received_saturday',
 			'received_midsale',
@@ -208,6 +206,9 @@ class Order_Model extends MY_Model {
 					$this->db->like('common.name', $value);
 					break;
 				case 'year' :
+					break;
+				case 'flat_exclude':
+					$this->db->where('flat_exclude', $value);
 					break;
 				default :
 					$this->db->like($key, $value);

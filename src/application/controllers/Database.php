@@ -90,12 +90,6 @@ class Database extends MY_Controller {
 		return 'UPDATE `variety` set new_year = 2021 where new_year = 2020;';
 	}
 
-	/**
-	 * @return string
-	 */
-	function db_update_9(): string {
-		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `count_thursday` DECIMAL(10,2) NULL;';
-	}
 
 	/**
 	 * @return string
@@ -112,12 +106,6 @@ class Database extends MY_Controller {
 
 	}
 
-	/**
-	 * @return string
-	 */
-	function db_update_12(): string {
-		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `received_thursday` DECIMAL(10,2) NULL;';
-	}
 
 	/**
 	 * @return string
@@ -162,6 +150,21 @@ class Database extends MY_Controller {
 	 */
 	function db_update_18(): string {
 		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `uc_users_groups`;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_19(): string {
+		return 'ALTER TABLE `orders` DROP IF EXISTS `count_thursday`;';
+	}
+
+
+	/**
+	 * @return string
+	 */
+	function db_update_20(): string {
+		return 'ALTER TABLE `orders` DROP IF EXISTS `received_thursday`';
 	}
 
 

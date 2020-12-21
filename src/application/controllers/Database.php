@@ -131,26 +131,26 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_16(): string {
+/*	function db_update_16(): string {
 		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `fk_users_groups_users1_idx`;';
 
-	}
+	}*/
 
 
 	/**
 	 * @return string
 	 */
-	function db_update_17(): string {
+	/*function db_update_17(): string {
 		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `fk_users_groups_groups1_idx`;';
 
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_18(): string {
+	/*function db_update_18(): string {
 		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `uc_users_groups`;';
-	}
+	}*/
 
 	/**
 	 * @return string

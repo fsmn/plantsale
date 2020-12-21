@@ -74,7 +74,8 @@ class Order extends MY_Controller {
 			];
 
 			$this->set_options($options, $keys);
-
+			$data['year'] = $this->input->get('year');
+			bake_cookie('sale_year',$data['year']);
 			if ($output_format = $this->input->get("output_format")) {
 				bake_cookie("output_format", $output_format);
 				$data ["output_format"] = $output_format;
@@ -153,12 +154,14 @@ class Order extends MY_Controller {
 
 			foreach ($orders as $order) {
 				$order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
-				if($this->session->userdata('user_id') == 1)
-				{
-					$order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
-				}else{
-					extract($this->get_toggle_text('flat_exclude',$order->flat_exclude));
-					$order->flat_exclude_button = $label;
+				if($output_format != 'crop-failure') {
+					if ($this->session->userdata('user_id') == 1) {
+						$order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
+					}
+					else {
+						extract($this->get_toggle_text('flat_exclude', $order->flat_exclude));
+						$order->flat_exclude_button = $label;
+					}
 				}
 			}
 			if ($show_last_only = $this->input->get("show_last_only")) {
@@ -171,7 +174,7 @@ class Order extends MY_Controller {
 				}
 			}
 			$title_category = [];
-			if (array_key_exists("category_id", $options)) {
+			if (array_key_exists( "category_id", $options)) {
 				$this->load->model("category_model", "category");
 				$category = $this->category->get($options ["category_id"])->category;
 				$options ["category"] = $category;

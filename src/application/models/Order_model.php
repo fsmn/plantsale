@@ -223,15 +223,11 @@ class Order_Model extends MY_Model {
 		}
 		for ($i = 0; $i < count($order_by ['fields']); $i++) {
 			$order_field = 'catalog_number';
-			if (array_key_exists('fields', $order_by) && !empty ($order_by ['fields'] [$i])) {
-
-				$order_field = $order_by ['fields'] [$i];
-			}
-
-			$order_direction = 'ASC';
-			if (array_key_exists('direction', $order_by) && !empty ($order_by ['direction'] [$i])) {
-				$order_direction = $order_by ['direction'] [$i];
-			}
+			[
+				$order_by,
+				$order_field,
+				$order_direction
+			] = $this->create_order_by($order_by, $i);
 
 			// if the $order_field is a price field or integer, sort as number.
 			if ($order_field == 'flat_size') {
@@ -319,7 +315,7 @@ class Order_Model extends MY_Model {
 		foreach ($options as $key => $value) {
 			switch ($key) {
 				case 'category_id' :
-					$where [] = sprintf('`co`.`%s` = \'%s\'', $key, $value);
+					$where [] = sprintf('`subcat`.`%s` = \'%s\'', $key, $value);
 					break;
 				default :
 					$where [] = sprintf('`%s` = \'%s\'', $key, $value);
@@ -327,15 +323,11 @@ class Order_Model extends MY_Model {
 		}
 		for ($i = 0; $i < count($order_by ['fields']); $i++) {
 			$order_field = 'year';
-			if (array_key_exists('fields', $order_by) && !empty ($order_by ['fields'] [$i])) {
-
-				$order_field = $order_by ['fields'] [$i];
-			}
-
-			$order_direction = 'ASC';
-			if (array_key_exists('direction', $order_by) && !empty ($order_by ['direction'] [$i])) {
-				$order_direction = $order_by ['direction'] [$i];
-			}
+			[
+				$order_by,
+				$order_field,
+				$order_direction
+			] = $this->create_order_by($order_by, $i);
 
 			// if the $order_field is a price field or integer, sort as number.
 			if ($order_field == 'flat_size') {
@@ -526,6 +518,24 @@ class Order_Model extends MY_Model {
 			WHERE `common`.`genus` = 'Paeonia' AND `orders`.`year` != 2021";
 		$this->db->query($query);
 		$this->session->set_flashdata('notice','Flat exclusions have been reset.');
+	}
+
+	/**
+ * @param array $order_by
+ * @param int $i
+ *
+ * @return array
+ */
+	protected function create_order_by(array $order_by, int $i): array {
+		$order_field = NULL;
+		if (array_key_exists('fields', $order_by) && !empty ($order_by ['fields'] [$i])) {
+			$order_field = $order_by ['fields'] [$i];
+		}
+		$order_direction = 'ASC';
+		if (array_key_exists('direction', $order_by) && !empty ($order_by ['direction'] [$i])) {
+			$order_direction = $order_by ['direction'] [$i];
+		}
+		return [$order_by, $order_field, $order_direction];
 	}
 
 }

@@ -25,10 +25,6 @@ if ($orders) :
 			],
 			[
 					'colspan' => 2,
-					'label' => 'Thursday',
-			],
-			[
-					'colspan' => 2,
 					'label' => 'Friday',
 			],
 			[

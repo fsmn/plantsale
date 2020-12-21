@@ -31,7 +31,6 @@ if ( ! empty($orders)) :
 			<?php endif; ?>
 			<th class="hide-column">Presale Order</th>
 			<?php if ($year == 2021): ?>
-				<th class="hide-column">Thursday Order</th>
 				<th class="hide-column">Friday Order</th>
 				<th class="hide-column">Saturday Order</th>
 			<?php else: ?>
@@ -158,9 +157,6 @@ if ( ! empty($orders)) :
 					<?php echo edit_field("count_presale", $order->count_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
 				</td>
 				<?php if($year == 2021):?>
-					<td class="order-count_thursday field">
-						<?php echo edit_field("count_thursday", $order->count_thursday, "", "order", $order->id, ["envelope" => "span"]); ?>
-					</td>
 					<td class="order-count_friday field">
 						<?php echo edit_field("count_friday", $order->count_friday, "", "order", $order->id, ["envelope" => "span"]); ?>
 					</td>

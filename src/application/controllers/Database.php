@@ -10,7 +10,7 @@ class Database extends MY_Controller {
 	 */
 	function __construct() {
 		parent::__construct();
-		$this->load->model('Update_model','updater');
+		$this->load->model('Update_model', 'updater');
 	}
 
 
@@ -35,14 +35,14 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_1() {
+	function db_update_1(): string {
 		return 'ALTER TABLE `orders` CHANGE `count_midsale` `count_midsale` DECIMAL(10,2) NULL DEFAULT NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_2() {
+	function db_update_2(): string {
 		return 'ALTER TABLE `orders` CHANGE `count_presale` `count_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
 
 	}
@@ -50,7 +50,7 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_3() {
+	function db_update_3(): string {
 		return 'ALTER TABLE `orders` CHANGE `received_midsale` `received_midsale` DECIMAL(10,2) NULL DEFAULT NULL;';
 
 	}
@@ -58,84 +58,114 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_4() {
+	function db_update_4(): string {
 		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_5() {
+	function db_update_5(): string {
 		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_6() {
+	function db_update_6(): string {
 		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_7() {
+	function db_update_7(): string {
 		return 'ALTER TABLE `orders` CHANGE `count_dead` `count_dead` DECIMAL(10,2) NULL DEFAULT NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_8() {
+	function db_update_8(): string {
 		return 'UPDATE `variety` set new_year = 2021 where new_year = 2020;';
 	}
 
-	/**
-	 * @return string
-	 */
-	function db_update_9(){
-		return 'ALTER TABLE `orders` ADD `count_thursday` DECIMAL(10,2) NULL;';
-	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_10(){
-		return 'ALTER TABLE `orders` ADD `count_friday` DECIMAL(10,2) NULL;';
+	function db_update_10(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `count_friday` DECIMAL(10,2) NULL;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_11(){
-		return 'ALTER TABLE `orders` ADD `count_saturday` DECIMAL(10,2) NULL;';
+	function db_update_11(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `count_saturday` DECIMAL(10,2) NULL;';
+
+	}
+
+
+	/**
+	 * @return string
+	 */
+	function db_update_13(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `received_friday` DECIMAL(10,2) NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_14(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `received_saturday` DECIMAL(10,2) NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_15(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `flat_exclude` BOOLEAN NOT NULL DEFAULT FALSE';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_16(): string {
+		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `fk_users_groups_users1_idx`;';
+
+	}
+
+
+	/**
+	 * @return string
+	 */
+	function db_update_17(): string {
+		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `fk_users_groups_groups1_idx`;';
 
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_12(){
-		return 'ALTER TABLE `orders` ADD `received_thursday` DECIMAL(10,2) NULL;';
+	function db_update_18(): string {
+		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `uc_users_groups`;';
 	}
 
 	/**
 	 * @return string
 	 */
-	function db_update_13(){
-		return 'ALTER TABLE `orders` ADD `received_friday` DECIMAL(10,2) NULL;';
+	function db_update_19(): string {
+		return 'ALTER TABLE `orders` DROP IF EXISTS `count_thursday`;';
 	}
+
 
 	/**
 	 * @return string
 	 */
-	function db_update_14(){
-		return 'ALTER TABLE `orders` ADD `received_saturday` DECIMAL(10,2) NULL;';
+	function db_update_20(): string {
+		return 'ALTER TABLE `orders` DROP IF EXISTS `received_thursday`';
 	}
 
-	function db_update_15(){
-		return 'ALTER TABLE `orders` ADD `flat_exclude` BOOLEAN NOT NULL DEFAULT FALSE';
-	}
 
 }
-

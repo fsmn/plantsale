@@ -34,11 +34,8 @@
 			<td class="order-plant_cost field"><input type="text" name="plant_cost" value=""/>
 			</td>
 			<td class="order-count_presale field"><input type="text" name="count_presale" value=""/>
-			<td class="order-count_wednesday field"><input type="text" name="count_wednesday" value=""/>
-			<td class="order-count_thursday field"><input type="text" name="count_thursday" value=""/>
 			<td class="order-count_friday field"><input type="text" name="count_friday" value=""/>
 			<td class="order-count_saturday field"><input type="text" name="count_saturday" value=""/>
-
 			<td class="order-count_midsale field"><input type="text" name="count_midsale" value=""/>
 			</td>
 			<td class="order-pot_size field"><input type="text" name="pot_size" value=""/>

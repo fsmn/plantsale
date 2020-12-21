@@ -31,7 +31,7 @@ $sale_year = $this->session->userdata("sale_year");;
 <td>New varieties</td>
 <td>
 <a
-		href="<?php echo site_url("variety/search?find=1&action%5B%5D=full&year=$sale_year&new_year=$sale_year&sorting%5B%5D=genus&direction%5B%5D=ASC");?>"
+		href="<?php echo site_url("variety/search?find=1&action=full&year=$sale_year&new_year=$sale_year&sorting[]=genus&direction[]=ASC");?>"
 		title="Show a list of all varieties ordered new this year (or after a long hiatus)"><?php echo $totals->new_varieties["current"];?></a>
 </td>
 <td>

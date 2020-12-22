@@ -64,8 +64,6 @@ if ($orders) :
 			'Rec&rsquo;d',
 			'Ord&rsquo;d',
 			'Rec&rsquo;d',
-			'Ord&rsquo;d',
-			'Rec&rsquo;d',
 			'Fri',
 			'Sat',
 			'Fri',

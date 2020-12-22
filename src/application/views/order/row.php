@@ -96,36 +96,40 @@ $row_classes = implode(" ", $row_classes);
 	<?php foreach ($field_list as $field => $value): ?>
 		<?php $field_name = 'count_' . $field; ?>
 		<td class="order-<?php print $field_name; ?> field"
-			title="Enter 'x' to clear value">
+			title="<?php print $value?'Enter \'x\' to clear value':'This is not editable for this year';?>">
 			<?php if ($value): ?>
 				<?php echo edit_field($field_name, get_value($order, $field_name), NULL, 'order', $order->id, ['envelope' => 'span']); ?>
 			<?php endif; ?>
 		</td>
 		<?php $field_name = 'received_' . $field; ?>
 		<td class="order-<?php print $field_name; ?> field"
-			title="Enter 'x' to clear value">
+			title="<?php print $value?'Enter \'x\' to clear value':'This is not editable for this year';?>">
 			<?php if ($value): ?>
 				<?php echo edit_field($field_name, get_value($order, $field_name), NULL, 'order', $order->id, ['envelope' => 'span']); ?>
 			<?php endif; ?>
 		</td>
 	<?php endforeach; ?>
 
-
-	<td class="order-sellout_friday field">
-		<?php echo edit_field("sellout_friday", get_as_time($order->sellout_friday), "", "order", $order->id, [
-				"envelope" => "span",
-				"type" => "time",
-		]); ?>
+	<td class="order-sellout_friday field" title="<?php print !$is_covid_year?'Friday sellouts':'This field is not editable this year';?>">
+		<?php if (!$is_covid_year): ?>
+			<?php echo edit_field("sellout_friday", get_as_time($order->sellout_friday), "", "order", $order->id, [
+					"envelope" => "span",
+					"type" => "time",
+			]); ?>
+		<?php endif; ?>
 	</td>
-	<td class="order-sellout_saturday field">
-		<?php echo edit_field("sellout_saturday", get_as_time($order->sellout_saturday), "", "order", $order->id, [
-				"envelope" => "span",
-				"type" => "time",
-		]); ?>
+	<td class="order-sellout_saturday field" title="<?php print !$is_covid_year?'Saturday sellouts':'This field is not editable this year';?>">
+		<?php if (!$is_covid_year): ?>
+			<?php echo edit_field("sellout_saturday", get_as_time($order->sellout_saturday), "", "order", $order->id, [
+					"envelope" => "span",
+					"type" => "time",
+			]); ?>
+		<?php endif; ?>
 	</td>
-	<td class="order-remainder_friday field">
-		<?php echo edit_field("remainder_friday", $order->remainder_friday, "", "order", $order->id, ["envelope" => "span"]); ?>
-
+	<td class="order-remainder_friday field" title="<?php print !$is_covid_year?'Friday remainder':'This field is not editable this year';?>">
+		<?php if (!$is_covid_year): ?>
+			<?php echo edit_field("remainder_friday", $order->remainder_friday, "", "order", $order->id, ["envelope" => "span"]); ?>
+		<?php endif; ?>
 	</td>
 	<td class="order-remainder_saturday field">
 		<?php echo edit_field("remainder_saturday", $order->remainder_saturday, "", "order", $order->id, ["envelope" => "span"]); ?>

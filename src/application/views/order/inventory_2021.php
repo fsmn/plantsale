@@ -6,7 +6,7 @@ defined('BASEPATH') or exit ('No direct script access allowed');
 if (!empty($orders)) :
 
 	?>
-	<!-- order/inventory -->
+	<!-- order/inventory 2021 -->
 	<h2 class="column-instructions">
 		Click on a header label to hide a column [
 		<a href="#" class=" reset-columns">Reset</a>
@@ -184,51 +184,54 @@ if (!empty($orders)) :
 					</td>
 				<?php endif; ?>
 				<td tabindex=-1 class="order-count_presale field">
-					<?php echo edit_field("count_presale", $order->count_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
+					<?php print edit_field("count_presale", $order->count_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
 				</td>
 				<td class="order-received_presale field">
-					<?php echo live_field('received_presale', $order->received_presale, 'order', $order->id, ['envelope' => 'span']); ?>
+					<?php print live_field('received_presale', $order->received_presale, 'order', $order->id, ['type'=>'text','envelope' => 'span']); ?>
 				</td>
 				<td tabindex=-1 class="order-count_friday field">
-					<?php echo edit_field('count_friday', $order->count_friday, '', 'order', $order->id, ['envelope' => 'span']); ?>
+					<?php echo edit_field('count_friday', $order->count_friday, '', 'order', $order->id, ['type'=>'text','envelope' => 'span']); ?>
 				</td>
 				<td class="order-received_friday field">
-					<?php echo live_field('received_friday', $order->received_friday, 'order', $order->id, ['envelope' =>'span']); ?>
+					<?php echo live_field('received_friday', $order->received_friday, 'order', $order->id, ['type'=>'text','envelope' =>'span']); ?>
 				</td>
 				<td tabindex=-1 class="order-count_saturday field">
-					<?php echo edit_field('count_saturday', $order->count_saturday, '', 'order', $order->id, ['envelope' => 'span']); ?>
+					<?php echo edit_field('count_saturday', $order->count_saturday, '', 'order', $order->id, ['type'=>'text','envelope' => 'span']); ?>
 				</td>
 				<td class="order-received_saturday field">
-					<?php echo live_field('received_saturday', $order->received_saturday, 'order', $order->id, ['envelope' =>'span']); ?>
+					<?php echo live_field('received_saturday', $order->received_saturday, 'order', $order->id, ['type'=>'text','envelope' =>'span']); ?>
 				</td>
 				<td class="order-remainder_saturday field" style="width: 31px;">
 					<?php echo live_field("remainder_saturday", $order->remainder_saturday, "order", $order->id, [
 							"envelope" => "span",
 							"size" => 31,
+							'type'=>'text',
 					]); ?>
 				</td>
 				<td class="order-remainder_sunday field" style="width: 31px;">
 					<?php echo live_field("remainder_sunday", $order->remainder_sunday, "order", $order->id, [
 							"envelope" => "span",
 							"size" => 31,
+							'type'=>'text',
 					]); ?>
 				</td>
 				<td class="order-count_dead field" style="width: 31px;">
 					<?php echo live_field("count_dead", $order->count_dead, "order", $order->id, [
 							"envelope" => "span",
 							"size" => 31,
+							'type'=>'text',
 					]); ?>
 				</td>
 				<td class="order-total_plants field">
 					<?php echo $order->count_midsale + $order->count_presale; ?>
 				</td>
 				<td class="order-pot_size field no-wrap"><?php echo edit_field("pot_size", $order->pot_size, "", "order", $order->id, [
-							"envelope" => "span",
-							"class" => "pot-size",
+							'envelope' => 'span',
+							'class' => 'pot-size',
 					]); ?>
 				</td>
 				<td class="order-flat_size field">
-					<?php echo edit_field("flat_size", $order->flat_size, "", "order", $order->id, ["envelope" => "span"]); ?>
+					<?php echo edit_field("flat_size", $order->flat_size, "", "order", $order->id, ['envelope' => 'span']); ?>
 				</td>
 				<td class="order-flat_cost field cost-field no-wrap"
 					id="flat_cost">

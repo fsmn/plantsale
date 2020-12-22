@@ -167,5 +167,13 @@ class Database extends MY_Controller {
 		return 'ALTER TABLE `orders` DROP IF EXISTS `received_thursday`';
 	}
 
+	/**
+	 * add online_only field to the variety table for consumption by the live site
+	 * @return string
+	 */
+	function db_update_21(): string {
+		return 'ALTER TABLE `variety` ADD IF NOT EXISTS `online_only` BOOLEAN NOT NULL DEFAULT FALSE';
+	}
+
 
 }

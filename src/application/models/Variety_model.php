@@ -33,6 +33,8 @@ class Variety_Model extends MY_Model {
 
 	var $churn_value;
 
+	var $online_only;
+
 	var $rec_modifier;
 
 	var $rec_modified;
@@ -57,6 +59,7 @@ class Variety_Model extends MY_Model {
 			"needs_copy_review",
 			"churn_value",
 			"common_id",
+			'online_only',
 		];
 
 		for ($i = 0; $i < count($variables); $i++) {

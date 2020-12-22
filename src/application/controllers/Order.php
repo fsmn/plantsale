@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit ('No direct script access allowed');
-
+use \Field\Field;
 // order.php Chris Dart Feb 28, 2013 9:38:32 PM chrisdart@cerebratorium.com
 class Order extends MY_Controller {
 
@@ -159,7 +159,8 @@ class Order extends MY_Controller {
 						$order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
 					}
 					else {
-						extract($this->get_toggle_text('flat_exclude', $order->flat_exclude));
+						$label = '';
+						extract(get_toggle_text('flat_exclude', $order->flat_exclude));
 						$order->flat_exclude_button = $label;
 					}
 				}
@@ -544,89 +545,17 @@ class Order extends MY_Controller {
 		}
 	}
 
-	/**
-	 * Issue #82 create a toggle function
-	 */
-	function toggle() {
-		$id = $this->input->post('id');
-		$field = $this->input->post('field');
-		$value = $this->input->post('value');
-		$result = $this->order->toggle($id, $field, $value);
-		$output = $this->get_toggle_text($field, $result);
-		$output['value'] = $result;
-		print json_encode($output);
-	}
-
-	/**
-	 * @param $id
-	 * @param $field
-	 * @param $value
-	 * Issue #82 create a toggle function
-	 * @return false|string
-	 */
-	function toggle_button($id, $field, $value) {
-		extract($this->get_toggle_text($field, $value));
-		return create_button([
-				'text' => $text,
-				'href' => site_url('order/toggle'),
-				'data_values' => [
-					'id' => $id,
-					'field' => $field,
-					'value' => $value,
-					'wrapper' => 'order-flat_exclude'
-				],
-				'callback' => 'order/toggle_button',
-				'class' => [
-					'button',
-					'inline',
-					'toggle-boolean',
-				],
-				'title' => $title,
-			]
-		);
-	}
-
-	/**
-	 * @param $field
-	 * @param $value
-	 *
-	 * @return \string[][]
-	 */
-	private function get_toggle_text($field, $value): array {
-		switch ($field) {
-			case 'flat_exclude':
-				$text = [
-					'Hide',
-					'Show',
-				];
-				$title = [
-					'Exclude this from flat totals',
-					'Include this in flat totals',
-				];
-				$label = [
-					'No',
-					'Yes',
-				];
-				break;
-			default:
-				$text = [
-					'Turn Off',
-					'Turn On',
-				];
-				$title = [
-					'Turn Off',
-					'Turn On',
-				];
-				$label = [
-					'On',
-					'Off',
-				];
-		}
-		return ['text'=>$text[$value],'title'=> $title[$value], 'label'=>$label[$value]];
-	}
-
 	function flat_total_exclusions(){
 		return $this->order->get_flat_total_exclusions();
+	}
+
+	private function toggle_button($id, string $field, $value) {
+		return toggle_button('order', $id, $field, $value);
+	}
+
+	function toggle(){
+		$value = $this->input->post('value')===1?0:1;
+		return toggle($this,$this->order, $value);
 	}
 
 }

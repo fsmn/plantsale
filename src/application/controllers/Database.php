@@ -172,7 +172,7 @@ class Database extends MY_Controller {
 	 * @return string
 	 */
 	function db_update_21(): string {
-		return 'ALTER TABLE `variety` ADD IF NOT EXISTS `online_only` BOOLEAN NOT NULL DEFAULT FALSE';
+		return 'ALTER TABLE `variety`  ADD `online_only` ENUM("yes","no") NOT NULL DEFAULT "no";';
 	}
 
 

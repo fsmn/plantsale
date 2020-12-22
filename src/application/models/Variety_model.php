@@ -86,6 +86,7 @@ class Variety_Model extends MY_Model {
 		return $this->_update("variety", $id, $values, $override);
 	}
 
+
 	function get($id) {
 		$this->db->where("variety.id", $id);
 		$this->db->from("variety");

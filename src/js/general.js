@@ -110,7 +110,7 @@
 			type: "get",
 			url: base_url + "grower/is_unique/" + my_id,
 			success: function (data) {
-				if (data == false) {
+				if (data === false) {
 					$("#unique-id").html("This ID is not unique!");
 					$("#grower-id").addClass("notice");
 
@@ -123,6 +123,13 @@
 	});
 
 	$(document).on("click", ".field-envelope .edit-field", function () {
+		let me;
+		let my_parent;
+		let my_attr;
+		let my_type;
+		let my_category;
+		let my_name;
+		let form_data;
 		if ($("body").hasClass("editor")) {
 			me = $(this);
 			my_parent = me.parent().attr("id");
@@ -167,8 +174,7 @@
 				data: form_data,
 				success: function (data) {
 					console.log(data);
-					$("#" + my_parent + " .edit-field").html(data);
-					$("#" + my_parent + " .edit-field").removeClass("edit-field").removeClass("field").addClass("live-field").addClass("text");
+					$("#" + my_parent + " .edit-field").html(data).removeClass("edit-field").removeClass("field").addClass("live-field").addClass("text");
 					$("#" + my_parent + " .live-field input").focus();
 
 				}
@@ -189,12 +195,12 @@
 	});
 
 	$(document).on("click", ".autocomplete.edit-field", function () {
-		my_parent = $(this).parent(".field-envelope").attr("id");
-		my_attr = my_parent.split("__");
-		my_table = my_attr[0];
-		my_category = $(this).attr("menu");
-		my_value = $(this).val();
-		form_data = {
+		let my_parent = $(this).parent(".field-envelope").attr("id");
+		let my_attr = my_parent.split("__");
+		let my_table = my_attr[0];
+		let my_category = $(this).attr("menu");
+		let my_value = $(this).val();
+		let form_data = {
 			category: my_category,
 			value: my_value,
 			id: my_parent
@@ -211,7 +217,7 @@
 
 	});
 
-	$(document).on("blur", ".field-envelope .live-field.text input", function () {
+	$(document).on("blur", ".field-envelope .live-field.text input[type='text']", function () {
 		if ($(this).hasClass("ui-autocomplete-input")) {
 			update_field(this, "autocomplete");
 
@@ -220,8 +226,13 @@
 		}
 		return false;
 	});
-	$(document).on("blur", ".field-envelope .live-field input[type='checkbox']", function () {
-		update_field(this, "checkbox");
+	$(document).on("change", ".field-envelope .live-field input[type='checkbox']", function (e) {
+		let my_type = $(this).data('type');
+		let has_type = $(this).data().hasOwnProperty("type");
+		if(!has_type){
+			my_type = 'checkbox';
+		}
+		update_field(this, my_type);
 	});
 
 	$(document).on("blur", ".field-envelope .live-field textarea", function () {
@@ -238,7 +249,7 @@
 
 
 	$(document).on("blur", ".field-envelope .live-field select", function () {
-		if ($(this).val() == "other") {
+		if ($(this).val() === "other") {
 			my_name = $(this).parents('.field-envelope').attr("id").split("_")[1];
 			$(this).parents(".live-field").html("<input type='text' name='" + my_name + "' value='' id=''/>");
 		} else {
@@ -256,14 +267,14 @@
 
 
 	$(document).on("click", ".autocomplete-live", function () {
-		my_category = $(this).attr("category");
-		my_id = this.id;
-		my_value = $(this).val();
-		my_parent = false;
-		if (my_id == "subcategory") {
+		let my_category = $(this).attr("category");
+		let my_id = this.id;
+		let my_value = $(this).val();
+		let my_parent = false;
+		if (my_id === "subcategory") {
 			my_parent = $("#category").val();
 		}
-		form_data = {
+		let form_data = {
 			category: my_category,
 			id: my_id,
 			value: my_value,
@@ -349,7 +360,7 @@
 
 	$(document).on("click", ".show-catalog-updater", function (event) {
 		event.preventDefault();
-		me = $(this);
+		let me = $(this);
 		if ($(this).hasClass("active")) {
 			$("#category-selector").fadeOut();
 			$(this).removeClass("active").addClass("ready");
@@ -371,10 +382,10 @@
 	});
 
 	$(document).on("click", ".help", function (event) {
-		var keys = this.id.split("_");//expect the id to be in the format "helpTopic_helpSubtopic"
-		var my_topic = keys[0];
-		var my_subtopic = keys[1];
-		form_data = {
+		let keys = this.id.split("_");//expect the id to be in the format "helpTopic_helpSubtopic"
+		let my_topic = keys[0];
+		let my_subtopic = keys[1];
+		let form_data = {
 			topic: my_topic,
 			subtopic: my_subtopic,
 			ajax: '1'
@@ -441,13 +452,13 @@
 			}
 		);
 	});
-})(jQuery);
+
 
 function show_popup(my_title, data, popup_width, x, y) {
 	if (!popup_width) {
 		popup_width = 300;
 	}
-	var myDialog = $('<div id="popup">').html(data).dialog({
+	let myDialog = $('<div id="popup">').html(data).dialog({
 		autoOpen: false,
 		title: my_title,
 		modal: true,
@@ -465,44 +476,50 @@ function show_popup(my_title, data, popup_width, x, y) {
 }
 
 function update_field(me, my_type) {
-	my_parent = $(me).parents(".field-envelope").attr("id");
-	my_attr = my_parent.split("__");
-	my_value = $("#" + my_parent).children(".live-field").children("input" | "textarea").val();
-	my_category = false;
-	if (my_type == "autocomplete") {
+	return false;
+	let my_parent = $(me).parents(".field-envelope").attr("id");
+	let my_attr = my_parent.split("__");
+	let my_value = $("#" + my_parent).children(".live-field").children("input" | "textarea").val();
+	let my_category = false;
+	if (my_type === "autocomplete") {
 		my_value = $("#" + my_parent).children(".live-field").children("input").val();
-
-	} else if (my_type == "multiselect") {
+	} else if (my_type === "multiselect") {
 		my_value = $("#" + my_parent).children(".multiselect").children("select").val();
-	} else if (my_type == "category-dropdown") {
+	} else if (my_type === "category-dropdown") {
 		my_category = "category";
-	} else if (my_type == "subcategory-dropdown") {
+	} else if (my_type === "subcategory-dropdown") {
 		my_category = "subcategory";
-	} else if (my_type == "checkbox") {
+	} else if (my_type === "checkbox") {
 		my_category = "checkbox";
-		if ($(me).attr("checked") == true) {
+		if ($(me).attr("checked") === true) {
 			my_value = 1;
 		} else {
 			my_value = 0;
 		}
+	} else if(my_type === 'boolean'){
+		if ($(me).attr("checked") === true) {
+			my_value = 'yes';
+		} else {
+			my_value = 'no';
+		}
 	}
-
-	is_persistent = $(me).hasClass("persistent");
+	let is_persistent = $(me).hasClass("persistent");
 
 	//don't do anything if the value is empty and it is a persistent field 
-	if (is_persistent && my_value == "") {
+	if (is_persistent && my_value === "") {
 		return false;
 	}
 
-	override = $(me).hasClass("override");
+	let override = $(me).hasClass("override");
 
-	form_data = {
+	let form_data = {
 		table: my_attr[0],
 		field: my_attr[1],
 		id: my_attr[2],
 		value: my_value,
 		override: override,
-		category: my_category
+		category: my_category,
+		type: my_type,
 	};
 
 	$.ajax({
@@ -522,7 +539,7 @@ function update_field(me, my_type) {
 
 function create_dropdown(my_field, my_category, my_value) {
 
-	form_data = {
+	let form_data = {
 		field: my_field,
 		category: my_category,
 		value: my_value
@@ -557,14 +574,14 @@ $(document).ready(function () {
 
 
 function omit_row(me, target) {
-	var my_id = me.id.split("_")[1];
+	let my_id = me.id.split("_")[1];
 	console.log(target + my_id);
 	$(target + my_id).remove();
 
 }
 
 $(window).scroll(function () {
-	var top = $('.float');
+	let top = $('.float');
 	if ($(window).scrollTop() > 250) {
 		if (top.css('position') != 'fixed') {
 			top.css('position', 'fixed');
@@ -580,3 +597,4 @@ $(window).scroll(function () {
 		}
 	}
 });
+})(jQuery);

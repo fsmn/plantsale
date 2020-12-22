@@ -86,6 +86,7 @@ class Variety extends MY_Controller {
 		// }
 
 		$variety = $this->variety->get($id);
+		$variety->toggle_online_only = toggle_button('variety',$id, 'online_only',$variety->online_only);
 		$current_order = $this->order->get_for_variety($id, get_current_year());
 		$data ['current_order'] = $current_order;
 		$data ['file_path'] = $this->s3_client->getPath();
@@ -452,6 +453,7 @@ class Variety extends MY_Controller {
 		$id = $this->input->post("id");
 		$value = $this->input->post("value");
 		$field = $this->input->post("field");
+		$type = $this->input->post('type');
 		if (strpos($field, "height") || strpos($field, "width")) {
 			$value = preg_replace("/[^0-9.]/", "", $value);
 		}
@@ -807,6 +809,11 @@ class Variety extends MY_Controller {
 		$output [] = form_multiselect($field, $pairs, $value, "id='$field'");
 		$buttons = implode(" ", $output);
 		echo $buttons . sprintf("<span class='button save-multiselect' target='%s'>Save</span>", $field);
+	}
+
+	function toggle(){
+		$value = 	$value = $this->input->post('value')=== 'no'?'yes':'no';
+		print toggle($this,$this->variety, $value);
 	}
 
 }

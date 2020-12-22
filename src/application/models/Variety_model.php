@@ -509,5 +509,14 @@ class Variety_Model extends MY_Model {
 		}
 	}
 
+	function batch_update($ids, $field, $value){
+		$this->db->where_in('id',$ids);
+		$this->db->set( $field, $value);
+		$this->db->set('rec_modified', mysql_timestamp());
+		$this->db->set('rec_modifier', $this->ion_auth->get_user_id());
+		$this->db->update('variety');
+
+	}
+
 
 }

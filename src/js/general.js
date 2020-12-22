@@ -452,6 +452,7 @@
 			}
 		);
 	});
+})(jQuery);
 
 
 function show_popup(my_title, data, popup_width, x, y) {
@@ -597,4 +598,3 @@ $(window).scroll(function () {
 		}
 	}
 });
-})(jQuery);

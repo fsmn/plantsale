@@ -173,7 +173,6 @@ $actions = [
 	<div class="field-set block box standard copy-edits" id="copy-edit-section"
 		 style="display: none;">
 		<div class="column first">
-
 			<?php echo create_input($variety, "copywriter", "Copywriter", "copywriter", $refine); ?>
 		</div>
 		<div class="column last">

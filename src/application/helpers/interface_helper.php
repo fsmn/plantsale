@@ -540,6 +540,7 @@ function get_toggle_text($field, $value): array {
 				'No',
 				'Yes',
 			];
+			break;
 		case 'online_only':
 			$text = [
 				'no' => 'No',

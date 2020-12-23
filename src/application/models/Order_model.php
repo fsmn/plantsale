@@ -91,6 +91,7 @@ class Order_Model extends MY_Model {
 			'tiers',
 			'grower_code',
 			'omit',
+			'flat_exclude',
 		];
 
 		for ($i = 0; $i < count($variables); $i++) {
@@ -106,7 +107,7 @@ class Order_Model extends MY_Model {
 
 	function insert() {
 		$this->prepare_variables();
-		$id = $this->_insert('orders', $this);
+		$id = $this->_insert('orders');
 		return $id;
 	}
 

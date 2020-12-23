@@ -55,6 +55,8 @@ class Variety extends MY_Controller {
 	function insert() {
 		$id = $this->variety->insert();
 		if ($this->input->post('add_order')) {
+			//@TODO fix this. It doesn't re-populate the form.
+
 			$data ['variety_id'] = $id;
 			$data ['order'] = $this->order->get_previous_year($data ['variety_id'], get_current_year());
 			$pot_sizes = $this->order->get_pot_sizes();
@@ -63,11 +65,11 @@ class Variety extends MY_Controller {
 				'pot_size',
 			]);
 			$data ['action'] = 'insert';
-			$this->load->view('order/edit', $data);
+			echo $this->load->view('order/edit', $data, TRUE);
+			return TRUE;
 		}
-		else {
-			redirect('variety/view/' . $id);
-		}
+
+		redirect('variety/view/' . $id);
 	}
 
 	function view($id) {

@@ -16,13 +16,17 @@ $plant_colors = form_multiselect("plant_color[]",$plant_colors, $colors );
 <p><?php echo create_input($variety,"species","Species");?></p>
 <p>
 <label for="new_year">First Year at Sale (YYYY)</label>
-<input name="new_yeara" id="new_year" value="<?php echo $this->session->userdata("sale_year");;?>"/>
+<input name="new_year" id="new_year" value="<?php echo $this->session->userdata("sale_year");;?>"/>
 </p>
+	<p><label for="online_only">Is Online Only</label>
+		<?php print form_dropdown('online_only',['no'=>'No','yes'=>'Yes'],get_value($variety, 'online_only','no'))	;?>
+	</p>
 <div class="field-group">
 <div class="label"><strong>Height</strong></div>
 <div class="dimension field-set"><?php echo create_input($variety,"min_height","Min");?></div>
 <div class="dimension field-set"><?php echo create_input($variety,"max_height","Max");?></div>
 <div class="dimension field-set"><label for="height_unit">Measure:</label><?php echo form_dropdown("height_unit",$measure_units, get_value($variety,"height_unit"),"id='height_unit'");?></div>
+
 </div>
 <div class="field-group">
 <div class="label"><strong>Width</strong></div>
@@ -34,10 +38,13 @@ $plant_colors = form_multiselect("plant_color[]",$plant_colors, $colors );
 <div class="label"><strong>Plant Color(s)</strong></div>
 <div class="field-set"><?php echo $plant_colors; ?></div>
 </div>
-<div class="field-group"><label for="print_description">Variety Description:</label><br/><textarea id="print_description" name="print_description"><?php echo get_value($variety,"print_description");?></textarea></div>
+
+
+	<div class="field-group"><label for="print_description">Variety Description:</label><br/><textarea id="print_description" name="print_description"><?php echo get_value($variety,"print_description");?></textarea></div>
 <div class="field-group"><label for="web_description">Web Description:</label><br/><textarea id="web_description" name="web_description"><?php echo get_value($variety,"web_description");?></textarea></div>
 
-<div class="field-group"><label for="add_order">Add a New Order for this variety:</label><input type="checkbox" id="add_order" name="add_order" checked value="true"/>
+<div class="field-group"><label for="add_order">Add a New Order for this variety:</label>
+	<input type="checkbox" id="add_order" name="add_order" value="true"/>
 </div>
 <div class="field-group"><label for="needs_copy_review">Needs Copy Review:</label><input type="checkbox" id="needs_copy_review" name="needs_copy_review" <?php echo $action=="insert"||get_value($variety,"needs_copy_review"=="yes")?"checked":""?> value="yes"/>
 </div>

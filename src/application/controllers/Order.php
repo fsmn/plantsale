@@ -558,4 +558,30 @@ class Order extends MY_Controller {
 		return toggle($this,$this->order, $value);
 	}
 
+	function flat_total_exclude(): bool {
+		$pot_size = $this->input->get('pot_size');
+		$online_pot_sizes = [
+			'bareroot',
+			'bulb',
+			'tuber',
+			'seed',
+		];
+		$ajax = $this->input->get('ajax');
+		foreach($online_pot_sizes as $size){
+			if(stristr($pot_size, $size)){
+				if($ajax) {
+					print TRUE;
+				}
+
+				return TRUE;
+			}
+		}
+		if($ajax) {
+			print FALSE;
+		}
+		return FALSE;
+
+
+	}
+
 }

@@ -198,6 +198,9 @@ div.login-title {
 label.inline {
 	display: inline !important;
 }
+.no-wrap label {
+	white-space: nowrap;
+}
 
 /* form dimensions mainly defined here */
 .form {

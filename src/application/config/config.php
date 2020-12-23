@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$allowed_domains = array('plantsale.test', 'db.friendsschoolplantsale.com', 'backoffice.t7live.io', 'backoffice.t7stage.io', 'backoffice.t7test.io', "docker.test");
+$allowed_domains = array('backoffice.test', 'db.friendsschoolplantsale.com', 'backoffice.t7live.io', 'backoffice.t7stage.io', 'backoffice.t7test.io', "docker.test");
 $default_domain = 'db.friendsschoolplantsale.com';
 
 
@@ -23,8 +23,8 @@ if (in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE)) {
 } else {
 	$domain = $default_domain;
 }
-
-if($domain != 'docker.test'){
+$dev_domains  = ['docker.test','backoffice.test','plantsale.test'];
+if(!in_array( $domain, $dev_domains )){
 	if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== FALSE){
 		$_SERVER['HTTPS'] = 'on';
 	}

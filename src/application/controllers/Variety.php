@@ -70,10 +70,9 @@ class Variety extends MY_Controller {
 		}
 	}
 
-	function view() {
+	function view($id) {
 		$this->load->library('s3_client');
 		// $this->output->enable_profiler(TRUE);
-		$id = $this->uri->segment(3);
 		//		$formats = array (
 		//			'statement',
 		//			'tabloid',
@@ -86,6 +85,7 @@ class Variety extends MY_Controller {
 		// }
 
 		$variety = $this->variety->get($id);
+		$variety->toggle_online_only = toggle_button('variety',$id, 'online_only',$variety->online_only);
 		$current_order = $this->order->get_for_variety($id, get_current_year());
 		$data ['current_order'] = $current_order;
 		$data ['file_path'] = $this->s3_client->getPath();
@@ -113,34 +113,35 @@ class Variety extends MY_Controller {
 		if ($this->input->get("find")) {
 
 			$variables = [
-				"name",
-				"variety",
-				"genus",
-				"species",
-				"category_id",
-				"subcategory_id",
-				"flag",
-				"plant_color",
-				"sunlight",
-				"description",
-				"year",
-				"flat_size",
-				"grower_id",
-				"new_year",
-				"omit",
-				"web_description",
-				"print_description",
-				"needs_bag",
-				"crop_failure",
-				"catalog_number",
-				"descriptions",
-				"editor",
-				"copywriter",
-				"copy_received",
-				"edit_notes",
-				"needs_copy_review",
-				"churn_value",
-				"pot_size",
+				'name',
+				'variety',
+				'genus',
+				'species',
+				'category_id',
+				'subcategory_id',
+				'flag',
+				'plant_color',
+				'sunlight',
+				'description',
+				'year',
+				'flat_size',
+				'grower_id',
+				'new_year',
+				'omit',
+				'web_description',
+				'print_description',
+				'needs_bag',
+				'crop_failure',
+				'catalog_number',
+				'descriptions',
+				'editor',
+				'copywriter',
+				'copy_received',
+				'edit_notes',
+				'needs_copy_review',
+				'churn_value',
+				'pot_size',
+				'online_only',
 			];
 			$options = [];
 			$options ['action'] = $action;
@@ -267,10 +268,10 @@ class Variety extends MY_Controller {
 	}
 
 	function _search($action) {
-		$this->load->model("menu_model", "menu");
-		$this->load->model("category_model", "category");
-		$this->load->model("subcategory_model", "subcategory");
-		$this->load->model("order_model", "order");
+		$this->load->model('menu_model', 'menu');
+		$this->load->model('category_model', 'category');
+		$this->load->model('subcategory_model', 'subcategory');
+		$this->load->model('order_model', 'order');
 
 		$pot_sizes = $this->order->get_pot_sizes();
 		$data ["pot_sizes"] = get_keyed_pairs($pot_sizes, [
@@ -516,32 +517,44 @@ class Variety extends MY_Controller {
 		$this->get_flags($this->input->post("variety_id"));
 	}
 
-	function batch_update_flags() {
+	function batch_update() {
 		if (IS_ADMIN) {
-			if ($this->input->post("action") == "edit") {
-				$this->load->model("menu_model", "menu");
-				$flags = $this->menu->get_pairs("flag");
-				$data ["target"] = $this->input->post("target");
-				$data ["flags"] = get_keyed_pairs($flags, [
-					"key",
-					"value",
-				]);
-				$data ["ids"] = $this->input->post("ids");
-				$this->load->view("variety/batch_update_flags", $data);
+			if ($this->input->post('action') == 'edit') {
+				if($this->input->post('field') == 'online_only'){
+					$data['ids'] = $this->input->post('ids');
+					$this->load->view('variety/batch_update_online_only',$data);
+				}else {
+					$this->load->model('menu_model', 'menu');
+					$flags = $this->menu->get_pairs('flag');
+					$data ['flags'] = get_keyed_pairs($flags, [
+						'key',
+						'value',
+					]);
+					$data ['ids'] = $this->input->post('ids');
+					$this->load->view('variety/batch_update_flags', $data);
+				}
 			}
-			elseif ($this->input->post("action") == "update") {
-				$target = $this->input->post("target");
-				if ($this->input->post("flag") && $this->input->post("ids")) {
-					$flag = urldecode($this->input->post("flag"));
-					$ids = explode(",", $this->input->post("ids"));
-					$this->flag->batch_update($ids, $flag);
-					$result = sprintf("The following varieties had the flag '%s' added: %s", $flag, $this->input->post("ids"));
+			elseif ($this->input->post('action') == 'update') {
+				if(!empty($this->input->post('ids'))) {
+					$ids = explode(',', $this->input->post('ids'));
+					$id_list = implode(', ', $ids);
+					if ($this->input->post('flag')) {
+						$flag = urldecode($this->input->post('flag'));
+						$this->flag->batch_update($ids, $flag);
+						$result = sprintf('The following varieties had the flag "%s" added: %s', $flag,  $id_list);
+					}
+				elseif ($this->input->post('online_only')) {
+					$value = $this->input->post('online_only');
+					$this->variety->batch_update($ids, 'online_only' , $value);
+					$result = sprintf('The following varieties have had their online_only value set to %s: %s', $value, $id_list);
+
 				}
 				else {
-					$result = "No Batch Updates Made";
+					$result = 'No Batch Updates Made';
+				}
 				}
 				$this->session->set_flashdata("notice", $result);
-				redirect($target);
+				redirect();
 			}
 		}
 	}
@@ -718,7 +731,7 @@ class Variety extends MY_Controller {
 	/**
 	 * using the GD2 image manipulation system, this creates any new files if
 	 * none exist.
-	 * The $force_update option can be used to forceably update all files.
+	 * The $force_update option can be used to forcibly update all files.
 	 *
 	 * @param string $image_name
 	 * @param string $format
@@ -807,6 +820,11 @@ class Variety extends MY_Controller {
 		$output [] = form_multiselect($field, $pairs, $value, "id='$field'");
 		$buttons = implode(" ", $output);
 		echo $buttons . sprintf("<span class='button save-multiselect' target='%s'>Save</span>", $field);
+	}
+
+	function toggle(){
+		$value = 	$value = $this->input->post('value')=== 'no'?'yes':'no';
+		print toggle($this,$this->variety, $value);
 	}
 
 }

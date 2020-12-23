@@ -85,7 +85,11 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 <?php
 
 if ($output_format == "inventory") {
-	$this->load->view ( "order/inventory" );
+	if($year == 2021){
+		$this->load->view('order/inventory_2021');
+	}else {
+		$this->load->view("order/inventory");
+	}
 } elseif ($output_format == "crop-failure") {
 	$this->load->view ( "order/crop_failures" );
 } elseif ($output_format == "printable-sellouts") {

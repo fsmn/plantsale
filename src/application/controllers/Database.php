@@ -1,40 +1,179 @@
 <?php
+
+/**
+ * Class Database
+ */
 class Database extends MY_Controller {
 
-	function __construct()
-	{
-		parent::__construct ();
+	/**
+	 * Database constructor.
+	 */
+	function __construct() {
+		parent::__construct();
+		$this->load->model('Update_model', 'updater');
 	}
 
-	function update_database()
-	{
-		$output = array ();
-		$table = $this->db->escape_str ( "user_sessions" );
-		$sql = "DESCRIBE `$table`";
-		$desc = $this->db->query ( $sql )->result ();
-		foreach ( $desc as $item ) {
-			if ($item->Field == "id" && $item->Type != "varchar(128)") {
-				if ($this->db->query ( "ALTER TABLE user_sessions CHANGE id id varchar(128) NOT NULL;" )) {
-					$output [] = "User Sessions Updated";
-				} else {
-					$output [] = "User Sessions Update Failed due to the following error: " . $this->db->error ();
+
+	/**
+	 *
+	 */
+	function run_updates() {
+		$messages = [];
+		foreach (get_class_methods('Database') as $method) {
+			if ($my_method = strstr($method, 'db_update_')) {
+				$id = (int) filter_var($my_method, FILTER_SANITIZE_NUMBER_INT);
+				$query = $this->$my_method();
+				if ($message = $this->updater->update($id, $query)) {
+					$messages[] = $message;
 				}
 			}
 		}
-		$precount = $this->db->count_all ( 'user_sessions' );
-		if ($this->db->query ( "DELETE from user_sessions where `timestamp` < unix_timestamp(now()) - 168000" )) {
-			$postcount = $this->db->count_all ( 'user_sessions' );
-			$output [] = sprintf ( "%s old records removed from `user_sessions` table", $precount - $postcount );
-		} else {
-			$output [] = "User sessions not cleared of old data due the following error: " . $this->db->error ();
-		}
-		if (empty ( $output )) {
-			$message = "No Database Updates";
-		} else {
-			$message = implode ( "</br>", $output );
-		}
-		$this->session->set_flashdata ( "notice", $message );
-		redirect ( "/" );
+		$this->session->set_flashdata('notice', implode('<br/>', $messages));
+		redirect();
 	}
-}
 
+	/**
+	 * @return string
+	 */
+	function db_update_1(): string {
+		return 'ALTER TABLE `orders` CHANGE `count_midsale` `count_midsale` DECIMAL(10,2) NULL DEFAULT NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_2(): string {
+		return 'ALTER TABLE `orders` CHANGE `count_presale` `count_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
+
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_3(): string {
+		return 'ALTER TABLE `orders` CHANGE `received_midsale` `received_midsale` DECIMAL(10,2) NULL DEFAULT NULL;';
+
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_4(): string {
+		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_5(): string {
+		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_6(): string {
+		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_7(): string {
+		return 'ALTER TABLE `orders` CHANGE `count_dead` `count_dead` DECIMAL(10,2) NULL DEFAULT NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_8(): string {
+		return 'UPDATE `variety` set new_year = 2021 where new_year = 2020;';
+	}
+
+
+	/**
+	 * @return string
+	 */
+	function db_update_10(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `count_friday` DECIMAL(10,2) NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_11(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `count_saturday` DECIMAL(10,2) NULL;';
+
+	}
+
+
+	/**
+	 * @return string
+	 */
+	function db_update_13(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `received_friday` DECIMAL(10,2) NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_14(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `received_saturday` DECIMAL(10,2) NULL;';
+	}
+
+	/**
+	 * @return string
+	 */
+	function db_update_15(): string {
+		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `flat_exclude` BOOLEAN NOT NULL DEFAULT FALSE';
+	}
+
+	/**
+	 * @return string
+	 */
+/*	function db_update_16(): string {
+		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `fk_users_groups_users1_idx`;';
+
+	}*/
+
+
+	/**
+	 * @return string
+	 */
+	/*function db_update_17(): string {
+		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `fk_users_groups_groups1_idx`;';
+
+	}*/
+
+	/**
+	 * @return string
+	 */
+	/*function db_update_18(): string {
+		return 'ALTER TABLE `users_groups` DROP INDEX IF EXISTS `uc_users_groups`;';
+	}*/
+
+	/**
+	 * @return string
+	 */
+	function db_update_19(): string {
+		return 'ALTER TABLE `orders` DROP IF EXISTS `count_thursday`;';
+	}
+
+
+	/**
+	 * @return string
+	 */
+	function db_update_20(): string {
+		return 'ALTER TABLE `orders` DROP IF EXISTS `received_thursday`';
+	}
+
+	/**
+	 * add online_only field to the variety table for consumption by the live site
+	 * @return string
+	 */
+	function db_update_21(): string {
+		return 'ALTER TABLE `variety`  ADD `online_only` ENUM("yes","no") NOT NULL DEFAULT "no";';
+	}
+
+
+}

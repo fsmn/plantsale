@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit ('No direct script access allowed');
-
+use \Field\Field;
 // order.php Chris Dart Feb 28, 2013 9:38:32 PM chrisdart@cerebratorium.com
 class Order extends MY_Controller {
 
@@ -41,6 +41,7 @@ class Order extends MY_Controller {
 				$options ['year'] = $sale_year;
 				// $this->session->set_userdata("sale_year", $sale_year);
 			}
+			$data['year'] = $sale_year;
 
 			if ($new_year = $this->input->get("new_year")) {
 				$options ['new_year'] = $new_year;
@@ -69,10 +70,12 @@ class Order extends MY_Controller {
 				"tiers",
 				"flag",
 				"needs_bag",
+				'flat_exclude',
 			];
 
 			$this->set_options($options, $keys);
-
+			$data['year'] = $this->input->get('year');
+			bake_cookie('sale_year',$data['year']);
 			if ($output_format = $this->input->get("output_format")) {
 				bake_cookie("output_format", $output_format);
 				$data ["output_format"] = $output_format;
@@ -111,12 +114,6 @@ class Order extends MY_Controller {
 				burn_cookie("is_tracking");
 				$data ["is_tracking"] = FALSE;
 			}
-
-			// if ($show_last_only = $this->input->get ( "show_last_only" )) {
-			// bake_cookie ( "show_last_only", $show_last_only );
-			// } else {
-			// burn_cookie ( "show_last_only" );
-			// }
 
 			$sorting ["fields"] = [
 				"catalog_number",
@@ -157,6 +154,16 @@ class Order extends MY_Controller {
 
 			foreach ($orders as $order) {
 				$order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
+				if($output_format != 'crop-failure') {
+					if ($this->session->userdata('user_id') == 1) {
+						$order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
+					}
+					else {
+						$label = '';
+						extract(get_toggle_text('flat_exclude', $order->flat_exclude));
+						$order->flat_exclude_button = $label;
+					}
+				}
 			}
 			if ($show_last_only = $this->input->get("show_last_only")) {
 				bake_cookie("show_last_only", $show_last_only);
@@ -168,7 +175,7 @@ class Order extends MY_Controller {
 				}
 			}
 			$title_category = [];
-			if (array_key_exists("category_id", $options)) {
+			if (array_key_exists( "category_id", $options)) {
 				$this->load->model("category_model", "category");
 				$category = $this->category->get($options ["category_id"])->category;
 				$options ["category"] = $category;
@@ -185,7 +192,6 @@ class Order extends MY_Controller {
 			foreach ($options as $key => $value) {
 				$where [] = sprintf("`%s` = '%s'", $key, $value);
 			}
-			// $this->session->set_flashdata ( "alert", sprintf ( "WHERE %s", implode ( " AND ", $where ) ) );
 
 			$data ["options"] = $options;
 			$data ["orders"] = $orders;
@@ -281,20 +287,28 @@ class Order extends MY_Controller {
 		if ($field == "received_presale" && $value == "f") {
 			$value = 0;
 		}
-		$values = [
-			$field => $value,
-		];
+		if ($value === 'x') {
+		$output = 	$this->order->clear($id, $field);
+		}
+		else {
+			$values = [
+				$field => $value,
+			];
 
-		$output = $this->order->update($id, $values);
+			$output = $this->order->update($id, $values);
 
-		if ($this->input->post("format") == "currency") {
-			$output = get_as_price($output);
+			if ($this->input->post("format") == "currency") {
+				$output = get_as_price($output);
+			}
 		}
 		echo $output;
 	}
 
+
 	/**
 	 * move the order to a new variety *
+	 *
+	 * @param null $id
 	 */
 	function move($id = NULL) {
 		if ($this->input->get("start")) {
@@ -425,9 +439,7 @@ class Order extends MY_Controller {
 
 	function update() {
 		$id = $this->input->post("id");
-		$variety_id = $this->input->post("variety_id");
 		$this->order->update($id);
-		// redirect ( "variety/view/$variety_id" );
 		redirect($this->input->post("redirect_url"));
 	}
 
@@ -490,6 +502,7 @@ class Order extends MY_Controller {
 					'flat_area',
 					'tiers',
 					'grower_code',
+					'flat_exclude',
 				];
 				$values = [];
 				foreach ($fields as $field) {
@@ -504,6 +517,9 @@ class Order extends MY_Controller {
 							case 'flat_area' :
 							case 'tiers' :
 								$values [$field] = preg_replace('/[^0-9,.]/', '', $my_value);
+								break;
+							case 'flat_exclude':
+								$values[$field] = $my_value == 'yes'?1:'0';
 								break;
 							default :
 								$values [$field] = $my_value;
@@ -524,9 +540,22 @@ class Order extends MY_Controller {
 					$this->session->set_flashdata('notice', 'No changes were made');
 				}
 				$order_search = cookie('order_search');
-				redirect('order/search?'.$order_search);
+				redirect('order/search?' . $order_search);
 			}
 		}
+	}
+
+	function flat_total_exclusions(){
+		return $this->order->get_flat_total_exclusions();
+	}
+
+	private function toggle_button($id, string $field, $value) {
+		return toggle_button('order', $id, $field, $value);
+	}
+
+	function toggle(){
+		$value = $this->input->post('value')===1?0:1;
+		return toggle($this,$this->order, $value);
 	}
 
 }

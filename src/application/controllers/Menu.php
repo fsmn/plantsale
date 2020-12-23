@@ -163,8 +163,6 @@ class Menu extends MY_Controller {
 				$output = form_input($data, $data ["value"], "class='autocomplete'");
 				break;
 			case "time" :
-				$output = sprintf("<input type'%s' name='%s' id='%s' value='%s' size='%s'", $data ['type'], $data ['name'], $data ['id'], $data ['value'], $data ['size']);
-				break;
 			case "email" :
 				$output = sprintf("<input type'%s' name='%s' id='%s' value='%s' size='%s'", $data ['type'], $data ['name'], $data ['id'], $data ['value'], $data ['size']);
 				break;

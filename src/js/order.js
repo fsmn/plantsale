@@ -145,13 +145,34 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("change","#pot-size-menu",function(){
-		console.log($(this).val());
-		if($(this).val()== "other"){
+		let pot_size = $(this).val();
+		if(pot_size === "other"){
 			my_parent = $(this).parent();
 			$(this).remove();
 			my_parent.append("<input name='pot_size' required value=''/>");
 			my_parent.children("input").focus();
 		}
+		// check if the pot-size should be excluded from flat totals
+		let form_data = {
+			pot_size: pot_size,
+			ajax: true
+		};
+		$.ajax({
+			type: "get",
+			url: base_url + "order/flat_total_exclude",
+			data: form_data,
+			success: function(data){
+				if(data) {
+					$("select#flat_exclude").val("1");
+				}
+				else {
+					$("select#flat_exclude").val("0");
+				}
+			},
+			failure: function(data){
+				console.log(data);
+			}
+		})
 	})
    
 	
@@ -202,4 +223,3 @@ $(document).ready(function(){
 		$(my_column).hide();
 
 	}
- 

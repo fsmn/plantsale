@@ -13,7 +13,7 @@ container_live:
     - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:$CI_COMMIT_SHA
   only:
-    - master
+    - main
 
 container_stage:
   stage: build
@@ -50,7 +50,7 @@ k8s_live:
     - "ansible-galaxy install -r $CI_PROJECT_DIR/ansible/requirements.yml"
     - "ansible-playbook -i $CI_PROJECT_DIR/ansible/inventories/all.ini $CI_PROJECT_DIR/ansible/live.yml"
   only:
-    - master
+    - main
 
 k8s_stage:
   stage: deploy

@@ -1,5 +1,5 @@
 <?php
-defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+defined('BASEPATH') or exit ('No direct script access allowed');
 // $show_names = TRUE;
 // variety_order.php Chris Dart Mar 4, 2013 8:44:25 PM
 // chrisdart@cerebratorium.com
@@ -85,12 +85,12 @@ if ($orders) :
 			$flat_cost = $order->flat_size * $order->plant_cost;
 		}
 		$row_classes = array (
-				"grouping" 
+				"grouping"
 		);
 		$latest_year = get_value ( $order, "latest_year", TRUE );
-		
+
 		$row_title = "";
-		
+
 		if ($order->received_presale == "0.000") {
 			$row_classes [] = "crop-failure";
 			$row_title = "This plant has a crop failure";
@@ -105,12 +105,12 @@ if ($orders) :
 			$row_classes [] = "temporary-sellout";
 			$row_title = "Temporary sellout";
 		}
-		
+
 		$presale_total += $order->count_presale;
 		$midsale_total += $order->count_midsale;
 		$flat_cost_total += $order->flat_cost * ($order->count_presale + $order->count_midsale);
 		$row_classes [] = has_price_discrepancy ( $order );
-		
+
 		?>
 		<tr class="<?php echo implode(" ",$row_classes);?>" id="order_<?php echo $order->id;?>" title="<?php echo $row_title;?>">
 
@@ -156,31 +156,31 @@ if ($orders) :
 			<?php echo edit_field("count_presale",$order->count_presale,"","order",$order->id,array("envelope"=>"span"));?>
 			</td>
 			<td class="order-received_presale field">
-			<?php echo live_field("received_presale",$order->received_presale,"order",$order->id,array("envelope"=>"span")); ?>
+			<?php echo live_field("received_presale",$order->received_presale,"order",$order->id,array('type'=>'text',"envelope"=>"span")); ?>
 			</td>
 			<td class="order-remainder_friday field" style="width: 31px;">
-			<?php echo live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("remainder_friday",$order->remainder_friday,"order",$order->id,array('type'=>'text',"envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-sellout_friday field" style="width: 31px;">
-			<?php echo live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("sellout_friday",$order->sellout_friday,"order",$order->id,array('type'=>'text',"envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td tabindex=-1 class="order-count_midsale field">
-			<?php echo edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array("envelope"=>"span"));?>
+			<?php echo edit_field("count_midsale",$order->count_midsale,"","order",$order->id,array('type'=>'text',"envelope"=>"span"));?>
 			</td>
 			<td class="order-received_midsale field">
-			<?php echo live_field("received_midsale",$order->received_midsale,"order",$order->id,array("envelope"=>"span"));?>
+			<?php echo live_field("received_midsale",$order->received_midsale,"order",$order->id,array('type'=>'text',"envelope"=>"span"));?>
 			</td>
 			<td class="order-remainder_saturday field" style="width: 31px;">
-			<?php echo live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("remainder_saturday",$order->remainder_saturday,"order",$order->id,array('type'=>'text',"envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-sellout_saturday field" style="width: 31px;">
-			<?php echo live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("sellout_saturday",$order->sellout_saturday,"order",$order->id,array('type'=>'text',"envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-remainder_sunday field" style="width: 31px;">
-			<?php echo live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("remainder_sunday",$order->remainder_sunday,"order",$order->id,array('type'=>'text',"envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-count_dead field" style="width: 31px;">
-			<?php echo live_field("count_dead",$order->count_dead,"order",$order->id,array("envelope"=>"span","sizse"=>31));?>
+			<?php echo live_field("count_dead",$order->count_dead,"order",$order->id,array('type'=>'text',"envelope"=>"span","sizse"=>31));?>
 			</td>
 			<td class="order-total_plants field">
 			<?php echo $order->count_midsale + $order->count_presale;?>

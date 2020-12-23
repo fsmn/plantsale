@@ -1,6 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 $refine = $this->input->get("refine");
-$sale_year = $this->session->userdata("sale_year");;
+if(!$sale_year = $this->session->userdata("sale_year")){
+	$sale_year = get_current_year();
+}
 if (cookie("output_format") == "crop-failure" && $refine) {
 	$sale_year = "";
 }
@@ -26,6 +28,22 @@ if (cookie("output_format") == "crop-failure" && $refine) {
 		<label for="output_format">Output Format</label>
 		<?php echo form_dropdown("output_format", $output_formats, ($refine ? cookie("output_format") : "catalog"), 'id="output_format"'); ?>
 
+	</div>
+	<div class="field-set label-break">
+		<div class="column first">
+			<label for="year">Year</label>
+			<input type="number" id="year"
+				   name="year" style="width:4em"
+					 value="<?php echo $sale_year; ?>"/>
+		</div>
+		<div class="column last">
+			<label for="new_year">First Year at Sale</label>
+			<input type="number"
+																   name="new_year"
+																   title="(enter current year for all new items)"
+																   style="width:4em"
+																   value="<?php echo $refine ? cookie("new_year") : ""; ?>"/>
+		</div>
 	</div>
 	<div class="field-set label-break">
 		<div class="column first">
@@ -127,20 +145,7 @@ if (cookie("output_format") == "crop-failure" && $refine) {
 															   value="<?php echo $refine ? cookie("price") : ""; ?>"/>
 		</div>
 	</div>
-	<div class="field-set label-break">
-		<div class="column first">
-			<label for="year">Year</label><input type="number" id="year"
-												 name="year" style="width:4em"
-												 value="<?php echo $sale_year; ?>"/>
-		</div>
-		<div class="column last">
-			<label for="new_year">First Year at Sale</label><input type="number"
-																   name="new_year"
-																   title="(enter current year for all new items)"
-																   style="width:4em"
-																   value="<?php echo $refine ? cookie("new_year") : ""; ?>"/>
-		</div>
-	</div>
+
 	<div class="field-set label-break">
 		<div class="column first"><label for="grower_id">Grower ID</label>&nbsp;<input
 					type="text" name="grower_id" style="width:3em;"

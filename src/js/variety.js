@@ -455,28 +455,31 @@ $(document).on("click",".variety-insert",function(){
 			});
 		}
 		
-		$(document).on("click",".batch-update-flags",function(e){
-			me = $(this);
+		$(document).on("click",".batch-update-variety",function(e){
 			e.preventDefault();
-			batch_update_flags(me);
+			let me = $(this);
+			batch_update_flags(me, 'edit');
 		});
 		
-		function batch_update_flags(me){
-			var id_array = $.map($(".plant-info"),function(n,i){
+		function batch_update_flags(me, action){
+			let id_array = $.map($(".plant-info"),function(n,i){
 				return n.id.split("_")[1];
 			});
-			href = me.attr('href');
-			form_data = {
-					ids: id_array,
-					action: "edit",
-					target: href
+			console.log(id_array);
+			let field = me.data('field');
+			let href = me.attr('href');
+			let form_data = {
+				ids: id_array,
+				action: action,
+				field: field,
+				target: href
 			};
 			
 			console.log(form_data);
 			$.ajax({
 				type:"post",
 				data: form_data,
-				url: base_url + "variety/batch_update_flags",
+				url: base_url + "variety/batch_update",
 				success: function(data){
 					show_popup("Batch Updater",data,"auto");
 				}

@@ -39,11 +39,13 @@
 	</p>
 <?php $sorting = $this->input->get("sorting"); ?>
 <?php $direction = $this->input->get("direction");?>
+		<?php if(!empty($sorting)):?>
 <ul>
 <?php for($i = 0; $i < count($sorting); $i++):?>
 <li><?php printf("%s, %s", ucwords($sorting[$i]), $direction[$i]); ?></li>
 <?php endfor; ?>
 </ul>
+		<?php endif; ?>
 <p>
 Found Count: <strong><?php echo count($plants);?> Varieties</strong>
 </p>

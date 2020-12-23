@@ -4,7 +4,7 @@ defined('BASEPATH') or exit ('No direct script access allowed');
 // variety_order.php Chris Dart Mar 4, 2013 8:44:25 PM
 // chrisdart@cerebratorium.com
 
-if ($orders) :
+if ( ! empty($orders)) :
 	?>
 
 	<!-- views/order/catalog.php -->
@@ -18,7 +18,7 @@ if ($orders) :
 
 		<tr>
 			<th class="hide-column"></th>
-			<?php if (!$show_names): ?>
+			<?php if ( ! $show_names): ?>
 				<th class="hide-column">Year</th>
 			<?php endif; ?>
 			<th class="hide-column">Grower</th>
@@ -30,7 +30,13 @@ if ($orders) :
 				<th class="hide-column">Variety</th>
 			<?php endif; ?>
 			<th class="hide-column">Presale Order</th>
-			<th class="hide-column">Midsale Order</th>
+			<?php if ($year == 2021): ?>
+				<th class="hide-column">Friday Order</th>
+				<th class="hide-column">Saturday Order</th>
+			<?php else: ?>
+				<th class="hide-column">Midsale Order</th>
+
+			<?php endif; ?>
 			<th class="hide-column">Total</th>
 			<th class="hide-column">Pot Size</th>
 			<th class="hide-column">Flat Size</th>
@@ -39,7 +45,10 @@ if ($orders) :
 			<th class="hide-column">Order Total</th>
 			<th class="hide-column">Price</th>
 			<th class="hide-column">Grower Code</th>
-			<th class="hide-column" title="Include or exclude these items from the flat totals calculator on the home page">Excluded from flat totals</th>
+			<th class="hide-column"
+				title="Include or exclude these items from the flat totals calculator on the home page">
+				Excluded from flat totals
+			</th>
 			<th></th>
 		</tr>
 		</thead>
@@ -51,16 +60,20 @@ if ($orders) :
 		foreach ($orders as $order) :
 			$flat_cost = $order->flat_cost;
 			$plant_cost = $order->plant_cost;
-			if ($order->flat_cost && !$order->plant_cost) {
+			if ($order->flat_cost && ! $order->plant_cost)
+			{
 				$flat_cost = $order->flat_cost;
-				if ($order->flat_cost != 0) {
+				if ($order->flat_cost != 0)
+				{
 					$plant_cost = $order->flat_size / $order->flat_cost;
 				}
-				else {
+				else
+				{
 					$plant_cost = 0;
 				}
 			}
-			elseif ($order->plant_cost && !$order->flat_cost) {
+			elseif ($order->plant_cost && ! $order->flat_cost)
+			{
 				$plant_cost = $order->plant_cost;
 				$flat_cost = $order->flat_size * $order->plant_cost;
 			}
@@ -69,10 +82,12 @@ if ($orders) :
 			];
 			$latest_year = get_value($order, "latest_year", TRUE);
 
-			if (get_value($order, "has_reorder") && $order->has_reorder) {
+			if (get_value($order, "has_reorder") && $order->has_reorder)
+			{
 				$row_classes [] = "hidden";
 			}
-			if ($order->received_presale == "0.000") {
+			if ($order->received_presale == "0.000")
+			{
 				$row_classes [] = "crop-failure";
 			}
 
@@ -82,7 +97,8 @@ if ($orders) :
 			$row_classes [] = has_price_discrepancy($order);
 			?>
 			<tr class="<?php echo implode(" ", $row_classes); ?>"
-				id="order_<?php echo $order->id; ?>" data-order-id="<?php print $order->id; ?>">
+				id="order_<?php echo $order->id; ?>"
+				data-order-id="<?php print $order->id; ?>">
 				<td class="no-wrap">
 					<?php if (IS_ADMIN): ?>
 						<span class="omit-row omit button"
@@ -111,7 +127,7 @@ if ($orders) :
 					<?php endif; ?>
 
 				</td>
-				<?php if (!$show_names): ?>
+				<?php if ( ! $show_names): ?>
 					<td class="order-year field"><?php echo edit_field("year", $order->year, "", "order", $order->id, ["envelope" => "span"]); ?>
 					</td>
 				<?php endif; ?>
@@ -121,7 +137,7 @@ if ($orders) :
 					<!-- if there is no catalog number, show the first letter of the category -->
 					<?php echo edit_field("catalog_number", $order->catalog_number ? $order->catalog_number : ucfirst(substr($order->category, 0, 1)), "", "order", $order->id, ["envelope" => "span"]); ?>
 				</td>
-				<?php if ($show_names): ?>
+				<?php if (!empty($show_names)): ?>
 					<td>
 						<a href="<?php echo site_url(sprintf("common/find?genus=%s", $order->genus)); ?>"
 						   title="View all <?php echo $order->genus; ?>"><?php echo $order->genus; ?></a>
@@ -140,7 +156,19 @@ if ($orders) :
 				<td class="order-count_presale field">
 					<?php echo edit_field("count_presale", $order->count_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
 				</td>
-				<?php if ($is_inventory): ?>
+				<?php if($year == 2021):?>
+					<td class="order-count_friday field">
+						<?php echo edit_field("count_friday", $order->count_friday, "", "order", $order->id, ["envelope" => "span"]); ?>
+					</td>
+					<td class="order-count_saturday field">
+						<?php echo edit_field("count_saturday", $order->count_saturday, "", "order", $order->id, ["envelope" => "span"]); ?>
+					</td>
+				<?php else: ?>
+					<td class="order-count_midsale field">
+						<?php echo edit_field("count_midsale", $order->count_midsale, "", "order", $order->id, ["envelope" => "span"]); ?>
+					</td>
+				<?php endif; ?>
+				<?php if (!empty($is_inventory)): ?>
 					<td class="order-received_presale field">
 						<?php echo edit_field("received_presale", $order->received_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
 					</td>
@@ -150,11 +178,6 @@ if ($orders) :
 					<td class="order-sellout_friday field">
 						<?php echo edit_field("sellout_friday", $order->sellout_friday, "", "order", $order->id, ["envelope" => "span"]); ?>
 					</td>
-				<?php endif; ?>
-				<td class="order-count_midsale field">
-					<?php echo edit_field("count_midsale", $order->count_midsale, "", "order", $order->id, ["envelope" => "span"]); ?>
-				</td>
-				<?php if ($is_inventory): ?>
 					<td class="order-received_midsale field">
 						<?php echo edit_field("received_midsale", $order->received_midsale, "", "order", $order->id, ["envelope" => "span"]); ?>
 					</td>
@@ -205,8 +228,8 @@ if ($orders) :
 				<td class="order-grower_code field"><?php echo edit_field("grower_code", $order->grower_code, "", "order", $order->id, ["envelope" => "span"]); ?>
 				</td>
 				<td class="order-flat_exclude field">
-					<?php if(!empty($order->flat_exclude_button)): ?>
-					<?php print $order->flat_exclude_button;?>
+					<?php if ( ! empty($order->flat_exclude_button)): ?>
+						<?php print $order->flat_exclude_button; ?>
 					<?php endif; ?>
 				</td>
 				<td class="re-order field">
@@ -229,7 +252,7 @@ if ($orders) :
 		<tfoot>
 		<tr>
 			<td></td>
-			<?php if (!$show_names): ?>
+			<?php if ( ! $show_names): ?>
 				<td></td>
 			<?php endif; ?>
 			<td></td>

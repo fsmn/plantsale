@@ -18,7 +18,7 @@ if ( ! empty($orders)) :
 
 		<tr>
 			<th class="hide-column"></th>
-			<?php if ( ! $show_names): ?>
+			<?php if ( empty($show_names)): ?>
 				<th class="hide-column">Year</th>
 			<?php endif; ?>
 			<th class="hide-column">Grower</th>
@@ -195,7 +195,7 @@ if ( ! empty($orders)) :
 					</td>
 				<?php endif; ?>
 				<td class="order-total_plants field">
-					<?php echo $order->count_midsale + $order->count_presale; ?>
+					<?php echo $order->count_midsale + $order->count_presale + $order->count_friday + $order->count_saturday; ?>
 				</td>
 				<td class="order-pot_size field no-wrap"><?php echo edit_field("pot_size", $order->pot_size, "", "order", $order->id, [
 							"envelope" => "span",
@@ -220,7 +220,7 @@ if ( ! empty($orders)) :
 						  class="edit-cost"><?php echo number_format($order->plant_cost, 2); ?></span>
 				</td>
 				<td class="order-order_total field order_total no-wrap">
-					$<?php echo round($order->flat_cost * ($order->count_presale + $order->count_midsale), 2); ?>
+					$<?php echo round($order->flat_cost * ($order->count_presale + $order->count_midsale + $order->count_friday + $order->count_saturday), 2); ?>
 				</td>
 				<td class="order-price field price-field no-wrap">
 					$<?php echo edit_field("price", $order->price, "", "order", $order->id, ["envelope" => "span"]); ?>

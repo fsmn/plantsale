@@ -84,24 +84,24 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 <?php
 
-if ($output_format == "inventory") {
+if ($output_format == 'inventory') {
 	if($year == 2021){
 		$this->load->view('order/inventory_2021');
 	}else {
-		$this->load->view("order/inventory");
+		$this->load->view('order/inventory');
 	}
-} elseif ($output_format == "crop-failure") {
-	$this->load->view ( "order/crop_failures" );
-} elseif ($output_format == "printable-sellouts") {
-	$this->load->view ( "order/sellouts" );
-} elseif ($output_format == "printable-tracking") {
-	$this->load->view ( "order/tracking" );
-} elseif ($output_format == "printable-shelfchecking") {
-	$this->load->view ( "order/shelfchecking" );
-} elseif ($output_format == "profitability") {
-	$this->load->view ( "order/profitability" );
+} elseif ($output_format == 'crop-failure') {
+	$this->load->view ( 'order/crop_failures' );
+} elseif ($output_format == 'printable-sellouts') {
+	$this->load->view ( 'order/sellouts' );
+} elseif ($output_format == 'printable-tracking') {
+	$this->load->view ( 'order/tracking' );
+} elseif ($output_format == 'printable-shelfchecking') {
+	$this->load->view ( 'order/shelfchecking' );
+} elseif ($output_format == 'profitability') {
+	$this->load->view ( 'order/profitability' );
 } else {
-	$this->load->view ( "order/catalog" );
+	$this->load->view ( 'order/catalog' );
 }
 ?>
 

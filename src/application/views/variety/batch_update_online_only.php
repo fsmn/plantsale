@@ -10,12 +10,6 @@ if(!empty($ids)):
 	<h2>DANGER: Updating <?php echo count($ids); ?> Records</h2>
 	<p class="notice">Changes you submit here cannot be undone!</p>
 	<p>
-		<?php print form_dropdown('online_only', [
-				'yes' => 'Set to online only',
-				'no' => 'Set to available at the sale',
-		]); ?>
-	</p>
-	<p>
 		<input type="submit" class="button"/>
 	</p>
 

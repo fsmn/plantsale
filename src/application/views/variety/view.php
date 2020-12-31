@@ -64,12 +64,7 @@
 						'attributes' => 'menu="churn_value"',
 				]); ?>
 			</div>
-			<div>
-				<p class="field-envelope">
-					<label>Online Only: </label>
-					<?php echo $variety->toggle_online_only; ?>
-				</p>
-			</div>
+
 			<?php echo edit_field('plant_color', $variety->plant_color, 'Plant Color(s)', 'variety', $variety->id, [
 					'class' => 'multiselect',
 					'attributes' => 'menu="plant_color"',

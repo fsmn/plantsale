@@ -82,7 +82,6 @@ class Variety extends MY_Controller {
 		$this->load->library('s3_client',$this->s3_vars);
 		$id = $this->uri->segment(3);
 		$variety = $this->variety->get($id);
-		$variety->toggle_online_only = toggle_button('variety',$id, 'online_only',$variety->online_only);
 		$current_order = $this->order->get_for_variety($id, get_current_year());
 		$data ['current_order'] = $current_order;
 		$data ['file_path'] = $this->s3_client->getPath();
@@ -138,7 +137,6 @@ class Variety extends MY_Controller {
 				'needs_copy_review',
 				'churn_value',
 				'pot_size',
-				'online_only',
 			];
 			$options = [];
 			$options ['action'] = $action;
@@ -540,12 +538,6 @@ class Variety extends MY_Controller {
 						$this->flag->batch_update($ids, $flag);
 						$result = sprintf('The following varieties had the flag "%s" added: %s', $flag,  $id_list);
 					}
-				elseif ($this->input->post('online_only')) {
-					$value = $this->input->post('online_only');
-					$this->variety->batch_update($ids, 'online_only' , $value);
-					$result = sprintf('The following varieties have had their online_only value set to %s: %s', $value, $id_list);
-
-				}
 				else {
 					$result = 'No Batch Updates Made';
 				}

@@ -67,10 +67,6 @@ $actions = [
 			   id="needs_bag" <?php echo $refine && cookie("needs_bag") == 1 ? "checked" : ""; ?>
 			   value="1"/>
 		<label for="no_image">Needs Bag</label>
-		<input type="checkbox" name="online_only"
-			   id="online_only" <?php echo $refine && cookie("online_only") == 1 ? "checked" : ""; ?>
-			   value="yes" title="varieties only available online"/>
-		<label for="no_image">Online Only</label>
 	</div>
 	<div class="field-set standard">
 		<div class="column first">

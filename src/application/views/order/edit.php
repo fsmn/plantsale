@@ -85,10 +85,6 @@ if (get_value($order, 'year') == 2021) {
 			<label for="pot_size">Pot Size:&nbsp;</label>
 			<?php echo form_dropdown("pot_size", $pot_sizes, urlencode(get_value($order, "pot_size")), "id='pot-size-menu'"); ?>
 		</div>
-		<div class="order-online_only field">
-			<label for="pot_size">Exclude from Flat Totals:&nbsp;</label>
-			<?php echo form_dropdown('flat_exclude', ['0'=>'No','1'=>'Yes'], get_value($order, 'flat_exclude'), "id='flat_exclude'"); ?>
-		</div>
 		<div class="order-grower_code field">
 			<label for="grower_code">Grower Code:&nbsp;</label> <input
 					type="text"

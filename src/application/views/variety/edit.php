@@ -17,10 +17,6 @@ $plant_colors = form_multiselect("plant_color[]",$plant_colors, $colors );
 <p>
 <label for="new_year">First Year at Sale (YYYY)</label>
 <input name="new_year" id="new_year" value="<?php echo $this->session->userdata("sale_year");;?>"/>
-</p>
-	<p><label for="online_only">Is Online Only</label>
-		<?php print form_dropdown('online_only',['no'=>'No','yes'=>'Yes'],get_value($variety, 'online_only','no'))	;?>
-	</p>
 <div class="field-group">
 <div class="label"><strong>Height</strong></div>
 <div class="dimension field-set"><?php echo create_input($variety,"min_height","Min");?></div>

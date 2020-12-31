@@ -7,55 +7,55 @@ class Order_Model extends MY_Model {
 	/**
 	 * @var
 	 */
-	var $variety_id;
+	public $variety_id;
 
-	var $grower_id;
+	public $grower_id;
 
-	var $catalog_number;
+	public $catalog_number;
 
-	var $year;
+	public $year;
 
-	var $flat_size;
+	public $flat_size;
 
-	var $flat_cost;
+	public $flat_cost;
 
-	var $flat_area;
+	public $flat_area;
 
-	var $tiers;
+	public $tiers;
 
-	var $pot_size;
+	public $pot_size;
 
-	var $plant_cost;
+	public $plant_cost;
 
-	var $price;
+	public $price;
 
-	var $count_presale;
+	public $count_presale = 0.0;
 
-	var $count_midsale;
+	public $count_midsale = 0.0;
 
-	var $received_presale;
+	public $received_presale;
 
-	var $received_midsale;
+	public $received_midsale;
 
-	var $count_dead;
+	public $count_dead;
 
-	var $sellout_friday;
+	public $sellout_friday;
 
-	var $sellout_saturday;
+	public $sellout_saturday;
 
-	var $remainder_friday;
+	public $remainder_friday;
 
-	var $remainder_saturday;
+	public $remainder_saturday;
 
-	var $remainder_sunday;
+	public $remainder_sunday;
 
-	var $grower_code;
+	public $grower_code;
 
-	var $omit;
+	public $omit = 0;
 
-	var $flat_exclude;
+	public $flat_exclude = 0;
 
-	var $rec_modified;
+	public $rec_modified = 0;
 
 	var $rec_modifier;
 
@@ -64,42 +64,19 @@ class Order_Model extends MY_Model {
 	}
 
 	function prepare_variables() {
-		$variables = [
-			'variety_id',
-			'grower_id',
-			'catalog_number',
-			'year',
-			'flat_size',
-			'flat_cost',
-			'pot_size',
-			'plant_cost',
-			'price',
-			'count_presale',
-			'count_friday',
-			'count_saturday',
-			'received_presale',
-			'received_friday',
-			'received_saturday',
-			'received_midsale',
-			'count_dead',
-			'sellout_friday',
-			'sellout_saturday',
-			'remainder_friday',
-			'remainder_saturday',
-			'remainder_sunday',
-			'flat_area',
-			'tiers',
-			'grower_code',
-			'omit',
-			'flat_exclude',
-		];
 
-		for ($i = 0; $i < count($variables); $i++) {
-			$my_variable = $variables [$i];
-			if ($this->input->post($my_variable)) {
-				$this->$my_variable = urldecode($this->input->post($my_variable));
+		$variables = get_class_vars('Order_Model');
+		foreach ($variables as $my_variable => $value) {
+			$my_value = $this->input->post($my_variable);
+			if ($my_value === '0') {
+				$this->{$my_variable} = 0;
 			}
+			elseif (!empty($my_value)) {
+				$this->{$my_variable} = urldecode($my_value);
 		}
+	}
+
+
 
 		$this->rec_modified = mysql_timestamp();
 		$this->rec_modifier = $this->session->userdata('user_id');
@@ -117,9 +94,7 @@ class Order_Model extends MY_Model {
 	}
 
 	function update($id, $values = []) {
-		$output = $this->_update('orders', $id, $values);
-		$this->_log();
-		return $output;
+		return $this->_update('orders', $id, $values);
 	}
 
 	function sellout($id, $values) {
@@ -226,7 +201,7 @@ class Order_Model extends MY_Model {
 			[
 				$order_by,
 				$order_field,
-				$order_direction
+				$order_direction,
 			] = $this->create_order_by($order_by, $i, 'catalog_number');
 
 			// if the $order_field is a price field or integer, sort as number.
@@ -331,7 +306,7 @@ class Order_Model extends MY_Model {
 			[
 				$order_by,
 				$order_field,
-				$order_direction
+				$order_direction,
 			] = $this->create_order_by($order_by, $i, 'year');
 
 			// if the $order_field is a price field or integer, sort as number.
@@ -437,19 +412,19 @@ class Order_Model extends MY_Model {
 			'count_saturday',
 		];
 		$totals = 0;
-		foreach($columns as $column){
-			$totals+= $this->get_column_total($column, $year);
+		foreach ($columns as $column) {
+			$totals += $this->get_column_total($column, $year);
 		}
 		return $totals;
 	}
 
-	function get_column_total($column, $year){
+	function get_column_total($column, $year) {
 		$total_label = $column . '_total';
 		$this->db->from('orders');
 		$this->db->where('year', $year);
-		$this->db->select('SUM(`' . $column . '`) AS `'. $total_label . '`');
+		$this->db->select('SUM(`' . $column . '`) AS `' . $total_label . '`');
 		return $this->db->get()->row()->$total_label;
-}
+	}
 
 	function get_price_range($year = NULL) {
 		$this->db->from('orders');
@@ -510,7 +485,7 @@ class Order_Model extends MY_Model {
 	}
 
 
-	function reset_flat_exclusions(){
+	function reset_flat_exclusions() {
 		$reset = "UPDATE `orders` SET flat_exclude=0";
 		$this->db->query($reset);
 		//exclude bulbs, bareroot and tubers from the sale years.
@@ -522,7 +497,7 @@ class Order_Model extends MY_Model {
     SET `orders`.`flat_exclude` = 1 
 			WHERE `common`.`genus` = 'Paeonia' AND `orders`.`year` != 2021";
 		$this->db->query($query);
-		$this->session->set_flashdata('notice','Flat exclusions have been reset.');
+		$this->session->set_flashdata('notice', 'Flat exclusions have been reset.');
 	}
 
 	/**

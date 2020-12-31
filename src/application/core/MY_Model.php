@@ -36,6 +36,7 @@ class MY_Model extends CI_Model
 		{
 			if (IS_EDITOR) {
 				$this->db->insert ( $db, $this );
+				$this->_log();
 				$id = $this->db->insert_id ();
 				return $id;
 			}

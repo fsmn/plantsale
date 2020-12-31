@@ -541,19 +541,6 @@ function get_toggle_text($field, $value): array {
 				'Yes',
 			];
 			break;
-		case 'online_only':
-			$text = [
-				'no' => 'No',
-				'yes' => 'Yes',
-			];
-			$title = [
-				'no' => 'This is available at the sale',
-				'yes' => 'This is available only on line',
-			];
-			$label = [
-				'no' => 'At Sale',
-				'yes' => 'Online Only',
-			];
 			break;
 		default:
 			$text = [

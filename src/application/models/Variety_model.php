@@ -3,78 +3,66 @@ defined('BASEPATH') or exit ('No direct script access allowed');
 
 class Variety_Model extends MY_Model {
 
-	var $common_id;
+	public $common_id;
 
-	var $species;
+	public $species;
 
-	var $variety;
+	public $variety;
 
-	var $min_height;
+	public $min_height;
 
-	var $max_height;
+	public $max_height;
 
-	var $min_width;
+	public $min_width;
 
-	var $max_width;
+	public $max_width;
 
-	var $height_unit;
+	public $height_unit;
 
-	var $width_unit;
+	public $width_unit;
 
-	var $plant_color;
+	public $plant_color;
 
-	var $print_description;
+	public $print_description;
 
-	var $web_description;
+	public $web_description;
 
-	var $new_year;
+	public $new_year;
 
-	var $needs_copy_review;
+	public $needs_copy_review;
 
-	var $churn_value;
+	public $churn_value;
 
-	var $online_only;
+	public $rec_modifier;
 
-	var $rec_modifier;
-
-	var $rec_modified;
+	public $rec_modified;
 
 	function __construct() {
 		parent::__construct();
 	}
 
 	function prepare_variables() {
-		$variables = [
-			'species',
-			'variety',
-			'min_height',
-			'max_height',
-			'min_width',
-			'max_width',
-			'height_unit',
-			'width_unit',
-			'print_description',
-			'web_description',
-			'new_year',
-			'needs_copy_review',
-			'churn_value',
-			'common_id',
-			'online_only',
-		];
-
-		for ($i = 0; $i < count($variables); $i++) {
-			$my_variable = $variables [$i];
-			if ($this->input->post($my_variable)) {
-				$this->$my_variable = urldecode($this->input->post($my_variable));
+		$variables = get_class_vars('Variety_Model');
+		foreach ($variables as $my_variable => $value) {
+			$my_value = $this->input->post($my_variable);
+			if ($my_value === '0') {
+				$this->{$my_variable} = 0;
+			}
+			elseif (!empty($my_value)) {
+				if($my_variable == 'plant_color'){
+					$this->plant_color = implode(",", $this->input->post("plant_color"));
+				}else {
+					$this->{$my_variable} = urldecode($my_value);
+				}
+			}elseif($my_variable == 'rec_modified'){
+				$this->rec_modified = mysql_timestamp();
+			}
+			elseif($my_variable == 'rec_modifier'){
+				$this->rec_modifier = $this->session->userdata('user_id');
 			}
 		}
 
-		if ($this->input->post("plant_color")) {
-			$this->plant_color = implode(",", $this->input->post("plant_color"));
-		}
 
-		$this->rec_modified = mysql_timestamp();
-		$this->rec_modifier = $this->session->userdata('user_id');
 	}
 
 	function insert() {

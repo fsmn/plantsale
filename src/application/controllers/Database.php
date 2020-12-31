@@ -175,5 +175,12 @@ class Database extends MY_Controller {
 		return 'ALTER TABLE `variety`  ADD `online_only` ENUM("yes","no") NOT NULL DEFAULT "no";';
 	}
 
+	/**
+	 * remove online_only field from the variety table as it is redundant
+	 */
+	function db_update_22(): string {
+		return 'ALTER TABLE `variety` DROP IF EXISTS `online_only`;';
+	}
+
 
 }

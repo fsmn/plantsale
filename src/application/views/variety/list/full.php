@@ -18,16 +18,6 @@ if (IS_ADMIN) {
 			],
 			'href' => $_SERVER['HTTP_REFERER'],
 	];
-	$buttons[] = [
-			'text' => 'Batch Online Only Update',
-			'title' => 'Batch update found set to be online only',
-			'class' => ['button', 'batch-update-variety', 'edit'],
-			'style' => 'print',
-			'data_values' => [
-					'field' => 'online_only',
-			],
-			'href' => $_SERVER['HTTP_REFERER'],
-	];
 }
 $buttons[] = [
 		'text' => 'Export Copy Edit List',

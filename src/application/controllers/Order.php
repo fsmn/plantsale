@@ -51,101 +51,101 @@ class Order extends MY_Controller {
 				burn_cookie("new_year");
 			}
 			$keys = [
-				"category_id",
-				"subcategory_id",
-				"name",
-				"genus",
-				"variety",
-				"species",
-				"grower_id",
-				"pot_size",
-				"flat_size",
-				"show-non-reorders",
-				"grower_code",
-				"received_presale",
-				"flat_cost",
-				"plant_cost",
-				"flat_area",
-				"price",
-				"tiers",
-				"flag",
-				"needs_bag",
+				'category_id',
+				'subcategory_id',
+				'name',
+				'genus',
+				'variety',
+				'species',
+				'grower_id',
+				'pot_size',
+				'flat_size',
+				'show-non-reorders',
+				'grower_code',
+				'received_presale',
+				'flat_cost',
+				'plant_cost',
+				'flat_area',
+				'price',
+				'tiers',
+				'flag',
+				'needs_bag',
 				'flat_exclude',
 			];
 
 			$this->set_options($options, $keys);
 			$data['year'] = $this->input->get('year');
 			bake_cookie('sale_year',$data['year']);
-			if ($output_format = $this->input->get("output_format")) {
-				bake_cookie("output_format", $output_format);
-				$data ["output_format"] = $output_format;
+			if ($output_format = $this->input->get('output_format')) {
+				bake_cookie('output_format', $output_format);
+				$data ['output_format'] = $output_format;
 			}
 			else {
-				$data ["output_format"] = "standard";
+				$data ['output_format'] = 'standard';
 			}
 
-			if ($is_inventory = $this->input->get("is_inventory")) {
-				bake_cookie("is_inventory", $is_inventory);
-				$data ["is_inventory"] = TRUE;
-				$special_options ["is_inventory"] = $is_inventory;
+			if ($is_inventory = $this->input->get('is_inventory')) {
+				bake_cookie('is_inventory', $is_inventory);
+				$data ['is_inventory'] = TRUE;
+				$special_options ['is_inventory'] = $is_inventory;
 			}
 			else {
-				$data ["is_inventory"] = FALSE;
-				burn_cookie("is_inventory");
+				$data ['is_inventory'] = FALSE;
+				burn_cookie('is_inventory');
 			}
 
-			if ($is_sellouts = $this->input->get("is_sellouts")) {
-				bake_cookie("is_sellouts", $is_sellouts);
-				$data ["is_sellouts"] = TRUE;
+			if ($is_sellouts = $this->input->get('is_sellouts')) {
+				bake_cookie('is_sellouts', $is_sellouts);
+				$data ['is_sellouts'] = TRUE;
 
-				$special_options ["is_sellouts"] = $is_sellouts;
+				$special_options ['is_sellouts'] = $is_sellouts;
 			}
 			else {
-				burn_cookie("is_sellouts");
-				$data ["is_sellouts"] = FALSE;
+				burn_cookie('is_sellouts');
+				$data ['is_sellouts'] = FALSE;
 			}
 
-			if ($is_tracking = $this->input->get("is_tracking")) {
-				bake_cookie("is_tracking", $is_tracking);
-				$data ["is_tracking"] = $is_tracking;
-				$special_options ["is_tracking"] = $is_tracking;
+			if ($is_tracking = $this->input->get('is_tracking')) {
+				bake_cookie('is_tracking', $is_tracking);
+				$data ['is_tracking'] = $is_tracking;
+				$special_options ['is_tracking'] = $is_tracking;
 			}
 			else {
-				burn_cookie("is_tracking");
-				$data ["is_tracking"] = FALSE;
+				burn_cookie('is_tracking');
+				$data ['is_tracking'] = FALSE;
 			}
 
-			$sorting ["fields"] = [
-				"catalog_number",
+			$sorting ['fields'] = [
+				'catalog_number',
 			];
-			$sorting ["direction"] = [
-				"ASC",
+			$sorting ['direction'] = [
+				'ASC',
 			];
 
-			if ($this->input->get("sorting")) {
-				$sorting ["fields"] = $this->input->get("sorting");
-				$sorting ["direction"] = $this->input->get("direction");
-				bake_cookie("sorting_fields", serialize($sorting ["fields"]));
-				bake_cookie("sorting_direction", serialize($sorting ["direction"]));
+			if ($this->input->get('sorting')) {
+				$sorting ['fields'] = $this->input->get('sorting');
+				$sorting ['direction'] = $this->input->get('direction');
+				bake_cookie('sorting_fields', serialize($sorting ['fields']));
+				bake_cookie('sorting_direction', serialize($sorting ['direction']));
 			}
 
-			if ($this->input->get("show_names") == 1) {
-				$data ["show_names"] = TRUE;
+			if ($this->input->get('show_names') == 1) {
+				$data ['show_names'] = TRUE;
 			}
 
-			$data ["is_inventory"] = FALSE;
-			if ($this->input->get("is_inventory") == 1) {
-				$data ["is_inventory"] = TRUE;
+			$data ['is_inventory'] = FALSE;
+			if ($this->input->get('is_inventory') == 1) {
+				$data ['is_inventory'] = TRUE;
 			}
 
-			$data ["is_sellouts"] = FALSE;
-			if ($this->input->get("is_sellouts") == 1) {
-				$data ["is_sellouts"] = TRUE;
+			$data ['is_sellouts'] = FALSE;
+			if ($this->input->get('is_sellouts') == 1) {
+				$data ['is_sellouts'] = TRUE;
 			}
 
-			bake_cookie("sorting", implode(",", $sorting ["fields"]));
-			bake_cookie("direction", implode(",", $sorting ["direction"]));
-			if ($output_format == "crop-failure") {
+			bake_cookie('sorting', implode(',', $sorting ['fields']));
+			bake_cookie('direction', implode(',', $sorting ['direction']));
+			if ($output_format == 'crop-failure') {
 				$orders = $this->order->get_crop_failures($options, $sorting);
 			}
 			else {
@@ -165,66 +165,66 @@ class Order extends MY_Controller {
 					}
 				}
 			}
-			if ($show_last_only = $this->input->get("show_last_only")) {
-				bake_cookie("show_last_only", $show_last_only);
-				$options ["Hiding Plants with Reorders Next Sale"] = "Yes";
+			if ($show_last_only = $this->input->get('show_last_only')) {
+				bake_cookie('show_last_only', $show_last_only);
+				$options ['Hiding Plants with Reorders Next Sale'] = 'Yes';
 			}
-			if ($this->input->get("show-non-reorders")) {
+			if ($this->input->get('show-non-reorders')) {
 				foreach ($orders as $order) {
 					$order->has_reorder = $this->order->get_for_variety($order->variety_id, $sale_year + 1);
 				}
 			}
 			$title_category = [];
-			if (array_key_exists( "category_id", $options)) {
-				$this->load->model("category_model", "category");
-				$category = $this->category->get($options ["category_id"])->category;
-				$options ["category"] = $category;
+			if (array_key_exists( 'category_id', $options)) {
+				$this->load->model('category_model', 'category');
+				$category = $this->category->get($options ['category_id'])->category;
+				$options ['category'] = $category;
 				$title_category [] = $category;
-				unset ($options ["category_id"]);
+				unset ($options ['category_id']);
 			}
-			if (array_key_exists("subcategory_id", $options)) {
-				$this->load->model("subcategory_model", "subcategory");
-				$subcategory = $this->subcategory->get($options ["subcategory_id"])->subcategory;
-				$options ["subcategory"] = $subcategory;
+			if (array_key_exists('subcategory_id', $options)) {
+				$this->load->model('subcategory_model', 'subcategory');
+				$subcategory = $this->subcategory->get($options ['subcategory_id'])->subcategory;
+				$options ['subcategory'] = $subcategory;
 				$title_category [] = $subcategory;
-				unset ($options ["subcategory_id"]);
+				unset ($options ['subcategory_id']);
 			}
 			foreach ($options as $key => $value) {
 				$where [] = sprintf("`%s` = '%s'", $key, $value);
 			}
 
-			$data ["options"] = $options;
-			$data ["orders"] = $orders;
+			$data ['options'] = $options;
+			$data ['orders'] = $orders;
 
 			if (!empty ($title_category)) {
-				$category = implode(" ", $title_category);
+				$category = implode(' ', $title_category);
 			}
 			else {
-				$category = "All";
+				$category = 'All';
 			}
-			if ($output_format == "crop-failure") {
-				$data ["title"] = "Crop Failure Listing";
+			if ($output_format == 'crop-failure') {
+				$data ['title'] = 'Crop Failure Listing';
 			}
 			else {
-				$data ["title"] = "List of $category orders for $sale_year";
+				$data ['title'] = sprintf('List of %s orders for %s', $category, $sale_year);
 			}
-			if ($this->input->get("export")) {
-				$data ["export_type"] = "standard";
-				$data ["filename"] = "order_export.csv";
+			if ($this->input->get('export')) {
+				$data ['export_type'] = 'standard';
+				$data ['filename'] = str_replace(' ' , '_', strtolower($category)). '_order_export_' . date('Y-m-d-H-i-s') .'.csv';
 
-				if ($export_type = $this->input->get("export_type")) {
-					if ($this->input->get("grower_id")) {
-						$data ["filename"] = $this->input->get("grower_id") . "-export.csv";
+				if ($export_type = $this->input->get('export_type')) {
+					if ($this->input->get('grower_id')) {
+						$data ['filename'] = $this->input->get('grower_id') . '-export.csv';
 					}
-					$data ["export_type"] = $export_type;
+					$data ['export_type'] = $export_type;
 				}
-				$this->load->helper("download");
-				$this->load->view("order/export", $data);
+				$this->load->helper('download');
+				$this->load->view('order/export', $data);
 			}
 			else {
-				$data ["target"] = "order/full_list";
-				$data ["show_names"] = TRUE;
-				$this->load->view("page/index", $data);
+				$data ['target'] = 'order/full_list';
+				$data ['show_names'] = TRUE;
+				$this->load->view('page/index', $data);
 			}
 		}
 		else {

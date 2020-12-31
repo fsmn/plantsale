@@ -21,7 +21,7 @@ $fields = [
 	'count_midsale' => 'Midsale Order',
 	'flat_count' => 'Total Flats',
 	'received_presale' => 'Received Presale',
-	'received_friday' => 'Recieved Friday',
+	'received_friday' => 'Received Friday',
 	'received_saturday' => 'Received Saturday',
 	'received_midsale' => 'Received Midsale',
 	'sellout_friday' => 'Sellout Time Friday',
@@ -60,10 +60,7 @@ if ($export_type == "grower") {
 		'grower_code' => 'Grower Code',
 	];
 }
-
-foreach (array_values($fields) as $value) {
-	$header_values[] = $value;
-}
+$header_values = array_keys($fields);
 
 $output = [
 	implode(",", $header_values),
@@ -88,4 +85,7 @@ foreach ($orders as $order) {
 }
 
 $data = implode("\n", $output);
+if(empty($filename)){
+	$filename = 'order_export.csv';
+}
 force_download($filename, $data);

@@ -59,36 +59,22 @@ print create_button_bar($buttons);
 			</td>
 			<td>
 				<?php echo live_field('copywriter', $plant->copywriter, 'variety', $plant->id, [
+						'type' => 'text',
 						'envelope' => 'span',
-						'size' => '63',
-						'override' => TRUE,
+						'size' => '35',
 				]); ?>
 			</td>
 			<td>
-				<div class="field-envelope"
-					 id="variety__copy_received__<?php echo $plant->id; ?>">
-					<span class="dropdown live-field text" menu="boolean"
-						  name="boolean">
-<?php echo form_dropdown("copy_received", [
-		"0" => "",
-		"no" => "No",
-		"yes" => "Yes",
-], get_value($plant, "copy_received"), "class='live-field'"); ?>
-</span>
-				</div>
+				<?php print live_field('copy_received', $plant->copy_received, 'variety', $plant->id, [
+						'type' => 'boolean-dropdown',
+						'envelope' => 'span',
+				]); ?>
 			</td>
 			<td>
-				<div class="field-envelope"
-					 id="variety__needs_copy_review__<?php echo $plant->id; ?>">
-					<span class="dropdown live-field text" menu="boolean"
-						  name="boolean">
-<?php echo form_dropdown("needs_copy_review", [
-		"0" => "",
-		"no" => "No",
-		"yes" => "Yes",
-], get_value($plant, "needs_copy_review"), "class='live-field'"); ?>
-</span>
-				</div>
+				<?php print live_field('needs_copy_review', $plant->needs_copy_review, 'variety', $plant->id, [
+						'type' => 'boolean-dropdown',
+						'envelope' => 'span',
+				]); ?>
 			</td>
 			<td>
 				<div class='field-set'>

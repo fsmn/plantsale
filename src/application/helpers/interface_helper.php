@@ -259,7 +259,7 @@ function create_edit_field($field_name, $value, $label, $options = []) {
 	return implode("\r", $output);
 }
 
-function edit_field($field_name, $value, $label, $table, $id, $options = []) {
+function edit_field($field_name, $value, $label, $table, $id, $options = []): string {
 	$options ["id"] = $id;
 	$options ["table"] = $table;
 	return create_edit_field($field_name, $value, $label, $options);
@@ -315,6 +315,10 @@ function live_field(string $field_name, ?string $value, string $table, string $i
 			switch ($type) {
 				case 'boolean':
 					$input = form_checkbox($field_name, 'yes', $value == 'yes', $attributes);
+					$output = str_replace('[input]', $input, $output_wrapper);
+					break;
+				case 'boolean-dropdown':
+					$input = form_dropdown($field_name,['yes'=>'Yes','no'=>'No'], $value, $attributes);
 					$output = str_replace('[input]', $input, $output_wrapper);
 					break;
 				default:

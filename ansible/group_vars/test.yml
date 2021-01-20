@@ -36,6 +36,10 @@ flightdeck_cluster:
               secretFile: "/config/varnish-secret/secret"
               memSize: "256m"
   secrets:
+    - name: "ingress-auth"
+      data:
+        - name: "auth"
+          value: "{{ lookup('file', _run_temp_dir.path + '/.htpasswd' )}}"
     - name: "web"
       files:
         - name: "flight-deck-web.yml"
@@ -115,6 +119,8 @@ flightdeck_cluster:
 
   ingress:
     name: "ingress"
+    auth:
+      secret: "ingress-auth"
     tlsIssuer: "lets-encrypt-ops-at-ten7-com"
     tls:
       - secret: "lets-encrypt-ops-at-ten7-com"

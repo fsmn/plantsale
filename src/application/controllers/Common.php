@@ -26,7 +26,7 @@ class Common extends MY_Controller {
 			$data ["target"] = "common/list";
 			$data ["full_list"] = TRUE;
 
-			// create the legend for the paramter display
+			// create the legend for the parameter display
 			$variables = [
 				"name",
 				"genus",
@@ -66,7 +66,7 @@ class Common extends MY_Controller {
 			"key",
 			"value",
 		], TRUE);
-		$data ["sunlight"] =  $this->menu->get_pairs("sunlight", [
+		$data ["sunlight"] = $this->menu->get_pairs("sunlight", [
 			"field" => "value",
 		]);;
 		$data ["common"] = NULL;
@@ -206,10 +206,23 @@ class Common extends MY_Controller {
 		echo $output;
 	}
 
-	function delete() {
-		if ($id = $this->input->post("id")) {
+	function delete($common_id = NULL) {
+		if (!empty($common_id)) {
+			$data['varieties'] = $this->variety->get_for_common($common_id);
+			$data['common'] = $this->common->get($common_id);
+			$data['target'] = 'common/delete';
+			$data['title'] = 'Delete a Common Record';
+			if($this->input->get('ajax')){
+				$this->load->view($data['target'], $data);
+			}else {
+				$this->load->view('page/index', $data);
+			}
+		}
+		elseif ($id = $this->input->post("id")) {
 			if ($this->variety->get_for_common($id) == FALSE) {
+				$common = $this->common->get($id);
 				$this->common->delete($id);
+				$this->session->set_flashdata('alert','Common ' . $common->name . ' ' . $common->genus. ' has been deleted.');
 				redirect("index");
 			}
 		}

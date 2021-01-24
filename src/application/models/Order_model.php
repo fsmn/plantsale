@@ -33,6 +33,10 @@ class Order_Model extends MY_Model {
 
 	public $count_midsale = 0.0;
 
+	public $count_friday  = 0.0;
+
+	public $count_saturday = 0.0;
+
 	public $received_presale;
 
 	public $received_midsale;

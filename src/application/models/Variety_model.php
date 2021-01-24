@@ -89,7 +89,7 @@ class Variety_Model extends MY_Model {
 	}
 
 	/**
-	 * Deprecated *
+	 * @deprecated *
 	 */
 	function get_by_common($common_id) {
 		return $this->get_for_common($common_id);
@@ -273,7 +273,9 @@ class Variety_Model extends MY_Model {
 		$this->db->where('orders.flat_exclude',0);
 		$this->db->group_by('common.category_id');
 		$this->db->order_by('category.category');
-		$this->db->select('sum(`orders`.`count_presale`) as presale_count');
+		$this->db->select('sum(`orders`.`count_presale`)  as presale_count');
+		$this->db->select('sum(`orders`.`count_friday`) as friday_count');
+		$this->db->select('sum(`orders`.`count_saturday`) as saturday_count');
 		$this->db->select('sum(`orders`.`count_midsale`) as midsale_count');
 		$this->db->select('category.category,category.id as category_id');
 		$result = $this->db->get()->result();

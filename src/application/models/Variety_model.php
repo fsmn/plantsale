@@ -89,7 +89,7 @@ class Variety_Model extends MY_Model {
 	}
 
 	/**
-	 * Deprecated *
+	 * @deprecated *
 	 */
 	function get_by_common($common_id) {
 		return $this->get_for_common($common_id);

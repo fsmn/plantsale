@@ -53,7 +53,7 @@
 			});
 		});
 
-		$(document).on("click", ".create.dialog, .edit.dialog", function (e) {
+		$(document).on("click", ".create.dialog, .edit.dialog, .delete.dialog", function (e) {
 			e.preventDefault();
 			redirect_url = $(location).attr("href");
 

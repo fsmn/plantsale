@@ -33,21 +33,3 @@
         recurse: yes
         owner: "{{ drupal_dir_owner }}"
         group: "{{ drupal_dir_group }}"
-    - name: Update .htaccess location
-      lineinfile:
-        dest: "{{ web_dir }}/.htaccess"
-        regexp: "^AuthUserFile "
-        line: "AuthUserFile {{ htpasswd_path }}"
-    - name: Add logins to .htpasswd
-      htpasswd:
-        path: "{{ htpasswd_path }}"
-        state: present
-        name: "{{ item.user }}"
-        password: "{{ item.pass }}"
-      loop:
-        - user: "ten7live"
-          pass: "ten7live"
-        - user: "ten7release"
-          pass: "ten7release"
-        - user: "ten7preview"
-          pass: "ten7preview"

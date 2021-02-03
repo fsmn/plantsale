@@ -366,8 +366,10 @@ class Order_Model extends MY_Model {
 		$this->db->order_by('(' . subcategory_order() . ')');
 		$this->db->order_by('subcategory.subcategory');
 		$this->db->order_by('common.name', 'ASC');
-		$this->db->order_by('orders.price', 'ASC');
-		$this->db->order_by('orders.pot_size', 'ASC');
+		if($this->get_current_year() != 2021) {
+			$this->db->order_by('orders.price', 'ASC');
+			$this->db->order_by('orders.pot_size', 'ASC');
+		}
 		$this->db->order_by('variety.variety', 'ASC');
 		$this->db->select('orders.id,category.category');
 		$result = $this->db->get()->result();

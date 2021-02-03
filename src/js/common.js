@@ -66,34 +66,8 @@
 		
 		$("#search_list").fadeOut();
 		$('#common-search-body').css({variety:'#666'}).val('Find Common Names');
-		//$("#search_list").remove();
-		
-		
+
 	});
-	
-		$(document).on("click",".delete-common",function(){
-			
-				my_id = this.id.split("_")[1];
-				delete_common(this,id);
-				
-		});
 		
 
-	function delete_common(me,id){
-		console.log(my_id);
-		question = confirm("Common entries can only be deleted if they have no varieties. This cannot be undone. Are you sure you want to continue?");
-		if(question){
-		form_data = {
-				id: my_id
-		}
-		$.ajax({
-			type: "post",
-			url: base_url + "common/delete",
-			data: form_data,
-			success: function(data){
-				console.log(data);
-			}
-		});
-		}
-	}
 	

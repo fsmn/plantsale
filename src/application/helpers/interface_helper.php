@@ -195,27 +195,34 @@ function create_button_bar($buttons, $options = NULL) {
  * @param string $label
  * @param array $options
  *          (envelope, class, attributes)
+ *
+ * @return string
  */
-function create_edit_field($field_name, $value, $label, $options = []) {
-	$envelope = "p";
-	if (array_key_exists("envelope", $options)) {
-		$envelope = $options ["envelope"];
+function create_edit_field(string $field_name, ?string $value, ?string $label, $options = []) {
+	$envelope = 'p';
+	if (array_key_exists('envelope', $options)) {
+		$envelope = $options ['envelope'];
 	}
 
-	$field_wrapper = "span";
-	if (array_key_exists("field-wrapper", $options)) {
-		$field_wrapper = $options ["field-wrapper"];
+	$field_wrapper = 'span';
+	if (array_key_exists('field-wrapper', $options)) {
+		$field_wrapper = $options ['field-wrapper'];
 	}
 	$id = "";
 	$table = "";
-	if (array_key_exists("table", $options) && array_key_exists("id", $options)) {
-		$table = $options ["table"];
-		$id = $options ["id"];
+	if (array_key_exists('table', $options) && array_key_exists('id', $options)) {
+		$table = $options ['table'];
+		$id = $options ['id'];
 	}
 	/* The id is split with the "-" delimiter in javascript when the field is clicked */
-	$output [] = sprintf("<%s class='field-envelope' id='%s__%s__%s'>", $envelope, $table, $field_name, $id);
+	$output[] = format_string('<@envelope class="field-envelope" id="@table__@field_name__@id">', [
+		'@envelope' => $envelope,
+		'@table' => $table,
+		'@field_name' => $field_name,
+		'@id' => $id,
+	]);
 	if ($label != "") {
-		$output [] = sprintf("<label>%s:&nbsp;</label>", $label);
+		$output [] = format_string('<label>@label:&nbsp;</label>', ['@label' => $label]);
 	}
 	if ($value == "") {
 		$value = "&nbsp;";
@@ -246,22 +253,60 @@ function create_edit_field($field_name, $value, $label, $options = []) {
 		}
 		$data_attributes = implode(" ", $data_items);
 	}
+	$title = '';
+	if (array_key_exists('title', $options)) {
+		//$title = format_string(' title="@title" ', ['@title' => $options['title']]);
+	}
 
 	/*
 	 * Attributes are non-standard html attributes that are used by javascript these can include the type of input to be generated
 	 */
 	$attributes = "";
-	if (array_key_exists("attributes", $options)) {
-		$attributes = $options ["attributes"];
+	if (array_key_exists('attributes', $options)) {
+		$attributes = $options ['attributes'];
 	}
-	$output [] = sprintf("<%s class='%s' %s %s name='%s' %s>%s</%s></%s>", $field_wrapper, $field_class, $attributes, $format, $field_name, $data_attributes, $value, $field_wrapper, $envelope);
 
+	$output[] = format_string('<@field_wrapper class="@field_class" @attributes @format name="@field_name" @title @data_attributes>@field_value</@field_wrapper></@envelope>', [
+		'@field_wrapper' => $field_wrapper,
+		'@field_class' => $field_class,
+		'@attributes' => $attributes,
+		'@format' => $format,
+		'@field_name' => $field_name,
+		'@data_attributes' => $data_attributes,
+		'@title' => $title,
+		'@field_value' => $value,
+		'@envelope' => $envelope,
+
+	]);
 	return implode("\r", $output);
 }
 
+function theme_edit_field($data): string {
+	$required_keys = [
+		'field',
+		'id',
+		'table',
+		'value',
+	];
+	ksort($data);
+	if (!empty(array_diff($required_keys, array_keys($data)))) {
+		return '';
+	}
+	$field = NULL;
+	$id = NULL;
+	$table = NULL;
+	$value = NULL;
+	$label = NULL;
+	extract($data);
+	$options['id'] = $id;
+	$options['table'] = $table;
+	return create_edit_field($field, $value, $label, $options);
+
+}
+
 function edit_field($field_name, $value, $label, $table, $id, $options = []): string {
-	$options ["id"] = $id;
-	$options ["table"] = $table;
+	$options ['id'] = $id;
+	$options ['table'] = $table;
 	return create_edit_field($field_name, $value, $label, $options);
 }
 
@@ -318,7 +363,10 @@ function live_field(string $field_name, ?string $value, string $table, string $i
 					$output = str_replace('[input]', $input, $output_wrapper);
 					break;
 				case 'boolean-dropdown':
-					$input = form_dropdown($field_name,['yes'=>'Yes','no'=>'No'], $value, $attributes);
+					$input = form_dropdown($field_name, [
+						'yes' => 'Yes',
+						'no' => 'No',
+					], $value, $attributes);
 					$output = str_replace('[input]', $input, $output_wrapper);
 					break;
 				default:

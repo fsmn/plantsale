@@ -341,3 +341,8 @@ function needs_bag($order = NULL)
 	}
 	return $output;
 }
+
+
+function format_string($string, $arguments){
+	return strtr($string, $arguments);
+}

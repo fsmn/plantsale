@@ -17,6 +17,16 @@
           cluster: "{{ cluster_name }}"
           kubeconfig: "{{ _run_temp_dir.path }}/kubectl.yaml"
 
+    - name: Generate an .htpasswd
+      htpasswd:
+        path: "{{ _run_temp_dir.path }}/.htpasswd"
+        state: present
+        name: "{{ item.user }}"
+        password: "{{ item.pass }}"
+      loop:
+        - user: "ten7preview"
+          pass: "ten7preview"
+
     - name: Deploy the cluster definitions
       include_role:
         name: "ten7.flightdeck_cluster"

@@ -17,6 +17,54 @@
           cluster: "{{ cluster_name }}"
           kubeconfig: "{{ _run_temp_dir.path }}/kubectl.yaml"
 
+
+    - name: Generate an .htpasswd
+      htpasswd:
+        path: "{{ _run_temp_dir.path }}/.htpasswd"
+        state: present
+        name: "{{ item.user }}"
+        password: "{{ item.pass }}"
+      loop:
+        - user: "ten7live"
+          pass: "ten7live"
+
+    - name: Create ingress for dev domains
+      include_role:
+        name: "ten7.flightdeck_cluster"
+      vars:
+        flightdeck_cluster_kubeconfig: "{{ _run_temp_dir.path }}/kubectl.yaml"
+        flightdeck_cluster:
+          namespace: "db-friendsschoolplantsale-com"
+          secrets:
+            - name: "backoffice-t7live-io-auth"
+              data:
+                - name: "auth"
+                  value: "{{ lookup('file', _run_temp_dir.path + '/.htpasswd' )}}"
+          ingress:
+            name: "backoffice-t7live-io"
+            auth:
+              secret: "backoffice-t7live-io-auth"
+            tlsIssuer: "lets-encrypt-ops-at-ten7-com"
+            tls:
+              - secret: "backoffice-t7live-io-tls"
+                hosts:
+                  - "backoffice.t7live.io"
+            rules:
+              - host: "backoffice.t7live.io"
+                paths:
+                  - path: "/"
+                    backend: "web"
+                    port: "6081"
+                  - path: "/s3/"
+                    backend: "web"
+                    port: "80"
+                  - path: "/s3fs-css/"
+                    backend: "web"
+                    port: "80"
+                  - path: "/s3fs-js/"
+                    backend: "web"
+                    port: "80"
+
     - name: Deploy the cluster definitions
       include_role:
         name: "ten7.flightdeck_cluster"

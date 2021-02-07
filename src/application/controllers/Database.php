@@ -184,7 +184,7 @@ class Database extends MY_Controller {
 	}
 
 	function fix_orders() {
-		$rows = [
+		/*$rows = [
 			33283 => '2.00',
 			33888 => '3.00',
 			33892 => '1.00',
@@ -777,7 +777,7 @@ class Database extends MY_Controller {
 		$this->load->model('order_model');
 		foreach($rows as $id=>$count){
 				$this->order_model->update($id, ['count_friday'=>$count]);
-		}
+		}*/
 	}
 
 	function fix_saturday_orders(){

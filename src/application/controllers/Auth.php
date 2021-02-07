@@ -118,7 +118,7 @@ class Auth extends CI_Controller {
 			$this->data ['target'] = 'auth/login';
 
 			$this->_render_page('page/index', $this->data);
-			$this->session->set_userdata("sale_year", get_current_year());
+			$this->session->set_userdata('sale_year', get_current_year());
 		}
 
 	}
@@ -128,7 +128,7 @@ class Auth extends CI_Controller {
 	 */
 	function logout() {
 
-		$this->data ['title'] = "Logout";
+		$this->data ['title'] = 'Logout';
 
 		// log the user out
 		$logout = $this->ion_auth->logout();
@@ -144,9 +144,9 @@ class Auth extends CI_Controller {
 	 */
 	function change_password() {
 
-		$this->form_validation->set_rules('old', "Old Password:", 'required');
-		$this->form_validation->set_rules('new', "New Passwored (at least %s characters long):", 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
-		$this->form_validation->set_rules('new_confirm', "Confirm New Password:", 'required');
+		$this->form_validation->set_rules('old', 'Old Password:', 'required');
+		$this->form_validation->set_rules('new', 'New Passwored (at least %s characters long):', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
+		$this->form_validation->set_rules('new_confirm', 'Confirm New Password:', 'required');
 
 		if ( ! $this->ion_auth->logged_in())
 		{
@@ -217,7 +217,7 @@ class Auth extends CI_Controller {
 	 */
 	function forgot_password() {
 
-		$this->form_validation->set_rules('email', "Email Address", 'required');
+		$this->form_validation->set_rules('email', 'Email Address', 'required');
 		if ($this->form_validation->run() == FALSE)
 		{
 			// setup the input
@@ -228,17 +228,17 @@ class Auth extends CI_Controller {
 
 			if ($this->config->item('identity', 'ion_auth') == 'username')
 			{
-				$this->data ['identity_label'] = "Username";
+				$this->data ['identity_label'] = 'Username';
 			}
 			else
 			{
-				$this->data ['identity_label'] = "Email";
+				$this->data ['identity_label'] = 'Email';
 			}
 
 			// set any errors and display the form
 			$this->data ['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 			$this->data ['target'] = 'auth/forgot_password';
-			$this->data ['title'] = "Forgot Password";
+			$this->data ['title'] = 'Forgot Password';
 			$this->_render_page('page/index', $this->data);
 		}
 		else
@@ -260,7 +260,7 @@ class Auth extends CI_Controller {
 			{
 				$this->ion_auth->set_message('forgot_password_email_not_found');
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("auth/forgot_password", 'refresh');
+				redirect('auth/forgot_password', 'refresh');
 			}
 
 			// run the forgotten password method to email an activation code to the user
@@ -297,8 +297,8 @@ class Auth extends CI_Controller {
 		{
 			// if the code is valid then display the password reset form
 
-			$this->form_validation->set_rules('new', "New Password (at least %s characters long):", 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
-			$this->form_validation->set_rules('new_confirm', "Confirm New Password:", 'required');
+			$this->form_validation->set_rules('new', 'New Password (at least %s characters long):', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
+			$this->form_validation->set_rules('new_confirm', 'Confirm New Password:', 'required');
 
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -400,7 +400,7 @@ class Auth extends CI_Controller {
 		{
 			// redirect them to the forgot password page
 			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("auth/forgot_password", 'refresh');
+			redirect('auth/forgot_password', 'refresh');
 		}
 
 	}
@@ -411,8 +411,8 @@ class Auth extends CI_Controller {
 		$id = $this->config->item('use_mongodb', 'ion_auth') ? ( string ) $id : ( int ) $id;
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('confirm', "confirmation", 'required');
-		$this->form_validation->set_rules('id', "user ID", 'required|alpha_numeric');
+		$this->form_validation->set_rules('confirm', 'confirmation', 'required');
+		$this->form_validation->set_rules('id', 'user ID', 'required|alpha_numeric');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -420,7 +420,7 @@ class Auth extends CI_Controller {
 			$this->data ['csrf'] = $this->_get_csrf_nonce();
 			$this->data ['user'] = $this->ion_auth->user($id)->row();
 			$this->data ['target'] = 'auth/deactivate_user';
-			$this->data ['title'] = "Deactivate User";
+			$this->data ['title'] = 'Deactivate User';
 			if ($this->input->get("ajax") == 1)
 			{
 				$this->_render_page($this->data['target'], $this->data);

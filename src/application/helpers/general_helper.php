@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * @return false|string
+ */
 function mysql_timestamp()
 {
 	return date ( 'Y-m-d H:i:s' );
 }
 
+/**
+ * @param $name
+ * @param $value
+ */
 function bake_cookie($name, $value)
 {
 	if (is_array ( $value )) {
@@ -18,6 +25,9 @@ function bake_cookie($name, $value)
 	) );
 }
 
+/**
+ * @param $name
+ */
 function burn_cookie($name)
 {
 	set_cookie ( array (
@@ -27,12 +37,29 @@ function burn_cookie($name)
 	) );
 }
 
+/**
+ * @param $name
+ * @param null $xss_clean
+ *
+ * @return mixed
+ */
 function cookie($name, $xss_clean = NULL)
 {
 	$name = $name . '_session';
 	return get_cookie ( $name, $xss_clean );
 }
 
+/**
+ * @param $object
+ * @param $name
+ * @param $label
+ * @param null $id
+ * @param false $default_value
+ * @param false $required
+ * @param array $classes
+ *
+ * @return string
+ */
 function create_input($object, $name, $label, $id = NULL, $default_value = FALSE, $required = FALSE, $classes = array())
 {
 	if (! $id) {
@@ -56,6 +83,9 @@ function create_input($object, $name, $label, $id = NULL, $default_value = FALSE
 	return sprintf ( '<label for="%s">%s: </label><input type="text" name="%s" id="%s" value="%s" class="%s" %s/>', $name, $label, $name, $id, get_value ( $object, $name, $value ), $class, $required );
 }
 
+/**
+ * @return false|int|string
+ */
 function get_current_year()
 {
 	if (date ( 'm' ) > 6) { // after June
@@ -70,6 +100,15 @@ function get_current_year()
  * @params $table varchar table name @params $data array consisting of "where"
  * string or array, and "select" comma-delimited string @returns an array of
  * key-value pairs reflecting a Database primary key and human-meaningful string
+ */
+/**
+ * @param $list
+ * @param $pairs
+ * @param null $initialBlank
+ * @param null $other
+ * @param array $alternate
+ *
+ * @return false
  */
 function get_keyed_pairs($list, $pairs, $initialBlank = NULL, $other = NULL, $alternate = array())
 {
@@ -92,6 +131,13 @@ function get_keyed_pairs($list, $pairs, $initialBlank = NULL, $other = NULL, $al
 	return $output;
 }
 
+/**
+ * @param $object
+ * @param $item
+ * @param null $default
+ *
+ * @return mixed|null
+ */
 function get_value($object, $item, $default = null)
 {
 	$output = $default;
@@ -110,12 +156,22 @@ function get_value($object, $item, $default = null)
 	return $output;
 }
 
+/**
+ * @param $int
+ *
+ * @return string
+ */
 function get_as_price($int)
 {
 	$output = sprintf ( '$%s', number_format ( $int, 2 ) );
 	return $output;
 }
 
+/**
+ * @param $time
+ *
+ * @return string
+ */
 function get_as_time($time)
 {
 	$output = '';
@@ -126,11 +182,21 @@ function get_as_time($time)
 	return $output;
 }
 
+/**
+ * @param $user
+ *
+ * @return string
+ */
 function get_user_name($user)
 {
 	return sprintf ( '%s %s', $user->first_name, $user->last_name );
 }
 
+/**
+ * @param $object
+ *
+ * @return string
+ */
 function format_latin_name($object)
 {
 	$output [] = ucfirst ( $object->genus );
@@ -141,6 +207,13 @@ function format_latin_name($object)
 	return implode ( ' ', $output );
 }
 
+/**
+ * @param $genus
+ * @param $species
+ * @param false $multiple
+ *
+ * @return string
+ */
 function quark_latin_name($genus, $species, $multiple = FALSE)
 {
 	if ($multiple) {
@@ -161,11 +234,22 @@ function quark_latin_name($genus, $species, $multiple = FALSE)
 	return implode ( ' ', $output );
 }
 
+/**
+ * @param $order_id
+ * @param $category
+ *
+ * @return string
+ */
 function format_catalog($order_id, $category)
 {
 	return sprintf ( '%s%s', ucfirst ( substr ( $category, 0, 1 ) ), $order_id );
 }
 
+/**
+ * @param $measure
+ *
+ * @return string
+ */
 function abbr_unit($measure)
 {
 	switch ($measure) {
@@ -180,6 +264,11 @@ function abbr_unit($measure)
 	return $output;
 }
 
+/**
+ * @param $string
+ *
+ * @return string|string[]|null
+ */
 function clean_string($string)
 {
 	return preg_replace ( '/[^a-zA-Z0-9\"\.\<\>\=]+/', ' ', $string );
@@ -187,10 +276,12 @@ function clean_string($string)
 
 /**
  * If a decimal value is equal to its integer value, just return the integer without the decimal points.
- * 
- * @param unknown $value        	
+ *
+ * @param string $value
+ *
+ * @return float|\string
  */
-function clean_decimal($value)
+function clean_decimal(string $value)
 {
 	if (round ( $value ) == $value) {
 		$value = round ( $value );
@@ -198,8 +289,15 @@ function clean_decimal($value)
 	return $value;
 }
 
-function format_dimensions($min = FALSE, $max = FALSE, $unit = 'Inches', $direction = FALSE)
-{
+/**
+ * @param false $min
+ * @param false $max
+ * @param string $unit
+ * @param false $direction
+ *
+ * @return string
+ */
+function format_dimensions($min = NULL, $max = NULL, $unit = 'Inches', $direction = FALSE): string {
 	$min = clean_decimal ( $min );
 	$max = clean_decimal ( $max );
 	$output = '';
@@ -220,9 +318,12 @@ function format_dimensions($min = FALSE, $max = FALSE, $unit = 'Inches', $direct
 	return $output;
 }
 
-function format_address($grower)
-
-{
+/**
+ * @param object $grower
+ *
+ * @return array
+ */
+function format_address(object $grower): array {
 	$street = array ();
 	if ($grower->street_address) {
 		$street [] = $grower->street_address;
@@ -273,6 +374,12 @@ function has_price_discrepancy(object $order): string {
 	return $output;
 }
 
+/**
+ * @param $object
+ * @param $field
+ *
+ * @return string|null
+ */
 function format_email($object, $field): ?string {
 	$email = get_value ( $object, $field );
 	if (filter_var ( $email, FILTER_VALIDATE_EMAIL )) {
@@ -307,6 +414,11 @@ function get_custom_order($values = array(NULL,'Hostas','Daylilies','Coleus','Ba
 	return implode ( ' ', $order );
 }
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function css_classify($string)
 {
 	$string = preg_replace ( '~[^A-z\ ]+~', '', $string );
@@ -315,6 +427,11 @@ function css_classify($string)
 	return $string;
 }
 
+/**
+ * @param null $order
+ *
+ * @return bool
+ */
 function needs_bag($order = NULL)
 {
 	$output = FALSE;

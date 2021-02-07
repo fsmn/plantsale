@@ -50,7 +50,7 @@ class Variety_Model extends MY_Model {
 			}
 			elseif (!empty($my_value)) {
 				if($my_variable == 'plant_color'){
-					$this->plant_color = implode(",", $this->input->post("plant_color"));
+					$this->plant_color = implode(',', $this->input->post('plant_color'));
 				}else {
 					$this->{$my_variable} = urldecode($my_value);
 				}
@@ -67,23 +67,23 @@ class Variety_Model extends MY_Model {
 
 	function insert() {
 		$this->prepare_variables();
-		return $this->_insert("variety");
+		return $this->_insert('variety');
 	}
 
 	function update($id, $values = [], $override = FALSE) {
-		return $this->_update("variety", $id, $values, $override);
+		return $this->_update('variety', $id, $values, $override);
 	}
 
 
 	function get($id) {
-		$this->db->where("variety.id", $id);
-		$this->db->from("variety");
-		$this->db->join("common", "variety.common_id = common.id");
-		$this->db->join("category", "common.category_id = category.id", "LEFT");
-		$this->db->join("subcategory", "common.subcategory_id = subcategory.id", "LEFT");
-		$this->db->join("image", "variety.id=image.variety_id", "LEFT");
-		$this->db->select("variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,subcategory.subcategory,  category.category, common.description, common.sunlight, variety.print_description,variety.web_description, common.other_names");
-		$this->db->select("image.id as image_id, image_name");
+		$this->db->where('variety.id', $id);
+		$this->db->from('variety');
+		$this->db->join('common', 'variety.common_id = common.id');
+		$this->db->join('category', 'common.category_id = category.id', 'LEFT');
+		$this->db->join('subcategory', 'common.subcategory_id = subcategory.id', 'LEFT');
+		$this->db->join('image', 'variety.id=image.variety_id', 'LEFT');
+		$this->db->select('variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,subcategory.subcategory,  category.category, common.description, common.sunlight, variety.print_description,variety.web_description, common.other_names');
+		$this->db->select('image.id as image_id, image_name');
 		$result = $this->db->get()->row();
 		return $result;
 	}
@@ -96,13 +96,13 @@ class Variety_Model extends MY_Model {
 	}
 
 	function get_for_common($common_id) {
-		$this->db->from("variety");
-		$this->db->where("common_id", $common_id);
-		$this->db->order_by("variety.variety");
+		$this->db->from('variety');
+		$this->db->where('common_id', $common_id);
+		$this->db->order_by('variety.variety');
 		$result = $this->db->get()->result();
-		$this->load->model("order_model", "orders");
+		$this->load->model('order_model', 'orders');
 		foreach ($result as $variety) {
-			$year = $this->db->query(sprintf("SELECT `year` FROM `orders` `o` WHERE `o`.`variety_id` = '$variety->id' ORDER BY `o`.`year` DESC LIMIT 1"))
+			$year = $this->db->query(sprintf('SELECT `year` FROM `orders` `o` WHERE `o`.`variety_id` = ' . $variety->id .' ORDER BY `o`.`year` DESC LIMIT 1'))
 				->row();
 			if ($year) {
 				$variety->year = $year->year;

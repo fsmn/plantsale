@@ -28,19 +28,6 @@ class Index extends MY_Controller {
 		$this->load->view('page/index', $data);
 	}
 
-	/**
-	 * test which users are more adventurous and willing to click buttons
-	 * that aren't part of their direct work flow.
-	 * This is a way to find
-	 * out how users learn an interface
-	 */
-	function user_test() {
-		$this->db->insert('user_log', [
-			'username' => $this->session->userdata('username'),
-			'action' => 'shmallow',
-		]);
-	}
-
 	function show_set_year() {
 		$data ['uri'] = $this->input->get('uri');
 		$this->load->view('utility/sale_year', $data);

@@ -226,14 +226,13 @@ $config['directory_trigger'] = 'd'; // experimental not currently in use
 
 switch ($_SERVER['HTTP_HOST']) {
 	case 'docker.test':
-		$config['log_threshold'] = 3;
-		break;
+	case 'backoffice.test':
 	case 'backoffice.t7test.io':
 	case 'backoffice.t7stage.io':
-		$config['log_threshold'] = 2;
+		$config['log_threshold'] = 4;
 		break;
 	default:
-		$config['log_threshold'] = 1;
+		$config['log_threshold'] = 3;
 		break;
 }
 

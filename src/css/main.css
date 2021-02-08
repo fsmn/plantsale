@@ -38,10 +38,19 @@ p {
 	cursor: pointer;
 	width: 100%;
 	margin-bottom: 1rem;
+	border: 1px solid black;
+	box-shadow: 2px 2px 3px black;
 }
-.message p {
-	margin: 0 0 .5rem 0;
-	padding: 0;
+.message h2 {
+	background: none;
+	border: none;
+	box-shadow: none;
+	color: #000000;
+
+}
+.message div {
+	margin-bottom: 1rem;
+	padding: 0 10px;
 }
 .not-logged-in #main {
 	width: auto;

@@ -77,13 +77,13 @@ if (!empty($orders)) :
 			$row_classes = [
 					"grouping",
 			];
-			$latest_year = get_value($order, "latest_year", TRUE);
+			$latest_year = get_value($order, 'latest_year', TRUE);
 
-			if (get_value($order, "has_reorder") && $order->has_reorder) {
-				$row_classes [] = "hidden";
+			if (get_value($order, 'has_reorder') && $order->has_reorder) {
+				$row_classes [] = 'hidden';
 			}
-			if ($order->received_presale == "0.000") {
-				$row_classes [] = "crop-failure";
+			if ($order->received_presale == '0.000') {
+				$row_classes [] = 'crop-failure';
 			}
 
 			$presale_total += $order->count_presale;
@@ -93,7 +93,7 @@ if (!empty($orders)) :
 			$flat_cost_total += $order->flat_cost * ($order->count_presale + $order->count_midsale + $order->count_friday + $order->count_saturday);
 			$row_classes [] = has_price_discrepancy($order);
 			?>
-			<tr class="<?php echo implode(" ", $row_classes); ?>"
+			<tr class="<?php echo implode(' ', $row_classes); ?>"
 				id="order_<?php echo $order->id; ?>"
 				data-order-id="<?php print $order->id; ?>">
 				<td class="no-wrap">
@@ -116,9 +116,9 @@ if (!empty($orders)) :
 
 					<?php else: ?>
 						<?php echo create_button([
-								"text" => "Details",
-								"class" => ["button", "details"],
-								"href" => site_url("order/view/$order->id"),
+								'text' => 'Details',
+								'class' => ['button', 'details'],
+								'href' => site_url('order/view/' . $order->id),
 						]); ?>
 
 					<?php endif; ?>
@@ -126,106 +126,106 @@ if (!empty($orders)) :
 				</td>
 				<?php if (!$show_names): ?>
 					<td
-						class="order-year field"><?php echo edit_field("year", $order->year, "", "order", $order->id, ["envelope" => "span"]); ?>
+						class="order-year field"><?php echo edit_field('year', $order->year, '', 'order', $order->id, ['envelope' => 'span']); ?>
 					</td>
 				<?php endif; ?>
 				<td
-					class="order-grower_id field"><?php echo edit_field("grower_id", $order->grower_id, "", "order", $order->id, ["envelope" => "span"]); ?>
+					class="order-grower_id field"><?php echo edit_field('grower_id', $order->grower_id, '', 'order', $order->id, ['envelope' => 'span']); ?>
 				</td>
 				<td class="order-catalog_number field">
 
 					<!-- if there is no catalog number, show the first letter of the category -->
-					<?php echo edit_field("catalog_number", $order->catalog_number ? $order->catalog_number : ucfirst(substr($order->category, 0, 1)), "", "order", $order->id, ["envelope" => "span"]); ?>
+					<?php echo edit_field('catalog_number', $order->catalog_number ? $order->catalog_number : ucfirst(substr($order->category, 0, 1)), '', 'order', $order->id, ['envelope' => 'span']); ?>
 				</td>
 				<?php if (!empty($show_names)): ?>
 					<td>
 						<a
-								href="<?php echo site_url(sprintf("common/find?genus=%s", $order->genus)); ?>"
+								href="<?php echo site_url(sprintf('common/search?find=1&genus=%s', $order->genus)); ?>"
 								title="View all <?php echo $order->genus; ?>"><?php echo $order->genus; ?></a>
 					</td>
 					<td><?php echo $order->species; ?></td>
 					<td>
-						<a href="<?php echo site_url("common/view/$order->common_id"); ?>"
+						<a href="<?php echo site_url('common/view/' . $order->common_id); ?>"
 						   title="View the details for <?php echo $order->name; ?>"><?php echo $order->name; ?></a>
 					</td>
 					<td>
 						<a style="font-weight: bold"
-						   href="<?php echo site_url("variety/view/$order->variety_id"); ?>"
+						   href="<?php echo site_url('variety/view/'. $order->variety_id); ?>"
 						   title="View the details for <?php echo $order->variety; ?>"><?php echo $order->variety; ?></a>
 					</td>
 				<?php endif; ?>
 				<td class="order-count_presale field">
-					<?php echo edit_field("count_presale", $order->count_presale, "", "order", $order->id, [
-							"envelope" => "span",
+					<?php echo edit_field('count_presale', $order->count_presale, '', 'order', $order->id, [
+							'envelope' => 'span',
 							'title' => 'enter x to zero out the value',
 					]); ?>
 				</td>
 				<?php if ($year == 2021): ?>
 					<td class="order-count_friday field">
-						<?php echo edit_field("count_friday", $order->count_friday, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('count_friday', $order->count_friday, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
 					<td class="order-count_saturday field">
-						<?php echo edit_field("count_saturday", $order->count_saturday, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('count_saturday', $order->count_saturday, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
 				<?php endif; ?>
 				<td class="order-count_midsale field">
-					<?php echo edit_field("count_midsale", $order->count_midsale, "", "order", $order->id, [
-							"envelope" => "span",
+					<?php echo edit_field('count_midsale', $order->count_midsale, '', 'order', $order->id, [
+							'envelope' => 'span',
 							'title' => 'enter x to zero out the value',
 					]); ?>
 				</td>
 				<?php if (!empty($is_inventory)): ?>
 					<td class="order-received_presale field">
-						<?php echo edit_field("received_presale", $order->received_presale, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('received_presale', $order->received_presale, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
 					<td class="order-remainder_friday field">
-						<?php echo edit_field("remainder_friday", $order->remainder_friday, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('remainder_friday', $order->remainder_friday, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
 					<td class="order-sellout_friday field">
-						<?php echo edit_field("sellout_friday", $order->sellout_friday, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('sellout_friday', $order->sellout_friday, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
 					<td class="order-received_midsale field">
-						<?php echo edit_field("received_midsale", $order->received_midsale, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('received_midsale', $order->received_midsale, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
 					<td class="order-remainder_saturday field">
-						<?php echo edit_field("remainder_saturday", $order->remainder_saturday, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('remainder_saturday', $order->remainder_saturday, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
 					<td class="order-sellout_saturday field">
-						<?php echo edit_field("sellout_saturday", $order->sellout_saturday, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('sellout_saturday', $order->sellout_saturday, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
 					<td class="order-remainder_sunday field">
-						<?php echo edit_field("remainder_sunday", $order->remainder_sunday, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('remainder_sunday', $order->remainder_sunday, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
 					<td class="order-count_dead field">
-						<?php echo edit_field("count_dead", $order->count_dead, "", "order", $order->id, [
-								"envelope" => "span",
+						<?php echo edit_field('count_dead', $order->count_dead, '', 'order', $order->id, [
+								'envelope' => 'span',
 								'title' => 'enter x to zero out the value',
 						]); ?>
 					</td>
@@ -234,8 +234,8 @@ if (!empty($orders)) :
 					<?php echo $order->count_midsale + $order->count_presale + $order->count_friday + $order->count_saturday; ?>
 				</td>
 				<td
-						class="order-pot_size field no-wrap"><?php echo edit_field("pot_size", $order->pot_size, "", "order", $order->id, [
-							"envelope" => "span",
+						class="order-pot_size field no-wrap"><?php echo edit_field('pot_size', $order->pot_size, '', 'order', $order->id, [
+							'envelope' => 'span',
 							"class" => "pot-size",
 					]); ?>
 				</td>
@@ -260,10 +260,10 @@ if (!empty($orders)) :
 					$<?php echo round($order->flat_cost * ($order->count_presale + $order->count_midsale + $order->count_friday + $order->count_saturday), 2); ?>
 				</td>
 				<td class="order-price field price-field no-wrap">
-					$<?php echo edit_field("price", $order->price, "", "order", $order->id, ["envelope" => "span"]); ?>
+					$<?php echo edit_field('price', $order->price, '', 'order', $order->id, ['envelope' => 'span']); ?>
 				</td>
 				<td
-						class="order-grower_code field"><?php echo edit_field("grower_code", $order->grower_code, "", "order", $order->id, ["envelope" => "span"]); ?>
+						class="order-grower_code field"><?php echo edit_field('grower_code', $order->grower_code, '', 'order', $order->id, ['envelope' => 'span']); ?>
 				</td>
 				<td class="order-flat_exclude field">
 					<?php if (!empty($order->flat_exclude_button)): ?>
@@ -272,15 +272,15 @@ if (!empty($orders)) :
 				</td>
 				<td class="re-order field">
 					<?php echo create_button([
-							"text" => "Re-order",
-							"href" => site_url("order/create?variety_id=$order->variety_id&reorder=1"),
-							"id" => "oc_$order->variety_id",
-							"class" => [
-									"button",
-									"new",
-									"create",
-									"dialog",
-									"order-create",
+							'text' => 'Re-order',
+							'href' => site_url('order/create?variety_id=' . $order->variety_id. '&reorder=1'),
+							'id' => 'oc_' . $order->variety_id,
+							'class' => [
+									'button',
+									'new',
+									'create',
+									'dialog',
+									'order-create',
 							],
 					]); ?>
 				</td>

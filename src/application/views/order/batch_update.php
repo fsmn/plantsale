@@ -108,14 +108,13 @@ if (empty($pot_sizes)) {
 					'yes' => 'Yes',
 			]); ?></label>
 	</div>
-	<input type="submit" class="button warning"/>
+	<input type="submit" class="button delete"/>
 </form>
 
 <script type="text/javascript">
-	$("#batch-update").submit(function () {
-		is_sure = confirm("Are you absolutely sure you want to do this? It cannot be undone!");
-		if (is_sure) {
-		} else {
+	jQuery("#batch-update").submit(function () {
+		let is_sure = confirm("Are you absolutely sure you want to do this? It cannot be undone!");
+		if (!is_sure) {
 			return false;
 		}
 	});

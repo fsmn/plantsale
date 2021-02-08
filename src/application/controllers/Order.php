@@ -497,6 +497,8 @@ class Order extends MY_Controller {
 					'flat_cost',
 					'plant_cost',
 					'count_presale',
+					'count_friday',
+					'count_saturday',
 					'count_midsale',
 					'pot_size',
 					'price',
@@ -508,8 +510,6 @@ class Order extends MY_Controller {
 				$values = [];
 				foreach ($fields as $field) {
 					if ($this->input->post($field)) {
-						// $values[] = sprintf('`%s` = '%s'',$field,
-						// urldecode($this->input->post($field)));
 						$my_value = urldecode($this->input->post($field));
 						switch ($field) {
 							case 'flat_cost' :

@@ -269,6 +269,15 @@ td .button, .row .button, .button.small {
 	box-shadow: 1px 1px 1px #333 inset;
 	padding: .25em;
 }
+input[type="number"].year {
+	width: 3.5rem;
+}
+input[type="number"].count, input[type="number"].size{
+	width: 3.5rem;
+}
+input[type="number"].cost {
+	width: 3rem;
+}
 
 #navigation .button {
 	padding: .75em;

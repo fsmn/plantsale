@@ -451,3 +451,14 @@ function needs_bag($order = NULL)
 	}
 	return $output;
 }
+
+function get_year_array($selected_year, $range): array {
+	for($i = 1;$i <= $range/2; $i++){
+		$output[$selected_year - $i] = $selected_year - $i;
+	}
+	$output[$selected_year] = $selected_year;
+	for($i = 1; $i <= $range/2; $i++){
+		$output[$selected_year + $i] = $selected_year + $i;
+	}
+	return $output;
+}

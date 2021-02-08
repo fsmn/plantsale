@@ -15,8 +15,8 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
 		$this->lang->load('auth');
-		define("IS_EDITOR", 0);
-		define("IS_ADMIN", 0);
+		define('IS_EDITOR', 0);
+		define('IS_ADMIN', 0);
 	}
 
 	/**
@@ -47,8 +47,8 @@ class Auth extends CI_Controller {
 					->result();
 			}
 
-			$this->data ['target'] = "auth/index";
-			$this->data ['title'] = "User List";
+			$this->data ['target'] = 'auth/index';
+			$this->data ['title'] = 'User List';
 			$this->_render_page('page/index', $this->data);
 		}
 
@@ -59,7 +59,7 @@ class Auth extends CI_Controller {
 	 */
 	function login() {
 		$_COOKIE = [];
-		$this->data ['title'] = "Login";
+		$this->data ['title'] = 'Login';
 
 		// validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
@@ -68,7 +68,7 @@ class Auth extends CI_Controller {
 		if ($this->form_validation->run() === TRUE)
 		{
 			// check to see if the user is logging in
-			// check for "remember me"
+			// check for 'remember me'
 			$remember = ( bool ) $this->input->post('remember');
 
 			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
@@ -188,7 +188,7 @@ class Auth extends CI_Controller {
 
 			// render
 			$this->data ['target'] = 'auth/change_password';
-			$this->data ['title'] = "Change Password";
+			$this->data ['title'] = 'Change Password';
 			$this->_render_page('page/index', $this->data);
 		}
 		else
@@ -272,12 +272,12 @@ class Auth extends CI_Controller {
 
 				$this->session->set_flashdata('message', 'Please check your email including spam box for the reset instructions');
 
-				redirect("auth/login", 'refresh'); // we should display a confirmation page here instead of the login page
+				redirect('auth/login', 'refresh'); // we should display a confirmation page here instead of the login page
 			}
 			else
 			{
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect("auth/forgot_password", 'refresh');
+				redirect('auth/forgot_password', 'refresh');
 			}
 		}
 
@@ -331,7 +331,7 @@ class Auth extends CI_Controller {
 
 				// render
 				$this->data ['target'] = 'auth/reset_password';
-				$this->data ['title'] = "Reset Password";
+				$this->data ['title'] = 'Reset Password';
 				$this->_render_page('page/index', $this->data);
 			}
 			else
@@ -370,7 +370,7 @@ class Auth extends CI_Controller {
 		{
 			// if the code is invalid then send them back to the forgot password page
 			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("auth/forgot_password", 'refresh');
+			redirect('auth/forgot_password', 'refresh');
 		}
 
 	}
@@ -394,7 +394,7 @@ class Auth extends CI_Controller {
 		{
 			// redirect them to the auth page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			redirect('auth', 'refresh');
 		}
 		else
 		{
@@ -421,7 +421,7 @@ class Auth extends CI_Controller {
 			$this->data ['user'] = $this->ion_auth->user($id)->row();
 			$this->data ['target'] = 'auth/deactivate_user';
 			$this->data ['title'] = 'Deactivate User';
-			if ($this->input->get("ajax") == 1)
+			if ($this->input->get('ajax') == 1)
 			{
 				$this->_render_page($this->data['target'], $this->data);
 			}
@@ -457,7 +457,7 @@ class Auth extends CI_Controller {
 	// create a new user
 	function create_user() {
 
-		$this->data ['title'] = "Create User";
+		$this->data ['title'] = 'Create User';
 
 		if ( ! $this->ion_auth->logged_in() || ! $this->ion_auth->is_admin())
 		{
@@ -467,11 +467,11 @@ class Auth extends CI_Controller {
 		$tables = $this->config->item('tables', 'ion_auth');
 
 		// validate form input
-		//$this->form_validation->set_rules ( 'first_name', "First Name:", 'required|xss_clean' );
-		//$this->form_validation->set_rules ( 'last_name', "Last Name:", 'required|xss_clean' );
-		$this->form_validation->set_rules('email', "Email:", 'required|valid_email|is_unique[' . $tables ['users'] . '.email]');
-		$this->form_validation->set_rules('password', "Password:", 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-		$this->form_validation->set_rules('password_confirm', "Password Confirmation:", 'required');
+		//$this->form_validation->set_rules ( 'first_name', 'First Name:', 'required|xss_clean' );
+		//$this->form_validation->set_rules ( 'last_name', 'Last Name:', 'required|xss_clean' );
+		$this->form_validation->set_rules('email', 'Email:', 'required|valid_email|is_unique[' . $tables ['users'] . '.email]');
+		$this->form_validation->set_rules('password', 'Password:', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+		$this->form_validation->set_rules('password_confirm', 'Password Confirmation:', 'required');
 
 		if ($this->form_validation->run() == TRUE)
 		{
@@ -491,7 +491,7 @@ class Auth extends CI_Controller {
 			// check to see if we are creating the user
 			// redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			redirect('auth', 'refresh');
 		}
 		else
 		{
@@ -530,7 +530,7 @@ class Auth extends CI_Controller {
 				'value' => $this->form_validation->set_value('password_confirm'),
 			];
 			$this->data ['target'] = 'auth/create_user';
-			if ($this->input->get("ajax") == 1)
+			if ($this->input->get('ajax') == 1)
 			{
 				$this->_render_page($this->data ['target'], $this->data);
 			}
@@ -545,7 +545,7 @@ class Auth extends CI_Controller {
 	// edit a user
 	function edit_user($id) {
 
-		$this->data ['title'] = "Edit User";
+		$this->data ['title'] = 'Edit User';
 
 		if ( ! $this->ion_auth->logged_in() || ( ! $this->ion_auth->is_admin() && ! ($this->ion_auth->user()
 						->row()->id == $id)))
@@ -561,9 +561,9 @@ class Auth extends CI_Controller {
 		$tables = $this->config->item('tables', 'ion_auth');
 
 		// validate form input
-		$this->form_validation->set_rules('first_name', "First Name", 'required|xss_clean');
-		$this->form_validation->set_rules('last_name', "Last Name", 'required|xss_clean');
-		$this->form_validation->set_rules('email', "Email:", 'required|valid_email|is_unique_to_row[' . $tables ['users'] . '.email.' . $id . ']');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email:', 'required|valid_email|is_unique_to_row[' . $tables ['users'] . '.email.' . $id . ']');
 
 		$this->form_validation->set_rules('groups', $this->lang->line('edit_user_validation_groups_label', 'xss_clean'));
 
@@ -603,8 +603,8 @@ class Auth extends CI_Controller {
 			// update the password if it was posted
 			if ($this->input->post('password'))
 			{
-				$this->form_validation->set_rules('password', "Password:", 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-				$this->form_validation->set_rules('password_confirm', "Password Confirmation:", 'required');
+				$this->form_validation->set_rules('password', 'Password:', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+				$this->form_validation->set_rules('password_confirm', 'Password Confirmation:', 'required');
 
 				$data ['password'] = $this->input->post('password');
 			}
@@ -615,7 +615,7 @@ class Auth extends CI_Controller {
 
 				// check to see if we are creating the user
 				// redirect them back to the admin page
-				$this->session->set_flashdata('message', "User Saved");
+				$this->session->set_flashdata('message', 'User Saved');
 				if ($this->ion_auth->is_admin())
 				{
 					redirect('auth', 'refresh');
@@ -668,7 +668,7 @@ class Auth extends CI_Controller {
 		];
 		$this->data['preferences'] = $preferences;
 		$this->data ['target'] = 'auth/edit_user';
-		$this->data['ajax'] = $this->input->get("ajax");
+		$this->data['ajax'] = $this->input->get('ajax');
 		if ($this->data['ajax'] == 1)
 		{
 			$this->_render_page($this->data ['target'], $this->data);
@@ -691,8 +691,8 @@ class Auth extends CI_Controller {
 		}
 
 		// validate form input
-		$this->form_validation->set_rules('group_name', "Group Name", 'required|alpha_dash|xss_clean');
-		$this->form_validation->set_rules('description', "Group Description", 'xss_clean');
+		$this->form_validation->set_rules('group_name', 'Group Name', 'required|alpha_dash|xss_clean');
+		$this->form_validation->set_rules('description', 'Group Description', 'xss_clean');
 
 		if ($this->form_validation->run() == TRUE)
 		{
@@ -702,7 +702,7 @@ class Auth extends CI_Controller {
 				// check to see if we are creating the group
 				// redirect them back to the admin page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("auth", 'refresh');
+				redirect('auth', 'refresh');
 			}
 		}
 		else
@@ -724,7 +724,7 @@ class Auth extends CI_Controller {
 				'value' => $this->form_validation->set_value('description'),
 			];
 			$this->data ['target'] = 'auth/create_group';
-			if ($this->input->get("ajax") == 1)
+			if ($this->input->get('ajax') == 1)
 			{
 				$this->_render_page($this->data ['target'], $this->data);
 			}
@@ -754,8 +754,8 @@ class Auth extends CI_Controller {
 		$group = $this->ion_auth->group($id)->row();
 
 		// validate form input
-		$this->form_validation->set_rules('group_name', "Group Name", 'required|alpha_dash|xss_clean');
-		$this->form_validation->set_rules('group_description', "Group Description", 'xss_clean');
+		$this->form_validation->set_rules('group_name', 'Group Name', 'required|alpha_dash|xss_clean');
+		$this->form_validation->set_rules('group_description', 'Group Description', 'xss_clean');
 
 		if (isset ($_POST) && ! empty ($_POST))
 		{
@@ -771,7 +771,7 @@ class Auth extends CI_Controller {
 				{
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
-				redirect("auth", 'refresh');
+				redirect('auth', 'refresh');
 			}
 		}
 
@@ -794,9 +794,9 @@ class Auth extends CI_Controller {
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		];
 		$this->data ['target'] = 'auth/edit_group';
-		if ($this->input->get("ajax") == 1)
+		if ($this->input->get('ajax') == 1)
 		{
-			$this->_render_page($this->data["target"], $this->data);
+			$this->_render_page($this->data['target'], $this->data);
 		}
 		else
 		{

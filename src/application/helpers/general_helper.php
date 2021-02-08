@@ -277,11 +277,11 @@ function clean_string($string)
 /**
  * If a decimal value is equal to its integer value, just return the integer without the decimal points.
  *
- * @param string $value
+ * @param string|null $value
  *
  * @return float|\string
  */
-function clean_decimal(string $value)
+function clean_decimal(?string $value)
 {
 	if (round ( $value ) == $value) {
 		$value = round ( $value );

@@ -8,6 +8,10 @@ class Logs extends MY_Controller {
 		parent::__construct();
 		$this->load->helper('directory');
 		$this->load->helper('file');
+		if(!$this->ion_auth->is_admin()){
+			$this->session->set_flashdata('alert','You are not authorized to view this feature');
+			redirect();
+		}
 	}
 
 	function index() {

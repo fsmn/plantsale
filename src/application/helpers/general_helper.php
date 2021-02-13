@@ -462,3 +462,8 @@ function get_year_array($selected_year, $range): array {
 	}
 	return $output;
 }
+
+
+function format_string($string, $arguments){
+	return strtr($string, $arguments);
+}

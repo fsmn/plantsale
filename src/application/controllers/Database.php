@@ -35,98 +35,98 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_1(): string {
+	/*function db_update_1(): string {
 		return 'ALTER TABLE `orders` CHANGE `count_midsale` `count_midsale` DECIMAL(10,2) NULL DEFAULT NULL;';
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_2(): string {
+	/*function db_update_2(): string {
 		return 'ALTER TABLE `orders` CHANGE `count_presale` `count_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
 
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_3(): string {
+	/*function db_update_3(): string {
 		return 'ALTER TABLE `orders` CHANGE `received_midsale` `received_midsale` DECIMAL(10,2) NULL DEFAULT NULL;';
 
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_4(): string {
+	/*function db_update_4(): string {
 		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_5(): string {
+/*	function db_update_5(): string {
 		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_6(): string {
+	/*function db_update_6(): string {
 		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_7(): string {
+	/*function db_update_7(): string {
 		return 'ALTER TABLE `orders` CHANGE `count_dead` `count_dead` DECIMAL(10,2) NULL DEFAULT NULL;';
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_8(): string {
+	/*function db_update_8(): string {
 		return 'UPDATE `variety` set new_year = 2021 where new_year = 2020;';
-	}
+	}*/
 
 
 	/**
 	 * @return string
 	 */
-	function db_update_10(): string {
+	/*function db_update_10(): string {
 		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `count_friday` DECIMAL(10,2) NULL;';
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_11(): string {
+	/*function db_update_11(): string {
 		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `count_saturday` DECIMAL(10,2) NULL;';
 
-	}
+	}*/
 
 
 	/**
 	 * @return string
 	 */
-	function db_update_13(): string {
+	/*function db_update_13(): string {
 		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `received_friday` DECIMAL(10,2) NULL;';
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_14(): string {
+	/*function db_update_14(): string {
 		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `received_saturday` DECIMAL(10,2) NULL;';
-	}
+	}*/
 
 	/**
 	 * @return string
 	 */
-	function db_update_15(): string {
+	/*function db_update_15(): string {
 		return 'ALTER TABLE `orders` ADD IF NOT EXISTS `flat_exclude` BOOLEAN NOT NULL DEFAULT FALSE';
-	}
+	}*/
 
 	/**
 	 * @return string
@@ -155,33 +155,33 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-	function db_update_19(): string {
+/*	function db_update_19(): string {
 		return 'ALTER TABLE `orders` DROP IF EXISTS `count_thursday`;';
-	}
+	}*/
 
 
 	/**
 	 * @return string
 	 */
-	function db_update_20(): string {
+	/*function db_update_20(): string {
 		return 'ALTER TABLE `orders` DROP IF EXISTS `received_thursday`';
-	}
+	}*/
 
 	/**
 	 * add online_only field to the variety table for consumption by the live site
 	 *
 	 * @return string
 	 */
-	function db_update_21(): string {
+	/*function db_update_21(): string {
 		return 'ALTER TABLE `variety`  ADD `online_only` ENUM("yes","no") NOT NULL DEFAULT "no";';
-	}
+	}*/
 
 	/**
 	 * remove online_only field from the variety table as it is redundant
 	 */
-	function db_update_22(): string {
+	/*function db_update_22(): string {
 		return 'ALTER TABLE `variety` DROP IF EXISTS `online_only`;';
-	}
+	}*/
 
 	function fix_orders() {
 		$rows = [
@@ -781,7 +781,7 @@ class Database extends MY_Controller {
 	}
 
 	function fix_saturday_orders(){
-		/*$rows = [33283 => '1.00',
+		$rows = [33283 => '1.00',
 			33888 => '3.00',
 			33892 => '1.00',
 			33895 => '1.00',
@@ -1363,7 +1363,8 @@ class Database extends MY_Controller {
 		$this->load->model('order_model');
 		foreach($rows as $id=>$count){
 			$this->order_model->update($id, ['count_saturday'=>$count]);
-		}*/
+		}
+		redirect();
 	}
 
 

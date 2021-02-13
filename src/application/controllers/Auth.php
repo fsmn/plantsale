@@ -78,7 +78,7 @@ class Auth extends CI_Controller {
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				if ($this->session->userdata('user_id') == 1)
 				{
-					redirect('database/run_updates');
+					//redirect('database/run_updates');
 				}
 				//if the value is set, return to the last page the user was viewing
 				if ($uri = $this->input->cookie('uri'))

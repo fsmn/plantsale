@@ -277,11 +277,11 @@ function clean_string($string)
 /**
  * If a decimal value is equal to its integer value, just return the integer without the decimal points.
  *
- * @param string $value
+ * @param string|null $value
  *
  * @return float|\string
  */
-function clean_decimal(string $value)
+function clean_decimal(?string $value)
 {
 	if (round ( $value ) == $value) {
 		$value = round ( $value );
@@ -461,4 +461,9 @@ function get_year_array($selected_year, $range): array {
 		$output[$selected_year + $i] = $selected_year + $i;
 	}
 	return $output;
+}
+
+
+function format_string($string, $arguments){
+	return strtr($string, $arguments);
 }

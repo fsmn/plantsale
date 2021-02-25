@@ -113,7 +113,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = TRUE;
 
 /*
  |--------------------------------------------------------------------------
@@ -229,10 +229,10 @@ switch ($_SERVER['HTTP_HOST']) {
 	case 'backoffice.test':
 	case 'backoffice.t7test.io':
 	case 'backoffice.t7stage.io':
-		$config['log_threshold'] = 4;
+		$config['log_threshold'] = 3;
 		break;
 	default:
-		$config['log_threshold'] = 3;
+		$config['log_threshold'] = 2;
 		break;
 }
 

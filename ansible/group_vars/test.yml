@@ -147,7 +147,7 @@ flightdeck_cluster:
       - "registry"
     nodeSelector:
       key: "doks.digitalocean.com/node-pool"
-      value: "web-pool"
+      value: "web2-pool"
     secrets:
       - name: "web"
         path: "/secrets"

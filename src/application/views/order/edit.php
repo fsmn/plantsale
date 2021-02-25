@@ -52,9 +52,9 @@ if (get_value($order, 'year') == 2021) {
 					   value="<?php echo get_value($order, 'catalog_number'); ?>"/></label>
 		</div>
 		<div class="order-flat_size field">
-			<label for="flat_size">Flat Size:&nbsp;$
+			<label for="flat_size">Flat Size:
 				<input
-						type="number"
+						type="text"
 						name="flat_size"
 						class="size"
 						value="<?php echo get_value($order, 'flat_size'); ?>"
@@ -63,7 +63,7 @@ if (get_value($order, 'year') == 2021) {
 		<div class="order-flat_cost field">
 			<label for="flat_cost">Flat Cost:&nbsp;$
 				<input
-						type="number"
+						type="text"
 						name="flat_cost"
 						class="cost"
 						value="<?php echo get_value($order, 'flat_cost'); ?>"
@@ -72,7 +72,7 @@ if (get_value($order, 'year') == 2021) {
 		<div class="order-plant_cost field">
 			<label for="plant_cost">Plant Cost:&nbsp;$
 				<input
-						type="number"
+						type="text"
 						class="cost"
 						name="plant_cost"
 						value="<?php echo get_value($order, 'plant_cost'); ?>"

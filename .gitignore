@@ -3,4 +3,6 @@ db-backups
 
 docker-compose.override.yml
 .vscode
-/.buildpath
+.buildpath
+.project
+.settings

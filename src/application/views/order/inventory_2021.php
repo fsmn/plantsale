@@ -202,36 +202,36 @@ if (!empty($orders)) :
 					<?php echo live_field('received_saturday', $order->received_saturday, 'order', $order->id, ['type'=>'text','envelope' =>'span']); ?>
 				</td>
 				<td class="order-remainder_saturday field" style="width: 31px;">
-					<?php echo live_field("remainder_saturday", $order->remainder_saturday, "order", $order->id, [
-							"envelope" => "span",
-							"size" => 31,
+					<?php echo live_field('remainder_saturday', $order->remainder_saturday, 'order', $order->id, [
+							'envelope' => 'span',
+							'size' => 31,
 							'type'=>'text',
 					]); ?>
 				</td>
 				<td class="order-remainder_sunday field" style="width: 31px;">
-					<?php echo live_field("remainder_sunday", $order->remainder_sunday, "order", $order->id, [
-							"envelope" => "span",
-							"size" => 31,
+					<?php echo live_field('remainder_sunday', $order->remainder_sunday, 'order', $order->id, [
+							'envelope' => 'span',
+							'size' => 31,
 							'type'=>'text',
 					]); ?>
 				</td>
 				<td class="order-count_dead field" style="width: 31px;">
-					<?php echo live_field("count_dead", $order->count_dead, "order", $order->id, [
-							"envelope" => "span",
-							"size" => 31,
+					<?php echo live_field('count_dead', $order->count_dead, 'order', $order->id, [
+							'envelope' => 'span',
+							'size' => 31,
 							'type'=>'text',
 					]); ?>
 				</td>
 				<td class="order-total_plants field">
 					<?php echo $order->count_midsale + $order->count_presale; ?>
 				</td>
-				<td class="order-pot_size field no-wrap"><?php echo edit_field("pot_size", $order->pot_size, "", "order", $order->id, [
+				<td class="order-pot_size field no-wrap"><?php echo edit_field('pot_size', $order->pot_size, '', 'order', $order->id, [
 							'envelope' => 'span',
 							'class' => 'pot-size',
 					]); ?>
 				</td>
 				<td class="order-flat_size field">
-					<?php echo edit_field("flat_size", $order->flat_size, "", "order", $order->id, ['envelope' => 'span']); ?>
+					<?php echo edit_field('flat_size', $order->flat_size, '', 'order', $order->id, ['envelope' => 'span']); ?>
 				</td>
 				<td class="order-flat_cost field cost-field no-wrap"
 					id="flat_cost">
@@ -247,27 +247,11 @@ if (!empty($orders)) :
 						  class="edit-cost"><?php echo number_format($order->plant_cost, 2); ?></span>
 				</td>
 				<td tabindex=-1 class="no-wrap order-price field">
-					$<?php echo edit_field("price", $order->price, "", "order", $order->id, ["envelope" => "span"]); ?>
+					$<?php echo edit_field('price', $order->price, '', 'order', $order->id, ['envelope' => 'span']); ?>
 				</td>
 				<td tabindex=-1
-					class="order-grower_code field"><?php echo edit_field("grower_code", $order->grower_code, "", "order", $order->id, ["envelope" => "span"]); ?>
+					class="order-grower_code field"><?php echo edit_field('grower_code', $order->grower_code, '', 'order', $order->id, ['envelope' => 'span']); ?>
 				</td>
-				<!--<td tabindex=-1 class="re-order field">
-				<?php echo create_button([
-						"text" => "Re-order",
-						"href" => site_url("order/create?variety_id=$order->variety_id"),
-						"id" => "oc_$order->variety_id",
-						"class" => [
-								"button",
-								"new",
-								"create",
-								"dialog",
-								"reorder",
-								"order-create",
-						],
-						"tabindex" => "-1",
-				]); ?>
-			</td>-->
 			</tr>
 		<?php endforeach; ?>
 		</tbody>
@@ -285,8 +269,6 @@ if (!empty($orders)) :
 			<td><?php echo get_as_price($flat_cost_total); ?></td>
 			<td></td>
 			<td></td>
-			<!-- <td></td> 
-			<td></td>-->
 		</tr>
 		</tfoot>
 	</table>

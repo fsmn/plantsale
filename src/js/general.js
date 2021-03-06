@@ -2,6 +2,8 @@
 
 
 	$(document).ready(function () {
+
+
 		$("#navigation .menu-button").click(function (e) {
 			e.preventDefault();
 			$("#navigation .button-box").toggle();
@@ -52,7 +54,13 @@
 				}
 			});
 		});
-
+		$(document).on("click","ul.filters li.filter-item a",function(e){
+			e.preventDefault();
+			let my_target = $(this).data('target');
+			$("table.log-list tr").hide();
+			$("table.log-list tr." + my_target).show();
+			console.log(my_target);
+		});
 		$(document).on("click", ".create.dialog, .edit.dialog, .delete.dialog", function (e) {
 			e.preventDefault();
 			redirect_url = $(location).attr("href");

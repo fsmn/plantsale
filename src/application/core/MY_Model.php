@@ -82,7 +82,7 @@ class MY_Model extends CI_Model
 		{
 			if (IS_EDITOR) {
 				$this->db->delete ( $db, array (
-						"id" => $id 
+						'id' => $id
 				) );
 			}
 			else {
@@ -90,12 +90,12 @@ class MY_Model extends CI_Model
 			}
 		}
 
-		function _log ( $element = "alert" )
+		function _log ( $element = 'alert' )
 		{
 			$last_query = $this->db->last_query ();
-			$this->load->model ( "user_preferences_model", "user_prefs" );
+			$this->load->model ( 'user_preferences_model', 'user_prefs' );
 			
-			if ($this->user_prefs->get ( $this->ion_auth->user ()->row ()->id, "dev" ) == 1) {
+			if ($this->user_prefs->get ( $this->ion_auth->user ()->row ()->id, 'dev' ) == 1) {
 				$this->session->set_flashdata ( $element, $last_query );
 			}
 		}

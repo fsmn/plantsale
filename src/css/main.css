@@ -37,10 +37,20 @@ p {
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	cursor: pointer;
 	width: 100%;
+	margin-bottom: 1rem;
+	border: 1px solid black;
+	box-shadow: 2px 2px 3px black;
 }
-.message p {
-	margin: 0 0 .5rem 0;
-	padding: 0;
+.message h2 {
+	background: none;
+	border: none;
+	box-shadow: none;
+	color: #000000;
+
+}
+.message div {
+	margin-bottom: 1rem;
+	padding: 0 10px;
 }
 .not-logged-in #main {
 	width: auto;
@@ -267,6 +277,15 @@ td .button, .row .button, .button.small {
 	font-size: 1.2em;
 	box-shadow: 1px 1px 1px #333 inset;
 	padding: .25em;
+}
+input[type="number"].year {
+	width: 3.5rem;
+}
+input[type="number"].count, input[type="number"].size{
+	width: 3.5rem;
+}
+input[type="number"].cost {
+	width: 3rem;
 }
 
 #navigation .button {
@@ -1192,4 +1211,16 @@ table.shelf-checking td.text-cell {
 		margin: 0;
 	}
 
+}
+
+ul.filters {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 300px;
+	padding: 0;
+}
+li.filter-item {
+	list-style: none;
 }

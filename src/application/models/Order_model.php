@@ -29,13 +29,13 @@ class Order_Model extends MY_Model {
 
 	public $price;
 
-	public $count_presale = 0.0;
+	public $count_presale;
 
-	public $count_midsale = 0.0;
+	public $count_midsale;
 
-	public $count_friday  = 0.0;
+	public $count_friday;
 
-	public $count_saturday = 0.0;
+	public $count_saturday;
 
 	public $received_presale;
 
@@ -77,9 +77,8 @@ class Order_Model extends MY_Model {
 			}
 			elseif (!empty($my_value)) {
 				$this->{$my_variable} = urldecode($my_value);
+			}
 		}
-	}
-
 
 
 		$this->rec_modified = mysql_timestamp();
@@ -222,7 +221,7 @@ class Order_Model extends MY_Model {
 			}
 		}
 		$this->db->select('orders.*');
-		$this->db->select('IF(`orders`.`count_presale` IS NULL, 0,`orders`.`count_presale`) + IF(`orders`.`count_midsale` IS NULL,0,`orders`.`count_midsale`) as `flat_count`, flat_exclude', FALSE);
+		$this->db->select('(IF(`orders`.`count_presale` IS NULL, 0,`orders`.`count_presale`) + IF(`orders`.`count_midsale` IS NULL,0,`orders`.`count_midsale`) + IF(`orders`.`count_friday` IS NULL,0,`orders`.`count_friday`) + IF(`orders`.`count_saturday` IS NULL,0,`orders`.`count_saturday`)) as `flat_count`, flat_exclude', FALSE);
 		$this->db->select('variety.variety, variety.species,variety.new_year');
 		$this->db->select('common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id');
 		$this->db->select('category.category,subcategory.subcategory');
@@ -366,14 +365,14 @@ class Order_Model extends MY_Model {
 		$this->db->order_by('(' . subcategory_order() . ')');
 		$this->db->order_by('subcategory.subcategory');
 		$this->db->order_by('common.name', 'ASC');
-		if($this->get_current_year() != 2021) {
+		if (get_current_year() != 2021) {
 			$this->db->order_by('orders.price', 'ASC');
 			$this->db->order_by('orders.pot_size', 'ASC');
 		}
 		$this->db->order_by('variety.variety', 'ASC');
 		$this->db->select('orders.id,category.category');
 		$result = $this->db->get()->result();
-		// $this->_log ( 'alert' );
+		$this->_log();
 		return $result;
 	}
 

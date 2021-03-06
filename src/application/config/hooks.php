@@ -10,7 +10,12 @@
 |
 */
 
-
+$hook['post_controller'][] = array(
+	'class' => 'Log_Query',
+	'function' => 'run',
+	'filename' => 'Log_query.php',
+	'filepath' => 'hooks'
+);
 
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */

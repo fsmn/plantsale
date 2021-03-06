@@ -2,3 +2,4 @@
 db-backups
 
 docker-compose.override.yml
+.vscode

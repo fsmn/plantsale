@@ -367,7 +367,6 @@ class Ion_auth
 
 			$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_unsuccessful', 'activation_email_unsuccessful'));
 			$this->set_error('activation_email_unsuccessful');
-			return FALSE;
 		}
 	}
 
@@ -402,13 +401,8 @@ class Ion_auth
 		{
 			$this->session->sess_create();
 		}
-		else
-		{
-			$this->session->sess_regenerate(TRUE);
-		}
 
-		$this->set_message('logout_successful');
-		return TRUE;
+		$this->session->set_flashdata('notice','logout_successful');
 	}
 
 	/**

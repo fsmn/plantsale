@@ -35,8 +35,13 @@ $body_class = implode ( " ", $body_classes );
 		<div id="page">
 <?php if(!$print): ?>
 <div id='header'>
-<?php if($_SERVER['HTTP_HOST'] == "plantsale"): ?>
-<div id="page-title" class="message alert">WARNING: THIS IS THE STAGING SERVER!</div>
+<?php if(in_array($_SERVER['HTTP_HOST'], [
+	'backoffice.test',
+	'docker.test',
+	'backoffice.t7test.io', 
+	'backoffice.t7stage.io',
+	])): ?>
+<div id="page-title">WARNING: THIS IS THE STAGING SERVER!</div>
 <?php else: ?>
 <div id='page-title'>Friends School Plant Sale Database</div>
 <?php endif;?>

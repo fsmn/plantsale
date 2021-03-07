@@ -40,10 +40,11 @@ $body_class = implode ( " ", $body_classes );
 	'docker.test',
 	'backoffice.t7test.io', 
 	'backoffice.t7stage.io',
-	])): ?>
-<div id="page-title">WARNING: THIS IS THE STAGING SERVER!</div>
+	])): 
+?>
+	<div id="page-title">WARNING: THIS IS THE STAGING SERVER!</div>
 <?php else: ?>
-<div id='page-title'>Friends School Plant Sale Database</div>
+	<div id='page-title'>Friends School Plant Sale Database</div>
 <?php endif;?>
 <?php if($this->ion_auth->logged_in()):?>
 <div id='utility'><?php $this->load->view('page/utility');?></div>

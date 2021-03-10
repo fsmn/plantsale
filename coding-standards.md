@@ -1,4 +1,4 @@
-# Code Style Guides
+# Coding Standards
 The styles for this site are based on [Drupal's coding standards](https://www.drupal.org/docs/develop/standards/coding-standards)
 
 ## Quotes

@@ -95,8 +95,7 @@ class Menu_Model extends MY_Model
     {
     	
         $this->db->where('category', $category);
-        $this->db->select('key');
-        $this->db->select('value');
+        $this->db->select(['key', 'value']);
         $direction = "ASC";
         $order_field = "key";
         

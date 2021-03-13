@@ -213,11 +213,13 @@ class Order extends MY_Controller {
         $this->load->view('page/index', $data);
       }
     } else {
-      $this->_search();
+      $this->do_search();
     }
   }
-
-  function _search() {
+/**
+ * //@TODO switch search() with do_search()?
+ */
+  private function do_search() {
     $this->load->model('menu_model', 'menu');
     $this->load->model('category_model', 'category');
     $this->load->model('subcategory_model', 'subcategory');
@@ -225,6 +227,7 @@ class Order extends MY_Controller {
     $flags      = $this->menu->get_pairs('flag', [
       'field' => 'value',
     ]);
+    // Create an array of flags for use in the search view
     $data['flags'] = get_keyed_pairs($flags, [
       'key',
       'value',
@@ -262,8 +265,8 @@ class Order extends MY_Controller {
       $data['basic_sort'] = TRUE;
       $this->load->view('order/sort', $data);
     } else {
-	  $this->load->view('page/index', $data);
-	}
+      $this->load->view('page/index', $data);
+    }
   }
 
   function update_value() {

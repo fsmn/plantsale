@@ -7,6 +7,7 @@ $config['smtp_crypto'] = 'TLS';
 
 switch($_SERVER['HTTP_HOST']){
 	case 'docker.test':
+	case 'backoffice.test':
 		$config['smtp_user'] = getenv('SMTP_USER');
 		$config['smtp_pass'] = getenv('SMTP_PASS');
 		break;

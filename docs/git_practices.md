@@ -131,7 +131,7 @@ After installing git flow, you can initialize your local repo with the command `
 To start a feature branch that you want to call `feature/issue-130/refactor-button-display-on-variety-edit` you would type
 <pre>git flow feature start issue-130/refactor-button-display-on-variety-edit</pre>
 
-When you want to publish your branch you just type 
+When you want to publish your branch, you just type 
 <pre>git flow feature publish</pre> This will automatically create the remote branch. 
 
 When you are done with your branch and no longer need it, you just type:
@@ -145,7 +145,7 @@ When you want to start a release, get the next tag value (say it's 3.1.35) you t
 Then, unless you have any last minute changes, you just type
 <pre>git flow release finish</pre>
 
-This will bring up editing dialogs asking you to enter the tag name. Just enter 3.1.35 and ctrl-x to save and exit. 
+This will bring up editing dialogs asking you to enter the tag name. Just enter 3.1.35 and ctrl-x to exit the editor, 'y' to save your edits, and enter to save the file.  
 
 Then finish up
 <pre>git push main

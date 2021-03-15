@@ -6,7 +6,7 @@
 
 @font-face {
 	font-family: plant-icons;
-	src: url(fonts/Plant-Icons-7.otf)
+	src: url(fonts/plant-icons-9b.otf)
 }
 
 body {
@@ -205,7 +205,7 @@ ul.icons li img {
 }
 
 .flags li, .sunlight li, .is-new, .saturday-delivery {
-	font-family: plant-icons, "FSM Plant Sale Icons";
+	font-family: plant-icons, serif;
 }
 
 .flags li.minnesota-native {

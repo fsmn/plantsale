@@ -157,6 +157,13 @@ function format_flags($flags, $format = "quark") {
 					$output .= "RockB";
 				}
 				break;
+			case "Houseplant":
+				if($format == "quark" || $format == "poster"){
+					$output .= "ƒ";
+				}
+				else{
+					$output .= "HouseplantB";
+				}
 		}
 	}
 	if ($format == "quark") {

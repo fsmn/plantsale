@@ -94,3 +94,70 @@ git push develop
 
 Hotfixes are similar to releases, but these are run on the rare occasion that a change needs to be made immediately on the `main` branch without merging any changes that may be pending in develop. The circumstances of this might be that items in develop are not yet ready to be released, but the fix that needs to be made must be made on live.
 
+1. First we create a branch off of live (use the hygiene implemented above, so you know your local `main` is identical to the remote)
+
+2. Determine the next tag
+<pre>
+git describe</pre>
+
+3. Create a new hotfix branch starting from `main`. So if the next tag is 1.0.67 then:
+<pre>git checkout -b hotfix/1.0.67</pre>
+
+4. Make all the code changes you intend to make to complete your hotfix. Since hotfixes are risky, this change should be as limited as can be. Commit with using the standard process above. 
+
+5. There is usually no need to create a remote copy of your hotfix branch. 
+
+6. Finish the hotfix following a similar process as for releases with the difference that main is merged into develop
+<pre>
+git checkout main
+git merge hotfix/1.0.67
+git branch -D hotfix/1.0.67
+git tag --1.0.67
+git push main
+git push --tags
+git checkout develop
+git pull develop
+git merge main
+git push develop
+</pre>
+
+## Using NVIE Git Flow tools
+There are several tools available to help automate this process. The most popular is the [nvie gitflow](https://github.com/nvie/gitflow/wiki/Installation).
+
+Git flow takes care of many of the fiddly things that can make using the git flow process frustrating and error-prone.
+
+After installing git flow, you can initialize your local repo with the command `git flow init` There are numerous questions that emerge. You should just press enter for every one until you come back to the standard command prompt. 
+
+To start a feature branch that you want to call `feature/issue-130/refactor-button-display-on-variety-edit` you would type
+<pre>git flow feature start issue-130/refactor-button-display-on-variety-edit</pre>
+
+When you want to publish your branch you just type 
+<pre>git flow feature publish</pre> This will automatically create the remote branch. 
+
+When you are done with your branch and no longer need it, you just type:
+<pre>git flow feature finish</pre>
+
+This code takes care of merging into `develop` and deleting both the local and remote copy of your feature branch. 
+
+When you want to start a release, get the next tag value (say it's 3.1.35) you type
+<pre>git flow release start 3.1.35</pre>
+
+Then, unless you have any last minute changes, you just type
+<pre>git flow release finish</pre>
+
+This will bring up editing dialogs asking you to enter the tag name. Just enter 3.1.35 and ctrl-x to save and exit. 
+
+Then finish up
+<pre>git push main
+git push --tags
+git checkout develop
+git push develop</pre>
+
+Hotfixes are virtually identical. 
+<pre>git flow hotfix start 3.1.35</pre>
+make the changes you need to do
+<pre>git flow hotfix finish
+git push main
+git push --tags
+git checkout develop
+git push develop</pre>

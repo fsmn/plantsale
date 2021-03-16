@@ -2,8 +2,7 @@
 
 /*** SHOVEL-FOOT LAYOUT ***/
 @import
-	url(https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic)
-	;
+	url(https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800,400italic,300italic);
 
 @font-face {
 	font-family: plant-icons;
@@ -172,7 +171,7 @@ body {
 }
 
 .flags li,.sunlight li,.icon.is-new,.icon.saturday-delivery {
-	font-family: plant-icons, "FSM Plant Sale Icons";
+	font-family: plant-icons, serif;
 	font-size: 50px;
 }
 

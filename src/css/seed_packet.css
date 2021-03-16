@@ -205,7 +205,7 @@ ul.icons li img {
 }
 
 .flags li, .sunlight li, .is-new, .saturday-delivery {
-	font-family: plant-icons, "FSM Plant Sale Icons";
+	font-family: plant-icons, serif;
 }
 
 .flags li.minnesota-native {

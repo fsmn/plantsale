@@ -27,8 +27,8 @@ if (!empty($orders)) :
 
 			<?php endif; ?>
 			<th colspan=2>Presale</th>
-				<th colspan=2>Friday</th>
-				<th colspan=3>Saturday</th>
+			<th colspan=2>Friday</th>
+			<th colspan=3>Saturday</th>
 			<th>Sunday</th>
 			<th colspan=8></th>
 
@@ -46,7 +46,7 @@ if (!empty($orders)) :
 				<th>Common</th>
 				<th>Variety</th>
 			<?php endif; ?>
-<!-- Presale -->
+			<!-- Presale -->
 			<th>Ord'd</th>
 			<th>Rec'd</th>
 			<!-- Friday -->
@@ -187,39 +187,54 @@ if (!empty($orders)) :
 					<?php print edit_field("count_presale", $order->count_presale, "", "order", $order->id, ["envelope" => "span"]); ?>
 				</td>
 				<td class="order-received_presale field">
-					<?php print live_field('received_presale', $order->received_presale, 'order', $order->id, ['type'=>'text','envelope' => 'span']); ?>
+					<?php print live_field('received_presale', $order->received_presale, 'order', $order->id, [
+							'type' => 'text',
+							'envelope' => 'span',
+					]); ?>
 				</td>
 				<td tabindex=-1 class="order-count_friday field">
-					<?php echo edit_field('count_friday', $order->count_friday, '', 'order', $order->id, ['type'=>'text','envelope' => 'span']); ?>
+					<?php echo edit_field('count_friday', $order->count_friday, '', 'order', $order->id, [
+							'type' => 'text',
+							'envelope' => 'span',
+					]); ?>
 				</td>
 				<td class="order-received_friday field">
-					<?php echo live_field('received_friday', $order->received_friday, 'order', $order->id, ['type'=>'text','envelope' =>'span']); ?>
+					<?php echo live_field('received_friday', $order->received_friday, 'order', $order->id, [
+							'type' => 'text',
+							'envelope' => 'span',
+					]); ?>
 				</td>
 				<td tabindex=-1 class="order-count_saturday field">
-					<?php echo edit_field('count_saturday', $order->count_saturday, '', 'order', $order->id, ['type'=>'text','envelope' => 'span']); ?>
+					<?php echo edit_field('count_saturday', $order->count_saturday, '', 'order', $order->id, [
+							'type' => 'text',
+							'envelope' => 'span',
+					]); ?>
 				</td>
 				<td class="order-received_saturday field">
-					<?php echo live_field('received_saturday', $order->received_saturday, 'order', $order->id, ['type'=>'text','envelope' =>'span']); ?>
+					<?php echo live_field('received_saturday', $order->received_saturday, 'order', $order->id, [
+							'type' => 'text',
+							'envelope' => 'span',
+					]); ?>
 				</td>
 				<td class="order-remainder_saturday field" style="width: 31px;">
 					<?php echo live_field('remainder_saturday', $order->remainder_saturday, 'order', $order->id, [
 							'envelope' => 'span',
 							'size' => 31,
-							'type'=>'text',
+							'type' => 'text',
 					]); ?>
 				</td>
 				<td class="order-remainder_sunday field" style="width: 31px;">
 					<?php echo live_field('remainder_sunday', $order->remainder_sunday, 'order', $order->id, [
 							'envelope' => 'span',
 							'size' => 31,
-							'type'=>'text',
+							'type' => 'text',
 					]); ?>
 				</td>
 				<td class="order-count_dead field" style="width: 31px;">
 					<?php echo live_field('count_dead', $order->count_dead, 'order', $order->id, [
 							'envelope' => 'span',
 							'size' => 31,
-							'type'=>'text',
+							'type' => 'text',
 					]); ?>
 				</td>
 				<td class="order-total_plants field">
@@ -257,16 +272,18 @@ if (!empty($orders)) :
 		</tbody>
 		<tfoot>
 		<tr>
-			<td colspan=<?php echo $show_names ? 8 : 4; ?>></td>
+			<td colspan=<?php echo $show_names ? 7 : 4; ?>></td>
 			<td><?php echo number_format($presale_total); ?></td>
-			<td colspan=3></td>
-				<td><?php echo number_format($friday_total); ?></td>
-				<td><?php echo number_format($saturday_total); ?></td>
-			<td colspan=5></td>
-			<td><?php echo number_format($presale_total  + $friday_total + $saturday_total); ?></td>
+			<td></td>
+			<td><?php echo number_format($friday_total); ?></td>
+			<td></td>
+			<td><?php echo number_format($saturday_total); ?></td>
+			<td colspan=4></td>
+			<td><?php echo number_format($presale_total + $friday_total + $saturday_total); ?></td>
 			<td></td>
 			<td></td>
 			<td><?php echo get_as_price($flat_cost_total); ?></td>
+			<td></td>
 			<td></td>
 			<td></td>
 		</tr>

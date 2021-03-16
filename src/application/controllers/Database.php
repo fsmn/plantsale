@@ -201,6 +201,18 @@ class Database extends MY_Controller {
     CHANGE `rec_modifier` `rec_modifier` INT(11) NOT NULL AFTER `rec_created`';
 	}
 
+	function db_update_24():string {
+		return 'ALTER TABLE `users_groups` DROP CONSTRAINT `fk_users_groups_groups1`, DROP CONSTRAINT `fk_users_groups_users1`, DROP KEY `fk_users_groups_users1_idx`,
+  DROP KEY `fk_users_groups_groups1_idx`';
+	}
+
+	function db_update_25(): string {
+		return 'ALTER TABLE `users_groups` ADD UNIQUE KEY `users_groups` (`user_id`,`group_id`)';
+	}
+
+
+
+
 	function fix_orders() {
 		$rows = [
 			33283 => '2',

@@ -265,6 +265,9 @@ class Order extends MY_Controller {
       $data['basic_sort'] = TRUE;
       $this->load->view('order/sort', $data);
     } else {
+      /**
+       * @todo undefined variable $data needs fix
+       */
       $this->load->view('page/index', $data);
     }
   }

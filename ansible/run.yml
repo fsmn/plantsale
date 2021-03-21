@@ -14,12 +14,12 @@
           $query_builder = TRUE;
 
           $db['default'] = array(
-              'dsn'	=> '',
+              'dsn'	=> "mysql:host={{ backoffice_mysql_host | default('mysql.database.svc.cluster.local', true) }};dbname={{ backoffice_mysql_name }};charset=utf8;",
               'hostname' => "{{ backoffice_mysql_host | default('mysql.database.svc.cluster.local', true) }}",
               'username' => '{{ backoffice_mysql_user }}',
               'password' => '{{ backoffice_mysql_pass }}',
               'database' => '{{ backoffice_mysql_name }}',
-              'dbdriver' => 'mysqli',
+              'dbdriver' => 'pdo',
               'dbprefix' => '',
               'pconnect' => FALSE,
               'db_debug' => TRUE,

@@ -64,12 +64,12 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
+	'dsn' => 'mysql:host=db;dbname=backoffice;charset=utf8;',
 	'hostname' => '',
-	'username' => '',
-	'password' => '',
+	'username' => 'backoffice',
+	'password' => 'backoffice',
 	'database' => '',
-	'dbdriver' => 'mysqli',
+	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => TRUE,

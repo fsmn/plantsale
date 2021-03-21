@@ -136,6 +136,8 @@ Add and commit your changes.
 When you want to publish your branch, you just type 
 <pre>git flow feature publish</pre> This will automatically create the remote branch. 
 
+NOTE: once you have run `git flow feature publish` for a branch, you can continue to push changes with the standard `git push` command.
+
 When you are done with your branch and no longer need it, you just type:
 <pre>git flow feature finish</pre>
 

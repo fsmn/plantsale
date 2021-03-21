@@ -131,6 +131,8 @@ After installing git flow, you can initialize your local repo with the command `
 To start a feature branch that you want to call `feature/issue-130/refactor-button-display-on-variety-edit` you would type
 <pre>git flow feature start issue-130/refactor-button-display-on-variety-edit</pre>
 
+Add and commit your changes.
+
 When you want to publish your branch, you just type 
 <pre>git flow feature publish</pre> This will automatically create the remote branch. 
 

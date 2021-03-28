@@ -32,6 +32,7 @@ $button = create_button([
 ]);
 
 $saved_sort = cookie('sorting_fields');
+
 if ($saved_sort && $basic_sort == FALSE) {
 	$saved_sort = unserialize($saved_sort);
 	$saved_direction = unserialize(cookie('sorting_direction'));

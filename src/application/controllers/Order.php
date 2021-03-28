@@ -261,13 +261,10 @@ class Order extends MY_Controller {
   }
 
   function show_sort() {
+    $data['basic_sort'] = TRUE;
     if ($ajax = $this->input->get('basic_sort')) {
-      $data['basic_sort'] = TRUE;
       $this->load->view('order/sort', $data);
     } else {
-      /**
-       * @todo undefined variable $data needs fix
-       */
       $this->load->view('page/index', $data);
     }
   }

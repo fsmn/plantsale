@@ -7,7 +7,7 @@ defined('BASEPATH') or exit ('No direct script access allowed');
 
 if (!empty($orders)) :
 	?>
-
+<h1><?php print $title; ?></h1>
 	<!-- views/order/catalog.php -->
 	<h5 class="column-instructions">
 		Click on a header to hide the column [

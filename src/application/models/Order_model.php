@@ -151,11 +151,8 @@ class Order_Model extends MY_Model {
 		$this->db->join('category', 'common.category_id = category.id', 'LEFT');
 		$this->db->join('subcategory', 'common.subcategory_id = subcategory.id', 'LEFT');
 		$this->db->join('flag', 'flag.variety_id=variety.id', 'LEFT');
-		$option_keys = array_keys($options);
-		$option_values = array_values($options);
-		for ($i = 0; $i < count($options); $i++) {
-			$key = $option_keys [$i];
-			$value = $option_values [$i];
+
+		foreach($options as $key=>$value) {
 			switch ($key) {
 				case 'show-non-reorders' :
 					$this->db->where(sprintf('NOT EXISTS (SELECT `year` from `orders` as `o` WHERE `o`.`variety_id` = `orders`.`variety_id` and `year` = %s) ', $sale_year + 1), NULL, FALSE);

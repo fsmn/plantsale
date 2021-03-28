@@ -1,7 +1,7 @@
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
-
+//@TODO swap double quotes with single quotes
 // symbol_model.php Chris Dart Feb 17, 2013 5:21:15 PM
 // chrisdart@cerebratorium.com
 class Menu_Model extends MY_Model

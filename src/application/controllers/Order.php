@@ -458,6 +458,7 @@ class Order extends MY_Controller {
   }
 
   function get_pot_sizes() {
+  	//@TODO define $output as empty array before the foreach */
     $pot_sizes = $this->order->get_pot_sizes();
     foreach ($pot_sizes as $pot_size) {
       $output[] = $pot_size->pot_size;

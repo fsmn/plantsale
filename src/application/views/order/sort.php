@@ -30,6 +30,7 @@ $button = create_button([
 	'type' => 'span',
 	'class' => 'button add-order-sort small',
 ]);
+
 $saved_sort = cookie('sorting_fields');
 if ($saved_sort && $basic_sort == FALSE) {
 	$saved_sort = unserialize($saved_sort);

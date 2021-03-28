@@ -126,11 +126,10 @@ class CI_DB_pdo_utility extends CI_DB_utility {
 				// integer type. We use this info to decide whether to
 				// surround the data with quotes or not
 
-				$i = 0;
 				$field_str = '';
 				$is_int = array();
 				$column_count = $query->result_id->columnCount();
-				for ($i=0;$i <= $column_count; $i++){
+				for ($i=0;$i < $column_count; $i++){
 					$field = $query->result_id->getColumnMeta($i);
 
 					// Most versions of MySQL store timestamp as a string

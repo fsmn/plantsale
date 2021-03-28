@@ -2,7 +2,7 @@ diff --git a/src/system/database/drivers/pdo/pdo_utility.php b/src/system/databa
 index 6c40cf3..a19248c 100644
 --- a/src/system/database/drivers/pdo/pdo_utility.php
 +++ b/src/system/database/drivers/pdo/pdo_utility.php
-@@ -56,8 +56,135 @@ class CI_DB_pdo_utility extends CI_DB_utility {
+@@ -56,8 +56,134 @@ class CI_DB_pdo_utility extends CI_DB_utility {
  	 */
  	protected function _backup($params = array())
  	{
@@ -78,11 +78,10 @@ index 6c40cf3..a19248c 100644
 +				// integer type. We use this info to decide whether to
 +				// surround the data with quotes or not
 +
-+				$i = 0;
 +				$field_str = '';
 +				$is_int = array();
 +				$column_count = $query->result_id->columnCount();
-+				for ($i=0;$i <= $column_count; $i++){
++				for ($i=0;$i < $column_count; $i++){
 +					$field = $query->result_id->getColumnMeta($i);
 +
 +					// Most versions of MySQL store timestamp as a string

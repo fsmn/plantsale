@@ -151,15 +151,6 @@ class Order extends MY_Controller {
 
 			foreach ($orders as $order) {
 				$order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
-				$integers = [
-					'count_presale',
-					'count_midsale',
-					'count_friday',
-					'count_saturday',
-				];
-				foreach ($integers as $field) {
-					$order->{$field} = (int) $order->{$field};
-				}
 				if (!empty($order->flat_cost)) {
 					$order->flat_cost = (float) $order->flat_cost;
 				}

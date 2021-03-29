@@ -2,6 +2,7 @@
 
 ?>
 <!-- views/order/edit_cost -->
+
 <form name="order-edit" id="order-edit" action="<?php print site_url('order/update_cost'); ?>" method="post">
 	<input type="hidden" name="id" id="id" value="<?php print get_value($order, 'id'); ?>" />
 	<input type="hidden" name="variety_id" id="variety_id" value="<?php print get_value($order, 'variety_id'); ?>" />

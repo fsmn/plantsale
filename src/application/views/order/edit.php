@@ -15,6 +15,7 @@ if (get_value($order, 'year') == 2021) {
 	];
 }
 ?>
+
 <h4><?php print get_value($order, 'variety', 'Order for New Variety'); ?></h4>
 
 <form name="order-edit" id="order-edit" class="no-wrap" action="<?php print site_url('order/' . $action); ?>" method="post">

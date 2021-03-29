@@ -527,7 +527,10 @@ class Order_Model extends MY_Model {
 		$this->db->from('orders');
 		$this->db->select(['id',$field]);
 		$this->db->like($field,'.');
-		return $this->db->get()->result();
+		$this->db->or_where($field,'');
+		$result =  $this->db->get()->result();
+		var_dump($this->db->last_query());
+		return $result;
 	}
 
 }

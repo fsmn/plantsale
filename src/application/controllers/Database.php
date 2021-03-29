@@ -215,16 +215,23 @@ class Database extends MY_Controller {
     CHANGE `count_presale` `count_presale` INT(11) NULL DEFAULT NULL,
     CHANGE `count_midsale` `count_midsale` INT(11) NULL DEFAULT NULL,
     CHANGE `count_friday` `count_friday` INT(11) NULL DEFAULT NULL,
-    CHANGE `count_saturday` `count_saturday` INT(11) NULL DEFAULT NULL,
+    CHANGE `count_saturday` `count_saturday` INT(11) NULL DEFAULT NULL';
+	}
+
+	function db_update_27(): string {
+		return 'ALTER TABLE `orders`
     CHANGE `received_presale` `received_presale` INT(11) NULL DEFAULT NULL,
     CHANGE `received_midsale` `received_midsale` INT(11) NULL DEFAULT NULL,
     CHANGE `received_friday` `received_friday` INT(11) NULL DEFAULT NULL,
-    CHANGE `received_saturday` `received_saturday` INT(11) NULL DEFAULT NULL,
+    CHANGE `received_saturday` `received_saturday` INT(11) NULL DEFAULT NULL';
+	}
+
+	function db_update_28(): string {
+		return 'ALTER TABLE `orders`
     CHANGE `remainder_friday` `remainder_friday` INT(11) NULL DEFAULT NULL,
     CHANGE `remainder_saturday` `remainder_saturday` INT(11) NULL DEFAULT NULL,
     CHANGE `remainder_sunday` `remainder_sunday` INT(11) NULL DEFAULT NULL';
 	}
-
 
 	function fix_orders() {
 		$rows = [

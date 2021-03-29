@@ -619,6 +619,7 @@ class Order extends MY_Controller {
 				$value = intval($order->{$field});
 				$this->db->update('orders', [$field => $value]);
 			}
+			redirect();
 		}
 	}
 

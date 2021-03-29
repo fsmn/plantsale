@@ -605,12 +605,19 @@ class Order extends MY_Controller {
 		];
 		foreach ($fields as $field) {
 			$orders = $this->order->get_fields_with_decimals($field);
+			$i=0;
 			foreach ($orders as $order) {
 				$this->db->where('id', $order->id);
-				$value = intval($order->{$field});
+				if(empty($order->{$field})){
+					$value = 0;
+				}else {
+					$value = intval($order->{$field});
+				}
 				$this->db->update('orders', [$field => $value]);
+				$i++;
 			}
 		}
+		$this->session->set_flashdata('notice', $i . 'order fields have been simplified as integers.');
 		redirect();
 	}
 

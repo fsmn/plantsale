@@ -523,4 +523,11 @@ class Order_Model extends MY_Model {
 		return [$order_by, $order_field, $order_direction];
 	}
 
+	function get_fields_with_decimals($field){
+		$this->db->from('orders');
+		$this->db->select(['id',$field]);
+		$this->db->like($field,'.');
+		return $this->db->get()->result();
+	}
+
 }

@@ -10,7 +10,6 @@
 		'class' => 'button hide-quark-export small',
 		'href' => '#'
 	]); ?>
-
 	<ul class="categories list">
 		<li class="category item">
 			<a class="edit set-catalog-numbers" href="<?php print site_url('order/set_catalog_numbers'); ?>">All Categories</a>

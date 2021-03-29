@@ -526,7 +526,6 @@ class Order_Model extends MY_Model {
 	function get_fields_with_decimals($field){
 		$this->db->from('orders');
 		$this->db->select(['id',$field]);
-		$this->db->like($field,'.');
 		$this->db->or_where($field,'');
 		$result =  $this->db->get()->result();
 		var_dump($this->db->last_query());

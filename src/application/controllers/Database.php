@@ -210,7 +210,7 @@ class Database extends MY_Controller {
 		return 'ALTER TABLE `users_groups` ADD UNIQUE KEY `users_groups` (`user_id`,`group_id`)';
 	}
 
-	function db_update_26(): string {
+/*	function db_update_26(): string {
 		return 'ALTER TABLE `orders` 
     CHANGE `count_presale` `count_presale` INT(11) NULL DEFAULT NULL,
     CHANGE `count_midsale` `count_midsale` INT(11) NULL DEFAULT NULL,
@@ -231,6 +231,29 @@ class Database extends MY_Controller {
     CHANGE `remainder_friday` `remainder_friday` INT(11) NULL DEFAULT NULL,
     CHANGE `remainder_saturday` `remainder_saturday` INT(11) NULL DEFAULT NULL,
     CHANGE `remainder_sunday` `remainder_sunday` INT(11) NULL DEFAULT NULL';
+	}*/
+
+	function db_update_29(): string {
+		return 'ALTER TABLE `orders` 
+    CHANGE `count_presale` `count_presale` DECIMAL(10,2) NULL DEFAULT NULL,
+    CHANGE `count_midsale` `count_midsale` DECIMAL(10,2) NULL DEFAULT NULL,
+    CHANGE `count_friday` `count_friday` DECIMAL(10,2) NULL DEFAULT NULL,
+    CHANGE `count_saturday` `count_saturday` DECIMAL(10,2) NULL DEFAULT NULL';
+	}
+
+	function db_update_30(): string {
+		return 'ALTER TABLE `orders`
+    CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL,
+    CHANGE `received_midsale` `received_midsale` DECIMAL(10,2) NULL DEFAULT NULL,
+    CHANGE `received_friday` `received_friday` DECIMAL(10,2) NULL DEFAULT NULL,
+    CHANGE `received_saturday` `received_saturday` DECIMAL(10,2) NULL DEFAULT NULL';
+	}
+
+	function db_update_31(): string {
+		return 'ALTER TABLE `orders`
+    CHANGE `remainder_friday` `remainder_friday` DECIMAL(10,2) NULL DEFAULT NULL,
+    CHANGE `remainder_saturday` `remainder_saturday` DECIMAL(10,2) NULL DEFAULT NULL,
+    CHANGE `remainder_sunday` `remainder_sunday` DECIMAL(10,2) NULL DEFAULT NULL';
 	}
 
 	function fix_orders() {

@@ -608,16 +608,14 @@ class Order extends MY_Controller {
 			$i=0;
 			foreach ($orders as $order) {
 				$this->db->where('id', $order->id);
-				if(empty($order->{$field})){
-					$value = 0;
-				}else {
-					$value = intval($order->{$field});
+				if(empty($order->{$field})) {
+					$value = NULL;
+					$this->db->update('orders', [$field => $value]);
+					$i++;
 				}
-				$this->db->update('orders', [$field => $value]);
-				$i++;
 			}
 		}
-		$this->session->set_flashdata('notice', $i . 'order fields have been simplified as integers.');
+		$this->session->set_flashdata('notice', $i . 'order fields have been fixed.');
 		redirect();
 	}
 

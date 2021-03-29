@@ -43,8 +43,7 @@ if ($saved_sort && $basic_sort == FALSE) {
 		$output[] = $button;
 		$output[] = '</p>';
 	}
-}
-else {
+} else {
 	$output[] = '<p>';
 	$output[] = form_dropdown('sorting[]', $sorting, 'genus');
 	$output[] = form_dropdown('direction[]', $direction, 'ASC');

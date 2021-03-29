@@ -109,10 +109,12 @@ if (!empty($orders)) :
 						<?php else : ?>
 							<?php print create_button([
 								'text' => 'Details',
-								'class' => ['button', 'details'],
+								'class' => [
+									'button',
+									'details'
+								],
 								'href' => site_url('order/view/' . $order->id),
 							]); ?>
-
 						<?php endif; ?>
 
 					</td>
@@ -125,7 +127,6 @@ if (!empty($orders)) :
 						<?php print edit_field('grower_id', $order->grower_id, '', 'order', $order->id, ['envelope' => 'span']); ?>
 					</td>
 					<td class="order-catalog_number field">
-
 						<!-- if there is no catalog number, show the first letter of the category -->
 						<?php print edit_field('catalog_number', $order->catalog_number ? $order->catalog_number : ucfirst(substr($order->category, 0, 1)), '', 'order', $order->id, ['envelope' => 'span']); ?>
 					</td>

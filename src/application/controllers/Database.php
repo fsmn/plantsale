@@ -65,9 +65,9 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-/*	function db_update_5(): string {
-		return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
-	}*/
+	/*	function db_update_5(): string {
+			return 'ALTER TABLE `orders` CHANGE `received_presale` `received_presale` DECIMAL(10,2) NULL DEFAULT NULL;';
+		}*/
 
 	/**
 	 * @return string
@@ -155,9 +155,9 @@ class Database extends MY_Controller {
 	/**
 	 * @return string
 	 */
-/*	function db_update_19(): string {
-		return 'ALTER TABLE `orders` DROP IF EXISTS `count_thursday`;';
-	}*/
+	/*	function db_update_19(): string {
+			return 'ALTER TABLE `orders` DROP IF EXISTS `count_thursday`;';
+		}*/
 
 
 	/**
@@ -201,7 +201,7 @@ class Database extends MY_Controller {
     CHANGE `rec_modifier` `rec_modifier` INT(11) NOT NULL AFTER `rec_created`';
 	}
 
-	function db_update_24():string {
+	function db_update_24(): string {
 		return 'ALTER TABLE `users_groups` DROP CONSTRAINT `fk_users_groups_groups1`, DROP CONSTRAINT `fk_users_groups_users1`, DROP KEY `fk_users_groups_users1_idx`,
   DROP KEY `fk_users_groups_groups1_idx`';
 	}
@@ -210,7 +210,20 @@ class Database extends MY_Controller {
 		return 'ALTER TABLE `users_groups` ADD UNIQUE KEY `users_groups` (`user_id`,`group_id`)';
 	}
 
-
+	function db_update_26(): string {
+		return 'ALTER TABLE `orders` 
+    CHANGE `count_presale` `count_presale` INT(11) NULL DEFAULT NULL,
+    CHANGE `count_midsale` `count_midsale` INT(11) NULL DEFAULT NULL,
+    CHANGE `count_friday` `count_friday` INT(11) NULL DEFAULT NULL,
+    CHANGE `count_saturday` `count_saturday` INT(11) NULL DEFAULT NULL,
+    CHANGE `received_presale` `received_presale` INT(11) NULL DEFAULT NULL,
+    CHANGE `received_midsale` `received_midsale` INT(11) NULL DEFAULT NULL,
+    CHANGE `received_friday` `received_friday` INT(11) NULL DEFAULT NULL,
+    CHANGE `received_saturday` `received_saturday` INT(11) NULL DEFAULT NULL,
+    CHANGE `remainder_friday` `remainder_friday` INT(11) NULL DEFAULT NULL,
+    CHANGE `remainder_saturday` `remainder_saturday` INT(11) NULL DEFAULT NULL,
+    CHANGE `remainder_sunday` `remainder_sunday` INT(11) NULL DEFAULT NULL';
+	}
 
 
 	function fix_orders() {
@@ -805,14 +818,15 @@ class Database extends MY_Controller {
 			35594 => '2',
 		];
 		$this->load->model('order_model');
-		foreach($rows as $id=>$count){
-				$this->order_model->update($id, ['count_friday'=>$count]);
+		foreach ($rows as $id => $count) {
+			$this->order_model->update($id, ['count_friday' => $count]);
 		}
 		redirect();
 	}
 
-	function fix_saturday_orders(){
-		$rows = [33283 => '1',
+	function fix_saturday_orders() {
+		$rows = [
+			33283 => '1',
 			33888 => '3',
 			33892 => '1',
 			33895 => '1',
@@ -1390,10 +1404,11 @@ class Database extends MY_Controller {
 			35592 => '1',
 			35593 => '5',
 			35594 => '1',
-			35597 => '0'];
+			35597 => '0',
+		];
 		$this->load->model('order_model');
-		foreach($rows as $id=>$count){
-			$this->order_model->update($id, ['count_saturday'=>$count]);
+		foreach ($rows as $id => $count) {
+			$this->order_model->update($id, ['count_saturday' => $count]);
 		}
 		redirect();
 	}

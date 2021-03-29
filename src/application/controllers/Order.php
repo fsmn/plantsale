@@ -72,7 +72,7 @@ class Order extends MY_Controller {
 
 			$this->set_options($options, $keys);
 			$data['year'] = $this->input->get('year');
-			bake_cookie('sale_year',$data['year']);
+			bake_cookie('sale_year', $data['year']);
 			if ($output_format = $this->input->get('output_format')) {
 				bake_cookie('output_format', $output_format);
 				$data ['output_format'] = $output_format;
@@ -151,7 +151,10 @@ class Order extends MY_Controller {
 
 			foreach ($orders as $order) {
 				$order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
-				if($output_format != 'crop-failure') {
+				if (!empty($order->flat_cost)) {
+					$order->flat_cost = (float) $order->flat_cost;
+				}
+				if ($output_format != 'crop-failure') {
 					if ($this->session->userdata('user_id') == 1) {
 						$order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
 					}
@@ -172,7 +175,7 @@ class Order extends MY_Controller {
 				}
 			}
 			$title_category = [];
-			if (array_key_exists( 'category_id', $options)) {
+			if (array_key_exists('category_id', $options)) {
 				$this->load->model('category_model', 'category');
 				$category = $this->category->get($options ['category_id'])->category;
 				$options ['category'] = $category;
@@ -207,7 +210,7 @@ class Order extends MY_Controller {
 			}
 			if ($this->input->get('export')) {
 				$data ['export_type'] = 'standard';
-				$data ['filename'] = str_replace(' ' , '_', strtolower($category)). '_order_export_' . date('Y-m-d-H-i-s') .'.csv';
+				$data ['filename'] = str_replace(' ', '_', strtolower($category)) . '_order_export_' . date('Y-m-d-H-i-s') . '.csv';
 
 				if ($export_type = $this->input->get('export_type')) {
 					if ($this->input->get('grower_id')) {
@@ -285,7 +288,7 @@ class Order extends MY_Controller {
 			$value = 0;
 		}
 		if ($value === 'x') {
-		$output = 	$this->order->clear($id, $field);
+			$output = $this->order->clear($id, $field);
 		}
 		else {
 			$values = [
@@ -425,9 +428,10 @@ class Order extends MY_Controller {
 		$data ['action'] = 'update';
 		$data ['target'] = 'order/edit';
 		$data ['title'] = 'Update Order';
-		if($this->input->get('ajax')) {
+		if ($this->input->get('ajax')) {
 			$this->load->view($data ['target'], $data);
-		}else{
+		}
+		else {
 			$this->load->view('page/index', $data);
 		}
 	}
@@ -520,7 +524,7 @@ class Order extends MY_Controller {
 								$values [$field] = preg_replace('/[^0-9,.]/', '', $my_value);
 								break;
 							case 'flat_exclude':
-								$values[$field] = $my_value == 'yes'?1:'0';
+								$values[$field] = $my_value == 'yes' ? 1 : '0';
 								break;
 							default :
 								$values [$field] = $my_value;
@@ -546,7 +550,7 @@ class Order extends MY_Controller {
 		}
 	}
 
-	function flat_total_exclusions(){
+	function flat_total_exclusions() {
 		return $this->order->get_flat_total_exclusions();
 	}
 
@@ -554,9 +558,9 @@ class Order extends MY_Controller {
 		return toggle_button('order', $id, $field, $value);
 	}
 
-	function toggle(){
-		$value = $this->input->post('value')===1?0:1;
-		return toggle($this,$this->order, $value);
+	function toggle() {
+		$value = $this->input->post('value') === 1 ? 0 : 1;
+		return toggle($this, $this->order, $value);
 	}
 
 	function flat_total_exclude(): bool {
@@ -568,21 +572,46 @@ class Order extends MY_Controller {
 			'seed',
 		];
 		$ajax = $this->input->get('ajax');
-		foreach($online_pot_sizes as $size){
-			if(stristr($pot_size, $size)){
-				if($ajax) {
+		foreach ($online_pot_sizes as $size) {
+			if (stristr($pot_size, $size)) {
+				if ($ajax) {
 					print TRUE;
 				}
 
 				return TRUE;
 			}
 		}
-		if($ajax) {
+		if ($ajax) {
 			print FALSE;
 		}
 		return FALSE;
 
 
+	}
+
+	function update_integers() {
+		$fields = [
+			'count_presale',
+			'count_midsale',
+			'count_friday',
+			'count_saturday',
+			'received_presale',
+			'received_midsale',
+			'received_friday',
+			'received_saturday',
+			'remainder_friday',
+			'remainder_saturday',
+			'remainder_sunday',
+		];
+		foreach ($fields as $field) {
+			$orders = $this->order->get_fields_with_decimals($field);
+			foreach ($orders as $order) {
+				$this->db->where('id', $order->id);
+				$value = intval($order->{$field});
+				$this->db->update('orders', [$field => $value]);
+			}
+			redirect();
+		}
 	}
 
 }

@@ -1,30 +1,26 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 ?>
 <!-- views/order/edit_cost -->
-<form name="order-edit" id="order-edit" action="<?php echo site_url("order/update_cost");?>" method="post">
-<input type="hidden" name="id" id="id" value="<?php echo get_value($order,"id");?>"/>
-<input type="hidden" name="variety_id" id="variety_id" value="<?php echo get_value($order,"variety_id");?>"/>
-
-<input type="hidden" name="redirect_url" id="redirect_url" value=""/>
-<span class="order-flat_size">
-		<input type="text"
-			name="flat_size" value="<?php echo get_value($order,"flat_size");?>" style="width:3ex" required autocomplete="off"/>
+<form name="order-edit" id="order-edit" action="<?php print site_url('order/update_cost'); ?>" method="post">
+	<input type="hidden" name="id" id="id" value="<?php print get_value($order, 'id'); ?>" />
+	<input type="hidden" name="variety_id" id="variety_id" value="<?php print get_value($order, 'variety_id'); ?>" />
+	<input type="hidden" name="redirect_url" id="redirect_url" value="" />
+	<span class="order-flat_size">
+		<input type="text" name="flat_size" value="<?php print get_value($order, 'flat_size'); ?>" style="width:3ex" required autocomplete="off" />
 	</span>
 	<span class="order-flat_cost">
-		<input type="text"
-			name="flat_cost" value="<?php echo get_value($order,"flat_cost");?>" style="width:7ex" required autocomplete="off" />
+		<input type="text" name="flat_cost" value="<?php print get_value($order, 'flat_cost'); ?>" style="width:7ex" required autocomplete="off" />
 	</span>
 	<span class="order-plant_cost">
-		<input type="text"
-			name="plant_cost" value="<?php echo get_value($order,"plant_cost");?>" style="width:7ex"  autocomplete="off" required />
+		<input type="text" name="plant_cost" value="<?php print get_value($order, 'plant_cost'); ?>" style="width:7ex" autocomplete="off" required />
 	</span>
 	<span>
-<input value="Save" type="submit" class="button small save"/>
-<a href="#" class="hide">Cancel</a>
+		<input value="Save" type="submit" class="button small save" />
+		<a href="#" class="hide">Cancel</a>
 	</span>
-
 </form>
+
 <script type="text/javascript">
-$("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));
+	$("#redirect_url").val($(location).attr("pathname") + $(location).attr("search"));
 </script>

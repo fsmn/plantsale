@@ -135,8 +135,8 @@ if (cookie('output_format') == 'crop-failure' && $refine) {
 		</div>
 	</div>
 	<div id="sort-block">
-		<?php $data["basic_sort"] = $refine ? FALSE : TRUE; ?>
-		<?php $this->load->view("order/sort", $data); ?>
+		<?php $data['basic_sort'] = $refine ? FALSE : TRUE; ?>
+		<?php $this->load->view('order/sort', $data); ?>
 	</div>
 	<p><input type="submit" class="button" value="Search" /></p>
 </form>

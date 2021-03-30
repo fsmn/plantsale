@@ -589,34 +589,5 @@ class Order extends MY_Controller {
 
 	}
 
-	function update_integers() {
-		$fields = [
-			'count_presale',
-			'count_midsale',
-			'count_friday',
-			'count_saturday',
-			'received_presale',
-			'received_midsale',
-			'received_friday',
-			'received_saturday',
-			'remainder_friday',
-			'remainder_saturday',
-			'remainder_sunday',
-		];
-		foreach ($fields as $field) {
-			$orders = $this->order->get_fields_with_decimals($field);
-			$i=0;
-			foreach ($orders as $order) {
-				$this->db->where('id', $order->id);
-				if(empty($order->{$field})) {
-					$value = NULL;
-					$this->db->update('orders', [$field => $value]);
-					$i++;
-				}
-			}
-		}
-		$this->session->set_flashdata('notice', $i . 'order fields have been fixed.');
-		redirect();
-	}
 
 }

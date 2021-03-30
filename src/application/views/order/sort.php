@@ -51,4 +51,4 @@ if ($saved_sort && $basic_sort == FALSE) {
 	$output[] = '</p>';
 }
 
-echo implode('\r', $output);
+echo implode('', $output);

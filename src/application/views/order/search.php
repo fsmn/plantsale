@@ -67,9 +67,7 @@ if (cookie('output_format') == 'crop-failure' && $refine) {
 		<div class="column first">
 			<label for="pot_size">Pot Size</label><input type="text" name="pot_size" id="tags" value="<?php print $refine ? cookie('pot_size') : ''; ?>" />
 		</div>
-		/**
-		 * @todo Look at this ternary expression
-		 */
+		<!-- @todo Look at this ternary expression -->
 		<div class="column last">
 			<label for="needs_bag">Needs Bag</label><input type="checkbox" name="needs_bag" id="needs_bag" value="1" <?php print $refine ? cookie('neds_bag') == 1 ? "checked" : '' : ''; ?> />
 		</div>

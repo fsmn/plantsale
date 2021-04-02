@@ -140,15 +140,18 @@ class Common extends MY_Controller {
 
 	function insert() {
 		$id = $this->common->insert();
-		redirect('common/view/$id');
+		redirect('common/view/' . $id);
 	}
 
 	function edit($id) {
+		$common = $this->common->get($id);
+		$data ['common'] = $common;
 		$data ['categories'] = get_keyed_pairs($this->category->get_pairs(), [
 			'key',
 			'value',
 		], TRUE);
-		$data ['subcategories'] = get_keyed_pairs($this->subcategory->get_pairs(), [
+
+		$data ['subcategories'] = get_keyed_pairs($this->subcategory->get_pairs($common->category_id), [
 			'key',
 			'value',
 		], TRUE);
@@ -157,7 +160,6 @@ class Common extends MY_Controller {
 		]);
 		$data ['action'] = 'update';
 		$data ['target'] = 'common/edit';
-		$data ['common'] = $this->common->get($id);
 		$data ['title'] = 'Edit Common Name';
 		if ($this->input->get('ajax')) {
 			$this->load->view($data ['target'], $data);
@@ -170,7 +172,7 @@ class Common extends MY_Controller {
 	function update() {
 		$id = $this->input->post('id');
 		$this->common->update($id);
-		redirect('common/view/$id');
+		redirect('common/view/' . $id);
 	}
 
 	function update_value() {

@@ -26,7 +26,7 @@ if (!empty($orders)) :
 					<th colspan=3></th>
 				<?php endif; ?>
 				<th colspan=2>Presale</th>
-				<th colspan=2>Friday</th>
+				<th colspan=4>Friday</th>
 				<th colspan=3>Saturday</th>
 				<th>Sunday</th>
 				<th colspan=8></th>
@@ -50,6 +50,8 @@ if (!empty($orders)) :
 				<!-- Friday -->
 				<th>Ord'd</th>
 				<th>Rec'd</th>
+				<th>Rem</th>
+				<th class="no-wrap">Sold Out</th>
 				<!-- Saturday -->
 				<th>Ord'd</th>
 				<th>Rec'd</th>
@@ -188,6 +190,20 @@ if (!empty($orders)) :
 						<?php print live_field('received_friday', $order->received_friday, 'order', $order->id, [
 							'type' => 'text',
 							'envelope' => 'span',
+						]); ?>
+					</td>
+					<td class="order-remainder_friday field" style="width: 31px;">
+						<?php print live_field('remainder_friday', $order->remainder_friday, 'order', $order->id, [
+								'type' => 'text',
+								'envelope' => 'span',
+								'sizse' => 31
+						]); ?>
+					</td>
+					<td class="order-sellout_friday field" style="width: 31px;">
+						<?php print live_field('sellout_friday', $order->sellout_friday, 'order', $order->id, [
+								'type' => 'text',
+								'envelope' => 'span',
+								'sizse' => 31
 						]); ?>
 					</td>
 					<td tabindex=-1 class="order-count_saturday field">

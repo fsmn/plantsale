@@ -26,108 +26,114 @@ if (get_value($order, 'year') == 2021) {
 	<input type="hidden" name="id"
 		   value="<?php print get_value($order, 'id'); ?>"/>
 	<input type="hidden" name="variety_id" value="<?php print $variety_id; ?>"/>
-	<?php if ($action == 'update') : ?>
-	<!-- 	<div class="field-set"> -->
-	<h3>Order details</h3>
-	<div class="column first">
-		<?php endif; ?>
-		<div class="order-year field">
-			<label for="year">Year:&nbsp;
-				<?php print form_dropdown('year', get_year_array(get_current_year(), 2), get_current_year()); ?>
-			</label>
-		</div>
-		<div class="order-grower field">
-			<label for="grower_id">Grower:&nbsp;</label>
-			<input type="text" name="grower_id"
-				   value="<?php print get_value($order, 'grower_id'); ?>"/>
-		</div>
-		<div class="order-catalog_number field">
-			<label for="catalog_number">Catalog Number
+
+		<!-- 	<div class="field-set"> -->
+		<h3>Order details</h3>
+
+	<div class="grid-group three-columns">
+		<div class="group first">
+
+			<div class="order-year field inline">
+				<label for="year">Year:&nbsp;</label><?php print form_dropdown('year', get_year_array(get_current_year(), 2), get_current_year()); ?>
+			</div>
+			<div class="order-grower field inline">
+				<label for="grower_id">Grower:&nbsp;</label>
+				<input type="text" name="grower_id"
+					   value="<?php print get_value($order, 'grower_id'); ?>"/>
+			</div>
+			<div class="order-catalog_number field inline">
+				<label for="catalog_number">Catalog Number: </label>
 				<input type="text" name="catalog_number"
-					   value="<?php print get_value($order, 'catalog_number'); ?>"/></label>
-		</div>
-		<div class="order-flat_size field">
-			<label for="flat_size">Flat Size:
+					   value="<?php print get_value($order, 'catalog_number'); ?>"/>
+
+			</div>
+			<div class="order-flat_size field inline">
+				<label for="flat_size">Flat Size:</label>
 				<input type="text" name="flat_size" class="size"
 					   value="<?php print get_value($order, 'flat_size'); ?>"
-					   required autocomplete="off"/></label>
+					   required autocomplete="off"/>
+			</div>
+			<div class="order-flat_cost field inline">
+				<label for="flat_cost">Flat Cost:</label>
+				<div>$
+					<input type="text" name="flat_cost" class="cost"
+						   value="<?php print get_value($order, 'flat_cost'); ?>"
+						   required autocomplete="off"/></div>
+			</div>
+			<div class="order-plant_cost field inline">
+				<label for="plant_cost">Plant Cost:&nbsp;</label>
+				<div>$ <input type="text" class="cost" name="plant_cost"
+							  value="<?php print get_value($order, 'plant_cost'); ?>"
+							  autocomplete="off" required/></div>
+			</div>
+			<div class="order-price field inline">
+				<label for="price">Price:</label>
+				<div>$
+					<input type="text" name="price"
+						   value="<?php print get_value($order, 'price'); ?>"
+						   required autocomplete="off"/></div>
+			</div>
 		</div>
-		<div class="order-flat_cost field">
-			<label for="flat_cost">Flat Cost:&nbsp;$
-				<input type="text" name="flat_cost" class="cost"
-					   value="<?php print get_value($order, 'flat_cost'); ?>"
-					   required autocomplete="off"/></label>
-		</div>
-		<div class="order-plant_cost field">
-			<label for="plant_cost">Plant Cost:&nbsp;$
-				<input type="text" class="cost" name="plant_cost"
-					   value="<?php print get_value($order, 'plant_cost'); ?>"
-					   autocomplete="off" required/></label>
-		</div>
-		<div class="order-price field">
-			<label for="price">Price:&nbsp;$
-				<input type="text" name="price"
-					   value="<?php print get_value($order, 'price'); ?>"
-					   required autocomplete="off"/></label>
-		</div>
-	</div>
-	<div class="column last">
-		<div class="order-pot_size field">
-			<label for="pot_size">Pot Size:&nbsp;
+		<div class="group last">
+			<div class="order-pot_size field inline">
+				<label for="pot_size">Pot Size:&nbsp;
+				</label>
 				<?php print form_dropdown('pot_size', $pot_sizes, urlencode(get_value($order, 'pot_size')), 'id="pot-size-menu"'); ?>
-			</label>
-		</div>
-		<div class="order-grower_code field">
-			<label for="grower_code">Grower Code:&nbsp;</label>
-			<input type="text" name="grower_code"
-				   value="<?php print get_value($order, 'grower_code'); ?>"/>
-		</div>
-		<div class="order-flat_area field">
-			<label for="flat_area">Flat Area (Sq Ft):&nbsp;</label>
-			<input type="text" name="flat_area"
-				   value="<?php print get_value($order, 'flat_area', 2); ?>"
-				   size="10"/>
-		</div>
-		<div class="order-tiers field">
-			<label for="tiers">Tiers:&nbsp;</label>
-			<input type="text" name="tiers"
-				   value="<?php print get_value($order, 'tiers', 3); ?>"
-				   size="10"/>
+
+			</div>
+			<div class="order-grower_code field inline">
+				<label for="grower_code">Grower Code:&nbsp;</label>
+				<input type="text" name="grower_code"
+					   value="<?php print get_value($order, 'grower_code'); ?>"/>
+			</div>
+			<div class="order-flat_area field inline">
+				<label for="flat_area">Flat Area (Sq Ft):&nbsp;</label>
+				<input type="text" name="flat_area"
+					   value="<?php print get_value($order, 'flat_area', 2); ?>"
+					   size="10"/>
+			</div>
+			<div class="order-tiers field inline">
+				<label for="tiers">Tiers:&nbsp;</label>
+				<input type="text" name="tiers"
+					   value="<?php print get_value($order, 'tiers', 3); ?>"
+					   size="10"/>
+			</div>
 		</div>
 	</div>
+	<?php if ($action == 'update') : ?>
 	<div class="group">
 		<h3>Inventory Details</h3>
-		<div class="grid-group">
+		<div class="grid-group three-columns">
 			<fieldset class="order-counts">
 				<legend>Order Counts</legend>
-			<?php foreach ($days as $day) : ?>
-				<div class="order-count_presale field inline">
-					<label for="count_<?php print $day; ?>"><?php print ucfirst($day); ?>
-						Count:&nbsp;</label>
+				<?php foreach ($days as $day) : ?>
+					<div class="order-count_presale field inline">
+						<label for="count_<?php print $day; ?>"><?php print ucfirst($day); ?>
+							Count:&nbsp;</label>
 						<input type="number" class="count"
 							   name="count_<?php print $day; ?>"
 							   value="<?php print get_value($order, 'count_' . $day); ?>"
 							   autocomplete="off"/>
-				</div>
-			<?php endforeach; ?>
+					</div>
+				<?php endforeach; ?>
 
 			</fieldset>
-			<?php if ($action == 'update') : ?>
+
 			<fieldset class="received-counts">
 				<legend>Received</legend>
 
-			<?php foreach ($days as $day) : ?>
-				<?php $field_name = 'received_' . $day; ?>
-				<div class="order-<?php print $field_name; ?> field inline">
-					<label for="<?php print $field_name; ?>"><?php print ucfirst($day); ?>
-						Received:&nbsp;</label>
-					<input type="text"
-						   style="<?php print $crop_failure ? 'background-color:#FFB3B3' : ''; ?>"
-						   name="<?php print $field_name; ?>"
-						   value="<?php print get_value($order, $field_name); ?>"
-						   autocomplete="off"/>
-				</div>
-			<?php endforeach; ?>
+				<?php foreach ($days as $day) : ?>
+					<?php $field_name = 'received_' . $day; ?>
+					<div class="order-<?php print $field_name; ?> field inline">
+						<label for="<?php print $field_name; ?>"><?php print ucfirst($day); ?>
+							Received:&nbsp;</label>
+						<input type="text"
+							   style="<?php print $crop_failure ? 'background-color:#FFB3B3' : ''; ?>"
+							   name="<?php print $field_name; ?>"
+							   value="<?php print get_value($order, $field_name); ?>"
+							   autocomplete="off"/>
+					</div>
+				<?php endforeach; ?>
 			</fieldset>
 			<fieldset class="order-sellouts-remainders">
 				<legend>Sellouts and Remainders</legend>
@@ -179,8 +185,9 @@ if (get_value($order, 'year') == 2021) {
 			</fieldset>
 		</div>
 
-		<?php endif; ?>
+
 	</div>
+	<?php endif; ?>
 	<input type="hidden" name="redirect_url" id="redirect_url"/>
 	<div style="clear:both">
 		<input type="submit" value="<?php print ucfirst($action); ?>"

@@ -14,7 +14,7 @@
 			$(this).fadeOut();
 		});
 
-		$("#footer").css({"top": $(document).height() - 25 + "px"});
+		$("#footer").css({ "top": $(document).height() - 25 + "px" });
 
 		$("#utility").on("click", ".set-current-year", function () {
 			my_uri = $(location).attr("href");
@@ -54,7 +54,7 @@
 				}
 			});
 		});
-		$(document).on("click","ul.filters li.filter-item a",function(e){
+		$(document).on("click", "ul.filters li.filter-item a", function (e) {
 			e.preventDefault();
 			let my_target = $(this).data('target');
 			$("table.log-list tr").hide();
@@ -182,7 +182,7 @@
 				success: function (data) {
 					// console.log(data);
 					// console.log(my_parent.children());
-					 my_parent.children(".edit-field").html(data).removeClass("edit-field").removeClass("field").addClass("live-field").addClass("text");
+					my_parent.children(".edit-field").html(data).removeClass("edit-field").removeClass("field").addClass("live-field").addClass("text");
 					//$("#" + my_parent + " .live-field input").focus();
 				}
 			});
@@ -218,7 +218,7 @@
 			data: form_data,
 			url: base_url + "menu/get_autocomplete",
 			success: function (data) {
-				$("#" + my_parent + " input").autocomplete({source: data});
+				$("#" + my_parent + " input").autocomplete({ source: data });
 			}
 		});
 
@@ -236,7 +236,7 @@
 	$(document).on("change", ".field-envelope .live-field input[type='checkbox']", function (e) {
 		let my_type = $(this).data('type');
 		let has_type = $(this).data().hasOwnProperty("type");
-		if(!has_type){
+		if (!has_type) {
 			my_type = 'checkbox';
 		}
 		update_field(this, my_type);
@@ -264,7 +264,7 @@
 		}
 	});
 
-//*/
+	//*/
 
 	$(document).on("click", ".field-envelope .save-multiselect", function () {
 		console.log(this);
@@ -295,7 +295,7 @@
 			url: base_url + "menu/get_autocomplete",
 			data: form_data,
 			success: function (data) {
-				$("#" + my_id).autocomplete({source: data});
+				$("#" + my_id).autocomplete({ source: data });
 			}
 		});
 	});
@@ -311,7 +311,7 @@
 	});
 
 
-//download the quark files show a progress bar for entertainment purposes.
+	//download the quark files show a progress bar for entertainment purposes.
 	$(document).on("click", "#category-selector a.export", function (event) {
 		// event.preventDefault();
 		// show_popup("Downloading","Please wait <div id='progressbar'></div>","auto");
@@ -414,7 +414,7 @@
 			$(".mr-shmallow-image").fadeIn();
 			if (!$("#page").hasClass("on")) {
 
-				$(".mr-shmallow-image img").toggle({effect: "puff", percent: 200});
+				$(".mr-shmallow-image img").toggle({ effect: "puff", percent: 200 });
 				$.ajax({
 					type: 'post',
 					url: base_url + "index/user_test",
@@ -431,7 +431,7 @@
 
 	});
 	$(document).on('click', ".mr-shmallow-image", function () {
-		$(".mr-shmallow-image img").toggle({effect: "puff", percent: 200});
+		$(".mr-shmallow-image img").toggle({ effect: "puff", percent: 200 });
 
 
 	});
@@ -453,8 +453,8 @@
 				'data': form_data,
 				success: function (data) {
 					me.html(data['text']);
-					me.prop('title',data['title']);
-					me.data('value',data['value']);
+					me.prop('title', data['title']);
+					me.data('value', data['value']);
 				}
 			}
 		);
@@ -474,11 +474,11 @@ function show_popup(my_title, data, popup_width, x, y) {
 	});
 
 	if (x) {
-		myDialog.dialog({position: x});
+		myDialog.dialog({ position: x });
 	}
 
 
-	myDialog.fadeIn().dialog('open', {width: popup_width});
+	myDialog.fadeIn().dialog('open', { width: popup_width });
 
 	return false;
 }
@@ -488,24 +488,33 @@ function update_field(me, my_type) {
 	let my_value = $(me).val();
 
 	let my_category = false;
-	if (my_type === "category-dropdown") {
-		my_category = "category";
-	} else if (my_type === "subcategory-dropdown") {
-		my_category = "subcategory";
-	} else if (my_type === "checkbox") {
-		my_category = "checkbox";
-		if ($(me).attr("checked") === true) {
-			my_value = 1;
-		} else {
-			my_value = 0;
-		}
-	} else if(my_type === 'boolean'){
-		if ($(me).attr("checked") === true) {
-			my_value = 'yes';
-		} else {
-			my_value = 'no';
-		}
+
+	switch (my_type) {
+		case ("category-dropdown"):
+			my_category = "category";
+			break;
+		case ("subcategory-dropdown"):
+			my_category = "subcategory";
+			break;
+		case ("checkbox"):
+			my_category = "checkbox";
+			if ($(me).attr("checked") === true) {
+				my_value = 1;
+			} else {
+				my_value = 0;
+			};
+			break;
+		case ("boolean"):
+			if ($(me).attr("checked") === true) {
+				my_value = 'yes';
+			} else {
+				my_value = 'no';
+			};
+			break;
+		default:
+			break;
 	}
+	
 	let is_persistent = my_parent.hasClass("persistent");
 
 	//don't do anything if the value is empty and it is a persistent field 
@@ -538,62 +547,62 @@ function update_field(me, my_type) {
 		}
 	});
 }
-	
-	// let my_parent = $(me).parents(".field-envelope").attr("id");
-	// let my_value = $("#" + my_parent).children(".live-field").children("input" | "textarea").val();
-	// let my_category = false;
-	// if (my_type === "autocomplete") {
-	// 	my_value = $("#" + my_parent).children(".live-field").children("input").val();
-	// } else if (my_type === "multiselect") {
-	// 	my_value = $("#" + my_parent).children(".multiselect").children("select").val();
-	// } else if (my_type === "category-dropdown") {
-	// 	my_category = "category";
-	// } else if (my_type === "subcategory-dropdown") {
-	// 	my_category = "subcategory";
-	// } else if (my_type === "checkbox") {
-	// 	my_category = "checkbox";
-	// 	if ($(me).attr("checked") === true) {
-	// 		my_value = 1;
-	// 	} else {
-	// 		my_value = 0;
-	// 	}
-	// } else if(my_type === 'boolean'){
-	// 	if ($(me).attr("checked") === true) {
-	// 		my_value = 'yes';
-	// 	} else {
-	// 		my_value = 'no';
-	// 	}
-	// }
-	// let is_persistent = $(me).hasClass("persistent");
 
-	// //don't do anything if the value is empty and it is a persistent field 
-	// if (is_persistent && my_value === "") {
-	// 	return false;
-	// }
+// let my_parent = $(me).parents(".field-envelope").attr("id");
+// let my_value = $("#" + my_parent).children(".live-field").children("input" | "textarea").val();
+// let my_category = false;
+// if (my_type === "autocomplete") {
+// 	my_value = $("#" + my_parent).children(".live-field").children("input").val();
+// } else if (my_type === "multiselect") {
+// 	my_value = $("#" + my_parent).children(".multiselect").children("select").val();
+// } else if (my_type === "category-dropdown") {
+// 	my_category = "category";
+// } else if (my_type === "subcategory-dropdown") {
+// 	my_category = "subcategory";
+// } else if (my_type === "checkbox") {
+// 	my_category = "checkbox";
+// 	if ($(me).attr("checked") === true) {
+// 		my_value = 1;
+// 	} else {
+// 		my_value = 0;
+// 	}
+// } else if(my_type === 'boolean'){
+// 	if ($(me).attr("checked") === true) {
+// 		my_value = 'yes';
+// 	} else {
+// 		my_value = 'no';
+// 	}
+// }
+// let is_persistent = $(me).hasClass("persistent");
 
-	// let override = $(me).hasClass("override");
-	// let form_data = {
-	// 	table: $(me).data('table'),
-	// 	field: $(me).data('field'),
-	// 	id: $(me).data('id'),
-	// 	value: my_value,
-	// 	override: override,
-	// 	category: my_category,
-	// 	type: my_type,
-	// };
+// //don't do anything if the value is empty and it is a persistent field 
+// if (is_persistent && my_value === "") {
+// 	return false;
+// }
 
-	// $.ajax({
-	// 	type: "post",
-	// 	url: base_url + $(me).data('table') + "/update_value",
-	// 	data: form_data,
-	// 	success: function (data) {
-	// 		console.log(data);
-	// 		if (!is_persistent) {
-	// 			$("#" + my_parent + " .live-field").html(data);
-	// 			$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
-	// 		}
-	// 	}
-	// });
+// let override = $(me).hasClass("override");
+// let form_data = {
+// 	table: $(me).data('table'),
+// 	field: $(me).data('field'),
+// 	id: $(me).data('id'),
+// 	value: my_value,
+// 	override: override,
+// 	category: my_category,
+// 	type: my_type,
+// };
+
+// $.ajax({
+// 	type: "post",
+// 	url: base_url + $(me).data('table') + "/update_value",
+// 	data: form_data,
+// 	success: function (data) {
+// 		console.log(data);
+// 		if (!is_persistent) {
+// 			$("#" + my_parent + " .live-field").html(data);
+// 			$("#" + my_parent + " .live-field").addClass("edit-field field").removeClass("live-field text");
+// 		}
+// 	}
+// });
 
 
 function create_dropdown(my_field, my_category, my_value) {

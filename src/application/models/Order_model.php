@@ -151,11 +151,8 @@ class Order_Model extends MY_Model {
 		$this->db->join('category', 'common.category_id = category.id', 'LEFT');
 		$this->db->join('subcategory', 'common.subcategory_id = subcategory.id', 'LEFT');
 		$this->db->join('flag', 'flag.variety_id=variety.id', 'LEFT');
-		$option_keys = array_keys($options);
-		$option_values = array_values($options);
-		for ($i = 0; $i < count($options); $i++) {
-			$key = $option_keys [$i];
-			$value = $option_values [$i];
+
+		foreach($options as $key=>$value) {
 			switch ($key) {
 				case 'show-non-reorders' :
 					$this->db->where(sprintf('NOT EXISTS (SELECT `year` from `orders` as `o` WHERE `o`.`variety_id` = `orders`.`variety_id` and `year` = %s) ', $sale_year + 1), NULL, FALSE);
@@ -497,11 +494,12 @@ class Order_Model extends MY_Model {
 		$query = "UPDATE `orders` SET flat_exclude=1  WHERE `pot_size` LIKE '%bareroot%' OR `pot_size` LIKE '%bulb%' OR `pot_size` LIKE '%tuber%' OR `pot_size` like '%seed%'";
 		$this->db->query($query);
 		// exclude peonies from every year except the COVID-19-modified sale year 2021
-		$query = "UPDATE `orders`  JOIN `variety` ON `orders`.`variety_id` = `variety`.`id`
+		$peonies_query = "UPDATE `orders`  JOIN `variety` ON `orders`.`variety_id` = `variety`.`id`
     JOIN `common` ON `common`.`id`  = `variety`.`common_id` 
+    JOIN `category` ON `common`.`category_id` = `category`.`id`
     SET `orders`.`flat_exclude` = 1 
-			WHERE `common`.`genus` = 'Paeonia' AND `orders`.`year` != 2021";
-		$this->db->query($query);
+			WHERE `common`.`genus` = 'Paeonia' AND `orders`.`year` != 2021 AND `category`.`id` = 7";
+		$this->db->query($peonies_query);
 		$this->session->set_flashdata('notice', 'Flat exclusions have been reset.');
 	}
 

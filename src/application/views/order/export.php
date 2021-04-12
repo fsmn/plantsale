@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-if(!empty($orders)) {
-	//$filename = "order_export.csv";
+if (!empty($orders)) {
+	//$filename = 'order_export.csv';
 	// Define the fields desired for output in this array
 	$fields = [
 		'grower_id' => 'Grower ID',
@@ -40,8 +40,7 @@ if(!empty($orders)) {
 		'flat_exclude' => 'Flat Exclude',
 	];
 
-
-	if ($export_type == "grower") {
+	if ($export_type == 'grower') {
 		$fields = [
 			'name' => 'Common Name',
 			'genus' => 'Genus',
@@ -65,28 +64,26 @@ if(!empty($orders)) {
 	$header_values = array_keys($fields);
 
 	$output = [
-		implode(",", $header_values),
+		implode(',', $header_values),
 	];
 	foreach ($orders as $order) {
 		$current_year = $order->year;
 		foreach (array_keys($fields) as $key) {
-			if ($key == "new_year") {
+			if ($key == 'new_year') {
 				if ($order->$key == $current_year) {
-					$line[] = "New";
+					$line[] = 'New';
+				} else {
+					$line[] = '';
 				}
-				else {
-					$line[] = "";
-				}
-			}
-			else {
+			} else {
 				$line[] = $order->$key;
 			}
 		}
-		$output[] = "\"" . implode("\",\"", $line) . "\"";
+		$output[] = '\'' . implode('\',\'', $line) . '\'';
 		$line = NULL;
 	}
 
-	$data = implode("\n", $output);
+	$data = implode('\n', $output);
 	if (empty($filename)) {
 		$filename = 'order_export.csv';
 	}

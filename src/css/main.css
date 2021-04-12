@@ -511,6 +511,12 @@ form .field{
 	display: flex;
 }
 
+form .field.inline {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
 table .field {
 	padding: 0;
 }
@@ -833,6 +839,22 @@ form .column {
 .column-even, .column.odd {
 	padding-left: 5px;
 }
+
+.grid-group {
+
+}
+
+.grid-group.three-columns {
+	display: grid;
+	grid-template-columns: .5fr .5fr .5fr;
+}
+
+.grid-group.two-columns {
+	display: grid;
+	grid-template-columns: .75fr .75fr;
+}
+
+
 
 .triptych {
 	width: auto;

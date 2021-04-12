@@ -78,14 +78,21 @@ class Variety extends MY_Controller {
 		redirect('variety/view/' . $id);
 	}
 
-	function view() {
+	function view($id) {
 		$this->load->library('s3_client',$this->s3_vars);
-		$id = $this->uri->segment(3);
 		$variety = $this->variety->get($id);
 		$current_order = $this->order->get_for_variety($id, get_current_year());
 		$data ['current_order'] = $current_order;
 		$data ['file_path'] = $this->s3_client->getPath();
-		$data ['orders'] = $this->order->get_for_variety($id);
+		$orders = $this->order->get_for_variety($id);
+		foreach ($orders as $order) {
+			if($order->year == get_current_year()) {
+					$label = '';
+					extract(get_toggle_text('flat_exclude', $order->flat_exclude));
+					$order->flat_exclude_button = $label;
+			}
+		}
+		$data ['orders'] = $orders;
 		$data ['flags'] = $this->flag->get_for_variety($id);
 		$data ['is_new'] = $variety->new_year == get_current_year();
 		$data ['variety'] = $variety;

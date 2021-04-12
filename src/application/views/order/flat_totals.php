@@ -58,9 +58,6 @@ $sale_year = $this->session->userdata("sale_year");;
 						The default are orders for "bulbs", "bareroots" "tubers", or "seeds" or any orders for the genus
 						"Paeonia" (except for 2021).
 					</p>
-					/**
-					 * @todo Red parentheses here not sure what is wrong.
-					 */
 					<?php if (IS_ADMIN) : ?>
 						<p>Numbers don't look right? <a href="<?php print site_url('index/reset_flat_exclusions'); ?>" title="Reset flat exclusions to defaults">Click here</a> to reset these.</p>
 					<?php endif; ?>

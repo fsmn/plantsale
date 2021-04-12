@@ -514,7 +514,7 @@ function update_field(me, my_type) {
 		default:
 			break;
 	}
-	
+
 	let is_persistent = my_parent.hasClass("persistent");
 
 	//don't do anything if the value is empty and it is a persistent field 

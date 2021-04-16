@@ -3,11 +3,8 @@
 	<?php echo edit_field('name', $common->name, '','common',$common->id,array('envelope'=>'span'));?>
 
 </h2>
-<div
-	class='grouping column first'
-	style='min-width: 400px;'
-	id='common'>
-<?php
+<div class="grouping column first" style="min-width: 400px;" id="common">
+    <?php
 
 if (IS_EDITOR) {
     $buttons['edit_common'] = array(
@@ -41,29 +38,23 @@ if (IS_EDITOR) {
             'title' => 'add a new variety'
     );
     if (empty($varieties)) {
-        $buttons['delete_common'] = array(
+        $buttons['delete_common'] = [
                 'selection' => 'common',
                 'text' => 'Delete',
-                'class' => array(
+                'class' => [
                         'button',
                         'delete',
                         'dialog'
-                ),
+                ],
         		'style'=>'delete',
                 'data_values' => ['common_id'=>$common->id],
                 'href' => base_url('common/delete/' . $common->id),
-                'title' => 'Delete this Common'
-        );
-
-    }
-    print create_button_bar($buttons);
-
-}?>
-	<input
-		type='hidden'
-		name='id'
-		id='id'
-		value='<?php echo $common->id;?>' />
+                'title' => 'Delete this Common',
+            ];
+        }
+        print create_button_bar($buttons);
+    } ?>
+    <input type="hidden" name="id" id="id" value="<?php print $common->id; ?>" />
 
 	<?php echo edit_field('genus', $common->genus, 'Genus','common',$common->id);?>
 	<?php echo edit_field('category_id', $common->category, 'Category','common',$common->id, array('envelope'=>'p','class'=>'category-dropdown'));?>
@@ -87,6 +78,4 @@ if (IS_EDITOR) {
 ?>
 <?php $this->load->view('variety/list/list');?>
 </div>
-<div class='column last'>
-</div>
-
+<div class='column last'></div>

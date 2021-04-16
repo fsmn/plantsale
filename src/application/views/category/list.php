@@ -45,7 +45,7 @@ print create_button_bar($buttons);
 					<?php foreach ($category->subcategories as $subcategory) : ?>
 						<li class="list-item">
 							<?php print live_field('subcategory', $subcategory->subcategory, 'subcategory', $subcategory->id, [
-								'size' => "auto",
+								'size' => 'auto',
 								'envelope' => 'span',
 							]); ?>
 						</li>

@@ -8,7 +8,8 @@ $is_covid_year = get_value($order, 'year') == 2021;
 if ($order->flat_cost && !$order->plant_cost) {
 	$flat_cost = $order->flat_cost;
 	$plant_cost = $order->flat_size / $order->flat_cost;
-} elseif ($order->plant_cost && !$order->flat_cost) {
+}
+elseif ($order->plant_cost && !$order->flat_cost) {
 	$plant_cost = $order->plant_cost;
 	$flat_cost = $order->flat_size * $order->plant_cost;
 }
@@ -27,22 +28,22 @@ $row_classes = implode(' ', $row_classes);
 	<td>
 		<?php if (IS_EDITOR) : ?>
 			<?php print create_button([
-				'text' => 'Edit',
-				'href' => site_url('order/edit/' . $order->id),
-				'class' => [
-					'button',
-					'edit',
-					'dialog',
-					'edit-order'
-				],
-				'id' => sprintf('edit-order_%s', $order->id),
+					'text' => 'Edit',
+					'href' => site_url('order/edit/' . $order->id),
+					'class' => [
+							'button',
+							'edit',
+							'dialog',
+							'edit-order',
+					],
+					'id' => sprintf('edit-order_%s', $order->id),
 			]); ?>
 
 		<?php else : ?>
 			<?php print create_button([
-				'text' => "Details",
-				'class' => ['button', "details"],
-				'href' => site_url('order/view/' . $order->id),
+					'text' => "Details",
+					'class' => ['button', "details"],
+					'href' => site_url('order/view/' . $order->id),
 			]); ?>
 		<?php endif; ?>
 		<?php if ($order->received_presale == '0.000') : ?>
@@ -59,19 +60,25 @@ $row_classes = implode(' ', $row_classes);
 		<?php print edit_field('catalog_number', $order->catalog_number, '', 'order', $order->id, ['envelope' => 'span']); ?>
 	</td>
 	<td class="order-pot_size field no-wrap"><?php print edit_field('pot_size', $order->pot_size, '', 'order', $order->id, [
-			'envelope' => 'span',
-			'class' => 'pot-size',
+				'envelope' => 'span',
+				'class' => 'pot-size',
 		]); ?>
 	</td>
-	<td class="order-flat_size field cost-field" id="flat_size"><span id="edit-flat-size_<?php print $order->id; ?>" class="edit-cost">
+	<td class="order-flat_size field cost-field" id="flat_size"><span
+				id="edit-flat-size_<?php print $order->id; ?>"
+				class="edit-cost">
 		<?php print $order->flat_size; ?></span></td>
-	<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">$<span id="edit-flat-cost_<?php print $order->id; ?>" class="edit-cost">
+	<td class="order-flat_cost field cost-field no-wrap" id="flat_cost">$<span
+				id="edit-flat-cost_<?php print $order->id; ?>"
+				class="edit-cost">
 		<?php print number_format($order->flat_cost, 2); ?></span>
 	</td>
 	<td class="order-flat_area field">
 		<?php print edit_field('flat_area', $order->flat_area, '', 'order', $order->id, ['envelope' => 'span']); ?>
 	</td>
-	<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span id="edit-plant-cost_<?php print $order->id; ?>" class="edit-cost">
+	<td class="order-plant_cost field cost-field no-wrap" id="plant_cost">$<span
+				id="edit-plant-cost_<?php print $order->id; ?>"
+				class="edit-cost">
 		<?php print number_format($order->plant_cost, 2); ?></span>
 	</td>
 	<td class="order-price field">
@@ -84,45 +91,44 @@ $row_classes = implode(' ', $row_classes);
 		<?php print edit_field('received_presale', $order->received_presale, '', 'order', $order->id, ['envelope' => 'span']); ?>
 	</td>
 	<?php $field_list = [
-		'friday' => $is_covid_year,
-		'saturday' => $is_covid_year,
-		'midsale' => !$is_covid_year,
+			'friday' => $is_covid_year,
+			'saturday' => $is_covid_year,
+			'midsale' => !$is_covid_year,
 	]; ?>
 	<?php foreach ($field_list as $field => $value) : ?>
 		<?php $field_name = 'count_' . $field; ?>
-		<td class="order-<?php print $field_name; ?> field" title="<?php print $value ? 'Enter \'x\' to clear value' : 'This is not editable for this year'; ?>">
+		<td class="order-<?php print $field_name; ?> field"
+			title="<?php print $value ? 'Enter \'x\' to clear value' : 'This is not editable for this year'; ?>">
 			<?php if ($value) : ?>
 				<?php print edit_field($field_name, get_value($order, $field_name), NULL, 'order', $order->id, ['envelope' => 'span']); ?>
 			<?php endif; ?>
 		</td>
 		<?php $field_name = 'received_' . $field; ?>
-		<td class="order-<?php print $field_name; ?> field" title="<?php print $value ? 'Enter \'x\' to clear value' : 'This is not editable for this year'; ?>">
+		<td class="order-<?php print $field_name; ?> field"
+			title="<?php print $value ? 'Enter \'x\' to clear value' : 'This is not editable for this year'; ?>">
 			<?php if ($value) : ?>
 				<?php print edit_field($field_name, get_value($order, $field_name), NULL, 'order', $order->id, ['envelope' => 'span']); ?>
 			<?php endif; ?>
 		</td>
 	<?php endforeach; ?>
 
-	<td class="order-sellout_friday field" title="<?php print !$is_covid_year ? 'Friday sellouts' : 'This field is not editable this year'; ?>">
-		<?php if (!$is_covid_year) : ?>
+	<td class="order-sellout_friday field"
+		title="Friday sellouts">
 			<?php print edit_field("sellout_friday", get_as_time($order->sellout_friday), '', 'order', $order->id, [
-				'envelope' => 'span',
-				"type" => "time",
+					'envelope' => 'span',
+					"type" => "time",
 			]); ?>
-		<?php endif; ?>
 	</td>
-	<td class="order-sellout_saturday field" title="<?php print !$is_covid_year ? 'Saturday sellouts' : 'This field is not editable this year'; ?>">
-		<?php if (!$is_covid_year) : ?>
+	<td class="order-sellout_saturday field"
+		title="Saturday sellouts">
 			<?php print edit_field("sellout_saturday", get_as_time($order->sellout_saturday), '', 'order', $order->id, [
-				'envelope' => 'span',
-				"type" => "time",
+					'envelope' => 'span',
+					"type" => "time",
 			]); ?>
-		<?php endif; ?>
 	</td>
-	<td class="order-remainder_friday field" title="<?php print !$is_covid_year ? 'Friday remainder' : 'This field is not editable this year'; ?>">
-		<?php if (!$is_covid_year) : ?>
+	<td class="order-remainder_friday field"
+		title="Friday remainder">
 			<?php print edit_field("remainder_friday", $order->remainder_friday, '', 'order', $order->id, ['envelope' => 'span']); ?>
-		<?php endif; ?>
 	</td>
 	<td class="order-remainder_saturday field">
 		<?php print edit_field("remainder_saturday", $order->remainder_saturday, '', 'order', $order->id, ['envelope' => 'span']); ?>
@@ -138,14 +144,14 @@ $row_classes = implode(' ', $row_classes);
 	<td>
 		<?php if (IS_EDITOR) : ?>
 			<?php print create_button([
-				'text' => 'Move',
-				'href' => base_url('order/move/' . $order->id . '?ajax=1&start=1'),
-				'class' => [
-					'button',
-					'edit',
-					'dialog'
-				],
-				'title' => 'Move this order to a new variety',
+					'text' => 'Move',
+					'href' => base_url('order/move/' . $order->id . '?ajax=1&start=1'),
+					'class' => [
+							'button',
+							'edit',
+							'dialog',
+					],
+					'title' => 'Move this order to a new variety',
 			]); ?>
 
 		<?php endif; ?>

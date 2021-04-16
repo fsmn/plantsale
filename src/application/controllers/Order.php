@@ -145,13 +145,9 @@ class Order extends MY_Controller {
       foreach ($orders as $order) {
         $order->latest_order = $this->order->is_latest($order->variety_id, $order->year);
         if ($output_format != 'crop-failure') {
-          if ($this->session->userdata('user_id') == 1) {
-            $order->flat_exclude_button = $this->toggle_button($order->id, 'flat_exclude', $order->flat_exclude);
-          } else {
             $label = '';
             extract(get_toggle_text('flat_exclude', $order->flat_exclude));
             $order->flat_exclude_button = $label;
-          }
         }
       }
       if ($show_last_only = $this->input->get('show_last_only')) {
@@ -534,10 +530,6 @@ class Order extends MY_Controller {
 
   function flat_total_exclusions() {
     return $this->order->get_flat_total_exclusions();
-  }
-
-  private function toggle_button($id, string $field, $value) {
-    return toggle_button('order', $id, $field, $value);
   }
 
   function toggle() {

@@ -42,19 +42,19 @@
                 'selection' => 'common',
                 'text' => 'Delete',
                 'class' => [
-                    'button',
-                    'delete',
-                    'dialog'
+                        'button',
+                        'delete',
+                        'dialog'
                 ],
-                'style' => 'delete',
-                'data_values' => ['common_id' => $common->id],
+        		'style'=>'delete',
+                'data_values' => ['common_id'=>$common->id],
                 'href' => base_url('common/delete/' . $common->id),
-                'title' => 'Delete this Common'
+                'title' => 'Delete this Common',
             ];
         }
         print create_button_bar($buttons);
     } ?>
-    <input type='hidden' name='id' id='id' value='<?php print $common->id; ?>' />
+    <input type="hidden" name="id" id="id" value="<?php print $common->id; ?>" />
 
     <?php print edit_field('genus', $common->genus, 'Genus', 'common', $common->id); ?>
     <?php print edit_field('category_id', $common->category, 'Category', 'common', $common->id, [

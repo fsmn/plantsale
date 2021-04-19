@@ -9,6 +9,9 @@ if ($orders) :
 	<table class="list shelf-checking small">
 		<thead>
 			<tr>
+				<th class="self-checking-title"><?php print $options['category']; ?></th>
+			</tr>
+			<tr>
 				<th>Grw</th>
 				<th>Yr</th>
 				<th>Cat&#35;</th>

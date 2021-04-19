@@ -589,6 +589,10 @@ a.button {
 	border: 1px solid #ddd;
 }
 
+th.self-checking-title {
+	border: 1px solid #bbb;
+}
+
 table.list td {
 	padding: 5px;
 	border-width: 0;

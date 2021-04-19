@@ -589,7 +589,8 @@ a.button {
 	border: 1px solid #ddd;
 }
 
-th.self-checking-title {
+th.self-checking-title,
+th.inventory-tracking-title {
 	border: 1px solid #bbb;
 }
 

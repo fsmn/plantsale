@@ -801,7 +801,7 @@ class Variety extends MY_Controller {
 		$output = [];
 		$output [] = form_multiselect($field, $pairs, $value, "id='$field'");
 		$buttons = implode(" ", $output);
-		echo $buttons . sprintf("<span class='button save-multiselect' target='%s'>Save</span>", $field);
+		echo $buttons . sprintf($field);
 	}
 
 	function toggle(){

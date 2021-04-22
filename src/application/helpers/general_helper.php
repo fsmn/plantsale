@@ -5,7 +5,7 @@
  */
 function mysql_timestamp()
 {
-	return date ( 'Y-m-d H:i:s' );
+	return date('Y-m-d H:i:s');
 }
 
 /**
@@ -14,15 +14,15 @@ function mysql_timestamp()
  */
 function bake_cookie($name, $value)
 {
-	if (is_array ( $value )) {
-		$value = implode ( ',', $value );
+	if (is_array($value)) {
+		$value = implode(',', $value);
 	}
-	
-	set_cookie ( array (
-			'name' => $name . '_session',
-			'value' => $value,
-			'expire' => 0
-	) );
+
+	set_cookie([
+		'name' => $name . '_session',
+		'value' => $value,
+		'expire' => 0
+	]);
 }
 
 /**
@@ -30,11 +30,11 @@ function bake_cookie($name, $value)
  */
 function burn_cookie($name)
 {
-	set_cookie ( array (
-			'name' => $name . '_session',
-			'value' => '',
-			'expire' => NULL
-	) );
+	set_cookie([
+		'name' => $name . '_session',
+		'value' => '',
+		'expire' => NULL
+	]);
 }
 
 /**
@@ -46,7 +46,7 @@ function burn_cookie($name)
 function cookie($name, $xss_clean = NULL)
 {
 	$name = $name . '_session';
-	return get_cookie ( $name, $xss_clean );
+	return get_cookie($name, $xss_clean);
 }
 
 /**
@@ -60,15 +60,15 @@ function cookie($name, $xss_clean = NULL)
  *
  * @return string
  */
-function create_input($object, $name, $label, $id = NULL, $default_value = FALSE, $required = FALSE, $classes = array())
+function create_input($object, $name, $label, $id = NULL, $default_value = FALSE, $required = FALSE, $classes = [])
 {
-	if (! $id) {
+	if (!$id) {
 		$id = $name;
 	}
 	$class = '';
 	if ($classes) {
-		if (is_array ( $classes )) {
-			$class = join ( ' ', $classes );
+		if (is_array($classes)) {
+			$class = join(' ', $classes);
 		} else {
 			$class = $classes;
 		}
@@ -78,9 +78,9 @@ function create_input($object, $name, $label, $id = NULL, $default_value = FALSE
 	}
 	$value = '';
 	if ($default_value) {
-		$value = cookie ( $name );
+		$value = cookie($name);
 	}
-	return sprintf ( '<label for="%s">%s: </label><input type="text" name="%s" id="%s" value="%s" class="%s" %s/>', $name, $label, $name, $id, get_value ( $object, $name, $value ), $class, $required );
+	return sprintf('<label for="%s">%s: </label><input type="text" name="%s" id="%s" value="%s" class="%s" %s/>', $name, $label, $name, $id, get_value($object, $name, $value), $class, $required);
 }
 
 /**
@@ -88,10 +88,10 @@ function create_input($object, $name, $label, $id = NULL, $default_value = FALSE
  */
 function get_current_year()
 {
-	if (date ( 'm' ) > 6) { // after June
-		$year = date ( 'Y' ) + 1;
+	if (date('m') > 6) { // after June
+		$year = date('Y') + 1;
 	} else {
-		$year = date ( 'Y' );
+		$year = date('Y');
 	}
 	return $year;
 }
@@ -114,19 +114,19 @@ function get_keyed_pairs($list, $pairs, $initialBlank = NULL, $other = NULL, $al
 {
 	$output = false;
 	if ($initialBlank) {
-		$output [''] = '';
+		$output[''] = '';
 	}
-	if (! empty ( $alternate )) {
-		$output [$alternate ['name']] = $alternate ['value'];
+	if (!empty($alternate)) {
+		$output[$alternate['name']] = $alternate['value'];
 	}
 	asort($list);
-	foreach ( $list as $item ) {
-		$key_name = $pairs [0];
-		$key_value = $pairs [1];
-		$output [urlencode ( $item->$key_name )] = $item->$key_value;
+	foreach ($list as $item) {
+		$key_name = $pairs[0];
+		$key_value = $pairs[1];
+		$output[urlencode($item->$key_name)] = $item->$key_value;
 	}
 	if ($other) {
-		$output ['other'] = 'Other...';
+		$output['other'] = 'Other...';
 	}
 	return $output;
 }
@@ -141,15 +141,15 @@ function get_keyed_pairs($list, $pairs, $initialBlank = NULL, $other = NULL, $al
 function get_value($object, $item, $default = null)
 {
 	$output = $default;
-	
+
 	if ($default) {
 		$output = $default;
 	}
 	if ($object) {
-		
-		$var_list = get_object_vars ( $object );
-		$var_keys = array_keys ( $var_list );
-		if (in_array ( $item, $var_keys )) {
+
+		$var_list = get_object_vars($object);
+		$var_keys = array_keys($var_list);
+		if (in_array($item, $var_keys)) {
 			$output = ($object->$item);
 		}
 	}
@@ -163,7 +163,7 @@ function get_value($object, $item, $default = null)
  */
 function get_as_price($int)
 {
-	$output = sprintf ( '$%s', number_format ( $int, 2 ) );
+	$output = sprintf('$%s', number_format($int, 2));
 	return $output;
 }
 
@@ -189,7 +189,7 @@ function get_as_time($time)
  */
 function get_user_name($user)
 {
-	return sprintf ( '%s %s', $user->first_name, $user->last_name );
+	return sprintf('%s %s', $user->first_name, $user->last_name);
 }
 
 /**
@@ -199,12 +199,12 @@ function get_user_name($user)
  */
 function format_latin_name($object)
 {
-	$output [] = ucfirst ( $object->genus );
-	
+	$output[] = ucfirst($object->genus);
+
 	if ($object->species) {
-		$output [] = strtolower ( $object->species );
+		$output[] = strtolower($object->species);
 	}
-	return implode ( ' ', $output );
+	return implode(' ', $output);
 }
 
 /**
@@ -218,20 +218,20 @@ function quark_latin_name($genus, $species, $multiple = FALSE)
 {
 	if ($multiple) {
 		if ($species) {
-			$output [] = ucfirst ( substr ( $genus, 0, 1 ) ) . '.';
-			$output [] = strtolower ( $species );
+			$output[] = ucfirst(substr($genus, 0, 1)) . '.';
+			$output[] = strtolower($species);
 		} else {
-			$output [] = NULL;
+			$output[] = NULL;
 		}
 	} else {
 		if ($species) {
-			$output [] = ucfirst ( $genus );
-			$output [] = strtolower ( $species );
-		} else if (! $species) {
-			$output [] = ucfirst ( $genus );
+			$output[] = ucfirst($genus);
+			$output[] = strtolower($species);
+		} else if (!$species) {
+			$output[] = ucfirst($genus);
 		}
 	}
-	return implode ( ' ', $output );
+	return implode(' ', $output);
 }
 
 /**
@@ -242,7 +242,7 @@ function quark_latin_name($genus, $species, $multiple = FALSE)
  */
 function format_catalog($order_id, $category)
 {
-	return sprintf ( '%s%s', ucfirst ( substr ( $category, 0, 1 ) ), $order_id );
+	return sprintf('%s%s', ucfirst(substr($category, 0, 1)), $order_id);
 }
 
 /**
@@ -253,11 +253,11 @@ function format_catalog($order_id, $category)
 function abbr_unit($measure)
 {
 	switch ($measure) {
-		case 'Feet' :
+		case 'Feet':
 			$output = '&#39;';
 			break;
-		case 'Inches' :
-		default :
+		case 'Inches':
+		default:
 			$output = '&quot;';
 			break;
 	}
@@ -271,7 +271,7 @@ function abbr_unit($measure)
  */
 function clean_string($string)
 {
-	return preg_replace ( '/[^a-zA-Z0-9\"\.\<\>\=]+/', ' ', $string );
+	return preg_replace('/[^a-zA-Z0-9\"\.\<\>\=]+/', ' ', $string);
 }
 
 /**
@@ -283,8 +283,8 @@ function clean_string($string)
  */
 function clean_decimal(?string $value)
 {
-	if (round ( $value ) == $value) {
-		$value = round ( $value );
+	if (round($value) == $value) {
+		$value = round($value);
 	}
 	return $value;
 }
@@ -297,24 +297,25 @@ function clean_decimal(?string $value)
  *
  * @return string
  */
-function format_dimensions($min = NULL, $max = NULL, $unit = 'Inches', $direction = FALSE): string {
-	$min = clean_decimal ( $min );
-	$max = clean_decimal ( $max );
+function format_dimensions($min = NULL, $max = NULL, $unit = 'Inches', $direction = FALSE): string
+{
+	$min = clean_decimal($min);
+	$max = clean_decimal($max);
 	$output = '';
-	if (! $min && ! $max) {
+	if (!$min && !$max) {
 		$output = '';
-	} elseif ($min == $max || ($min && ! $max)) {
-		$output = sprintf ( '%s%s', $min, ucfirst ( $unit ) );
-	} elseif ($min == $max || ($max && ! $min)) {
-		$output = sprintf ( '%s%s', $max, ucfirst ( $unit ) );
+	} elseif ($min == $max || ($min && !$max)) {
+		$output = sprintf('%s%s', $min, ucfirst($unit));
+	} elseif ($min == $max || ($max && !$min)) {
+		$output = sprintf('%s%s', $max, ucfirst($unit));
 	} else {
-		$output = sprintf ( '%s~%s%s', $min, $max, ucfirst ( $unit ) );
+		$output = sprintf('%s~%s%s', $min, $max, ucfirst($unit));
 	}
-	
+
 	if ($direction) {
-		$output = sprintf ( '%s%s', $output, $direction );
+		$output = sprintf('%s%s', $output, $direction);
 	}
-	
+
 	return $output;
 }
 
@@ -323,35 +324,36 @@ function format_dimensions($min = NULL, $max = NULL, $unit = 'Inches', $directio
  *
  * @return array
  */
-function format_address(object $grower): array {
-	$street = array ();
+function format_address(object $grower): array
+{
+	$street = array();
 	if ($grower->street_address) {
-		$street [] = $grower->street_address;
+		$street[] = $grower->street_address;
 	}
 	if ($grower->po_box) {
-		$street [] = $grower->po_box;
+		$street[] = $grower->po_box;
 	}
 	if ($grower->city) {
-		$locale = sprintf ( '%s, %s %s', $grower->city, $grower->state, $grower->zip );
+		$locale = sprintf('%s, %s %s', $grower->city, $grower->state, $grower->zip);
 	} else {
 		$locale = '<span class="highlight">NO CITY ENTERED</span>';
 	}
-	if (empty ( $street )) {
+	if (empty($street)) {
 		$street = '<span class="highlight">NO STREET OR PO BOX ENTERED</span>';
 	} else {
-		$street = implode ( ' ', $street );
+		$street = implode(' ', $street);
 	}
-	
-	if (empty ( $grower->country )) {
+
+	if (empty($grower->country)) {
 		$country = 'USA';
 	} else {
 		$country = $grower->country;
 	}
-	
-	return array (
-			'street' => $street,
-			'locale' => $locale,
-			'country' => $country
+
+	return array(
+		'street' => $street,
+		'locale' => $locale,
+		'country' => $country
 	);
 }
 
@@ -365,10 +367,11 @@ function format_address(object $grower): array {
  *         mistakes may have been entered into the system due to a bug in the
  *         user interface.
  */
-function has_price_discrepancy(object $order): string {
-	$plant_value = round ( $order->flat_size * $order->plant_cost, 2 );
+function has_price_discrepancy(object $order): string
+{
+	$plant_value = round($order->flat_size * $order->plant_cost, 2);
 	$output = '';
-	if (abs ( $plant_value - $order->flat_cost ) > .15) {
+	if (abs($plant_value - $order->flat_cost) > .15) {
 		$output = 'price-discrepancy';
 	}
 	return $output;
@@ -380,10 +383,11 @@ function has_price_discrepancy(object $order): string {
  *
  * @return string|null
  */
-function format_email($object, $field): ?string {
-	$email = get_value ( $object, $field );
-	if (filter_var ( $email, FILTER_VALIDATE_EMAIL )) {
-		$output = sprintf ( '<a href="mailto:%s" title="send an email to %s">%s</a>', $email, $email, $email );
+function format_email($object, $field): ?string
+{
+	$email = get_value($object, $field);
+	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		$output = sprintf('<a href="mailto:%s" title="send an email to %s">%s</a>', $email, $email, $email);
 	} else {
 		$output = $email;
 	}
@@ -397,21 +401,21 @@ function format_email($object, $field): ?string {
  * @param string $field        	
  * @return string
  */
-function get_custom_order($values = array(NULL,'Hostas','Daylilies','Coleus','Basil','Lavender'), $field = 'name')
+function get_custom_order($values = array(NULL, 'Hostas', 'Daylilies', 'Coleus', 'Basil', 'Lavender'), $field = 'name')
 {
 	// @TODO there should be a UI-available tool for global sorting.
-	$order [] = 'CASE';
-	for($i = 0; $i < count ( $values ); $i ++) {
-		$my_value = $values [$i];
+	$order[] = 'CASE';
+	for ($i = 0; $i < count($values); $i++) {
+		$my_value = $values[$i];
 		$x = $i + 1;
 		if ($my_value == 'NULL' || $my_value == NULL) {
-			$order [] = 'WHEN `$field` IS NULL THEN' . $x;
+			$order[] = 'WHEN `$field` IS NULL THEN' . $x;
 		} else {
-			$order [] = 'WHEN `$field`="'  . $my_value .'" THEN "' . $x;
+			$order[] = 'WHEN `$field`="'  . $my_value . '" THEN "' . $x;
 		}
 	}
-	$order [] = 'END';
-	return implode ( ' ', $order );
+	$order[] = 'END';
+	return implode(' ', $order);
 }
 
 /**
@@ -421,9 +425,9 @@ function get_custom_order($values = array(NULL,'Hostas','Daylilies','Coleus','Ba
  */
 function css_classify($string)
 {
-	$string = preg_replace ( '~[^A-z\ ]+~', '', $string );
-	$string = str_replace ( ' ', '-', $string );
-	$string = strtolower ( $string );
+	$string = preg_replace('~[^A-z\ ]+~', '', $string);
+	$string = str_replace(' ', '-', $string);
+	$string = strtolower($string);
 	return $string;
 }
 
@@ -436,11 +440,11 @@ function needs_bag($order = NULL)
 {
 	$output = FALSE;
 	if ($order) {
-		if (is_array ( $order )) {
+		if (is_array($order)) {
 			$order = $order[0]; //get just the first order. 
 		}
 		$needs_pot = $order->pot_size;
-		switch($needs_pot){
+		switch ($needs_pot) {
 			case strpos($needs_pot, 'bulb'):
 			case strpos($needs_pot, 'bag'):
 			case strpos($needs_pot, 'bareroot'):
@@ -452,18 +456,20 @@ function needs_bag($order = NULL)
 	return $output;
 }
 
-function get_year_array($selected_year, $range): array {
-	for($i = 1;$i <= $range/2; $i++){
+function get_year_array($selected_year, $range): array
+{
+	for ($i = 1; $i <= $range / 2; $i++) {
 		$output[$selected_year - $i] = $selected_year - $i;
 	}
 	$output[$selected_year] = $selected_year;
-	for($i = 1; $i <= $range/2; $i++){
+	for ($i = 1; $i <= $range / 2; $i++) {
 		$output[$selected_year + $i] = $selected_year + $i;
 	}
 	return $output;
 }
 
 
-function format_string($string, $arguments){
+function format_string($string, $arguments)
+{
 	return strtr($string, $arguments);
 }

@@ -181,8 +181,8 @@ class Menu extends MY_Controller {
 		$category = $this->input->get("category");
 		$value = $this->input->get("value");
 		$field = $this->input->get("field");
-
-		echo $this->_get_dropdown($category, $value, $field, $this->input->get("parent"));
+		$parent_id = $this->input->get("parent");
+		echo $this->_get_dropdown($category, $value, $field, $parent_id);
 	}
 
 	/**

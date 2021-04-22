@@ -215,11 +215,8 @@ function create_edit_field(string $field_name, ?string $value, ?string $label, $
 		$id = $options ['id'];
 	}
 	/* The id is split with the "-" delimiter in javascript when the field is clicked */
-	$output[] = format_string('<@envelope class="field-envelope" id="@table__@field_name__@id">', [
+	$output[] = format_string('<@envelope class="field-envelope">', [
 		'@envelope' => $envelope,
-		'@table' => $table,
-		'@field_name' => $field_name,
-		'@id' => $id,
 	]);
 	if ($label != "") {
 		$output [] = format_string('<label>@label:&nbsp;</label>', ['@label' => $label]);
@@ -242,8 +239,18 @@ function create_edit_field(string $field_name, ?string $value, ?string $label, $
 		$format = sprintf("format='%s'", $options ["format"]);
 	}
 	$data_attributes = '';
+	
+	$primary_data_items = [
+		'id' => $id,
+		'table' => $table,
+		'field' => $field_name,
+	];
+	if(empty($options['data'])){
+		$options['data'] = [];
+	}
+	$options['data'] = array_merge($options['data'], $primary_data_items);
 	if (array_key_exists('data', $options)) {
-		$data_items = [];
+		
 		$data = $options['data'];
 		if (!is_array($data)) {
 			$data = [$data];
@@ -253,6 +260,7 @@ function create_edit_field(string $field_name, ?string $value, ?string $label, $
 		}
 		$data_attributes = implode(" ", $data_items);
 	}
+	
 	$title = '';
 	if (array_key_exists('title', $options)) {
 		//$title = format_string(' title="@title" ', ['@title' => $options['title']]);
@@ -289,9 +297,12 @@ function theme_edit_field($data): string {
 		'value',
 	];
 	ksort($data);
-	if (!empty(array_diff($required_keys, array_keys($data)))) {
-		return '';
-	}
+	try {
+		empty(array_diff($required_keys, array_keys($data)));
+	} catch (Exception $e) {
+		print 'Caught exception: ' .  $e->getMessage() . "\n";
+	};
+
 	$field = NULL;
 	$id = NULL;
 	$table = NULL;
@@ -373,6 +384,9 @@ function live_field(string $field_name, ?string $value, string $table, string $i
 					$input = form_input($field_name, $value, $attributes);
 					$output = str_replace('[input]', $input, $output_wrapper);
 			}
+		} else {
+			$input = form_input($field_name, $value, $attributes);
+			$output = str_replace('[input]', $input, $output_wrapper);
 		}
 	}
 	else {

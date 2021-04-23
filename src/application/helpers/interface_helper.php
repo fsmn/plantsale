@@ -283,7 +283,7 @@ function create_edit_field(string $field_name, ?string $value, ?string $label, $
 		'@envelope' => $envelope,
 
 	]);
-	return implode('\r', $output);
+	return implode('', $output);
 }
 
 /**

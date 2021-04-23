@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: ten7/flight-deck-web:develop-drupal7
+    image: ten7/flightdeck-web-7.4
     ports:
       - "80:80"
     env_file:

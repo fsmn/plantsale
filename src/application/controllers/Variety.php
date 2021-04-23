@@ -458,8 +458,11 @@ class Variety extends MY_Controller
 		if ($field == 'copywriter') {
 			$override = TRUE;
 		}
+		/**
+		 * @todo What is $override for?
+		 */
 		$this->variety->update($id, $values, $override);
-		print $override;
+		// print $override;
 		if ($field == 'editor') {
 			if ($value) {
 				$this->load->model('user_model', 'user');
@@ -469,7 +472,7 @@ class Variety extends MY_Controller
 				$value = '&nbsp;';
 			}
 		}
-		echo $value;
+		print $value;
 	}
 
 	function update_new_status($year)

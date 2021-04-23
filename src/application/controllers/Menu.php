@@ -330,7 +330,6 @@ class Menu extends MY_Controller
 		]);
 		$output = [];
 		$output[] = form_multiselect($field, $pairs, explode(',', $value), "id='$field'");
-		$buttons = implode(' ', $output);
-		print $buttons . sprintf($field);
+		print implode(' ', $output);
 	}
 }

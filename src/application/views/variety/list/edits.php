@@ -9,7 +9,7 @@ $buttons[] = [
 		"text" => "Export Copy Edit List",
 		"title" => "Export selected records for copy editing workflow",
 		"class" => ["button", "export", "export-copy-edit-list"],
-		"href" => $_SERVER['REQUEST_URI'] . "&export=true&export_type=copy_edits&action=full",
+		"href" => htmlspecialchars($_SERVER['REQUEST_URI']) . "&export=true&export_type=copy_edits&action=full",
 ];
 print create_button_bar($buttons);
 ?>

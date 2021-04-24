@@ -1,7 +1,15 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 if (!empty($orders)) {
-	//$filename = 'order_export.csv';
+	if (empty($filename)) {
+		$filename = 'order_export.csv';
+	}
+	$handle = fopen('php://output', 'w');
+	header("Content-type: application/csv");
+	header("Content-Disposition: attachment; filename=" . $filename);
+	header("Pragma: no-cache");
+	header("Expires: 0");
 	// Define the fields desired for output in this array
 	$fields = [
 		'grower_id' => 'Grower ID',
@@ -63,10 +71,9 @@ if (!empty($orders)) {
 	}
 	$header_values = array_keys($fields);
 
-	$output = [
-		implode(',', $header_values),
-	];
+	fputcsv($handle, $header_values);
 	foreach ($orders as $order) {
+		$line = [];
 		$current_year = $order->year;
 		foreach (array_keys($fields) as $key) {
 			if ($key == 'new_year') {
@@ -79,13 +86,8 @@ if (!empty($orders)) {
 				$line[] = $order->$key;
 			}
 		}
-		$output[] = '\'' . implode('\',\'', $line) . '\'';
-		$line = NULL;
+		fputcsv($handle, $line);
 	}
-
-	$data = implode('\n', $output);
-	if (empty($filename)) {
-		$filename = 'order_export.csv';
-	}
-	force_download($filename, $data);
+	fclose($handle);
+	force_download($filename);
 }

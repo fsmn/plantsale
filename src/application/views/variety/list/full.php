@@ -19,12 +19,12 @@ if (IS_ADMIN) {
 			'href' => $_SERVER['HTTP_REFERER'],
 	];
 }
-$buttons[] = [
+/*$buttons[] = [
 		'text' => 'Export Copy Edit List',
 		'title' => 'Export selected records for copy editing workflow',
 		'class' => ['button', 'export', 'export-copy-edit-list'],
-		'href' => $_SERVER['HTTP_REFERER'] . '&export=true&export_type=copy_edits',
-];
+		'href' => htmlspecialchars($_SERVER['HTTP_REFERER']) . '&export=true&export_type=copy_edits',
+];*/
 if (!empty($plants)):
 	print create_button_bar($buttons);
 	?>

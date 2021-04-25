@@ -589,10 +589,7 @@ a.button {
 	border: 1px solid #ddd;
 }
 
-th.self-checking-title,
-th.inventory-tracking-title {
-	border: 1px solid #bbb;
-}
+
 
 table.list td {
 	padding: 5px;

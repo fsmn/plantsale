@@ -71,6 +71,13 @@ table {
 	width: 10.5in;
 }
 
+th.self-checking-title,
+th.inventory-tracking-title {
+	font-size: 2em;
+	background-color: #000000;
+	text-align: right;
+}
+
 td {
 	border: 1px solid black;
 	padding: 5px;

@@ -31,14 +31,11 @@ if ($orders) :
 		<tr>
 			<th>Cat&#35;</th>
 			<th>Grower</th>
-			<th>Genus</th>
 			<th>Common</th>
 			<th>Variety</th>
 			<th>Pot Size</th>
 			<th>Cat&#35;</th>
-			<th>Wed<br/>Rec'd</th>
 			<th>Fri<br/>Rem</th>
-			<th>Sat<br/>Rec'd</th>
 			<th>Sat<br/>Rem</th>
 			<th>Sun<br/>Rem</th>
 		</tr>
@@ -48,14 +45,10 @@ if ($orders) :
 			<tr id="order_<?php print $order->id; ?>">
 				<td><strong><?php print $order->catalog_number; ?></strong></td>
 				<td><?php print $order->grower_id; ?></td>
-				<td><?php print $order->genus; ?></td>
-				<td class="no-wrap"><?php print $order->name; ?></td>
+				<td><strong><?php print $order->name; ?></strong></td>
 				<td class="no-wrap"><?php print $order->variety; ?></td>
 				<td class="no-wrap"><?php print $order->pot_size; ?></td>
 				<td><strong><?php print $order->catalog_number; ?></strong></td>
-				<td></td>
-				<td></td>
-				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

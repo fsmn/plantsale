@@ -81,6 +81,7 @@ th.inventory-tracking-title {
 td {
 	border: 1px solid black;
 	padding: 5px;
+	max-width: 75px;
 }
 
 td:last-child {

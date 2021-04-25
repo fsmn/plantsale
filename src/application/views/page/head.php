@@ -7,15 +7,15 @@
 <title><?php echo $title;?></title>
 <meta http-equiv="refresh" content = "86400; url=<?php echo site_url("auth/logout");?>">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" media="screen"> -->		
-<link type="text/css" rel="stylesheet" media="all" href="<?php echo base_url("css/main.css?") . date("U");?>" />
-<link type="text/css" rel="stylesheet" media="all" href="<?php echo base_url("css/color.css?") . date("U");?>"/>
+<link type="text/css" rel="stylesheet" media="screen" href="<?php echo base_url("css/main.css?") . date("U");?>" />
+<link type="text/css" rel="stylesheet" media="screen" href="<?php echo base_url("css/color.css?") . date("U");?>"/>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" media="screen"/>
-<link type="text/css" rel="stylesheet" media="all" href="<?php echo base_url("css/popup.css?") . date("U")?>" />
+<link type="text/css" rel="stylesheet" media="screen" href="<?php echo base_url("css/popup.css?") . date("U")?>" />
 <?php if(IS_EDITOR): ?>
 <link type="text/css" rel="stylesheet" media="screen" href="<?php echo base_url("css/edit.css?")  . date("U");?>"/>
 <?php endif;?>
 <link type="text/css" rel="stylesheet" media="print" href="<?php echo base_url("css/print.css?")  . date("U");?>" />
-<link type="text/css" rel="stylesheet" media="(max-width:736px)" href="<?php echo base_url("css/mobile.css");?>"/>
+<link type="text/css" rel="stylesheet" media="screen and (max-width:736px)" href="<?php echo base_url("css/mobile.css");?>"/>
 
 <!-- jquery scripts -->
 <script type="text/javascript">

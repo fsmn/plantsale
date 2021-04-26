@@ -536,7 +536,7 @@ function update_field(me, my_type) {
 		url: base_url + my_parent.data('table') + "/update_value",
 		data: form_data,
 		success: function (data) {
-			console.log(data);
+			// console.log(data);
 			me.focus();
 			if (!is_persistent) {
 				$(my_parent).html(data)

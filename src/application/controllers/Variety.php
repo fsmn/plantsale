@@ -479,7 +479,7 @@ class Variety extends MY_Controller {
 				$value = "&nbsp;";
 			}
 		}
-		// echo $value;
+		echo $value;
 	}
 
 	function update_new_status($year) {

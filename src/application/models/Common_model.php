@@ -21,7 +21,7 @@ class Common_model extends MY_Model
 
     function prepare_variables($method = 'post')
     {
-        $variables = array(
+        $variables = [
             'name',
             'genus',
             'description',
@@ -29,7 +29,7 @@ class Common_model extends MY_Model
             'subcategory_id',
             ',other_names',
             'sunlight'
-        );
+        ];
 
         for ($i = 0; $i < count($variables); $i++) {
             $my_variable = $variables[$i];
@@ -63,7 +63,7 @@ class Common_model extends MY_Model
         return $id;
     }
 
-    function update($id, $values = array())
+    function update($id, $values = [])
     {
         return $this->_update('common', $id, $values);
     }
@@ -83,7 +83,7 @@ class Common_model extends MY_Model
 
     function get_by_name($name)
     {
-        $this->db->where('`name` LIKE '%$name%' OR `genus` LIKE '%$name%'');
+        $this->db->where('`name` LIKE ' % $name % ' OR `genus` LIKE ' % $name % '');
         $this->db->order_by('name', 'ASC');
         $this->db->order_by('genus', 'ASC');
         $result = $this->db->get('common')->result();

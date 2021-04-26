@@ -9,19 +9,23 @@ class Field_model extends MY_Model
     var $table;
     var $rec_modifier;
     var $rec_modified;
-    
-    function __construct ()
+
+    function __construct()
     {
         parent::__construct();
     }
 
-    function get ($field, $table)
+    /**
+     * @todo Undefined variable $field_name
+     */
+
+    function get($field, $table)
     {
-        $this->db->where("field", $field);
-        $this->db->where("table", $table);
-        $this->db->from("field");
+        $this->db->where('field', $field);
+        $this->db->where('table', $table);
+        $this->db->from('field');
         $result = $this->db->get()->row();
-        if(empty($result)){
+        if (empty($result)) {
             $result = $field_name;
         }
         return $result;

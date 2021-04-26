@@ -15,26 +15,26 @@ class Contact_model extends MY_Model
     var $rec_modifier;
     var $rec_modified;
 
-    function __construct ()
+    function __construct()
     {
         parent::__construct();
     }
 
-    function prepare_variables ()
+    function prepare_variables()
     {
-        $variables = array(
-                "name",
-                "grower_id",
-                "contact_type",
-                "phone1",
-                "phone1_type",
-                "phone2",
-                "phone2_type",
-                "email",
-                "notes",
-        );
+        $variables = [
+            'name',
+            'grower_id',
+            'contact_type',
+            'phone1',
+            'phone1_type',
+            'phone2',
+            'phone2_type',
+            'email',
+            'notes',
+        ];
 
-        for ($i = 0; $i < count($variables); $i ++) {
+        for ($i = 0; $i < count($variables); $i++) {
             $my_variable = $variables[$i];
             if ($this->input->post($my_variable)) {
                 $this->$my_variable = $this->input->post($my_variable);
@@ -45,39 +45,39 @@ class Contact_model extends MY_Model
         $this->rec_modifier = $this->ion_auth->get_user_id();
     }
 
-    function get ($id)
+    function get($id)
     {
-        return $this->_get("contact",$id);
+        return $this->_get('contact', $id);
     }
 
-    function get_for_grower ($grower_id)
+    function get_for_grower($grower_id)
     {
-        $this->db->where("grower_id", $grower_id);
-        $this->db->from("contact");
-        $this->db->order_by("contact_type");
-        $this->db->order_by("name");
+        $this->db->where('grower_id', $grower_id);
+        $this->db->from('contact');
+        $this->db->order_by('contact_type');
+        $this->db->order_by('name');
         $result = $this->db->get()->result();
         return $result;
     }
 
-    function insert ()
+    function insert()
     {
         $this->prepare_variables();
-        return $this->_insert("contact");
+        return $this->_insert('contact');
     }
 
-    function update ($id)
+    function update($id)
     {
         $this->prepare_variables();
-        $this->db->where("id", $id);
-        $this->db->update("contact", $this);
+        $this->db->where('id', $id);
+        $this->db->update('contact', $this);
     }
 
-    function delete ($id)
+    function delete($id)
     {
         $delete = array(
-                "id" => $id
+            'id' => $id
         );
-        $this->db->delete("contact", $delete);
+        $this->db->delete('contact', $delete);
     }
 }

@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Help_model extends CI_Model
 {
@@ -13,10 +13,10 @@ class Help_model extends CI_Model
 
 	function prepare_variables()
 	{
-		$variables = array("topic","subtopic","text");
-		for($i = 0; $i < count($variables); $i++){
+		$variables = ['topic', 'subtopic', 'text'];
+		for ($i = 0; $i < count($variables); $i++) {
 			$myVariable = $variables[$i];
-			if($this->input->post($myVariable)){
+			if ($this->input->post($myVariable)) {
 				$this->$myVariable = $this->input->post($myVariable);
 			}
 		}
@@ -25,16 +25,16 @@ class Help_model extends CI_Model
 		//$this->recModifier = $this->session->userdata('userID');
 	}
 
-	function get($topic,$subtopic=NULL)
+	function get($topic, $subtopic = NULL)
 	{
-		$this->db->select("text");
-		$this->db->where("topic", $topic);
-		if($subtopic){
-			$this->db->where("subtopic", $subtopic);
+		$this->db->select('text');
+		$this->db->where('topic', $topic);
+		if ($subtopic) {
+			$this->db->where('subtopic', $subtopic);
 		}
-		$this->db->from("help");
+		$this->db->from('help');
 		$row = $this->db->get()->row();
 		return $row->text;
-	}//end showHelp
+	} //end showHelp
 
 }

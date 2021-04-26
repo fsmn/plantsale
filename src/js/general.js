@@ -537,7 +537,6 @@ function update_field(me, my_type) {
 		data: form_data,
 		success: function (data) {
 			console.log(data);
-			// redirects focus back on textarea
 			me.focus();
 			if (!is_persistent) {
 				$(my_parent).html(data)

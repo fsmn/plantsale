@@ -80,11 +80,11 @@
 <div class='column-right column last'></div>
 <div class='column first  common-varieties'>
     <?php
-        if (IS_EDITOR) {
-            print create_button_bar([
-                $buttons['add_variety']
-            ]);
-        }
+    if (IS_EDITOR) {
+        print create_button_bar([
+            $buttons['add_variety']
+        ]);
+    }
     ?>
     <?php $this->load->view('variety/list/list'); ?>
 </div>

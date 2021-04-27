@@ -1,20 +1,20 @@
-<h1><?php echo lang('create_group_heading');?></h1>
-<p><?php echo lang('create_group_subheading');?></p>
+<h1><?php print lang('create_group_heading'); ?></h1>
+<p><?php print lang('create_group_subheading'); ?></p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<div id="infoMessage"><?php print $message; ?></div>
 
-<?php echo form_open("auth/create_group");?>
+<?php print form_open('auth/create_group'); ?>
 
-      <p>
-            <?php echo form_label("Group Name:", 'group_name');?> <br />
-            <?php echo form_input($group_name);?>
-      </p>
+<p>
+    <?php print form_label('Group Name:', 'group_name'); ?> <br />
+    <?php print form_input($group_name); ?>
+</p>
 
-      <p>
-            <?php echo form_label("Description:", 'description');?> <br />
-            <?php echo form_input($description);?>
-      </p>
+<p>
+    <?php print form_label('Description:', 'description'); ?> <br />
+    <?php print form_input($description); ?>
+</p>
 
-      <p><?php echo form_submit('submit', "Add Group","class='button new'");?></p>
+<p><?php print form_submit('submit', 'Add Group', 'class="button new"'); ?></p>
 
-<?php echo form_close();?>
+<?php print form_close(); ?>

@@ -6,10 +6,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <h4>A PHP Error was encountered</h4>
 
-<p>Severity: <?php echo $severity; ?></p>
-<p>Message:  <?php echo $message; ?></p>
-<p>Filename: <?php echo $filepath; ?></p>
-<p>Line Number: <?php echo $line; ?></p>
+<p>Severity: <?php print $severity; ?></p>
+<p>Message:  <?php print $message; ?></p>
+<p>Filename: <?php print $filepath; ?></p>
+<p>Line Number: <?php print $line; ?></p>
 
 <?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE): ?>
 
@@ -19,9 +19,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php if (isset($error['file']) && strpos($error['file'], realpath(BASEPATH)) !== 0): ?>
 
 			<p style="margin-left:10px">
-			File: <?php echo $error['file'] ?><br />
-			Line: <?php echo $error['line'] ?><br />
-			Function: <?php echo $error['function'] ?>
+			File: <?php print $error['file'] ?><br />
+			Line: <?php print $error['line'] ?><br />
+			Function: <?php print $error['function'] ?>
 			</p>
 
 		<?php endif ?>

@@ -1,17 +1,17 @@
 <div class="login">
-<h2><?php echo lang('forgot_password_heading');?></h2>
-<p><?php echo sprintf(lang('forgot_password_subheading'), $identity_label);?></p>
+      <h2><?php print lang('forgot_password_heading'); ?></h2>
+      <p><?php print sprintf(lang('forgot_password_subheading'), $identity_label); ?></p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+      <div id="infoMessage"><?php print $message; ?></div>
 
-<?php echo form_open("auth/forgot_password");?>
+      <?php print form_open('auth/forgot_password'); ?>
 
       <p>
-      	<label for="email"><?php echo sprintf("%s:", $identity_label);?></label>
-      	<?php echo form_input($email);?>
+            <label for="email"><?php print sprintf('%s:', $identity_label); ?></label>
+            <?php print form_input($email); ?>
       </p>
 
-      <p><?php echo form_submit('submit', "Reset Password","class='button edit'");?></p>
+      <p><?php print form_submit('submit', 'Reset Password', 'class="button edit"'); ?></p>
 
-<?php echo form_close();?>
+      <?php print form_close(); ?>
 </div>

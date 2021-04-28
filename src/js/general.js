@@ -180,8 +180,6 @@
 				url: base_url + "menu/edit_value",
 				data: form_data,
 				success: function (data) {
-					// console.log(data);
-					// console.log(my_parent.children());
 					my_parent.children(".edit-field").html(data).removeClass("edit-field").removeClass("field").addClass("live-field").addClass("text");
 					//$("#" + my_parent + " .live-field input").focus();
 				}
@@ -538,7 +536,8 @@ function update_field(me, my_type) {
 		url: base_url + my_parent.data('table') + "/update_value",
 		data: form_data,
 		success: function (data) {
-			console.log(data);
+			// console.log(data);
+			me.focus();
 			if (!is_persistent) {
 				$(my_parent).html(data)
 				$(my_parent).removeClass("live-field text");

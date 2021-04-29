@@ -134,7 +134,8 @@ class Variety_Model extends MY_Model
 
 	function get_by_name($name)
 	{
-		$this->db->where('`variety` LIKE "%' . $name . '%" OR `common`.`name` LIKE "%' . $name .'%" OR `variety`.`species` LIKE  "%' .$name . '%" OR `common`.`genus` LIKE "%' . $name . '%"');
+		$query_string = format_string('`variety` LIKE "%@name%" OR `common`.`name` LIKE "%@name%" OR `variety`.`species` LIKE  "%@name%" OR `common`.`genus` LIKE "%@name%"',['@name'=>$name]);
+		$this->db->where($query_string);
 		$this->db->join('common', 'variety.common_id=common.id');
 		$this->db->join('category', 'common.category_id = category.id', 'LEFT');
 		$this->db->join('subcategory', 'common.subcategory_id = subcategory.id', 'LEFT');
@@ -142,8 +143,7 @@ class Variety_Model extends MY_Model
 		$this->db->order_by('common.name', 'ASC');
 		$this->db->select('variety.*, variety.id as id, variety.common_id as common_id, common.name as common_name, common.genus,  category.category, subcategory.subcategory, common.description');
 
-		$result = $this->db->get('variety')->result();
-		return $result;
+		return $this->db->get('variety')->result();
 	}
 
 	function get_value($id, $field)
@@ -172,9 +172,9 @@ class Variety_Model extends MY_Model
 		if (!$year) {
 			$year = $this->session->userdata('sale_year');
 		}
-		$query = sprintf('select * from `orders`,variety where `orders`.`variety_id` = %s and variety.id = `orders`.variety_id  and  not exists(select `year` from `orders` where `year` < %s and variety_id = %s)  having `orders`.`year` = %s', $id, $year, $id, $year);
-		$result = $this->db->query($query)->num_rows();
-		return $result;
+		$query = format_string('select * from `orders`,`variety` where `orders`.`variety_id` = @id and variety.id = `orders`.variety_id  and  not exists(select `year` from `orders` where `year` < @year and variety_id = @id)  having `orders`.`year` = @year',
+		['@id'=>$id, '@year'=>$year]);
+		return $this->db->query($query)->num_rows();
 	}
 
 	function update_all($year)
@@ -405,7 +405,8 @@ class Variety_Model extends MY_Model
 			])) {
 				$this->db->like($parameter->key, $parameter->value);
 			} elseif ($parameter->key == 'descriptions') {
-				$this->db->where('(`common`.`description` LIKE ' % $parameter->value % ' OR `variety`.`web_description` LIKE ' % $parameter->value % ' OR `variety`.`print_description` LIKE ' % $parameter->value % ')', NULL, FALSE);
+				$query = format_string('(`common`.`description` LIKE "%@value%" OR `variety`.`web_description` LIKE "@value" OR `variety`.`print_description` LIKE  "%@value%")',['@value'=>$parameter->value]);
+				$this->db->where($query, NULL, FALSE);
 			} elseif ($parameter->key == 'omit') {
 				$this->db->where('(orders.omit is NULL OR orders.omit != 1)', NULL, FALSE);
 			} elseif ($parameter->key == 'not_flag') {

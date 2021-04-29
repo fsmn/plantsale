@@ -20,16 +20,14 @@ class User_model extends MY_Model
 		$this->db->where('active', 1);
 		$this->db->order_by('username');
 		$this->db->select('id,CONCAT(`first_name`," ",`last_name`) as `name`', FALSE);
-		$result = $this->db->get()->result();
-		return $result;
+		return $this->db->get()->result();
 	}
 
 	function get_user($id)
 	{
 		$this->db->from('users');
 		$this->db->where('id', $id);
-		$output = $this->db->get()->row();
-		return $output;
+		return $this->db->get()->row();
 	}
 
 	function get_by_name($name)
@@ -41,7 +39,6 @@ class User_model extends MY_Model
 
 		$this->db->where('first_name', $first_name);
 		$this->db->where('last_name', $last_name);
-		$output = $this->db->get()->row();
-		return $output;
+		return $this->db->get()->row();
 	}
 }

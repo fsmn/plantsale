@@ -12,8 +12,9 @@
 	},
 	"require": {
 		"php": ">=7.2",
-		"aws/aws-sdk-php": "^3.111"
-	},
+		"aws/aws-sdk-php": "^3.111",
+      "ext-json": "*"
+    },
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},

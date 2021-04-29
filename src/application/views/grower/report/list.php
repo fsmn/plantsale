@@ -60,7 +60,7 @@ print create_button_bar($buttons);
 	</thead>
 	<tbody>
 		<?php
-		print implode("\r", $growers); ?>
+		print implode('\r', $growers); ?>
 	</tbody>
 	<tfoot>
 		<tr>

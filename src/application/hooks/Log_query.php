@@ -50,12 +50,11 @@ class Log_Query
 		}
 	}
 
-	/**
-	 * @todo Undefined variable in this function
-	 */
+
 
 	public function run()
 	{
+		$result = NULL;
 		if ($this->_enabled === false) {
 			return false;
 		}

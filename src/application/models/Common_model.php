@@ -83,7 +83,7 @@ class Common_model extends MY_Model
 
     function get_by_name($name)
     {
-        $this->db->where('`name` LIKE ' % $name % ' OR `genus` LIKE ' % $name % '');
+        $this->db->where('`name` LIKE "%' . $name .  '%" OR `genus` LIKE "%' .$name . '%"');
         $this->db->order_by('name', 'ASC');
         $this->db->order_by('genus', 'ASC');
         $result = $this->db->get('common')->result();

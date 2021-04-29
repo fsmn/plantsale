@@ -46,7 +46,7 @@ class Menu extends MY_Controller
 	{
 		if (IS_ADMIN) {
 			$data['title'] = 'Editing a Menu Item';
-			$data['target'] = "menu/edit";
+			$data['target'] = 'menu/edit';
 			$data['ajax'] = FALSE;
 			$data['action'] = 'insert';
 			$data['item'] = NULL;

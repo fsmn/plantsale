@@ -532,6 +532,7 @@ class Variety extends MY_Controller
 	function batch_update()
 	{
 		if (IS_ADMIN) {
+			$result = NULL;
 			if ($this->input->post('action') == 'edit') {
 				if ($this->input->post('field') == 'online_only') {
 					$data['ids'] = $this->input->post('ids');
@@ -826,9 +827,9 @@ class Variety extends MY_Controller
 			'value',
 		]);
 		$output = [];
-		$output[] = form_multiselect($field, $pairs, $value, "id='$field'");
+		$output[] = form_multiselect($field, $pairs, $value, 'id="'. $field . '"');
 		$buttons = implode(' ', $output);
-		print $buttons . sprintf($field);
+		print $buttons . $field;
 	}
 
 	function toggle()

@@ -33,7 +33,7 @@ class Inventory extends MY_Controller
 				redirect('inventory/index/' . $catalog_number);
 			}
 		} else {
-			$this->_log("You did not enter a catalog number. This doesn't work unless you enter a catalog number.");
+			$this->_log('You did not enter a catalog number. This doesn\'t work unless you enter a catalog number.');
 			redirect('inventory/index');
 		}
 	}

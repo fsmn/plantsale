@@ -15,10 +15,6 @@ class Field_model extends MY_Model
         parent::__construct();
     }
 
-    /**
-     * @todo Undefined variable $field_name
-     */
-
     function get($field, $table)
     {
         $this->db->where('field', $field);
@@ -26,7 +22,7 @@ class Field_model extends MY_Model
         $this->db->from('field');
         $result = $this->db->get()->row();
         if (empty($result)) {
-            $result = $field_name;
+            $result = $field;
         }
         return $result;
     }

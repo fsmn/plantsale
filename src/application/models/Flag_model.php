@@ -85,10 +85,12 @@ class Flag_Model extends MY_Model
 
 	/**
 	 * finds all the flags for a variety and returns a key-value pair multi-array
-	 * @param unknown $variety_id
+	 *
+	 * @param int $variety_id
+	 *
 	 * @return array
 	 */
-	function get_missing($variety_id)
+	function get_missing(int $variety_id)
 	{
 		$current_flags = $this->get_for_variety($variety_id);
 		$flag_list = [];

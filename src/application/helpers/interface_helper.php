@@ -254,7 +254,7 @@ function create_edit_field(string $field_name, ?string $value, ?string $label, $
 			$data = [$data];
 		}
 		foreach ($data as $data_key => $data_value) {
-			$data_items[] = 'data-' . $data_key . '="' . $data_value . '"';
+			$data_items[] = 'data-' . $data_key . '=' . $data_value;
 		}
 		$data_attributes = implode(' ', $data_items);
 	}

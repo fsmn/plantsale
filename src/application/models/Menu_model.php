@@ -75,8 +75,7 @@ class Menu_Model extends MY_Model
         }
         $this->db->group_by('category');
         $this->db->order_by('category', 'ASC');
-        $result = $this->db->get()->result();
-        return $result;
+			return $this->db->get()->result();
     }
 
     function get_all($category = FALSE)
@@ -87,8 +86,7 @@ class Menu_Model extends MY_Model
         if ($category) {
             $this->db->where('category', $category);
         }
-        $result = $this->db->get()->result();
-        return $result;
+			return $this->db->get()->result();
     }
 
     function get_pairs($category, $order_by = [])
@@ -110,8 +108,7 @@ class Menu_Model extends MY_Model
 
         $this->db->order_by($order_field, $direction);
         $this->db->from('menu');
-        $result = $this->db->get()->result();
-        return $result;
+			return $this->db->get()->result();
     }
 
     function get_value($category, $key)
@@ -119,7 +116,6 @@ class Menu_Model extends MY_Model
         $this->db->from('menu');
         $this->db->where('category', $category);
         $this->db->where('key', $key);
-        $value = $this->db->get()->row()->value;
-        return $value;
+			return $this->db->get()->row()->value;
     }
 }

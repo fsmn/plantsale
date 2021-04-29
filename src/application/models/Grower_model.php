@@ -129,7 +129,7 @@ class grower_model extends MY_Model
 		$this->db->order_by('grower.id', 'ASC');
 		$this->db->group_by('grower.id');
 		$result = $this->db->get()->result();
-		// $this->_log("alert");
+		$this->_log("alert");
 		return $result;
 	}
 

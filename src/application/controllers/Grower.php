@@ -87,7 +87,7 @@ class Grower extends MY_Controller
 	{
 		$this->grower->insert();
 		$id = $this->input->post('id');
-		redirect('grower/view/$id');
+		redirect('grower/view/' . $id);
 	}
 
 	function update_value()

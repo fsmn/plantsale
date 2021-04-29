@@ -246,6 +246,7 @@ function create_edit_field(string $field_name, ?string $value, ?string $label, $
 		$options['data'] = [];
 	}
 	$options['data'] = array_merge($options['data'], $primary_data_items);
+	$data_items = [];
 	if (array_key_exists('data', $options)) {
 
 		$data = $options['data'];
@@ -410,7 +411,7 @@ function live_field(string $field_name, ?string $value, string $table, string $i
  *
  * @TODO add id option
  */
-function create_checkbox($name, $values, $selections = [])
+function create_checkbox(string $name, array $values, $selections = [])
 {
 	$output = [];
 	foreach ($values as $value) {
@@ -470,21 +471,21 @@ function add_fa_icon($class = [])
 	}
 	if (in_array('reorder', $class)) {
 		$output = '&nbsp;<i class="fa fa-shopping-cart"></i>';
-	} elseif (in_array("export", $class)) {
+	} elseif (in_array('export', $class)) {
 		$output = '&nbsp;<i class="fa fa-download"></i>';
-	} elseif (in_array("edit", $class)) {
+	} elseif (in_array('edit', $class)) {
 		$output = '&nbsp;<i class="fa fa-pencil-square-o"></i>';
-	} elseif (in_array("update", $class)) {
+	} elseif (in_array('update', $class)) {
 		$output = '&nbsp;<i class="fa fa-arrow-up"></i>';
-	} elseif (in_array("new", $class)) {
+	} elseif (in_array('new', $class)) {
 		$output = '&nbsp;<i class="fa fa-star"></i>';
-	} elseif (in_array("details", $class)) {
+	} elseif (in_array('details', $class)) {
 		$output = '&nbsp;<i class="fa fa-eye"></i>';
-	} elseif (in_array("refine", $class)) {
+	} elseif (in_array('refine', $class)) {
 		$output = '&nbsp;<i class="fa fa-search"></i>';
-	} elseif (in_array("delete", $class)) {
+	} elseif (in_array('delete', $class)) {
 		$output = '&nbsp;<i class="fa fa-exclamation-triangle"></i>';
-	} elseif (in_array("print", $class)) {
+	} elseif (in_array('print', $class)) {
 		$output = '&nbsp;<i class="fa fa-print"></i>';
 	} else {
 		$output = '';
@@ -567,11 +568,13 @@ function toggle_button($controller, $id, $field, $value)
 
 /**
  * Issue #82 create a toggle function
- * @todo Undefined method update
+ *
  * @param $controller
  * @param \MY_Model $model
+ * @param $value
  *
  * @return false|string
+ * @todo Undefined method update
  */
 function toggle($controller, MY_Model $model, $value)
 {

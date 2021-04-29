@@ -83,7 +83,7 @@ class Backup extends MY_Controller {
 	function _backup_csv($table) {
 		$this->load->dbutil();
 		$query = NULL;
-		$query = ('SELECT * FROM `$table`');
+		$query = ('SELECT * FROM `' . $table . '`');
 		$filename = sprintf('s%-backup-%s.csv', $table, date('Y-m-d-H-i-s'));
 		$path = sprintf('/tmp/');
 		$temp_file = $path . $filename;

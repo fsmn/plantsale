@@ -56,8 +56,7 @@ class Contact_model extends MY_Model
         $this->db->from('contact');
         $this->db->order_by('contact_type');
         $this->db->order_by('name');
-        $result = $this->db->get()->result();
-        return $result;
+			return $this->db->get()->result();
     }
 
     function insert()

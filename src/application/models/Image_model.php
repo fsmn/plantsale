@@ -27,7 +27,7 @@ class Image_Model extends MY_Model
         for ($i = 0; $i < count($variables); $i++) {
             $my_variable = $variables[$i];
             if ($this->input->post($my_variable)) {
-                $this->$my_variable = $this->input->post($my_variable);
+                $this->{$my_variable} = $this->input->post($my_variable);
             }
         }
 
@@ -82,7 +82,6 @@ class Image_Model extends MY_Model
     function delete($id)
     {
         if (IS_EDITOR) {
-            $image = $this->get($id);
             $id_array = [
                 'id' => $id
             ];
@@ -116,7 +115,6 @@ class Image_Model extends MY_Model
         }
 
         $query = $this->db->get();
-        $result = $query->result();
-        return $result;
+			return $query->result();
     }
 }

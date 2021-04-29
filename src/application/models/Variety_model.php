@@ -134,7 +134,7 @@ class Variety_Model extends MY_Model
 
 	function get_by_name($name)
 	{
-		$this->db->where('`variety` LIKE ' % $name % ' OR `common`.`name` LIKE ' % $name % ' OR `variety`.`species` LIKE ' % $name % ' OR `common`.`genus` LIKE ' % $name % '');
+		$this->db->where('`variety` LIKE "%' . $name . '%" OR `common`.`name` LIKE "%' . $name .'%" OR `variety`.`species` LIKE  "%' .$name . '%" OR `common`.`genus` LIKE "%' . $name . '%"');
 		$this->db->join('common', 'variety.common_id=common.id');
 		$this->db->join('category', 'common.category_id = category.id', 'LEFT');
 		$this->db->join('subcategory', 'common.subcategory_id = subcategory.id', 'LEFT');
@@ -179,6 +179,7 @@ class Variety_Model extends MY_Model
 
 	function update_all($year)
 	{
+		$output = [];
 		if (IS_EDITOR) {
 			$output = [];
 			$this->db->select('id');
@@ -221,8 +222,7 @@ class Variety_Model extends MY_Model
 		$this->db->order_by('variety.variety');
 		$this->db->select('variety.*');
 		$this->db->select('common.description,common.name');
-		$result = $this->db->get()->result();
-		return $result;
+		return $this->db->get()->result();
 	}
 
 	/**
@@ -327,9 +327,9 @@ class Variety_Model extends MY_Model
 			if ($this->input->get($my_variable) && $this->input->get($my_variable) != '') {
 				$my_value = $this->input->get($my_variable);
 				if ($my_value) {
-					$my_parameters->$my_variable = new stdClass();
-					$my_parameters->$my_variable->key = $my_variable;
-					$my_parameters->$my_variable->value = $my_value;
+					$my_parameters->{$my_variable} = new stdClass();
+					$my_parameters->{$my_variable}->key = $my_variable;
+					$my_parameters->{$my_variable}->value = $my_value;
 				}
 			}
 		}
@@ -491,9 +491,8 @@ class Variety_Model extends MY_Model
 			$this->db->delete('flag', [
 				'variety_id' => $id,
 			]);
-		} else {
-			return FALSE;
 		}
+			return FALSE;
 	}
 
 	function batch_update($ids, $field, $value)

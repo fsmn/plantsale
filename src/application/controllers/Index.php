@@ -140,7 +140,7 @@ class Index extends MY_Controller {
 		elseif ($category) {
 			$categories = $category;
 		}
-		$filename = sprintf('quark-export_%s-%s.txt', $categories, date('Y-m-d-H-i-s'));
+		$filename = format_string('quark-export-@categories-@date',['@categories'=>$categories, '@date'=>date('Y-m-d-H-i-s')]);
 		$output = ['<v8.1><e9>'];
 		foreach ($commons as $common) {
 			$data['common'] = $common;

@@ -469,7 +469,9 @@ function get_year_array($selected_year, $range): array
 }
 
 
-function format_string($string, $arguments)
-{
+function format_string($string, $arguments): string {
+	foreach($arguments as $key=>$value){
+		$arguments[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+	}
 	return strtr($string, $arguments);
 }

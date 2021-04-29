@@ -145,7 +145,6 @@ class Variety extends MY_Controller
 				'descriptions',
 				'editor',
 				'copywriter',
-				'copy_received',
 				'edit_notes',
 				'needs_copy_review',
 				'churn_value',
@@ -650,7 +649,7 @@ class Variety extends MY_Controller
 		$data['plants'] = $this->variety->get_varieties_for_year(get_current_year(), TRUE);
 		$data['year'] = get_current_year();
 		$data['title'] = 'Printable List';
-		$data['target'] = 'variety/print/paper_waste';
+		$data['target'] = 'variety/print/copy_edits';
 		$data['format'] = 'print';
 		$data['classes'] = '';
 		$this->load->view('variety/print/index', $data);

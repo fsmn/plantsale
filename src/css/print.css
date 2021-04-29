@@ -60,12 +60,15 @@ h1,h2,h3,h4,h5 {
 blockquote {
 	font-size: 85%;
 }
+.message {
+	display: none;
+}
 
 table {
 	border: 1px;
 	font-size: 14px;
 	border-collapse: collapse;
-	width: 100%;
+	width: 10.5in;
 }
 
 td {

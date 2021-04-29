@@ -9,15 +9,17 @@ if ($orders) :
 	<table class="list shelf-checking small">
 		<thead>
 			<tr>
-				<th>Grw</th>
+				<th class="self-checking-title"><?php print $options['category']; ?></th>
+			</tr>
+			<tr>
 				<th>Yr</th>
 				<th>Cat&#35;</th>
-				<th class="text-cell">Common</th>
+				<th class="text-cell">Common Name</th>
 				<th class="no-wrap">Pot-Size</th>
 				<th class="text-cell">Variety</th>
 				<th>Weds<br />Ordered</th>
-				<th>Not<br />There</th>
-				<th>Very<br /> Short</th>
+				<th>Qty</th>
+				<th class="no-wrap">Too tall<br /> for table</th>
 				<th>Needs<br />Sign</th>
 				<th>Needs<br />Tags</th>
 				<th>Comments</th>
@@ -26,7 +28,6 @@ if ($orders) :
 		<tbody>
 			<?php foreach ($orders as $order) : ?>
 				<tr id="order_<?php print $order->id; ?>">
-					<td><?php print $order->grower_id; ?></td>
 					<td><?php print $order->year; ?></td>
 					<td><?php print $order->catalog_number; ?></td>
 					<td><?php print $order->name; ?></td>

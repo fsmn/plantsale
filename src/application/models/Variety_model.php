@@ -105,7 +105,8 @@ class Variety_Model extends MY_Model
 		$result = $this->db->get()->result();
 		$this->load->model('order_model', 'orders');
 		foreach ($result as $variety) {
-			$year = $this->db->query(sprintf('SELECT `year` FROM `orders` `o` WHERE `o`.`variety_id` = ' . $variety->id . ' ORDER BY `o`.`year` DESC LIMIT 1'))
+			$year_query = format_string('SELECT `year` FROM `orders` `o` WHERE `o`.`variety_id` = @variety_id ORDER BY `o`.`year` DESC LIMIT 1',['@variety_id'=>$variety->id]);
+			$year = $this->db->query($year_query)
 				->row();
 			if ($year) {
 				$variety->year = $year->year;

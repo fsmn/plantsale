@@ -1,6 +1,7 @@
 body {
 	border: none !important;
 	margin: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a,a:visited,a:hover,a:active {

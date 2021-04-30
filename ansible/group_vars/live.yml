@@ -25,6 +25,22 @@ s3fs_root_folder: "db.friendsschoolplantsale.com"
 s3fs_public_folder: "files"
 s3fs_private_folder: "private"
 
+digitalocean_domains:
+  - name: "t7live.io"
+    records:
+      - name: "backoffice"
+        type: "A"
+        value: "159.203.51.233"
+        state: present
+        ttl: 300
+  - name: "friendsschoolplantsale.com"
+    records:
+      - name: "db"
+        type: "A"
+        value: "159.203.51.233"
+        state: present
+        ttl: 300
+
 flightdeck_cluster:
   namespace: "db-friendsschoolplantsale-com"
   configMaps:

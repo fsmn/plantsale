@@ -9,6 +9,14 @@
       notify:
         - delete temp items
 
+    - name: Provision domains
+      include_role:
+        name: "ten7.digitalocean_domain"
+      loop: "{{ digitalocean_domains | default([]) }}"
+      loop_control:
+        label: "{{ digitalocean_domain.name | default('undefined') }}"
+        loop_var: digitalocean_domain
+
     - name: Get the kubeconfig file.
       import_role:
         name: ten7.digitalocean_kubeconfig

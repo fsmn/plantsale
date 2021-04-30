@@ -15,6 +15,7 @@ if (!empty($orders)) :
 	<?php endif; ?>
 	<!-- order/tracking -->
 	<h3 class="no-print">Inventory Tracking Printable Report</h3>
+	<?php print create_button_bar(['refine'=>['text'=>'Refine','class'=>['no-print','search','button','refine','dialog'], 'href'=>base_url('order/search')]]); ?>
 
 	<table class="list tracking small">
 		<thead>

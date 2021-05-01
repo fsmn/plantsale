@@ -484,6 +484,10 @@ function show_popup(my_title, data, popup_width, x, y) {
 function update_field(me, my_type) {
 	let my_parent = $(me).parent();
 	let my_value = $(me).val();
+	if( $(me).hasClass("persistent")){
+		my_parent = $(me);
+	}
+	let is_persistent = my_parent.hasClass("persistent");
 
 	let my_category = false;
 
@@ -500,20 +504,20 @@ function update_field(me, my_type) {
 				my_value = 1;
 			} else {
 				my_value = 0;
-			};
+			}
 			break;
 		case ("boolean"):
 			if ($(me).attr("checked") === true) {
 				my_value = 'yes';
 			} else {
 				my_value = 'no';
-			};
+			}
 			break;
 		default:
 			break;
 	}
 
-	let is_persistent = my_parent.hasClass("persistent");
+
 
 	//don't do anything if the value is empty and it is a persistent field 
 	if (is_persistent && my_value === "") {
@@ -530,6 +534,7 @@ function update_field(me, my_type) {
 		category: my_category,
 		type: my_type,
 	};
+	console.log(my_parent.data('table'));
 
 	$.ajax({
 		type: "post",

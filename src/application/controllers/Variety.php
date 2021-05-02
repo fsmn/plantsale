@@ -55,20 +55,13 @@ class Variety extends MY_Controller
 		$id = $this->variety->insert();
 		if ($this->input->post('add_order')) {
 			//@TODO fix this. It doesn't re-populate the form.
+			redirect('order/create?ajax=1&variety_id=' . $id);
+		}
+		else{
+			redirect('variety/view/' . $id);
 
-			$data['variety_id'] = $id;
-			$data['order'] = $this->order->get_previous_year($data['variety_id'], get_current_year());
-			$pot_sizes = $this->order->get_pot_sizes();
-			$data['pot_sizes'] = get_keyed_pairs($pot_sizes, [
-				'pot_size',
-				'pot_size',
-			]);
-			$data['action'] = 'insert';
-			print $this->load->view('order/edit', $data, TRUE);
-			return TRUE;
 		}
 
-		redirect('variety/view/' . $id);
 	}
 
 	function view($id) {

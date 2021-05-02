@@ -83,18 +83,23 @@ $(document).on("click","#edit-common-id #revert",function(){
 
 
 			
-$(document).on("click",".variety-insert",function(){
+$(document).on("click",".variety-insert",function(e){
+
 	if($("#add_order").attr("checked")){
 		$.ajax({
 			type: "post",
 			url: base_url + "variety/insert",
 			data: $("#variety-editor").serializeArray(),
+
 			success: function(data) {
 				$("#ui-dialog-title-popup").html("New Order");
 				$("#popup").html(data);
 			}
 		});
 		return false;
+	}
+	else{
+		$("#variety-editor").submit();
 	}
 
 });

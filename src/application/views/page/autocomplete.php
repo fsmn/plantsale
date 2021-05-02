@@ -1,5 +1,12 @@
-<?php  defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
-$buttons[] = array("text"=>"Turn Autocomplete Off","class"=>array("link","autocomplete-off"),"style"=>"default");
+$buttons[] = [
+    'text' => 'Turn Autocomplete Off',
+    'class' => [
+        'link',
+        'autocomplete-off'
+    ],
+    'style' => 'default'
+];
 
-echo create_button_bar($buttons);
+print create_button_bar($buttons);

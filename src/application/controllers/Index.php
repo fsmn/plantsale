@@ -30,6 +30,7 @@ class Index extends MY_Controller {
 
 	function show_set_year() {
 		$data ['uri'] = $this->input->get('uri');
+		$data['title'] = 'Temporarily change the year';
 		$this->load->view('utility/sale_year', $data);
 	}
 

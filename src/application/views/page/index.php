@@ -7,23 +7,23 @@ if (isset($print) && $print == TRUE) {
 	$print = FALSE;
 }
 $body_classes[] = $this->uri->segment(1);
-if ($this->uri->segment(1) == "") {
-	$body_classes[] = "front";
+if ($this->uri->segment(1) == '') {
+	$body_classes[] = 'front';
 }
 
 if ($this->ion_auth->logged_in()) {
-	$body_classes[] = "logged-in";
+	$body_classes[] = 'logged-in';
 	if (IS_EDITOR) {
 
-		$body_classes[] = "editor";
+		$body_classes[] = 'editor';
 	} else {
-		$body_classes[] = "viewer";
+		$body_classes[] = 'viewer';
 	}
 } else {
-	$body_classes[] = "not-logged-in";
+	$body_classes[] = 'not-logged-in';
 }
 
-$body_class = implode(" ", $body_classes);
+$body_class = implode(' ', $body_classes);
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +32,7 @@ $body_class = implode(" ", $body_classes);
 	<?php $this->load->view('page/head'); ?>
 </head>
 
-<body class="browser <?php echo $body_class; ?>">
+<body class="browser <?php print $body_class; ?>">
 	<div id="page-wrapper">
 		<div id="page">
 			<?php if (!$print) : ?>
@@ -62,7 +62,7 @@ $body_class = implode(" ", $body_classes);
 			<div id="main">
 				<!-- content -->
 				<div id="content">
-					<?php $this->load->view("page/messages"); ?>
+					<?php $this->load->view('page/messages'); ?>
 					<?php
 					$this->load->view($target);
 					?></div>

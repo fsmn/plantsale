@@ -1,6 +1,7 @@
 body {
 	border: none !important;
 	margin: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a,a:visited,a:hover,a:active {
@@ -71,9 +72,17 @@ table {
 	width: 10.5in;
 }
 
+th.self-checking-title,
+th.inventory-tracking-title {
+	font-size: 2em;
+	background-color: #000000;
+	text-align: right;
+}
+
 td {
 	border: 1px solid black;
 	padding: 5px;
+	max-width: 75px;
 }
 
 td:last-child {

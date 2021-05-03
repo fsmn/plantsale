@@ -102,7 +102,7 @@ class Common extends MY_Controller {
 			$data ['varieties'] = $this->variety->get_for_common($id);
 			$data['relatives'] = $this->common->get_relatives($id, $common->genus);
 			$data ['common'] = $common;
-			$data ['title'] = sprintf('Viewing Common Name: %s', $common->name);
+			$data ['title'] = format_string('Viewing Common Name: @name', ['@name' => $common->name]);
 			$data ['target'] = 'common/view';
 			$this->load->view('page/index', $data);
 		}

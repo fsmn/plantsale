@@ -26,7 +26,7 @@ class Grower extends MY_Controller
 			], TRUE);
 			$data['grower'] = $grower;
 			$data['target'] = 'grower/view';
-			$data['title'] = sprintf('Viewing Details for %s', $id);
+			$data['title'] = format_string('Viewing Details for @id', ['@id' => $id]);
 			$this->load->view('page/index', $data);
 		} else {
 			show_error('The grower with ID ' . $id . ' could not be found. Press the back arrow, and notify the database administrator if you believe this error is a mistake.');
@@ -112,7 +112,10 @@ class Grower extends MY_Controller
 			if ($value) {
 				$this->load->model('user_model', 'user');
 				$user = $this->user->get_user($value);
-				$output = sprintf('%s %s', $user->first_name, $user->last_name);
+				$output = format_string('@first_name @last_name', [
+					'@first_name' => $user->first_name,
+					'@last_name' => $user->last_name,
+				]);
 			} else {
 				$output = '&nbsp;';
 			}

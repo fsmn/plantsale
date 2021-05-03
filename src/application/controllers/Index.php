@@ -135,7 +135,10 @@ class Index extends MY_Controller {
 		}
 		$categories = '';
 		if (isset($category) && isset($subcategory)) {
-			$categories = sprintf('%s-%s', $category, $subcategory);
+			$categories = format_string('@category-@subcategory', [
+				'@category' => $category,
+				'@subcategory' => $subcategory,
+			]);
 		}
 		elseif ($category) {
 			$categories = $category;

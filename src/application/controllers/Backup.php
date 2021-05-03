@@ -41,7 +41,10 @@ class Backup extends MY_Controller {
 
 			$backup = $this->dbutil->backup($prefs);
 
-			$filename = sprintf('%s-backup-%s.sql.gz', join('_', $table), date('Y-m-d-H-i-s'));
+			$filename = format_string('@table-backup-@date.sql.gz', [
+				'@table' => join('_', $table),
+				'@date' => date('Y-m-d-H-i-s'),
+			]);
 			$path = sprintf('/tmp/');
 			$temp_file = $path . $filename;
 			// Load the file helper and write the file to your server
@@ -68,7 +71,7 @@ class Backup extends MY_Controller {
 		$settings = [];
 		// Backup your entire database and assign it to a variable
 		$backup = $this->dbutil->backup($settings);
-		$filename = sprintf('backup-%s.sql.gz', date('Y-m-d-H-i-s'));
+		$filename = format_string('backup-@date.sql.gz', ['@date' => date('Y-m-d-H-i-s')]);
 		$path = sprintf('/tmp/');
 		$temp_file = $path . $filename;
 		// Load the file helper and write the file to your server
@@ -84,7 +87,10 @@ class Backup extends MY_Controller {
 		$this->load->dbutil();
 		$query = NULL;
 		$query = ('SELECT * FROM `' . $table . '`');
-		$filename = sprintf('s%-backup-%s.csv', $table, date('Y-m-d-H-i-s'));
+		$filename = format_string('@table-backup-@date.csv', [
+			'@table' => $table,
+			'@date' => date('Y-m-d-H-i-s'),
+		]);
 		$path = sprintf('/tmp/');
 		$temp_file = $path . $filename;
 		$delimiter = ',';

@@ -46,7 +46,12 @@ class Inventory extends MY_Controller
 		if ($item) {
 			$data['step'] = $step;
 			$data['item'] = $item;
-			$data['title'] = sprintf('Inventory for %s: %s %s (%s)', $item->catalog_number, $item->name, $item->variety, format_latin_name($item));
+			$data['title'] = format_string('Inventory for @catalog_number: @name @variety (@latin_name)', [
+				'@catalog_number' => $item->catalog_number,
+				'@name' => $item->name,
+				'@variety' => $item->variety,
+				'@latin_name' => format_latin_name($item),
+			]);
 			$data['target'] = 'inventory/edit';
 			$this->load->view('inventory/index', $data);
 		}
@@ -81,7 +86,10 @@ class Inventory extends MY_Controller
 			foreach ($variables as $variable) {
 				if ($value = $this->input->post($variable)) {
 					$values[$variable] = $this->input->post($variable);
-					$message[] = sprintf('%s: %s', $variable, $this->input->post($variable));
+					$message[] = format_string('@variable: @post_variable', [
+						'@variable' => $variable,
+						'@post_variable' => $this->input->post($variable),
+					]);
 				}
 				burn_cookie($variable);
 			}

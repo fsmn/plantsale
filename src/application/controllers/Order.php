@@ -175,7 +175,10 @@ class Order extends MY_Controller {
         unset($options['subcategory_id']);
       }
       foreach ($options as $key => $value) {
-        $where[] = sprintf('`%s` = "%s"', $key, $value);
+        $where[] = format_string('`@key` = "@value"', [
+          '@key' => $key,
+          '@value' => $value,
+        ]);
       }
 
       $data['options'] = $options;
@@ -189,7 +192,10 @@ class Order extends MY_Controller {
       if ($output_format == 'crop-failure') {
         $data['title'] = 'Crop Failure Listing';
       } else {
-        $data['title'] = sprintf('List of %s orders for %s', $category, $sale_year);
+        $data['title'] = format_string('List of @category orders for @sale_year', [
+          '@category' => $category,
+          '@sale_year' => $sale_year,
+        ]);
       }
       if ($this->input->get('export')) {
         $data['export_type'] = 'standard';
@@ -360,7 +366,10 @@ class Order extends MY_Controller {
       }
     }
 
-    $this->session->set_flashdata('notice', sprintf('%s %s orders have had their catalog number updated', $count, $target_category));
+    $this->session->set_flashdata('notice', format_string('@count @target_category orders have had their catalog number updated', [
+      '@count' => $count,
+      '@target_category' => $target_category,
+    ]));
     redirect('index');
   }
 

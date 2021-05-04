@@ -169,7 +169,13 @@ class Menu extends MY_Controller
 				break;
 			case 'time':
 			case 'email':
-				$output = sprintf('<input type"%s" name="%s" id="%s" value="%s" size="%s"', $data['type'], $data['name'], $data['id'], $data['value'], $data['size']);
+				$output = format_string('<input type"@type" name="@name" id="@id" value="@value" size="@size"', [
+					'@type' => $data['type'],
+					'@name' => $data['name'],
+					'@id' => $data['id'],
+					'@value' => $data['value'],
+					'@size' => $data['size'],
+				]);
 				break;
 			default:
 				$output = form_input($data);
@@ -241,10 +247,14 @@ class Menu extends MY_Controller
 				$checked = 'checked';
 			}
 
-			$output[] = sprintf("<label for='%s'>%s</label><input type='checkbox' name='%s[$i]' id='%s' value='%s' %s/>", $item->value, $item->value, $field, $field, $item->value, $checked);
+			$output[] = format_string("<label for='@value'>@value</label><input type='checkbox' name='@field[$i]' id='@field' value='@value' @checked/>", [
+				'@value' => $item->value,
+				'@field' => $field,
+				'@checked' => $checked,
+			]);
 		}
 		$buttons = implode(' ', $output);
-		print $buttons . sprintf("<span class='button save-checkbox' target='%s'>Save</span>", $field);
+		print $buttons . format_string('<span class="button save-checkbox" target="@field">Save</span>', ['@field' => $field]);
 	}
 
 	function get_autocomplete()

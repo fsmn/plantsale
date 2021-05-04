@@ -26,7 +26,7 @@ class Subcategory extends MY_Controller
 		$this->load->model('category_model', 'category');
 		$category = $this->category->get($category_id);
 		$data['category_id'] = $category_id;
-		$data['title'] = sprintf('Create a New Subcategory for %s', $category->category);
+		$data['title'] = format_string('Create a New Subcategory for @category', ['@category' => $category->category]);
 		$data['target'] = 'subcategory/edit';
 		$data['action'] = 'insert';
 		$data['subcategory'] = FALSE;

@@ -103,7 +103,7 @@ class Variety extends MY_Controller
 		$data['is_new'] = $variety->new_year == get_current_year();
 		$data['variety'] = $variety;
 		$data['target'] = 'variety/view';
-		$data['title'] = sprintf('Viewing Info for %s (variety)', $variety->variety);
+		$data['title'] = format_string('Viewing Info for @variety (variety)', ['@variety' => $variety->variety]);
 		$data['variety_id'] = $id;
 		if ($data['mini_view'] = $this->input->get('ajax') == 1) {
 			$this->load->view('variety/mini_view', $data);
@@ -237,11 +237,14 @@ class Variety extends MY_Controller
 			if ($this->input->get('export')) {
 				$data['export_type'] = 'standard';
 				$date_string = date('Y-m-d-h-j');
-				$data['filename'] = sprintf('variety-export_%s.csv', $date_string);
+				$data['filename'] = format_string('variety-export_@date_string.csv', ['@date_string' => $date_string]);
 
 				if ($export_type = $this->input->get('export_type')) {
 					$data['export_type'] = $export_type;
-					$data['filename'] = sprintf('%s_%s.csv', $export_type, $date_string);
+					$data['filename'] = format_string('@export_type_@date_string.csv', [
+						'@export_type' => $export_type,
+						'@date_string' => $date_string,
+					]);
 				}
 				$this->load->helper('download');
 				$this->load->view('variety/list/export', $data);
@@ -479,7 +482,10 @@ class Variety extends MY_Controller
 			if ($value) {
 				$this->load->model('user_model', 'user');
 				$user = $this->user->get_user($value);
-				$value = sprintf('%s %s', $user->first_name, $user->last_name);
+				$value = format_string('@first_name @last_name', [
+					'@first_name' => $user->first_name,
+					'@last_name' => $user->last_name,
+				]);
 			} else {
 				$value = '&nbsp;';
 			}
@@ -494,7 +500,10 @@ class Variety extends MY_Controller
 
 			$output = $this->variety->update_all($year);
 		}
-		$this->session->set_flashdata('notice', sprintf('%s varieties were marked as new items for %s', count($output), $year));
+		$this->session->set_flashdata('notice', format_string('@output varieties were marked as new items for @year', [
+			'@output' => count($output),
+			'@year' => $year,
+		]));
 		redirect('index');
 	}
 
@@ -553,7 +562,10 @@ class Variety extends MY_Controller
 					if ($this->input->post('flag')) {
 						$flag = urldecode($this->input->post('flag'));
 						$this->flag->batch_update($ids, $flag);
-						$result = sprintf('The following varieties had the flag "%s" added: %s', $flag,  $id_list);
+						$result = format_string('The following varieties had the flag "@flag" added: @id_list', [
+							'@flag' => $flag,
+							'@id_list' => $id_list,
+						]);
 					} else {
 						$result = 'No Batch Updates Made';
 					}
@@ -592,7 +604,10 @@ class Variety extends MY_Controller
 
 				$data['classes'] = 'multiple';
 				$count = count($plants);
-				$data['title'] = sprintf('%s-Size List-%s Pages', ucfirst($format), $count);
+				$data['title'] = format_string('@format-Size List-@count Pages', [
+					'@format' => ucfirst($format),
+					'@count' => $count,
+				]);
 				$data['target'] = 'variety/print/multiple';
 
 				$this->load->view('variety/print/index', $data);
@@ -616,7 +631,11 @@ class Variety extends MY_Controller
 		$data['order'] = $this->order->get_for_variety($id, $this->session->userdata('sale_year'));
 		if ($data['order']) {
 			$data['flags'] = $this->flag->get_for_variety($id);
-			$data['title'] = sprintf('%s-size Printout for %s %s', ucfirst($format), $data['variety']->common_name, $data['variety']->variety);
+			$data['title'] = format_string('@format-size Printout for @common_name @variety', [
+				'@format' => ucfirst($format),
+				'@common_name' => $data['variety']->common_name,
+				'@variety' => $data['variety']->variety,
+			]);
 			$data['target'] = 'variety/print/' . $format;
 			$data['classes'] = 'single';
 			if (get_value($data['order'], 'crop_failure') == 1) {
@@ -624,7 +643,10 @@ class Variety extends MY_Controller
 			}
 			$this->load->view('variety/print/index', $data);
 		} else {
-			show_error(sprintf('%s has no orders in %s', $data['variety']->variety, cookie('sale_year')));
+			show_error(format_string('@variety has no orders in @cookie_sale_year', [
+				'@variety' => $data['variety']->variety,
+				'@cookie_sale_year' => cookie('sale_year'),
+			]));
 		}
 	}
 

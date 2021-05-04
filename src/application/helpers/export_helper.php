@@ -29,7 +29,7 @@ function format_sunlight($sunlight, $format = 'quark') {
 	}
 
 	if ($format == 'quark') {
-		$output = sprintf('<f\'FSMPlantSaleIcons\'>%s<f$>', $output);
+		$output = format_string('<f\'FSMPlantSaleIcons\'>@output<f$>', ['@output' => $output]);
 	}
 	return $output;
 }
@@ -168,7 +168,7 @@ function format_flags($flags, $format = 'quark') {
 	}
 	if ($format == 'quark') {
 		if ($output) {
-			$output = sprintf('<f\'FSMPlantSaleIcons\'>%s<f$>', $output);
+			$output = format_string('<f\'FSMPlantSaleIcons\'>@output<f$>', ['@output' => $output]);
 		}
 	}
 	return $output;
@@ -179,7 +179,7 @@ function format_flags($flags, $format = 'quark') {
  */
 function format_new($format = 'quark') {
 	if ($format == 'quark') {
-		$output = sprintf('<f\'FSMPlantSaleIcons\'>%s<f$>', '◊');
+		$output = format_string('<f\'FSMPlantSaleIcons\'>@symbol<f$>', ['@symbol' => '◊']);
 	}
 	elseif ($format == 'poster') {
 		$output = '◊';
@@ -193,7 +193,7 @@ function format_new($format = 'quark') {
 
 function format_saturday($format = 'quark') {
 	if ($format == 'quark') {
-		$output = sprintf('<f\'FSMPlantSaleIcons\'>%s<f$>', 'ß');
+		$output = format_string('<f\'FSMPlantSaleIcons\'>@symbol<f$>', ['@symbol' => 'ß']);
 	}
 	elseif ($format == 'poster') {
 		$output = 'ß';
@@ -261,22 +261,32 @@ function subcategory_order($categories = []) {
 
 function quark_single($common) {
 	$variety = $common->varieties[0];
-	$output[] = sprintf('@Common Name:<@Number In-text>%s<@\$p> %s ', $variety->catalog_number, $common->name);
+	$output[] = format_string('@Common Name:<@Number In-text>@catalog_number<@\$p> @name ', [
+		'@catalog_number' => $variety->catalog_number,
+		'@name' => $common->name,
+	]);
 	$output[] = $variety->count_midsale > 0 ? format_saturday('quark') : '';
 	$output[] = $variety->new_year == get_current_year() ? format_new('quark') : '';
-	$output[] = sprintf('<p>@Latin Name:%s ', quark_latin_name($common->genus, $variety->species));
-	$output[] = sprintf('<f\'GoudySansITCbyBT-Medium\'> %s<f$>', $variety->variety);
-	$output[] = sprintf('<p>@Copy:%s ', format_description($common->description, $variety, 'quark'));
+	$output[] = format_string('<p>@Latin Name:@latin_name ', ['@latin_name' => quark_latin_name($common->genus, $variety->species)]);
+	$output[] = format_string('<f\'GoudySansITCbyBT-Medium\'> @variety<f$>', ['@variety' => $variety->variety]);
+	$output[] = format_string('<p>@Copy:@description ', ['@description' => format_description($common->description, $variety, 'quark')]);
 	$output[] = format_quark_dimensions($variety);
-	$output[] = sprintf(' %s', format_sunlight($common->sunlight, 'quark'));
+	$output[] = format_string(' @sunlight', ['@sunlight' => format_sunlight($common->sunlight, 'quark')]);
 	$output[] = format_flags($variety->flags, 'quark');
-	$output[] = sprintf('<p>@Pot and Price Right:%s--%s', get_as_price($variety->price), $variety->pot_size);
+	$output[] = format_string('<p>@Pot and Price Right:@price--@pot_size', [
+		'@price' => get_as_price($variety->price),
+		'@pot_size' => $variety->pot_size,
+	]);
 	return implode('', $output);
 }
 
 function quark_multiple($common) {
-	$output[] = sprintf('@Common Name:%s<p>@Latin Name:%s<p>@Copy:%s %s', $common->name, $common->genus, $common->description,
-		format_sunlight($common->sunlight, 'quark'));
+	$output[] = format_string('@Common Name:@name<p>@Latin Name:@genus<p>@Copy:@description @sunlight', [
+		'@name' => $common->name,
+		'@genus' => $common->genus,
+		'@description' => $common->description,
+		'@sunlight' => format_sunlight($common->sunlight, 'quark'),
+	]);
 
 	// set prices and pot sizes based on if they show up in the output.
 	$base_price = FALSE;
@@ -292,13 +302,23 @@ function quark_multiple($common) {
 		}
 		//if either the pot size or price have changed, then print them out.
 		if ($price || $pot_size) {
-			$output[] = sprintf('<p>@Pot and Price:%s--%s:', get_as_price($price), $pot_size);
+			$output[] = format_string('<p>@Pot and Price:@price--@pot_size:', [
+				'@price' => get_as_price($price),
+				'@pot_size' => $pot_size,
+			]);
 		}
-		$output[] = sprintf('<p>@Copy After Copy:<@Number In-text>%s ', $variety->catalog_number);
-		$output[] = sprintf('<@In text Goudy Sans Bold>%s<@\$p> <I>%s</I> ', $variety->variety, quark_latin_name($common->genus, $variety->species, TRUE));
+		$output[] = format_string('<p>@Copy After Copy:<@Number In-text>@catalog_number ', ['@catalog_number' => $variety->catalog_number]);
+		$output[] = format_string('<@In text Goudy Sans Bold>@variety<@\$p> <I>@latin_name</I> ', [
+			'@variety' => $variety->variety,
+			'@latin_name' => quark_latin_name($common->genus, $variety->species, TRUE),
+		]);
 		$output[] = $variety->new_year == get_current_year() ? format_new('quark') : '';
 		$output[] = (get_value($variety, 'count_midsale') > 0) ? ' ' . format_saturday('quark') : '';
-		$output[] = sprintf('--%s %s %s', $variety->print_description, format_quark_dimensions($variety), format_flags($variety->flags, 'quark'));
+		$output[] = format_string('--@print_description @format_quark_dimensions @format_flags', [
+			'@print_description' => $variety->print_description,
+			'@format_quark_dimensions' => format_quark_dimensions($variety),
+			'@format_flags' => format_flags($variety->flags, 'quark'),
+		]);
 	}
 	return implode('', $output);
 }

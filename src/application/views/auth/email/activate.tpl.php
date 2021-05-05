@@ -1,7 +1,7 @@
 <html>
 <body>
-	<h1><?php print sprintf('Activate account for %s', $identity); ?></h1>
-	<p><?php print sprintf('Please click this link to %s.', anchor('auth/activate/' . $id . '/' . $activation, 'activate')); ?>
+	<h1><?php print format_string('Activate account for @identity', ['@identity' => $identity]); ?></h1>
+	<p><?php print format_string('Please click this link to @url.', ['@url' => anchor('auth/activate/' . $id . '/' . $activation, 'activate')]); ?>
 	</p>
 </body>
 </html>

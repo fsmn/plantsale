@@ -80,7 +80,14 @@ function create_input($object, $name, $label, $id = NULL, $default_value = FALSE
 	if ($default_value) {
 		$value = cookie($name);
 	}
-	return sprintf('<label for="%s">%s: </label><input type="text" name="%s" id="%s" value="%s" class="%s" %s/>', $name, $label, $name, $id, get_value($object, $name, $value), $class, $required);
+	return format_string('<label for="@name">@label: </label><input type="text" name="@name" id="@id" value="@value" class="@class" @required/>', [
+		'@name' => $name,
+		'@label' => $label,
+		'@id' => $id,
+		'@value' => get_value($object, $name, $value),
+		'@class' => $class,
+		'@required' => $required,
+	]);
 }
 
 /**
@@ -163,7 +170,7 @@ function get_value($object, $item, $default = null)
  */
 function get_as_price($int)
 {
-	$output = sprintf('$%s', number_format($int, 2));
+	$output = format_string('$@number_format', ['@number_format' => number_format($int, 2)]);
 	return $output;
 }
 
@@ -189,7 +196,10 @@ function get_as_time($time)
  */
 function get_user_name($user)
 {
-	return sprintf('%s %s', $user->first_name, $user->last_name);
+	return format_string('%s %s', [
+		'@first_name' => $user->first_name,
+		'@last_name' => $user->last_name,
+	]);
 }
 
 /**
@@ -242,7 +252,10 @@ function quark_latin_name($genus, $species, $multiple = FALSE)
  */
 function format_catalog($order_id, $category)
 {
-	return sprintf('%s%s', ucfirst(substr($category, 0, 1)), $order_id);
+	return format_string('@category@order_id', [
+		'@category' => ucfirst(substr($category, 0, 1)),
+		'@order_id' => $order_id,
+	]);
 }
 
 /**
@@ -305,15 +318,28 @@ function format_dimensions($min = NULL, $max = NULL, $unit = 'Inches', $directio
 	if (!$min && !$max) {
 		$output = '';
 	} elseif ($min == $max || ($min && !$max)) {
-		$output = sprintf('%s%s', $min, ucfirst($unit));
+		$output = format_string('@min@unit', [
+			'@min' => $min,
+			'@unit' => ucfirst($unit),
+		]);
 	} elseif ($min == $max || ($max && !$min)) {
-		$output = sprintf('%s%s', $max, ucfirst($unit));
+		$output = format_string('@max@unit', [
+			'@max' => $max,
+			'@unit' => ucfirst($unit),
+		]);
 	} else {
-		$output = sprintf('%s~%s%s', $min, $max, ucfirst($unit));
+		$output = format_string('@min~@max@unit', [
+			'@min' => $min,
+			'@max' => $max,
+			'@unit' => ucfirst($unit),
+		]);
 	}
 
 	if ($direction) {
-		$output = sprintf('%s%s', $output, $direction);
+		$output = format_string('@output@direction', [
+			'@output' => $output,
+			'@direction' => $direction,
+		]);
 	}
 
 	return $output;
@@ -326,7 +352,7 @@ function format_dimensions($min = NULL, $max = NULL, $unit = 'Inches', $directio
  */
 function format_address(object $grower): array
 {
-	$street = array();
+	$street = [];
 	if ($grower->street_address) {
 		$street[] = $grower->street_address;
 	}
@@ -334,7 +360,11 @@ function format_address(object $grower): array
 		$street[] = $grower->po_box;
 	}
 	if ($grower->city) {
-		$locale = sprintf('%s, %s %s', $grower->city, $grower->state, $grower->zip);
+		$locale = format_string('@city, @state @zip', [
+			'@city' => $grower->city,
+			'@state' => $grower->state,
+			'@zip' => $grower->zip,
+		]);
 	} else {
 		$locale = '<span class="highlight">NO CITY ENTERED</span>';
 	}
@@ -350,11 +380,11 @@ function format_address(object $grower): array
 		$country = $grower->country;
 	}
 
-	return array(
+	return [
 		'street' => $street,
 		'locale' => $locale,
 		'country' => $country
-	);
+	];
 }
 
 /**
@@ -387,7 +417,7 @@ function format_email($object, $field): ?string
 {
 	$email = get_value($object, $field);
 	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		$output = sprintf('<a href="mailto:%s" title="send an email to %s">%s</a>', $email, $email, $email);
+		$output = format_string('<a href="mailto:@email" title="send an email to @email">@email</a>', ['@email' => $email]);
 	} else {
 		$output = $email;
 	}

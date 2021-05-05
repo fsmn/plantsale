@@ -11,7 +11,7 @@
 
 <p>
     <label
-        for="new_password"><?php print sprintf('New Password (at least %s characters long):', $min_password_length);?></label>
+        for="new_password"><?php print format_string('New Password (at least @min_password_length characters long):', ['@min_password_length' => $min_password_length]); ?></label>
     <br />
     <?php print form_input($new_password);?>
 </p>

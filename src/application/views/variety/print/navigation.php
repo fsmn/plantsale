@@ -7,6 +7,6 @@ foreach($fonts as $font){
     if($font == "ubuntu"){
         $is_active = "active";
     }
-$buttons[] = array("text"=>sprintf("Try %s Font",ucfirst($font)), "class"=>array("button","change-font", $is_active),"style"=>"print","id"=>$font );
+$buttons[] = array("text"=> format_string("Try @font Font", ['@font' => ucfirst($font)]), "class"=>array("button","change-font", $is_active),"style"=>"print","id"=>$font );
 }
 print create_button_bar($buttons);

@@ -68,7 +68,10 @@ $saturday_delivery = $order->count_midsale ? 1 : 0;
 			<?php
 			$sunlight = explode ( ",", $variety->sunlight );
 			foreach ( $sunlight as $light ) {
-				echo sprintf ( "<li class='%s'>%s</li>", css_classify ( $light ), format_sunlight ( $light, "poster" ) );
+				echo format_string("<li class='@class'>@sunlight</li>", [
+					'@class' => css_classify($light),
+					'@sunlight' => format_sunlight( $light, "poster" ),
+				]);
 			}
 			?>
 		</ul>
@@ -76,9 +79,10 @@ $saturday_delivery = $order->count_midsale ? 1 : 0;
 			<?php
 			
 			foreach ( $flags as $flag ) {
-				echo sprintf ( "<li class='%s'>%s</li>", css_classify ( $flag->name ), format_flags ( array (
-						$flag 
-				), "poster" ) );
+				echo format_string("<li class='@class'>@flag</li>", [
+					'@class' => css_classify($flag->name),
+					'@flag' => format_flags([$flag], "poster"),
+				]);
 				// echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
 			}
 			?>

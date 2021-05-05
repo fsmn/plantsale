@@ -3,12 +3,23 @@
 function form_group($field_name, $field_value, $label, $field_type = 'text', $class = FALSE)
 {
 	if ($label) {
-		$label_string = sprintf('<label for="%s" class="control-label">%s</label>', $field_name, $label);
+		$label_string = format_string('<label for="@field_name" class="control-label">@label</label>', [
+			'@field_name' => $field_name,
+			'@label' => $label,
+		]);
 	} else {
 		$label_string = '';
 	}
-	$field = sprintf('<input type="%s" class="form-control number %s" id="%s" name="%s" value="%s"/>', $field_type, $class, $field_name, $field_name, $field_value);
-	$output = sprintf('<div class="form-group">%s<div class="field-wrapper">%s</div></div>', $label_string, $field);
+	$field = format_string('<input type="@field_type" class="form-control number @class" id="@field_name" name="@field_name" value="@field_value"/>', [
+		'@field_type' => $field_type,
+		'@class' => $class,
+		'@field_name' => $field_name,
+		'@field_value' => $field_value,
+	]);
+	$output = format_string('<div class="form-group">@label_string<div class="field-wrapper">@field</div></div>', [
+		'@label_string' => $label_string,
+		'@field' => $field,
+	]);
 	return $output;
 }
 

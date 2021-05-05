@@ -46,7 +46,7 @@ $contact_types = [
 			<?php print create_button([
 				'text' => 'Delete',
 				'class' => 'button delete delete-contact',
-				'id' => sprintf('delete-contact_%s', $contact->id)
+				'id' => format_string('delete-contact_@id', ['@id' => $contact->id])
 			]); ?>
 		<?php endif; ?>
 

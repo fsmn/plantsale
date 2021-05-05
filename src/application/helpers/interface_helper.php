@@ -77,7 +77,7 @@ function create_button($data)
 			$title = "title ='" . $data['title'] . "'";
 		}
 		if (array_key_exists('tabindex', $data)) {
-			$tabindex = sprintf(' tabindex=%s ', $data['tabindex']);
+			$tabindex = format_string(' tabindex=@tabindex ', ['@tabindex' => $data['tabindex']]);
 		}
 		if ($type != 'pass-through') {
 			if (array_key_exists('class', $data)) {
@@ -102,7 +102,7 @@ function create_button($data)
 				$data['class'] = array_merge($data['class'], get_button_style('default'));
 			}
 
-			$class = sprintf('class="%s"', implode(' ', $data['class']));
+			$class = format_string('class="@class"', ['@class' => implode(' ', $data['class'])]);
 
 			$id = '';
 			if (array_key_exists('id', $data)) {
@@ -156,7 +156,7 @@ function create_button_bar($buttons, $options = NULL)
 	$class = 'mini';
 	if ($options) {
 		if (array_key_exists('id', $options)) {
-			$id = sprintf('id="%s"', $options['id']);
+			$id = format_string('id="@id"', ['@id' => $options['id']]);
 		}
 
 		if (array_key_exists('selection', $options)) {
@@ -233,7 +233,7 @@ function create_edit_field(string $field_name, ?string $value, ?string $label, $
 	$field_class = implode(' ', $classes);
 	$format = '';
 	if (array_key_exists('format', $options)) {
-		$format = sprintf('format="%s"', $options['format']);
+		$format = format_string('format="@format"', ['@format' => $options['format']]);
 	}
 	$data_attributes = '';
 
@@ -353,15 +353,22 @@ function live_field(string $field_name, ?string $value, string $table, string $i
 		}
 		$label = '';
 		if (array_key_exists('label', $options)) {
-			$label = sprintf('<label>%s</label>', $options['label']);
+			$label = format_string('<label>@label</label>', ['@label' => $options['label']]);
 		}
 
 		$classes[] = 'persistent';
 		if ($access) {
 			$classes[] = 'override';
 		}
-		$output_wrapper = sprintf('<%s class="field-envelope" id="%s__%s__%s">%s
-		<span class="live-field text" name="%s">[input]</span></%s>', $envelope, $table, $field_name, $id, $label, $field_name, $envelope);
+		$output_wrapper = format_string('<@envelope class="field-envelope" id="@table__@field_name__@id">@label
+		<span class="live-field text" name="@field_name">[input]</span></@envelope>', [
+			'@envelope' => $envelope,
+			'@table' => $table,
+			'@field_name' => $field_name,
+			'@id' => $id,
+			'@label' => $label,
+		]);
+
 		$attributes = [
 			'class' => implode(' ', $classes),
 			'id' => $field_name . '_' . $id,
@@ -419,14 +426,19 @@ function create_checkbox(string $name, array $values, $selections = [])
 		if (in_array($value->key, $selections)) {
 			$checked = 'checked';
 		}
-		$output[] = sprintf('<label>%s</label><input type="checkbox" name="%s" value="%s" %s/>&nbsp;', $value->value, $name, $value->key, $checked);
+		$output[] = format_string('<label>@value</label><input type="checkbox" name="@name" value="@key" @checked/>&nbsp;', [
+			'@value' => $value->value,
+			'@name' => $name,
+			'@key' => $value->key,
+			'@checked' => $checked,
+		]);
 	}
 	return implode('\r', $output);
 }
 
 function create_autocomplete($items, $selection, $id, $is_live = FALSE)
 {
-	$output[] = sprintf('<ul class="autocomplete-list" id="autocomplete-%s">', $id);
+	$output[] = format_string('<ul class="autocomplete-list" id="autocomplete-@id">', ['@id' => $id]);
 	foreach ($items as $item) {
 		$classes = [
 			'autocomplete-item',
@@ -439,7 +451,10 @@ function create_autocomplete($items, $selection, $id, $is_live = FALSE)
 		if ($item->value == $selection) {
 			$classes[] = 'active';
 		}
-		$output[] = sprintf('<li class="%s">%s</li>', implode(' ', $classes), $item->value);
+		$output[] = format_string('<li class="@class">@value</li>', [
+			'@class' => implode(' ', $classes),
+			'@value' => $item->value,
+		]);
 	}
 	$output[] = '<li class="autocomplete-list-cancel button link">Cancel</li>';
 

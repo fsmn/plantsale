@@ -155,7 +155,7 @@ class Order_Model extends MY_Model {
 		foreach($options as $key=>$value) {
 			switch ($key) {
 				case 'show-non-reorders' :
-					$this->db->where(sprintf('NOT EXISTS (SELECT `year` from `orders` as `o` WHERE `o`.`variety_id` = `orders`.`variety_id` and `year` = %s) ', $sale_year + 1), NULL, FALSE);
+					$this->db->where(format_string('NOT EXISTS (SELECT `year` from `orders` as `o` WHERE `o`.`variety_id` = `orders`.`variety_id` and `year` = @sale_year) ', ['@sale_year' => $sale_year + 1]), NULL, FALSE);
 					break;
 				case 'category_id' :
 					$this->db->where('common.category_id', $value);
@@ -295,10 +295,16 @@ class Order_Model extends MY_Model {
 		foreach ($options as $key => $value) {
 			switch ($key) {
 				case 'category_id' :
-					$where [] = sprintf('`subcat`.`%s` = \'%s\'', $key, $value);
+					$where [] = format_string('`subcat`.`@key` = \'@value\'', [
+						'@key' => $key,
+						'@value' => $value,
+					]);
 					break;
 				default :
-					$where [] = sprintf('`%s` = \'%s\'', $key, $value);
+					$where [] = format_string('`@key` = \'@value\'', [
+						'@key' => $key,
+						'@value' => $value,
+					]);
 			}
 		}
 		for ($i = 0; $i < count($order_by ['fields']); $i++) {
@@ -324,8 +330,13 @@ class Order_Model extends MY_Model {
 		}
 		$where_string = '';
 		if (!empty($where)) {
-			$where_string = sprintf('WHERE %s', implode(' AND ', $where));
+			$where_string = format_string('WHERE @where', ['@where' => implode(' AND ', $where)]);
 		}
+
+		/**
+		 * @todo How to format this sprintf?
+		 */
+
 		$query = sprintf($query, $where_string, 'ORDER BY ' . implode(' AND ', $order));
 
 		$result = $this->db->query($query)->result();
@@ -442,8 +453,11 @@ class Order_Model extends MY_Model {
 	 * @param int(4) $comparison_year
 	 */
 	function get_non_reorders($base_year, $comparison_year) {
-		$query = sprintf('select * from `orders` as `o`, `variety` as `v` WHERE `v`.`id`= `o`.`variety_id` and `o`.`year` =%s
-        and not exists (select `year` from `orders`, `variety` where `o`.`variety_id` = `orders`.`variety_id` and `year` =%s)', $base_year, $comparison_year);
+		$query = format_string('select * from `orders` as `o`, `variety` as `v` WHERE `v`.`id`= `o`.`variety_id` and `o`.`year` =@base_year
+        and not exists (select `year` from `orders`, `variety` where `o`.`variety_id` = `orders`.`variety_id` and `year` =@comparison_year)', [
+			'@base_year' => $base_year,
+			'@comparison_year' => $comparison_year,
+		]);
 	}
 
 	function batch_update($ids, $values) {

@@ -52,8 +52,16 @@ class Flag_Model extends MY_Model
 		$values = [];
 
 		foreach ($variety_ids as $id) {
-			$values[] = sprintf('(%s,"%s","%s","%s")', $id, $flag, $rec_modified, $rec_modifier);
+			$values[] = format_string('(@id,"@flag","@rec_modified","@rec_modifier")', [
+				'@id' => $id,
+				'@flag' => $flag,
+				'@rec_modified' => $rec_modified,
+				'@rec_modifier' => $rec_modifier,
+			]);
 		}
+		/**
+		 * @todo What do do about this sprintf? Not sure if this one can be changed.
+		 */
 		$query = sprintf('REPLACE INTO flag (`variety_id`,`name`,`rec_modified`,`rec_modifier`) VALUES%s;', implode(',', $values));
 		$this->db->query($query);
 	}
@@ -97,7 +105,7 @@ class Flag_Model extends MY_Model
 		foreach ($current_flags as $current_flag) {
 			$flag_list[] = $current_flag->name;
 		}
-		$query = sprintf('SELECT `key`, `value` FROM `menu` WHERE `category` = "flag" AND `value` not in ("%s")', implode('","', $flag_list));
+		$query = format_string('SELECT `key`, `value` FROM `menu` WHERE `category` = "flag" AND `value` not in ("@flag_list")', ['@flag_list' => implode('","', $flag_list)]);
 
 		$output = $this->db->query($query)->result();
 

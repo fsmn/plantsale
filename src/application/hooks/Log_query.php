@@ -95,7 +95,12 @@ class Log_Query
 
 			foreach ($queries as $key => $query) {
 				$query_time = !empty($times[$key]) ? round($times[$key], 4) : 0.0000;
-				$message .= 'QUERY' . ' - ' . $date . ' --> ' . $query_time . ' | ' . str_replace(array("\n", "\n\r", "\r", PHP_EOL), " ", $query) . "\n";
+				$message .= 'QUERY' . ' - ' . $date . ' --> ' . $query_time . ' | ' . str_replace([
+					"\n",
+					"\n\r",
+					"\r",
+					PHP_EOL
+				], " ", $query) . "\n";
 			}
 
 			for ($written = 0, $length = self::strlen($message); $written < $length; $written += $result) {

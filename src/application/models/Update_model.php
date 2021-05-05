@@ -15,6 +15,11 @@ class Update_model extends MY_Model {
 		if(!$this->update_exists($id)) {
 			$this->db->query($query);
 			$this->db->insert('update_tracker', ['id' => $id]);
+
+			/**
+			 * @todo How to format this sprintf
+			 */
+
 			return sprintf('Database update # ' . $id . ' completed successfully');
 		}
 		return FALSE;

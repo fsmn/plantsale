@@ -104,6 +104,10 @@ class Variety_Model extends MY_Model
 		$this->db->order_by('variety.variety');
 		$result = $this->db->get()->result();
 		$this->load->model('order_model', 'orders');
+
+		/**
+		 * @todo How to format this sprintf?
+		 */
 		foreach ($result as $variety) {
 			$year = $this->db->query(sprintf('SELECT `year` FROM `orders` `o` WHERE `o`.`variety_id` = ' . $variety->id . ' ORDER BY `o`.`year` DESC LIMIT 1'))
 				->row();
@@ -172,7 +176,10 @@ class Variety_Model extends MY_Model
 		if (!$year) {
 			$year = $this->session->userdata('sale_year');
 		}
-		$query = sprintf('select * from `orders`,variety where `orders`.`variety_id` = %s and variety.id = `orders`.variety_id  and  not exists(select `year` from `orders` where `year` < %s and variety_id = %s)  having `orders`.`year` = %s', $id, $year, $id, $year);
+		$query = format_string('select * from `orders`,variety where `orders`.`variety_id` = @id and variety.id = `orders`.variety_id  and  not exists(select `year` from `orders` where `year` < @year and variety_id = @id)  having `orders`.`year` = @year', [
+			'@id' => $id,
+			'@year' => $year,
+		]);
 		$result = $this->db->query($query)->num_rows();
 		return $result;
 	}
@@ -187,7 +194,11 @@ class Variety_Model extends MY_Model
 			// $this->db->where("new_year IS NULL", NULL, false);
 			$varieties = $this->db->get()->result();
 			foreach ($varieties as $variety) {
-				$query = sprintf('SELECT `orders`.`year` FROM `orders`,`variety` WHERE `orders`.`variety_id` = %s AND variety.id = `orders`.variety_id  AND NOT EXISTS(SELECT `year` FROM `orders` WHERE `year` < %s AND variety_id = %s)  HAVING `orders`.`year` = %s;', $variety->id, $year, $variety->id, $year);
+				$query = format_string('SELECT `orders`.`year` FROM `orders`,`variety` WHERE `orders`.`variety_id` = @id AND variety.id = `orders`.variety_id  AND NOT EXISTS(SELECT `year` FROM `orders` WHERE `year` < @year AND variety_id = @id)  HAVING `orders`.`year` = @year;', [
+					'@id' => $variety->id,
+					'@year' => $year,
+				]);
+
 				$new_year = $this->db->query($query)->row();
 				if ($new_year) {
 					$this->update_status($variety->id, $year);
@@ -387,7 +398,7 @@ class Variety_Model extends MY_Model
 				$this->db->like('common.name', $parameter->value);
 			} elseif ($parameter->key == 'flag') {
 				if ($this->input->get('not_flag') == 1) {
-					$this->db->where(sprintf("NOT EXISTS(SELECT 1 from flag where `flag`.`name` ='%s' AND `variety`.`id` = `flag`.`variety_id`)", urldecode($parameter->value)), NULL, FALSE);
+					$this->db->where(format_string("NOT EXISTS(SELECT 1 from flag where `flag`.`name` ='@name' AND `variety`.`id` = `flag`.`variety_id`)", ['@name' => urldecode($parameter->value)]), NULL, FALSE);
 				} else {
 					$this->db->where('flag.name', urldecode($parameter->value));
 				}

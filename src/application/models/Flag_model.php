@@ -60,7 +60,7 @@ class Flag_Model extends MY_Model
 			]);
 		}
 		/**
-		 * @todo What do do about this sprintf? Not sure if this one can be changed.
+		 * @todo What do do about this sprintf? Not sure if this one can be changed (messes up the string)
 		 */
 		$query = sprintf('REPLACE INTO flag (`variety_id`,`name`,`rec_modified`,`rec_modifier`) VALUES%s;', implode(',', $values));
 		$this->db->query($query);

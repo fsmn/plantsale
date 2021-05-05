@@ -543,8 +543,8 @@ function update_field(me, my_type) {
 		data: form_data,
 		success: function (data) {
 			// console.log(data);
-			me.focus();
 			if (!is_persistent) {
+				me.focus();
 				$(my_parent).html(data)
 				$(my_parent).removeClass("live-field text");
 				//$(my_parent).addClass("edit-field field");

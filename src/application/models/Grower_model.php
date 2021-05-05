@@ -135,14 +135,17 @@ class grower_model extends MY_Model
 
 	function get_totals($id, $year)
 	{
-		$query = sprintf('SELECT sum(`o`.`total`) as `total`, `grower`.*,`users`.`first_name`,`users`.`last_name`,
-                `shipping`.`name` AS `shipping_name`,`shipping`.`phone1` AS `shipping_phone1`, `shipping`.`phone2` AS `shipping_phone2`, `shipping`.`email` AS `shipping_email`
-                FROM (SELECT `grower_id`, (IFNULL(`count_presale`,0) + IFNULL(`count_midsale`,0) + IFNULL(`count_friday`,0) + IFNULL(`count_saturday`,0)) * `flat_cost` as `total` FROM (`orders`)
-                WHERE `year` = "%s" AND `orders`.`grower_id` = "%s" ) as `o`
-                LEFT JOIN `grower` ON `grower`.`id` = `o`.`grower_id`
-                LEFT JOIN `contact` AS `shipping` ON `shipping`.`grower_id` = `grower`.`id` AND `shipping`.`contact_type` = "shipping"
-        		LEFT JOIN `users` AS `users` ON `grower`.`user_id` = `users`.`id`
-                GROUP BY `o`.`grower_id`', $year, $id);
+		$query = format_string('SELECT sum(`o`.`total`) as `total`, `grower`.*,`users`.`first_name`,`users`.`last_name`,
+								`shipping`.`name` AS `shipping_name`,`shipping`.`phone1` AS `shipping_phone1`, `shipping`.`phone2` AS `shipping_phone2`, `shipping`.`email` AS `shipping_email`
+								FROM (SELECT `grower_id`, (IFNULL(`count_presale`,0) + IFNULL(`count_midsale`,0) + IFNULL(`count_friday`,0) + IFNULL(`count_saturday`,0)) * `flat_cost` as `total` FROM (`orders`)
+								WHERE `year` = "@year" AND `orders`.`grower_id` = "@id" ) as `o`
+								LEFT JOIN `grower` ON `grower`.`id` = `o`.`grower_id`
+								LEFT JOIN `contact` AS `shipping` ON `shipping`.`grower_id` = `grower`.`id` AND `shipping`.`contact_type` = "shipping"
+								LEFT JOIN `users` AS `users` ON `grower`.`user_id` = `users`.`id`
+								GROUP BY `o`.`grower_id`', [
+									'@year' => $year,
+									'@id' => $id,
+								]);
 		$result = $this->db->query($query)->row();
 		$this->_log();
 		return $result;

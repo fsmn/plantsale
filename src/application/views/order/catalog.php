@@ -109,7 +109,7 @@ if (!empty($orders)) :
 										'dialog',
 										'edit-order',
 								],
-								'id' => sprintf('edit-order_%s', $order->id),
+								'id' => format_string('edit-order_@id', ['@id' => $order->id]),
 						]); ?>
 
 					<?php else : ?>
@@ -138,7 +138,7 @@ if (!empty($orders)) :
 				</td>
 				<?php if (!empty($show_names)) : ?>
 					<td>
-						<a href="<?php print site_url(sprintf('common/search?find=1&genus=%s', $order->genus)); ?>"
+						<a href="<?php print site_url(format_string('common/search?find=1&genus=@genus', ['@genus' => $order->genus])); ?>"
 						   title="View all <?php print $order->genus; ?>"><?php print $order->genus; ?></a>
 					</td>
 					<td><?php print $order->species; ?></td>

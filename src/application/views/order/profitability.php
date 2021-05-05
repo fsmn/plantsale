@@ -132,7 +132,7 @@ if ($orders) :
 				</td>
 				<td>
 					<a tabindex=-1
-					   href="<?php print site_url(sprintf('common/find?genus=%s', $order->genus)); ?>"
+					   href="<?php print site_url(format_string('common/find?genus=@genus', ['@genus' => $order->genus])); ?>"
 					   title="View all <?php print $order->genus; ?>">
 						<?php print $order->genus; ?>
 					</a>

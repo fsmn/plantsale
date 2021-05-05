@@ -36,7 +36,7 @@ $row_classes = implode(' ', $row_classes);
 							'dialog',
 							'edit-order',
 					],
-					'id' => sprintf('edit-order_%s', $order->id),
+					'id' => format_string('edit-order_@id', ['@id' => $order->id]),
 			]); ?>
 
 		<?php else : ?>

@@ -33,7 +33,7 @@
                 'variety-create'
             ],
             'style' => 'new',
-            'id' => sprintf('common-id_%s', $common->id),
+            'id' => format_string('common-id_@id', ['@id' => $common->id]),
             'href' => site_url('variety/create?common_id=' . $common->id),
             'title' => 'add a new variety'
         ];

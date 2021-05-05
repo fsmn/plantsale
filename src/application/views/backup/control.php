@@ -51,7 +51,10 @@ foreach ($tables as $table) :
 
         $buttons[] = [
             'selection' => 'all',
-            'text' => sprintf('Download %s %s', $table, $title),
+            'text' => format_string('Download @table @title', [
+                '@table' => $table,
+                '@title' => $title,
+            ]),
             'class' => $class,
             'style' => 'default',
             'href' => site_url('backup/backup_table/' . $table),

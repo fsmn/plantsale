@@ -7,7 +7,7 @@
       <?php print form_open('auth/forgot_password'); ?>
 
       <p>
-            <label for="email"><?php print sprintf('%s:', $identity_label); ?></label>
+            <label for="email"><?php print format_string('@identity_label:', ['@identity_label' => $identity_label]); ?></label>
             <?php print form_input($email); ?>
       </p>
 

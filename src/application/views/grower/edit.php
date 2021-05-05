@@ -56,10 +56,16 @@ $fields = [
 	];
 foreach ($fields as $field) {
 	if (array_key_exists('type', $field) && $field['type'] == 'dropdown') {
-		$output[] = sprintf('<p><label for="%s">%s:&nbsp;</label>%s</p>', $field['name'], $field['label'], form_dropdown($field['name'], $field['options'], 'USA'));
+		$output[] = format_string('<p><label for="@name">@label:&nbsp;</label>@form_dropdown</p>', [
+			'@name' => $field['name'],
+			'@label' => $field['label'],
+			'@form_dropdown' => form_dropdown($field['name'], $field['options'], 'USA'),
+		]);
 	} else {
 
-		$output[] = sprintf('<p>%s</p>', create_input($grower, $field['name'], $field['label'], $field['name']));
+		$output[] = format_string('<p>@create_input</p>', [
+			'@create_input' => create_input($grower, $field['name'], $field['label'], $field['name'])
+		]);
 	}
 }
 ?>

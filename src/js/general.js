@@ -130,7 +130,8 @@
 		});
 	});
 
-	$(document).on("click", ".field-envelope .edit-field", function () {
+	$(document).on("click", ".field-envelope .edit-field", function (e) {
+
 		let me;
 		let my_parent;
 		let my_attr;
@@ -546,7 +547,7 @@ function update_field(me, my_type) {
 			if (!is_persistent) {
 				$(my_parent).html(data)
 				$(my_parent).removeClass("live-field text");
-				$(my_parent).addClass("edit-field field");
+				//$(my_parent).addClass("edit-field field");
 			}
 		}
 	});

@@ -86,7 +86,7 @@ class Log_Query
 			// Instantiating DateTime with microseconds appended to initial date is needed for proper support of this format
 			if (strpos($this->_date_fmt, 'u') !== false) {
 				$microtime_full = microtime(true);
-				$microtime_short = sprintf('%06d', ($microtime_full - floor($microtime_full)) * 1000000);
+				$microtime_short = format_string('@microtime6d', ['@microtime' => ($microtime_full - floor($microtime_full)) * 1000000]);
 				$date = new DateTime(date('Y-m-d H:i:s.' . $microtime_short, $microtime_full));
 				$date = $date->format($this->_date_fmt);
 			} else {

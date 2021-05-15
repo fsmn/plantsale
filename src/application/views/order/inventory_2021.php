@@ -16,20 +16,12 @@ if (!empty($orders)) :
 	<table class="list inventory hideable-columns">
 		<thead>
 			<tr class="top-row">
-				<th></th>
-				<th></th>
-				<?php if (!$show_names) : ?>
-					<th></th>
-				<?php endif; ?>
-				<th colspan=2></th>
-				<?php if ($show_names) : ?>
-					<th colspan=3></th>
-				<?php endif; ?>
+				<th colspan="7"></th>
 				<th colspan=2>Presale</th>
 				<th colspan=4>Friday</th>
-				<th colspan=3>Saturday</th>
-				<th>Sunday</th>
-				<th colspan=8></th>
+				<th colspan=4>Saturday</th>
+				<th colspan="2">Sunday</th>
+				<th colspan="7"></th>
 			</tr>
 			<tr>
 				<th></th>
@@ -38,12 +30,10 @@ if (!empty($orders)) :
 				<?php endif; ?>
 				<th>Grower</th>
 				<th>Cat&#35;</th>
-				<?php if ($show_names) : ?>
-					<th>Genus</th>
-					<th>Species</th>
-					<th>Common</th>
-					<th>Variety</th>
-				<?php endif; ?>
+				<th>Genus</th>
+				<th>Species</th>
+				<th>Common</th>
+				<th>Variety</th>
 				<!-- Presale -->
 				<th>Ord'd</th>
 				<th>Rec'd</th>
@@ -56,6 +46,7 @@ if (!empty($orders)) :
 				<th>Ord'd</th>
 				<th>Rec'd</th>
 				<th>Rem</th>
+				<th>Sold Out</th>
 				<!-- Sunday -->
 				<th>Rem</th>
 				<th>Dead Count</th>
@@ -159,18 +150,12 @@ if (!empty($orders)) :
 						<!-- if there is no catalog number, show the first letter of the category -->
 						<?php print edit_field('catalog_number', $order->catalog_number ? $order->catalog_number : ucfirst(substr($order->category, 0, 1)), '', 'order', $order->id, ['envelope' => 'span']); ?>
 					</td>
-					<?php if ($show_names) : ?>
 						<td>
 							<a tabindex=-1 href="<?php print site_url(sprintf('common/find?genus=%s', $order->genus)); ?>" title="View all <?php print $order->genus; ?>"><?php print $order->genus; ?></a>
-						</td>
-						<td tabindex=-1><?php print $order->species; ?></td>
-						<td>
-							<a tabindex=-1 href="<?php print site_url('common/view/' . $order->common_id); ?>" title="View the details for <?php print $order->name; ?>"><?php print $order->name; ?></a>
-						</td>
-						<td>
-							<a tabindex=-1 style="font-weight: bold" href="<?php print site_url('variety/view/' . $order->variety_id); ?>" title="View the details for <?php print $order->variety; ?>"><?php print $order->variety; ?></a>
-						</td>
-					<?php endif; ?>
+							<td>
+						<?php print $order->species; ?></td>
+					<td><a tabindex=-1 href="<?php print site_url('common/view/' . $order->common_id); ?>" title="View the details for <?php print $order->name; ?>"><?php print $order->name; ?></a></td>
+					<td><a tabindex=-1 style="font-weight: bold" href="<?php print site_url('variety/view/' . $order->variety_id); ?>" title="View the details for <?php print $order->variety; ?>"><?php print $order->variety; ?></a></td>
 					<td tabindex=-1 class="order-count_presale field">
 						<?php print edit_field('count_presale', $order->count_presale, '', 'order', $order->id, ['envelope' => 'span']); ?>
 					</td>
@@ -223,6 +208,13 @@ if (!empty($orders)) :
 							'envelope' => 'span',
 							'size' => 31,
 							'type' => 'text',
+						]); ?>
+					</td>
+					<td class="order-sellout_saturday field" style="width: 31px;">
+						<?php print live_field('sellout_saturday', $order->sellout_saturday, 'order', $order->id, [
+								'type' => 'text',
+								'envelope' => 'span',
+								'sizse' => 31
 						]); ?>
 					</td>
 					<td class="order-remainder_sunday field" style="width: 31px;">

@@ -7,7 +7,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <!-- order/full_list -->
 <?php if (!strstr($output_format, 'printable')) : ?>
 	<fieldset class="search-fieldset">
-		<legend title="click to show or hide the parameters">Search Parameters</legend>
+		<legend title="click to show or hide the parameters">Search Parameters
+		</legend>
 		<div class="search-parameters">
 			<?php if (isset($options)) : ?>
 				<?php $keys = array_keys($options); ?>
@@ -33,55 +34,67 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<?php endfor; ?>
 			</ul>
 			<p>
-				Found Count: <strong><?php print count($orders); ?> Orders</strong>
+				Found Count: <strong><?php print count($orders); ?>
+					Orders</strong>
 			</p>
-			<?php print create_button_bar([[
-				'text' => 'Refine Search',
-				'class' => [
-					'button',
-					'refine',
-					'search',
-					'dialog',
-					'search-orders'
-				],
-				'href' => site_url('order/search')
-			]]); ?>
+			<?php print create_button_bar([
+					[
+							'text' => 'Refine Search',
+							'class' => [
+									'button',
+									'refine',
+									'search',
+									'dialog',
+									'search-orders',
+							],
+							'href' => site_url('order/search'),
+					],
+			]); ?>
 		</div>
 	</fieldset>
 
 	<?php
 	if ($output_format != 'crop-failure') {
-		$buttons[] = array(
-			'text' => 'Full Export',
-			'title' => 'Export all the fields using the current sort',
-			'class' => array(
-				'button',
-				'export'
-			),
-			'style' => 'export',
-			'href' => $_SERVER['REQUEST_URI'] . '&export=true'
-		);
-		$buttons[] = array(
-			'text' => 'Grower Export',
-			'title' => 'Export grower fields using a special grower export',
-			'class' => array(
-				'button',
-				'export'
-			),
-			'style' => 'export',
-			'href' => $_SERVER['REQUEST_URI'] . '&export=true&export_type=grower'
-		);
+		$buttons[] = [
+				'text' => 'Full Export',
+				'title' => 'Export all the fields using the current sort',
+				'class' => [
+						'button',
+						'export',
+				],
+				'style' => 'export',
+				'href' => $_SERVER['REQUEST_URI'] . '&export=true',
+		];
+		$buttons[] = [
+				'text' => 'Grower Export',
+				'title' => 'Export grower fields using a special grower export',
+				'class' => [
+						'button',
+						'export',
+				],
+				'style' => 'export',
+				'href' => $_SERVER['REQUEST_URI'] . '&export=true&export_type=grower',
+		];
 		if (IS_ADMIN) {
-			$buttons[] = array(
-				'text' => 'Batch Update',
-				'title' => 'Batch Update values for all the listed orders.',
-				'class' => array(
-					'button',
-					'batch-update-orders',
-					'edit'
-				),
-				'style' => 'edit'
-			);
+			$buttons[] = [
+					'text' => 'Batch Update',
+					'title' => 'Batch Update values for all the listed orders.',
+					'class' => [
+							'button',
+							'batch-update-orders',
+							'edit',
+					],
+					'style' => 'edit',
+			];
+			$buttons[] = [
+					'text' => 'Backup Orders Database',
+					'title' => 'Download a copy of the orders table',
+					'href' => base_url('backup/backup_table/orders'),
+					'class' => [
+							'button',
+							'export',
+					],
+			];
 		}
 		print create_button_bar($buttons);
 	}
@@ -93,20 +106,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
 if ($output_format == 'inventory') {
 	if ($year == 2021) {
 		$this->load->view('order/inventory_2021');
-	} else {
+	}
+	else {
 		$this->load->view('order/inventory');
 	}
-} elseif ($output_format == 'crop-failure') {
+}
+elseif ($output_format == 'crop-failure') {
 	$this->load->view('order/crop_failures');
-} elseif ($output_format == 'printable-sellouts') {
+}
+elseif ($output_format == 'printable-sellouts') {
 	$this->load->view('order/sellouts');
-} elseif ($output_format == 'printable-tracking') {
+}
+elseif ($output_format == 'printable-tracking') {
 	$this->load->view('order/tracking');
-} elseif ($output_format == 'printable-shelfchecking') {
+}
+elseif ($output_format == 'printable-shelfchecking') {
 	$this->load->view('order/shelfchecking');
-} elseif ($output_format == 'profitability') {
+}
+elseif ($output_format == 'profitability') {
 	$this->load->view('order/profitability');
-} else {
+}
+else {
 	$this->load->view('order/catalog');
 }
 ?>

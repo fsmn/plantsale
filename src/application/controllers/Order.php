@@ -267,26 +267,26 @@ class Order extends MY_Controller {
 
 	function update_value() {
 		$id = $this->input->post('id');
-		$value = urldecode($this->input->post('value'));
-		$field = $this->input->post('field');
-		if ($field == 'received_presale' && $value == 'f') {
-			$value = 0;
-		}
-		if ($value === 'x') {
-			$output = $this->order->clear($id, $field);
-		}
-		else {
-			$values = [
-				$field => $value,
-			];
+			$value = urldecode($this->input->post('value'));
+			$field = $this->input->post('field');
+			if ($field == 'received_presale' && $value == 'f') {
+				$value = 0;
+			}
+			if ($value === 'x') {
+				$output = $this->order->clear($id, $field);
+			}
+			else {
+				$values = [
+					$field => $value,
+				];
 
-      $output = $this->order->update($id, $values);
+				$output = $this->order->update($id, $values);
 
-      if ($this->input->post('format') == 'currency') {
-        $output = get_as_price($output);
-      }
-    }
-    echo $output;
+				if ($this->input->post('format') == 'currency') {
+					$output = get_as_price($output);
+				}
+			}
+			echo $output;
   }
 
   /**

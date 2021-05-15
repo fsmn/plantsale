@@ -186,18 +186,16 @@ if (!empty($orders)) :
 							'envelope' => 'span',
 					]); ?>
 				</td>
-				<td class="order-remainder_friday field" style="width: 31px;">
+				<td class="order-remainder_friday field">
 					<?php print live_field('remainder_friday', $order->remainder_friday, 'order', $order->id, [
 							'type' => 'text',
 							'envelope' => 'span',
-							'sizse' => 31,
 					]); ?>
 				</td>
-				<td class="order-sellout_friday field" style="width: 31px;">
+				<td class="order-sellout_friday field">
 					<?php print live_field('sellout_friday', $order->sellout_friday, 'order', $order->id, [
 							'type' => 'text',
 							'envelope' => 'span',
-							'sizse' => 31,
 					]); ?>
 				</td>
 				<td tabindex=-1 class="order-count_saturday field">
@@ -212,31 +210,27 @@ if (!empty($orders)) :
 							'envelope' => 'span',
 					]); ?>
 				</td>
-				<td class="order-remainder_saturday field" style="width: 31px;">
+				<td class="order-remainder_saturday field">
 					<?php print live_field('remainder_saturday', $order->remainder_saturday, 'order', $order->id, [
 							'envelope' => 'span',
-							'size' => 31,
 							'type' => 'text',
 					]); ?>
 				</td>
-				<td class="order-sellout_saturday field" style="width: 31px;">
+				<td class="order-sellout_saturday field">
 					<?php print live_field('sellout_saturday', $order->sellout_saturday, 'order', $order->id, [
 							'type' => 'text',
 							'envelope' => 'span',
-							'sizse' => 31,
 					]); ?>
 				</td>
-				<td class="order-remainder_sunday field" style="width: 31px;">
+				<td class="order-remainder_sunday field">
 					<?php print live_field('remainder_sunday', $order->remainder_sunday, 'order', $order->id, [
 							'envelope' => 'span',
-							'size' => 31,
 							'type' => 'text',
 					]); ?>
 				</td>
-				<td class="order-count_dead field" style="width: 31px;">
+				<td class="order-count_dead field">
 					<?php print live_field('count_dead', $order->count_dead, 'order', $order->id, [
 							'envelope' => 'span',
-							'size' => 31,
 							'type' => 'text',
 					]); ?>
 				</td>

@@ -15,7 +15,7 @@ if (!empty($orders)) :
 	<table class="list inventory hideable-columns">
 		<thead>
 		<tr class="top-row">
-			<th colspan="7"></th>
+			<th colspan="8"></th>
 			<th colspan=2>Presale</th>
 			<th colspan=4>Friday</th>
 			<th colspan=4>Saturday</th>

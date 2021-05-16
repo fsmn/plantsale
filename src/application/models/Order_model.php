@@ -39,6 +39,10 @@ class Order_Model extends MY_Model {
 
 	public $received_presale;
 
+	public $received_friday;
+
+	public $received_saturday;
+
 	public $received_midsale;
 
 	public $count_dead;
@@ -70,19 +74,21 @@ class Order_Model extends MY_Model {
 	function prepare_variables() {
 
 		$variables = get_class_vars('Order_Model');
-		foreach ($variables as $my_variable => $value) {
-			$my_value = $this->input->post($my_variable);
-			if ($my_value === '0') {
-				$this->{$my_variable} = 0;
+		if(!empty($this->input->post('id'))) {
+			foreach ($variables as $my_variable => $value) {
+				$my_value = $this->input->post($my_variable);
+				if ($my_value === '0') {
+					$this->{$my_variable} = 0;
+				}
+				elseif (!empty($my_value)) {
+					$this->{$my_variable} = urldecode($my_value);
+				}
 			}
-			elseif (!empty($my_value)) {
-				$this->{$my_variable} = urldecode($my_value);
-			}
+
+
+			$this->rec_modified = mysql_timestamp();
+			$this->rec_modifier = $this->session->userdata('user_id');
 		}
-
-
-		$this->rec_modified = mysql_timestamp();
-		$this->rec_modifier = $this->session->userdata('user_id');
 	}
 
 	function insert() {
@@ -92,7 +98,7 @@ class Order_Model extends MY_Model {
 	}
 
 	function clear($id, $field) {
-		$this->db->query('UPDATE `orders` SET ' . $field . ' = NULL');
+		$this->db->query('UPDATE `orders` SET ' . $field . ' = NULL WHERE id = ' . $id);
 		return $this->get_value($id, $field);
 	}
 

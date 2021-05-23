@@ -17,31 +17,31 @@ if (empty($pot_sizes)) {
 	</div>
 	<div class="orders-flat_size field">
 		<label for="flat_size">Flat Size:&nbsp;
-			<input type="number" name="flat_size" value="" class="size" autocomplete="off" /></label>
+			<input type="text" name="flat_size" value="" class="size" autocomplete="off" /></label>
 	</div>
 	<div class="orders-flat_cost field">
 		<label for="flat_cost">Flat Cost: $
-			<input type="number" name="flat_cost" value="" class="cost" autocomplete="off" /></label>
+			<input type="text" name="flat_cost" value="" class="cost" autocomplete="off" /></label>
 	</div>
 	<div class="orders-plant_cost field">
 		<label for="plant_cost">Plant Cost:&nbsp;$
-			<input type="number" name="plant_cost" value="" class="cost" autocomplete="off" /></label>
+			<input type="text" name="plant_cost" value="" class="cost" autocomplete="off" /></label>
 	</div>
 	<div class="orders-count_presale field">
 		<label for="count_presale">Presale Count:&nbsp;
-			<input type="number" class="count" name="count_presale" value="" autocomplete="off" /></label>
+			<input type="text" class="count" name="count_presale" value="" autocomplete="off" /></label>
 	</div>
 	<div class="orders-count_friday field">
 		<label for="count_friday">Friday Count (2021 only):&nbsp;
-			<input type="number" class="count" name="count_friday" value="" autocomplete="off" /></label>
+			<input type="text" class="count" name="count_friday" value="" autocomplete="off" /></label>
 	</div>
 	<div class="orders-count_saturday field">
 		<label for="count_saturday">Saturday Count (2021 only):&nbsp;
-			<input type="number" class="count" name="count_saturday" value="" autocomplete="off" /></label>
+			<input type="text" class="count" name="count_saturday" value="" autocomplete="off" /></label>
 	</div>
 	<div class="orders-count_midsale field">
 		<label for="count_midsale">Midsale Count:&nbsp;
-			<input type="number" class="count" name="count_midsale" value="" autocomplete="off" /></label>
+			<input type="text" class="count" name="count_midsale" value="" autocomplete="off" /></label>
 	</div>
 	<div class="orders-pot_size field">
 		<label for="pot_size">Pot Size:&nbsp;
@@ -49,7 +49,7 @@ if (empty($pot_sizes)) {
 	</div>
 	<div class="orders-price field">
 		<label for="price">Price:&nbsp;$
-			<input type="number" name="price" value="" class="cost" autocomplete="off" /></label>
+			<input type="text" name="price" value="" class="cost" autocomplete="off" /></label>
 	</div>
 	<div class="orders-flat_area field">
 		<label for="flat_area">Flat Area:&nbsp;

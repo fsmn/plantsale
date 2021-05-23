@@ -130,7 +130,8 @@
 		});
 	});
 
-	$(document).on("click", ".field-envelope .edit-field", function () {
+	$(document).on("click", ".field-envelope .edit-field", function (e) {
+
 		let me;
 		let my_parent;
 		let my_attr;
@@ -484,6 +485,10 @@ function show_popup(my_title, data, popup_width, x, y) {
 function update_field(me, my_type) {
 	let my_parent = $(me).parent();
 	let my_value = $(me).val();
+	if( $(me).hasClass("persistent")){
+		my_parent = $(me);
+	}
+	let is_persistent = my_parent.hasClass("persistent");
 
 	let my_category = false;
 
@@ -500,20 +505,20 @@ function update_field(me, my_type) {
 				my_value = 1;
 			} else {
 				my_value = 0;
-			};
+			}
 			break;
 		case ("boolean"):
 			if ($(me).attr("checked") === true) {
 				my_value = 'yes';
 			} else {
 				my_value = 'no';
-			};
+			}
 			break;
 		default:
 			break;
 	}
 
-	let is_persistent = my_parent.hasClass("persistent");
+
 
 	//don't do anything if the value is empty and it is a persistent field 
 	if (is_persistent && my_value === "") {
@@ -530,28 +535,22 @@ function update_field(me, my_type) {
 		category: my_category,
 		type: my_type,
 	};
+	console.log(my_parent.data('table'));
 
-	if (my_value === "") {
-		$(my_parent).html('&nbsp;');
-		$(my_parent).removeClass("live-field text");
-		$(my_parent).addClass("edit-field field");
-	} else {
-		$.ajax({
-			type: "post",
-			url: base_url + my_parent.data('table') + "/update_value",
-			data: form_data,
-			success: function (data) {
-				console.log(data);
+	$.ajax({
+		type: "post",
+		url: base_url + my_parent.data('table') + "/update_value",
+		data: form_data,
+		success: function (data) {
+			// console.log(data);
+			if (!is_persistent) {
 				me.focus();
-				if (!is_persistent) {
-					$(my_parent).html(data);
-					$(my_parent).removeClass("live-field text");
-					$(my_parent).addClass("edit-field field");
-				}
+				$(my_parent).html(data)
+				$(my_parent).removeClass("live-field text");
+				//$(my_parent).addClass("edit-field field");
 			}
-		});
-	}
-
+		}
+	});
 }
 
 // let my_parent = $(me).parents(".field-envelope").attr("id");

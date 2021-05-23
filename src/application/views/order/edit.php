@@ -110,7 +110,7 @@ if (get_value($order, 'year') == 2021) {
 					<div class="order-count_presale field inline">
 						<label for="count_<?php print $day; ?>"><?php print ucfirst($day); ?>
 							Count:&nbsp;</label>
-						<input type="number" class="count"
+						<input type="text" class="count"
 							   name="count_<?php print $day; ?>"
 							   value="<?php print get_value($order, 'count_' . $day); ?>"
 							   autocomplete="off"/>

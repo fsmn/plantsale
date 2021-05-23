@@ -1,4 +1,4 @@
-FROM ten7/flightdeck-web-7.4
+FROM ten7/flight-deck-web:develop-drupal7
 MAINTAINER tess@ten7.com
 
 # Switch to root for the build.

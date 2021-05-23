@@ -537,20 +537,27 @@ function update_field(me, my_type) {
 	};
 	console.log(my_parent.data('table'));
 
-	$.ajax({
-		type: "post",
-		url: base_url + my_parent.data('table') + "/update_value",
-		data: form_data,
-		success: function (data) {
-			// console.log(data);
-			if (!is_persistent) {
+	if (my_value === "") {
+		$(my_parent).html('&nbsp;');
+		$(my_parent).removeClass("live-field text");
+		$(my_parent).addClass("edit-field field");
+	} else {
+		$.ajax({
+			type: "post",
+			url: base_url + my_parent.data('table') + "/update_value",
+			data: form_data,
+			success: function (data) {
+				console.log(data);
 				me.focus();
-				$(my_parent).html(data)
-				$(my_parent).removeClass("live-field text");
-				//$(my_parent).addClass("edit-field field");
+				if (!is_persistent) {
+					$(my_parent).html(data);
+					$(my_parent).removeClass("live-field text");
+					$(my_parent).addClass("edit-field field");
+				}
 			}
-		}
-	});
+		});
+	}
+
 }
 
 // let my_parent = $(me).parents(".field-envelope").attr("id");

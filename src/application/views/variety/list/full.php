@@ -48,25 +48,25 @@ if (!empty($plants)):
 			</thead>
 			<tbody>
 			<?php foreach ($plants as $plant): ?>
-				<?php $checked = ""; ?>
-				<?php $class = "print"; ?>
+				<?php $checked = ''; ?>
+				<?php $class = 'print'; ?>
 				<?php if ($plant->omit == 1): ?>
-					<?php $checked = "checked"; ?>
-					<?php $class = "omitted"; ?>
+					<?php $checked = 'checked'; ?>
+					<?php $class = 'omitted'; ?>
 				<?php endif; ?>
 				<tr class="plant-row plant-info inline-list <?php echo $class; ?>"
 					tabindex=<?php echo $i; ?> id="plant-info_<?php echo $plant->id; ?>">
 					<td class="field omit-plant">
 						<?php echo form_checkbox([
-								"name" => "omit",
-								"value" => 1,
-								"title" => "Omit this plant from printing",
-								"id" => "omit-plant_$plant->id",
-								"checked" => $checked,
-								"class" => "omit-row omit plant-info",
+								'name' => 'omit',
+								'value' => 1,
+								'title' => 'Omit this plant from printing',
+								'id' => "omit-plant_$plant->id",
+								'checked' => $checked,
+								'class' => 'omit-row omit plant-info',
 						]); ?></td>
 					<td class="field year"><?php echo $plant->year; ?></td>
-					<td><?php echo get_value($plant, "catalog_number"); ?></td>
+					<td><?php echo get_value($plant, 'catalog_number'); ?></td>
 					<td class="field latin-name"><?php echo format_latin_name($plant); ?></td>
 					<td class="field common-name"><?php echo $plant->name; ?></td>
 					<td class="field variety"><?php echo $plant->variety; ?></td>

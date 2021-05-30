@@ -7,7 +7,7 @@ if(!empty($ids)):
 	<input type="hidden" id="ids" name="ids"
 		   value="<?php print implode(',', $ids); ?>"/>
 	<input type="hidden" id="action" name="action" value="update"/>
-	<h2>DANGER: Updating <?php echo count($ids); ?> Records</h2>
+	<h2>DANGER: Updating <?php print count($ids); ?> Records</h2>
 	<p class="notice">Changes you submit here cannot be undone!</p>
 	<p>
 		<input type="submit" class="button"/>

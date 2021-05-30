@@ -1,2 +1,2 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-echo "Nothing to see here";
+print 'Nothing to see here';

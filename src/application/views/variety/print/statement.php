@@ -2,119 +2,125 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 // statement.php Chris Dart May 20, 2014 7:58:21 PM chrisdart@cerebratorium.com
-$classes = array("document");
+$classes = ['document'];
 
-if(isset($row_class)){
-	$classes[] = implode(" ", $row_class);
+if (isset($row_class)) {
+	$classes[] = implode(' ', $row_class);
 }
 $has_image = TRUE;
-if(!$variety->image_name){
-    $classes[] = "no-image";
-    $has_image = FALSE;
+if (!$variety->image_name) {
+	$classes[] = 'no-image';
+	$has_image = FALSE;
 }
-$saturday_delivery = $order->count_midsale>0?1:0;
-$is_new = $variety->new_year == $this->session->userdata("sale_year");
-if($saturday_delivery){
-	$classes[] = "has-saturday-delivery";
+$saturday_delivery = $order->count_midsale > 0 ? 1 : 0;
+$is_new = $variety->new_year == $this->session->userdata('sale_year');
+if ($saturday_delivery) {
+	$classes[] = 'has-saturday-delivery';
 }
-if($is_new){
-	$classes[] = "has-new-icon";
+if ($is_new) {
+	$classes[] = 'has-new-icon';
 }
 
-$common_classes[] = "common-name";
+$common_classes[] = 'common-name';
 $length = strlen($variety->common_name);
 
-if($length > 27){
-    $common_classes[] = "large";
-}elseif($length > 18){
-    $common_classes[] = "medium";
-    		
+if ($length > 27) {
+	$common_classes[] = 'large';
+} elseif ($length > 18) {
+	$common_classes[] = 'medium';
+
 }
-$common_class = implode(" ", $common_classes);
+$common_class = implode(' ', $common_classes);
 
 ?>
-<div class="<?php echo implode(" ",$classes);?>">
+<div class="<?php print implode(' ', $classes); ?>">
 	<div class="header">
-	<div class="catalog-number"><?php echo $order->catalog_number;?></div>
-	<div class="<?php print $common_class;?>"><?php print $variety->common_name;?></div>
+		<div class="catalog-number"><?php print $order->catalog_number; ?></div>
+		<div class="<?php print $common_class; ?>"><?php print $variety->common_name; ?></div>
 	</div>
-<div class="subheader">
-<?php if($saturday_delivery || $variety->new_year == $this->session->userdata("sale_year")):?>
-<div class="special-icons">
-	<?php if($order->count_midsale > 0): ?>
+	<div class="subheader">
+		<?php if ($saturday_delivery || $variety->new_year == $this->session->userdata('sale_year')): ?>
+			<div class="special-icons">
+				<?php if ($order->count_midsale > 0): ?>
 
-		<span class="icon saturday-delivery">
-		<!-- <img src="<?php echo base_url("images/truck-icon.png");?>"/> -->
-		<?php echo format_saturday("poster"); ?>
+					<span class="icon saturday-delivery">
+		<!-- <img src="<?php print base_url('images/truck-icon.png'); ?>"/> -->
+		<?php print format_saturday('poster'); ?>
 		</span>
 
-	<?php endif;?>
-	<?php if($variety->new_year == $this->session->userdata("sale_year")):?>
-<span class="icon is-new">
-		<!-- <img src="<?php echo base_url("images/new-icon.png");?>"/> -->
-		<?php echo format_new("poster"); ?>
+				<?php endif; ?>
+				<?php if ($variety->new_year == $this->session->userdata('sale_year')): ?>
+					<span class="icon is-new">
+		<!-- <img src="<?php print base_url('images/new-icon.png'); ?>"/> -->
+		<?php print format_new('poster'); ?>
 		</span>
-		<?php endif;?>
-</div>
-<?php endif;?>
-<div class="latin-name"><?php echo format_latin_name($variety);?></div>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
+		<div class="latin-name"><?php print format_latin_name($variety); ?></div>
 	</div>
 	<div class="description-group">
-	<?php if($has_image):?>
+	<?php if($has_image): ?>
 	<div class="image">
 		<img src="/files/<?php print $variety->id;?>.jpg<?php print '?cache='. date('U');?>" class="photo" alt="image of <?php print $variety->common_name; ?> "/>
 </div>
 <?php endif;?>
 <div class="description-text">
-<div class="variety"><a href="<?php echo site_url("variety/view/$variety->id");?>" target="_blank"><?php echo $variety->variety;?></a></div>
+<div class="variety"><a href="<?php print site_url("variety/view/$variety->id");?>" target="_blank"><?php echo $variety->variety;?></a></div>
 <?php if($variety->print_description):?>
-	<div class="print_description"><?php echo $variety->print_description;?></div>
+	<div class="print_description"><?php print $variety->print_description;?></div>
 	<?php endif;?>
-	<div class="description"><?php echo $variety->description;?></div>
+	<div class="description"><?php print $variety->description;?></div>
 </div>
 </div>
 <div class="details-group">
 
-<div class="dimensions">
-	<?php if($variety->min_height || $variety->max_height):?>
-		<div class="height">
-			<label>Height</label>
-			<div class="text"><?php echo format_dimensions($variety->min_height, $variety->max_height, abbr_unit($variety->height_unit));?></div>
+		<div class="dimensions">
+			<?php if ($variety->min_height || $variety->max_height): ?>
+				<div class="height">
+					<label>Height</label>
+					<div class="text"><?php print format_dimensions($variety->min_height, $variety->max_height, abbr_unit($variety->height_unit)); ?></div>
+				</div>
+			<?php endif; ?>
+			<?php if ($variety->min_width || $variety->max_width): ?>
+				<div class="width">
+					<label>Width</label>
+					<div class="text"><?php print format_dimensions($variety->min_width, $variety->max_width, abbr_unit($variety->width_unit)); ?></div>
+				</div>
+			<?php endif; ?>
+			<div class="price-group">
+				<div class="pot-size"><?php print get_value($order, 'pot_size'); ?></div>
+				<div class="price"><?php print get_as_price(get_value($order, 'price')); ?></div>
+			</div>
+
+
 		</div>
-	<?php endif;?>
-	<?php if($variety->min_width || $variety->max_width):?>
-		<div class="width">
-			<label>Width</label>
-			<div class="text"><?php echo format_dimensions($variety->min_width, $variety->max_width, abbr_unit($variety->width_unit));?></div>
-		</div>
-	<?php endif;?>
-	<div class="price-group">
-		<div class="pot-size"><?php echo get_value($order,"pot_size");?></div>
-		<div class="price"><?php echo get_as_price(get_value($order,"price"));?></div>
+
 	</div>
-	
-
-</div>
-
-</div>
-<div class="icons">
+	<div class="icons">
 		<ul class="sunlight">
 			<?php
-			$sunlight = explode(",",$variety->sunlight);
-			foreach($sunlight as $light){
-				echo sprintf("<li class='%s'>%s</li>",css_classify($light),format_sunlight($light));
+			$sunlight = explode(",", $variety->sunlight);
+			foreach ($sunlight as $light) {
+				print format_string('<li class="@class">@sunlight</li>', [
+						'@class' => css_classify($light),
+						'@sunlight' => format_sunlight($light),
+				]);
 			}
 			?>
 		</ul>
 		<ul class="flags">
-			<?php foreach($flags as $flag){
-			    echo sprintf("<li class='%s'>%s</li>",css_classify($flag->name),format_flags(array($flag),"poster"));
-				//echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
-			}?>
+			<?php foreach ($flags as $flag) {
+				print format_string('<li class="@class">@flag</li>', [
+						'@class' => css_classify($flag->name),
+						'@flag' => format_flags([$flag],'poster'),
+				]);
+				//print sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
+			} ?>
 
 		</ul>
 	</div>
 	<div class="footer-group">
-		<div class="grower-name"><?php echo get_value($order,"grower_name");?></div>
+		<div class="grower-name"><?php print get_value($order, 'grower_name'); ?></div>
 	</div>
 </div>

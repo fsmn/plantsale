@@ -1,46 +1,46 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-$classes = array("document");
+$classes = ['document'];
 $has_image = TRUE;
-if(!$variety->image_name){
-    $classes[] = "no-image";
-    $has_image = FALSE;
+if (!$variety->image_name) {
+	$classes[] = 'no-image';
+	$has_image = FALSE;
 }
-$saturday_delivery = $order->count_midsale?1:0;
-if(isset($row_class)){
-	$classes[] = implode(" ", $row_class);
+$saturday_delivery = $order->count_midsale ? 1 : 0;
+if (isset($row_class)) {
+	$classes[] = implode(' ', $row_class);
 }
 ?>
-<div class="<?php echo implode(" ",$classes);?>">
-	<div class="header">
-	<div class="catalog-number"><?php echo $order->catalog_number;?></div>
-	<div class="common-name"><?php echo $variety->common_name;?></div>
-	</div>
+	<div class="<?php print implode(' ', $classes); ?>">
+		<div class="header">
+			<div class="catalog-number"><?php print $order->catalog_number; ?></div>
+			<div class="common-name"><?php print $variety->common_name; ?></div>
+		</div>
 
-<div class="subheader">
-<?php if($saturday_delivery):?>
-<span class="saturday-delivery">
-		<!-- <img src="<?php echo base_url("images/truck-icon.png");?>"/> -->
-		<?php echo format_saturday("poster"); ?>
+		<div class="subheader">
+			<?php if ($saturday_delivery): ?>
+				<span class="saturday-delivery">
+		<!-- <img src="<?php print base_url('images/truck-icon.png'); ?>"/> -->
+		<?php print format_saturday('poster'); ?>
 		</span>
-		<?php endif;?>
-	<span class="latin-name<?php echo $saturday_delivery?' saturday':'';?>"><?php echo format_latin_name($variety);?></span>
-	<div class="variety-name">
-	<?php if($variety->new_year == $this->session->userdata("sale_year")):?>
-<span class="is-new">
-		<!-- <img src="<?php echo base_url("images/new-icon.png");?>"/> -->
-		<?php echo format_new("poster"); ?>
+			<?php endif; ?>
+			<span class="latin-name<?php print $saturday_delivery ? ' saturday' : ''; ?>"><?php print format_latin_name($variety); ?></span>
+			<div class="variety-name">
+				<?php if ($variety->new_year == $this->session->userdata('sale_year')): ?>
+					<span class="is-new">
+		<!-- <img src="<?php print base_url('images/new-icon.png'); ?>"/> -->
+		<?php print format_new('poster'); ?>
 		</span>
-		<?php endif;?>
+		<?php endif; ?>
 	<span class="variety"><a href="<?php echo site_url("variety/view/$variety->id");?>" target="_blank"><?php echo $variety->variety;?></a></span>
 	</div>
 	</div>
 	<div class="description-group">
-	<?php if($has_image):?>
+	<?php if($has_image): ?>
 	<div class="image">
 		<img src="/files/<?php print $variety->id;?>.jpg<?php print '?cache='. date('U');?>" class="photo" alt="image of <?php print $variety->common_name; ?> "/>				<ul class="flags icons">
 			<?php foreach($flags as $flag){
-			    echo sprintf("<li class='%s'>%s</li>",css_classify($flag->name),format_flags(array($flag),"poster"));
+			    print sprintf("<li class='%s'>%s</li>",css_classify($flag->name),format_flags(array($flag),"poster"));
 				//echo sprintf("<li><img src='%s'/></li>",base_url("images/$flag->thumbnail"));
 			}?>
 		</ul>
@@ -87,14 +87,13 @@ if(isset($row_class)){
 	<div class="description"><?php echo $variety->description;?></div>
 	</div>
 
-</div>
-</div>
+			</div>
+		</div>
 
 
-
-	<div class="footer-group">
-		<div class="grower-name"><?php echo get_value($order,"grower_name");?></div>
+		<div class="footer-group">
+			<div class="grower-name"><?php print get_value($order, 'grower_name'); ?></div>
+		</div>
 	</div>
-</div>
 
-<?php $classes = array();
+<?php $classes = [];

@@ -36,6 +36,11 @@ digitalocean_domains:
 
 flightdeck_cluster:
   namespace: "backoffice-t7stage-io"
+  volumes:
+    - name: "backoffice-stage-files"
+      class: "rook-cephfs"
+      mode: "ReadWriteMany"
+      size: "10Gi"
   configMaps:
     - name: "varnish"
       files:
@@ -141,12 +146,6 @@ flightdeck_cluster:
           - path: "/"
             backend: "web"
             port: "80"
-          - path: "/s3fs-css/"
-            backend: "web"
-            port: "80"
-          - path: "/s3fs-js/"
-            backend: "web"
-            port: "80"
   web:
     image: "{{ docker_web_image }}"
     replicas: 1
@@ -157,6 +156,9 @@ flightdeck_cluster:
     nodeSelector:
       key: "doks.digitalocean.com/node-pool"
       value: "web2-pool"
+    volumes:
+      - name: "backoffice-stage-files"
+        path: "/var/www/files"
     secrets:
       - name: "web"
         path: "/secrets"

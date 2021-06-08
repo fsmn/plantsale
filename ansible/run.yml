@@ -42,13 +42,3 @@
       template:
         src: "{{ web_dir }}/application/config/s3.php"
         dest: "{{ web_dir }}/application/config/s3.php"
-    - name: Add assets rewrite to .htaccess
-      lineinfile:
-        dest: "{{ web_dir }}/.htaccess"
-        regexp: "^\\s*RewriteEngine on"
-        line: |
-          RewriteEngine on
-
-          RewriteCond %{HTTP_HOST} t7live\.io$ [NC,OR]
-          RewriteCond %{HTTP_HOST} db.friendsschoolplantsale\.com$ [NC]
-          RewriteRule ^/?files(.*) https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/$1 [L,R=302,NE]

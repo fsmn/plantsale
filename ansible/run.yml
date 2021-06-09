@@ -38,7 +38,3 @@
       template:
         src: "{{ web_dir }}/application/config/email.php"
         dest: "{{ web_dir }}/application/config/email.php"
-    - name: Template the s3 config file
-      template:
-        src: "{{ web_dir }}/application/config/s3.php"
-        dest: "{{ web_dir }}/application/config/s3.php"

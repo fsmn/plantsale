@@ -53,8 +53,20 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
+switch(getenv('T7_SITE_ENVIRONMENT')){
+	case 'live':
+		define('ENVIRONMENT', 'production');
+		break;
+	case 'stage':
+		define('ENVIRONMENT', 'testing');
+		break;
+	case 'docker':
+	case 'preview':
+	default:
+		define('ENVIRONMENT', 'development');
+
+}
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

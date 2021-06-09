@@ -1,7 +1,5 @@
 <?php
 
-use Plantsale\S3;
-
 defined('BASEPATH') or exit ('No direct script access allowed');
 
 class Variety extends MY_Controller {
@@ -18,16 +16,6 @@ class Variety extends MY_Controller {
 		$this->load->model("common_model", "common");
 		$this->load->model("order_model", "order");
 		$this->load->model("flag_model", "flag");
-		$this->s3_vars = [
-			'folder_name' => $this->config->item('folder_name'),
-			'bucket' => $this->config->item('bucket_name'),
-			'key'=> $this->config->item('access_key'),
-			'secret' => $this->config->item('secret_key'),
-			's3_url' => $this->config->item('s3_url'),
-			'region' => $this->config->item('s3fs_region'),
-			'cname_url' => $this->config->item('cname_url'),
-			'hostname' => $this->config->item('hostname'),
-		];
 		// $this->load->library ( "field" );
 	}
 
@@ -79,11 +67,10 @@ class Variety extends MY_Controller {
 	}
 
 	function view($id) {
-		$this->load->library('s3_client',$this->s3_vars);
 		$variety = $this->variety->get($id);
 		$current_order = $this->order->get_for_variety($id, get_current_year());
 		$data ['current_order'] = $current_order;
-		$data ['file_path'] = $this->s3_client->getPath();
+		$data ['file_path'] = '/files';
 		$orders = $this->order->get_for_variety($id);
 		foreach ($orders as $order) {
 			if($order->year == get_current_year()) {

@@ -63,15 +63,6 @@
                   - path: "/"
                     backend: "web"
                     port: "6081"
-                  - path: "/s3/"
-                    backend: "web"
-                    port: "80"
-                  - path: "/s3fs-css/"
-                    backend: "web"
-                    port: "80"
-                  - path: "/s3fs-js/"
-                    backend: "web"
-                    port: "80"
 
     - name: Deploy the cluster definitions
       include_role:

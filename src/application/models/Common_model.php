@@ -45,7 +45,7 @@ class Common_model extends MY_Model
             }
             if ($my_value) {
 
-                $this->$my_variable = $my_value;
+                $this->{$my_variable} = $my_value;
             }
         }
 

@@ -37,7 +37,7 @@ class Contact_model extends MY_Model
         for ($i = 0; $i < count($variables); $i++) {
             $my_variable = $variables[$i];
             if ($this->input->post($my_variable)) {
-                $this->$my_variable = $this->input->post($my_variable);
+                $this->{$my_variable} = $this->input->post($my_variable);
             }
         }
 

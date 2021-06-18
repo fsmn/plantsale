@@ -71,10 +71,10 @@ class Order_Model extends MY_Model {
 		parent::__construct();
 	}
 
-	function prepare_variables() {
+	function prepare_variables($is_insert = FALSE) {
 
 		$variables = get_class_vars('Order_Model');
-		if(!empty($this->input->post('id'))) {
+		if($is_insert || !empty($this->input->post('id'))) {
 			foreach ($variables as $my_variable => $value) {
 				$my_value = $this->input->post($my_variable);
 				if ($my_value === '0') {
@@ -92,7 +92,7 @@ class Order_Model extends MY_Model {
 	}
 
 	function insert() {
-		$this->prepare_variables();
+		$this->prepare_variables(TRUE);
 		$id = $this->_insert('orders');
 		return $id;
 	}

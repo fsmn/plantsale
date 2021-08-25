@@ -100,7 +100,6 @@ if (get_value($order, 'year') == 2021) {
 			</div>
 		</div>
 	</div>
-	<?php if ($action == 'update') : ?>
 	<div class="group">
 		<h3>Inventory Details</h3>
 		<div class="grid-group three-columns">
@@ -187,7 +186,6 @@ if (get_value($order, 'year') == 2021) {
 
 
 	</div>
-	<?php endif; ?>
 	<input type="hidden" name="redirect_url" id="redirect_url"/>
 	<div style="clear:both">
 		<input type="submit" value="<?php print ucfirst($action); ?>"

@@ -72,7 +72,7 @@ flightdeck_cluster:
                   endpoint: "https://nyc3.digitaloceanspaces.com"
                   region: "nyc3"
                   disabled: false
-                  healthcheckUrl: "https://hc-ping.com/bd1e7225-180a-4daf-90ab-cabfef357e62"
+                  healthcheckUrl: "https://betteruptime.com/api/v1/heartbeat/tBdfZFffDDSVq5hsE6eNayXV"
   secrets:
     - name: "backoffice-s3"
       files:

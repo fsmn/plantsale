@@ -511,6 +511,12 @@ form .field{
 	display: flex;
 }
 
+form .field.inline {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
 table .field {
 	padding: 0;
 }
@@ -583,6 +589,8 @@ a.button {
 	border: 1px solid #ddd;
 }
 
+
+
 table.list td {
 	padding: 5px;
 	border-width: 0;
@@ -612,6 +620,7 @@ table.list thead th, table.list tbody td {
 	border-left: 1px solid #bbb;
 	padding: 5px;
 }
+
 
 table.list tbody tr {
 	border-bottom: 1px solid #bbb;
@@ -833,6 +842,22 @@ form .column {
 .column-even, .column.odd {
 	padding-left: 5px;
 }
+
+.grid-group {
+
+}
+
+.grid-group.three-columns {
+	display: grid;
+	grid-template-columns: .5fr .5fr .5fr;
+}
+
+.grid-group.two-columns {
+	display: grid;
+	grid-template-columns: .75fr .75fr;
+}
+
+
 
 .triptych {
 	width: auto;

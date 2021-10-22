@@ -10,52 +10,56 @@ class Subcategory_Model extends MY_Model
     var $category_id;
     var $rec_modifier;
     var $rec_modified;
-    
-    function __construct ()
+
+    function __construct()
     {
         parent::__construct();
     }
 
-    function get($id){
-    	return $this->_get("subcategory",$id);
-    	
-    }
-    function get_for_category ($category_id)
+    function get($id)
     {
-        $this->db->from("subcategory");
-        $this->db->where("category_id", $category_id);
-        $this->db->order_by("subcategory", "ASC");
+        return $this->_get('subcategory', $id);
+    }
+
+    function get_for_category($category_id)
+    {
+        $this->db->from('subcategory');
+        $this->db->where('category_id', $category_id);
+        $this->db->order_by('subcategory', 'ASC');
         $result = $this->db->get()->result();
         return $result;
     }
 
-    function get_pairs ($category_id = NULL)
+    function get_pairs($category_id = NULL)
     {
-        if($category_id){
-            $this->db->where("category_id",$category_id);
+        if ($category_id) {
+            $this->db->where('category_id', $category_id);
         }
-        $this->db->from("subcategory");
-        $this->db->select("`id` as `key`, `subcategory` as `value`");
-        $this->db->order_by("subcategory", "ASC");
+        $this->db->from('subcategory');
+        $this->db->select('`id` as `key`, `subcategory` as `value`');
+        $this->db->order_by('subcategory', 'ASC');
         $result = $this->db->get()->result();
         return $result;
     }
-    
-    function exists($category_id, $subcategory){
-    	$this->db->from("subcategory");
-    	$this->db->where('category_id',$category_id);
-    	$this->db->where('subcategory',trim($subcategory));
-    	$result = $this->db->get()->row();
-    	return $result;
+
+    function exists($category_id, $subcategory)
+    {
+        $this->db->from('subcategory');
+        $this->db->where('category_id', $category_id);
+        $this->db->where('subcategory', trim($subcategory));
+        $result = $this->db->get()->row();
+        return $result;
     }
-    
-    function insert($category_id, $subcategory){
-    	$this->category_id = $category_id;
-    	$this->subcategory = $subcategory;
-    	return $this->_insert("subcategory");
+
+    function insert($category_id, $subcategory)
+    {
+        $this->category_id = $category_id;
+        $this->subcategory = $subcategory;
+        return $this->_insert('subcategory');
     }
-    
-    function update($id,$values = array()){
-    	return $this->_update("subcategory",$id,$values);
+
+    function update($id, $values = [])
+    {
+        return $this->_update('subcategory', $id, $values);
     }
 }

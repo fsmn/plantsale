@@ -4,7 +4,7 @@ digitalocean_api_token: "{{ lookup('env', 'DIGITALOCEAN_API_TOKEN') }}"
 cluster_name: "cc02"
 t7_env: "live"
 
-docker_registry: "registry.t7develop.io:443"
+docker_registry: "cc02-registry.t7develop.io:443"
 docker_registry_user: "{{ lookup('env', 'REGISTRY_USER') }}"
 docker_registry_pass: "{{ lookup('env', 'REGISTRY_PASS') }}"
 docker_registry_image: "{{ lookup('env', 'CI_PROJECT_NAME') }}"
@@ -25,8 +25,29 @@ s3fs_root_folder: "db.friendsschoolplantsale.com"
 s3fs_public_folder: "files"
 s3fs_private_folder: "private"
 
+digitalocean_domains:
+  - name: "t7live.io"
+    records:
+      - name: "backoffice"
+        type: "A"
+        value: "159.203.51.233"
+        state: present
+        ttl: 300
+  - name: "friendsschoolplantsale.com"
+    records:
+      - name: "db"
+        type: "A"
+        value: "159.203.51.233"
+        state: present
+        ttl: 300
+
 flightdeck_cluster:
   namespace: "db-friendsschoolplantsale-com"
+  volumes:
+    - name: "backoffice-live-files"
+      class: "rook-cephfs"
+      mode: "ReadWriteMany"
+      size: "20Gi"
   configMaps:
     - name: "varnish"
       files:
@@ -35,7 +56,30 @@ flightdeck_cluster:
             flightdeck_varnish:
               secretFile: "/config/varnish-secret/secret"
               memSize: "256m"
+    - name: "tractorbeam"
+      files:
+        - name: "tractorbeam.yml"
+          content: |
+            tractorbeam_db_nolog: true
+            tractorbeam:
+              local:
+                - path: "/backoffice-files"
+                  provider: "Digitalocean"
+                  bucket: "t7-live-fsmn"
+                  prefix: "db.friendsschoolplantsale.com/files"
+                  accessKeyFile: "/config/backoffice-s3/s3-key.txt"
+                  secretKeyFile: "/config/backoffice-s3/s3-secret.txt"
+                  endpoint: "https://nyc3.digitaloceanspaces.com"
+                  region: "nyc3"
+                  disabled: false
+                  healthcheckUrl: "https://betteruptime.com/api/v1/heartbeat/tBdfZFffDDSVq5hsE6eNayXV"
   secrets:
+    - name: "backoffice-s3"
+      files:
+        - name: "s3-key.txt"
+          content: "{{ lookup('env', 'LIVE_BACK_S3_KEY') }}"
+        - name: "s3-secret.txt"
+          content: "{{ lookup('env', 'LIVE_BACK_S3_SECRET') }}"
     - name: "web"
       files:
         - name: "flight-deck-web.yml"
@@ -70,26 +114,6 @@ flightdeck_cluster:
                   env:
                     - name: "T7_SITE_ENVIRONMENT"
                       value: "live"
-                  extraLines:
-                    - |
-                        <IfModule mod_proxy.c>
-                          ProxyRequests Off
-                          SSLProxyEngine on
-                          <Proxy *>
-                              Order deny,allow
-                              Allow from all
-                          </Proxy>
-
-                          <location /s3fs-css/>
-                            ProxyPass https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/
-                            ProxyPassReverse https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/
-                          </location>
-
-                          <location /s3fs-js/>
-                            ProxyPass https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/
-                            ProxyPassReverse https://{{ s3fs_cname_url }}/{{ s3fs_root_folder }}/{{ s3fs_public_folder }}/
-                          </location>
-                         </IfModule>
               php:
                 upload_max_filesize: "128M"
                 post_max_size: "128M"
@@ -125,24 +149,62 @@ flightdeck_cluster:
           - path: "/"
             backend: "web"
             port: "80"
-          - path: "/s3fs-css/"
-            backend: "web"
-            port: "80"
-          - path: "/s3fs-js/"
-            backend: "web"
-            port: "80"
   web:
     image: "{{ docker_web_image }}"
     replicas: 3
     wait: true
     imagePullSecrets:
       - "registry"
-    nodeSelector:
-      key: "doks.digitalocean.com/node-pool"
-      value: "web2-pool"
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+    minReadySeconds: 15
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - web
+            topologyKey: kubernetes.io/hostname
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: doks.digitalocean.com/node-pool
+              operator: In
+              values:
+              - web2-pool
+    volumes:
+      - name: "backoffice-live-files"
+        path: "/var/www/files"
     secrets:
       - name: "web"
         path: "/secrets"
     varnish:
       memory: "256M"
       storage: "1024M"
+  cron:
+    - name: "file-sync-to-s3"
+      schedule: "35 23 * * *"
+      image: "ten7/tractorbeam:develop"
+      command:
+        - "tractorbeam"
+      args:
+        - "daily"
+      nodeSelector:
+        key: "doks.digitalocean.com/node-pool"
+        value: "web2-pool"
+      volumes:
+        - name: "backoffice-live-files"
+          path: "/backoffice-files"
+      configMaps:
+        - name: "tractorbeam"
+          path: "/config/tractorbeam"
+      secrets:
+        - name: "backoffice-s3"
+          path: "/config/backoffice-s3"

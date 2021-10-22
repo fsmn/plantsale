@@ -10,8 +10,8 @@ container_live:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
-    - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:$CI_COMMIT_SHA
+    - echo "{\"auths\":{\"cc02-registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination cc02-registry.t7develop.io:443/$CI_PROJECT_NAME:$CI_COMMIT_SHA
   only:
     - main
 
@@ -23,8 +23,8 @@ container_stage:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
-    - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:latest
+    - echo "{\"auths\":{\"cc02-registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination cc02-registry.t7develop.io:443/$CI_PROJECT_NAME:latest
   only:
     - develop
 
@@ -36,8 +36,8 @@ container_test:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
-    - echo "{\"auths\":{\"registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.t7develop.io:443/$CI_PROJECT_NAME:test
+    - echo "{\"auths\":{\"cc02-registry.t7develop.io:443\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$REGISTRY_PASS\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination cc02-registry.t7develop.io:443/$CI_PROJECT_NAME:test
   only:
     - preview
 
@@ -45,7 +45,7 @@ k8s_live:
   stage: deploy
   tags:
     - cc02
-  image: ten7/flight-deck-util:latest
+  image: ten7/flightdeck-util:latest
   script:
     - "ansible-galaxy install -r $CI_PROJECT_DIR/ansible/requirements.yml"
     - "ansible-playbook -i $CI_PROJECT_DIR/ansible/inventories/all.ini $CI_PROJECT_DIR/ansible/live.yml"
@@ -56,7 +56,7 @@ k8s_stage:
   stage: deploy
   tags:
     - cc02
-  image: ten7/flight-deck-util:latest
+  image: ten7/flightdeck-util:latest
   script:
     - "ansible-galaxy install -r $CI_PROJECT_DIR/ansible/requirements.yml"
     - "ansible-playbook -i $CI_PROJECT_DIR/ansible/inventories/all.ini $CI_PROJECT_DIR/ansible/stage.yml"
@@ -67,7 +67,7 @@ k8s_test:
   stage: deploy
   tags:
     - cc02
-  image: ten7/flight-deck-util:latest
+  image: ten7/flightdeck-util:latest
   script:
     - "ansible-galaxy install -r $CI_PROJECT_DIR/ansible/requirements.yml"
     - "ansible-playbook -i $CI_PROJECT_DIR/ansible/inventories/all.ini $CI_PROJECT_DIR/ansible/test.yml"

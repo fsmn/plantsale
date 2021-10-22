@@ -20,7 +20,7 @@ if (isset($variety)):
 <?php else: ?>
 	<div class="center">
 		<img
-			src="https://nyc3.digitaloceanspaces.com/t7-live-fsmn/db.friendsschoolplantsale.com/files/<?php print $variety->id; ?>.jpg<?php print '?cache='. date('U');?>"
+			src="/files/<?php print $variety->id; ?>.jpg<?php print '?cache='. date('U');?>"
 			class="photo" alt="image of <?php print $variety->common_name; ?> "/>
 		<?php if (IS_EDITOR): ?>
 			<?php echo create_button([

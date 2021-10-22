@@ -66,7 +66,7 @@ if(isset($row_class)){
 
 	<?php if($has_image):?>
 	<div class="image">
-		<img src="https://nyc3.digitaloceanspaces.com/t7-live-fsmn/db.friendsschoolplantsale.com/files/<?php print $variety->id;?>.jpg<?php print '?cache='. date('U');?>" class="photo" alt="image of <?php print $variety->common_name; ?> "/>
+		<img src="/files/<?php print $variety->id;?>.jpg<?php print '?cache='. date('U');?>" class="photo" alt="image of <?php print $variety->common_name; ?> "/>
 				
 </div>
 <?php endif;?>

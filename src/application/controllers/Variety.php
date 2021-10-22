@@ -649,37 +649,33 @@ class Variety extends MY_Controller {
 		}
 	}
 
-	function attach_image() {
-		$variety_id = $this->input->post('variety_id');
-		$config ['upload_path'] = '/tmp';
-		$this->load->helper('directory');
+	function attach_image()
+	{
+		$config ['upload_path'] = './files';
+		$this->load->helper ( 'directory' );
 		$config ['allowed_types'] = 'jpg|jpeg';
 		$config ['max_size'] = '2048';
 		$config ['max_width'] = '0';
 		$config ['max_height'] = '0';
-		$config ['file_name'] = $variety_id . '.jpg';
-		$this->load->library('upload', $config);
+		$config ['file_name'] = $this->input->post ( "variety_id" ) . ".jpg";
 
-		if (!$this->upload->do_upload()) {
-			$error = [
-				'error' => $this->upload->display_errors(),
-			];
-			print_r($error);
-		}
-		else {
+		$this->load->library ( 'upload', $config );
 
-			$file_data = $this->upload->data();
+		if (! $this->upload->do_upload ()) {
+			$error = array (
+				'error' => $this->upload->display_errors ()
+			);
+			print_r ( $error );
+		} else {
+
+			$file_data = $this->upload->data ();
 			$data ['image_display_name'] = $file_data ['file_name'];
-			$data ['image_source'] = $this->input->post('image_source');
-			$this->load->model('image_model');
-			$this->image_model->insert($variety_id, $file_data);
-			$this->load->library('S3_client',$this->s3_vars);
-			try {
-				$this->s3_client->putFile($variety_id . '.jpg', $file_data);
-			} catch (Exception $e) {
-				$this->session->set_flashdata('alert', 'The file was not uploaded correctly. Please email the file and the url of this page to the site developer.');
-			}
-			redirect('variety/view/' . $variety_id);
+			$data ['image_source'] = $this->input->post ( 'image_source' );
+			$this->load->model ( "image_model" );
+			$variety_id = $this->input->post ( "variety_id" );
+			$id = $this->image_model->insert ( $variety_id, $file_data );
+			$this->resize_image ( $variety_id, "statement" );
+			redirect ( "variety/view/$variety_id" );
 		}
 	}
 
@@ -688,27 +684,21 @@ class Variety extends MY_Controller {
 	 */
 	function delete_image() {
 		$id = $this->input->post('id');
-		$this->load->library('s3_client', $this->s3_vars);
 		$this->load->model('image_model');
 		$variety_id = $this->image_model->get($id)->variety_id;
 		$this->image_model->delete($id);
-		try {
-			$this->s3_client->deleteFile($variety_id . '.jpg');
-		} catch (Exception $e) {
-			$this->session->set_flashdata('warning', 'The file could not be deleted.');
-			$data['message'] = 'The file was not successfully deleted from the S3 container, but the file record was deleted from the database. Please see the site developer for help with this.';
-		}
 		$variety = $this->variety->get($variety_id);
 		if ($this->input->post('ajax') == 1) {
 			$data ['variety'] = $variety;
 			$data ['variety_id'] = $variety_id;
-			$data['file_path'] = $this->s3_client->getPath();
 			$this->load->view('image/view', $data);
 		}
 		else {
 			redirect('variety/view/' . $variety_id);
 		}
 	}
+
+
 
 	/**
 	 * using the GD2 image manipulation system, this creates any new files if

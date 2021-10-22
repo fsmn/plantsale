@@ -19,9 +19,8 @@ if (isset($variety)):
 	?>
 <?php else: ?>
 	<div class="center">
-<?php $file_path = (ENVIRONMENT == 'development')?'https://db.friendsschoolplantsale.com/files/':'/files/';?>
 		<img
-			src="<?php print $file_path .  $variety->id; ?>.jpg<?php print '?cache='. date('U');?>"
+			src="/files/<?php print $variety->id; ?>.jpg<?php print '?cache='. date('U');?>"
 			class="photo" alt="image of <?php print $variety->common_name; ?> "/>
 		<?php if (IS_EDITOR): ?>
 			<?php echo create_button([

@@ -72,7 +72,7 @@ flightdeck_cluster:
                   endpoint: "https://nyc3.digitaloceanspaces.com"
                   region: "nyc3"
                   disabled: false
-                  healthcheckUrl: "https://hc-ping.com/bd1e7225-180a-4daf-90ab-cabfef357e62"
+                  healthcheckUrl: "https://betteruptime.com/api/v1/heartbeat/tBdfZFffDDSVq5hsE6eNayXV"
   secrets:
     - name: "backoffice-s3"
       files:
@@ -155,9 +155,30 @@ flightdeck_cluster:
     wait: true
     imagePullSecrets:
       - "registry"
-    nodeSelector:
-      key: "doks.digitalocean.com/node-pool"
-      value: "web2-pool"
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+    minReadySeconds: 15
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - web
+            topologyKey: kubernetes.io/hostname
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: doks.digitalocean.com/node-pool
+              operator: In
+              values:
+              - web2-pool
     volumes:
       - name: "backoffice-live-files"
         path: "/var/www/files"

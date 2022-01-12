@@ -128,6 +128,7 @@ class Variety extends MY_Controller {
 				'copywriter',
 				'edit_notes',
 				'needs_copy_review',
+				'copy_received',
 				'churn_value',
 				'pot_size',
 			];

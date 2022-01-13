@@ -118,6 +118,27 @@ flightdeck_cluster:
                 upload_max_filesize: "128M"
                 post_max_size: "128M"
                 max_execution_time: "300"
+    - name: "backoffice-settings"
+      files:
+        - name: "settings.flightdeck.php"
+          content: |
+            <?php
+            $flightdeck_settings = array(
+              'varnish_secret' => "{{ lookup('env', 'LIVE_BACK_VARNISH_SECRET') }}",
+              'mysql_databases' => array(
+                '{{ lookup('env', 'LIVE_BACK_MYSQL_NAME') }}' => array(
+                  'name' => '{{ lookup('env', 'LIVE_BACK_MYSQL_NAME') }}',
+                  'host' => '{{ lookup('env', 'LIVE_BACK_MYSQL_HOST') | default('mysql.database.svc.cluster.local', true) }}',
+                  'port' => '{{ lookup('env', 'LIVE_BACK_MYSQL_PORT') | default('3306', true) }}',
+                ),
+              ),
+              'mysql_users' => array(
+                '{{ lookup('env', 'LIVE_BACK_MYSQL_USER') }}' => array(
+                  'username' => '{{ lookup('env', 'LIVE_BACK_MYSQL_USER') }}',
+                  'password' => {{ lookup('env', 'LIVE_BACK_MYSQL_PASS') | quote }},
+                ),
+              ),
+            );
     - name: "registry"
       type: "kubernetes.io/dockerconfigjson"
       data:
@@ -185,6 +206,8 @@ flightdeck_cluster:
     secrets:
       - name: "web"
         path: "/secrets"
+      - name: "backoffice-settings"
+        path: "/config/php"
     varnish:
       memory: "256M"
       storage: "1024M"

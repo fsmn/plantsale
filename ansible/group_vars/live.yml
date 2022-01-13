@@ -188,6 +188,9 @@ flightdeck_cluster:
     varnish:
       memory: "256M"
       storage: "1024M"
+    env:
+      - name: "T7_SITE_ENVIRONMENT"
+        value: "live"
   cron:
     - name: "file-sync-to-s3"
       schedule: "35 23 * * *"

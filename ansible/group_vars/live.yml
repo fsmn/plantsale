@@ -51,7 +51,7 @@ flightdeck_cluster:
   configMaps:
     - name: "varnish"
       files:
-        - name: "flight-deck-varnish.yml"
+        - name: "flightdeck-varnish.yml"
           content: |
             flightdeck_varnish:
               secretFile: "/config/varnish-secret/secret"
@@ -82,7 +82,7 @@ flightdeck_cluster:
           content: "{{ lookup('env', 'LIVE_BACK_S3_SECRET') }}"
     - name: "web"
       files:
-        - name: "flight-deck-web.yml"
+        - name: "flightdeck-web.yml"
           content: |
             s3fs_bucket: "{{ s3fs_bucket }}"
             s3fs_region: "{{ s3fs_region }}"
@@ -205,7 +205,7 @@ flightdeck_cluster:
         path: "/var/www/files"
     secrets:
       - name: "web"
-        path: "/secrets"
+        path: "/config/web"
       - name: "backoffice-settings"
         path: "/config/php"
     varnish:

@@ -1,5 +1,6 @@
 .idea
 db-backups
+.DS_Store
 
 docker-compose.override.yml
 .vscode

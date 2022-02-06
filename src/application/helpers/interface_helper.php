@@ -380,6 +380,10 @@ function live_field(string $field_name, ?string $value, string $table, string $i
 					], $value, $attributes);
 					$output = str_replace('[input]', $input, $output_wrapper);
 					break;
+				case 'textarea':
+					$input = form_textarea($field_name, $value, $attributes);
+					$output = str_replace('[input]', $input, $output_wrapper);
+					break;
 				default:
 					$input = form_input($field_name, $value, $attributes);
 					$output = str_replace('[input]', $input, $output_wrapper);

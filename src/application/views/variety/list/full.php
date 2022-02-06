@@ -8,6 +8,7 @@ $buttons[] = [
 		"style" => "print",
 ];
 if (IS_ADMIN) {
+	$url = parse_url($_SERVER['REQUEST_URI'],PHP_URL_QUERY);
 	$buttons[] = [
 			'text' => 'Batch Flag Update',
 			'title' => 'Batch update flags for the listed items',
@@ -15,16 +16,12 @@ if (IS_ADMIN) {
 			'style' => 'print',
 			'data_values' => [
 					'field' => 'flag',
+					'redirect' => htmlspecialchars($url),
 			],
-			'href' => $_SERVER['HTTP_REFERER'],
+			'href' => base_url('variety/batch_update'),
 	];
 }
-/*$buttons[] = [
-		'text' => 'Export Copy Edit List',
-		'title' => 'Export selected records for copy editing workflow',
-		'class' => ['button', 'export', 'export-copy-edit-list'],
-		'href' => htmlspecialchars($_SERVER['HTTP_REFERER']) . '&export=true&export_type=copy_edits',
-];*/
+
 if (!empty($plants)):
 	print create_button_bar($buttons);
 	?>

@@ -3,9 +3,10 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 if(!empty($ids) && !empty($flags)):
 ?>
 
-<form id="batch-update" name="batch-update" method="post" action="<?php echo base_url('variety/batch_update_flags');?>">
+<form id="batch-update" name="batch-update" method="post" action="<?php echo base_url('variety/batch_update');?>">
 <input type="hidden" id="ids" name="ids" value="<?php echo implode(',',$ids);?>"/>
 <input type="hidden" id="action" name="action" value="update"/>
+	<input type="hidden" id="redirect" name="redirect" value="<?php echo !empty($redirect)?$redirect:'';?>"/>
 	<h2>DANGER: Updating <?php echo count($ids);?> Records</h2>
 <p class="notice">Changes you submit here cannot be undone!</p>
 <p>

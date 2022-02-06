@@ -51,7 +51,7 @@ flightdeck_cluster:
   configMaps:
     - name: "varnish"
       files:
-        - name: "flight-deck-varnish.yml"
+        - name: "flightdeck-varnish.yml"
           content: |
             flightdeck_varnish:
               secretFile: "/config/varnish-secret/secret"
@@ -82,7 +82,7 @@ flightdeck_cluster:
           content: "{{ lookup('env', 'LIVE_BACK_S3_SECRET') }}"
     - name: "web"
       files:
-        - name: "flight-deck-web.yml"
+        - name: "flightdeck-web.yml"
           content: |
             s3fs_bucket: "{{ s3fs_bucket }}"
             s3fs_region: "{{ s3fs_region }}"
@@ -118,6 +118,27 @@ flightdeck_cluster:
                 upload_max_filesize: "128M"
                 post_max_size: "128M"
                 max_execution_time: "300"
+    - name: "backoffice-settings"
+      files:
+        - name: "settings.flightdeck.php"
+          content: |
+            <?php
+            $flightdeck_settings = array(
+              'varnish_secret' => "{{ lookup('env', 'LIVE_BACK_VARNISH_SECRET') }}",
+              'mysql_databases' => array(
+                '{{ lookup('env', 'LIVE_BACK_MYSQL_NAME') }}' => array(
+                  'name' => '{{ lookup('env', 'LIVE_BACK_MYSQL_NAME') }}',
+                  'host' => '{{ lookup('env', 'LIVE_BACK_MYSQL_HOST') | default('mysql.database.svc.cluster.local', true) }}',
+                  'port' => '{{ lookup('env', 'LIVE_BACK_MYSQL_PORT') | default('3306', true) }}',
+                ),
+              ),
+              'mysql_users' => array(
+                '{{ lookup('env', 'LIVE_BACK_MYSQL_USER') }}' => array(
+                  'username' => '{{ lookup('env', 'LIVE_BACK_MYSQL_USER') }}',
+                  'password' => {{ lookup('env', 'LIVE_BACK_MYSQL_PASS') | quote }},
+                ),
+              ),
+            );
     - name: "registry"
       type: "kubernetes.io/dockerconfigjson"
       data:
@@ -184,10 +205,15 @@ flightdeck_cluster:
         path: "/var/www/files"
     secrets:
       - name: "web"
-        path: "/secrets"
+        path: "/config/web"
+      - name: "backoffice-settings"
+        path: "/config/php"
     varnish:
       memory: "256M"
       storage: "1024M"
+    env:
+      - name: "T7_SITE_ENVIRONMENT"
+        value: "live"
   cron:
     - name: "file-sync-to-s3"
       schedule: "35 23 * * *"

@@ -1,0 +1,40 @@
+---
+- hosts: docker
+  roles:
+    - flightdeck-web-init
+  tasks:
+    - name: Template the database settings
+      copy:
+        dest: "{{ web_dir }}/application/config/database.php"
+        content: |
+          <?php
+          defined('BASEPATH') OR exit('No direct script access allowed');
+
+          $active_group = 'default';
+          $query_builder = TRUE;
+
+          $db['default'] = array(
+              'dsn'	=> "mysql:host={{ backoffice_mysql_host | default('mysql.database.svc.cluster.local', true) }};dbname={{ backoffice_mysql_name }};charset=utf8;",
+              'hostname' => "{{ backoffice_mysql_host | default('mysql.database.svc.cluster.local', true) }}",
+              'username' => '{{ backoffice_mysql_user }}',
+              'password' => '{{ backoffice_mysql_pass }}',
+              'database' => '{{ backoffice_mysql_name }}',
+              'dbdriver' => 'pdo',
+              'dbprefix' => '',
+              'pconnect' => FALSE,
+              'db_debug' => TRUE,
+              'cache_on' => FALSE,
+              'cachedir' => '',
+              'char_set' => 'utf8',
+              'dbcollat' => 'utf8_general_ci',
+              'swap_pre' => '',
+              'encrypt' => FALSE,
+              'compress' => TRUE,
+              'stricton' => TRUE,
+              'failover' => array(),
+              'save_queries' => TRUE
+          );
+    - name: Template the email config file
+      template:
+        src: "{{ web_dir }}/application/config/email.php"
+        dest: "{{ web_dir }}/application/config/email.php"

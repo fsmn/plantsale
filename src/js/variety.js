@@ -462,20 +462,20 @@ $(document).on("click",".variety-insert",function(){
 		});
 		
 		function batch_update_flags(me, action){
+			let redirect = me.data('redirect');
 			let id_array = $.map($(".plant-info"),function(n,i){
 				return n.id.split("_")[1];
 			});
-			console.log(id_array);
 			let field = me.data('field');
 			let href = me.attr('href');
 			let form_data = {
 				ids: id_array,
 				action: action,
 				field: field,
+				redirect: redirect,
 				target: href
 			};
 			
-			console.log(form_data);
 			$.ajax({
 				type:"post",
 				data: form_data,

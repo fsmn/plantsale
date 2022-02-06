@@ -73,10 +73,10 @@ class Variety extends MY_Controller {
 		$data ['file_path'] = '/files';
 		$orders = $this->order->get_for_variety($id);
 		foreach ($orders as $order) {
-			if($order->year == get_current_year()) {
-					$label = '';
-					extract(get_toggle_text('flat_exclude', $order->flat_exclude));
-					$order->flat_exclude_button = $label;
+			if ($order->year == get_current_year()) {
+				$label = '';
+				extract(get_toggle_text('flat_exclude', $order->flat_exclude));
+				$order->flat_exclude_button = $label;
 			}
 		}
 		$data ['orders'] = $orders;
@@ -202,6 +202,7 @@ class Variety extends MY_Controller {
 			else {
 				burn_cookie("no_image");
 			}
+
 			$data ["options"] ["no_image"] = $no_image;
 			$print_list = [];
 			foreach ($data ["plants"] as $plant) {
@@ -509,10 +510,11 @@ class Variety extends MY_Controller {
 	function batch_update() {
 		if (IS_ADMIN) {
 			if ($this->input->post('action') == 'edit') {
-				if($this->input->post('field') == 'online_only'){
+				if ($this->input->post('field') == 'online_only') {
 					$data['ids'] = $this->input->post('ids');
-					$this->load->view('variety/batch_update_online_only',$data);
-				}else {
+					$this->load->view('variety/batch_update_online_only', $data);
+				}
+				else {
 					$this->load->model('menu_model', 'menu');
 					$flags = $this->menu->get_pairs('flag');
 					$data ['flags'] = get_keyed_pairs($flags, [
@@ -520,24 +522,28 @@ class Variety extends MY_Controller {
 						'value',
 					]);
 					$data ['ids'] = $this->input->post('ids');
+					$data['redirect'] = $this->input->post('redirect');
 					$this->load->view('variety/batch_update_flags', $data);
 				}
 			}
 			elseif ($this->input->post('action') == 'update') {
-				if(!empty($this->input->post('ids'))) {
+				if (!empty($this->input->post('ids'))) {
 					$ids = explode(',', $this->input->post('ids'));
 					$id_list = implode(', ', $ids);
+
 					if ($this->input->post('flag')) {
 						$flag = urldecode($this->input->post('flag'));
 						$this->flag->batch_update($ids, $flag);
-						$result = sprintf('The following varieties had the flag "%s" added: %s', $flag,  $id_list);
+						$result = sprintf('The following varieties had the flag "%s" added: %s', $flag, $id_list);
 					}
-				else {
-					$result = 'No Batch Updates Made';
+					else {
+						$result = 'No Batch Updates Made';
+					}
+					$this->session->set_flashdata("notice", $result);
 				}
-				}
-				$this->session->set_flashdata("notice", $result);
-				redirect();
+				$url = $this->input->post('redirect');
+				$cleaned_url = str_replace('&copywriter=©_received=0', '&copywriter=&copy_received=0',$url );
+				redirect('variety/search?' . $cleaned_url);
 			}
 		}
 	}
@@ -650,33 +656,33 @@ class Variety extends MY_Controller {
 		}
 	}
 
-	function attach_image()
-	{
+	function attach_image() {
 		$config ['upload_path'] = './files';
-		$this->load->helper ( 'directory' );
+		$this->load->helper('directory');
 		$config ['allowed_types'] = 'jpg|jpeg';
 		$config ['max_size'] = '2048';
 		$config ['max_width'] = '0';
 		$config ['max_height'] = '0';
-		$config ['file_name'] = $this->input->post ( "variety_id" ) . ".jpg";
+		$config ['file_name'] = $this->input->post("variety_id") . ".jpg";
 
-		$this->load->library ( 'upload', $config );
+		$this->load->library('upload', $config);
 
-		if (! $this->upload->do_upload ()) {
-			$error = array (
-				'error' => $this->upload->display_errors ()
-			);
-			print_r ( $error );
-		} else {
+		if (!$this->upload->do_upload()) {
+			$error = [
+				'error' => $this->upload->display_errors(),
+			];
+			print_r($error);
+		}
+		else {
 
-			$file_data = $this->upload->data ();
+			$file_data = $this->upload->data();
 			$data ['image_display_name'] = $file_data ['file_name'];
-			$data ['image_source'] = $this->input->post ( 'image_source' );
-			$this->load->model ( "image_model" );
-			$variety_id = $this->input->post ( "variety_id" );
-			$id = $this->image_model->insert ( $variety_id, $file_data );
-			$this->resize_image ( $variety_id, "statement" );
-			redirect ( "variety/view/$variety_id" );
+			$data ['image_source'] = $this->input->post('image_source');
+			$this->load->model("image_model");
+			$variety_id = $this->input->post("variety_id");
+			$id = $this->image_model->insert($variety_id, $file_data);
+			$this->resize_image($variety_id, "statement");
+			redirect("variety/view/$variety_id");
 		}
 	}
 
@@ -698,7 +704,6 @@ class Variety extends MY_Controller {
 			redirect('variety/view/' . $variety_id);
 		}
 	}
-
 
 
 	/**
@@ -795,9 +800,9 @@ class Variety extends MY_Controller {
 		echo $buttons . sprintf("<span class='button save-multiselect' target='%s'>Save</span>", $field);
 	}
 
-	function toggle(){
-		$value = 	$value = $this->input->post('value')=== 'no'?'yes':'no';
-		print toggle($this,$this->variety, $value);
+	function toggle() {
+		$value = $value = $this->input->post('value') === 'no' ? 'yes' : 'no';
+		print toggle($this, $this->variety, $value);
 	}
 
 }

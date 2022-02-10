@@ -1,5 +1,5 @@
 ---
-git_dir: "~/{{ lookup('env', 'CI_PROJECT_DIR') }}"
+git_dir: "/drone/src"
 digitalocean_api_token: "{{ lookup('env', 'DIGITALOCEAN_API_TOKEN') }}"
 cluster_name: "cc02"
 t7_env: "stage"

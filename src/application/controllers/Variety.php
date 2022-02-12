@@ -4,8 +4,6 @@ defined('BASEPATH') or exit ('No direct script access allowed');
 
 class Variety extends MY_Controller {
 
-	public $s3_vars;
-
 
 	function __construct() {
 		parent::__construct();

@@ -1,0 +1,147 @@
+---
+kind: pipeline
+type: kubernetes
+name: live
+
+steps:
+- name: build
+  image: banzaicloud/drone-kaniko
+  settings:
+    username:
+      from_secret: FLIGHTDECK_REGISTRY_USER
+    password:
+      from_secret: FLIGHTDECK_REGISTRY_PASS
+    repo: ${DRONE_REPO_NAME}/${DRONE_BRANCH}
+    registry: cc02-registry.t7develop.io:443
+    tags: ${DRONE_COMMIT_SHA}
+- name: deploy
+  image: ten7/flightdeck-util
+  commands:
+    - "ansible-playbook -i /drone/src/ansible/inventories/all.ini /drone/src/ansible/live.yml"
+  environment:
+    DIGITALOCEAN_API_TOKEN:
+      from_secret: DIGITALOCEAN_API_TOKEN
+    FLIGHTDECK_REGISTRY_USER:
+      from_secret: FLIGHTDECK_REGISTRY_USER
+    FLIGHTDECK_REGISTRY_PASS:
+      from_secret: FLIGHTDECK_REGISTRY_PASS
+    FLIGHTDECK_REGISTRY_ADDR: "cc02-registry.t7develop.io:443"
+    FLIGHTDECK_IMAGE_NAME: ${DRONE_REPO_NAME}/${DRONE_BRANCH}
+    FLIGHTDECK_IMAGE_TAG: ${DRONE_COMMIT_SHA}
+    LIVE_BACK_MYSQL_USER:
+      from_secret: LIVE_BACK_MYSQL_USER
+    LIVE_BACK_MYSQL_PASS:
+      from_secret: LIVE_BACK_MYSQL_PASS
+    LIVE_BACK_MYSQL_NAME:
+      from_secret: LIVE_BACK_MYSQL_NAME
+    LIVE_BACK_VARNISH_SECRET:
+      from_secret: LIVE_BACK_VARNISH_SECRET
+    LIVE_BACK_S3_KEY:
+      from_secret: LIVE_BACK_S3_KEY
+    LIVE_BACK_S3_SECRET:
+      from_secret: LIVE_BACK_S3_SECRET
+    LIVE_FSMN_SMTP_USER:
+      from_secret: LIVE_FSMN_SMTP_USER
+    LIVE_FSMN_SMTP_PASS:
+      from_secret: LIVE_FSMN_SMTP_PASS
+trigger:
+  branch:
+    - main
+---
+kind: pipeline
+type: kubernetes
+name: stage
+
+steps:
+- name: build
+  image: banzaicloud/drone-kaniko
+  settings:
+    username:
+      from_secret: FLIGHTDECK_REGISTRY_USER
+    password:
+      from_secret: FLIGHTDECK_REGISTRY_PASS
+    repo: ${DRONE_REPO_NAME}/${DRONE_BRANCH}
+    registry: cc02-registry.t7develop.io:443
+    tags: ${DRONE_COMMIT_SHA}
+- name: deploy
+  image: ten7/flightdeck-util
+  commands:
+    - "ansible-playbook -i /drone/src/ansible/inventories/all.ini /drone/src/ansible/stage.yml"
+  environment:
+    DIGITALOCEAN_API_TOKEN:
+      from_secret: DIGITALOCEAN_API_TOKEN
+    FLIGHTDECK_REGISTRY_USER:
+      from_secret: FLIGHTDECK_REGISTRY_USER
+    FLIGHTDECK_REGISTRY_PASS:
+      from_secret: FLIGHTDECK_REGISTRY_PASS
+    FLIGHTDECK_REGISTRY_ADDR: "cc02-registry.t7develop.io:443"
+    FLIGHTDECK_IMAGE_NAME: ${DRONE_REPO_NAME}/${DRONE_BRANCH}
+    FLIGHTDECK_IMAGE_TAG: ${DRONE_COMMIT_SHA}
+    STAGE_BACK_MYSQL_USER:
+      from_secret: STAGE_BACK_MYSQL_USER
+    STAGE_BACK_MYSQL_PASS:
+      from_secret: STAGE_BACK_MYSQL_PASS
+    STAGE_BACK_MYSQL_NAME:
+      from_secret: STAGE_BACK_MYSQL_NAME
+    STAGE_BACK_VARNISH_SECRET:
+      from_secret: STAGE_BACK_VARNISH_SECRET
+    STAGE_BACK_S3_KEY:
+      from_secret: STAGE_BACK_S3_KEY
+    STAGE_BACK_S3_SECRET:
+      from_secret: STAGE_BACK_S3_SECRET
+    STAGE_FSMN_SMTP_USER:
+      from_secret: STAGE_FSMN_SMTP_USER
+    STAGE_FSMN_SMTP_PASS:
+      from_secret: STAGE_FSMN_SMTP_PASS
+trigger:
+  branch:
+    - develop
+---
+kind: pipeline
+type: kubernetes
+name: test
+
+steps:
+- name: build
+  image: banzaicloud/drone-kaniko
+  settings:
+    username:
+      from_secret: FLIGHTDECK_REGISTRY_USER
+    password:
+      from_secret: FLIGHTDECK_REGISTRY_PASS
+    repo: ${DRONE_REPO_NAME}/${DRONE_BRANCH}
+    registry: cc02-registry.t7develop.io:443
+    tags: ${DRONE_COMMIT_SHA}
+- name: deploy
+  image: ten7/flightdeck-util
+  commands:
+    - "ansible-playbook -i /drone/src/ansible/inventories/all.ini /drone/src/ansible/test.yml"
+  environment:
+    DIGITALOCEAN_API_TOKEN:
+      from_secret: DIGITALOCEAN_API_TOKEN
+    FLIGHTDECK_REGISTRY_USER:
+      from_secret: FLIGHTDECK_REGISTRY_USER
+    FLIGHTDECK_REGISTRY_PASS:
+      from_secret: FLIGHTDECK_REGISTRY_PASS
+    FLIGHTDECK_REGISTRY_ADDR: "cc02-registry.t7develop.io:443"
+    FLIGHTDECK_IMAGE_NAME: ${DRONE_REPO_NAME}/${DRONE_BRANCH}
+    FLIGHTDECK_IMAGE_TAG: ${DRONE_COMMIT_SHA}
+    TEST_BACK_MYSQL_USER:
+      from_secret: TEST_BACK_MYSQL_USER
+    TEST_BACK_MYSQL_PASS:
+      from_secret: TEST_BACK_MYSQL_PASS
+    TEST_BACK_MYSQL_NAME:
+      from_secret: TEST_BACK_MYSQL_NAME
+    TEST_BACK_VARNISH_SECRET:
+      from_secret: TEST_BACK_VARNISH_SECRET
+    TEST_BACK_S3_KEY:
+      from_secret: TEST_BACK_S3_KEY
+    TEST_BACK_S3_SECRET:
+      from_secret: TEST_BACK_S3_SECRET
+    TEST_FSMN_SMTP_USER:
+      from_secret: TEST_FSMN_SMTP_USER
+    TEST_FSMN_SMTP_PASS:
+      from_secret: TEST_FSMN_SMTP_PASS
+trigger:
+  branch:
+    - preview

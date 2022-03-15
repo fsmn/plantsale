@@ -661,7 +661,7 @@ class Variety extends MY_Controller {
 		$config ['max_size'] = '2048';
 		$config ['max_width'] = '0';
 		$config ['max_height'] = '0';
-		$config ['file_name'] = $this->input->post("variety_id") . ".jpg";
+		$config ['file_name'] = $this->input->post('variety_id') . '.jpg';
 
 		$this->load->library('upload', $config);
 
@@ -689,10 +689,17 @@ class Variety extends MY_Controller {
 	 */
 	function delete_image() {
 		$id = $this->input->post('id');
+		$variety_id = $this->input->post('variety_id');
+		$file_path = FCPATH . 'files/' . $variety_id . '.jpg';
+
+		if(file_exists($file_path)) {
+			unlink($file_path);
+		}
 		$this->load->model('image_model');
 		$variety_id = $this->image_model->get($id)->variety_id;
 		$this->image_model->delete($id);
 		$variety = $this->variety->get($variety_id);
+
 		if ($this->input->post('ajax') == 1) {
 			$data ['variety'] = $variety;
 			$data ['variety_id'] = $variety_id;

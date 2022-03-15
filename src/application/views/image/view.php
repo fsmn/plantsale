@@ -27,7 +27,7 @@ if (isset($variety)):
 				'text' => 'Delete Image',
 				'class' => ['button', 'delete', 'delete-image'],
 				'id' => 'delete-image',
-				'data_values' => ['id' => $variety->image_id],
+				'data_values' => ['id' => $variety->image_id, 'variety_id' => $variety->id],
 			]); ?>
 		<?php endif; ?>
 	</div>

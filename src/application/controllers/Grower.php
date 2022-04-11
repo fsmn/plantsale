@@ -20,19 +20,19 @@ class Grower extends MY_Controller {
 				'id',
 				'name',
 			], TRUE);
-			$data['fields'] =  $this->grower->list_fields(['user_id', 'id']);
+			$data['fields'] = $this->grower->list_fields(['user_id', 'id']);
 			$data ['grower'] = $grower;
 			$data ['target'] = 'grower/view';
 			$data ['title'] = sprintf('Viewing Details for %s', $id);
 			$this->load->view('page/index', $data);
 		}
 		else {
-			$this->session->set_flashdata('alert','The grower with ID "'. $id .'"could not be found. Press the back arrow, and notify the database administrator if you believe this error is a mistake.');
+			$this->session->set_flashdata('alert', 'The grower with ID "' . $id . '"could not be found. Press the back arrow, and notify the database administrator if you believe this error is a mistake.');
 			redirect('grower/totals');
 		}
 	}
 
-	function edit($id){
+	function edit($id) {
 		$grower = $this->grower->get($id);
 		$this->load->model('user_model', 'user');
 		$users = $this->user->get_user_pairs();
@@ -47,10 +47,11 @@ class Grower extends MY_Controller {
 			'users' => $user_list,
 			'title' => 'Editing ' . $grower->grower_name,
 		];
-		if($this->input->get('ajax')){
-			$this->load->view($data['target'],$data);
-		}else {
-			$this->load->view('page/index',$data);
+		if ($this->input->get('ajax')) {
+			$this->load->view($data['target'], $data);
+		}
+		else {
+			$this->load->view('page/index', $data);
 		}
 	}
 
@@ -110,24 +111,25 @@ class Grower extends MY_Controller {
 		redirect('grower/view/' . $id);
 	}
 
-	function update(){
-		$fields = $this->grower->list_fields('grower');
+	function update() {
+		$fields = $this->grower->list_fields();
 		$values = [];
 		$id = $this->input->post('id');
 		$original = $this->grower->get($id);
-		foreach($fields as $field){
-			if(!empty($value = $this->input->post($field))){
-				if($value != $original->{$field}) {
+		foreach ($fields as $field) {
+			if (!empty($value = $this->input->post($field))) {
+				if ($value != $original->{$field}) {
 					$values[$field] = $value;
 				}
 			}
 		}
-		if(!empty($values)) {
+		if (!empty($values)) {
 			$this->grower->update($id, $values);
-		}else{
-			$this->session->set_flashdata('notice','No data was changed from the original record.');
 		}
-		redirect('grower/view/'. $id);
+		else {
+			$this->session->set_flashdata('notice', 'No data was changed from the original record.');
+		}
+		redirect('grower/view/' . $id);
 	}
 
 	function update_value() {
@@ -187,6 +189,8 @@ class Grower extends MY_Controller {
 
 		foreach ($ids as $id) {
 			$my_grower = $this->grower->get_totals($id->id, $year);
+			$this->load->model('user_model','user');
+			$my_grower->our_contact = $this->user->get_user($my_grower->user_id);
 			if ($this->input->get("export")) {
 				$growers [] = $my_grower;
 			}

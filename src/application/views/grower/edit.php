@@ -59,6 +59,7 @@ foreach ($fields as $field) {
 					value="<?php echo get_value($grower, 'id'); ?>"/><span
 					id="unique-id"></span>
 		<?php else: ?>
+		<input type="hidden" name="id" value="<?php print $grower->id; ?>"/>
 			<span><?php print $grower->id; ?></span>
 		<?php endif; ?>
 	</p>

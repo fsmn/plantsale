@@ -76,10 +76,6 @@ class grower_model extends MY_Model {
 	}
 
 	function update($id, $values = []) {
-		if(empty($values)){
-			$this->prepare_variables();
-			$values = $this;
-		}
 		return $this->_update('grower', $id, $values);
 	}
 
@@ -103,11 +99,11 @@ class grower_model extends MY_Model {
 	function get($id) {
 		$this->db->from("grower");
 		$this->db->where("grower.id", $id);
-		$this->db->join("users", "user_id = users.id", "LEFT");
 		$this->db->select("grower.*");
-		$this->db->select("users.first_name, users.last_name");
 		$result = $this->db->get()->row();
 		if(!empty($result)) {
+			$this->load->model('user_model','user');
+			$result->our_contact = $this->user->get_user($result->user_id);
 			$this->load->model('contact_model', 'contact');
 			$result->contacts = $this->contact->get_for_grower($id);
 		}

@@ -99,4 +99,17 @@ class MY_Model extends CI_Model
 				$this->session->set_flashdata ( $element, $last_query );
 			}
 		}
+
+		function _list_fields(string $table, array $ignore_fields = []): array {
+			$base_ignore_fields =  ['rec_created','rec_creator','rec_modifier','rec_modified'];
+			$ignore_fields = array_merge($ignore_fields, $base_ignore_fields);
+			$fields = $this->db->list_fields($table);
+			$output = [];
+			foreach($fields as $field){
+				if(!in_array($field, $ignore_fields)){
+					$output[] = $field;
+				}
+			}
+			return $output;
+		}
 	}

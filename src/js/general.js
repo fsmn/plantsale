@@ -63,10 +63,9 @@
 		});
 		$(document).on("click", ".create.dialog, .edit.dialog, .delete.dialog", function (e) {
 			e.preventDefault();
-			redirect_url = $(location).attr("href");
-
-			url = $(this).attr("href");
-			form_data = {
+			let redirect_url = $(location).attr("href");
+			let url = $(this).attr("href");
+			let form_data = {
 				ajax: 1
 			};
 			$.ajax({
@@ -76,6 +75,9 @@
 				success: function (data) {
 					show_popup("*", data, "auto");
 					$("#redirect_url").val(redirect_url);
+				},
+				failure: function(data) {
+					console.log(data);
 				}
 			});
 		});

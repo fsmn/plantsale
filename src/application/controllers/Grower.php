@@ -14,20 +14,43 @@ class Grower extends MY_Controller {
 
 	function view($id) {
 		if ($grower = $this->grower->get($id)) {
-			$grower->contacts = $this->contact->get_for_grower($id);
-			$this->load->model("user_model", "user");
+			$this->load->model('user_model', 'user');
 			$users = $this->user->get_user_pairs();
-			$data ["users"] = get_keyed_pairs($users, [
-				"id",
-				"name",
+			$data ['users'] = get_keyed_pairs($users, [
+				'id',
+				'name',
 			], TRUE);
-			$data ["grower"] = $grower;
-			$data ["target"] = "grower/view";
-			$data ["title"] = sprintf("Viewing Details for %s", $id);
-			$this->load->view("page/index", $data);
+			$data['fields'] =  $this->grower->list_fields(['user_id', 'id']);
+			$data ['grower'] = $grower;
+			$data ['target'] = 'grower/view';
+			$data ['title'] = sprintf('Viewing Details for %s', $id);
+			$this->load->view('page/index', $data);
 		}
 		else {
-			show_error("The grower with ID $id could not be found. Press the back arrow, and notify the database administrator if you believe this error is a mistake.");
+			$this->session->set_flashdata('alert','The grower with ID "'. $id .'"could not be found. Press the back arrow, and notify the database administrator if you believe this error is a mistake.');
+			redirect('grower/totals');
+		}
+	}
+
+	function edit($id){
+		$grower = $this->grower->get($id);
+		$this->load->model('user_model', 'user');
+		$users = $this->user->get_user_pairs();
+		$user_list = get_keyed_pairs($users, [
+			'id',
+			'name',
+		], TRUE);
+		$data = [
+			'grower' => $grower,
+			'target' => 'grower/edit',
+			'action' => 'update',
+			'users' => $user_list,
+			'title' => 'Editing ' . $grower->grower_name,
+		];
+		if($this->input->get('ajax')){
+			$this->load->view($data['target'],$data);
+		}else {
+			$this->load->view('page/index',$data);
 		}
 	}
 
@@ -69,6 +92,7 @@ class Grower extends MY_Controller {
 			"id",
 			"name",
 		], TRUE);
+		$data['fields'] = $this->db->list_fields('grower');
 		$data ["action"] = "insert";
 		$data ["target"] = "grower/edit";
 		$data ["title"] = "Add New Grower";
@@ -82,14 +106,34 @@ class Grower extends MY_Controller {
 
 	function insert() {
 		$this->grower->insert();
-		$id = $this->input->post("id");
-		redirect("grower/view/$id");
+		$id = $this->input->post('id');
+		redirect('grower/view/' . $id);
+	}
+
+	function update(){
+		$fields = $this->grower->list_fields('grower');
+		$values = [];
+		$id = $this->input->post('id');
+		$original = $this->grower->get($id);
+		foreach($fields as $field){
+			if(!empty($value = $this->input->post($field))){
+				if($value != $original->{$field}) {
+					$values[$field] = $value;
+				}
+			}
+		}
+		if(!empty($values)) {
+			$this->grower->update($id, $values);
+		}else{
+			$this->session->set_flashdata('notice','No data was changed from the original record.');
+		}
+		redirect('grower/view/'. $id);
 	}
 
 	function update_value() {
-		$id = $this->input->post("id");
-		$value = $this->input->post("value");
-		$field = $this->input->post("field");
+		$id = $this->input->post('id');
+		$value = $this->input->post('value');
+		$field = $this->input->post('field');
 		if (is_array($value)) {
 			$value = implode(",", $value);
 		}

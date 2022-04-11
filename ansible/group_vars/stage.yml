@@ -92,7 +92,6 @@ flightdeck_cluster:
                     - |
                         <IfModule mod_proxy.c>
                           ProxyRequests Off
-                          SSLProxyEngine on
                           <Proxy *>
                               Order deny,allow
                               Allow from all

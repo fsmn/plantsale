@@ -1,14 +1,14 @@
 ---
-git_dir: "~/{{ lookup('env', 'CI_PROJECT_DIR') }}"
+git_dir: "/drone/src"
 digitalocean_api_token: "{{ lookup('env', 'DIGITALOCEAN_API_TOKEN') }}"
 cluster_name: "cc02"
 t7_env: "live"
 
-docker_registry: "cc02-registry.t7develop.io:443"
-docker_registry_user: "{{ lookup('env', 'REGISTRY_USER') }}"
-docker_registry_pass: "{{ lookup('env', 'REGISTRY_PASS') }}"
-docker_registry_image: "{{ lookup('env', 'CI_PROJECT_NAME') }}"
-docker_registry_version: "{{ lookup('env', 'CI_COMMIT_SHA') | default('latest', true) }}"
+docker_registry: "{{ lookup('env', 'FLIGHTDECK_REGISTRY_ADDR') }}"
+docker_registry_user: "{{ lookup('env', 'FLIGHTDECK_REGISTRY_USER') }}"
+docker_registry_pass: "{{ lookup('env', 'FLIGHTDECK_REGISTRY_PASS') }}"
+docker_registry_image: "{{ lookup('env', 'FLIGHTDECK_IMAGE_NAME') }}"
+docker_registry_version: "{{ lookup('env', 'FLIGHTDECK_IMAGE_TAG') | default('latest', true) }}"
 
 docker_web_image: "{{ docker_registry }}/{{ docker_registry_image }}:{{ docker_registry_version }}"
 

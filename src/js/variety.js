@@ -330,10 +330,12 @@ $(document).on("click",".variety-insert",function(){
 			let question = confirm("Are you sure you want to delete this image? This cannot be undone!");
 			if(question){
 					let my_id = $(this).data('id');
-					console.log(my_id);
+					let my_variety_id = $(this).data('variety_id');
+					console.log(my_variety_id);
 					let form_data = {
 							ajax: 1,
-							id: my_id
+							id: my_id,
+						    variety_id: my_variety_id
 					};
 					$.ajax({
 						type:"post",

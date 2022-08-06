@@ -156,7 +156,6 @@ class Index extends MY_Controller {
 
 		$quark = implode('\n\r', $output);
 		$this->load->helper('file');
-		$this->load->library('S3_client');
 		$source_path = '/tmp/' . $filename;
 		write_file($source_path, $quark);
 		$this->load->helper('download');

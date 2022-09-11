@@ -434,10 +434,14 @@ class Variety_Model extends MY_Model {
 		// select orders fields
 		$this->db->select("orders.id as order_id,year,flat_size,flat_cost,plant_cost,pot_size,price,count_presale,count_midsale,count_dead,omit");
 		$this->db->select("sellout_friday,sellout_saturday,remainder_friday,remainder_saturday,remainder_sunday,grower_code,grower_id,catalog_number");
-		$this->db->group_by("variety.id");
 		$result = $this->db->get()->result();
+		// Group by variety to avoid duplicates.
+		$output = [];
+		foreach($result as $item){
+			$output[$item->id] = $item;
+		}
 		$this->_log();
-		return $result;
+		return $output;
 	}
 
 	function get_for_web($year) {

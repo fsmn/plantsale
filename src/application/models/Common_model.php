@@ -163,10 +163,12 @@ class Common_model extends MY_Model
             $this->db->join('orders', 'variety.id=orders.variety_id');
             $this->db->select('orders.year');
             $this->db->where('year', $year);
-            $this->db->group_by('common.id');
         }
 
         $result = $this->db->get()->result();
+				if($year){
+					$result = $this->group_by($result, 'id');
+				}
         return $result;
     }
 
@@ -197,9 +199,8 @@ class Common_model extends MY_Model
         $this->db->order_by('category.category');
         $this->load->helper('export');
         $this->db->order_by('(' . subcategory_order() . ')');
-        $this->db->group_by('common.id');
         $result = $this->db->get()->result();
-        //$this->_log('alert');
-        return $result;
+        $this->_log();
+        return $this->group_by($result, 'id');
     }
 }

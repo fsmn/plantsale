@@ -255,12 +255,11 @@ class Variety_Model extends MY_Model {
 		 * indoor annuals $this->db->where("subcategory_id !=", 8); // no
 		 * perennial water plants
 		 */
-		$this->db->group_by("common.category_id");
 		$this->db->order_by("category.category");
 		$this->db->select("count(`variety`.`id`) as count,category.category,category.id");
 		$result = $this->db->get()->result();
-		// $this->_log("alert");
-		return $result;
+		$this->_log();
+		return $this->group_by($result, 'category_id');
 	}
 
 	//@TODO this should be moved to orders model
@@ -271,7 +270,6 @@ class Variety_Model extends MY_Model {
 		$this->db->join('category', 'common.category_id = category.id', 'LEFT');
 		$this->db->where('orders.year', $year);
 		$this->db->where('orders.flat_exclude',0);
-		$this->db->group_by('common.category_id');
 		$this->db->order_by('category.category');
 		$this->db->select('sum(`orders`.`count_presale`)  as presale_count');
 		$this->db->select('sum(`orders`.`count_friday`) as friday_count');
@@ -279,8 +277,9 @@ class Variety_Model extends MY_Model {
 		$this->db->select('sum(`orders`.`count_midsale`) as midsale_count');
 		$this->db->select('category.category,category.id as category_id');
 		$result = $this->db->get()->result();
+		// Group by category_id
 		$this->_log();
-		return $result;
+		return $this->group_by($result, 'category_id');
 	}
 
 	/**
@@ -313,10 +312,10 @@ class Variety_Model extends MY_Model {
 			if ($this->input->get($my_variable) && $this->input->get($my_variable) != "") {
 				$my_value = $this->input->get($my_variable);
 				if ($my_value) {
-					$my_parameters->$my_variable = new stdClass ();
+					$my_parameters->{$my_variable} = new stdClass ();
 
-					$my_parameters->$my_variable->key = $my_variable;
-					$my_parameters->$my_variable->value = $my_value;
+					$my_parameters->{$my_variable}->key = $my_variable;
+					$my_parameters->{$my_variable}->value = $my_value;
 				}
 			}
 		}
@@ -441,7 +440,8 @@ class Variety_Model extends MY_Model {
 			$output[$item->id] = $item;
 		}
 		$this->_log();
-		return $output;
+		// Group by variety to avoid duplicates.
+		return $this->group_by($result, 'id');
 	}
 
 	function get_for_web($year) {

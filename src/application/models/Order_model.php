@@ -228,19 +228,22 @@ class Order_Model extends MY_Model {
 		$this->db->select('variety.variety, variety.species,variety.new_year');
 		$this->db->select('common.name, common.genus, common.category_id, common.subcategory_id, common.id as common_id');
 		$this->db->select('category.category,subcategory.subcategory');
-		$this->db->group_by('orders.id');
 		$result = $this->db->get()->result();
 		$this->_log();
-		return $result;
+		return $this->group_by($result, 'id');
 	}
 
+	/**
+	 * @return mixed
+	 *
+	 * @deprecated
+	 */
 	function get_current_year() {
 		$this->db->from('orders');
 		$this->db->order_by('year', 'DESC');
-		$this->db->group_by('year');
-		$this->db->limit(1);
-		$result = $this->db->get()->row();
-		return $result->year;
+		$result = $this->db->get()->result();
+		$output = $this->group_by($result, 'year');
+		return reset($output);
 	}
 
 	function get_previous_year($variety_id, $current_year) {
@@ -264,10 +267,9 @@ class Order_Model extends MY_Model {
 
 		$this->db->select('variety.variety');
 		$this->db->order_by('year', 'DESC');
-		$this->db->group_by('year');
 		$this->db->limit(1);
 		$result = $this->db->get()->row();
-		return $result;
+		return $this->group_by($result, 'year');
 	}
 
 	/**
@@ -344,8 +346,9 @@ class Order_Model extends MY_Model {
 		$this->db->where('variety_id', $variety_id);
 		$this->db->where('year >', $current_year);
 		$this->db->order_by('year', 'DESC');
-		$this->db->group_by('year');
-		$result = $this->db->get()->num_rows;
+		$result = $this->db->get()->result();
+		$result = $this->group_by($result, 'year');
+		$result = count($result);
 		$output = TRUE;
 		if ($result == 1) {
 			$output = FALSE;
@@ -406,10 +409,9 @@ class Order_Model extends MY_Model {
 	function get_pot_sizes() {
 		$this->db->from('orders');
 		$this->db->select('pot_size');
-		$this->db->group_by('pot_size');
 		$this->db->order_by('pot_size');
 		$result = $this->db->get()->result();
-		return $result;
+		return $this->group_by($result, 'pot_size');
 	}
 
 	function get_plant_total($year): int {

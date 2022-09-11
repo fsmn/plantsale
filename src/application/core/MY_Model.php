@@ -112,4 +112,19 @@ class MY_Model extends CI_Model
 			}
 			return $output;
 		}
+
+	/**
+	 * Group results by a given field.
+	 * @param $results
+	 * @param $field
+	 *
+	 * @return array
+	 */
+		function group_by($results, $field): array {
+			$output = [];
+			foreach($results as $item){
+				$output[$item->{$field}] = $item;
+			}
+			return $output;
+		}
 	}

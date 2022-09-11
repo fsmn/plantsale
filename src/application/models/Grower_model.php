@@ -90,9 +90,8 @@ class grower_model extends MY_Model {
 		$this->db->where("grower.id IS NULL", NULL, FALSE);
 		$this->db->where("orders.grower_id !=", "");
 		$this->db->where("orders.year", $this->session->userdata("sale_year"));
-		$this->db->group_by("grower_id");
 		$result = $this->db->get()->result();
-		return $result;
+		return $this->group_by($result, 'grower_id');
 
 	}
 
@@ -122,10 +121,9 @@ class grower_model extends MY_Model {
 		$this->db->join("orders", "grower.id = orders.grower_id");
 		$this->db->select("grower.id");
 		$this->db->order_by("grower.id", "ASC");
-		$this->db->group_by("grower.id");
 		$result = $this->db->get()->result();
 		// $this->_log("alert");
-		return $result;
+		return $this->group_by($result, 'grower_id');
 	}
 
 	function get_totals($id, $year) {
@@ -135,11 +133,10 @@ class grower_model extends MY_Model {
                 WHERE `year` = '%s' AND `orders`.`grower_id` = '%s' ) as `o`
                 LEFT JOIN `grower` ON `grower`.`id` = `o`.`grower_id`
                 LEFT JOIN `contact` AS `shipping` ON `shipping`.`grower_id` = `grower`.`id` AND `shipping`.`contact_type` = 'shipping'
-        		LEFT JOIN `users` AS `users` ON `grower`.`user_id` = `users`.`id`
-                GROUP BY `o`.`grower_id`", $year, $id);
+        		LEFT JOIN `users` AS `users` ON `grower`.`user_id` = `users`.`id`", $year, $id);
 		$result = $this->db->query($query)->row();
 		$this->_log();
-		return $result;
+		return $this->group_by($result, 'grower_id');
 	}
 
 	function list_fields(array $ignore_fields = []): array {

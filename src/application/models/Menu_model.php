@@ -73,10 +73,9 @@ class Menu_Model extends MY_Model
         }else{
             $this->db->select("category");
         }
-        $this->db->group_by("category");
         $this->db->order_by("category", "ASC");
         $result = $this->db->get()->result();
-        return $result;
+        return $this->group_by($result, 'category');
     }
 
     function get_all ($category = FALSE)

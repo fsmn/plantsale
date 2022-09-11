@@ -256,30 +256,56 @@ class Variety_Model extends MY_Model {
 		 * perennial water plants
 		 */
 		$this->db->order_by("category.category");
-		$this->db->select("count(`variety`.`id`) as count,category.category,category.id");
+		$this->db->select("variety.id as variety_id, category.category,category.id");
 		$result = $this->db->get()->result();
 		$this->_log();
-		return $this->group_by($result, 'category_id');
+		$output = [];
+		foreach($result as $item){
+			if(empty($output[$item->id])){
+				$output[$item->id] = (object) [
+					'id' => $item->id,
+					'category' => $item->category,
+					'count' => 1,
+				];
+			}else {
+				$output[$item->id]->count++;
+			}
+		}
+
+		return $output;
 	}
 
 	//@TODO this should be moved to orders model
 	function get_flat_totals($year) {
-		$this->db->from('variety');
-		$this->db->join('orders', 'variety.id=orders.variety_id');
-		$this->db->join('common', 'common.id=variety.common_id');
-		$this->db->join('category', 'common.category_id = category.id', 'LEFT');
-		$this->db->where('orders.year', $year);
-		$this->db->where('orders.flat_exclude',0);
-		$this->db->order_by('category.category');
-		$this->db->select('sum(`orders`.`count_presale`)  as presale_count');
-		$this->db->select('sum(`orders`.`count_friday`) as friday_count');
-		$this->db->select('sum(`orders`.`count_saturday`) as saturday_count');
-		$this->db->select('sum(`orders`.`count_midsale`) as midsale_count');
-		$this->db->select('category.category,category.id as category_id');
-		$result = $this->db->get()->result();
+		$orders = $this->db->from('variety')
+			->join('orders', 'variety.id=orders.variety_id')
+			->join('common', 'common.id=variety.common_id')
+			->join('category', 'common.category_id = category.id', 'LEFT')
+			->where('orders.year', $year)
+			->where('orders.flat_exclude',0)
+			->order_by('category.category')
+			->select('count_presale as presale_count')
+			->select('count_friday as friday_count')
+			->select('count_saturday as saturday_count')
+			->select('count_midsale as midsale_count')
+			->select('category.category,category.id as category_id');
+		$result = $orders->get()->result();
 		// Group by category_id
 		$this->_log();
-		return $this->group_by($result, 'category_id');
+		$output = [];
+		foreach($result as $item){
+			if(empty($output[$item->category_id])){
+				$output[$item->category_id] = $item;
+			}
+			else {
+				$updated_item = $output[$item->category_id];
+				$updated_item->presale_count += floatval($item->presale_count);
+				$updated_item->friday_count += floatval($item->friday_count);
+				$updated_item->saturday_count += floatval($item->saturday_count);
+				$updated_item->midsale_count += floatval($item->midsale_count);
+			}
+		}
+		return $output;
 	}
 
 	/**

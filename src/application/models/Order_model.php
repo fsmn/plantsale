@@ -433,7 +433,7 @@ class Order_Model extends MY_Model {
 		$this->db->from('orders');
 		$this->db->where('year', $year);
 		$this->db->select('SUM(`' . $column . '`) AS `' . $total_label . '`');
-		return $this->db->get()->row()->$total_label;
+		return $this->db->get()->row()->{$total_label};
 	}
 
 	function get_price_range($year = NULL) {

@@ -189,19 +189,21 @@ class Grower extends MY_Controller {
 
 		foreach ($ids as $id) {
 			$my_grower = $this->grower->get_totals($id->id, $year);
-			$this->load->model('user_model','user');
-			$my_grower->our_contact = $this->user->get_user($my_grower->user_id);
-			if ($this->input->get("export")) {
-				$growers [] = $my_grower;
+			if(!empty($my_grower)) {
+				$this->load->model('user_model', 'user');
+				$my_grower->our_contact = $this->user->get_user($my_grower->user_id);
+				if ($this->input->get("export")) {
+					$growers [] = $my_grower;
+				}
+				else {
+					$growers [] = $this->load->view("grower/report/row", [
+						"grower" => $my_grower,
+						'year' => $year,
+					], TRUE);
+				}
+				$grand_total += $my_grower->total;
+				// $growers[$id] = $this->grower->get_totals($id->grower_id, $year);
 			}
-			else {
-				$growers [] = $this->load->view("grower/report/row", [
-					"grower" => $my_grower,
-					'year' => $year,
-				], TRUE);
-			}
-			$grand_total += $my_grower->total;
-			// $growers[$id] = $this->grower->get_totals($id->grower_id, $year);
 		}
 		$data ["grand_total"] = $grand_total;
 		$data ["ids"] = $ids;

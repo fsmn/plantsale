@@ -127,20 +127,28 @@ class grower_model extends MY_Model {
 	}
 
 	function get_totals($id, $year) {
-		$query = sprintf("SELECT `total`, `grower`.*,`users`.`first_name`,`users`.`last_name`,
-                `shipping`.`name` AS `shipping_name`,`shipping`.`phone1` AS `shipping_phone1`, `shipping`.`phone2` AS `shipping_phone2`, `shipping`.`email` AS `shipping_email`
-                FROM (SELECT `grower_id`, (IFNULL(`count_presale`,0) + IFNULL(`count_midsale`,0) + IFNULL(`count_friday`,0) + IFNULL(`count_saturday`,0)) * `flat_cost` as `total` FROM (`orders`)
-                WHERE `year` = '%s' AND `orders`.`grower_id` = '%s' ) as `o`
-                LEFT JOIN `grower` ON `grower`.`id` = `o`.`grower_id`
-                LEFT JOIN `contact` AS `shipping` ON `shipping`.`grower_id` = `grower`.`id` AND `shipping`.`contact_type` = 'shipping'
-        		LEFT JOIN `users` AS `users` ON `grower`.`user_id` = `users`.`id`", $year, $id);
-		$result = $this->db->query($query)->result();
-		$this->_log();
-		$totals = [];
-		foreach($result as $item){
-			$totals+= $item->total;
+		$question = $this->db->from('orders')
+			->select('orders.*')
+			->where('orders.year', $year)
+			->where('orders.grower_id', $id);
+		$orders = $question->get()->result();
+		$totals = 0;
+		foreach($orders as $order){
+			$sum = (floatval($order->count_presale) + floatval($order->count_midsale) + floatval($order->count_friday) + floatval($order->count_saturday)) * floatval($order->flat_cost);
+			$totals+=$sum;
 		}
-		return $totals;
+		$grower = $this->db->from('grower')
+			->select('grower.*')
+			->select('shipping.name as shipping_name, shipping.phone1 as shipping_phone1, shipping.phone2 as shipping_phone2, shipping.email as shipping_email')
+			->join('contact as shipping', 'shipping.grower_id = grower.id','left')
+			->where('grower.id', $id)
+			->where('shipping.contact_type', 'shipping')
+			->order_by('grower.id')
+			->get()->row();
+		if(!empty($grower)) {
+			$grower->total = !empty($totals) ? $totals : 0;
+		}
+		return $grower;
 	}
 
 	function list_fields(array $ignore_fields = []): array {

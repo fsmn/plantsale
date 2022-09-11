@@ -91,7 +91,7 @@ class grower_model extends MY_Model {
 		$this->db->where("orders.grower_id !=", "");
 		$this->db->where("orders.year", $this->session->userdata("sale_year"));
 		$result = $this->db->get()->result();
-		return $this->group_by($result, 'grower_id');
+		return $this->group_by($result, 'id');
 
 	}
 
@@ -123,7 +123,7 @@ class grower_model extends MY_Model {
 		$this->db->order_by("grower.id", "ASC");
 		$result = $this->db->get()->result();
 		// $this->_log("alert");
-		return $this->group_by($result, 'grower_id');
+		return $this->group_by($result, 'id');
 	}
 
 	function get_totals($id, $year) {
